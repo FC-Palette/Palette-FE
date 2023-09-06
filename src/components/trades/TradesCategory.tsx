@@ -4,19 +4,17 @@ import { css, styled } from 'styled-components'
 export const TradesCategory = () => {
   return (
     <>
-      <Category />
+      <Category>가전/디지털</Category>
     </>
   )
 }
 
 const Category = styled.div`
-  width: 62px;
-  height: 19px;
-  top: 154px;
-  left: 6px;
-  gap: 10px;
-  padding: 2px 6px;
+  height: 25px;
+  top: 158px;
+  left: 8px;
+  padding: 4px 8px;
   border-radius: 4px;
   position: absolute;
-  background-color: grey;
+  background-color: ${theme.greyScale.grey2};
 `

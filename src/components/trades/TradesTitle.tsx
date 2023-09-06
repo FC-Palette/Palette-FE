@@ -4,9 +4,11 @@ import { css, styled } from 'styled-components'
 export const TradesTitle = () => {
   return (
     <>
-      <Title />
+      <Title>제목이요</Title>
     </>
   )
 }
 
-const Title = styled.div``
+const Title = styled.div`
+  width: 153px;
+`

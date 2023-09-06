@@ -10,9 +10,9 @@ export const TradesImage = () => {
 }
 
 const Image = styled.div`
-  width: 164px;
+  width: 183px;
   height: 125px;
   border-top-right-radius: 8px;
   border-top-left-radius: 8px;
-  background-color: #d9d9d9;
+  background-color: ${theme.greyScale.grey5};
 `
