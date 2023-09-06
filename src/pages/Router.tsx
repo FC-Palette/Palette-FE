@@ -31,6 +31,12 @@ export const router = createBrowserRouter([
     path: '/',
     element: <Layout />,
     errorElement: <ErrorComponent />,
+    children: []
+  },
+  {
+    path: '/',
+    element: <Layout />,
+    errorElement: <ErrorComponent />,
     children: [
       generateRoute('/groupBuying', <GroupBuying />, <ErrorComponent />, [])
     ]
