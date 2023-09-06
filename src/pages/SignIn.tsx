@@ -6,7 +6,7 @@ export const SignIn = () => {
     <div>
       SignIn
       <Button>button</Button>
-      <Input ph="검색어를 입력하세요."></Input>
+      <Input></Input>
     </div>
   )
 }
