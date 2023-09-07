@@ -1,9 +1,9 @@
-import { FindId } from '@/components/signin/FindId'
-import FindPassword from '@/components/signin/FindPassword'
-import IdForm from '@/components/signin/IdForm'
-import LogInButton from '@/components/signin/LogInButton'
-import PasswordForm from '@/components/signin/PasswordForm'
-import SignUp from '@/components/signin/SignUp'
+import { FindId } from 'components/index'
+import { FindPassword } from 'components/index'
+import { IdForm } from 'components/index'
+import { LogInButton } from 'components/index'
+import { PasswordForm } from 'components/index'
+import { SignUp } from 'components/index'
 import { styled } from 'styled-components'
 
 
@@ -23,5 +23,3 @@ export const SignIn = () => {
 const SignInContainer = styled.div`
 
 `
-
-export default SignIn;
