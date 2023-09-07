@@ -26,5 +26,14 @@ export const theme = {
     greenL1: '#6DD29C',
     green0: '#1CAB67',
     greenD1: '#15965A'
+  },
+  fontSize: {
+    customSize: {
+      small: '12px',
+      medium: '14px',
+      large: '16px',
+      xlarge: '18px',
+      xxlarge: '24px'
+    }
   }
 }
