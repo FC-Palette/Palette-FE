@@ -5,7 +5,7 @@ import { HeaderProps } from 'types/headerProps'
 export const Header: React.FC<HeaderProps> = ({
   leftIcon,
   centerText,
-  rightContent,
+  children,
   chatCount
 }) => {
   return (
@@ -19,17 +19,7 @@ export const Header: React.FC<HeaderProps> = ({
           </ChatCountWrapper>
         )}
       </CenterText>
-      {rightContent && (
-        <RightContent>
-          {Array.isArray(rightContent) ? (
-            rightContent.map((content, index) => (
-              <ContentItem key={index}>{content}</ContentItem>
-            ))
-          ) : (
-            <ContentItem>{rightContent}</ContentItem>
-          )}
-        </RightContent>
-      )}
+      <RightContent>{children}</RightContent>
     </Wrapper>
   )
 }
@@ -37,20 +27,25 @@ export const Header: React.FC<HeaderProps> = ({
 const Wrapper = styled.header`
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 430px;
+  position: relative;
+  width: auto;
   height: 80px;
 `
 
 const LeftIcon = styled.div`
-  margin-left: 48px;
+  position: absolute;
+  left: 10%;
 `
 
 const CenterText = styled.div`
   text-align: center;
   font-size: 24px;
   display: flex;
+  position: absolute;
   align-items: center;
+  left: 30%;
+  font-weight: 600;
+  line-height: 31.2px;
 `
 
 const ChatCountWrapper = styled.div`
@@ -67,9 +62,6 @@ const ChatCount = styled.span`
 const RightContent = styled.div`
   display: flex;
   align-items: center;
-  margin-right: 48px;
-`
-
-const ContentItem = styled.div`
-  margin-left: 10px;
+  position: absolute;
+  right: 10%;
 `
