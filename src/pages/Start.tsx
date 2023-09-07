@@ -1,19 +1,12 @@
-<<<<<<< HEAD
 import { theme } from "styles/index"
 import { Button } from "components/index"
 import { START_TEXTS } from "constants/index"
 import { Link } from "react-router-dom"
-=======
-import { START_TEXTS } from "constants/start/startTexts"
->>>>>>> 7297bbf (feat:separate start&signin pages component files)
 import { styled } from "styled-components"
 
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 7297bbf (feat:separate start&signin pages component files)
 export const Start = () => {
     return (
     <Wrapper>
@@ -22,7 +15,6 @@ export const Start = () => {
             <StartTitle>{START_TEXTS.mainTitleText}</StartTitle>
             <StartIntro>{START_TEXTS.introFirstText}</StartIntro>
             <StartIntro>{START_TEXTS.introSecondText}</StartIntro>
-<<<<<<< HEAD
             <StartSignUp>
                 <Link to="/signup">
                 <Button $bgColor={theme.main.white}
@@ -38,9 +30,6 @@ export const Start = () => {
                 <MoveToSignInPage>{START_TEXTS.linkToSignInText}</MoveToSignInPage>
                 </Link>
             </StartSignInWrap>
-=======
-            <StartSignIn>{START_TEXTS.existenceText}</StartSignIn>
->>>>>>> 7297bbf (feat:separate start&signin pages component files)
         </Container>
     </Wrapper>
     )
@@ -81,7 +70,6 @@ const StartTitle = styled.div`
 
 const StartIntro = styled.div`
     font-size: 16px;
-<<<<<<< HEAD
     line-height: 19.09px;
 `
 
@@ -108,13 +96,5 @@ const MoveToSignInPage = styled.span`
 
 
 const StartSignInWrap = styled.div`
-=======
-    font-family: 'Pretendard-Regular';
-    padding-bottom: 48px;
-    line-height: 19.09px;
-`
-
-const StartSignIn = styled.div`
->>>>>>> 7297bbf (feat:separate start&signin pages component files)
     text-align: center;
 `
