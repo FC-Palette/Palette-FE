@@ -5,6 +5,7 @@ export interface InputProps {
   $borderColor?: string
   $borderRadius?: string
   $paddingLeft?: string
+  type?: string
   ph?: string
   children?: React.ReactNode
 }
@@ -16,4 +17,5 @@ export type InputType = Pick<
   | '$inputWidth'
   | '$borderRadius'
   | '$paddingLeft'
+  | 'type'
 >
