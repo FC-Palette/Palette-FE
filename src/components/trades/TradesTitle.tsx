@@ -10,5 +10,6 @@ export const TradesTitle = () => {
 }
 
 const Title = styled.div`
-  width: 153px;
+  width: 141px;
+  font-family: 'Pretendard-Regular';
 `

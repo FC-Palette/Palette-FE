@@ -13,7 +13,7 @@ const LikeButton = styled.button`
   width: 24px;
   height: 24px;
   top: 8px;
-  left: 151px;
+  left: 136px;
   position: absolute;
   background-color: black;
 `
