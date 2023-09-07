@@ -11,7 +11,7 @@ export const TradesImage = () => {
 
 const Image = styled.div`
   width: 170px;
-  height: 125px;
+  height: 150px;
   border-top-right-radius: 8px;
   border-top-left-radius: 8px;
   background-color: ${theme.greyScale.grey5};
