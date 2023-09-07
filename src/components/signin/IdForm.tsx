@@ -1,4 +1,4 @@
-import { SIGNIN_FORM_TEXT } from 'constants/signin/signInTexts'
+import { SIGNIN_FORM_TEXT } from 'constants/index'
 import { Input } from 'components/index'
 import { styled } from 'styled-components'
 
@@ -6,7 +6,7 @@ export const IdForm = () => {
     return (
     <IdFormWrap>
         {SIGNIN_FORM_TEXT.idFormText}
-        <Input></Input>
+        <Input ph={SIGNIN_FORM_TEXT.idInputPlaceholderText}></Input>
     </IdFormWrap>
     )
 }
@@ -17,4 +17,3 @@ const IdFormWrap = styled.div`
 `
 
 
-export default IdForm;
