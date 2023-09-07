@@ -30,6 +30,7 @@ const Wrapper = styled.header`
   position: relative;
   width: auto;
   height: 80px;
+  justify-content: center;
 `
 
 const LeftIcon = styled.div`
@@ -43,7 +44,6 @@ const CenterText = styled.div`
   display: flex;
   position: absolute;
   align-items: center;
-  left: 30%;
   font-weight: 600;
   line-height: 31.2px;
 `
