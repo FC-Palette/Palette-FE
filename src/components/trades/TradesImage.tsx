@@ -10,7 +10,7 @@ export const TradesImage = () => {
 }
 
 const Image = styled.div`
-  width: 183px;
+  width: 170px;
   height: 125px;
   border-top-right-radius: 8px;
   border-top-left-radius: 8px;

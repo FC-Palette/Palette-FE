@@ -8,22 +8,30 @@ export const GroupBuying = () => {
     <>
       <Header
         leftIcon="콘"
-        rightContent={['콘', '콘']}
         centerText="Header Text"
-        chatCount={2}
-      />
-      <CardWrapper>
-        <GroupBuyingList />
-      </CardWrapper>
+        chatCount={2}>
+        <div>콘</div>
+        <div>콘</div>
+      </Header>
+      <Wrapper>
+        <CardWrapper>
+          <GroupBuyingList />
+        </CardWrapper>
+      </Wrapper>
     </>
   )
 }
 
+const Wrapper = styled.div`
+  width: auto;
+  display: flex;
+  justify-content: center;
+`
+
 const CardWrapper = styled.div`
-  width: 382px;
+  width: 360px;
   top: 197px;
-  justify-content: space-between;
-  margin-left: 24px;
+  justify-content: space-around;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;

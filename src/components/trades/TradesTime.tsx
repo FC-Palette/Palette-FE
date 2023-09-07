@@ -10,7 +10,7 @@ export const TradesTime = () => {
 }
 
 const Time = styled.div`
-  width: 183px;
+  width: 170px;
   height: 25px;
   top: 125px;
   background-color: ${theme.greyScale.grey3};

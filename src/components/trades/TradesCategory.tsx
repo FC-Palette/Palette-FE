@@ -16,5 +16,6 @@ const Category = styled.div`
   padding: 4px 8px;
   border-radius: 4px;
   position: absolute;
+  font-family: 'Pretendard-Regular';
   background-color: ${theme.greyScale.grey2};
 `

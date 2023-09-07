@@ -84,7 +84,7 @@ export const GroupBuyingList = () => {
 
 const Container = styled.div`
   display: flex;
-  width: 183px;
+  width: 170px;
   height: 284px;
   box-shadow: 0px 8px 16px ${theme.greyScale.grey3};
   border-radius: 8px;
@@ -92,7 +92,7 @@ const Container = styled.div`
 `
 
 const TradesPreview = styled.div`
-  width: 183px;
+  width: 170px;
   height: 150px;
   border-top-right-radius: 8px;
   border-top-left-radius: 8px;
@@ -100,7 +100,7 @@ const TradesPreview = styled.div`
 
 const TitleWrapper = styled.div`
   position: absolute;
-  width: 183px;
+  width: 162px;
   top: 187px;
   left: 8px;
   height: 70px;
