@@ -1,4 +1,4 @@
-import { SIGNIN_FORM_TEXT } from "constants/signin/signInTexts";
+import { SIGNIN_FORM_TEXT } from "constants/index";
 import { styled } from "styled-components";
 
 export const FindId = () => {
@@ -10,4 +10,3 @@ export const FindId = () => {
 const FindIdWrap = styled.div`
 `
 
-export default FindId;

@@ -1,4 +1,4 @@
-import { SIGNIN_FORM_TEXT } from "constants/signin/signInTexts";
+import { SIGNIN_FORM_TEXT } from "constants/index";
 import { Button } from 'components/index'
 
 export const LogInButton = () => {
@@ -8,4 +8,3 @@ export const LogInButton = () => {
 }
 
 
-export default LogInButton;
