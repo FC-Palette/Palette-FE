@@ -28,6 +28,7 @@ export const theme = {
     greenD1: '#15965A'
   },
   customSize: {
+    tiny: '10px',
     small: '12px',
     medium: '14px',
     large: '16px',
