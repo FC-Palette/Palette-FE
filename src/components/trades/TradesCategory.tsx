@@ -17,5 +17,8 @@ const Category = styled.div`
   border-radius: 4px;
   position: absolute;
   font-family: 'Pretendard-Regular';
+  font-size: ${theme.customSize.medium};
   background-color: ${theme.greyScale.grey2};
+  display: flex;
+  align-items: center;
 `

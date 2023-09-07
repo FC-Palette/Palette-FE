@@ -85,7 +85,7 @@ export const GroupBuyingList = () => {
 const Container = styled.div`
   display: flex;
   width: 170px;
-  height: 284px;
+  height: 288px;
   box-shadow: 0px 8px 16px ${theme.greyScale.grey3};
   border-radius: 8px;
   position: relative;
@@ -102,7 +102,6 @@ const TitleWrapper = styled.div`
   position: absolute;
   width: 162px;
   top: 187px;
-  left: 8px;
   height: 70px;
   padding: 0px 8px;
 `
@@ -111,7 +110,11 @@ const TradesCount = styled.div`
   display: flex;
   position: absolute;
   width: 155px;
-  top: 259px;
+  top: 265px;
   left: 8px;
   height: 17px;
+  gap: 10px;
+  font-size: ${theme.customSize.medium};
+  color: ${theme.greyScale.grey6};
+  font-weight: 400;
 `

@@ -7,4 +7,5 @@ export * from 'components/trades/TradesLikeCount'
 export * from 'components/trades/TradesLikeBtn'
 export * from 'components/trades/TradesViews'
 export * from 'components/trades/TradesTime'
-//
+export * from 'components/trades/TradesOption'
+export * from 'components/trades/TradesCard'
