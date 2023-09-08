@@ -44,12 +44,11 @@ const LeftIcon = styled.div`
 
 const CenterText = styled.div`
   text-align: center;
-  font-size: 24px;
+  font-size: ${theme.customSize.xxlarge};
   display: flex;
   position: absolute;
   align-items: center;
   font-weight: 600;
-  line-height: 31.2px;
 `
 
 const ChatCountWrapper = styled.div`
@@ -58,7 +57,7 @@ const ChatCountWrapper = styled.div`
 `
 
 const ChatCount = styled.span`
-  font-size: 16px;
+  font-size: ${theme.customSize.large};
   margin-left: 5px;
   color: ${theme.greyScale.grey6};
 `

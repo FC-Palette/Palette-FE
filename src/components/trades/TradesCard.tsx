@@ -66,6 +66,11 @@ const StyledIcon = styled.button`
   align-items: center;
 `
 
+const StyledRecordWrapper = styled.button`
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+`
 const StyledSetting4 = styled(Setting4)`
   color: ${theme.main.white};
   width: ${theme.customSize.xlarge};
@@ -75,9 +80,4 @@ const StyledRecord = styled(Record)`
   color: ${theme.main.blue0};
   width: 20px;
   height: 20px;
-`
-const StyledRecordWrapper = styled.button`
-  width: 20px;
-  height: 20px;
-  margin-right: 8px;
 `
