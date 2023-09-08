@@ -1,12 +1,7 @@
-import { Button, Input } from 'components/index'
-import { theme } from 'styles/index'
+import { styled } from 'styled-components'
 
 export const SignIn = () => {
-  return (
-    <div>
-      SignIn
-      <Button>button</Button>
-      <Input></Input>
-    </div>
-  )
+  return <Wrapper></Wrapper>
 }
+
+const Wrapper = styled.div``
