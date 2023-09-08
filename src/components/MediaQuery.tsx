@@ -1,8 +1,22 @@
 import { useMediaQuery } from 'react-responsive'
+import { styled } from 'styled-components'
 
-export const Mobile = ({ children }) => {
+export const MediaQuery = ({ children }) => {
   const isMobile = useMediaQuery({
     query: '(max-width:767px)'
   })
-  return <>{isMobile && children}</>
+  const notMobile = useMediaQuery({ query: '(min-width:767px)' })
+
+  return (
+    <>
+      {isMobile && children}
+      {notMobile && <Wrapper>{children}</Wrapper>}
+    </>
+  )
 }
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  background-color: ${props => props.theme.greyScale.grey0};
+`

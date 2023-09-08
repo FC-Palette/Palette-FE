@@ -5,15 +5,15 @@ import { ThemeProvider } from 'styled-components'
 import { theme } from 'styles/index'
 import { RecoilRoot } from 'recoil'
 import { GlobalStyles } from 'styles/index'
-import { Mobile } from 'components/index'
+import { MediaQuery } from 'components/index'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <RecoilRoot>
     <GlobalStyles />
-    <Mobile>
-      <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
+      <MediaQuery>
         <RouterProvider router={router} />
-      </ThemeProvider>
-    </Mobile>
+      </MediaQuery>
+    </ThemeProvider>
   </RecoilRoot>
 )
