@@ -5,12 +5,11 @@ import { ICON_TEXTS } from 'constants/index'
 export const Footer = () => {
   return (
     <Wrapper>
-      {ICON_TEXTS.map(({ text, icon: IconComponent }, index) => (
-        <IconWrapper key={index}>
+      {ICON_TEXTS.map(({ text, icon: IconComponent }) => (
+        <IconWrapper key={text}>
           <StyledIcon>
             <IconComponent />
           </StyledIcon>
-
           <StyledIcon>{text}</StyledIcon>
         </IconWrapper>
       ))}
