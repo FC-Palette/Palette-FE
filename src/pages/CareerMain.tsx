@@ -1,4 +1,8 @@
 import { Footer, Header, SubHeader } from 'components/common/index'
+<<<<<<< HEAD
+=======
+import { theme } from 'styles/index'
+>>>>>>> fbf0980 (feat: 성장해요 메인 페이지 컴포넌트 생성)
 import { ArrowLeft2, SearchNormal1, Notification } from 'iconsax-react'
 import styled from 'styled-components'
 import { CAREER_SUBHEADER_TEXT } from 'constants/index'
