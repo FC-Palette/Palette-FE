@@ -38,3 +38,4 @@ const SignUpLink = styled.div`
     color: ${theme.main.blue0};
     text-align: center;
 `
+
