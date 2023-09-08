@@ -1,6 +1,6 @@
 import { theme } from 'styles/index'
 import { css, styled } from 'styled-components'
-import { FilterBarProps } from 'types/filterBarProps'
+import { FilterBarProps } from 'types/index'
 
 export const FilterBar: React.FC<FilterBarProps> = ({
   filterButton,
@@ -18,20 +18,29 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   )
 }
 
-const Wrapper = styled.header`
+const Wrapper = styled.div`
   display: flex;
   align-items: center;
   width: auto;
   height: 30px;
+  position: relative;
+  margin-top: 10px;
 `
-const FilterWrapper = styled.header`
+const FilterWrapper = styled.div`
   display: flex;
+  position: absolute;
+  left: 8%;
 `
 
-const Text = styled.header`
+const Text = styled.div`
+  font-weight: 400;
+  font-size: ${theme.customSize.large};
   display: flex;
+  align-items: center;
 `
 
-const OptionWrapper = styled.header`
+const OptionWrapper = styled.div`
   display: flex;
+  position: absolute;
+  right: 5%;
 `

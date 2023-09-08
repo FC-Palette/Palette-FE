@@ -4,7 +4,7 @@ import { css, styled } from 'styled-components'
 export const TradesTitle = () => {
   return (
     <>
-      <Title>삼성주식 공동구매합시다</Title>
+      <Title>삼성주식 공동구매 하실분 구해요</Title>
     </>
   )
 }

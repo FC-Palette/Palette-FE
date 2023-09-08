@@ -4,3 +4,9 @@ export interface FilterBarProps {
   filterText?: React.ReactNode
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 }
+
+export interface CategoryBarProps {
+  categoryList?: React.ReactNode
+  categoryFilter?: React.ReactNode
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+}
