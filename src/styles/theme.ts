@@ -35,6 +35,8 @@ export const theme = {
     large: '16px',
     xlarge: '18px',
     xxlarge: '24px',
-    xxxlarge: '48px'
+    xxxlarge: '48px',
+    greenD1: '#15965A',
+    danger: '#F13D2C'
   }
 }
