@@ -1,14 +1,22 @@
 import { styled } from 'styled-components'
 export const CareerMainItemImage = () => {
   return (
-    <PreviewImg>
-      <RemainSpaces>
-        <ImpactColor>2자리</ImpactColor>
-        남았어요
-      </RemainSpaces>
-    </PreviewImg>
+    <Wrapper>
+      <PreviewImg>
+        <RemainSpaces>
+          <ImpactColor>2자리</ImpactColor>
+          남았어요
+        </RemainSpaces>
+      </PreviewImg>
+    </Wrapper>
   )
 }
+// 이미지 위치 래퍼
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`
 
 //  미리보기 이미지
 const PreviewImg = styled.div`

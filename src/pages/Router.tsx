@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { ErrorComponent } from 'components/index'
-import { CareerMain, GroupBuying, Layout } from 'pages/index'
+import { CareerMain, GroupBuying, Layout, ProfileEnter } from 'pages/index'
 import type { RouteObject } from 'react-router-dom'
 
 //페이지 정보를 담고있는 객체를 반환하는 함수.
@@ -46,7 +46,8 @@ export const router = createBrowserRouter([
     element: <Layout />,
     errorElement: <ErrorComponent />,
     children: [
-      generateRoute('/careerMain', <CareerMain />, <ErrorComponent />, [])
+      generateRoute('/careerMain', <CareerMain />, <ErrorComponent />),
+      generateRoute('/profile-1', <ProfileEnter />, <ErrorComponent />)
     ]
   }
 ])

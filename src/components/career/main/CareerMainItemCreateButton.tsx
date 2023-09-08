@@ -1,11 +1,18 @@
 import { Button } from '@/components'
 import styled from 'styled-components'
 import { BrushSquare } from 'iconsax-react'
+import { useNavigate } from 'react-router-dom'
 
 export const CareerMainItemCreateButton = () => {
+  const naviage = useNavigate()
+  const handleClickBtn = () => {
+    naviage('/profile-1')
+  }
   return (
     <BtnLocationChangeDiv>
-      <Button $borderRadius="24px">
+      <Button
+        $borderRadius="24px"
+        onClick={handleClickBtn}>
         <Gap>
           {<BrushSquare />}
           글쓰기
