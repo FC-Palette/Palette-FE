@@ -4,7 +4,7 @@ import { Header, Footer } from 'components/common/index'
 import { css, styled } from 'styled-components'
 import { ArrowLeft2, SearchNormal1, Notification } from 'iconsax-react'
 
-export const GroupBuying = () => {
+export const UsedTrade = () => {
   return (
     <>
       <Header
@@ -28,10 +28,12 @@ export const GroupBuying = () => {
     </>
   )
 }
-const MainWrapper = styled.div``
+const MainWrapper = styled.div`
+  padding-bottom: 80px;
+`
 const StyledIcon = styled.button`
-  /* color: #000;
-  font-size: ${theme.customSize.xxlarge}; */
+  color: #000;
+  font-size: ${theme.customSize.xxlarge};
 `
 const IconWrapper = styled.button`
   margin-right: 10px;

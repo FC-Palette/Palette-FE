@@ -1,6 +1,18 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { ErrorComponent } from 'components/index'
-import { CareerMain, GroupBuying, Layout, ProfileEnter, SignIn, SignUp, FindId, FindPassword } from 'pages/index'
+import {
+  CareerMain,
+  GroupBuying,
+  Layout,
+  ProfileEnter,
+  SignIn,
+  SignUp,
+  FindId,
+  FindPassword,
+  UsedTrade,
+  GroupUpload
+} from 'pages/index'
+
 import type { RouteObject } from 'react-router-dom'
 import { Start } from './Start'
 
@@ -25,7 +37,7 @@ export const router = createBrowserRouter([
   //   children: [
   //     generateRoute('/trades', <Test />, <ErrorComponent />, [
   //       generateRoute('3', <Test3 />, <ErrorComponent />),
-  //     ]), 
+  //     ]),
   //   ]
   // }
   {
@@ -39,7 +51,10 @@ export const router = createBrowserRouter([
     element: <Layout />,
     errorElement: <ErrorComponent />,
     children: [
-      generateRoute('/groupBuying', <GroupBuying />, <ErrorComponent />)
+      generateRoute('/groupBuying', <GroupBuying />, <ErrorComponent />),
+
+      generateRoute('/groupUpload', <GroupUpload />, <ErrorComponent />),
+      generateRoute('/usedTrade', <UsedTrade />, <ErrorComponent />)
     ]
   },
   {
@@ -48,7 +63,7 @@ export const router = createBrowserRouter([
     errorElement: <ErrorComponent />,
     children: [
       generateRoute('/careerMain', <CareerMain />, <ErrorComponent />),
-      generateRoute('/profile-1', <ProfileEnter />, <ErrorComponent />),
+      generateRoute('/profile-1', <ProfileEnter />, <ErrorComponent />)
     ]
   },
   {
@@ -60,23 +75,19 @@ export const router = createBrowserRouter([
       generateRoute('/signup', <SignUp />, <ErrorComponent />),
       generateRoute('/signin', <SignIn />, <ErrorComponent />),
       generateRoute('/findid', <FindId />, <ErrorComponent />),
-      generateRoute('/findpassword', <FindPassword />, <ErrorComponent />),
+      generateRoute('/findpassword', <FindPassword />, <ErrorComponent />)
     ]
   },
   {
     path: '/',
     element: <Layout />,
     errorElement: <ErrorComponent />,
-    children: [
-      generateRoute('/signup', <SignUp />, <ErrorComponent />)
-    ]
+    children: [generateRoute('/signup', <SignUp />, <ErrorComponent />)]
   },
   {
     path: '/',
     element: <Layout />,
     errorElement: <ErrorComponent />,
-    children: [
-      generateRoute('/signup', <SignUp />, <ErrorComponent />)
-    ]
-  },
+    children: [generateRoute('/signup', <SignUp />, <ErrorComponent />)]
+  }
 ])
