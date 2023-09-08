@@ -36,3 +36,20 @@ const SignUpLink = styled.div`
     color: ${theme.main.blue0};
     text-align: center;
 `
+
+
+const CheckIdText = styled.div`
+    width: 159px;
+    height: 17px;
+    font-size: 14px;
+    font-weight: 400px;
+    color: ${theme.greyScale.grey7};
+`
+
+const SignUpLink = styled.div`
+    margin: 0 10px;
+    height: 17px;
+    color: ${theme.main.blue0};
+    text-align: center;
+`
+
