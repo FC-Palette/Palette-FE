@@ -1,8 +1,4 @@
-import { FindId } from 'components/index'
-import { FindPassword } from 'components/index'
-import { IdForm } from 'components/index'
-import { LogInButton } from 'components/index'
-import { PasswordForm } from 'components/index'
+import { SignInField, FindUserField } from 'components/index'
 import { SignUp } from 'components/index'
 import { styled } from 'styled-components'
 
@@ -10,16 +6,14 @@ import { styled } from 'styled-components'
 export const SignIn = () => {
   return (
     <SignInContainer>
-      <IdForm></IdForm>
-      <PasswordForm></PasswordForm>
-      <LogInButton></LogInButton>
-      <FindId></FindId>
-      <FindPassword></FindPassword>
+      <SignInField></SignInField>
+      <FindUserField></FindUserField>
       <SignUp></SignUp>
     </SignInContainer>
   )
 }
 
 const SignInContainer = styled.div`
-
+  position: relative;
+  top: 124px;
 `

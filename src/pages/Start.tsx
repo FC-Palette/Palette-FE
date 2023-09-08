@@ -1,5 +1,9 @@
-import { START_TEXTS } from "constants/start/startTexts"
+import { theme } from "styles/index"
+import { Button } from "components/index"
+import { START_TEXTS } from "constants/index"
+import { Link } from "react-router-dom"
 import { styled } from "styled-components"
+
 
 
 
@@ -11,7 +15,21 @@ export const Start = () => {
             <StartTitle>{START_TEXTS.mainTitleText}</StartTitle>
             <StartIntro>{START_TEXTS.introFirstText}</StartIntro>
             <StartIntro>{START_TEXTS.introSecondText}</StartIntro>
-            <StartSignIn>{START_TEXTS.existenceText}</StartSignIn>
+            <StartSignUp>
+                <Link to="/signup">
+                <Button $bgColor={theme.main.white}
+                color={theme.main.blueL1}
+                $btnWidth="382px">
+                    오피스너 시작하기
+                </Button>
+                </Link>
+            </StartSignUp>
+            <StartSignInWrap>
+                <StartSignIn>{START_TEXTS.existenceText}</StartSignIn>
+                <Link to="/signin">
+                <MoveToSignInPage>{START_TEXTS.linkToSignInText}</MoveToSignInPage>
+                </Link>
+            </StartSignInWrap>
         </Container>
     </Wrapper>
     )
@@ -52,11 +70,31 @@ const StartTitle = styled.div`
 
 const StartIntro = styled.div`
     font-size: 16px;
-    font-family: 'Pretendard-Regular';
-    padding-bottom: 48px;
     line-height: 19.09px;
 `
 
-const StartSignIn = styled.div`
+const StartSignUp = styled.div`
+    margin-bottom: 24px;
+    margin-top: 48px;
+    font-size: 20px;
+    font-weight: 500;
+    Button{
+        margin: 0 auto;
+    }
+`
+
+const StartSignIn = styled.span`
+    padding-right: 3px;
+`
+
+
+const MoveToSignInPage = styled.span` 
+    text-decoration: underline;
+    text-underline-position: under;
+    color: ${(props)=>props.theme.main.white};
+`
+
+
+const StartSignInWrap = styled.div`
     text-align: center;
 `
