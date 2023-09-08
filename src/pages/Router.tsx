@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { ErrorComponent } from 'components/index'
-import { Layout } from 'pages/index'
+import { GroupBuying, Layout } from 'pages/index'
 import type { RouteObject } from 'react-router-dom'
 
 //페이지 정보를 담고있는 객체를 반환하는 함수.
@@ -32,5 +32,13 @@ export const router = createBrowserRouter([
     element: <Layout />,
     errorElement: <ErrorComponent />,
     children: []
+  },
+  {
+    path: '/',
+    element: <Layout />,
+    errorElement: <ErrorComponent />,
+    children: [
+      generateRoute('/groupBuying', <GroupBuying />, <ErrorComponent />, [])
+    ]
   }
 ])

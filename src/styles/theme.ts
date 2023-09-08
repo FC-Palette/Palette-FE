@@ -15,9 +15,9 @@ export const theme = {
     grey4: '#9CA3AF',
     grey5: '#6B7280',
     grey6: '#4B5563',
-    grey7: '374151',
+    grey7: '#374151',
     grey8: '#1F2937',
-    grey9: '111827'
+    grey9: '#111827'
   },
   subColor: {
     redL1: '#FA5C47',
@@ -26,5 +26,13 @@ export const theme = {
     greenL1: '#6DD29C',
     green0: '#1CAB67',
     greenD1: '#15965A'
+  },
+  customSize: {
+    tiny: '10px',
+    small: '12px',
+    medium: '14px',
+    large: '16px',
+    xlarge: '18px',
+    xxlarge: '24px'
   }
 }
