@@ -39,11 +39,19 @@ const Wrapper = styled.div`
   background-color: ${props => props.theme.main.white};
   width: 100%;
   display: flex;
+<<<<<<< HEAD
   position: sticky;
+=======
+  position: fixed;
+>>>>>>> fbf0980 (feat: 성장해요 메인 페이지 컴포넌트 생성)
   flex-direction: column;
   top: 108px;
   padding-top: 10px;
   z-index: 1;
+<<<<<<< HEAD
+=======
+  
+>>>>>>> fbf0980 (feat: 성장해요 메인 페이지 컴포넌트 생성)
 `
 // 파란 아이콘 래퍼 [카테고리 필터]
 const StyledIcon = styled.button`

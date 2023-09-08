@@ -14,6 +14,16 @@ export const CareerMainCard = () => {
       <CareerMainItemsWrap />
       <CareerMainItemsWrap />
       <CareerMainItemsWrap />
+      <CareerMainItemsWrap />
+      <CareerMainItemsWrap />
+      <CareerMainItemsWrap />
+      <CareerMainItemsWrap />
+      <CareerMainItemsWrap />
+      <CareerMainItemsWrap />
+      <CareerMainItemsWrap />
+      <CareerMainItemsWrap />
+      <CareerMainItemsWrap />
+      <CareerMainItemsWrap />
 
       <CareerMainItemCreateButton />
     </Card>
