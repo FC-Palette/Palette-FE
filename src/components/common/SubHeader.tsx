@@ -28,7 +28,7 @@ export const SubHeader: React.FC<SubHeaderProps> = ({ items, initialItem }) => {
 // 서브 헤더 래퍼
 const HeaderWrapperSimple = styled.div`
   display: flex;
-  position: fixed;
+  position: sticky;
   top: 80px;
   width: 100%;
   padding-bottom: 6px;

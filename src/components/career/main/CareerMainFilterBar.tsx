@@ -39,12 +39,11 @@ const Wrapper = styled.div`
   background-color: ${props => props.theme.main.white};
   width: 100%;
   display: flex;
-  position: fixed;
+  position: sticky;
   flex-direction: column;
   top: 108px;
   padding-top: 10px;
   z-index: 1;
-  
 `
 // 파란 아이콘 래퍼 [카테고리 필터]
 const StyledIcon = styled.button`

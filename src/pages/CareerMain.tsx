@@ -1,5 +1,4 @@
 import { Footer, Header, SubHeader } from 'components/common/index'
-import { theme } from 'styles/index'
 import { ArrowLeft2, SearchNormal1, Notification } from 'iconsax-react'
 import styled from 'styled-components'
 import { CAREER_SUBHEADER_TEXT } from 'constants/index'
@@ -9,11 +8,7 @@ export const CareerMain = () => {
     <>
       {/* 헤더 */}
       <Header
-        leftIcon={
-          <StyledIcon>
-            <ArrowLeft2 />
-          </StyledIcon>
-        }
+        leftIcon={<ArrowLeft2 />}
         centerText="같이 성장해요">
         <IconWrapper>
           <SearchNormal1 />
@@ -40,11 +35,7 @@ export const CareerMain = () => {
   )
 }
 
-
-const StyledIcon = styled.button`
-  color: #000;
-  font-size: ${theme.customSize.xxlarge};
-`
+const StyledIcon = styled.button``
 const IconWrapper = styled.button`
   margin-right: 10px;
 `
