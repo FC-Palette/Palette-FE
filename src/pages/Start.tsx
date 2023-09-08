@@ -6,6 +6,7 @@ import { styled } from "styled-components"
 
 
 
+
 export const Start = () => {
     return (
     <Wrapper>
