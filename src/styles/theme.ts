@@ -25,6 +25,7 @@ export const theme = {
     redD1: '#D61E05',
     greenL1: '#6DD29C',
     green0: '#1CAB67',
-    greenD1: '#15965A'
+    greenD1: '#15965A',
+    danger: '#F13D2C'
   }
 }
