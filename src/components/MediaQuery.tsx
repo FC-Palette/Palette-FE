@@ -19,4 +19,5 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   background-color: ${props => props.theme.greyScale.grey0};
+  /* overflow: hidden; */
 `

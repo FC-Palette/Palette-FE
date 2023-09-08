@@ -32,8 +32,8 @@ const Wrapper = styled.div`
   padding-bottom: 80px;
 `
 const StyledIcon = styled.button`
-  color: #000;
-  font-size: ${theme.customSize.xxlarge};
+  /* color: #000;
+  font-size: ${theme.customSize.xxlarge}; */
 `
 const IconWrapper = styled.button`
   margin-right: 10px;
