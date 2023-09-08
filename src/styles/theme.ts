@@ -36,6 +36,5 @@ export const theme = {
     xlarge: '18px',
     xxlarge: '24px',
     xxxlarge: '48px',
-    greenD1: '#15965A',
   }
 }
