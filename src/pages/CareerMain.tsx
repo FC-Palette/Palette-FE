@@ -1,0 +1,50 @@
+import { Footer, Header, SubHeader } from 'components/common/index'
+import { theme } from 'styles/index'
+import { ArrowLeft2, SearchNormal1, Notification } from 'iconsax-react'
+import styled from 'styled-components'
+import { CAREER_SUBHEADER_TEXT } from 'constants/index'
+import { CareerMainCard, CareerMainFilterBar } from '@/components/career'
+export const CareerMain = () => {
+  return (
+    <>
+      {/* 헤더 */}
+      <Header
+        leftIcon={
+          <StyledIcon>
+            <ArrowLeft2 />
+          </StyledIcon>
+        }
+        centerText="같이 성장해요">
+        <IconWrapper>
+          <SearchNormal1 />
+        </IconWrapper>
+        <StyledIcon>
+          <Notification />
+        </StyledIcon>
+      </Header>
+
+      {/* 서브헤더 */}
+      <SubHeader
+        items={CAREER_SUBHEADER_TEXT}
+        initialItem="커리어"
+      />
+      {/* 필터 바 */}
+      <CareerMainFilterBar />
+
+      {/* 메인 출력 콘텐츠 */}
+      <CareerMainCard />
+
+      {/* 푸터 */}
+      <Footer />
+    </>
+  )
+}
+
+
+const StyledIcon = styled.button`
+  color: #000;
+  font-size: ${theme.customSize.xxlarge};
+`
+const IconWrapper = styled.button`
+  margin-right: 10px;
+`

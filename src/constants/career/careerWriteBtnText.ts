@@ -1,0 +1,1 @@
+export const WRITE_BUTTON_TEXT = '글쓰기'
