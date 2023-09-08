@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { ErrorComponent } from 'components/index'
-import { Layout, SignIn } from 'pages/index'
+import { Layout, SignIn, SignUp } from 'pages/index'
 import type { RouteObject } from 'react-router-dom'
 import { Start } from './Start'
 
@@ -42,6 +42,14 @@ export const router = createBrowserRouter([
     errorElement: <ErrorComponent />,
     children: [
       generateRoute('/signin', <SignIn />, <ErrorComponent />)
+    ]
+  },
+  {
+    path: '/',
+    element: <Layout />,
+    errorElement: <ErrorComponent />,
+    children: [
+      generateRoute('/signup', <SignUp />, <ErrorComponent />)
     ]
   },
 ])
