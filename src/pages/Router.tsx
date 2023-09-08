@@ -71,4 +71,12 @@ export const router = createBrowserRouter([
       generateRoute('/signup', <SignUp />, <ErrorComponent />)
     ]
   },
+  {
+    path: '/',
+    element: <Layout />,
+    errorElement: <ErrorComponent />,
+    children: [
+      generateRoute('/signup', <SignUp />, <ErrorComponent />)
+    ]
+  },
 ])
