@@ -23,6 +23,7 @@ export const theme = {
     redL1: '#FA5C47',
     red0: '#F93015',
     redD1: '#D61E05',
+    redD2: '#F13D2c',
     greenL1: '#6DD29C',
     green0: '#1CAB67',
     greenD1: '#15965A'
