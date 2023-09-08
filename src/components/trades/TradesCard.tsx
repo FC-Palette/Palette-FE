@@ -71,11 +71,13 @@ const StyledRecordWrapper = styled.button`
   height: 20px;
   margin-right: 8px;
 `
+
 const StyledSetting4 = styled(Setting4)`
   color: ${theme.main.white};
   width: ${theme.customSize.xlarge};
   height: ${theme.customSize.xlarge};
 `
+
 const StyledRecord = styled(Record)`
   color: ${theme.main.blue0};
   width: 20px;

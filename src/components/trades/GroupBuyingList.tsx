@@ -82,7 +82,7 @@ export const GroupBuyingList = () => {
   )
 }
 
-const Container = styled.div`
+const Container = styled.button`
   display: flex;
   width: 170px;
   height: 288px;

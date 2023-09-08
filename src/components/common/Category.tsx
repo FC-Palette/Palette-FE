@@ -21,15 +21,15 @@ const Wrapper = styled.div`
   height: 48px;
   position: relative;
 `
-const CategoryBar = styled.div`
+const CategoryBar = styled.button`
   display: flex;
   position: absolute;
   left: 8%;
-  height: 44px;
+  height: 32px;
   display: flex;
   align-items: center;
   border-radius: 8px;
-  padding: 6px;
+  padding: 4px 8px;
   background-color: ${theme.greyScale.grey3};
   font-weight: 400;
   font-size: ${theme.customSize.large};
