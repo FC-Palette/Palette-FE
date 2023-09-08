@@ -7,26 +7,30 @@ import { ArrowLeft2, SearchNormal1, Notification } from 'iconsax-react'
 export const GroupBuying = () => {
   return (
     <>
-      <Header
-        leftIcon={
+      <Wrapper>
+        <Header
+          leftIcon={
+            <StyledIcon>
+              <ArrowLeft2 />
+            </StyledIcon>
+          }
+          centerText="같이 사요">
+          <IconWrapper>
+            <SearchNormal1 />
+          </IconWrapper>
           <StyledIcon>
-            <ArrowLeft2 />
+            <Notification />
           </StyledIcon>
-        }
-        centerText="같이 사요">
-        <IconWrapper>
-          <SearchNormal1 />
-        </IconWrapper>
-        <StyledIcon>
-          <Notification />
-        </StyledIcon>
-      </Header>
-      <TradesCard />
+        </Header>
+        <TradesCard />
+      </Wrapper>
       <Footer />
     </>
   )
 }
-
+const Wrapper = styled.div`
+  padding-bottom: 80px;
+`
 const StyledIcon = styled.button`
   color: #000;
   font-size: ${theme.customSize.xxlarge};

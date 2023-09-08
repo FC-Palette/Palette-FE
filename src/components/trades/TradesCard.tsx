@@ -37,11 +37,11 @@ export const TradesCard = () => {
 }
 
 const Wrapper = styled.div`
-  width: auto;
+  width: 100%;
 `
 
 const Main = styled.div`
-  width: auto;
+  width: 100%;
   display: flex;
   justify-content: center;
   margin-top: 10px;
