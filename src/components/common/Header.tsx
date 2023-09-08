@@ -29,9 +29,10 @@ const Wrapper = styled.header`
   display: flex;
   align-items: center;
   width: 100%;
+  /* max-width: 767px; */
   height: 80px;
   justify-content: center;
-  position: fixed;
+  position: sticky;
   top: 0;
   z-index: 100;
   background-color: ${theme.main.white};

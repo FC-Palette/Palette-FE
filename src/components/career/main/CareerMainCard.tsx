@@ -33,18 +33,4 @@ export const CareerMainCard = () => {
 const Card = styled.div`
   position: relative;
   width: 100%;
-  top: 200px;
-
-  /* height: auto; */
-  /* display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-content: center; */
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* align-items: center; */
-  /* justify-content: center; */
-
-  /* width: auto; */
-  /* height: 100vh; */
 `
