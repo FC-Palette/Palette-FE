@@ -5,6 +5,7 @@ import { StartButton } from "components/index"
 
 
 
+
 export const Start = () => {
     return (
     <Wrapper>
