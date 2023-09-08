@@ -104,6 +104,9 @@ const TitleWrapper = styled.div`
   top: 187px;
   height: 70px;
   padding: 0px 8px;
+  align-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
 `
 
 const TradesCount = styled.div`
