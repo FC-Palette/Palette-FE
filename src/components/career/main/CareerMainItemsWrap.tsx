@@ -17,8 +17,8 @@ export const CareerMainItemsWrap = () => {
 
         <ItemFlexColumnWrapper>
           {/* 글 묶음 */}
-          <CareerMainItemTitle />
           <CareerMainItemCategory />
+          <CareerMainItemTitle />
           <CareerMainItemMeetingTime />
           <CareerMainItemParticipant />
         </ItemFlexColumnWrapper>
@@ -36,7 +36,9 @@ const ItemFlexRowWrapper = styled.div`
   flex-direction: row;
   gap: 10px;
   justify-content: center;
+  align-items: center;
   margin-top: 10px;
+  height: 132px;
 `
 // 세로 래퍼
 const ItemFlexColumnWrapper = styled.div`
