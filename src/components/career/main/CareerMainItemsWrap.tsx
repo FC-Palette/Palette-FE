@@ -37,7 +37,7 @@ const ItemFlexRowWrapper = styled.div`
   gap: 10px;
   justify-content: center;
   align-items: center;
-  margin-top: 10px;
+  margin-left: 24px;
   height: 132px;
 `
 // 세로 래퍼
@@ -45,6 +45,5 @@ const ItemFlexColumnWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: auto;
-  margin-left: 10px;
   gap: 4px;
 `
