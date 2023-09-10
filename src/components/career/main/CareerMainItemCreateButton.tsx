@@ -24,9 +24,11 @@ export const CareerMainItemCreateButton = () => {
 
 // 버튼 위치 조절 스타일러
 const BtnLocationChangeDiv = styled.div`
-  position: fixed;
+  display: flex;
+  justify-content: flex-end;
+  position: sticky;
   bottom: 100px;
-  right: 20px;
+  margin-right: 20px;
   z-index: 1;
 `
 // 아이템 갭
