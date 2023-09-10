@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { ErrorComponent } from 'components/index'
-import { CareerMain, GroupBuying, Layout, ProfileEnter, SignIn, SignUp } from 'pages/index'
+import { CareerMain, GroupBuying, Layout, ProfileEnter, SignIn, SignUp, FindId, FindPassword } from 'pages/index'
 import type { RouteObject } from 'react-router-dom'
 import { Start } from './Start'
 
@@ -58,7 +58,9 @@ export const router = createBrowserRouter([
     children: [
       generateRoute('/start', <Start />, <ErrorComponent />),
       generateRoute('/signup', <SignUp />, <ErrorComponent />),
-      generateRoute('/signin', <SignIn />, <ErrorComponent />)
+      generateRoute('/signin', <SignIn />, <ErrorComponent />),
+      generateRoute('/findid', <FindId />, <ErrorComponent />),
+      generateRoute('/findpassword', <FindPassword />, <ErrorComponent />),
     ]
   },
 ])
