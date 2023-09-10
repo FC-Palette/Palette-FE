@@ -7,6 +7,7 @@ export interface InputProps {
   $paddingLeft?: string
   type?: string
   ph?: string
+  value? : string
   children?: React.ReactNode
 }
 
