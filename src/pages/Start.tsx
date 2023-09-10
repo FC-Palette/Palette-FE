@@ -18,7 +18,7 @@ export const Start = () => {
             <StartSignUp>
                 <Link to="/signup">
                 <Button $bgColor={theme.main.white}
-                color={theme.main.blueL1}
+                color={theme.main.blue0}
                 $btnWidth="382px">
                     오피스너 시작하기
                 </Button>
@@ -40,7 +40,7 @@ const Wrapper = styled.div`
     position: relative;
     background-color: ${(props)=>props.theme.main.blue0};
     margin: 0 auto;
-    width: 100%;
+    width: 430px;
     height: 100vh;
     color: ${(props)=>props.theme.main.white};
 
@@ -70,7 +70,9 @@ const StartTitle = styled.div`
 
 const StartIntro = styled.div`
     font-size: 16px;
+    font-weight: 600;
     line-height: 19.09px;
+    
 `
 
 const StartSignUp = styled.div`
