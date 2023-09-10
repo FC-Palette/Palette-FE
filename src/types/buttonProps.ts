@@ -6,6 +6,7 @@ export interface ButtonProps {
   $fontSize?: string
   $borderColor?: string
   $borderRadius?: string
+  disabled? : boolean
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
   children: React.ReactNode
 }
