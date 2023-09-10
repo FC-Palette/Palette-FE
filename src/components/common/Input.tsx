@@ -11,6 +11,7 @@ export const Input = ({
   children,
   ph,
   type,
+  value,
   $paddingLeft,
   ...props
 }: InputProps) => {
@@ -25,6 +26,7 @@ export const Input = ({
         $borderRadius={$borderRadius}
         $paddingLeft={$paddingLeft}
         type={type}
+        value={value}
         placeholder={ph}
       />
       {/* absolute를 통해 Icon */}
