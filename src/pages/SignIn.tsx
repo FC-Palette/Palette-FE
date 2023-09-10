@@ -1,11 +1,18 @@
-import { SignInField, FindUserField } from 'components/index'
+import { SignInField, FindUserField, Header } from 'components/index'
 import { SignUp } from 'components/index'
+import { ArrowLeft2 } from 'iconsax-react'
 import { styled } from 'styled-components'
 
 
 export const SignIn = () => {
   return (
     <SignInContainer>
+        <Header leftIcon={
+          <StyledIcon>
+            <ArrowLeft2 />
+          </StyledIcon>}
+        centerText="로그인">
+        </Header>
       <SignInField></SignInField>
       <FindUserField></FindUserField>
       <SignUp></SignUp>
@@ -14,6 +21,13 @@ export const SignIn = () => {
 }
 
 const SignInContainer = styled.div`
+  margin: 0 auto;
+  width: 430px;
+  height: 100vh;
   position: relative;
-  top: 124px;
+`
+const StyledIcon = styled.button`
+  color: #000;
+  font-size: ${props => props.theme.customSize.xxlarge};
+
 `

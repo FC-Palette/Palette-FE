@@ -53,7 +53,7 @@ export const SignInField = () => {
                 <Input                     
                 ph={SIGNIN_FORM_TEXT.idInputPlaceholderText}
                 $inputWidth={'100%'}
-                $borderColor={isValidEmail ? theme.greyScale.grey4 : theme.subColor.danger}
+                $borderColor={isValidEmail ? theme.greyScale.grey4 : theme.customSize.danger}
                 value={email}
                 onChange={handleEmailChange}>
                 </Input>
@@ -67,19 +67,21 @@ export const SignInField = () => {
                 type="password"
                 ph={SIGNIN_FORM_TEXT.passwordInputPlaceholderText}
                 $inputWidth={'100%'}             
-                $borderColor={isValidPassword ? theme.greyScale.grey4 : theme.subColor.danger}
+                $borderColor={isValidPassword ? theme.greyScale.grey4 : theme.customSize.danger}
                 value={password}
                 onChange={handlePasswordChange}>
                 </Input>
                 <PasswordRexErrorMessage>
                     {renderPasswordErrorMessage() && (<ErrorMessage>{renderPasswordErrorMessage()}</ErrorMessage>)}
                 </PasswordRexErrorMessage>
-            </PasswordFieldWrap>
-            <Button 
-            $btnWidth= {'100%'}
-            $fontSize= {'20px'}
-            >{SIGNIN_FORM_TEXT.submitButtonText}
-            </Button>
+            </PasswordFieldWrap>              
+                
+                <Button 
+                $btnWidth={'100%'}
+                $fontSize={'20px'}
+                disabled={!isValidEmail || !isValidPassword}>
+                {SIGNIN_FORM_TEXT.submitButtonText}
+                </Button>
         </SignInFieldWrap>
     )
 }
@@ -88,6 +90,7 @@ const SignInFieldWrap = styled.div`
     margin: 0 auto;
     width: 382px;
     margin-bottom: 16px;
+    margin-top: 4px;
 `
 
 
@@ -96,12 +99,18 @@ const IdFieldWrap = styled.div`
     display: flex;
     flex-direction: column;
     margin-bottom: 30px;
+    :focus{
+        border: 1px solid ${theme.main.blue0};
+    }
 `
 
 const PasswordFieldWrap = styled.div`
     display: flex;
     flex-direction: column;
-    margin-bottom: 35px;
+    margin-bottom: 6px;
+    :focus{
+        border: 1px solid ${theme.main.blue0};
+    }
 `
 
 const IdText = styled.div`
@@ -120,18 +129,18 @@ const PasswordText = styled.div`
 `
 
 const ErrorMessage = styled.div`
-    
 `
 
 
 const IdRexErrorMessage = styled.div`
-    color: ${theme.subColor.danger};
+    color: ${theme.customSize.danger};
     font-size: 12px;
     line-height: 28px;
+
 `
 
 const PasswordRexErrorMessage = styled.div`
-    color: ${theme.subColor.danger};
+    color: ${theme.customSize.danger};
     font-size: 12px;
     line-height: 28px;
 `

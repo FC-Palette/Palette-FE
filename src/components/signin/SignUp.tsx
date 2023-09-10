@@ -15,17 +15,14 @@ export const SignUp = () => {
 }
 
 const SignUpContainer = styled.div`
-    position: absolute;
-    width: 100%;
-    height: 70%;
+    position: relative;
     display: flex;
     justify-content: center;
-    align-items: flex-end;
+    top: 40%;
 `
 
 
 const CheckIdText = styled.div`
-    width: 159px;
     height: 17px;
     font-size: 14px;
     font-weight: 400px;
@@ -34,6 +31,7 @@ const CheckIdText = styled.div`
 
 const SignUpLink = styled.div`
     margin: 0 10px;
+    font-size: 14px;
     height: 17px;
     color: ${theme.main.blue0};
     text-align: center;

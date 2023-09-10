@@ -1,14 +1,19 @@
 import { theme } from "styles/index";
 import { SIGNIN_FORM_TEXT } from "constants/index";
 import { styled } from "styled-components";
+import { Link } from "react-router-dom";
 
 
 export const FindUserField = () => {
   return (
     <FindUserFieldForm>
+        <Link to="/findid">
         <FindIdWrap>{SIGNIN_FORM_TEXT.findIdText}</FindIdWrap>
+        </Link>
         <Divider />
+        <Link to="/findpassword">
         <FindPasswordWrap>{SIGNIN_FORM_TEXT.findPasswordText}</FindPasswordWrap>
+        </Link>
     </FindUserFieldForm>
   )
 }
