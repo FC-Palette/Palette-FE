@@ -1,5 +1,5 @@
 import { theme } from 'styles/index'
-import { css, styled } from 'styled-components'
+import { styled } from 'styled-components'
 import { HeaderProps } from 'types/headerProps'
 import {} from 'iconsax-react'
 
