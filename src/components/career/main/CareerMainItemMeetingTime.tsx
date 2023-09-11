@@ -5,5 +5,5 @@ export const CareerMainItemMeetingTime = () => {
 
 const MeetingTime = styled.div`
   color: ${props => props.theme.greyScale.grey6};
-  margin-top: 5px;
+  margin-bottom: -7px;
 `
