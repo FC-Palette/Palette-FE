@@ -5,13 +5,10 @@ import { useNavigate } from 'react-router-dom'
 export const CareerCreateMeetingHeader = () => {
   const navigate = useNavigate()
 
-  const handleBackClick = () => {
-    navigate(-1)
-  }
   return (
     <Header
       leftIcon={
-        <StyledIcon onClick={() => handleBackClick}>
+        <StyledIcon onClick={() => navigate(-1)}>
           <ArrowLeft2 />
         </StyledIcon>
       }

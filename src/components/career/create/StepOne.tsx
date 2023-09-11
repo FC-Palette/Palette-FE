@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { profileNCareerFilter } from '@/constants'
 import { useState } from 'react'
 import { Button, iconMapping } from 'components/common'
+import { useNavigate } from 'react-router-dom'
 
 interface AnswerProps {
   $isSelected: boolean
@@ -16,6 +17,7 @@ interface InputState {
   male: string
 }
 export const StepOne = () => {
+  const navigate = useNavigate()
   const [inputState, setInputState] = useState<InputState>({
     // 모임 종류 [커리어, 근력, 자산]
     typeOne: '',
@@ -98,8 +100,6 @@ export const StepOne = () => {
     </Answer>
   ))
 
-  console.log(inputState)
-
   return (
     <Wrap>
       <QuestionContainer>
@@ -127,7 +127,7 @@ export const StepOne = () => {
         <Question>원하시는 직급이 있으신가요?</Question>
       </QuestionContainer>
       <AnswersContainer>{AnswerList5}</AnswersContainer>
-      <BtnWrap>
+      <BtnWrap onClick={() => navigate('/createMeeting-2')}>
         <Button
           $btnWidth="382px"
           $btnHeight="60px"
@@ -146,7 +146,6 @@ const Wrap = styled.div`
   flex-direction: column;
   position: relative;
   align-items: flex-start;
-  /* left: 24px; */
   margin: 0 23px;
   gap: 8px;
 `
