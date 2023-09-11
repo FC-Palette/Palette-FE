@@ -10,6 +10,7 @@ export const Layout = () => {
 }
 
 const Wrapper = styled.div`
+  width: 430px;
   display: flex;
   flex-direction: column;
   background-color: ${props => props.theme.main.white};
