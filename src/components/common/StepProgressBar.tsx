@@ -34,7 +34,9 @@ const Wrap = styled.div`
   height: 44px;
   display: flex;
   flex-direction: column;
+  background-color: ${props => props.theme.main.white};
   gap: 5px;
+  z-index: 1;
 `
 
 // 그레이
