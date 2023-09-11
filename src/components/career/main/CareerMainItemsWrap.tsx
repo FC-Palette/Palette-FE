@@ -35,7 +35,7 @@ const ItemFlexRowWrapper = styled.div`
   width: calc(100% - 48px);
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 12px;
   align-items: center;
   margin-right: 24px;
   margin-left: 24px;
