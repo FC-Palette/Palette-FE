@@ -16,7 +16,11 @@ export const MediaQuery = ({ children }) => {
 }
 
 const Wrapper = styled.div`
+<<<<<<< HEAD
   min-height: 100vh;
+=======
+  height: 100vh;
+>>>>>>> a494a6e (feat: connect mypage route)
   display: flex;
   justify-content: center;
   background-color: ${props => props.theme.greyScale.grey0};
