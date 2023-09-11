@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 export const ProfileEnterWrap = () => {
   return (
-    <>
+    <Wrap>
       <TextWrap>
         <HeaderText>
           {PROFILE_ENTRY_POINT_TEXT.top[0]}
@@ -26,33 +26,42 @@ export const ProfileEnterWrap = () => {
           간단 프로필 입력하기
         </Button>
       </BtnWrap>
-    </>
+    </Wrap>
   )
 }
+
+const Wrap = styled.div`
+  height: 852px;
+  width: 430px;
+`
 const TextWrap = styled.div`
   display: flex;
+  position: relative;
   flex-direction: column;
-  margin-left: 20px;
+  margin-left: 24px;
 `
 
 const HeaderText = styled.div`
-  margin-top: 178px;
+  position: absolute;
+  top: 178px;
   font-size: ${props => props.theme.customSize.xxxlarge};
+  line-height: 48px;
   font-weight: 700;
   color: ${props => props.theme.greyScale.grey9};
 `
 const SmallText = styled.div`
+  position: absolute;
+  top: 306px;
   color: ${props => props.theme.greyScale.grey5};
   font-size: ${props => props.theme.customSize.xlarge};
   font-weight: 400;
-  margin-top: 28px;
+  line-height: 27px;
 `
 
 const BtnWrap = styled.div`
-  display: flex;
   line-height: 26px;
-  justify-content: center;
-  margin-top: 390px;
+  position: absolute;
+  display: flex;
+  top: 840px;
+  margin-left: 24px;
 `
-
-console.log(window.outerHeight)
