@@ -40,7 +40,7 @@ const Wrap = styled.div`
 `
 
 // 그레이
-const DefaultBar = styled.p`
+const DefaultBar = styled.div`
   height: 4px;
   background-color: ${props => props.theme.greyScale.grey1};
   width: 100%;
