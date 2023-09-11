@@ -1,14 +1,22 @@
 import styled from 'styled-components'
 import { profileNCareerFilter } from '@/constants'
 import { useState } from 'react'
-import { iconMapping } from '@/components/common/'
+import { Button, iconMapping } from 'components/common'
 
 interface AnswerProps {
   $isSelected: boolean
   onClick: () => void
 }
+
+interface InputState {
+  typeOne: string
+  typeTwo: string
+  meetingJopType: string
+  rank: string
+  male: string
+}
 export const StepOne = () => {
-  const [inputState, setInputState] = useState({
+  const [inputState, setInputState] = useState<InputState>({
     // 모임 종류 [커리어, 근력, 자산]
     typeOne: '',
     // 모임 종류 [스터디, 플젝, 친목]
@@ -29,58 +37,14 @@ export const StepOne = () => {
     male: ''
   })
 
-  const handleAnswerOneClick = (item: string) => {
+  const handleAnswerClick = (item: string, questionKey: string) => {
     setInputState(prev => ({
       ...prev,
-      typeOne: item
+      [questionKey]: item
     }))
     setIsSelected(prev => ({
       ...prev,
-      typeOne: item
-    }))
-  }
-
-  const handleAnswerTwoClick = (item: string) => {
-    setInputState(prev => ({
-      ...prev,
-      typeTwo: item
-    }))
-    setIsSelected(prev => ({
-      ...prev,
-      typeTwo: item
-    }))
-  }
-
-  const handleAnswerThreeClick = (item: string) => {
-    setInputState(prev => ({
-      ...prev,
-      meetingJopType: item
-    }))
-    setIsSelected(prev => ({
-      ...prev,
-      meetingJopType: item
-    }))
-  }
-
-  const handleAnswerFourClick = (item: string) => {
-    setInputState(prev => ({
-      ...prev,
-      rank: item
-    }))
-    setIsSelected(prev => ({
-      ...prev,
-      rank: item
-    }))
-  }
-
-  const handleAnswerFiveClick = (item: string) => {
-    setInputState(prev => ({
-      ...prev,
-      male: item
-    }))
-    setIsSelected(prev => ({
-      ...prev,
-      male: item
+      [questionKey]: item
     }))
   }
 
@@ -92,7 +56,7 @@ export const StepOne = () => {
     <Answer
       key={item}
       $isSelected={isAnswerSelected(item, 'typeOne')}
-      onClick={() => handleAnswerOneClick(item)}>
+      onClick={() => handleAnswerClick(item, 'typeOne')}>
       {item}
     </Answer>
   ))
@@ -101,7 +65,7 @@ export const StepOne = () => {
     <Answer
       key={item}
       $isSelected={isAnswerSelected(item, 'typeTwo')}
-      onClick={() => handleAnswerTwoClick(item)}>
+      onClick={() => handleAnswerClick(item, 'typeTwo')}>
       {item}
     </Answer>
   ))
@@ -110,7 +74,7 @@ export const StepOne = () => {
     <Answer
       key={item}
       $isSelected={isAnswerSelected(item, 'meetingJopType')}
-      onClick={() => handleAnswerThreeClick(item)}>
+      onClick={() => handleAnswerClick(item, 'meetingJopType')}>
       <IconWrapper>{iconMapping[item]}</IconWrapper>
       {item}
     </Answer>
@@ -120,7 +84,7 @@ export const StepOne = () => {
     <Answer
       key={item}
       $isSelected={isAnswerSelected(item, 'rank')}
-      onClick={() => handleAnswerFourClick(item)}>
+      onClick={() => handleAnswerClick(item, 'rank')}>
       {item}
     </Answer>
   ))
@@ -129,10 +93,12 @@ export const StepOne = () => {
     <Answer
       key={item}
       $isSelected={isAnswerSelected(item, 'male')}
-      onClick={() => handleAnswerFiveClick(item)}>
+      onClick={() => handleAnswerClick(item, 'male')}>
       {item}
     </Answer>
   ))
+
+  console.log(inputState)
 
   return (
     <Wrap>
@@ -161,6 +127,15 @@ export const StepOne = () => {
         <Question>원하시는 직급이 있으신가요?</Question>
       </QuestionContainer>
       <AnswersContainer>{AnswerList5}</AnswersContainer>
+      <BtnWrap>
+        <Button
+          $btnWidth="382px"
+          $btnHeight="60px"
+          $fontSize="20px"
+          $borderRadius="8px">
+          다음
+        </Button>
+      </BtnWrap>
     </Wrap>
   )
 }
@@ -171,7 +146,8 @@ const Wrap = styled.div`
   flex-direction: column;
   position: relative;
   align-items: flex-start;
-  left: 24px;
+  /* left: 24px; */
+  margin: 0 23px;
   gap: 8px;
 `
 
@@ -237,4 +213,11 @@ const IconWrapper = styled.div`
   color: ${props => props.theme.main.blue0};
   width: 16px;
   height: 16px;
+`
+const BtnWrap = styled.div`
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: 500;
+  width: 100%;
+  margin: 40px 0 20px;
 `
