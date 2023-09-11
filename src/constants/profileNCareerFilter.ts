@@ -1,12 +1,13 @@
 import { propfileNCareerFilterProps } from 'types/index'
 
 export const profileNCareerFilter: propfileNCareerFilterProps = {
+  typeOne: ['커리어', '근력', '자산', '자기개발'],
   // 온, 오프라인
   onOff: ['온라인', '오프라인'],
   // 모임 종류
-  type: ['스터디', '프로젝트', '친목'],
-  // 직무
-  job: [
+  typeTwo: ['스터디', '프로젝트', '친목'],
+  // 직무 프로필 용
+  jobType: [
     '경영・비즈니스',
     '서비스기획・운영',
     '개발',
@@ -28,6 +29,28 @@ export const profileNCareerFilter: propfileNCareerFilterProps = {
     '엔지니어링 · 설계',
     '생산 · 품질'
   ],
+  meetingJopType: [
+    '경영 · 비즈니스',
+    '고객 · 영업',
+    '개발',
+    '게임 기획 · 개발',
+    '금융 · 컨설팅 · VC',
+    '교육',
+    '데이터 · AI · ML',
+    '디자인',
+    '마케팅 · 광고 · 홍보',
+    '미디어 · 커뮤니케이션',
+    '물류 · 구매',
+    `서비스기획 · 운영`,
+    '이커머스 · 리테일',
+    '인사 · 채용 · 노무',
+    '의료 · 제약 · 바이오',
+    '회계 · 재무',
+    '연구 · R&D',
+    '법률 · 특허',
+    '엔지니어링 · 설계',
+    '생산 · 품질'
+  ],
   // 직급
   rank: [
     '인턴',
@@ -41,5 +64,5 @@ export const profileNCareerFilter: propfileNCareerFilterProps = {
     '기타'
   ],
   // 성별
-  male: ['남성', '여성']
+  male: ['무관', '남성', '여성']
 }
