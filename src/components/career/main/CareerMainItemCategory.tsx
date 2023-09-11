@@ -15,6 +15,7 @@ const CategoryWrap = styled.div`
   display: flex;
   width: auto;
   gap: 4px;
+  
 `
 
 const CategoryItem = styled.div`
