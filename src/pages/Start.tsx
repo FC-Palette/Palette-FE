@@ -1,8 +1,8 @@
-import { theme } from "styles/index"
-import { Button } from "components/index"
-import { START_TEXTS } from "constants/index"
+
+import { NAVIGATION_PATH, START_TEXTS } from "constants/index"
 import { Link } from "react-router-dom"
 import { styled } from "styled-components"
+import { StartButton } from "components/index"
 
 
 
@@ -16,17 +16,11 @@ export const Start = () => {
             <StartIntro>{START_TEXTS.introFirstText}</StartIntro>
             <StartIntro>{START_TEXTS.introSecondText}</StartIntro>
             <StartSignUp>
-                <Link to="/signup">
-                <Button $bgColor={theme.main.white}
-                color={theme.main.blue0}
-                $btnWidth="382px">
-                    오피스너 시작하기
-                </Button>
-                </Link>
+                <StartButton></StartButton>
             </StartSignUp>
             <StartSignInWrap>
                 <StartSignIn>{START_TEXTS.existenceText}</StartSignIn>
-                <Link to="/signin">
+                <Link {...NAVIGATION_PATH.navigatorSignInPage}>
                 <MoveToSignInPage>{START_TEXTS.linkToSignInText}</MoveToSignInPage>
                 </Link>
             </StartSignInWrap>

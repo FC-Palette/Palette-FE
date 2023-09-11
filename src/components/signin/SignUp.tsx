@@ -1,4 +1,4 @@
-import { SIGNIN_FORM_TEXT } from "constants/index";
+import { NAVIGATION_PATH, SIGNIN_FORM_TEXT } from "constants/index";
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
 import { theme } from "styles/index"
@@ -7,7 +7,7 @@ export const SignUp = () => {
     return (
         <SignUpContainer>
             <CheckIdText>{SIGNIN_FORM_TEXT.haveNotIdText}</CheckIdText>
-            <Link to="/signup">
+            <Link {...NAVIGATION_PATH.navigatorSignUpPage}>
             <SignUpLink>{SIGNIN_FORM_TEXT.signUpText}</SignUpLink>
             </Link>
         </SignUpContainer>
