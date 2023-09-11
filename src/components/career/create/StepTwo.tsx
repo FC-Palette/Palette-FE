@@ -36,7 +36,7 @@ export const StepTwo = () => {
       {/* 이미지 입력 필드 */}
       <DummyImage />
       {/* 하단 입력 필드 */}
-      <QuestionBig>제목을 입력해주세요. *</QuestionBig>
+      <QuestionBig>제목을 입력해주세요. <Asterrisk>*</Asterrisk></QuestionBig>
       <InputWrapSmall>
         <InputText
           placeholder="제목을 입력하세요"
@@ -173,4 +173,8 @@ const InputLengthWrapBig = styled.div`
   line-height: 19px;
   text-align: right;
   color: ${props => props.theme.greyScale.grey5};
+`
+
+const Asterrisk = styled.span`
+  color: #ff5a5a; 
 `
