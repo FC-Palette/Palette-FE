@@ -21,28 +21,40 @@ export const SignInField = () => {
     const renderEmailErrorMessage = () => {
         if (!email) {
             return SIGNIN_REGEX_TEXT.idInsertRegText;
-        } else if (!isValidEmail) {
+        }
+    
+        if (!isValidEmail) {
             return SIGNIN_REGEX_TEXT.idFormatRegText;
         }
+    
         return null;
     };
+    
 
     const renderPasswordErrorMessage = () => {
         if (!password) {
             return SIGNIN_REGEX_TEXT.passwordInsertRegText;
-        } else if (!passwordRegex.test(password)) {
+        }
+        if (!passwordRegex.test(password)) {
             if (!SIGNIN_REGEX_TEXT.passwordIncludeEngRegText.test(password)) {
                 return SIGNIN_REGEX_TEXT.passwordIncludeEngText;
-            } else if (!SIGNIN_REGEX_TEXT.passwordIncludeNumRegText.test(password)) {
+            }
+    
+            if (!SIGNIN_REGEX_TEXT.passwordIncludeNumRegText.test(password)) {
                 return SIGNIN_REGEX_TEXT.passwordIncludeNumText;
-            } else if (!SIGNIN_REGEX_TEXT.passwordIncludeSymRegText.test(password)) {
+            }
+    
+            if (!SIGNIN_REGEX_TEXT.passwordIncludeSymRegText.test(password)) {
                 return SIGNIN_REGEX_TEXT.passwordIncludeSymbolText;
-            } else if (password.length < 8) {
+            }
+    
+            if (password.length < 8) {
                 return SIGNIN_REGEX_TEXT.passwordGreaterNumText;
             }
         }
-        return null;
-    };
+        return null; 
+        };
+    
     
 
 
@@ -53,7 +65,7 @@ export const SignInField = () => {
                 <Input                     
                 ph={SIGNIN_FORM_TEXT.idInputPlaceholderText}
                 $inputWidth={'100%'}
-                $borderColor={isValidEmail ? theme.greyScale.grey4 : theme.customSize.danger}
+                $borderColor={isValidEmail ? theme.greyScale.grey4 : theme.subColor.redD2}
                 value={email}
                 onChange={handleEmailChange}>
                 </Input>
@@ -67,7 +79,7 @@ export const SignInField = () => {
                 type="password"
                 ph={SIGNIN_FORM_TEXT.passwordInputPlaceholderText}
                 $inputWidth={'100%'}             
-                $borderColor={isValidPassword ? theme.greyScale.grey4 : theme.customSize.danger}
+                $borderColor={isValidPassword ? theme.greyScale.grey4 : theme.subColor.redD2}
                 value={password}
                 onChange={handlePasswordChange}>
                 </Input>
@@ -133,14 +145,14 @@ const ErrorMessage = styled.div`
 
 
 const IdRexErrorMessage = styled.div`
-    color: ${theme.customSize.danger};
+    color: ${theme.subColor.redD2};
     font-size: 12px;
     line-height: 28px;
 
 `
 
 const PasswordRexErrorMessage = styled.div`
-    color: ${theme.customSize.danger};
+    color: ${theme.subColor.redD2};
     font-size: 12px;
     line-height: 28px;
 `
