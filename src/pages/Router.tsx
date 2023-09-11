@@ -10,7 +10,8 @@ import {
   FindId,
   FindPassword,
   UsedTrade,
-  GroupUpload
+  GroupUpload,
+  MyPage
 } from 'pages/index'
 
 import type { RouteObject } from 'react-router-dom'
@@ -82,12 +83,6 @@ export const router = createBrowserRouter([
     path: '/',
     element: <Layout />,
     errorElement: <ErrorComponent />,
-    children: [generateRoute('/signup', <SignUp />, <ErrorComponent />)]
-  },
-  {
-    path: '/',
-    element: <Layout />,
-    errorElement: <ErrorComponent />,
-    children: [generateRoute('/signup', <SignUp />, <ErrorComponent />)]
+    children: [generateRoute('/mypage', <MyPage />, <ErrorComponent />)]
   }
 ])
