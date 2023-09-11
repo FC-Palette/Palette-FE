@@ -3,6 +3,7 @@ import { ErrorComponent } from 'components/index'
 import {
   CareerMain,
   GroupPurchase,
+  GroupBuying,
   Layout,
   ProfileEnter,
   SignIn,
@@ -16,9 +17,10 @@ import {
   CareerCreateMeetingStepOne,
   CareerCreateMeetingStepTwo,
   CareerCreateMeetingStepThree,
-  CareerCreateMeetingStepPreview
+  CareerCreateMeetingStepPreview,
+  ChatList,
+  ChatRoom
 } from 'pages/index'
-
 import type { RouteObject } from 'react-router-dom'
 import { Start } from './Start'
 
@@ -117,6 +119,15 @@ export const router = createBrowserRouter([
     children: [
       generateRoute('/mypage', <MyPage />, <ErrorComponent />),
       generateRoute('/setting', <Setting />, <ErrorComponent />)
+    ]
+  },
+  {
+    path: '/',
+    element: <Layout />,
+    errorElement: <ErrorComponent />,
+    children: [
+      generateRoute('/chatlist', <ChatList />, <ErrorComponent />),
+      generateRoute('/chat', <ChatRoom />, <ErrorComponent />)
     ]
   }
 ])
