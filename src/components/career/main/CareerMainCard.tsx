@@ -23,5 +23,5 @@ export const CareerMainCard = () => {
 const Card = styled.div`
   position: relative;
   width: 430px;
-  margin: 0 auto; /* Center the card horizontally */
+  margin: 0 auto;
 `
