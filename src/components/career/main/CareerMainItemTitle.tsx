@@ -7,5 +7,4 @@ const Title = styled.div`
   color: ${props => props.theme.greyScale.grey9};
   font-size: ${props => props.theme.customSize.xlarge};
   font-weight: 600;
-  /* margin-top: 5px; */
 `
