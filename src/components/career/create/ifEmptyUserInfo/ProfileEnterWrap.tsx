@@ -6,6 +6,7 @@ export const ProfileEnterWrap = () => {
   return (
     <Wrap>
       <TextWrap>
+        <PostTitle>[마케팅] 출근 전 트렌드 분석</PostTitle>
         <HeaderText>
           {PROFILE_ENTRY_POINT_TEXT.top[0]}
           <br />
@@ -29,39 +30,39 @@ export const ProfileEnterWrap = () => {
     </Wrap>
   )
 }
-
 const Wrap = styled.div`
-  height: 852px;
   width: 430px;
+  height: 850px;
+  position: relative;
 `
 const TextWrap = styled.div`
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  margin-left: 24px;
-`
-
-const HeaderText = styled.div`
   position: absolute;
-  top: 178px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+`
+const PostTitle = styled.div`
+  margin-top: 64px;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 26px;
+  color: ${props => props.theme.greyScale.grey9};
+`
+const HeaderText = styled.div`
+  top: 180px;
+  margin-top: 8px;
   font-size: ${props => props.theme.customSize.xxxlarge};
-  line-height: 48px;
   font-weight: 700;
   color: ${props => props.theme.greyScale.grey9};
 `
 const SmallText = styled.div`
-  position: absolute;
-  top: 306px;
   color: ${props => props.theme.greyScale.grey5};
   font-size: ${props => props.theme.customSize.xlarge};
   font-weight: 400;
-  line-height: 27px;
+  margin-top: 12px;
 `
 
 const BtnWrap = styled.div`
   line-height: 26px;
-  position: absolute;
-  display: flex;
-  top: 840px;
-  margin-left: 24px;
+  margin: 760px 24px 32px;
 `
