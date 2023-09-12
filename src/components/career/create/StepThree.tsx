@@ -4,56 +4,58 @@ import { useState } from 'react'
 import styled from 'styled-components'
 
 interface selectProps {
-  $isSelected: boolean
+  $isSelected: boolean | string
   onClick: () => void
 }
 
-interface InputState {
-  numOfPeople: number
-  meetingPeriod: string
-  meetingSpace: string
-  periodicCheck: boolean
-  days: string[]
-  progressTime: string
-  memberApproval: boolean
-}
-
 export const StepThree = () => {
-  const [inputState, setInputState] = useState<InputState>({
-    // 모집인원
-    numOfPeople: 0,
-    // 모임기간
-    meetingPeriod: '',
-    // 모임장소
-    meetingSpace: '',
-    // 주기적 모임 체크
-    periodicCheck: false,
-    // 모임 요일
-    days: [],
-    // 진행 시간
-    progressTime: '',
-    // 맴버 승인
-    memberApproval: false
-  })
+  // TOGGLE STATE
+  const [onlineToggleState, setOnlineToggleState] = useState(false)
+  const [meetingFrequency, setMeetingFrequency] = useState('')
+  const [isApprove, setIsApprove] = useState(false)
+  const [periodicMeeting, setPeriodicMeeting] = useState(false)
+  const [selectedDays, setSelectedDays] = useState<string[]>([])
 
-  console.log(inputState)
-  const [isSelected, setIsSelected] = useState({
-    days: ''
-  })
+  const handleToggleOnline = (isOnline: boolean) => {
+    setOnlineToggleState(isOnline)
+  }
+  const handleToggleMeetingFrequency = (frequency: string) => {
+    setMeetingFrequency(frequency)
+  }
+
+  const handleToggleApprovalType = (type: boolean) => {
+    setIsApprove(type)
+  }
+
+  const handleTogglePeriodicMeeting = () => {
+    setPeriodicMeeting(!periodicMeeting)
+    if (!periodicMeeting) {
+      setOnlineToggleState(true)
+    } else {
+      setOnlineToggleState(false)
+    }
+  }
+
+  const toggleDaySelection = (day: string) => {
+    if (selectedDays.includes(day)) {
+      setSelectedDays(selectedDays.filter(selectedDay => selectedDay !== day))
+    } else {
+      setSelectedDays([...selectedDays, day])
+    }
+  }
+
+  console.log(onlineToggleState)
+  console.log(selectedDays)
 
   const daysList = days.dayOfTheWeek.map(item => (
-    <Answer key={item}>{item}</Answer>
+    <Answer
+      key={item}
+      onClick={() => toggleDaySelection(item)}
+      $isSelected={selectedDays.includes(item)}
+      className={selectedDays.includes(item) ? 'selected' : ''}>
+      {item}
+    </Answer>
   ))
-
-  const isAnswerSelected = (item: string, questionKey: string) => {
-    return isSelected[questionKey] === item
-  }
-  const handleToggleApproval = (isApproval: boolean) => {
-    setInputState(prevState => ({
-      ...prevState,
-      memberApproval: isApproval
-    }))
-  }
 
   return (
     <Wrap>
@@ -85,26 +87,80 @@ export const StepThree = () => {
       </InputWrapSmall>
 
       {/* 모임 장소  */}
-      <QuestionTitleSmall>
-        모임장소를 어디로 할까요? <Asterrisk>*</Asterrisk>
-      </QuestionTitleSmall>
+      <ToggleNTextWrap>
+        <QuestionTitleSmall>
+          모임장소를 어디로 할까요? <Asterrisk>*</Asterrisk>
+        </QuestionTitleSmall>
+        <ToggleRowSortContainer>
+          <ToggleL
+            onClick={() => handleToggleOnline(true)}
+            $isSelected={onlineToggleState}>
+            온라인
+          </ToggleL>
+          <ToggleR
+            onClick={() => handleToggleOnline(false)}
+            $isSelected={!onlineToggleState}>
+            오프라인
+          </ToggleR>
+        </ToggleRowSortContainer>
+      </ToggleNTextWrap>
       <InputWrapSmall>
-        <InputText placeholder="텍스트를 입력하세요" />
+        <InputText
+          placeholder="텍스트를 입력하세요"
+          disabled={!onlineToggleState}
+          style={{
+            background: onlineToggleState ? 'inherit' : '#F5F6FA',
+            color: onlineToggleState ? 'inherit' : '#F5F6FA'
+          }}
+        />
       </InputWrapSmall>
 
-      {/* 주기 체크*/}
+      {/* 주기 체크 , 주기 체크 클릭시 온라인, 오프라인 모두 체크되어야함 */}
       <PeriodicMeetingChecWrap>
-        <PeriodicMeetingCheckBox type="checkbox" />
+        <PeriodicMeetingCheckBox
+          type="checkbox"
+          onClick={() => handleTogglePeriodicMeeting()}
+        />
         <PeriodicMeetingCheckText>
           주기적으로 모이시겠어요?
         </PeriodicMeetingCheckText>
       </PeriodicMeetingChecWrap>
 
       {/* 모임 요일 */}
-      <QuestionTitleSmall>
-        모임 요일을 정해주세요. <Asterrisk>*</Asterrisk>
-      </QuestionTitleSmall>
+      <ToggleNTextWrap>
+        <QuestionTitleSmall>
+          모임 요일을 정해주세요. <Asterrisk>*</Asterrisk>
+        </QuestionTitleSmall>
+        <ToggleRowSortContainer>
+          <ToggleL60
+            onClick={() => handleToggleMeetingFrequency('weekly')}
+            $isSelected={meetingFrequency === 'weekly'}>
+            매주
+          </ToggleL60>
+          <ToggleM60
+            onClick={() => handleToggleMeetingFrequency('biweekly')}
+            $isSelected={meetingFrequency === 'biweekly'}>
+            격주
+          </ToggleM60>
+          <ToggleR60
+            onClick={() => handleToggleMeetingFrequency('monthly')}
+            $isSelected={meetingFrequency === 'monthly'}>
+            매달
+          </ToggleR60>
+        </ToggleRowSortContainer>
+      </ToggleNTextWrap>
       <AnswerFlexWrap>{daysList}</AnswerFlexWrap>
+
+      {/* 모임 시간 */}
+      <QuestionTitleSmall>
+        모임 시간을 정해주세요.<Asterrisk>*</Asterrisk>
+      </QuestionTitleSmall>
+      <InputWrapSmall>
+        <InputText
+          placeholder="오전 11:00"
+          type="text"
+        />
+      </InputWrapSmall>
 
       {/* 진행 시간 */}
       <QuestionTitleSmall>
@@ -116,21 +172,21 @@ export const StepThree = () => {
         max={180}
       />
 
-      <RelatedToggleWrap>
+      <ToggleNTextWrap>
         <QuestionTitleSmall>멤버승인</QuestionTitleSmall>
-        <ToggleContainer>
-          <ToggleButtonL
-            onClick={() => handleToggleApproval(true)}
-            $isSelected={inputState.memberApproval}>
+        <ToggleRowSortContainer>
+          <ToggleL
+            onClick={() => handleToggleApprovalType(true)}
+            $isSelected={isApprove}>
             승인제
-          </ToggleButtonL>
-          <ToggleButtonR
-            onClick={() => handleToggleApproval(false)}
-            $isSelected={!inputState.memberApproval}>
+          </ToggleL>
+          <ToggleR
+            onClick={() => handleToggleApprovalType(false)}
+            $isSelected={!isApprove}>
             선착순
-          </ToggleButtonR>
-        </ToggleContainer>
-      </RelatedToggleWrap>
+          </ToggleR>
+        </ToggleRowSortContainer>
+      </ToggleNTextWrap>
       <BtnWrap>
         <Button
           $btnWidth="382px"
@@ -149,7 +205,7 @@ const Wrap = styled.div`
   flex-direction: column;
   position: relative;
   align-items: flex-start;
-  margin: 0 23px;
+  margin: 0 24px;
   gap: 8px;
 `
 
@@ -157,7 +213,7 @@ const Wrap = styled.div`
 const QuestionContainer = styled.div`
   display: flex; /* 수평 정렬을 위해 추가 */
   align-items: center; /* 세로 중앙 정렬을 위해 추가 */
-  margin-top: 30px;
+  margin-top: 32px;
 `
 // 질문 텍스트 (대)
 const QuestionTitleBig = styled.div`
@@ -179,11 +235,10 @@ const QuestionTitleBigDown = styled.div`
 `
 // 질문 텍스트 (중)
 const QuestionTitleSmall = styled.div`
-  margin-top: 30px;
   font-weight: 700;
   font-size: 18px;
   line-height: 21.48px;
-  margin-top: 32px;
+  margin-top: 26px;
   color: ${props => props.theme.greyScale.grey6};
 `
 // 버티컬 바 파란색
@@ -218,6 +273,8 @@ const InputText = styled.input`
     border: none;
     border-color: transparent;
   }
+
+  background-color: transparent;
 `
 // 주기적 체크
 const PeriodicMeetingChecWrap = styled.div`
@@ -225,7 +282,7 @@ const PeriodicMeetingChecWrap = styled.div`
   align-items: center;
   justify-content: center;
   gap: 5px;
-  margin-top: 32px;
+  margin-top: 26px;
 `
 const PeriodicMeetingCheckText = styled.div`
   font-size: 16px;
@@ -242,7 +299,7 @@ const BtnWrap = styled.div`
   line-height: 26px;
   font-weight: 500;
   width: 100%;
-  margin: 40px 0 20px;
+  margin: 55px 0 32px;
   color: ${props => props.theme.greyScale.grey3};
 `
 
@@ -250,7 +307,7 @@ const Asterrisk = styled.span`
   color: #ff5a5a;
 `
 
-const Answer = styled.div`
+const Answer = styled.div<selectProps>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -261,8 +318,13 @@ const Answer = styled.div`
   height: 42px;
   color: ${props => props.theme.greyScale.grey9};
   background-color: ${props => props.theme.subColor.blueGrey};
-
   cursor: pointer;
+
+  &.selected {
+    /* 선택된 요일의 스타일 */
+    background-color: ${props => props.theme.main.blue0};
+    color: ${props => props.theme.main.white};
+  }
 `
 const AnswerFlexWrap = styled.div`
   width: 382px;
@@ -272,39 +334,109 @@ const AnswerFlexWrap = styled.div`
   cursor: pointer;
   min-width: 120px; // 최소 너비 설정 (원하는 최소 너비로 조절)
 `
-const RelatedToggleWrap = styled.div`
+
+// 토글 관련
+const ToggleNTextWrap = styled.div`
   display: flex;
+  position: relative;
+  width: 100%;
   flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 `
-const ToggleContainer = styled.div`
+
+const ToggleRowSortContainer = styled.div`
   display: flex;
+  text-align: center;
+  align-items: center;
+  margin-top: 26px;
+  white-space: nowrap;
 `
 
-const ToggleButtonL = styled.button<selectProps>`
-  width: 69px;
+const ToggleL = styled.div<selectProps>`
+  width: 68px;
   height: 29px;
+  font-size: 14px;
+  line-height: 16.71px;
+  border-radius: 8px 0 0 8px;
   padding: 6px 20px;
-  border-bottom-left-radius: 8px;
-  border-top-left-radius: 8px;
   flex: 1;
-
-  padding: 10px;
-  border: 1px solid ${props => (props.$isSelected ? '#0077FF' : '#CCCCCC')};
-  background-color: ${props => (props.$isSelected ? '#0077FF' : 'transparent')};
-  color: ${props => (props.$isSelected ? 'white' : '#333333')};
+  background-color: ${props =>
+    props.$isSelected ? props.theme.main.blue0 : props.theme.subColor.blueGrey};
+  color: ${props =>
+    props.$isSelected ? props.theme.main.white : props.theme.greyScale.grey5};
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
-const ToggleButtonR = styled.button<selectProps>`
-  width: 69px;
-  height: 29px;
-  padding: 6px 20px;
-  border-bottom-right-radius: 8px;
-  border-top-right-radius: 8px;
-  flex: 1;
 
-  padding: 10px;
-  border: 1px solid ${props => (props.$isSelected ? '#0077FF' : '#CCCCCC')};
-  background-color: ${props => (props.$isSelected ? '#0077FF' : 'transparent')};
-  color: ${props => (props.$isSelected ? 'white' : '#333333')};
+const ToggleR = styled.div<selectProps>`
+  width: 68px;
+  height: 29px;
+  font-size: 14px;
+  line-height: 16.71px;
+  border-radius: 0 8px 8px 0;
+  flex: 1;
+  padding: 6px 20px;
+  background-color: ${props =>
+    props.$isSelected ? props.theme.main.blue0 : props.theme.subColor.blueGrey};
+  color: ${props =>
+    props.$isSelected ? props.theme.main.white : props.theme.greyScale.grey5};
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+const ToggleL60 = styled.div<selectProps>`
+  width: 60px;
+  height: 29px;
+  font-size: 14px;
+  line-height: 16.71px;
+  border-radius: 8px 0 0 8px;
+  padding: 6px 20px;
+  flex: 1;
+  background-color: ${props =>
+    props.$isSelected ? props.theme.main.blue0 : props.theme.subColor.blueGrey};
+  color: ${props =>
+    props.$isSelected ? props.theme.main.white : props.theme.greyScale.grey5};
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+const ToggleM60 = styled.div<selectProps>`
+  width: 60px;
+  height: 29px;
+  font-size: 14px;
+  line-height: 16.71px;
+  flex: 1;
+  padding: 6px 20px;
+  background-color: ${props =>
+    props.$isSelected ? props.theme.main.blue0 : props.theme.subColor.blueGrey};
+  color: ${props =>
+    props.$isSelected ? props.theme.main.white : props.theme.greyScale.grey5};
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+const ToggleR60 = styled.div<selectProps>`
+  width: 60px;
+  height: 29px;
+  font-size: 14px;
+  line-height: 16.71px;
+  border-radius: 0 8px 8px 0;
+  flex: 1;
+  padding: 6px 20px;
+  background-color: ${props =>
+    props.$isSelected ? props.theme.main.blue0 : props.theme.subColor.blueGrey};
+  color: ${props =>
+    props.$isSelected ? props.theme.main.white : props.theme.greyScale.grey5};
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
