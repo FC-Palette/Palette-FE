@@ -5,7 +5,8 @@ export const theme = {
     blue0: '#2563EB',
     blueD1: '#134BC9',
     blueD2: '#19429D',
-    white: '#fff'
+    white: '#fff',
+    black: '#000'
   },
   greyScale: {
     grey0: '#F9FAFB',
