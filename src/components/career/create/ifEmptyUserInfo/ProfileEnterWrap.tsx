@@ -32,7 +32,7 @@ export const ProfileEnterWrap = () => {
 }
 const Wrap = styled.div`
   width: 430px;
-  height: 932px;
+  height: 850px;
   position: relative;
 `
 const TextWrap = styled.div`
@@ -64,5 +64,5 @@ const SmallText = styled.div`
 
 const BtnWrap = styled.div`
   line-height: 26px;
-  margin: 840px 24px 32px;
+  margin: 760px 24px 32px;
 `
