@@ -7,6 +7,7 @@ export const ProfileEnterWrap = () => {
     <Wrap>
       <TextWrap>
         <PostTitle>[마케팅] 출근 전 트렌드 분석</PostTitle>
+
         <HeaderText>
           {PROFILE_ENTRY_POINT_TEXT.top[0]}
           <br />
@@ -27,6 +28,7 @@ export const ProfileEnterWrap = () => {
           간단 프로필 입력하기
         </Button>
       </BtnWrap>
+
     </Wrap>
   )
 }
@@ -37,10 +39,12 @@ const Wrap = styled.div`
 `
 const TextWrap = styled.div`
   position: absolute;
+
   display: flex;
   flex-direction: column;
   margin-left: 20px;
 `
+
 const PostTitle = styled.div`
   margin-top: 64px;
   font-weight: 500;
@@ -66,3 +70,4 @@ const BtnWrap = styled.div`
   line-height: 26px;
   margin: 760px 24px 32px;
 `
+
