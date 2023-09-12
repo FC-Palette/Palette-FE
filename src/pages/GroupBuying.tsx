@@ -28,7 +28,9 @@ export const GroupBuying = () => {
     </>
   )
 }
-const MainWrapper = styled.div``
+const MainWrapper = styled.div`
+  padding-bottom: 10px;
+`
 const StyledIcon = styled.button`
   /* color: #000;
   font-size: ${theme.customSize.xxlarge}; */

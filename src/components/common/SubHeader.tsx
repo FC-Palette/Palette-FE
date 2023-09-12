@@ -1,23 +1,33 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { styled } from 'styled-components'
-import { SubHeaderProps } from 'types/index'
+import { SubHeaderProps, SubHeaderItemProps } from 'types/index'
+import { useNavigate } from 'react-router-dom'
 
 export const SubHeader: React.FC<SubHeaderProps> = ({ items, initialItem }) => {
   const [selectedHeader, setSelectedHeader] = useState<string>(initialItem)
 
-  const handleSubHeaderClick = (header: string) => {
-    setSelectedHeader(header)
-    // 추후 페이지 이동 필요시 로직 추가
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    setSelectedHeader(
+      items.find(item => item.path === window.location.pathname)?.text ||
+        initialItem
+    )
+  }, [items, initialItem])
+
+  const handleSubHeaderClick = (item: SubHeaderItemProps) => {
+    navigate(item.path)
   }
+
   return (
     <>
       <HeaderWrapperSimple>
-        {items.map(header => (
+        {items.map(item => (
           <HeaderItemSimple
-            key={header}
-            $isSelected={selectedHeader}
-            onClick={() => handleSubHeaderClick(header)}>
-            {header}
+            key={item.text}
+            $isSelected={selectedHeader === item.text}
+            onClick={() => handleSubHeaderClick(item)}>
+            {item.text}
           </HeaderItemSimple>
         ))}
       </HeaderWrapperSimple>
@@ -39,15 +49,14 @@ const HeaderWrapperSimple = styled.div`
 `
 
 // 서브 헤더 아이템
-const HeaderItemSimple = styled.div<{ $isSelected: string }>`
+const HeaderItemSimple = styled.button<{
+  $isSelected: boolean
+}>`
   width: auto;
   color: ${props =>
-    props.$isSelected === props.children
-      ? props.theme.main.blue0
-      : props.theme.greyScale.grey5};
+    props.$isSelected ? props.theme.main.blue0 : props.theme.greyScale.grey5};
   border-bottom: ${props => (props.$isSelected ? '2px solid #fff' : 'none')};
-  text-decoration: ${props =>
-    props.$isSelected === props.children ? '4px underline' : 'none'};
+  text-decoration: ${props => (props.$isSelected ? '4px underline' : 'none')};
   text-underline-offset: 10.5px;
   font-size: 16px;
   line-height: 19.09px;
