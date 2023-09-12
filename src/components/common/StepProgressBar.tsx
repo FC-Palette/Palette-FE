@@ -51,10 +51,5 @@ const ProgressP = styled.p<ProgressBarProps>`
   font-weight: 500;
   line-height: 26px;
   position: relative;
-  left: ${props =>
-    props.$currentPage === 1
-      ? '20%'
-      : props.$currentPage === 2
-      ? '50%'
-      : '83%'};
+  left: 24px;
 `
