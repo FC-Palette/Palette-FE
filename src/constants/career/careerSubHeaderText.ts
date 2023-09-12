@@ -1,1 +1,6 @@
-    export const CAREER_SUBHEADER_TEXT = ['커리어', '근육', '자산', '자기계발']
+export const CAREER_SUBHEADER_TEXT = [
+  { text: '커리어', path: '/' },
+  { text: '근육', path: '/' },
+  { text: '자산', path: '/' },
+  { text: '자기계발', path: '/' }
+]

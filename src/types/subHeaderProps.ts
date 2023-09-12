@@ -1,4 +1,8 @@
 export interface SubHeaderProps {
-  items: string[]
+  items: SubHeaderItemProps[]
   initialItem: string
+}
+export interface SubHeaderItemProps {
+  text: string
+  path: string
 }

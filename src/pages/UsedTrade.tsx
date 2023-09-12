@@ -29,7 +29,7 @@ export const UsedTrade = () => {
   )
 }
 const MainWrapper = styled.div`
-  padding-bottom: 80px;
+  padding-bottom: 10px;
 `
 const StyledIcon = styled.button`
   color: #000;
