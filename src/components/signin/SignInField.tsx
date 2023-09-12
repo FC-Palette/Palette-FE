@@ -8,10 +8,10 @@ export const SignInField = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const emailRegex = SIGNIN_REGEX_TEXT.idRegexCondition;
+    const emailRegex = SIGNIN_REGEX_TEXT.idCondition;
     const isValidEmail = emailRegex.test(email);
 
-    const passwordRegex = SIGNIN_REGEX_TEXT.passwordRegexCondition;
+    const passwordRegex = SIGNIN_REGEX_TEXT.pwdCondition;
     const isValidPassword = passwordRegex.test(password);
 
     const handleEmailChange = (e) => setEmail(e.target.value);
@@ -20,11 +20,11 @@ export const SignInField = () => {
 
     const renderEmailErrorMessage = () => {
         if (!email) {
-            return SIGNIN_REGEX_TEXT.idInsertRegText;
+            return SIGNIN_REGEX_TEXT.emptyId;
         }
     
         if (!isValidEmail) {
-            return SIGNIN_REGEX_TEXT.idFormatRegText;
+            return SIGNIN_REGEX_TEXT.wrongId;
         }
     
         return null;
@@ -33,23 +33,23 @@ export const SignInField = () => {
 
     const renderPasswordErrorMessage = () => {
         if (!password) {
-            return SIGNIN_REGEX_TEXT.passwordInsertRegText;
+            return SIGNIN_REGEX_TEXT.emptyPwd;
         }
         if (!passwordRegex.test(password)) {
-            if (!SIGNIN_REGEX_TEXT.passwordIncludeEngRegText.test(password)) {
-                return SIGNIN_REGEX_TEXT.passwordIncludeEngText;
+            if (!SIGNIN_REGEX_TEXT.engInPwd.test(password)) {
+                return SIGNIN_REGEX_TEXT.pwdReqEng;
             }
     
-            if (!SIGNIN_REGEX_TEXT.passwordIncludeNumRegText.test(password)) {
-                return SIGNIN_REGEX_TEXT.passwordIncludeNumText;
+            if (!SIGNIN_REGEX_TEXT.numInPwd.test(password)) {
+                return SIGNIN_REGEX_TEXT.pwdReqNum;
             }
     
-            if (!SIGNIN_REGEX_TEXT.passwordIncludeSymRegText.test(password)) {
-                return SIGNIN_REGEX_TEXT.passwordIncludeSymbolText;
+            if (!SIGNIN_REGEX_TEXT.symInPwd.test(password)) {
+                return SIGNIN_REGEX_TEXT.pwdReqSym;
             }
     
             if (password.length < 8) {
-                return SIGNIN_REGEX_TEXT.passwordGreaterNumText;
+                return SIGNIN_REGEX_TEXT.pwdLengLeast;
             }
         }
         return null; 
