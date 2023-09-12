@@ -16,9 +16,10 @@ export const SignUp = () => {
 
 const SignUpContainer = styled.div`
     position: relative;
+    top: 30%;
+    margin: 0 auto;
     display: flex;
     justify-content: center;
-    top: 40%;
 `
 
 

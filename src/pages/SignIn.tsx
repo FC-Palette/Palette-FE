@@ -23,7 +23,7 @@ export const SignIn = () => {
 const SignInContainer = styled.div`
   margin: 0 auto;
   width: 430px;
-  height: 100vh;
+  height: 100%;
   position: relative;
 `
 const StyledIcon = styled.button`
