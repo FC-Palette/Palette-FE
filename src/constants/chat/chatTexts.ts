@@ -1,7 +1,5 @@
-const CHAT_TEXTS = {
+export const CHAT_TEXTS = {
   header: '채팅',
-  groupChat: '단체톡',
-  personalChat: '개인톡',
   groupInfo: '참여인원',
   announcement: '공지',
   exitHeader: '채팅방 나가기',
@@ -18,3 +16,4 @@ const CHAT_TEXTS = {
   sendImg: '이미지 전송하기',
   sendFile: '파일 전송하기'
 }
+export const CHAT_TABS = ['단체톡', '개인톡']
