@@ -1,12 +1,20 @@
 import { theme } from 'styles/index'
 import { css, styled } from 'styled-components'
 import { ICON_TEXTS } from 'constants/index'
+import { useNavigate } from 'react-router-dom'
 
 export const Footer = () => {
+  const navigate = useNavigate()
+  const handleIconClick = path => {
+    navigate(path)
+  }
+
   return (
     <Wrapper>
-      {ICON_TEXTS.map(({ text, icon: IconComponent }) => (
-        <IconWrapper key={text}>
+      {ICON_TEXTS.map(({ text, icon: IconComponent, path }) => (
+        <IconWrapper
+          key={text}
+          onClick={() => handleIconClick(path)}>
           <StyledIcon>
             <IconComponent />
           </StyledIcon>
