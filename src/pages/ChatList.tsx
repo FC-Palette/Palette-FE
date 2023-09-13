@@ -1,4 +1,5 @@
-import { Header, Footer, SubHeader, ChatRoom } from 'components/index'
+import { Header, Footer, SubHeader, ChatRooms } from 'components/index'
+import { styled } from 'styled-components'
 import { CHAT_TABS } from 'constants/index'
 /*
     HEADER
@@ -15,8 +16,7 @@ export const ChatList = () => {
         items={CHAT_TABS}
         initialItem={CHAT_TABS[0]}
       />
-      {/* 작업하자 */}
-      <ChatRoom></ChatRoom>
+      <ChatRooms />
       <Footer />
     </>
   )
