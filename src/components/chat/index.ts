@@ -1,1 +1,2 @@
-export * from 'components/chat/ChatRoom'
+export * from 'chat/chatlist'
+export * from 'chat/chaton'
