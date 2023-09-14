@@ -21,7 +21,8 @@ export const theme = {
     grey9: '#111827',
     blueGrey: '#F5F6FA',
     blie: '#E7F2FE',
-    greyShadow: '#5e5e5e66'
+    greyShadow: '#5e5e5e66',
+    greyOpaque: '#0005'
   },
   subColor: {
     redL1: '#FA5C47',
@@ -41,6 +42,6 @@ export const theme = {
     large: '16px',
     xlarge: '18px',
     xxlarge: '24px',
-    xxxlarge: '48px',
+    xxxlarge: '48px'
   }
 }
