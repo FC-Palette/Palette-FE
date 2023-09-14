@@ -17,11 +17,15 @@ export const MediaQuery = ({ children }) => {
 
 const Wrapper = styled.div`
 <<<<<<< HEAD
+<<<<<<< HEAD
   min-height: 100vh;
 =======
   height: 100vh;
 >>>>>>> a494a6e (feat: connect mypage route)
+=======
+>>>>>>> 6166572 (feat: Apply first UI && Constant separation)
   display: flex;
+  min-height: 100vh;
   justify-content: center;
   background-color: ${props => props.theme.greyScale.grey0};
   /* overflow: hidden; */
