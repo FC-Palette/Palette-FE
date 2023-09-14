@@ -11,7 +11,7 @@ export const ChatPreview = () => {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 275px;
+  max-width: 224px;
   overflow: hidden;
   border: 1px solid black;
 `
