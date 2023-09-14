@@ -25,7 +25,7 @@ const Wrapper = styled.footer`
   justify-content: space-around;
   border-top: 2px solid ${theme.greyScale.grey2};
   z-index: 100;
-  position: fixed;
+  position: sticky;
   bottom: 0;
   background-color: ${theme.main.white};
 `
