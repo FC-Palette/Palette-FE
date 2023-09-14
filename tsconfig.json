@@ -36,7 +36,8 @@
       "assets/*": ["src/assets/*"],
       "constants/*": ["src/constants/*"],
       "utils/*": ["src/utils/*"],
-      "chat/*": ["src/components/chat/*"]
+      "chat/*": ["src/components/chat/*"],
+      "recoil/*": ["src/recoil/*"]
     }
   },
   "include": [
