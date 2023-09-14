@@ -17,3 +17,7 @@ export const CHAT_TEXTS = {
   sendFile: '파일 전송하기'
 }
 export const CHAT_TABS = ['단체톡', '개인톡']
+
+export const CHATON_TEXTS = {
+  exit: '채팅방 나가기'
+}
