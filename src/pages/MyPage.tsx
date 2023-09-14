@@ -1,30 +1,34 @@
-import { Footer, Header } from "@/components"
-import { Notification, Setting2 } from "iconsax-react"
-import styled from "styled-components"
-
+import { Footer, Header } from "components/index";
+import { MyPageEditBtn, MyPageIntro, MyPagePostDisplay, MyPageSelectTab } from "components/index";
+import { Notification, Setting2 } from "iconsax-react";
+import { styled } from "styled-components";
 
 export const MyPage = () => {
+
+
   return (
     <MyPageWrap>      
-      <Header
-    centerText="마이페이지">
-      <StyledIcon>
-      <Notification />
-      </StyledIcon>
-      <IconWrapper>
-      <Setting2 />
-      </IconWrapper>
+      <Header centerText="마이페이지">
+        <StyledIcon>
+          <Notification />
+        </StyledIcon>
+        <IconWrapper>
+          <Setting2 />
+        </IconWrapper>
       </Header>
+      <MyPageIntro></MyPageIntro>
+      <MyPageEditBtn></MyPageEditBtn>
+      <MyPagePostArea>
+        <MyPageSelectTab />
+        <MyPagePostDisplay></MyPagePostDisplay>
+      </MyPagePostArea>
       <Footer />
     </MyPageWrap>
   )
 }
 
-
 const MyPageWrap = styled.div`
   position: relative;
-  height: 100vh;
-  
 `
 
 const IconWrapper = styled.div`
@@ -35,4 +39,6 @@ const StyledIcon = styled.div`
   margin-right: 5px;
 `
 
-
+const MyPagePostArea = styled.div`
+  
+`
