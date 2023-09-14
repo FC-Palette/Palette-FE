@@ -1,8 +1,8 @@
-import { Header, ChatAnnList } from 'components/index'
+import { Header, ChatAnnListItem } from 'components/index'
 import { StyledIcon } from 'pages/index'
 import { styled } from 'styled-components'
 import { ArrowLeft2, More } from 'iconsax-react'
-export const ChatAnn = () => {
+export const ChatAnnList = () => {
   return (
     <>
       <Header
@@ -12,7 +12,7 @@ export const ChatAnn = () => {
           <More />
         </StyledIcon>
       </Header>
-      <ChatAnnList></ChatAnnList>
+      <ChatAnnListItem></ChatAnnListItem>
     </>
   )
 }

@@ -1,12 +1,17 @@
-import { Header, Modal, ChatField } from 'components/index'
+import {
+  Header,
+  BackgroundModal,
+  ChatField,
+  ModalButtons
+} from 'components/index'
 import { styled } from 'styled-components'
 import { ArrowLeft2, More } from 'iconsax-react'
 export const ChatOn = () => {
   return (
     <>
-      <Modal
+      <BackgroundModal
         title="asd"
-        content="asd"></Modal>
+        content="asd"></BackgroundModal>
       <Header
         centerText="USERNAME"
         leftIcon={<ArrowLeft2 />}>

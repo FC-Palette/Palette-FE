@@ -1,4 +1,4 @@
 import { Wrapper } from 'components/index'
-export const ChatAnnList = () => {
+export const ChatAnnListItem = () => {
   return <Wrapper>asd</Wrapper>
 }
