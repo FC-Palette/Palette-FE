@@ -29,6 +29,7 @@ const Wrapper = styled.footer`
   display: flex;
   align-items: center;
   width: 100%;
+  max-width: 430px;
   height: 80px;
   justify-content: space-around;
   border-top: 2px solid ${theme.greyScale.grey2};

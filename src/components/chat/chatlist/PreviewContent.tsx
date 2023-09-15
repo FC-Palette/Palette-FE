@@ -1,11 +1,6 @@
 import { styled } from 'styled-components'
 export const PreviewContent = () => {
-  return (
-    <Wrapper>
-      PreviewContentPreviewContentPreviewContentPreviewContent
-      가나다라마바사아자차카타파하가나다라마
-    </Wrapper>
-  )
+  return <Wrapper>가나다라마바사아자차카타파하가나다라마</Wrapper>
 }
 
 const Wrapper = styled.div`
