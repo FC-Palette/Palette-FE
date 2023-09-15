@@ -20,7 +20,8 @@ import {
   CareerCreateMeetingStepPreview,
   ChatList,
   ChatOn,
-  ChatAnnList
+  ChatAnnList,
+  ChatAnnDetail
 } from 'pages/index'
 import type { RouteObject } from 'react-router-dom'
 import { Start } from './Start'
@@ -129,7 +130,8 @@ export const router = createBrowserRouter([
     children: [
       generateRoute('/chatlist', <ChatList />, <ErrorComponent />),
       generateRoute('/chat', <ChatOn />, <ErrorComponent />),
-      generateRoute('/chatannlist', <ChatAnnList />, <ErrorComponent />)
+      generateRoute('/chatannlist', <ChatAnnList />, <ErrorComponent />),
+      generateRoute('/chatann', <ChatAnnDetail />, <ErrorComponent />)
     ]
   }
 ])

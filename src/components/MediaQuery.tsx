@@ -2,9 +2,9 @@ import { useMediaQuery } from 'react-responsive'
 import { styled } from 'styled-components'
 export const MediaQuery = ({ children }) => {
   const isMobile = useMediaQuery({
-    query: '(max-width:767px)'
+    query: '(max-width:431px)'
   })
-  const notMobile = useMediaQuery({ query: '(min-width:767px)' })
+  const notMobile = useMediaQuery({ query: '(min-width:431px)' })
 
   return (
     <>

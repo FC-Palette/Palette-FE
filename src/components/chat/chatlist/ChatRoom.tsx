@@ -13,8 +13,6 @@ export const ChatRoom = () => {
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
-  /* align-items: center; */
-  /* padding: 18px 0; */
   position: relative;
-  /* height: 95px; */
+  max-width: 430px;
 `

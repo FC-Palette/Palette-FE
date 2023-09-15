@@ -29,7 +29,7 @@ const Wrapper = styled.header`
   display: flex;
   align-items: center;
   width: 100%;
-  /* max-width: 767px; */
+  max-width: 430px;
   height: 80px;
   justify-content: center;
   position: sticky;
