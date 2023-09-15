@@ -22,7 +22,8 @@ export const theme = {
     blueGrey: '#F5F6FA',
     blie: '#E7F2FE',
     greyShadow: '#5e5e5e66',
-    greyOpaque: '#0005'
+    greyOpaque: '#0005',
+    bluegrey: '#f5f6fa'
   },
   subColor: {
     redL1: '#FA5C47',
