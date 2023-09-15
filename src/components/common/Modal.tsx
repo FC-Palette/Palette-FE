@@ -27,13 +27,17 @@ const ModalBox = styled.div`
   flex-direction: column;
   border-radius: 16px;
   background-color: ${props => props.theme.main.white};
-  box-shadow: 0px 10px 30px 0px ${props => props.theme.main.greyShadow};
   padding: 24px;
 `
 
 const ModalTitle = styled.h3`
   height: 32px;
   font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 12px;
 `
 
-const ModalContent = styled.p``
+const ModalContent = styled.p`
+  width: 263px;
+  margin-bottom: 24px;
+`
