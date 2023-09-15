@@ -14,4 +14,5 @@ const Wrapper = styled.div`
   overflow: hidden;
   border: 1px solid black;
   max-width: auto;
+  word-break: keep-all;
 `
