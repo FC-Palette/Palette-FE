@@ -1,4 +1,4 @@
-import { theme } from '@/styles'
+import { theme } from 'styles/index'
 import { Button } from 'components/index'
 
 //한개짜리 꽉찬 모달버튼입니다.
