@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   background-color: ${props => props.theme.main.white};
-  max-width: 767px;
+  max-width: 430px;
   box-shadow: rgba(130, 130, 130, 0.15) 0px 0px 20px;
   position: relative;
 `
