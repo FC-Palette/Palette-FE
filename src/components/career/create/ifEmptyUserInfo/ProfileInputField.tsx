@@ -1,7 +1,3 @@
-import React from 'react'
-
 export const SimpleProfileInputField = () => {
-  return (
-    <div>SimpleProfileInputField</div>
-  )
+  return <div>SimpleProfileInputField</div>
 }

@@ -10,6 +10,8 @@ export const Input = ({
   $borderRadius,
   children,
   ph,
+  type,
+  value,
   $paddingLeft,
   ...props
 }: InputProps) => {
@@ -23,6 +25,8 @@ export const Input = ({
         $borderColor={$borderColor}
         $borderRadius={$borderRadius}
         $paddingLeft={$paddingLeft}
+        type={type}
+        value={value}
         placeholder={ph}
       />
       {/* absolute를 통해 Icon */}
@@ -54,3 +58,5 @@ const TextInput = styled.input<InputType>`
     outline: none;
   }
 `
+
+

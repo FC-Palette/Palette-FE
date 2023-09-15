@@ -20,6 +20,7 @@ export const CareerMainItemsWrap = () => {
           <CareerMainItemCategory />
           <CareerMainItemTitle />
           <CareerMainItemMeetingTime />
+
           <CareerMainItemParticipant />
         </ItemFlexColumnWrapper>
         {/* 하트 버튼 */}
@@ -31,13 +32,13 @@ export const CareerMainItemsWrap = () => {
 
 // 가로 래퍼
 const ItemFlexRowWrapper = styled.div`
-  width: 100%;
+  width: calc(100% - 48px);
   display: flex;
   flex-direction: row;
-  gap: 10px;
-  justify-content: center;
+  gap: 12px;
   align-items: center;
-  margin-top: 10px;
+  margin-right: 24px;
+  margin-left: 24px;
   height: 132px;
 `
 // 세로 래퍼
@@ -45,6 +46,5 @@ const ItemFlexColumnWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: auto;
-  margin-left: 10px;
-  gap: 4px;
+  gap: 9px;
 `

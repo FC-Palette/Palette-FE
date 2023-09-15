@@ -5,7 +5,8 @@ export const theme = {
     blue0: '#2563EB',
     blueD1: '#134BC9',
     blueD2: '#19429D',
-    white: '#fff'
+    white: '#fff',
+    black: '#000'
   },
   greyScale: {
     grey0: '#F9FAFB',
@@ -26,7 +27,9 @@ export const theme = {
     redD2: '#F13D2c',
     greenL1: '#6DD29C',
     green0: '#1CAB67',
-    greenD1: '#15965A'
+    greenD1: '#15965A',
+    blie10: '#E7F2FE',
+    blueGrey: '#F5F6FA'
   },
   customSize: {
     tiny: '10px',
@@ -35,6 +38,6 @@ export const theme = {
     large: '16px',
     xlarge: '18px',
     xxlarge: '24px',
-    xxxlarge: '48px'
+    xxxlarge: '48px',
   }
 }

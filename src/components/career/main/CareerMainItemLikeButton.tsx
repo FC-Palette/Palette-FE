@@ -13,7 +13,8 @@ export const CareerMainItemLikeButton = () => {
 }
 
 const StyledWrapper = styled.button`
-  margin-left: 40px;
+  position: absolute;
+  left: 382px;
 `
 
 const StyledIcon = styled(Heart)`

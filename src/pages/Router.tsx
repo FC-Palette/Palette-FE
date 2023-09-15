@@ -1,7 +1,22 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { ErrorComponent } from 'components/index'
-import { CareerMain, GroupBuying, Layout, MyPage, ProfileEnter } from 'pages/index'
+
+import {
+  CareerMain,
+  GroupBuying,
+  Layout,
+  ProfileEnter,
+  SignIn,
+  SignUp,
+  FindId,
+  FindPassword,
+  MyPage,
+  UsedTrade,
+  GroupUpload
+} from 'pages/index'
+
 import type { RouteObject } from 'react-router-dom'
+import { Start } from './Start'
 
 //페이지 정보를 담고있는 객체를 반환하는 함수.
 const generateRoute = (path, component, error, children?): RouteObject => {
@@ -22,9 +37,9 @@ export const router = createBrowserRouter([
   //   element: <Layout />,
   //   errorElement: <ErrorComponent />,
   //   children: [
-  //     generateRoute('/test', <Test />, <ErrorComponent />, [
-  //       generateRoute('3', <Test3 />, <ErrorComponent />)
-  //     ])
+  //     generateRoute('/trades', <Test />, <ErrorComponent />, [
+  //       generateRoute('3', <Test3 />, <ErrorComponent />),
+  //     ]),
   //   ]
   // }
   {
@@ -38,7 +53,10 @@ export const router = createBrowserRouter([
     element: <Layout />,
     errorElement: <ErrorComponent />,
     children: [
-      generateRoute('/groupBuying', <GroupBuying />, <ErrorComponent />, [])
+      generateRoute('/groupBuying', <GroupBuying />, <ErrorComponent />),
+
+      generateRoute('/groupUpload', <GroupUpload />, <ErrorComponent />),
+      generateRoute('/usedTrade', <UsedTrade />, <ErrorComponent />)
     ]
   },
   {
@@ -55,7 +73,19 @@ export const router = createBrowserRouter([
     element: <Layout />,
     errorElement: <ErrorComponent />,
     children: [
-      generateRoute('/mypage', <MyPage />, <ErrorComponent />),
+      generateRoute('/start', <Start />, <ErrorComponent />),
+      generateRoute('/signup', <SignUp />, <ErrorComponent />),
+      generateRoute('/signin', <SignIn />, <ErrorComponent />),
+      generateRoute('/findid', <FindId />, <ErrorComponent />),
+      generateRoute('/findpassword', <FindPassword />, <ErrorComponent />)
     ]
-  }
+  },
+    {
+    path: '/',
+    element: <Layout />,
+    errorElement: <ErrorComponent />,
+    children: [
+      generateRoute('/mypage', <MyPage />, <ErrorComponent />)
+    ]
+  },
 ])

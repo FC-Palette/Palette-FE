@@ -1,12 +1,24 @@
 import { theme } from 'styles/index'
 import { GroupBuyingList, TradesOption } from 'components/trades/index'
 import { css, styled } from 'styled-components'
-import { FilterBar, Category } from 'components/common/index'
+import {
+  FilterBar,
+  Category,
+  CreateBtn,
+  SubHeader
+} from 'components/common/index'
+import { TRADES_SUBHEADER_TEXT } from 'constants/trades/index'
 import { Setting4, Record } from 'iconsax-react'
 
 export const TradesCard = () => {
+  const groupUploadPath = '/groupUpload'
+
   return (
     <Wrapper>
+      <SubHeader
+        items={TRADES_SUBHEADER_TEXT}
+        initialItem="공동구매"
+      />
       <Category
         categoryList="전체"
         categoryFilter={
@@ -27,7 +39,9 @@ export const TradesCard = () => {
         }
         filterText="마감된 거래 제외"
         filterOption={<TradesOption />}></FilterBar>
+
       <Main>
+        <CreateBtn path={groupUploadPath} />
         <CardWrapper>
           <GroupBuyingList />
         </CardWrapper>

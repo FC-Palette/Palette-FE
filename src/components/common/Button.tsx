@@ -1,3 +1,4 @@
+import { theme } from 'styles/index'
 import { css, styled } from 'styled-components'
 import { BorderType, ButtonProps, SizeType, StyleType } from 'types/index'
 
@@ -12,6 +13,7 @@ export const Button = ({
   $btnHeight,
   $btnWidth,
   $fontSize,
+  disabled, 
   children,
   ...props
 }: ButtonProps) => {
@@ -24,12 +26,14 @@ export const Button = ({
       $btnHeight={$btnHeight}
       $btnWidth={$btnWidth}
       $fontSize={$fontSize}
-      {...props}>
-      {/* children  - 컴포넌트 내부 내용(text only or components) */}
+      disabled={disabled}
+      {...props}
+    >
       {children}
     </Wrapper>
   )
 }
+
 
 //사이즈 정리 필요
 const sizeStyles = css<SizeType>`
@@ -56,4 +60,13 @@ const Wrapper = styled.button<StyleType>`
   color: ${({ theme, color }) => color || theme.main.white};
   background-color: ${({ theme, $bgColor }) => $bgColor || theme.main.blue0};
   ${sizeStyles};
+  ${({ disabled }) => disabled && disabledStyles};
 `
+
+
+const disabledStyles = css<StyleType>`
+  background-color: ${({ theme }) => theme.greyScale.grey1};
+  color: ${({ theme }) => theme.greyScale.grey3};
+  border: 1px solid transparent;
+  cursor: not-allowed;
+`;

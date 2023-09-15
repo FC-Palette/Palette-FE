@@ -1,0 +1,7 @@
+export * from 'components/trades/uploadproduct/UploadTitle'
+export * from 'components/trades/uploadproduct/UploadOption'
+export * from 'components/trades/uploadproduct/TitleInput'
+export * from 'components/trades/uploadproduct/InputDetail'
+export * from '@/components/trades/uploadproduct/AgreeMsg'
+export * from '@/components/trades/uploadproduct/Account'
+export * from '@/components/trades/uploadproduct/DeadLine'
