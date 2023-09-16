@@ -11,12 +11,15 @@ export const ChatField = ({ messages }) => {
   // }
 
   let previousSender = null
+  let previousTime = null
 
   return (
     <Wrapper>
       {messages.map((message, index) => {
         const isSameSender = previousSender === message.sender
         previousSender = message.sender
+        const isSameTime = previousTime === message.createdAt
+        previousTime = message.createdAt
 
         return (
           <>
@@ -25,14 +28,19 @@ export const ChatField = ({ messages }) => {
                 message={message.text}
                 key={index}
                 sender={message.sender}
+                createdAt={message.createdAt}
+                //시간이 다르거나 보내는 사람이 다를 때는 시간을 보여준다. === 보내는 사람도 같고 시간도 같을때만 보여주지 않는다.
+                showCreatedTime={!isSameTime || !isSameSender}
               />
             )}
             {message.sender !== 'sender' && (
               <Recipient
                 message={message.text}
-                showProfileImage={!isSameSender}
+                isSameSender={isSameSender}
                 key={index}
                 sender={message.sender}
+                createdAt={message.createdAt}
+                showCreatedTime={!isSameTime || !isSameSender}
               />
             )}
           </>

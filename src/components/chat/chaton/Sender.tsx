@@ -1,12 +1,12 @@
 import { styled } from 'styled-components'
 import { MessageTime } from 'components/index'
 //ChatField
-export const Sender = ({ message, sender }) => {
+export const Sender = ({ message, sender, createdAt, showCreatedTime }) => {
   return (
     <MessageBlock sender={sender}>
       <SenderBlock>
         <MessageTime
-          time="오후 11:11"
+          time={showCreatedTime ? createdAt : null}
           sender={sender}
         />
         <MessageBox sender={sender}>{message}</MessageBox>
