@@ -9,10 +9,14 @@ import {
   SignUp,
   FindId,
   FindPassword,
-  GroupUpload,
   MyPage,
   Setting,
-  SecondHand
+  SecondHand,
+  GroupUpload,
+  CareerCreateMeetingStepOne,
+  CareerCreateMeetingStepTwo,
+  CareerCreateMeetingStepThree,
+  CareerCreateMeetingStepPreview
 } from 'pages/index'
 
 import type { RouteObject } from 'react-router-dom'
@@ -65,6 +69,33 @@ export const router = createBrowserRouter([
     children: [
       generateRoute('/careerMain', <CareerMain />, <ErrorComponent />),
       generateRoute('/profile-1', <ProfileEnter />, <ErrorComponent />)
+    ]
+  },
+  {
+    path: '/',
+    element: <Layout />,
+    errorElement: <ErrorComponent />,
+    children: [
+      generateRoute(
+        '/createMeeting-1',
+        <CareerCreateMeetingStepOne />,
+        <ErrorComponent />
+      ),
+      generateRoute(
+        '/createMeeting-2',
+        <CareerCreateMeetingStepTwo />,
+        <ErrorComponent />
+      ),
+      generateRoute(
+        '/createMeeting-3',
+        <CareerCreateMeetingStepThree />,
+        <ErrorComponent />
+      ),
+      generateRoute(
+        '/createMeeting-preview',
+        <CareerCreateMeetingStepPreview />,
+        <ErrorComponent />
+      )
     ]
   },
   {

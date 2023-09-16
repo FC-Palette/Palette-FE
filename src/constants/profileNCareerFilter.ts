@@ -53,6 +53,7 @@ export const profileNCareerFilter: propfileNCareerFilterProps = {
   ],
   // 직급
   rank: [
+    '무관',
     '인턴',
     '사원',
     '대리',

@@ -1,11 +1,16 @@
+import {
+  CareerCreateMeetingStaticHeader,
+  StepOneCard
+} from '@/components/career'
+
 import { StepProgressBar } from 'components/common'
-import { CareerCreateMeetingHeader, StepOne } from '@/components/career'
+
 export const CareerCreateMeetingStepOne = () => {
   return (
     <>
-      <CareerCreateMeetingHeader />
+      <CareerCreateMeetingStaticHeader />
       <StepProgressBar $currentPage={1} />
-      <StepOne />
+      <StepOneCard />
     </>
   )
 }
