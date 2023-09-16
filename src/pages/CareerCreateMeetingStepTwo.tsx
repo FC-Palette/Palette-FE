@@ -1,12 +1,15 @@
 import { StepProgressBar } from '@/components'
-import { CareerCreateMeetingHeader, StepTwo } from '@/components/career'
+import {
+  CareerCreateMeetingStaticHeader,
+  StepTwoCard
+} from '@/components/career'
 
 export const CareerCreateMeetingStepTwo = () => {
   return (
     <>
-      <CareerCreateMeetingHeader />
+      <CareerCreateMeetingStaticHeader />
       <StepProgressBar $currentPage={2} />
-      <StepTwo />
+      <StepTwoCard />
     </>
   )
 }

@@ -19,7 +19,13 @@ import {
   Trade,
   Book,
   Setting2,
-  ReceiptSearch
+  ReceiptSearch,
+  UserOctagon,
+  Timer1,
+  Calendar,
+  ProfileAdd,
+  Woman,
+  Man
 } from 'iconsax-react'
 
 export const iconMapping = {
@@ -42,5 +48,12 @@ export const iconMapping = {
   '연구 · R&D': <Trade />,
   '법률 · 특허': <Book />,
   '엔지니어링 · 설계': <Setting2 />,
-  '생산 · 품질': <ReceiptSearch />
+  '생산 · 품질': <ReceiptSearch />,
+  모집기준: <UserOctagon />,
+  모집인원: <Profile2User />,
+  모집시간: <Timer1 />,
+  모집기간: <Calendar />,
+  멤버승인: <ProfileAdd />,
+  남성만: <Man />,
+  여성만: <Woman />
 }

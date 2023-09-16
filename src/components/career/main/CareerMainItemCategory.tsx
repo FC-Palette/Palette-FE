@@ -4,9 +4,9 @@ import { profileNCareerFilter } from 'constants/index'
 export const CareerMainItemCategory = () => {
   return (
     <CategoryWrap>
-      <CategoryItem>{profileNCareerFilter.job[0]}</CategoryItem>
+      <CategoryItem>{profileNCareerFilter.jobType[0]}</CategoryItem>
       <CategoryItem>{profileNCareerFilter.male[0]}</CategoryItem>
-      <CategoryItem>{profileNCareerFilter.job[0]}</CategoryItem>
+      <CategoryItem>{profileNCareerFilter.typeOne[0]}</CategoryItem>
     </CategoryWrap>
   )
 }
