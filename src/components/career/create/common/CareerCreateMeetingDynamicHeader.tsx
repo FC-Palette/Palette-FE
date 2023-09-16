@@ -1,8 +1,8 @@
-import { ArrowLeft2 } from 'iconsax-react'
+import { ArrowLeft2, More, Send2 } from 'iconsax-react'
 import { Header } from '@/components'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
-export const CareerCreateMeetingHeader = () => {
+export const CareerCreateMeetingHeaderDynamic = () => {
   const navigate = useNavigate()
 
   return (
@@ -12,8 +12,11 @@ export const CareerCreateMeetingHeader = () => {
           <ArrowLeft2 />
         </StyledIcon>
       }
-      centerText="모임생성">
-      <Xbtn>X</Xbtn>
+      centerText={'모임 제목이 들어갈 자리'}>
+      <MultiIconWrap>
+        <Send2 />
+        <More />
+      </MultiIconWrap>
     </Header>
   )
 }
@@ -22,10 +25,11 @@ const StyledIcon = styled.button`
   font-size: ${props => props.theme.customSize.xxlarge};
 `
 
-const Xbtn = styled.button`
-  text-align: center;
+const MultiIconWrap = styled.div`
+  display: flex;
+  width: 58px;
+  gap: 10px;
   font-weight: 100;
   font-size: ${props => props.theme.customSize.xxlarge};
-  width: 24px;
   height: 24px;
 `
