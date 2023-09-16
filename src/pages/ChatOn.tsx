@@ -7,6 +7,26 @@ import {
 import { styled } from 'styled-components'
 import { CHATON_TEXTS } from 'constants/index'
 import { ArrowLeft2, More } from 'iconsax-react'
+
+//지우자
+const messages = [
+  {
+    sender: 'sender',
+    text: '안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요'
+  },
+  { sender: 'sender', text: '안녕하세요' },
+  { sender: 'sender', text: '안녕하세요' },
+  { sender: 'sender', text: '안녕하세요' },
+  {
+    sender: 'recipient',
+    text: '안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요'
+  },
+  { sender: 'recipient', text: '안녕하세요' },
+  { sender: 'sender', text: '안녕하세요' },
+  { sender: 'recipient', text: '안녕하세요' },
+  { sender: 'sender', text: '안녕하세요' }
+]
+
 export const ChatOn = () => {
   return (
     <>
@@ -25,7 +45,7 @@ export const ChatOn = () => {
           <More />
         </StyledIcon>
       </Header>
-      <ChatField />
+      <ChatField messages={messages} />
     </>
   )
 }
