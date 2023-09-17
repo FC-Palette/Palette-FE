@@ -20,12 +20,12 @@ export const Footer = () => {
 const Wrapper = styled.footer`
   display: flex;
   align-items: center;
-  width: 430px;
+  width: 100%;
   height: 80px;
   justify-content: space-around;
   border-top: 2px solid ${theme.greyScale.grey2};
   z-index: 100;
-  position: fixed;
+  position: sticky;
   bottom: 0;
   background-color: ${theme.main.white};
 `
