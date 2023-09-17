@@ -2,7 +2,9 @@ import {
   Header,
   BackgroundModal,
   ChatField,
-  ModalButtons
+  ModalButtons,
+  ChatInputField,
+  ChatInfo
 } from 'components/index'
 import { styled } from 'styled-components'
 import { CHATON_TEXTS } from 'constants/index'
@@ -68,7 +70,9 @@ export const ChatOn = () => {
           <More />
         </StyledIcon>
       </Header>
+      <ChatInfo></ChatInfo>
       <ChatField messages={messages} />
+      <ChatInputField />
     </>
   )
 }
