@@ -33,6 +33,7 @@ const StyledInput = styled.textarea`
   border: none;
   border-radius: 21px;
   max-height: 114px;
+  resize: none;
   &:focus {
     outline: none;
   }
