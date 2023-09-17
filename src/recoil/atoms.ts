@@ -8,3 +8,8 @@ export const modalOnState = atom<boolean>({
 //사용할 컴포넌트에서
 //const [modalOn, setModalOn] = useRecoilState(modalOnState);
 //setModalOn(!modalOn)
+
+export const showMembersState = atom<boolean>({
+  key: 'showMembersState',
+  default: true
+})
