@@ -1,13 +1,11 @@
 import {
   Header,
-  BackgroundModal,
   ChatField,
-  ModalButtons,
   ChatInputField,
-  ChatInfo
+  ChatInfo,
+  ChatMembers
 } from 'components/index'
 import { styled } from 'styled-components'
-import { CHATON_TEXTS } from 'constants/index'
 import { ArrowLeft2, More } from 'iconsax-react'
 
 //지우자
@@ -55,14 +53,7 @@ const messages = [
 export const ChatOn = () => {
   return (
     <>
-      <BackgroundModal
-        title={CHATON_TEXTS.chatRoomExit}
-        content={CHATON_TEXTS.memberWarn}>
-        <ModalButtons
-          leftBtn={CHATON_TEXTS.cancel}
-          rightBtn={CHATON_TEXTS.exit}
-        />
-      </BackgroundModal>
+      <ChatMembers />
       <Header
         centerText="USERNAME"
         leftIcon={<ArrowLeft2 />}>

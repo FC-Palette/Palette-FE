@@ -28,6 +28,8 @@ export const BackgroundModal = ({ title, content, children }) => {
 }
 
 export const Background = styled.div`
+  display: flex;
+  justify-content: flex-end;
   position: absolute;
   height: 100%;
   width: 100%;
