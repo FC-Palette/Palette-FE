@@ -90,7 +90,7 @@ export const MeetupDetailsSelector = () => {
       {/* 모임 장소 */}
       <ToggleNTextWrap>
         <QuestionTitle>모임 장소를 어디로 할까요?</QuestionTitle>
-        <ToggleRowSortContainer>
+        <ToggleRowSortContainerTwo>
           <ToggleL
             onClick={() => handleToggleOnline(!onlineToggleState)}
             $isSelected={!onlineToggleState}>
@@ -101,7 +101,7 @@ export const MeetupDetailsSelector = () => {
             $isSelected={onlineToggleState}>
             오프라인
           </ToggleR>
-        </ToggleRowSortContainer>
+        </ToggleRowSortContainerTwo>
       </ToggleNTextWrap>
       <InputContainer>
         <InputText
@@ -130,8 +130,8 @@ export const MeetupDetailsSelector = () => {
       {periodicMeeting && (
         <>
           <ToggleNTextWrap>
-            <QuestionTitle>모임 요일을 정해주세요</QuestionTitle>
-            <ToggleRowSortContainer>
+            <QuestionTitle>모임 요일을 정해주세요.</QuestionTitle>
+            <ToggleRowSortContainerThree>
               <ToggleL60
                 onClick={() => handleToggleMeetingFrequency('매주')}
                 $isSelected={meetingFrequency === '매주'}>
@@ -147,12 +147,12 @@ export const MeetupDetailsSelector = () => {
                 $isSelected={meetingFrequency === '매달'}>
                 매달
               </ToggleR60>
-            </ToggleRowSortContainer>
+            </ToggleRowSortContainerThree>
           </ToggleNTextWrap>
           <AnswerFlexWrap>{daysList}</AnswerFlexWrap>
 
           {/* 모임시간 */}
-          <QuestionTitle>모임 시간을 정해주세요</QuestionTitle>
+          <QuestionTitle>모임 시간을 정해주세요.</QuestionTitle>
           <CommonTimePicker onTimeChange={handleMeetingTime} />
 
           {/* 진행시간 */}
@@ -179,10 +179,11 @@ export const MeetupDetailsSelector = () => {
   )
 }
 const QuestionTitle = styled.div`
-  margin-top: 32px;
+  margin: 32px 24px 0;
   font-weight: 500;
   font-size: 18px;
   color: ${props => props.theme.greyScale.grey6};
+  white-space: nowrap;
 `
 
 // 토글 텍스트 래퍼 (Row)
@@ -194,12 +195,21 @@ const ToggleNTextWrap = styled.div`
   justify-content: space-between;
 `
 // 토글 래퍼 (Row)
-const ToggleRowSortContainer = styled.div`
+const ToggleRowSortContainerTwo = styled.div`
+  margin: 32px 24px 0;
   display: flex;
   text-align: center;
   align-items: center;
   white-space: nowrap;
+`
+
+const ToggleRowSortContainerThree = styled.div`
   margin-top: 32px;
+  margin-right: 24px;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  white-space: nowrap;
 `
 
 const ToggleL = styled.div<selectProps>`
@@ -240,6 +250,7 @@ const ToggleR = styled.div<selectProps>`
 
 // Input
 const InputContainer = styled.div`
+  margin: 0 24px;
   width: 382px;
   height: 48px;
   border-radius: 8px;
@@ -260,6 +271,7 @@ const InputText = styled.input`
 
 // 주기 체크
 const PeriodicCheckBoxContainer = styled.div`
+  margin: 0 24px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -297,6 +309,7 @@ const Answer = styled.div<selectProps>`
   }
 `
 const AnswerFlexWrap = styled.div`
+  margin: 0 24px;
   width: 382px;
   display: flex;
   flex-wrap: nowrap;
@@ -311,6 +324,7 @@ const ToggleL60 = styled.div<selectProps>`
   font-size: 14px;
   line-height: 16.71px;
   border-radius: 8px 0 0 8px;
+  border-right: 1px solid ${props => props.theme.greyScale.grey2};
   padding: 6px 20px;
   flex: 1;
   background-color: ${props =>
@@ -330,6 +344,7 @@ const ToggleM60 = styled.div<selectProps>`
   line-height: 16.71px;
   flex: 1;
   padding: 6px 20px;
+  border-right: 1px solid ${props => props.theme.greyScale.grey2};
   background-color: ${props =>
     props.$isSelected ? props.theme.main.blue0 : props.theme.subColor.blueGrey};
   color: ${props =>
