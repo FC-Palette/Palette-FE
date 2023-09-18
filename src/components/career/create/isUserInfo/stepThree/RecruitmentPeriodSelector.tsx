@@ -1,29 +1,33 @@
+// 모집 기간
 import styled from 'styled-components'
 import { DesktopDatePicker } from '@mui/x-date-pickers'
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import { useState } from 'react'
-import { MobileDatePicker } from '@mui/x-date-pickers'
 import 'dayjs/locale/ko'
-// 모집 기간
+import { useSetRecoilState } from 'recoil'
+import { CareerCreateGlobalState } from '../..'
+import dayjs from 'dayjs'
+
 export const RecruitmentPeriodSelector = () => {
-  const dateNow = new Date()
-  const today = dateNow.toISOString().slice(0, 10)
+  const setGlobalState = useSetRecoilState(CareerCreateGlobalState)
 
-  const [startDate, setStartDate] = useState(today) // 시작일 상태
-  const [endDate, setEndDate] = useState(today) // 종료일 상태
-
-  // 시작일 변경 핸들러
   const handleStartDateChange = date => {
-    setStartDate(date.toISOString().slice(0, 10))
+    const dateFormat_Start = dayjs(date).format('YYYY-MM-DD')
+    setGlobalState(prevDate => ({
+      ...prevDate,
+      meetupStartDay: dateFormat_Start
+    }))
   }
 
   // 종료일 변경 핸들러
   const handleEndDateChange = date => {
-    setEndDate(date.toISOString().slice(0, 10))
+    const dateFormat_End = dayjs(date).format('YYYY-MM-DD')
+    setGlobalState(prevDate => ({
+      ...prevDate,
+      meetupEndDay: dateFormat_End
+    }))
   }
 
-  console.log(startDate, endDate)
   return (
     <>
       <QuestionTitle>기간을 설정해주세요.</QuestionTitle>
@@ -31,8 +35,7 @@ export const RecruitmentPeriodSelector = () => {
         dateAdapter={AdapterDayjs}
         adapterLocale="ko">
         <TimePickerContainer>
-          <MobileDatePicker
-            slotProps={{ textField: { size: 'small' } }}
+          <DesktopDatePicker
             label="시작일"
             onChange={handleStartDateChange}
           />

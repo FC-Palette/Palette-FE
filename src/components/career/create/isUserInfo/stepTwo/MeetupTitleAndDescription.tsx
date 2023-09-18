@@ -1,26 +1,34 @@
-import { useState } from 'react'
+import { useRecoilState } from 'recoil'
 import styled from 'styled-components'
+import { CareerCreateGlobalState } from '../..'
 
 export const MeetupTitleAndDescription = () => {
-  const [title, setTitle] = useState('') // 제목 상태 변수
-  const [description, setDescription] = useState('') // 모임 소개글 상태 변수
+  const [globalState, setGlobalState] = useRecoilState(CareerCreateGlobalState)
+  const { meetupTitle, meetupDescription } = globalState
 
-  const maxTitleLength = 25 // 제목 최대 길이
-  const maxDescriptionLength = 500 // 모임 소개글 최대 길이
+  const maxTitleLength = 25
+  const maxDescriptionLength = 500
 
   const handleTitleChange = e => {
     const text = e.target.value
-    if (text.length <= maxTitleLength) {
-      setTitle(text)
+    if (text.length <= maxDescriptionLength) {
+      setGlobalState(prev => ({
+        ...prev,
+        meetupTitle: text
+      }))
     }
   }
 
   const handleDescriptionChange = e => {
     const text = e.target.value
     if (text.length <= maxDescriptionLength) {
-      setDescription(text)
+      setGlobalState(prev => ({
+        ...prev,
+        meetupDescription: text
+      }))
     }
   }
+
   return (
     <>
       <QuestionTitle>
@@ -35,7 +43,7 @@ export const MeetupTitleAndDescription = () => {
         />
       </InputContainer>
       <InputLength>
-        {title.length}/{maxTitleLength}
+        {meetupTitle.length}/{maxTitleLength}
       </InputLength>
       <QuestionDescription>모임 소개글을 입력해주세요.</QuestionDescription>
       <TextAreaContainer>
@@ -46,7 +54,7 @@ export const MeetupTitleAndDescription = () => {
         />
       </TextAreaContainer>
       <TextAreaLengthWrap>
-        {description.length}/{maxDescriptionLength}
+        {meetupDescription.length}/{maxDescriptionLength}
       </TextAreaLengthWrap>
     </>
   )
@@ -54,6 +62,7 @@ export const MeetupTitleAndDescription = () => {
 
 // Title
 const QuestionTitle = styled.div`
+  margin-top: 32px;
   font-weight: 500;
   font-size: 18px;
   color: ${props => props.theme.greyScale.grey6};

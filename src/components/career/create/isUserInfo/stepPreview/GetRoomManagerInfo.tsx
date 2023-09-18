@@ -6,9 +6,9 @@ export const GetRoomManagerInfo = () => {
       <ContentsContainer>
         <RoomManagerImage />
         <NameAndIntroduceWrap_Column>
-          <RoomManagerName>CEO가 꿈이야</RoomManagerName>
+          <RoomManagerName>매니저명 미리보기</RoomManagerName>
           <RoomManagerNameIntroduce>
-            일이삼사오육칠팝구십
+            매니저 소개 미리보기
           </RoomManagerNameIntroduce>
         </NameAndIntroduceWrap_Column>
         <FollowBtn>팔로우 삭제</FollowBtn>
@@ -22,7 +22,6 @@ const ContentsContainer = styled.div`
   height: 76px;
   display: flex;
   justify-content: space-between;
-  background-color: rosybrown;
 `
 
 const RoomManagerImage = styled.div`
@@ -59,4 +58,3 @@ const FollowBtn = styled.button`
   color: ${props => props.theme.greyScale.grey5};
   border-radius: 8px;
 `
-

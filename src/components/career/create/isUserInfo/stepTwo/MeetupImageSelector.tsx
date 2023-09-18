@@ -3,6 +3,8 @@ import { useState } from 'react'
 import Dropzone from 'react-dropzone'
 import { Add } from 'iconsax-react'
 import { DraggableImagePreview } from '@/components'
+import { useSetRecoilState } from 'recoil'
+import { CareerCreateGlobalState } from '../..'
 
 interface Image {
   id: string
@@ -12,41 +14,9 @@ interface Image {
 
 export const MeetupImageSelector = () => {
   const [images, setImages] = useState<Image[]>([])
-  console.log(images)
+  const setGlobalData = useSetRecoilState(CareerCreateGlobalState)
 
-  // 기존 createObjectURL(file) => 클라이언트 로컬에서만 확인 가능한 객체
-  // const handleImgDrop = acceptedFiles => {
-  //   const newImg = acceptedFiles.map(file => ({
-  //     id: file.name,
-  //     url: URL.createObjectURL(file)
-  //   }))
-  //   setImages([...images, ...newImg])
-  // }
-
-  // base64 인코딩
-  // function encodeImageToBase64(file, callback) {
-  //   const reader = new FileReader()
-  //   reader.onload = () => {
-  //     const base64Image = reader.result
-  //     callback(base64Image)
-  //   }
-  //   reader.readAsDataURL(file)
-  // }
-
-  // const handleImgDrop = acceptedFiles => {
-  //   acceptedFiles.forEach(file => {
-  //     // 이미지를 Base64로 인코딩하여 images 배열에 추가
-  //     encodeImageToBase64(file, base64Image => {
-  //       const newImg = {
-  //         id: file.name,
-  //         url: base64Image
-  //       }
-  //       setImages(prevImages => [...prevImages, newImg])
-  //     })
-  //   })
-  // }
-
-  // blob 형식 (제일 효율적인듯함)
+  // blob
   const encodeImageToBlob = (file: File, callback: (blob: Blob) => void) => {
     const reader = new FileReader()
     reader.onload = () => {
@@ -56,7 +26,8 @@ export const MeetupImageSelector = () => {
     reader.readAsArrayBuffer(file)
   }
 
-  const handleImgDrop = (acceptedFiles: File[]) => {
+  // 업로드시
+  const handleImageUpload = (acceptedFiles: File[]) => {
     acceptedFiles.forEach(file => {
       encodeImageToBlob(file, blob => {
         const newImg = {
@@ -65,10 +36,16 @@ export const MeetupImageSelector = () => {
           blob: blob
         }
         setImages(prevImages => [...prevImages, newImg])
+
+        // 이미지를 전역 상태 meetupImages 배열에 추가
+        setGlobalData(prevData => ({
+          ...prevData,
+          meetupImages: [...prevData.meetupImages, blob]
+        }))
       })
     })
   }
-
+  // 순서 변경
   const handleDragEnd = (result: any) => {
     if (!result.destination) {
       return
@@ -78,20 +55,32 @@ export const MeetupImageSelector = () => {
     const [movedImage] = reorderedImages.splice(result.source.index, 1)
     reorderedImages.splice(result.destination.index, 0, movedImage)
     setImages(reorderedImages)
+
+    setGlobalData((prevData: any) => ({
+      ...prevData,
+      meetupImages: reorderedImages.map(img => img.blob)
+    }))
   }
 
+  // 이미지 삭제
   const handleImageDelete = (imageId: string) => {
     const updatedImages = images.filter(image => image.id !== imageId)
+    setGlobalData((prevData: any) => ({
+      ...prevData,
+      meetupImages: updatedImages
+    }))
     setImages(updatedImages)
   }
 
   return (
     <>
-      <Title>이미지를 등록 해주세요.</Title>
+      <Title>
+        이미지를 등록 해주세요.<span>(최대 5장)</span>
+      </Title>
       <TotalContainer>
         <UploadZoneContainer>
           <AddIcon />
-          <Dropzone onDrop={handleImgDrop}>
+          <Dropzone onDrop={handleImageUpload}>
             {({ getRootProps, getInputProps }) => (
               <div {...getRootProps()}>
                 <input {...getInputProps()} />
@@ -112,7 +101,7 @@ export const MeetupImageSelector = () => {
 const TotalContainer = styled.div`
   width: 380px;
   display: flex;
-  margin: 30px 0;
+  margin-top: 8px;
   gap: 8px;
   overflow-x: scroll;
 `
@@ -142,4 +131,10 @@ const Title = styled.div`
   font-weight: 500;
   font-size: 18px;
   color: ${props => props.theme.greyScale.grey6};
+
+  & > span {
+    color: ${props => props.theme.greyScale.grey6};
+    font-size: 14px;
+    font-weight: 400;
+  }
 `

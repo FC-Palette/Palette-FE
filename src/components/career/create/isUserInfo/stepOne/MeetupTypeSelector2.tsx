@@ -1,8 +1,9 @@
 import { profileNCareerFilter } from '@/constants'
 import styled from 'styled-components'
 import { CareerCreateMeetingCommonQuestion } from '../..'
-import { useState } from 'react'
 import { iconMapping } from '@/components'
+import { useRecoilState } from 'recoil'
+import { CareerCreateGlobalState } from '../..'
 
 interface SelectedAnswerProps {
   $isSelected: boolean
@@ -10,26 +11,33 @@ interface SelectedAnswerProps {
 }
 
 export const MeetupTypeSelector2 = () => {
-  const [selectedItems, setSeletedItems] = useState<string[]>([])
-  console.log(selectedItems)
-  const isItemSelected = (item: string) => {
-    return selectedItems.includes(item)
-  }
+  const [globalData, setGlobalData] = useRecoilState(CareerCreateGlobalState)
+  const { selectedMeetingTypes } = globalData
 
-  const handleSelectedItem = item => {
+  const isItemSelected = (item: string) => {
+    return selectedMeetingTypes.includes(item)
+  }
+  const handleSelectedItem = (item: string) => {
     // 아이템이 이미 선택되었는지 확인
-    const isSelected = selectedItems.includes(item)
+    const isSelected = selectedMeetingTypes.includes(item)
 
     if (isSelected) {
       // 이미 선택된 경우, 해당 아이템을 배열에서 제거
-      setSeletedItems(prevItems =>
-        prevItems.filter(prevItem => prevItem !== item)
-      )
+      setGlobalData(prevData => ({
+        ...prevData,
+        selectedMeetingTypes: prevData.selectedMeetingTypes.filter(
+          prevItem => prevItem !== item
+        )
+      }))
     } else {
       // 선택되지 않은 경우, 해당 아이템을 배열에 추가
-      setSeletedItems(prevItems => [...prevItems, item])
+      setGlobalData(prevData => ({
+        ...prevData,
+        selectedMeetingTypes: [...prevData.selectedMeetingTypes, item]
+      }))
     }
   }
+
   const AnswerItems = profileNCareerFilter.meetingJopType.map(item => (
     <AnswerItem
       key={item}
