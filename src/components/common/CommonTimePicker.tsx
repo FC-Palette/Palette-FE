@@ -12,11 +12,6 @@ export const CommonTimePicker = ({
 }) => {
   const sxStyle = {
     minWidth: '382px'
-    // backgroundColor: 'rgba(0,200,0,0.3)'
-    // border: '3px solid red',
-    // borderRadius: '10px'
-    // padding: '20px',
-    // margin: '20px',
   }
 
   return (
@@ -32,7 +27,9 @@ export const CommonTimePicker = ({
             minutesStep={30}
             format="hh:mm a" // 시간 형식을 "hh:mm aa" 설정
             onChange={(newTime: any) => {
-              const formattedTime = dayjs(newTime).format('hh:mm a').toUpperCase()
+              const formattedTime = dayjs(newTime)
+                .format('hh:mm a')
+                .toUpperCase()
               onTimeChange(formattedTime)
             }}
           />

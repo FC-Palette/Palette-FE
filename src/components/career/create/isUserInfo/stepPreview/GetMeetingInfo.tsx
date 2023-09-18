@@ -1,8 +1,26 @@
 import styled from 'styled-components'
-import { CareerCreateMeetingCommonQuestion } from '../..'
+import {
+  CareerCreateGlobalState,
+  CareerCreateMeetingCommonQuestion
+} from '../..'
 import { iconMapping } from '@/components'
+import { useRecoilValue } from 'recoil'
 
 export const GetMeetingInfo = () => {
+  const globalState = useRecoilValue(CareerCreateGlobalState)
+  const {
+    selectedRoles,
+    gender,
+    recruitmentSize,
+    meetingFrequency,
+    selectedDays,
+    meetingTime,
+    progressTime,
+    meetupStartDay,
+    meetupEndDay,
+    isApprove
+  } = globalState
+
   const requiredIcons = [
     '모집기준',
     '모집인원',
@@ -11,19 +29,31 @@ export const GetMeetingInfo = () => {
     '멤버승인'
   ]
   const icons = requiredIcons.map((iconKey, idx) => (
-    <IconZone key={iconKey}>
+    <IconZone key={idx}>
       <Icon>{iconMapping[iconKey]}</Icon>
       <div>{iconKey}</div>
     </IconZone>
   ))
 
+  const participationMethod = isApprove ? '승인제' : '선착순'
+  const selectedRolesString = Array.isArray(selectedRoles)
+    ? selectedRoles.join(', ')
+    : selectedRoles
+
   const infos = (
     <InfoZone>
-      <Info>신입만 | 성별무관</Info>
-      <Info>4/6명</Info>
-      <Info>매주 월요일 오전 08:00 / 30분 진행</Info>
-      <Info>2023.08.30 ~ 2013.09.30</Info>
-      <Info>승인제</Info>
+      <Info>
+        {selectedRolesString || '-'} | {gender}
+      </Info>
+      <Info>{recruitmentSize}명</Info>
+      <Info>
+        {meetingFrequency || '-'} {selectedDays ? `${selectedDays}` : ''}{' '}
+        {meetingTime || ''} {progressTime ? `/ ${progressTime}분 진행` : ''}
+      </Info>
+      <Info>
+        {meetupStartDay} ~ {meetupEndDay}
+      </Info>
+      <Info>{participationMethod}</Info>
     </InfoZone>
   )
 

@@ -22,16 +22,16 @@ export const CareerCreateMeetingStaticHeader = () => {
           <path
             d="M18.3711 6.69727L6.37109 18.6973"
             stroke="#33363F"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M6.37109 6.69727L18.3711 18.6973"
             stroke="#33363F"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
       </X>

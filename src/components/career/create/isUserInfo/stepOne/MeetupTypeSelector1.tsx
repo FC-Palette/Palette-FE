@@ -1,6 +1,8 @@
 // 1페이지, 1번 2번 항목 관리
 import { profileNCareerFilter } from '@/constants'
 import { useState } from 'react'
+import { useRecoilState } from 'recoil'
+import { CareerCreateGlobalState } from '../..'
 import styled from 'styled-components'
 import { CareerCreateMeetingCommonQuestion } from '../..'
 
@@ -10,14 +12,18 @@ interface SelectedAnswerProps {
 }
 
 export const MeetupTypeSelector1 = () => {
+  const [globalData, setGlobalData] = useRecoilState(CareerCreateGlobalState)
   const [selectedItem1, setSelectedItem1] = useState<string>('')
-  const [selectedItem2, setSelectedItem2] = useState<string>('')
+  const { selectedItem2 } = globalData
 
   const handleItemSelect = (item: string, questionKey: string) => {
     if (questionKey === 'Answer1') {
       setSelectedItem1(item)
     } else if (questionKey === 'Answer2') {
-      setSelectedItem2(item)
+      setGlobalData(prevData => ({
+        ...prevData,
+        selectedItem2: item
+      }))
     }
   }
 

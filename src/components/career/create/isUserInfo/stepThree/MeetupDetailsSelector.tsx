@@ -1,56 +1,77 @@
 // 모임 장소, 요일, 모임 시간, 진행 시간 선택 컴포넌트
-import { useState } from 'react'
 import styled from 'styled-components'
 import { days, timeSliderMarks } from '@/constants'
 import { CommonTimePicker } from '@/components'
 import Slider from '@mui/material/Slider'
+import { useRecoilState } from 'recoil'
+import { CareerCreateGlobalState } from '../..'
 
 interface selectProps {
   $isSelected: boolean | string
 }
 
 export const MeetupDetailsSelector = () => {
-  // 온라인(f)인지 오프라인(t)인지
-  const [onlineToggleState, setOnlineToggleState] = useState<boolean>(false)
-  // 주기적인지 아닌지
-  const [periodicMeeting, setPeriodicMeeting] = useState<boolean>(false)
-  // 선택 요일들
-  const [selectedDays, setSelectedDays] = useState<string[]>([])
-  // 매주 격주 매달
-  const [meetingFrequency, setMeetingFrequency] = useState<string>('')
-  //  모임 시간
-  const [meetingTime, setMeetingTime] = useState<string>('')
-  // 진행 시간
-  const [progressTime, setProgressTime] = useState<string>('')
+  const [globalState, setGlobalState] = useRecoilState(CareerCreateGlobalState)
+  const { onlineToggleState, periodicMeeting, selectedDays, meetingFrequency } =
+    globalState
 
-  // 온라인인지 오프라인인지
   const handleToggleOnline = (isOnline: boolean) => {
-    setOnlineToggleState(isOnline)
+    setGlobalState(prevGlobalState => ({
+      ...prevGlobalState,
+      onlineToggleState: isOnline
+    }))
   }
-  // 주기적인지 아닌지
+
   const handleTogglePeriodicMeeting = () => {
-    setPeriodicMeeting(!periodicMeeting)
-    if (!periodicMeeting) {
-      setOnlineToggleState(true)
-    } else {
-      setOnlineToggleState(false)
-    }
+    setGlobalState(prevGlobalState => ({
+      ...prevGlobalState,
+      periodicMeeting: !prevGlobalState.periodicMeeting,
+      onlineToggleState: !prevGlobalState.periodicMeeting
+    }))
   }
-  // 선택 요일
+
   const toggleDaySelection = (day: string) => {
     if (selectedDays.includes(day)) {
-      setSelectedDays(selectedDays.filter(selectedDay => selectedDay !== day))
+      setGlobalState(prevGlobalState => ({
+        ...prevGlobalState,
+        selectedDays: prevGlobalState.selectedDays.filter(
+          selectedDay => selectedDay !== day
+        )
+      }))
     } else {
-      setSelectedDays([...selectedDays, day])
+      setGlobalState(prevGlobalState => ({
+        ...prevGlobalState,
+        selectedDays: [...prevGlobalState.selectedDays, day]
+      }))
     }
   }
-  // 매주 격주 매달
+
   const handleToggleMeetingFrequency = (frequency: string) => {
-    setMeetingFrequency(frequency)
+    setGlobalState(prevGlobalState => ({
+      ...prevGlobalState,
+      meetingFrequency: frequency
+    }))
   }
 
   const handleProgressTime = (time: string) => {
-    setProgressTime(time)
+    setGlobalState(prevGlobalState => ({
+      ...prevGlobalState,
+      progressTime: time
+    }))
+  }
+
+  const handleMeetingTime = (time: string) => {
+    setGlobalState(prevGlobalState => ({
+      ...prevGlobalState,
+      meetingTime: time
+    }))
+  }
+
+  const handleMeetingPlace = (place: string) => {
+    setGlobalState(provGlobalState => ({
+      ...provGlobalState,
+      meetingPlace: place
+    }))
   }
 
   // 요일 리스트
@@ -64,8 +85,6 @@ export const MeetupDetailsSelector = () => {
     </Answer>
   ))
 
-  console.log(meetingTime)
-  
   return (
     <>
       {/* 모임 장소 */}
@@ -86,6 +105,7 @@ export const MeetupDetailsSelector = () => {
       </ToggleNTextWrap>
       <InputContainer>
         <InputText
+          onChange={e => handleMeetingPlace(e.target.value)}
           placeholder={
             onlineToggleState
               ? '텍스트를 입력하세요'
@@ -113,18 +133,18 @@ export const MeetupDetailsSelector = () => {
             <QuestionTitle>모임 요일을 정해주세요</QuestionTitle>
             <ToggleRowSortContainer>
               <ToggleL60
-                onClick={() => handleToggleMeetingFrequency('weekly')}
-                $isSelected={meetingFrequency === 'weekly'}>
+                onClick={() => handleToggleMeetingFrequency('매주')}
+                $isSelected={meetingFrequency === '매주'}>
                 매주
               </ToggleL60>
               <ToggleM60
-                onClick={() => handleToggleMeetingFrequency('biweekly')}
-                $isSelected={meetingFrequency === 'biweekly'}>
+                onClick={() => handleToggleMeetingFrequency('격주')}
+                $isSelected={meetingFrequency === '격주'}>
                 격주
               </ToggleM60>
               <ToggleR60
-                onClick={() => handleToggleMeetingFrequency('monthly')}
-                $isSelected={meetingFrequency === 'monthly'}>
+                onClick={() => handleToggleMeetingFrequency('매달')}
+                $isSelected={meetingFrequency === '매달'}>
                 매달
               </ToggleR60>
             </ToggleRowSortContainer>
@@ -133,7 +153,7 @@ export const MeetupDetailsSelector = () => {
 
           {/* 모임시간 */}
           <QuestionTitle>모임 시간을 정해주세요</QuestionTitle>
-          <CommonTimePicker onTimeChange={setMeetingTime}/>
+          <CommonTimePicker onTimeChange={handleMeetingTime} />
 
           {/* 진행시간 */}
           <QuestionTitle>진행시간은 얼마나 될까요?</QuestionTitle>

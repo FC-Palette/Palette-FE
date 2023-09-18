@@ -1,14 +1,19 @@
 // 모집인원 설정
-import { useState } from 'react'
+import { useSetRecoilState } from 'recoil'
 import styled from 'styled-components'
+import { CareerCreateGlobalState } from '../..'
 
 export const RecruitmentSizeSelector = () => {
-  const [numOfMembers, setNumOfMembers] = useState(0)
+  const setGlobalState = useSetRecoilState(CareerCreateGlobalState)
 
-  const handleNumofMembers = e => {
-    setNumOfMembers(e.target.value)
+  const handleNumofMembers = (e: number) => {
+    let count = e
+    setGlobalState(prev => ({
+      ...prev,
+      recruitmentSize: count
+    }))
   }
-  console.log(numOfMembers)
+
   return (
     <>
       <QuestionTitle>
@@ -16,7 +21,7 @@ export const RecruitmentSizeSelector = () => {
       </QuestionTitle>
       <InputContainer>
         <InputContents
-          onChange={e => handleNumofMembers(e)}
+          onChange={e => handleNumofMembers(+e.target.value)}
           placeholder="인원수를 적어주세요."
           type="number"
           min={0}
