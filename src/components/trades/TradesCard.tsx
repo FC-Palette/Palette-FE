@@ -1,99 +1,123 @@
 import { theme } from 'styles/index'
-import { GroupBuyingList, TradesOption } from 'components/trades/index'
 import { css, styled } from 'styled-components'
 import {
-  FilterBar,
-  Category,
-  CreateBtn,
-  SubHeader
-} from 'components/common/index'
-import { TRADES_SUBHEADER_TEXT } from 'constants/trades/index'
-import { Setting4, Record } from 'iconsax-react'
+  TradesTime,
+  TradesViews,
+  TradesLikeBtn,
+  TradesCategory,
+  TradesImage,
+  TradesLikeCount,
+  TradesTitle,
+  TradesPrice
+} from 'components/trades/index'
 
 export const TradesCard = () => {
-  const groupUploadPath = '/groupUpload'
-
   return (
-    <Wrapper>
-      <SubHeader
-        items={TRADES_SUBHEADER_TEXT}
-        initialItem="공동구매"
-      />
-      <Category
-        categoryList="전체"
-        categoryFilter={
-          <StyledIcon>
-            <StyledSetting4>
-              <Setting4 />
-            </StyledSetting4>
-          </StyledIcon>
-        }
-      />
-      <FilterBar
-        filterButton={
-          <StyledRecordWrapper>
-            <StyledRecord>
-              <Record />
-            </StyledRecord>
-          </StyledRecordWrapper>
-        }
-        filterText="마감된 거래 제외"
-        filterOption={<TradesOption />}></FilterBar>
-
-      <Main>
-        <CreateBtn path={groupUploadPath} />
-        <CardWrapper>
-          <GroupBuyingList />
-        </CardWrapper>
-      </Main>
-    </Wrapper>
+    <>
+      <Container>
+        <TradesPreview>
+          <TradesImage />
+          <TradesLikeBtn />
+          <TradesTime />
+        </TradesPreview>
+        <TradesCategory />
+        <TitleWrapper>
+          <TradesTitle />
+          <TradesPrice />
+        </TitleWrapper>
+        <TradesCount>
+          <TradesLikeCount />
+          <TradesViews />
+        </TradesCount>
+      </Container>
+      <Container>
+        <TradesPreview>
+          <TradesImage />
+          <TradesLikeBtn />
+          <TradesTime />
+        </TradesPreview>
+        <TradesCategory />
+        <TitleWrapper>
+          <TradesTitle />
+          <TradesPrice />
+        </TitleWrapper>
+        <TradesCount>
+          <TradesLikeCount />
+          <TradesViews />
+        </TradesCount>
+      </Container>
+      <Container>
+        <TradesPreview>
+          <TradesImage />
+          <TradesLikeBtn />
+          <TradesTime />
+        </TradesPreview>
+        <TradesCategory />
+        <TitleWrapper>
+          <TradesTitle />
+          <TradesPrice />
+        </TitleWrapper>
+        <TradesCount>
+          <TradesLikeCount />
+          <TradesViews />
+        </TradesCount>
+      </Container>
+      <Container>
+        <TradesPreview>
+          <TradesImage />
+          <TradesLikeBtn />
+          <TradesTime />
+        </TradesPreview>
+        <TradesCategory />
+        <TitleWrapper>
+          <TradesTitle />
+          <TradesPrice />
+        </TitleWrapper>
+        <TradesCount>
+          <TradesLikeCount />
+          <TradesViews />
+        </TradesCount>
+      </Container>
+    </>
   )
 }
 
-const Wrapper = styled.div`
-  width: 100%;
-`
-
-const Main = styled.div`
-  width: 100%;
+const Container = styled.div`
   display: flex;
-  justify-content: center;
-  margin-top: 10px;
+  width: 170px;
+  height: 288px;
+  box-shadow: 0px 8px 16px ${theme.greyScale.grey3};
+  border-radius: 8px;
+  position: relative;
 `
 
-const CardWrapper = styled.div`
-  width: 360px;
-  top: 197px;
-  justify-content: space-around;
+const TradesPreview = styled.div`
+  width: 170px;
+  height: 150px;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+`
+
+const TitleWrapper = styled.div`
+  position: absolute;
+  width: 162px;
+  top: 187px;
+  height: 70px;
+  padding: 0px 8px;
+  align-content: space-between;
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
 `
 
-const StyledIcon = styled.button`
-  background-color: ${theme.main.blue0};
-  width: 34px;
-  height: 34px;
-  border-radius: 12px;
+const TradesCount = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
-`
-
-const StyledRecordWrapper = styled.button`
-  width: 20px;
-  height: 20px;
-  margin-right: 8px;
-`
-
-const StyledSetting4 = styled(Setting4)`
-  color: ${theme.main.white};
-  width: ${theme.customSize.xlarge};
-  height: ${theme.customSize.xlarge};
-`
-
-const StyledRecord = styled(Record)`
-  color: ${theme.main.blue0};
-  width: 20px;
-  height: 20px;
+  position: absolute;
+  width: 155px;
+  top: 265px;
+  left: 8px;
+  height: 17px;
+  gap: 10px;
+  font-size: ${theme.customSize.medium};
+  color: ${theme.greyScale.grey6};
+  font-weight: 400;
 `

@@ -1,8 +1,9 @@
-import { Input, ImageBtn, ClosingDate } from 'components/common/index'
+import { ClosingDate, Input, ImageBtn } from 'components/common/index'
 import {
   DeadLine,
   AgreeMsg,
-  Account
+  Account,
+  UploadInputDetail
 } from 'components/trades/uploadproduct/index'
 
 export const TRADES_TEXT = [
@@ -34,17 +35,12 @@ export const TRADES_TEXT = [
   { title: '제품 이미지를 등록 해주세요.', component: ImageBtn },
   {
     title: '제품에 대한 상세 설명을 입력해주세요.',
-    props: {
-      ph: `TIP!
-      \n수금은 어떻게 진행하실 건가요?
-      \n어디서 상품을 나누실 건가요?
-      \n왜 이상품을 공동구매 하시나요?`,
-      item: ''
-    },
-    component: Input
+    component: UploadInputDetail
   },
   { title: '마감시간을 설정해주세요.', component: DeadLine },
+
   { title: '공동구매 자동 마감 시점을 알려주세요.', component: ClosingDate },
+
   {
     title: `수금을 진행하실 
         \n금융기관과 계좌번호를 입력해 주세요.`,
@@ -61,9 +57,4 @@ export const TRADES_ACCOUNT_TEXT = [
   '금융기관을 선택해주세요.',
   '계좌번호 입력',
   '계좌주 성명'
-]
-
-export const TRADES_CLOSING_TEXT = [
-  '마감 일시 도달 시 자동 마감',
-  '마감 인원 도달 시 자동 마감'
 ]

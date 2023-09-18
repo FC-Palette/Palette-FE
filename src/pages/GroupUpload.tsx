@@ -2,7 +2,10 @@ import { theme } from 'styles/index'
 import { Header } from 'components/common/index'
 import { css, styled } from 'styled-components'
 import { ArrowLeft2 } from 'iconsax-react'
-import { InputDetail } from 'components/trades/uploadproduct/index'
+import {
+  UploadDetail,
+  UploadFooter
+} from 'components/trades/uploadproduct/index'
 
 export const GroupUpload = () => {
   return (
@@ -14,7 +17,8 @@ export const GroupUpload = () => {
             <ArrowLeft2 />
           </StyledIcon>
         }></Header>
-      <InputDetail></InputDetail>
+      <UploadDetail></UploadDetail>
+      <UploadFooter></UploadFooter>
     </>
   )
 }
