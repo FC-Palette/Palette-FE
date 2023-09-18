@@ -4,9 +4,8 @@ import { css, styled } from 'styled-components'
 import { UploadTitle } from 'components/trades/uploadproduct/index'
 import { Input } from 'components/index'
 import { TRADES_TEXT } from 'constants/trades/index'
-import { Component } from 'iconsax-react'
 
-export const TitleInput = () => {
+export const UploadList = () => {
   return (
     <Wrapper>
       {TRADES_TEXT.map(item => (
@@ -18,11 +17,7 @@ export const TitleInput = () => {
             {item.component === Input ? (
               <Input
                 $inputWidth={item.props?.item ? '324px' : '350px'}
-                $inputHeight={
-                  item.title === '제품에 대한 상세 설명을 입력해주세요.'
-                    ? '180px'
-                    : '48px'
-                }
+                $inputHeight={'48px'}
                 $borderColor={theme.greyScale.grey3}
                 $borderRadius="8px"
                 $paddingLeft="12px"
@@ -47,7 +42,7 @@ const Wrapper = styled.div`
 `
 
 const ComponentWappper = styled.div`
-  margin-top: 32px;
+  margin-bottom: 32px;
 `
 
 const ItemText = styled.div`

@@ -34,5 +34,5 @@ const ImagePreview = styled.div`
   border-radius: 8px;
   width: 90px;
   height: 90px;
-  background-color: ${theme.greyScale.grey1};
+  background-color: ${theme.greyScale.grey4};
 `
