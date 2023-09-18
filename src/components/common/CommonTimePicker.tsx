@@ -11,14 +11,15 @@ export const CommonTimePicker = ({
   onTimeChange: (time: string) => void
 }) => {
   const sxStyle = {
-    minWidth: '382px'
+    width: '382px',
+    margin: '0 24px'
   }
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={['TimePicker']}>
         <Wrap>
-          <StyledTimePicker
+          <TimePicker
             label={'오전 12:00'}
             ampm={true} // 오전・오후 표시 활성화
             autoFocus={false} // 마운트시 자동 포커스
@@ -41,10 +42,5 @@ export const CommonTimePicker = ({
 
 const Wrap = styled.div`
   display: flex;
-  width: 382px;
-`
-
-const StyledTimePicker = styled(TimePicker)`
-  display: flex;
-  border: 1px solid red;
+  width: 430px;
 `
