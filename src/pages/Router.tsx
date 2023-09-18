@@ -2,17 +2,17 @@ import { createBrowserRouter } from 'react-router-dom'
 import { ErrorComponent } from 'components/index'
 import {
   CareerMain,
-  GroupBuying,
+  GroupPurchase,
   Layout,
   ProfileEnter,
   SignIn,
   SignUp,
   FindId,
   FindPassword,
-  UsedTrade,
   GroupUpload,
   MyPage,
-  Setting
+  Setting,
+  SecondHand
 } from 'pages/index'
 
 import type { RouteObject } from 'react-router-dom'
@@ -53,10 +53,9 @@ export const router = createBrowserRouter([
     element: <Layout />,
     errorElement: <ErrorComponent />,
     children: [
-      generateRoute('/groupBuying', <GroupBuying />, <ErrorComponent />),
-
+      generateRoute('/groupPurchase', <GroupPurchase />, <ErrorComponent />),
       generateRoute('/groupUpload', <GroupUpload />, <ErrorComponent />),
-      generateRoute('/usedTrade', <UsedTrade />, <ErrorComponent />)
+      generateRoute('/secondHand', <SecondHand />, <ErrorComponent />)
     ]
   },
   {

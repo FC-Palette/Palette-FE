@@ -1,4 +1,4 @@
-export * from 'components/trades/GroupBuyingList'
+export * from 'components/trades/GroupPurchaseList'
 export * from 'components/trades/TradesTitle'
 export * from 'components/trades/TradesPrice'
 export * from 'components/trades/TradesCategory'

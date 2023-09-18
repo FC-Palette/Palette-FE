@@ -1,10 +1,10 @@
 import { theme } from 'styles/index'
-import { TradesCard } from 'components/trades/index'
+import { GroupPurchaseList } from 'components/trades/index'
 import { Header, Footer } from 'components/common/index'
 import { css, styled } from 'styled-components'
 import { ArrowLeft2, SearchNormal1, Notification } from 'iconsax-react'
 
-export const UsedTrade = () => {
+export const GroupPurchase = () => {
   return (
     <>
       <Header
@@ -22,7 +22,7 @@ export const UsedTrade = () => {
         </StyledIcon>
       </Header>
       <MainWrapper>
-        <TradesCard />
+        <GroupPurchaseList />
       </MainWrapper>
       <Footer />
     </>
@@ -32,8 +32,8 @@ const MainWrapper = styled.div`
   padding-bottom: 10px;
 `
 const StyledIcon = styled.button`
-  color: #000;
-  font-size: ${theme.customSize.xxlarge};
+  /* color: #000;
+  font-size: ${theme.customSize.xxlarge}; */
 `
 const IconWrapper = styled.button`
   margin-right: 10px;
