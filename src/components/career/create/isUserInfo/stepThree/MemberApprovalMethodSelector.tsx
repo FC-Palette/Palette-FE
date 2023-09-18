@@ -1,17 +1,23 @@
 // 맴버 승인 방법 선택 컴포넌트 (선착순, 승인제)
-import { useState } from 'react'
+import { useRecoilState } from 'recoil'
 import styled from 'styled-components'
+import { CareerCreateGlobalState } from '../..'
 
 interface selectProps {
   $isSelected: boolean | string
   onClick: () => void
 }
 export const MemberApprovalMethodSelector = () => {
-  const [isApprove, setIsApprove] = useState(false) // 선착순: false 승인제: true
+  const [globalState, setGlobalState] = useRecoilState(CareerCreateGlobalState)
+  const { isApprove } = globalState // 선착순 => false(default)
 
   const handleToggleApprovalType = (type: boolean) => {
-    setIsApprove(type)
+    setGlobalState(prevState => ({
+      ...prevState,
+      isApprove: type
+    }))
   }
+
   return (
     <>
       <ToggleNTextWrap>
@@ -34,7 +40,6 @@ export const MemberApprovalMethodSelector = () => {
 }
 
 const QuestionTitleSmall = styled.div`
-  /* font-weight: 700; */
   font-size: 18px;
   margin-top: 28px;
   color: ${props => props.theme.greyScale.grey6};

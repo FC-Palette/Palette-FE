@@ -49,12 +49,10 @@ export const GetStats = () => {
 const Container = styled.div`
   width: 430px;
   display: flex;
-  background-color: orange;
 `
 
 const IconWrap = styled.div`
   display: flex;
-
   gap: 4px;
   color: ${props => props.theme.greyScale.grey6};
   margin: 12px 24px 0;
@@ -64,6 +62,5 @@ const Time = styled.div`
 `
 
 const Dot = styled.div``
-
 const Like = styled.div``
 const View = styled.div``

@@ -2,7 +2,7 @@ import { ArrowLeft2, More, Send2 } from 'iconsax-react'
 import { Header } from '@/components'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
-export const CareerCreateMeetingHeaderDynamic = () => {
+export const CareerCreateMeetingHeaderDynamic = ({ meetupTitle }) => {
   const navigate = useNavigate()
 
   return (
@@ -12,7 +12,7 @@ export const CareerCreateMeetingHeaderDynamic = () => {
           <ArrowLeft2 />
         </StyledIcon>
       }
-      centerText={'모임 제목이 들어갈 자리'}>
+      centerText={meetupTitle ? meetupTitle : '미리보기'}>
       <MultiIconWrap>
         <Send2 />
         <More />

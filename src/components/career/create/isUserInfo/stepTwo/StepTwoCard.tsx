@@ -19,6 +19,7 @@ export const StepTwoCard = () => {
       <QuestionSmall>입력하신 내용은 추후 변경할 수 있어요</QuestionSmall>
 
       <MeetupImageSelector />
+
       <MeetupTitleAndDescription />
 
       <BtnWrap onClick={() => navigate('/createMeeting-3')}>
@@ -39,7 +40,7 @@ const Wrap = styled.div`
   flex-direction: column;
   position: relative;
   align-items: flex-start;
-  margin: 0 23px;
+  margin: 0 24px;
 `
 
 const QuestionSmall = styled.div`
@@ -48,9 +49,11 @@ const QuestionSmall = styled.div`
   justify-content: center;
   align-items: center;
   height: 43px;
+  width: auto;
   color: ${props => props.theme.greyScale.grey6};
   border-radius: 21px;
   padding: 12px;
+  margin-top: -5px;
 `
 
 const BtnWrap = styled.div`

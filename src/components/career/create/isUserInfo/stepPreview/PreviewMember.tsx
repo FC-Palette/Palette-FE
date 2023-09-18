@@ -16,8 +16,8 @@ export const PreviewMember = () => {
       <ContentsContainer>
         <MemberImage />
         <NameAndIntroduceWrap_Column>
-          <MemberName>멤버 이름</MemberName>
-          <MemberIntroduce>멤버 소개</MemberIntroduce>
+          <MemberName>멤버 이름 미리보기</MemberName>
+          <MemberIntroduce>멤버 소개 미리보기</MemberIntroduce>
         </NameAndIntroduceWrap_Column>
       </ContentsContainer>
       <BtnWrap>

@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 import { CareerCreateMeetingCommonQuestion } from '../..'
 import { profileNCareerFilter } from '@/constants'
-import { useSelectedItems } from '@/components/career/hooks'
-import { useState } from 'react'
 import { iconMapping } from '@/components'
+import { useRecoilState } from 'recoil'
+import { CareerCreateGlobalState } from '../..'
 
 interface SelectedAnswerProps {
   $isSelected: boolean
@@ -11,47 +11,70 @@ interface SelectedAnswerProps {
 }
 
 export const RoleAndGenderSelector = () => {
-  const {
-    selectedItems: selectedRoles,
-    isItemSelected: isRoleSelected,
-    handleSelectedItem: handleRoleSelectedItem
-  } = useSelectedItems([])
-  const [gender, setGender] = useState('무관')
+  const [globalState, setGlobalState] = useRecoilState(CareerCreateGlobalState)
+  const { gender, selectedRoles } = globalState
 
   const genderList = ['무관', '남성만', '여성만']
 
-  const AnswerItems_1 = profileNCareerFilter.rank.map(item => {
-    return (
-      <AnswerItem
-        key={item}
-        onClick={() => handleRoleSelectedItem(item)}
-        $isSelected={isRoleSelected(item)}>
-        {item}
-      </AnswerItem>
-    )
-  })
+  const updateGender = newGender => {
+    setGlobalState(prevGlobalState => ({
+      ...prevGlobalState,
+      gender: newGender
+    }))
+  }
+
+  const updateSelectedRoles = role => {
+    setGlobalState(prevGlobalState => {
+      let newSelectedRoles
+
+      if (role === '무관') {
+        // 무관 선택시 다 제거하고 무관만 선택
+        newSelectedRoles = ['무관']
+      } else {
+        // 무관 이외 아이템 선택시, 무관 빼고 아이템 선택
+        newSelectedRoles = prevGlobalState.selectedRoles.includes('무관')
+          ? [role]
+          : [...prevGlobalState.selectedRoles, role]
+      }
+
+      return {
+        ...prevGlobalState,
+        selectedRoles: newSelectedRoles
+      }
+    })
+  }
 
   const isItemSelected = (item: string) => {
     return gender.includes(item)
   }
 
+  // 직급
+  const AnswerItems_1 = profileNCareerFilter.rank.map(item => {
+    return (
+      <AnswerItem
+        key={item}
+        onClick={() => updateSelectedRoles(item)}
+        $isSelected={selectedRoles.includes(item)}>
+        {item}
+      </AnswerItem>
+    )
+  })
+
   const AnswerItems_2 = genderList.map(item => (
     <AnswerItem
       key={item}
-      onClick={() => setGender(item)}
+      onClick={() => updateGender(item)}
       $isSelected={gender === item}>
       {item !== '무관' && (
         <IconWrapper
           $isSelected={isItemSelected(item)}
-          onClick={() => setGender(item)}>
+          onClick={() => updateGender(item)}>
           {iconMapping[item]}
         </IconWrapper>
       )}
       {item}
     </AnswerItem>
   ))
-
-  console.log(gender)
 
   return (
     <>
