@@ -11,7 +11,8 @@ import {
   FindPassword,
   UsedTrade,
   GroupUpload,
-  MyPage
+  MyPage,
+  Setting
 } from 'pages/index'
 
 import type { RouteObject } from 'react-router-dom'
@@ -83,6 +84,9 @@ export const router = createBrowserRouter([
     path: '/',
     element: <Layout />,
     errorElement: <ErrorComponent />,
-    children: [generateRoute('/mypage', <MyPage />, <ErrorComponent />)]
+    children: [
+      generateRoute('/mypage', <MyPage />, <ErrorComponent />),
+      generateRoute('/setting', <Setting />, <ErrorComponent />)
+    ]
   }
 ])
