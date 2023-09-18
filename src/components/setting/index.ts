@@ -1,0 +1,7 @@
+export * from 'components/setting/SettingAlarm'
+export * from 'components/setting/SettingManagement'
+export * from 'components/setting/SettingNotice'
+export * from 'components/setting/SettingPassword'
+export * from 'components/setting/SettingService'
+export * from 'components/setting/SettingBtnStyle'
+export * from 'components/setting/SettingVersion'
