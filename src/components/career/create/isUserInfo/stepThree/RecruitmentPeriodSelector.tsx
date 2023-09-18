@@ -51,7 +51,7 @@ export const RecruitmentPeriodSelector = () => {
 }
 // Title
 const QuestionTitle = styled.div`
-  margin-top: 32px;
+  margin: 32px 24px 0;
   font-weight: 500;
   font-size: 18px;
   color: ${props => props.theme.greyScale.grey6};
@@ -63,4 +63,5 @@ const TimePickerContainer = styled.div`
   gap: 7px;
   color: ${props => props.theme.greyScale.grey9};
   height: 48px;
+  margin: 8px 24px 0;
 `
