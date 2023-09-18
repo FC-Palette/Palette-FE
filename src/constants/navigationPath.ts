@@ -3,4 +3,6 @@ export const NAVIGATION_PATH = {
     navigatorSignUpPage: {to: "/signup"},
     navigatorFindIdPage: {to: "/findid"},
     navigatorFindPasswordPage: {to: "/findpassword"},
+    navigatorMyPage: {to: "/mypage"},
+    navigatorSettingPage: {to: "/setting"},
 }

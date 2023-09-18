@@ -1,4 +1,4 @@
-import { Input, ImageBtn, ClosingDate } from 'components/common/index'
+import { Input, ImageBtn } from 'components/common/index'
 import {
   DeadLine,
   AgreeMsg,
@@ -44,7 +44,7 @@ export const TRADES_TEXT = [
     component: Input
   },
   { title: '마감시간을 설정해주세요.', component: DeadLine },
-  { title: '공동구매 자동 마감 시점을 알려주세요.', component: ClosingDate },
+  { title: '공동구매 자동 마감 시점을 알려주세요.' },
   {
     title: `수금을 진행하실 
         \n금융기관과 계좌번호를 입력해 주세요.`,

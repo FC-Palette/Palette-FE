@@ -1,6 +1,8 @@
+import { NAVIGATION_PATH } from "constants/index";
 import { Footer, Header } from "components/index";
 import { MyPageEditBtn, MyPageIntro, MyPagePostDisplay, MyPageSelectTab } from "components/index";
 import { Notification, Setting2 } from "iconsax-react";
+import { Link } from "react-router-dom";
 import { styled } from "styled-components";
 
 export const MyPage = () => {
@@ -13,7 +15,9 @@ export const MyPage = () => {
           <Notification />
         </StyledIcon>
         <IconWrapper>
+          <Link {...NAVIGATION_PATH.navigatorSettingPage}>
           <Setting2 />
+          </Link>
         </IconWrapper>
       </Header>
       <MyPageIntro></MyPageIntro>
