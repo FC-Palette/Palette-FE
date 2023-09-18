@@ -14,4 +14,5 @@ const Title = styled.div`
   font-weight: 400;
   font-size: ${theme.customSize.large};
   color: ${theme.greyScale.grey9};
+  cursor: pointer;
 `

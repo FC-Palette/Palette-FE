@@ -1,11 +1,11 @@
 import { theme } from 'styles/index'
 import { css, styled } from 'styled-components'
-import { TitleInput } from 'components/trades/uploadproduct/index'
+import { UploadList } from 'components/trades/uploadproduct/index'
 
-export const InputDetail = () => {
+export const UploadDetail = () => {
   return (
     <Wrapper>
-      <TitleInput></TitleInput>
+      <UploadList></UploadList>
     </Wrapper>
   )
 }
