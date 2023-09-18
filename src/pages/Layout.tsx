@@ -10,9 +10,6 @@ export const Layout = () => {
 }
 
 const Wrapper = styled.div`
-  width: 100%;
-  min-height: 100vh;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
   background-color: ${props => props.theme.main.white};

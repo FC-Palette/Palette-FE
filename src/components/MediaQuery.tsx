@@ -16,7 +16,6 @@ export const MediaQuery = ({ children }) => {
 }
 
 const Wrapper = styled.div`
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   background-color: ${props => props.theme.greyScale.grey0};
