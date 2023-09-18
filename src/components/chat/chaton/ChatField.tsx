@@ -1,15 +1,6 @@
-import { styled } from 'styled-components'
-import { Wrapper, Modal, Sender, Recipient } from 'components/index'
-import { useRecoilState } from 'recoil'
-import { modalOnState } from 'recoil/index'
+import { Wrapper, Sender, Recipient } from 'components/index'
 
 export const ChatField = ({ messages }) => {
-  // const [modalOn, setModalOn] = useRecoilState(modalOnState)
-  // const handleModalOn = () => {
-  //   setModalOn(!modalOn)
-  //   console.log(modalOn)
-  // }
-
   let previousSender = null
   let previousTime = null
 
