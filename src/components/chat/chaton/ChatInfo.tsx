@@ -10,7 +10,7 @@ export const ChatInfo = () => {
       <ChatSubject
         isBuying={true}
         inDetail={false}></ChatSubject>
-      <ChatAnn isRegistered={true}></ChatAnn>
+      <ChatAnn $registered={true}></ChatAnn>
     </InfoWrapper>
   )
 }

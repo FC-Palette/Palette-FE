@@ -1,15 +1,15 @@
 import { styled } from 'styled-components'
 import { MessageTime } from 'components/index'
 //ChatField
-export const Sender = ({ message, sender, createdAt, showCreatedTime }) => {
+export const Sender = ({ message, $sender, createdAt, showCreatedTime }) => {
   return (
-    <MessageBlock sender={sender}>
+    <MessageBlock sender={$sender}>
       <SenderBlock>
         <MessageTime
           time={showCreatedTime ? createdAt : null}
-          sender={sender}
+          sender={$sender}
         />
-        <MessageBox sender={sender}>{message}</MessageBox>
+        <MessageBox sender={$sender}>{message}</MessageBox>
       </SenderBlock>
     </MessageBlock>
   )
