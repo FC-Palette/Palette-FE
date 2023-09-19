@@ -7,7 +7,8 @@ import {
   MembersLayer,
   MembersList,
   MembersHeader,
-  MembersFooter
+  MembersFooter,
+  Fixer
 } from 'components/index'
 import { CHATON_TEXTS } from 'constants/index'
 import { modalOnState, showMembersState } from 'recoil/index'
@@ -39,9 +40,11 @@ export const ChatMembers = () => {
         <>
           <Background onClick={handleShowMembers}></Background>
           <MembersLayer>
-            <MembersHeader onClick={handleShowMembers} />
-            <MembersList />
-            <MembersFooter onClick={handleExit} />
+            <Fixer top="0">
+              <MembersHeader onClick={handleShowMembers} />
+              <MembersList />
+              <MembersFooter onClick={handleExit} />
+            </Fixer>
           </MembersLayer>
         </>
       )}

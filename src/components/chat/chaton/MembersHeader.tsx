@@ -26,9 +26,11 @@ export const Fixer = styled.div<{
   center?: boolean
 }>`
   position: sticky;
+  overflow-x: hidden;
+  overflow-y: ${props => (props.center ? 'scroll' : 'hidden')};
   top: ${props => props.top};
   bottom: ${props => props.bottom};
-  height: ${props => (props.center ? '100%' : '')};
+  height: ${props => (props.center ? 'calc(100vh - 128px)' : '')};
 `
 
 const Container = styled.div`
