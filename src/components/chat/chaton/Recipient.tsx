@@ -6,15 +6,9 @@ import {
   MemberImg
 } from 'components/index'
 //ChatField
-export const Recipient = ({
-  message,
-  $sender,
-  createdAt,
-  isSameSender,
-  showCreatedTime
-}) => {
+export const Recipient = ({ message, $sender, createdAt, showCreatedTime }) => {
   return (
-    <MessageBlock sender={$sender}>
+    <MessageBlock $sender={$sender}>
       {showCreatedTime && (
         <MemberImg
           src={'https://avatars.githubusercontent.com/u/142562921?s=200&v=4'}
@@ -25,10 +19,10 @@ export const Recipient = ({
       <RecipientBlock>
         {showCreatedTime && <MemberName>고스트 사원</MemberName>}
         <MessageBubble>
-          <MessageBox sender={$sender}>{message}</MessageBox>
+          <MessageBox $sender={$sender}>{message}</MessageBox>
           <MessageTime
             time={showCreatedTime ? createdAt : null}
-            sender={$sender}
+            $sender={$sender}
           />
         </MessageBubble>
       </RecipientBlock>
