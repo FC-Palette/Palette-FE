@@ -12,7 +12,9 @@ export const MyPage = () => {
     <MyPageWrap>      
       <Header centerText="마이페이지">
         <StyledIcon>
+          <Link {...NAVIGATION_PATH.navigatorAlarm} >
           <Notification />
+          </Link>
         </StyledIcon>
         <IconWrapper>
           <Link {...NAVIGATION_PATH.navigatorSettingPage}>
@@ -20,7 +22,7 @@ export const MyPage = () => {
           </Link>
         </IconWrapper>
       </Header>
-      <MyPageIntro></MyPageIntro>
+      <MyPageIntro />
       <MyPageEditBtn></MyPageEditBtn>
       <MyPagePostArea>
         <MyPageSelectTab />
@@ -33,14 +35,21 @@ export const MyPage = () => {
 
 const MyPageWrap = styled.div`
   position: relative;
+  max-width: 100%;
 `
 
 const IconWrapper = styled.div`
   margin-left: 5px;
-`
+  :visited{
+    color: inherit;
+  }
+    `
 
 const StyledIcon = styled.div`
   margin-right: 5px;
+  :visited{
+    color: inherit;
+  }
 `
 
 const MyPagePostArea = styled.div`

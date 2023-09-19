@@ -26,19 +26,19 @@ export const MyPageCategory = ({ activeTab }) => {
             activeCategory={activeCategory === 1} 
             onClick={() => setActiveCategory(1)} 
           >
-            {CATEGORY_TITLE_TEXTS.WithDevelopText}
+            {CATEGORY_TITLE_TEXTS.withDevelopText}
           </WithDevelop>
           <WithBuy
             activeCategory={activeCategory === 2} 
             onClick={() => setActiveCategory(2)} 
           >
-            {CATEGORY_TITLE_TEXTS.WithBuyText}
+            {CATEGORY_TITLE_TEXTS.withBuyText}
           </WithBuy>
           <MyPost
             activeCategory={activeCategory === 3} 
             onClick={() => setActiveCategory(3)} 
           >
-            {CATEGORY_TITLE_TEXTS.MyPostText}
+            {CATEGORY_TITLE_TEXTS.myPostText}
           </MyPost>
         </>
       )}
@@ -54,13 +54,13 @@ export const MyPageCategory = ({ activeTab }) => {
             activeCategory={activeCategory === 1} 
             onClick={() => setActiveCategory(1)} 
           >
-            {CATEGORY_TITLE_TEXTS.WithDevelopText}
+            {CATEGORY_TITLE_TEXTS.withDevelopText}
           </WithDevelop>
           <WithBuy
             activeCategory={activeCategory === 2} 
             onClick={() => setActiveCategory(2)} 
           >
-            {CATEGORY_TITLE_TEXTS.WithBuyText}
+            {CATEGORY_TITLE_TEXTS.withBuyText}
           </WithBuy>
         </>
       )}

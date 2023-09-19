@@ -48,10 +48,9 @@ const Tab = styled.div<myPageSelectTabProps>`
   width: 191px;
   height: 50px;
   font-size: 18px;
-  font-weight: 700;
+  font-weight: ${(props) => props.active ? 700 : 400};
   line-height: 21.48px;
-  color: ${(props) =>
-    props.active ? theme.main.blue0 : theme.greyScale.grey5};
+  color: ${(props) => props.active ? theme.main.blue0 : theme.greyScale.grey5};
   cursor: pointer;
 
   &::after {

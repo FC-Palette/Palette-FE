@@ -15,7 +15,7 @@ export const Start = () => {
             <StartIntro>{START_TEXTS.introFirstText}</StartIntro>
             <StartIntro>{START_TEXTS.introSecondText}</StartIntro>
             <StartSignUp>
-                <StartButton></StartButton>
+                <StartButton />
             </StartSignUp>
             <StartSignInWrap>
                 <StartSignIn>{START_TEXTS.existenceText}</StartSignIn>
