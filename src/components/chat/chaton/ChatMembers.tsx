@@ -40,7 +40,7 @@ export const ChatMembers = () => {
         <>
           <Background onClick={handleShowMembers}></Background>
           <MembersLayer>
-            <Fixer top="0">
+            <Fixer $top="0">
               <MembersHeader onClick={handleShowMembers} />
               <MembersList />
               <MembersFooter onClick={handleExit} />

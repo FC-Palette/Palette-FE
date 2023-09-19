@@ -48,6 +48,11 @@ export const messages = [
   },
   {
     sender: 'recipient',
+    text: '다른 사람이 메세지를 연속적으로 보냈을 때 오후 11:23 같은 시간이 보이지 않습니다.',
+    createdAt: '오후 11:23'
+  },
+  {
+    sender: 'recipient',
     text: '다른 사람이 메세지를 연속적으로 보냈을 때 프로필사진이 보이지 않습니다.',
     createdAt: '오후 11:23'
   },

@@ -1,14 +1,12 @@
 import { styled } from 'styled-components'
-import { ArrowLeft2, More } from 'iconsax-react'
+import { ArrowLeft2 } from 'iconsax-react'
 import { ToChatList } from 'components/index'
 
 export const MembersHeader = ({ onClick }) => {
   return (
-    <Fixer top="0">
+    <Fixer $top="0">
       <Container>
-        <IconWrapper
-          position="left"
-          onClick={onClick}>
+        <IconWrapper onClick={onClick}>
           <ArrowLeft2 />
         </IconWrapper>
         <Grow>
@@ -21,16 +19,16 @@ export const MembersHeader = ({ onClick }) => {
   )
 }
 export const Fixer = styled.div<{
-  top?: string
-  bottom?: string
-  center?: boolean
+  $top?: string
+  $bottom?: string
+  $center?: boolean
 }>`
   position: sticky;
   overflow-x: hidden;
-  overflow-y: ${props => (props.center ? 'scroll' : 'hidden')};
-  top: ${props => props.top};
-  bottom: ${props => props.bottom};
-  height: ${props => (props.center ? 'calc(100vh - 128px)' : '')};
+  overflow-y: ${props => (props.$center ? 'scroll' : 'hidden')};
+  top: ${props => props.$top};
+  bottom: ${props => props.$bottom};
+  height: ${props => (props.$center ? 'calc(100vh - 128px)' : '')};
 `
 
 const Container = styled.div`
@@ -38,7 +36,7 @@ const Container = styled.div`
   align-items: center;
   height: 64px;
 `
-const IconWrapper = styled.div<{ position: string }>`
+const IconWrapper = styled.div`
   padding: 20px 8px 20px 11px;
 `
 

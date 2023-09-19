@@ -2,11 +2,11 @@
 import { styled } from 'styled-components'
 import { Edit } from 'iconsax-react'
 
-export const ChatAnn = ({ isRegistered }) => {
+export const ChatAnn = ({ $registered }) => {
   return (
     <>
-      {isRegistered && (
-        <ChatTopBar isRegistered={true}>
+      {$registered && (
+        <ChatTopBar $registered={true}>
           <Edit />
           <TopBarContent>공지입니다.</TopBarContent>
         </ChatTopBar>
@@ -15,13 +15,15 @@ export const ChatAnn = ({ isRegistered }) => {
   )
 }
 
-export const ChatTopBar = styled.div<{ isRegistered?: boolean }>`
+export const ChatTopBar = styled.div<{ $registered?: boolean }>`
   display: flex;
   padding: 12px 24px;
   background-color: ${props => props.theme.greyScale.bluegrey};
   color: ${props => props.theme.main.blue0};
   border-top: ${props =>
-    props.isRegistered ? `1px solid ${props.theme.greyScale.grey3}` : 'none'};
+    props.$registered === true
+      ? `1px solid ${props.theme.greyScale.grey3}`
+      : 'none'};
 `
 export const TopBarContent = styled.div`
   width: 100%;

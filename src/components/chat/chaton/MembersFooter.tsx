@@ -3,7 +3,7 @@ import { Fixer } from 'components/index'
 import { Logout, Notification } from 'iconsax-react'
 export const MembersFooter = ({ onClick }) => {
   return (
-    <Fixer bottom="0">
+    <Fixer $bottom="0">
       <Container>
         <IconWrapper>
           <Notification />
