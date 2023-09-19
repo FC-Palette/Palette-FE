@@ -5,11 +5,11 @@ import { AddSquare, Send2 } from 'iconsax-react'
 export const ChatInputField = () => {
   return (
     <ChatWrapper>
-      <IconWrapper position="left">
+      <IconWrapper $position="left">
         <AddSquare />
       </IconWrapper>
       <ChatInput />
-      <IconWrapper position="right">
+      <IconWrapper $position="right">
         <Send2 />
       </IconWrapper>
     </ChatWrapper>
@@ -26,7 +26,7 @@ const ChatWrapper = styled.div`
   max-width: 430px;
   z-index: 100;
 `
-const IconWrapper = styled.div<{ position: string }>`
+const IconWrapper = styled.div<{ $position: string }>`
   align-self: center;
-  padding: ${props => (props.position === 'left' ? '0 8px 0 0' : '0 0 0 8px')};
+  padding: ${props => (props.$position === 'left' ? '0 8px 0 0' : '0 0 0 8px')};
 `

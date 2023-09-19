@@ -30,6 +30,8 @@ export const messages = [
     createdAt: '오후 10:23'
   },
   { sender: 'sender', text: '안녕하세요', createdAt: '오후 10:28' },
+
+  { sender: 'sender', text: '안녕하세요', createdAt: '오후 10:28' },
   {
     sender: 'sender',
     text: '10:28 같은 시간에 한번 더 안녕하세요. 시간이 보이지 않습니다. 근데 이러면 이렇게 너비를 풀로 차지하는 게 맞나......?',

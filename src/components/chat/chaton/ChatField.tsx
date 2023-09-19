@@ -28,9 +28,9 @@ export const ChatField = ({ messages }) => {
             {message.sender !== 'sender' && (
               <Recipient
                 message={message.text}
-                isSameSender={
-                  message.sender === (nextMessage && nextMessage.sender)
-                }
+                // isSameSender={
+                //   message.sender === (nextMessage && nextMessage.sender)
+                // }
                 $sender={message.sender}
                 createdAt={message.createdAt}
                 showCreatedTime={showTimestamp}
