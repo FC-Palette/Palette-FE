@@ -35,4 +35,5 @@ export const ChatRooms = () => {
 
 export const Wrapper = styled.div`
   min-width: 375px;
+  min-height: calc(100vh - 199px);
 `
