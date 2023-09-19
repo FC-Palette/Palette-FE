@@ -2,35 +2,37 @@ import { Header } from "components/index"
 import { ArrowLeft2 } from "iconsax-react"
 import { styled } from "styled-components"
 import { SettingAlarm, SettingManagement, SettingNotice, SettingPassword, SettingService, SettingVersion } from "components/setting"
+import { NAVIGATION_PATH } from "@/constants"
+import { Link } from "react-router-dom"
 
 export const Setting = () => {
   return (
-    <SeetingContainer>
-    <Header leftIcon={
+    <SettingContainer>
+    <Header 
+      leftIcon={
       <StyledIcon>
         <ArrowLeft2 />
       </StyledIcon>}
-    centerText="설정">
+      centerText="설정">
     </Header>
     <SettingListWrap>
-      <SettingPassword></SettingPassword>
-      <SettingAlarm></SettingAlarm>
-      <SettingManagement></SettingManagement>
-      <SettingNotice></SettingNotice>
-      <SettingService></SettingService>
+        <Link {...NAVIGATION_PATH.navigatorSettingPasswordPage}><SettingPassword /></Link>
+        <Link {...NAVIGATION_PATH.navigatorSettingAlarmPage}><SettingAlarm /></Link>
+        <Link {...NAVIGATION_PATH.navigatorSettingManagePage}><SettingManagement /></Link>
+        <Link {...NAVIGATION_PATH.navigatorSettingNoticePage}><SettingNotice /></Link>
+        <Link {...NAVIGATION_PATH.navigatorSettingServicePage}><SettingService /></Link>
     </SettingListWrap>
-    <SettingVersion></SettingVersion>
-
-</SeetingContainer>
+    <SettingVersion />
+</SettingContainer>
   )
 }
 
 
-const SeetingContainer = styled.div`
+const SettingContainer = styled.div`
   margin: 0 auto;
   height: 100vh;
-  width: 430px;
   position: relative;
+  width: 100%;
 `
 
 const StyledIcon = styled.div`
@@ -40,6 +42,6 @@ const StyledIcon = styled.div`
 `
 
 const SettingListWrap = styled.div`
-  width: 100%;
-  
+  width: 430px;
+  max-width: 100%;
 `

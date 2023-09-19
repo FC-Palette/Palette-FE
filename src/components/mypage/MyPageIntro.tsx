@@ -35,9 +35,9 @@ export const MyPageIntro = () => {
 
 
 const Container = styled.div`
+    position: relative;
     display: flex;
-    width: 382px;
-    margin: 0 auto;
+    padding: 0 24px;
 `
 
 const TextInformation = styled.div`
@@ -57,7 +57,7 @@ const TextArea = styled.div`
     color: ${theme.greyScale.grey5};
     font-size: 16px;
     line-height: 19.09px;
-    margin-bottom: 8px;
+    padding-bottom: 8px;
 `
 
 const CategoryWrap = styled.div`
@@ -79,17 +79,17 @@ const PositionCategory = styled.div`
     font-size: 14px;
     border-radius: 4px;
     padding: 4px 8px;
-    margin-left: 4px;
+    padding-left: 4px;
 `
 
 const FollowUserArea = styled.div`
     display: flex;
-    margin: 12px 0;
+    padding: 12px 0;
 `
 
 
 const FollowerWrap = styled.div`
-    margin-right: 22px;
+    padding-right: 22px;
 `
 //공통 css 분리 필요
 const Follower = styled.div`
@@ -123,7 +123,7 @@ const FollowingWrap = styled.div`
 
 const ImageInformation = styled.div`
     margin-top: 40.5px;
-    margin-left: 14px;
+    padding-left: 14px;
 
 `
 const CircleImage = styled.div`
