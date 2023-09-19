@@ -21,7 +21,11 @@ import {
   ChatList,
   ChatOn,
   ChatAnnList,
-  ChatAnnDetail
+  ChatAnnDetail,
+  IsNotApprovedJoinMeetingStepOne,
+  IsApprovedJoinMeetingStepOne,
+  IsApprovedJoinMeetingStepTwo,
+  IsApprovedJoinMeetingStepComplete
 } from 'pages/index'
 import type { RouteObject } from 'react-router-dom'
 import { Start } from './Start'
@@ -98,6 +102,26 @@ export const router = createBrowserRouter([
       generateRoute(
         '/createMeeting-preview',
         <CareerCreateMeetingStepPreview />,
+        <ErrorComponent />
+      ),
+      generateRoute(
+        '/isNotApproved-joinMeeting-1',
+        <IsNotApprovedJoinMeetingStepOne />,
+        <ErrorComponent />
+      ),
+      generateRoute(
+        '/isApproved-joinMeeting-1',
+        <IsApprovedJoinMeetingStepOne />,
+        <ErrorComponent />
+      ),
+      generateRoute(
+        'isApproved-joinMeeting-2',
+        <IsApprovedJoinMeetingStepTwo />,
+        <ErrorComponent />
+      ),
+      generateRoute(
+        'isApproved-joinMeeting-complete',
+        <IsApprovedJoinMeetingStepComplete />,
         <ErrorComponent />
       )
     ]
