@@ -1,3 +1,3 @@
 export interface ProgressBarProps {
-  $currentPage: number;
+  $currentPage: number | string
 }

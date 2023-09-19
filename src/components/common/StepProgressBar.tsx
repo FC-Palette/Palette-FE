@@ -2,17 +2,25 @@ import styled from 'styled-components'
 import { ProgressBarProps } from '@/types'
 
 // 파란거
+
 const ProgressBar = styled.div<ProgressBarProps>`
   height: 4px;
   background-color: ${props => props.theme.main.blue0};
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
-  width: ${props =>
-    props.$currentPage === 1
-      ? '33%'
-      : props.$currentPage === 2
-      ? '66%'
-      : '100%'};
+  width: ${props => {
+    if (props.$currentPage === 1) {
+      return '33%'
+    } else if (props.$currentPage === 2) {
+      return '66%'
+    } else if (props.$currentPage === 3) {
+      return '100%'
+    } else if (props.$currentPage === '1') {
+      return '50%'
+    } else if (props.$currentPage === '2') {
+      return '100%'
+    } else return
+  }};
 `
 
 export const StepProgressBar = ({ $currentPage }: ProgressBarProps) => {
