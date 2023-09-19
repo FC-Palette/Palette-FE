@@ -3,7 +3,7 @@ export const Member = () => {
   return (
     <Wrapper>
       <Image></Image>
-      <Username>asdasd</Username>
+      <Username>asdasdasdasdasdasdas</Username>
     </Wrapper>
   )
 }
