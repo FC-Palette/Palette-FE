@@ -31,7 +31,7 @@ const CategoryBar = styled.button`
   align-items: center;
   border-radius: 20px;
   padding: 12px;
-  background-color: ${theme.greyScale.grey3};
+  background-color: ${theme.greyScale.grey2};
   font-weight: 400;
   font-size: ${theme.customSize.large};
 `

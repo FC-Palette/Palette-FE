@@ -8,7 +8,7 @@ export * from 'components/common/SubHeader'
 export * from 'components/common/StepProgressBar'
 export * from 'components/common/IconMapping'
 export * from 'components/common/CreateBtn'
-export * from 'components/common/ImageBtn'
+
 export * from 'components/common/ClosingDate'
 export * from 'components/common/CommonTimePicker'
 export * from 'components/common/DraggableImagePreview'

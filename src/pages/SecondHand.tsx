@@ -1,5 +1,5 @@
 import { theme } from 'styles/index'
-import { GroupPurchaseList } from 'components/trades/index'
+import { SecondHandList } from 'components/trades/index'
 import { Header, Footer } from 'components/common/index'
 import { css, styled } from 'styled-components'
 import { ArrowLeft2, SearchNormal1, Notification } from 'iconsax-react'
@@ -22,7 +22,7 @@ export const SecondHand = () => {
         </StyledIcon>
       </Header>
       <MainWrapper>
-        <GroupPurchaseList />
+        <SecondHandList />
       </MainWrapper>
       <Footer />
     </>
