@@ -3,7 +3,6 @@ import { ErrorComponent } from 'components/index'
 import {
   CareerMain,
   GroupPurchase,
-  GroupBuying,
   Layout,
   ProfileEnter,
   SignIn,
@@ -27,7 +26,8 @@ import {
   IsApprovedJoinMeetingStepTwo,
   IsApprovedJoinMeetingStepComplete,
   CareerDetail,
-  CareerDetailMemberSeeMore
+  CareerDetailMemberSeeMore,
+  SecondHandUpload
 } from 'pages/index'
 import type { RouteObject } from 'react-router-dom'
 import { Start } from './Start'
@@ -69,7 +69,12 @@ export const router = createBrowserRouter([
     children: [
       generateRoute('/groupPurchase', <GroupPurchase />, <ErrorComponent />),
       generateRoute('/groupUpload', <GroupUpload />, <ErrorComponent />),
-      generateRoute('/secondHand', <SecondHand />, <ErrorComponent />)
+      generateRoute('/secondHand', <SecondHand />, <ErrorComponent />),
+      generateRoute(
+        '/secondHandUpload',
+        <SecondHandUpload />,
+        <ErrorComponent />
+      )
     ]
   },
   {

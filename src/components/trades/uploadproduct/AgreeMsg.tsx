@@ -3,7 +3,9 @@ import { theme } from 'styles/index'
 import { css, styled } from 'styled-components'
 import {
   TRADES_DETAILTITLE_TEXT,
-  TRADES_DETAIL_TEXT
+  TRADES_DETAIL_TEXT,
+  TRADES_DETAILTITLE_TEXT2,
+  TRADES_DETAIL_TEXT2
 } from 'constants/trades/index'
 import { ArrowDown2, ArrowUp2 } from 'iconsax-react'
 
@@ -11,7 +13,7 @@ interface AgreeWrapperProps {
   showMsg: boolean
 }
 
-export const AgreeMsg = () => {
+export const AgreeMsg1 = () => {
   const [showMsg, setShowMsg] = useState(false)
 
   const toggleMsg = () => {
@@ -48,10 +50,42 @@ export const AgreeMsg = () => {
   )
 }
 
+export const AgreeMsg2 = () => {
+  const [showMsg, setShowMsg] = useState(false)
+
+  const toggleMsg = () => {
+    setShowMsg(!showMsg)
+  }
+
+  return (
+    <>
+      <Wrapper1>
+        <AgreeWrapper
+          onClick={toggleMsg}
+          showMsg={showMsg}>
+          <AgreeTitle>{TRADES_DETAILTITLE_TEXT2}</AgreeTitle>
+          <AgreeBtn>{showMsg ? <ArrowUp2 /> : <ArrowDown2 />}</AgreeBtn>
+        </AgreeWrapper>
+        {showMsg && (
+          <AdditionalInfo2 showMsg={showMsg}>
+            {TRADES_DETAIL_TEXT2.map((text, index) => (
+              <p key={index}>{text}</p>
+            ))}
+          </AdditionalInfo2>
+        )}
+      </Wrapper1>
+    </>
+  )
+}
+
 const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin-top: 40px;
+`
+const Wrapper1 = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: -40px;
 `
 
 const LabelWrapper = styled.label`
@@ -65,6 +99,7 @@ const LabelWrapper = styled.label`
 const Checkbox = styled.input`
   width: 20px;
   height: 20px;
+  display: none;
 `
 
 const AgreeWrapper = styled.button<AgreeWrapperProps>`
@@ -109,4 +144,16 @@ const AdditionalInfo = styled.div<AgreeWrapperProps>`
   color: ${theme.greyScale.grey7};
   font-size: ${theme.customSize.small};
   line-height: 17px;
+`
+const AdditionalInfo2 = styled.div<AgreeWrapperProps>`
+  padding: 14px 12px 0px 12px;
+  height: 248px;
+  width: 350px;
+  border-radius: ${props => (props.showMsg ? `0px 0px 8px 8px` : '8px')};
+  background-color: ${theme.greyScale.grey1};
+  color: ${theme.greyScale.grey7};
+  font-size: ${theme.customSize.small};
+  line-height: 18px;
+  padding-left: 20px;
+  padding-top: 15px;
 `

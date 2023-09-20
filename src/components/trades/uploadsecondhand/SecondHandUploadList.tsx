@@ -3,19 +3,23 @@ import { theme } from 'styles/index'
 import { css, styled } from 'styled-components'
 import { UploadTitle } from 'components/trades/uploadproduct/index'
 import { Input } from 'components/index'
-import { TRADES_TEXT } from 'constants/trades/index'
+import { TRADES_SECONDHAND_TEXT } from 'constants/trades/index'
 
-export const UploadList = () => {
+export const SecondHandUploadList = () => {
   return (
     <Wrapper>
-      {TRADES_TEXT.map((item, index) => (
+      {TRADES_SECONDHAND_TEXT.map((item, index) => (
         <ComponentWappper key={item.title}>
           <TitleWrapper>
             <UploadTitle Text={item.title}> </UploadTitle>
             {item.title === '제품 이미지를 등록 해주세요.' && (
               <TitleDescription>(최대 10장)</TitleDescription>
             )}
-            {index !== 6 && index !== 8 && <EssentialIcon>*</EssentialIcon>}
+            {index !== 3 &&
+              index !== 4 &&
+              index !== 6 &&
+              index !== 7 &&
+              index !== 8 && <EssentialIcon>*</EssentialIcon>}
           </TitleWrapper>
           <InputWrapper>
             {item.component === Input ? (
@@ -31,6 +35,14 @@ export const UploadList = () => {
               React.createElement(item.component)
             )}
             {item.props?.item && <ItemText>{item.props?.item}</ItemText>}
+            {item.title === '금액을 알려주세요.' && (
+              <FreeSharingCheckbox>
+                <CheckboxLabel>
+                  <Checkbox type="checkbox" />
+                </CheckboxLabel>
+                <FreeSharingText>무료나눔</FreeSharingText>
+              </FreeSharingCheckbox>
+            )}
           </InputWrapper>
         </ComponentWappper>
       ))}
@@ -71,6 +83,7 @@ const InputWrapper = styled.div`
   display: flex;
   align-items: end;
   justify-content: space-between;
+  flex-wrap: wrap;
 `
 const TitleDescription = styled.div`
   font-size: ${theme.customSize.large};
@@ -83,4 +96,34 @@ const EssentialIcon = styled.div`
   display: flex;
   align-items: flex-end;
   margin-bottom: 2px;
+`
+
+const CheckboxLabel = styled.label`
+  margin: 10px 0px;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: 2px solid ${theme.main.blue0};
+`
+
+const Checkbox = styled.input`
+  width: 20px;
+  height: 20px;
+  display: none;
+`
+
+const FreeSharingCheckbox = styled.div`
+  flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
+`
+
+const FreeSharingText = styled.div`
+  flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 5px;
 `
