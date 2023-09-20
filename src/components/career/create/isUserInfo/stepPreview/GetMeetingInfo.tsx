@@ -1,27 +1,20 @@
 import styled from 'styled-components'
-import {
-  CareerCreateGlobalState,
-  CareerCreateMeetingCommonQuestion
-} from '../..'
+import { CareerCreateMeetingCommonQuestion } from '../..'
 import { iconMapping } from '@/components'
-import { useRecoilValue } from 'recoil'
 import { MEETUP_SIMPLE_INFO } from '@/constants'
 
-export const GetMeetingInfo = () => {
-  const globalState = useRecoilValue(CareerCreateGlobalState)
-  const {
-    selectedRoles,
-    gender,
-    recruitmentSize,
-    meetingFrequency,
-    selectedDays,
-    meetingTime,
-    progressTime,
-    meetupStartDay,
-    meetupEndDay,
-    isApprove
-  } = globalState
-
+export const GetMeetingInfo = ({
+  selectedRoles,
+  gender,
+  recruitmentSize,
+  meetingFrequency,
+  selectedDays,
+  meetingTime,
+  progressTime,
+  meetupStartDay,
+  meetupEndDay,
+  isApprove
+}) => {
   const icons = MEETUP_SIMPLE_INFO.map((iconKey, idx) => (
     <IconZone key={idx}>
       <Icon>{iconMapping[iconKey]}</Icon>

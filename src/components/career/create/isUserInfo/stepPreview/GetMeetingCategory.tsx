@@ -1,12 +1,7 @@
-import { useRecoilValue } from 'recoil'
 import styled from 'styled-components'
-import { CareerCreateGlobalState } from '../..'
 
-export const GetMeetingCategory = () => {
-  const globalState = useRecoilValue(CareerCreateGlobalState)
-  const category = globalState?.selectedMeetingTypes
-
-  const categoryMap = category.map((item, idx) => (
+export const GetMeetingCategory = ({ selectedMeetingTypes }) => {
+  const categoryMap = selectedMeetingTypes?.map((item, idx) => (
     <CategoryChip key={idx}>{item}</CategoryChip>
   ))
 
@@ -32,6 +27,7 @@ const Container = styled.div`
 const CategoryChipsWrap = styled.div`
   margin: 12px 24px 12px;
   display: flex;
+  flex-wrap: wrap;
   width: auto;
   gap: 4px;
 `
@@ -45,6 +41,7 @@ const CategoryChip = styled.div`
   line-height: 16.71px;
   padding: 4px 8px;
   border-radius: 4px;
+  white-space: nowrap;
 `
 const DummyCategoryChip = styled.div`
   width: auto;
