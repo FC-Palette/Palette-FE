@@ -74,9 +74,6 @@ export const MeetupImageSelector = () => {
 
   return (
     <>
-      <Title>
-        이미지를 등록 해주세요.<span>(최대 5장)</span>
-      </Title>
       <TotalContainer>
         <UploadZoneContainer>
           <AddIcon />
@@ -124,17 +121,4 @@ const UploadZoneBox = styled.div`
 const AddIcon = styled(Add)`
   position: absolute;
   cursor: pointer;
-`
-
-const Title = styled.div`
-  margin-top: 32px;
-  font-weight: 500;
-  font-size: 18px;
-  color: ${props => props.theme.greyScale.grey6};
-
-  & > span {
-    color: ${props => props.theme.greyScale.grey6};
-    font-size: 14px;
-    font-weight: 400;
-  }
 `

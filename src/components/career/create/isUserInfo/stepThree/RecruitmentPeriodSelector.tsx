@@ -30,7 +30,7 @@ export const RecruitmentPeriodSelector = () => {
 
   return (
     <>
-      <QuestionTitle>기간을 설정해주세요.</QuestionTitle>
+      {/* <QuestionTitle>기간을 설정해주세요.</QuestionTitle> */}
       <LocalizationProvider
         dateAdapter={AdapterDayjs}
         adapterLocale="ko">
@@ -50,12 +50,12 @@ export const RecruitmentPeriodSelector = () => {
   )
 }
 // Title
-const QuestionTitle = styled.div`
-  margin: 32px 24px 0;
-  font-weight: 500;
-  font-size: 18px;
-  color: ${props => props.theme.greyScale.grey6};
-`
+// const QuestionTitle = styled.div`
+//   margin: 32px 24px 0;
+//   font-weight: 500;
+//   font-size: 18px;
+//   color: ${props => props.theme.greyScale.grey6};
+// `
 
 const TimePickerContainer = styled.div`
   display: flex;
@@ -63,5 +63,5 @@ const TimePickerContainer = styled.div`
   gap: 7px;
   color: ${props => props.theme.greyScale.grey9};
   height: 48px;
-  margin: 8px 24px 0;
+  margin: 8px 0px;
 `

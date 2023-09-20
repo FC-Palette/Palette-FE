@@ -1,20 +1,28 @@
-import { ClosingDate, Input, ImageBtn } from 'components/common/index'
+import { ClosingDate, Input } from 'components/common/index'
 import {
-  DeadLine,
-  AgreeMsg,
+  // DeadLine,
+  AgreeMsg1,
+  AgreeMsg2,
   Account,
-  UploadInputDetail
+  UploadInputDetail,
+  UploadInputDetail1
 } from 'components/trades/uploadproduct/index'
+import { MeetupImageSelector } from 'components/career/create/isUserInfo/stepTwo/index'
+import {
+  SecondHandDay,
+  SecondHandTime
+} from 'components/trades/uploadsecondhand/index'
+import { RecruitmentPeriodSelector } from 'components/career/create/isUserInfo/stepThree/index'
 
 export const TRADES_TEXT = [
   {
     title: '제목을 입력해주세요.',
-    props: { ph: '', item: '' },
+    props: { ph: '제목을 입력해주세요.', item: '' },
     component: Input
   },
   {
     title: '상품 카테고리를 선택해주세요.',
-    props: { ph: '', item: '' },
+    props: { ph: '상품 카테고리를 선택해주세요.', item: '' },
     component: Input
   },
   {
@@ -32,12 +40,15 @@ export const TRADES_TEXT = [
     props: { ph: '인당 부담 금액을 입력해 주세요.', item: '원' },
     component: Input
   },
-  { title: '제품 이미지를 등록 해주세요.', component: ImageBtn },
+  {
+    title: '제품 이미지를 등록 해주세요.',
+    component: MeetupImageSelector
+  },
   {
     title: '제품에 대한 상세 설명을 입력해주세요.',
     component: UploadInputDetail
   },
-  { title: '마감시간을 설정해주세요.', component: DeadLine },
+  { title: '마감시간을 설정해주세요.', component: RecruitmentPeriodSelector },
 
   { title: '공동구매 자동 마감 시점을 알려주세요.', component: ClosingDate },
 
@@ -49,7 +60,7 @@ export const TRADES_TEXT = [
   {
     title: `공동구매 참여자들에게 재직 중인
       \n회사, 층수, 이름, 계좌번호 정보가 제공됩니다.`,
-    component: AgreeMsg
+    component: AgreeMsg1
   }
 ]
 
@@ -57,4 +68,43 @@ export const TRADES_ACCOUNT_TEXT = [
   '금융기관을 선택해주세요.',
   '계좌번호 입력',
   '계좌주 성명'
+]
+
+export const TRADES_SECONDHAND_TEXT = [
+  {
+    title: '제목을 입력해주세요.',
+    props: { ph: '제목을 입력해주세요.', item: '' },
+    component: Input
+  },
+  {
+    title: '상품 카테고리를 선택해주세요.',
+    props: { ph: '상품 카테고리를 선택해주세요.', item: '' },
+    component: Input
+  },
+  {
+    title: '금액을 알려주세요.',
+    props: { ph: '인당 부담 금액을 입력해주세요.', item: '원' },
+    component: Input
+  },
+  {
+    title: '거래가능 요일을 정해주세요.',
+    component: SecondHandDay
+  },
+
+  {
+    title: '거래가능한 시간을 설정해주세요.',
+    component: SecondHandTime
+  },
+  {
+    title: '제품 이미지를 등록 해주세요.',
+    component: MeetupImageSelector
+  },
+  {
+    title: '제품에 대한 상세 설명을 입력해주세요.',
+    component: UploadInputDetail1
+  },
+  {
+    title: ``,
+    component: AgreeMsg2
+  }
 ]

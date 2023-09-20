@@ -5,6 +5,7 @@ export const TRADES_UPLOADFOOTER_TEXT = [
   '채팅하기'
 ]
 export const TRADES_DETAILTITLE_TEXT = ['공동구매 시 유의사항']
+export const TRADES_DETAILTITLE_TEXT2 = ['중고구매 시 유의사항']
 
 export const TRADES_DETAIL_TEXT = [
   '오피스너는 공동구매 수금에 일절 관여하지 않습니다.',
@@ -17,4 +18,13 @@ export const TRADES_DETAIL_TEXT = [
   '내용 수정은 참여자 참여 전까지만 가능합니다.',
   '월 3회 이상 공동구매 취소 시 3개월 동안 공동구매를 진행할 수 없습니다.',
   '참여자는 입금 전 까지 참여 취소가 가능합니다.'
+]
+export const TRADES_DETAIL_TEXT2 = [
+  '오피스너는 중고거래에 일절 관여하지 않습니다.',
+  '중고거래 시 불법에 해당하는 품목을 거래할 수 없습니다.',
+  '개봉된 식품, 수제 식품, 건강기능식품, 살아있는 물고기나 곤충, 의약품,',
+  '도수가 있는 안경이나 선글라스, 콘텍트 렌즈, 종량제 봉투, 화장품 샘플',
+  '또는 소분한 화장품, 개인이 제작한 디퓨저나 향초, 지역상품권, 술이나',
+  '담배, 통신사 데이터 등 규제 대상',
+  '연락처와 계좌번호로 더치트 사이트(https://thecheat.co.kr/)를 통해 판매자의 안전성을 1차 점검 할 수 있습니다.'
 ]

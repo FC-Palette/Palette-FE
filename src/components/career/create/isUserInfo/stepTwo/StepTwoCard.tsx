@@ -17,7 +17,9 @@ export const StepTwoCard = () => {
         모임을 소개해주세요.
       </CareerCreateMeetingCommonQuestion>
       <QuestionSmall>입력하신 내용은 추후 변경할 수 있어요</QuestionSmall>
-
+      <Title>
+        이미지를 등록 해주세요.<span>(최대 5장)</span>
+      </Title>
       <MeetupImageSelector />
 
       <MeetupTitleAndDescription />
@@ -63,4 +65,16 @@ const BtnWrap = styled.div`
   width: 100%;
   margin: 40px 0 20px;
   color: ${props => props.theme.greyScale.grey3};
+`
+const Title = styled.div`
+  margin-top: 32px;
+  font-weight: 500;
+  font-size: 18px;
+  color: ${props => props.theme.greyScale.grey6};
+
+  & > span {
+    color: ${props => props.theme.greyScale.grey6};
+    font-size: 14px;
+    font-weight: 400;
+  }
 `
