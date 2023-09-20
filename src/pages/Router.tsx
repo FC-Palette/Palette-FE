@@ -25,7 +25,9 @@ import {
   IsNotApprovedJoinMeetingStepOne,
   IsApprovedJoinMeetingStepOne,
   IsApprovedJoinMeetingStepTwo,
-  IsApprovedJoinMeetingStepComplete
+  IsApprovedJoinMeetingStepComplete,
+  CareerDetail,
+  CareerDetailMemberSeeMore
 } from 'pages/index'
 import type { RouteObject } from 'react-router-dom'
 import { Start } from './Start'
@@ -122,6 +124,12 @@ export const router = createBrowserRouter([
       generateRoute(
         'isApproved-joinMeeting-complete',
         <IsApprovedJoinMeetingStepComplete />,
+        <ErrorComponent />
+      ),
+      generateRoute('careerDetail', <CareerDetail />, <ErrorComponent />),
+      generateRoute(
+        'careerDetail/members',
+        <CareerDetailMemberSeeMore />,
         <ErrorComponent />
       )
     ]

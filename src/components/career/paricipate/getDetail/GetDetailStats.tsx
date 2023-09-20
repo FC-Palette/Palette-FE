@@ -1,7 +1,10 @@
-// 좋아요수, 조회수, 게시글 생성시간 등
 import styled from 'styled-components'
 
-export const GetStats = () => {
+export const GetDetailStats = () => {
+  const like = 7234234
+  const view = 72342342
+  const time = '20년 전'
+
   return (
     <>
       <Container>
@@ -19,7 +22,7 @@ export const GetStats = () => {
               />
             </svg>
           </Like>
-          0
+          {like}
           <View>
             <svg
               width="17"
@@ -37,8 +40,9 @@ export const GetStats = () => {
               />
             </svg>
           </View>
-          0<Dot>・</Dot>
-          <Time>1분 전</Time>
+          {view}
+          <Dot>・</Dot>
+          <Time>{time}</Time>
         </IconWrap>
       </Container>
     </>
