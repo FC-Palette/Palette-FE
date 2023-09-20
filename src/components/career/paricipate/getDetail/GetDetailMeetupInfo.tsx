@@ -1,56 +1,70 @@
-import styled from 'styled-components'
-import {
-  CareerCreateGlobalState,
-  CareerCreateMeetingCommonQuestion
-} from '../..'
 import { iconMapping } from '@/components'
-import { useRecoilValue } from 'recoil'
-import { MEETUP_SIMPLE_INFO } from '@/constants'
+import { MEETUP_SIMPLE_INFO, profileNCareerFilter } from '@/constants'
+import styled from 'styled-components'
+import { CareerCreateMeetingCommonQuestion } from '../..'
 
-export const GetMeetingInfo = () => {
-  const globalState = useRecoilValue(CareerCreateGlobalState)
+export const GetDetailMeetupInfo = () => {
+  const fetchInfo = {
+    isApproved: true, // 승인제
+    selectedJopRank: profileNCareerFilter.rank, // 직급
+    gender: profileNCareerFilter.male[2], // 성별
+    recruitmentSize: 7, // 모집 인원수
+    meetingFrequency: ['매주', '격주', '매달'][0],
+    selectedDays: ['월', '화', '수', '목', '금', '토', '일'].splice(0, 3),
+    progressTime: 60, // 진행시간 (분단위)
+    meetingTime: '오전 08: 00', // 모임 시작 시간
+    meetupStartDay: '2023-01-01',
+    meetupEndDay: '2023-01-02'
+  }
+
   const {
-    selectedRoles,
+    isApproved,
+    selectedJopRank,
     gender,
     recruitmentSize,
     meetingFrequency,
     selectedDays,
-    meetingTime,
     progressTime,
+    meetingTime,
     meetupStartDay,
-    meetupEndDay,
-    isApprove
-  } = globalState
+    meetupEndDay
+  } = fetchInfo
 
-  const icons = MEETUP_SIMPLE_INFO.map((iconKey, idx) => (
+  // 아이콘 및 아이콘 맵핑 타이틀
+  const iconsAndTitles = MEETUP_SIMPLE_INFO.map((iconKey, idx) => (
     <IconZone key={idx}>
       <Icon>{iconMapping[iconKey]}</Icon>
       <div>{iconKey}</div>
     </IconZone>
   ))
 
-  const participationMethod = isApprove ? '승인제' : '선착순'
-  const selectedRolesString = Array.isArray(selectedRoles)
-    ? selectedRoles.join(', ')
-    : selectedRoles
+  const participationMethod = isApproved ? '승인제' : '선착순'
+
+  const selectedRolesString = Array.isArray(selectedJopRank)
+    ? selectedJopRank.join(', ')
+    : selectedJopRank
 
   const infos = (
     <InfoZone>
+      {/* 모집기준 */}
       <Info>
-        {selectedRolesString || '-'} | {gender}
+        {selectedRolesString} | {gender}
       </Info>
+      {/* 모집인원 */}
       <Info>{recruitmentSize}명</Info>
+      {/* 모집시간 */}
       <Info>
-        {meetingFrequency || '-'} {selectedDays ? `${selectedDays}` : ''}{' '}
-        {meetingTime || ''} {progressTime ? `/ ${progressTime}분 진행` : ''}
+        {`${meetingFrequency} `} {selectedDays.join(', ')} {meetingTime}
+        {progressTime ? ` / ${progressTime}분 진행` : ''}
       </Info>
+      {/* 모집기간 */}
       <Info>
         {meetupStartDay} ~ {meetupEndDay}
       </Info>
+      {/* 멤버승인 */}
       <Info>{participationMethod}</Info>
     </InfoZone>
   )
-
   return (
     <>
       <TitleContainer>
@@ -58,10 +72,10 @@ export const GetMeetingInfo = () => {
           모임정보
         </CareerCreateMeetingCommonQuestion>
       </TitleContainer>
-      <ContentsFielContainer>
-        <ContentsFieldL>{icons}</ContentsFieldL>
+      <ContentsFieldContainer>
+        <ContentsFieldL>{iconsAndTitles}</ContentsFieldL>
         <ContentsFieldR>{infos}</ContentsFieldR>
-      </ContentsFielContainer>
+      </ContentsFieldContainer>
     </>
   )
 }
@@ -71,9 +85,10 @@ const TitleContainer = styled.div`
   margin: 0 24px 0;
 `
 
-const ContentsFielContainer = styled.div`
+const ContentsFieldContainer = styled.div`
   display: flex;
 `
+
 const ContentsFieldL = styled.div`
   margin-left: 24px;
   display: flex;
@@ -117,6 +132,10 @@ const IconZone = styled.div`
   width: 80px;
 `
 
+const Info = styled.div`
+  height: 24px;
+`
+
 const InfoZone = styled.div`
   margin-top: 3px;
   display: flex;
@@ -125,8 +144,4 @@ const InfoZone = styled.div`
   font-size: 14px;
   line-height: 16.71px;
   color: ${props => props.theme.greyScale.grey9};
-`
-
-const Info = styled.div`
-  height: 24px;
 `
