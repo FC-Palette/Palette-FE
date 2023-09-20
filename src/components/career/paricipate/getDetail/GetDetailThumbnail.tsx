@@ -1,29 +1,17 @@
-import { useRecoilValue } from 'recoil'
 import styled from 'styled-components'
-import { CareerCreateGlobalState } from '../..'
 import Slider from 'react-slick'
 
-export const GetThumbnail = () => {
-  const globalState = useRecoilValue(CareerCreateGlobalState)
-  const thumbnailImage = globalState?.meetupImages
-
+export const GetDetailThumbnail = () => {
   const settings = {
     dots: true, // 이미지 아래에 점 표시
     arrows: false,
     infinite: false, // 무한 슬라이딩
-    speed: 500, // 슬라이딩 속도
+    speed: 100, // 슬라이딩 속도
     slidesToShow: 1, // 보여질 이미지 수
     slidesToScroll: 1 // 스크롤할 이미지 수
   }
-
-  const previewSlides = thumbnailImage.map((item, index) => (
-    <SlideItem key={index}>
-      <img
-        src={URL.createObjectURL(item)}
-        alt={`Thumbnail ${index + 1}`}
-      />
-    </SlideItem>
-  ))
+  const dummyArr = ['a', 'b', 'c']
+  const previewSlides = dummyArr.map(item => <SlideItem key={item} />)
 
   return (
     <>
@@ -40,7 +28,7 @@ const ThumbnailSlider = styled.div`
   overflow: hidden;
   // 점 위치
   .slick-dots {
-    bottom: 10px;
+    bottom: 10px !important;
   }
 
   /* 슬라이더 컨테이너 크기 고정  */
@@ -51,10 +39,13 @@ const ThumbnailSlider = styled.div`
 `
 
 const SlideItem = styled.div`
+  background-color: rosybrown;
+  width: 430px;
+  height: 322px;
   img {
     width: 430px;
     height: 322px;
-    
+
     object-fit: cover;
   }
 `

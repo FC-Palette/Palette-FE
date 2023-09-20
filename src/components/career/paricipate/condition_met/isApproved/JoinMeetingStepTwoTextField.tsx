@@ -19,6 +19,8 @@ export const JoinMeetingStepTwoTextField = () => {
     setTextLength(text)
   }
 
+  console.log(textContent)
+
   return (
     <>
       <TextAreaContainer>
@@ -30,7 +32,7 @@ export const JoinMeetingStepTwoTextField = () => {
         />
       </TextAreaContainer>
       <TextAreaLengthWrap>
-        {textLength.length}/{maxTextLength}
+        {textLength.length || textContent.length}/{maxTextLength}
       </TextAreaLengthWrap>
       <ChipsField>
         {JOIN_MEETING_HEADER_TEXT.stepTwoChips.map((chipText, index) => (
