@@ -1,19 +1,23 @@
-import { useRecoilValue } from 'recoil'
 import styled from 'styled-components'
-import { CareerCreateGlobalState } from '../..'
 
-export const GetTitleAndDescription = () => {
-  const globalState = useRecoilValue(CareerCreateGlobalState)
-  const title = globalState.meetupTitle
-  const description = globalState.meetupDescription
+interface GetTitleAndDescriptionProps {
+  meetupTitle: string
+  meetupDescription: string
+}
 
+export const GetTitleAndDescription: React.FC<GetTitleAndDescriptionProps> = ({
+  meetupTitle,
+  meetupDescription
+}) => {
   return (
     <>
       <Container>
-        <Title>{title.length > 0 ? title : '모임 제목 미리보기'}</Title>
+        <Title>
+          {meetupTitle.length > 0 ? meetupTitle : '모임 제목 미리보기'}
+        </Title>
         <Description>
-          {description.length > 0
-            ? description
+          {meetupDescription.length > 0
+            ? meetupDescription
             : '아직 이 모임에 대한 소개가 작성되지 않았어요.'}
         </Description>
       </Container>
