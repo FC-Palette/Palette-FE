@@ -4,14 +4,16 @@ import { css, styled } from 'styled-components'
 import { ArrowLeft2 } from 'iconsax-react'
 import { UploadFooter } from 'components/trades/uploadproduct/index'
 import { SecondHandUploadList } from 'components/trades/uploadsecondhand/index'
+import { useNavigate } from 'react-router-dom'
 
 export const SecondHandUpload = () => {
+  const navigate = useNavigate()
   return (
     <>
       <Header
-        centerText="공동 구매 제안하기"
+        centerText="중고물품 판매하기"
         leftIcon={
-          <StyledIcon>
+          <StyledIcon onClick={() => navigate('/secondHand')}>
             <ArrowLeft2 />
           </StyledIcon>
         }></Header>

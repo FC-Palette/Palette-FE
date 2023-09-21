@@ -21,7 +21,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
-  width: auto;
+  width: 350px;
   height: 30px;
   position: relative;
   margin-top: 10px;
@@ -29,7 +29,7 @@ const Wrapper = styled.div`
 const FilterWrapper = styled.div`
   display: flex;
   position: absolute;
-  left: 8%;
+  left: 1px;
 `
 
 const Text = styled.div`
@@ -42,5 +42,5 @@ const Text = styled.div`
 const OptionWrapper = styled.div`
   display: flex;
   position: absolute;
-  right: 5%;
+  right: 1px;
 `

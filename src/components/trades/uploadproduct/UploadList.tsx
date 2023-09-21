@@ -9,24 +9,26 @@ export const UploadList = () => {
   return (
     <Wrapper>
       {TRADES_TEXT.map((item, index) => (
-        <ComponentWappper key={item.title}>
+        <ComponentWappper key={index}>
           <TitleWrapper>
             <UploadTitle Text={item.title}> </UploadTitle>
             {item.title === '제품 이미지를 등록 해주세요.' && (
-              <TitleDescription>(최대 10장)</TitleDescription>
+              <TitleDescription>(최대 5장)</TitleDescription>
             )}
             {index !== 6 && index !== 8 && <EssentialIcon>*</EssentialIcon>}
           </TitleWrapper>
           <InputWrapper>
             {item.component === Input ? (
-              <Input
-                $inputWidth={item.props?.item ? '324px' : '350px'}
-                $inputHeight={'48px'}
-                $borderColor={theme.greyScale.grey3}
-                $borderRadius="8px"
-                $paddingLeft="12px"
-                ph={item.props?.ph}
-              />
+              <InputFocus>
+                <Input
+                  $inputWidth={item.props?.item ? '324px' : '350px'}
+                  $inputHeight={'48px'}
+                  $borderColor={theme.greyScale.grey3}
+                  $borderRadius="8px"
+                  $paddingLeft="12px"
+                  ph={item.props?.ph}
+                />
+              </InputFocus>
             ) : (
               React.createElement(item.component)
             )}
@@ -43,6 +45,13 @@ const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin-top: 12px;
+`
+
+const InputFocus = styled.div`
+  :focus {
+    border: 2px solid ${theme.main.blue0};
+  }
 `
 
 const ComponentWappper = styled.div`

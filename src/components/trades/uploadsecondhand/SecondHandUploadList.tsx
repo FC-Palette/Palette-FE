@@ -13,7 +13,7 @@ export const SecondHandUploadList = () => {
           <TitleWrapper>
             <UploadTitle Text={item.title}> </UploadTitle>
             {item.title === '제품 이미지를 등록 해주세요.' && (
-              <TitleDescription>(최대 10장)</TitleDescription>
+              <TitleDescription>(최대 5장)</TitleDescription>
             )}
             {index !== 3 &&
               index !== 4 &&
@@ -23,14 +23,16 @@ export const SecondHandUploadList = () => {
           </TitleWrapper>
           <InputWrapper>
             {item.component === Input ? (
-              <Input
-                $inputWidth={item.props?.item ? '324px' : '350px'}
-                $inputHeight={'48px'}
-                $borderColor={theme.greyScale.grey3}
-                $borderRadius="8px"
-                $paddingLeft="12px"
-                ph={item.props?.ph}
-              />
+              <InputFocus>
+                <Input
+                  $inputWidth={item.props?.item ? '324px' : '350px'}
+                  $inputHeight={'48px'}
+                  $borderColor={theme.greyScale.grey3}
+                  $borderRadius="8px"
+                  $paddingLeft="12px"
+                  ph={item.props?.ph}
+                />
+              </InputFocus>
             ) : (
               React.createElement(item.component)
             )}
@@ -55,6 +57,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin-top: 12px;
 `
 
 const ComponentWappper = styled.div`
@@ -67,6 +70,12 @@ const ItemText = styled.div`
   height: 19px;
   width: 14px;
   font-size: ${theme.customSize.large};
+`
+
+const InputFocus = styled.div`
+  :focus {
+    border: 2px solid ${theme.main.blue0};
+  }
 `
 
 const TitleWrapper = styled.div`
