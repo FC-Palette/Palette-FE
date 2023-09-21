@@ -12,10 +12,10 @@ const Wrapper = styled.div`
   padding: 10px 0 9px 16px;
 `
 
-const Image = styled.div`
+export const Image = styled.div`
   border: 1px solid red;
   min-width: 32px;
-  min-height: 32px;
+  height: 32px;
 `
 
 const Username = styled.div`
