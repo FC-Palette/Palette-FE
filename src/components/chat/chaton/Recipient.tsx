@@ -1,12 +1,26 @@
 import { styled } from 'styled-components'
+import { useRecoilState } from 'recoil'
+import { msgLayerState } from 'recoil/index'
+
 import {
   MessageBlock,
   MessageTime,
   MessageBox,
-  MemberImg
+  MemberImg,
+  MsgActions
 } from 'components/index'
+
 //ChatField
-export const Recipient = ({ message, $sender, createdAt, showCreatedTime }) => {
+export const Recipient = ({
+  message,
+  $sender,
+  createdAt,
+  showCreatedTime,
+  showMsgActions,
+  toggleMsgActions
+}) => {
+  const [msgLayer, setMsgLayer] = useRecoilState(msgLayerState)
+
   return (
     <MessageBlock $sender={$sender}>
       {showCreatedTime && (
@@ -19,7 +33,12 @@ export const Recipient = ({ message, $sender, createdAt, showCreatedTime }) => {
       <RecipientBlock>
         {showCreatedTime && <MemberName>고스트 사원</MemberName>}
         <MessageBubble>
-          <MessageBox $sender={$sender}>{message}</MessageBox>
+          <MessageBox
+            $sender={$sender}
+            onDoubleClick={toggleMsgActions}>
+            {message}
+            {msgLayer && showMsgActions && <MsgActions $sender={$sender} />}
+          </MessageBox>
           <MessageTime
             time={showCreatedTime ? createdAt : null}
             $sender={$sender}

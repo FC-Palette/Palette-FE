@@ -28,6 +28,7 @@ const ModalBox = styled.div`
   border-radius: 16px;
   background-color: ${props => props.theme.main.white};
   padding: 24px;
+  box-shadow: 0px 10px 30px 0px rgba(94, 94, 94, 0.4);
 `
 
 const ModalTitle = styled.h3`

@@ -1,7 +1,17 @@
 import { styled } from 'styled-components'
-import { MessageTime } from 'components/index'
+import { MessageTime, MsgActions } from 'components/index'
+import { useRecoilState } from 'recoil'
+import { msgLayerState } from 'recoil/index'
 //ChatField
-export const Sender = ({ message, $sender, createdAt, showCreatedTime }) => {
+export const Sender = ({
+  message,
+  $sender,
+  createdAt,
+  showCreatedTime,
+  showMsgActions,
+  toggleMsgActions
+}) => {
+  const [msgLayer, setMsgLayer] = useRecoilState(msgLayerState)
   return (
     <MessageBlock $sender={$sender}>
       <SenderBlock>
@@ -9,7 +19,12 @@ export const Sender = ({ message, $sender, createdAt, showCreatedTime }) => {
           time={showCreatedTime ? createdAt : null}
           $sender={$sender}
         />
-        <MessageBox $sender={$sender}>{message}</MessageBox>
+        <MessageBox
+          $sender={$sender}
+          onDoubleClick={toggleMsgActions}>
+          {message}
+          {msgLayer && showMsgActions && <MsgActions $sender={$sender} />}
+        </MessageBox>
       </SenderBlock>
     </MessageBlock>
   )
@@ -26,6 +41,7 @@ const SenderBlock = styled.div`
   display: flex;
 `
 export const MessageBox = styled.div<{ $sender: string }>`
+  position: relative;
   padding: 12px;
   border-radius: 12px;
   color: ${props =>
