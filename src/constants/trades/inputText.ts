@@ -48,7 +48,7 @@ export const TRADES_TEXT = [
     title: '제품에 대한 상세 설명을 입력해주세요.',
     component: UploadInputDetail
   },
-  { title: '마감시간을 설정해주세요.', component: RecruitmentPeriodSelector },
+  { title: '마감일자를 설정해주세요.', component: RecruitmentPeriodSelector },
 
   { title: '공동구매 자동 마감 시점을 알려주세요.', component: ClosingDate },
 
@@ -62,12 +62,6 @@ export const TRADES_TEXT = [
       \n회사, 층수, 이름, 계좌번호 정보가 제공됩니다.`,
     component: AgreeMsg1
   }
-]
-
-export const TRADES_ACCOUNT_TEXT = [
-  '금융기관을 선택해주세요.',
-  '계좌번호 입력',
-  '계좌주 성명'
 ]
 
 export const TRADES_SECONDHAND_TEXT = [

@@ -12,6 +12,8 @@ export const CreateBtn = ({ path }) => {
     <BtnLocationChangeDiv>
       <Button
         $borderRadius="24px"
+        $bgColor="#FF706F"
+        $borderColor="#FF706F"
         onClick={handleClickBtn}>
         <Gap>
           {<BrushSquare />}

@@ -29,17 +29,18 @@ export const GroupPurchaseList = () => {
           </StyledIcon>
         }
       />
-      <FilterBar
-        filterButton={
-          <StyledRecordWrapper>
-            <StyledRecord>
-              <Record />
-            </StyledRecord>
-          </StyledRecordWrapper>
-        }
-        filterText="마감된 거래 제외"
-        filterOption={<TradesOption />}></FilterBar>
-
+      <FilterBarWrapper>
+        <FilterBar
+          filterButton={
+            <StyledRecordWrapper>
+              <StyledRecord>
+                <Record />
+              </StyledRecord>
+            </StyledRecordWrapper>
+          }
+          filterText="마감된 거래 제외"
+          filterOption={<TradesOption />}></FilterBar>
+      </FilterBarWrapper>
       <Main>
         <CreateBtn path={groupUploadPath} />
         <CardWrapper>
@@ -59,6 +60,12 @@ const Main = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 10px;
+`
+
+const FilterBarWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
 `
 
 const CardWrapper = styled.div`
