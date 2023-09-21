@@ -9,10 +9,6 @@ import {
 } from 'constants/trades/index'
 import { ArrowDown2, ArrowUp2 } from 'iconsax-react'
 
-interface AgreeWrapperProps {
-  showMsg: boolean
-}
-
 export const AgreeMsg1 = () => {
   const [showMsg, setShowMsg] = useState(false)
 
@@ -32,14 +28,12 @@ export const AgreeMsg1 = () => {
           </LabelWrapper>
           <AgreeText>동의합니다.</AgreeText>
         </LabelTextWrapper>
-        <AgreeWrapper
-          onClick={toggleMsg}
-          showMsg={showMsg}>
+        <AgreeWrapper onClick={toggleMsg}>
           <AgreeTitle>{TRADES_DETAILTITLE_TEXT}</AgreeTitle>
           <AgreeBtn>{showMsg ? <ArrowUp2 /> : <ArrowDown2 />}</AgreeBtn>
         </AgreeWrapper>
         {showMsg && (
-          <AdditionalInfo showMsg={showMsg}>
+          <AdditionalInfo>
             {TRADES_DETAIL_TEXT.map((text, index) => (
               <p key={index}>{text}</p>
             ))}
@@ -51,23 +45,21 @@ export const AgreeMsg1 = () => {
 }
 
 export const AgreeMsg2 = () => {
-  const [showMsg, setShowMsg] = useState(false)
+  const [showMsg2, setShowMsg2] = useState(false)
 
   const toggleMsg = () => {
-    setShowMsg(!showMsg)
+    setShowMsg2(!showMsg2)
   }
 
   return (
     <>
       <Wrapper1>
-        <AgreeWrapper
-          onClick={toggleMsg}
-          showMsg={showMsg}>
+        <AgreeWrapper onClick={toggleMsg}>
           <AgreeTitle>{TRADES_DETAILTITLE_TEXT2}</AgreeTitle>
-          <AgreeBtn>{showMsg ? <ArrowUp2 /> : <ArrowDown2 />}</AgreeBtn>
+          <AgreeBtn>{showMsg2 ? <ArrowUp2 /> : <ArrowDown2 />}</AgreeBtn>
         </AgreeWrapper>
-        {showMsg && (
-          <AdditionalInfo2 showMsg={showMsg}>
+        {showMsg2 && (
+          <AdditionalInfo2>
             {TRADES_DETAIL_TEXT2.map((text, index) => (
               <p key={index}>{text}</p>
             ))}
@@ -85,7 +77,7 @@ const Wrapper = styled.div`
 const Wrapper1 = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin-top: -40px;
+  margin-top: -20px;
 `
 
 const LabelWrapper = styled.label`
@@ -94,6 +86,14 @@ const LabelWrapper = styled.label`
   height: 20px;
   border-radius: 4px;
   border: 2px solid ${theme.main.blue0};
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  input[type='checkbox']:checked + & {
+    background-color: ${theme.main.blue0};
+  }
 `
 
 const Checkbox = styled.input`
@@ -102,7 +102,7 @@ const Checkbox = styled.input`
   display: none;
 `
 
-const AgreeWrapper = styled.button<AgreeWrapperProps>`
+const AgreeWrapper = styled.button`
   display: flex;
   width: 350px;
   height: 58px;
@@ -111,10 +111,13 @@ const AgreeWrapper = styled.button<AgreeWrapperProps>`
   align-items: center;
   font-size: ${theme.customSize.medium};
   justify-content: space-between;
-  border-radius: ${props => (props.showMsg ? `8px 8px 0px 0px` : '8px')};
-  border-bottom: ${props =>
-    props.showMsg ? `1px solid ${theme.greyScale.grey2};` : 'none'};
+  border-radius: 8px;
   cursor: pointer;
+
+  &:hover {
+    border-radius: 8px 8px 0px 0px;
+    border-bottom: 1px solid ${theme.greyScale.grey3};
+  }
 `
 
 const AgreeText = styled.div`
@@ -135,21 +138,20 @@ const AgreeBtn = styled.div`
   padding-right: 24px;
 `
 
-const AdditionalInfo = styled.div<AgreeWrapperProps>`
-  padding: 14px 12px 0px 12px;
+const AdditionalInfo = styled.div`
+  padding: 14px 20px 0px 20px;
   height: 268px;
   width: 350px;
-  border-radius: ${props => (props.showMsg ? `0px 0px 8px 8px` : '8px')};
+  border-radius: 0px 0px 8px 8px;
   background-color: ${theme.greyScale.grey1};
   color: ${theme.greyScale.grey7};
   font-size: ${theme.customSize.small};
   line-height: 17px;
 `
-const AdditionalInfo2 = styled.div<AgreeWrapperProps>`
-  padding: 14px 12px 0px 12px;
+const AdditionalInfo2 = styled.div`
+  padding: 14px 20px 0px 20px;
   height: 248px;
   width: 350px;
-  border-radius: ${props => (props.showMsg ? `0px 0px 8px 8px` : '8px')};
   background-color: ${theme.greyScale.grey1};
   color: ${theme.greyScale.grey7};
   font-size: ${theme.customSize.small};
