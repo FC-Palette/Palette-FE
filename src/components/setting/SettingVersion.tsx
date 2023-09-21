@@ -5,7 +5,7 @@ import styled from "styled-components"
 export const SettingVersion = () => {
   return (
     <SettingVersionWrap>
-        {SETTING_MENU_TEXT.SettingVersionText}
+        {SETTING_MENU_TEXT.settingVersionText}
     </SettingVersionWrap>
   )
 }

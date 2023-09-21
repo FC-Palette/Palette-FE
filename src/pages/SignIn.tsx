@@ -13,11 +13,11 @@ export const SignIn = () => {
           </StyledIcon>}
         centerText="로그인">
         </Header>
-      <Dd>
-      <SignInField></SignInField>
-      <FindUserField></FindUserField>
-      <SignUp></SignUp>
-      </Dd>
+      <FieldWrap>
+        <SignInField></SignInField>
+        <FindUserField></FindUserField>
+        <SignUp></SignUp>
+      </FieldWrap>
     </SignInContainer>
   )
 }
@@ -30,7 +30,7 @@ const SignInContainer = styled.div`
   max-width: 430px;
 `
 
-const Dd = styled.div`
+const FieldWrap = styled.div`
   max-width: 430px;
   margin: 0 24px;
   `

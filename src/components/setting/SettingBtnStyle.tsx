@@ -24,7 +24,7 @@ const ButtonWrap = styled.div`
     margin: 0 24px;
     height: 56px;
     margin-bottom: 12px;
-    margin-top: 8px;    
+    margin-top: 12px;    
     Button{
         box-sizing: border-box;
         width: 100%;
@@ -39,6 +39,7 @@ const ButtonWrap = styled.div`
         font-size: 16px;
         margin-top: 8px;
     }
+
     svg{
         color: ${theme.greyScale.grey6};
         width: 20px;
