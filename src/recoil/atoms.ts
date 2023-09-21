@@ -24,3 +24,8 @@ export const sendFileState = atom<boolean>({
   key: 'sendFileState',
   default: false
 })
+
+export const msgLayerState = atom<boolean>({
+  key: 'msgLayerState',
+  default: true
+})
