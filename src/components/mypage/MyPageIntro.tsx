@@ -38,14 +38,13 @@ const Container = styled.div`
     position: relative;
     display: flex;
     padding: 0 24px;
-    width: 430px;
+    max-width: 430px;
 `
 
 const TextInformation = styled.div`
 `
 
 const NickName = styled.div`
-    width: 282px;
     height: 43px;
     color: ${theme.greyScale.grey9};
     font-size: 32px;
@@ -54,7 +53,6 @@ const NickName = styled.div`
 `
 
 const TextArea = styled.div`
-    width: 293px;
     color: ${theme.greyScale.grey5};
     font-size: 16px;
     line-height: 19.09px;
@@ -71,6 +69,7 @@ const JobCategory = styled.div`
     background-color: ${theme.greyScale.grey2};
     font-size: 14px;
     border-radius: 4px;
+    margin-right: 4px;
     padding: 4px 8px;
 `
 

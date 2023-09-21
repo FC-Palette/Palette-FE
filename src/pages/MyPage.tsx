@@ -35,7 +35,8 @@ export const MyPage = () => {
 
 const MyPageWrap = styled.div`
   position: relative;
-  max-width: 100%;
+  max-width: 430px;
+  width: 100%;
 `
 
 const IconWrapper = styled.div`
