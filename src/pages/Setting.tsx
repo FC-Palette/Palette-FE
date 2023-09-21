@@ -8,22 +8,22 @@ import { Link } from "react-router-dom"
 export const Setting = () => {
   return (
     <SettingContainer>
-    <Header 
-      leftIcon={
-      <StyledIcon>
-        <ArrowLeft2 />
-      </StyledIcon>}
-      centerText="설정">
-    </Header>
-    <SettingListWrap>
-        <Link {...NAVIGATION_PATH.navigatorSettingPasswordPage}><SettingPassword /></Link>
-        <Link {...NAVIGATION_PATH.navigatorSettingAlarmPage}><SettingAlarm /></Link>
-        <Link {...NAVIGATION_PATH.navigatorSettingManagePage}><SettingManagement /></Link>
-        <Link {...NAVIGATION_PATH.navigatorSettingNoticePage}><SettingNotice /></Link>
-        <Link {...NAVIGATION_PATH.navigatorSettingServicePage}><SettingService /></Link>
-    </SettingListWrap>
-    <SettingVersion />
-</SettingContainer>
+      <Header 
+        leftIcon={
+        <StyledIcon>
+          <ArrowLeft2 />
+        </StyledIcon>}
+        centerText="설정">
+      </Header>
+      <SettingListWrap>
+          <Link {...NAVIGATION_PATH.navigatorSettingPasswordPage}><SettingPassword /></Link>
+          <Link {...NAVIGATION_PATH.navigatorSettingAlarmPage}><SettingAlarm /></Link>
+          <Link {...NAVIGATION_PATH.navigatorSettingManagePage}><SettingManagement /></Link>
+          <Link {...NAVIGATION_PATH.navigatorSettingNoticePage}><SettingNotice /></Link>
+          <Link {...NAVIGATION_PATH.navigatorSettingServicePage}><SettingService /></Link>
+      </SettingListWrap>
+      <SettingVersion />
+    </SettingContainer>
   )
 }
 
