@@ -42,7 +42,9 @@ return (
 const SelectWrap = styled.div`
     display: flex;
     justify-content: center;
-    margin: 0 auto;
+    padding-left: 24px;
+    padding-right: 25px;
+    max-width: 430px;
     border-bottom: 1px solid ${theme.greyScale.grey2};
     margin-top: 23px;
 `

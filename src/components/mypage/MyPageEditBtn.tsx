@@ -20,8 +20,10 @@ export const MyPageEditBtn = () => {
 
 const ButtonWrap = styled.div`
   margin-bottom: 20px;
+  padding: 0 24px;
+  max-width: 430px;
   Button{
-    margin: 0 auto;
+    width: 100%;
     font-size: 20px;
     font-weight: 500;
     line-height: 26px;

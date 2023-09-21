@@ -22,8 +22,8 @@ const DisplayArea = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
-  width: 375px;
+  margin: 0 27.5px;
+  max-width: 430px;
   height: 282px;
 `
 
@@ -31,14 +31,17 @@ const DisplayWrap = styled.div`
   justify-content: center;
   flex-direction: column;
   display: flex;
-  margin: auto; 
+  width: 100%;
+  margin-left: 42px;
+  margin-right: 33px;
   height: 100%;
   text-align: center;
   font-size: 14px;
   font-weight: 500;
   line-height: 21px;
   Button{
-    width: 300px;
+    box-sizing: border-box;
+    width: 100%;
     height: 60px;
     margin-top: 12px;
     font-size: 20px;
