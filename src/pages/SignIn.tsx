@@ -13,19 +13,28 @@ export const SignIn = () => {
           </StyledIcon>}
         centerText="로그인">
         </Header>
+      <Dd>
       <SignInField></SignInField>
       <FindUserField></FindUserField>
       <SignUp></SignUp>
+      </Dd>
     </SignInContainer>
   )
 }
 
 const SignInContainer = styled.div`
   margin: 0 auto;
-  width: 430px;
-  height: 100%;
+  height: 100vh;
   position: relative;
+  width: 100%;
+  max-width: 430px;
 `
+
+const Dd = styled.div`
+  width: 430px;
+  max-width: 100%;
+  `
+
 const StyledIcon = styled.button`
   color: #000;
   font-size: ${props => props.theme.customSize.xxlarge};

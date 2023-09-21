@@ -1,5 +1,5 @@
 
-import { Header } from "@/components"
+import { Header, SettingChangePwd } from "@/components"
 import { ArrowLeft2 } from "iconsax-react"
 import styled from "styled-components"
 import { StyledIcon } from "."
@@ -16,7 +16,9 @@ export const SettingPassword = () => {
       </Header>
 
 
-      <SettingListWrap></SettingListWrap>
+      <SettingListWrap>
+        <SettingChangePwd></SettingChangePwd>
+      </SettingListWrap>
     </ServiceWrap>
   )
 }
