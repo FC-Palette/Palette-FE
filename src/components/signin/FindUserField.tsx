@@ -20,6 +20,7 @@ export const FindUserField = () => {
 
 const FindUserFieldForm = styled.div`
   display: flex;
+  max-width: 100%;
   justify-content: center;
   align-items: center;
   width: 231px;
