@@ -29,17 +29,18 @@ export const SecondHandList = () => {
           </StyledIcon>
         }
       />
-      <FilterBar
-        filterButton={
-          <StyledRecordWrapper>
-            <StyledRecord>
-              <Record />
-            </StyledRecord>
-          </StyledRecordWrapper>
-        }
-        filterText="마감된 거래 제외"
-        filterOption={<TradesOption />}></FilterBar>
-
+      <FilterBarWrapper>
+        <FilterBar
+          filterButton={
+            <StyledRecordWrapper>
+              <StyledRecord>
+                <Record />
+              </StyledRecord>
+            </StyledRecordWrapper>
+          }
+          filterText="마감된 거래 제외"
+          filterOption={<TradesOption />}></FilterBar>
+      </FilterBarWrapper>
       <Main>
         <CreateBtn path={groupUploadPath} />
         <CardWrapper>
@@ -96,4 +97,9 @@ const StyledRecord = styled(Record)`
   color: ${theme.main.blue0};
   width: 20px;
   height: 20px;
+`
+const FilterBarWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
 `

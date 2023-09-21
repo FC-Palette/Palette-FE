@@ -13,5 +13,6 @@ const Wrapper = styled.div`
   font-size: ${theme.customSize.xlarge};
   margin-bottom: 8px;
   font-weight: 700;
+  line-height: 15px;
   color: ${theme.greyScale.grey6};
 `

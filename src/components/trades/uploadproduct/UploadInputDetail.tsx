@@ -20,7 +20,7 @@ export const UploadInputDetail = () => {
   }
 
   return (
-    <Wrapper>
+    <Wrapper1>
       <InputWrapper>
         <TextArea
           value={text}
@@ -29,7 +29,7 @@ export const UploadInputDetail = () => {
         />
       </InputWrapper>
       <TextCount>{text.length} / 300</TextCount>
-    </Wrapper>
+    </Wrapper1>
   )
 }
 
@@ -61,11 +61,19 @@ export const UploadInputDetail1 = () => {
 //
 const Wrapper = styled.div`
   width: 100%;
-
   justify-content: center;
   margin-top: 8px;
   height: 209px;
 `
+
+const Wrapper1 = styled.div`
+  width: 100%;
+  justify-content: center;
+  margin-top: 8px;
+  margin-bottom: -20px;
+  height: 209px;
+`
+
 const InputWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
