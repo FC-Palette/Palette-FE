@@ -12,10 +12,9 @@ export const Alarm = () => {
         <StyledIcon>
         <ArrowLeft2 />
         </StyledIcon>}
-        centerText="설정">
+        centerText="알림내역">
         </Header>
     <AlarmSelectTab />
-
     <AlarmList />
     <AlarmList />
     <AlarmList />
@@ -26,7 +25,6 @@ export const Alarm = () => {
     <AlarmList />
     <AlarmList />
     <AlarmList />
-
     <Footer />
     </AlarmWrap>
     )
