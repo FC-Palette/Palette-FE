@@ -1,7 +1,9 @@
 import { styled } from 'styled-components'
 import { MessageTime, MsgActions } from 'components/index'
-import { useRecoilState } from 'recoil'
-import { msgLayerState } from 'recoil/index'
+import { useSetRecoilState } from 'recoil'
+import { msgActionsState } from 'recoil/index'
+import { useOutsideClick } from 'hooks/index'
+
 //ChatField
 export const Sender = ({
   message,
@@ -11,7 +13,16 @@ export const Sender = ({
   showMsgActions,
   toggleMsgActions
 }) => {
-  const [msgLayer, setMsgLayer] = useRecoilState(msgLayerState)
+  // const [msgLayer, setMsgLayer] = useRecoilState(msgLayerState)
+  const setOpenMsgActionsIndex = useSetRecoilState(msgActionsState)
+  const ref = useOutsideClick({
+    onClickOutside: () => {
+      console.log('ref Clicked')
+
+      setOpenMsgActionsIndex(-1)
+    }
+  })
+
   return (
     <MessageBlock $sender={$sender}>
       <SenderBlock>
@@ -23,7 +34,12 @@ export const Sender = ({
           $sender={$sender}
           onDoubleClick={toggleMsgActions}>
           {message}
-          {msgLayer && showMsgActions && <MsgActions $sender={$sender} />}
+          {showMsgActions && (
+            <MsgActions
+              ref={ref}
+              $sender={$sender}
+            />
+          )}
         </MessageBox>
       </SenderBlock>
     </MessageBlock>

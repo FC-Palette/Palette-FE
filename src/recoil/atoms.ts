@@ -29,3 +29,8 @@ export const msgLayerState = atom<boolean>({
   key: 'msgLayerState',
   default: true
 })
+
+export const msgActionsState = atom<number>({
+  key: 'msgActionsState',
+  default: -1
+})
