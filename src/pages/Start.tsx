@@ -42,6 +42,7 @@ const Container = styled.div`
     position: relative;
     top: 26.824%;
     padding-left: 5.581%;
+    background-color: ${(props)=>props.theme.main.blue0};
     width: 100%;
     max-width: 430px;
     padding-right: 5.581%;

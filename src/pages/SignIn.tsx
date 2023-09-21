@@ -31,8 +31,8 @@ const SignInContainer = styled.div`
 `
 
 const Dd = styled.div`
-  width: 430px;
-  max-width: 100%;
+  max-width: 430px;
+  margin: 0 24px;
   `
 
 const StyledIcon = styled.button`
