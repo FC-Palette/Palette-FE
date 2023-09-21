@@ -15,11 +15,11 @@ export const SignUp = () => {
 }
 
 const SignUpContainer = styled.div`
-    position: relative;
-    top: 30%;
+    position: absolute;
     margin: 0 auto;
+    bottom: 26px;
+    left: 21%;
     display: flex;
-    justify-content: center;
 `
 
 

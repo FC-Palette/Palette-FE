@@ -100,6 +100,7 @@ export const SignInField = () => {
 
 const SignInFieldWrap = styled.div`
     margin: 0 auto;
+    max-width: 100%;
     width: 382px;
     margin-bottom: 16px;
     margin-top: 4px;
@@ -107,7 +108,7 @@ const SignInFieldWrap = styled.div`
 
 
 const IdFieldWrap = styled.div`
-    width: 100%;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     margin-bottom: 30px;
@@ -119,7 +120,7 @@ const IdFieldWrap = styled.div`
 const PasswordFieldWrap = styled.div`
     display: flex;
     flex-direction: column;
-    margin-bottom: 6px;
+    margin-bottom: 17px;
     :focus{
         border: 1px solid ${theme.main.blue0};
     }
