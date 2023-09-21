@@ -23,7 +23,6 @@ export const AlarmList = () => {
 const AlarmListWrap = styled.div`
   display: flex;
   align-items: center;
-  width: 430px;
   height: 77px;
 `
 
