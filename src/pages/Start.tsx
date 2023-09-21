@@ -33,6 +33,7 @@ const Wrapper = styled.div`
     position: relative;
     display: flex;
     background-color: ${(props)=>props.theme.main.blue0};
+    width: 100%;
     max-width: 430px;
     height: 100vh;
     color: ${(props)=>props.theme.main.white};
@@ -40,13 +41,11 @@ const Wrapper = styled.div`
 
 const Container = styled.div`
     position: relative;
-    top: 26.824%;
-    padding-left: 5.581%;
     background-color: ${(props)=>props.theme.main.blue0};
-    width: 100%;
-    max-width: 430px;
-    padding-right: 5.581%;
-    max-height: 300px;
+    padding-top: 253px;
+    min-height: 100vh;
+    width: 430px;
+    margin: 0 24px;
 `
 
 const StartHeaderText = styled.span`
@@ -66,7 +65,7 @@ const StartTitle = styled.div`
 
 const StartIntro = styled.div`
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 400;
     line-height: 19.09px;
     
 `
@@ -77,7 +76,8 @@ const StartSignUp = styled.div`
     font-size: 20px;
     font-weight: 500;
     Button{
-        margin: 0 auto;
+        box-sizing: border-box;
+        width: 100%;
     }
 `
 

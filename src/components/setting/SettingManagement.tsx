@@ -3,9 +3,9 @@ import { SettingBtnStyle } from "components/index"
 
 export const SettingManagement = () => {
   return (
-    <SettingBtnStyle
-      text={SETTING_MENU_TEXT.settingManagementText}>
-    </SettingBtnStyle>
+      <SettingBtnStyle
+        text={SETTING_MENU_TEXT.settingManagementText}>
+      </SettingBtnStyle>
   )
 }
 
