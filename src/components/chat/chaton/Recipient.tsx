@@ -1,7 +1,7 @@
 import { styled } from 'styled-components'
-import { useRecoilState } from 'recoil'
-import { msgLayerState } from 'recoil/index'
-
+import { useSetRecoilState } from 'recoil'
+import { msgActionsState } from 'recoil/index'
+import { useOutsideClick } from 'hooks/index'
 import {
   MessageBlock,
   MessageTime,
@@ -19,7 +19,18 @@ export const Recipient = ({
   showMsgActions,
   toggleMsgActions
 }) => {
-  const [msgLayer, setMsgLayer] = useRecoilState(msgLayerState)
+  // const [msgLayer, setMsgLayer] = useRecoilState(msgLayerState)
+  const setOpenMsgActionsIndex = useSetRecoilState(msgActionsState)
+  // useOutsideClick(msgRef, () => {
+  //   setOpenMsgActionsIndex(-1)
+  // })
+  const ref = useOutsideClick({
+    onClickOutside: () => {
+      console.log('ref Clicked')
+
+      setOpenMsgActionsIndex(-1)
+    }
+  })
 
   return (
     <MessageBlock $sender={$sender}>
@@ -37,7 +48,12 @@ export const Recipient = ({
             $sender={$sender}
             onDoubleClick={toggleMsgActions}>
             {message}
-            {msgLayer && showMsgActions && <MsgActions $sender={$sender} />}
+            {showMsgActions && (
+              <MsgActions
+                ref={ref}
+                $sender={$sender}
+              />
+            )}
           </MessageBox>
           <MessageTime
             time={showCreatedTime ? createdAt : null}
