@@ -1,6 +1,6 @@
 import { Header } from "@/components"
 import { ArrowLeft2 } from "iconsax-react"
-import styled from "styled-components"
+import { styled } from "styled-components"
 import { StyledIcon } from "."
 
 export const SettingService = () => {

@@ -38,6 +38,7 @@ const Container = styled.div`
     position: relative;
     display: flex;
     padding: 0 24px;
+    width: 430px;
 `
 
 const TextInformation = styled.div`

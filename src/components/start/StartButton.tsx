@@ -22,5 +22,7 @@ export const StartButton = () => {
 
 
 const StartButtonWrap = styled.div`
-  
+  Button{
+    max-width: 100%;
+  }
 `

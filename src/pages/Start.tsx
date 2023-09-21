@@ -31,19 +31,21 @@ export const Start = () => {
 
 const Wrapper = styled.div`
     position: relative;
+    display: flex;
     background-color: ${(props)=>props.theme.main.blue0};
-    margin: 0 auto;
-    width: 430px;
+    max-width: 430px;
     height: 100vh;
     color: ${(props)=>props.theme.main.white};
-
 `
 
 const Container = styled.div`
     position: relative;
     top: 26.824%;
     padding-left: 5.581%;
+    width: 100%;
+    max-width: 430px;
     padding-right: 5.581%;
+    max-height: 300px;
 `
 
 const StartHeaderText = styled.span`
