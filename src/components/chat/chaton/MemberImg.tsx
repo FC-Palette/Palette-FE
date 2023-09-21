@@ -2,7 +2,12 @@ import { styled } from 'styled-components'
 export const MemberImg = ({ src }) => {
   return (
     <>
-      <ImgBox src={src} />
+      <ImgBox
+        src={src}
+        onClick={() => {
+          ;('여기에 이벤트 => 해당 유저 마이페이지 이동')
+        }}
+      />
     </>
   )
 }
