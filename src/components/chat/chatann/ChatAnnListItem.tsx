@@ -4,15 +4,12 @@ import { useNavigate } from 'react-router-dom'
 const interpoint = '\u00B7 '
 export const ChatAnnListItem = ({ content, time, publisher }) => {
   const navigate = useNavigate()
-
+  const handleNavigate = () => {
+    navigate('/chatann')
+  }
   return (
-    <Wrapper>
-      <Title
-        onClick={() => {
-          navigate('/chatannlist')
-        }}>
-        {content}
-      </Title>
+    <Wrapper onClick={handleNavigate}>
+      <Title>{content}</Title>
       <Info>
         <Date>{time}</Date>
         {interpoint}
@@ -29,7 +26,10 @@ const Wrapper = styled.div`
   padding: 14px 22px 0 24px;
   border-bottom: 1px solid ${props => props.theme.greyScale.grey2};
 `
-const Title = styled.div``
+const Title = styled.div`
+  max-height: 32px;
+  overflow: hidden;
+`
 const Info = styled.div`
   display: flex;
   white-space: nowrap;

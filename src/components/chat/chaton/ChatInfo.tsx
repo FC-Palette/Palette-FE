@@ -3,13 +3,25 @@
 감싸는 컴포넌트 
 */
 import { styled } from 'styled-components'
-import { ChatAnn, ChatSubject } from 'components/index'
+import { useRecoilValue } from 'recoil'
+import { inDetailState, isBuyingState } from 'recoil/index'
+
+import {
+  ChatAnn,
+  ChatSubject,
+  SubjectDetail,
+  AccountInfo
+} from 'components/index'
 export const ChatInfo = () => {
+  const inDetail = useRecoilValue(inDetailState)
+  const isBuying = useRecoilValue(isBuyingState)
+
   return (
     <InfoWrapper>
-      <ChatSubject
-        isBuying={true}
-        inDetail={false}></ChatSubject>
+      <ChatSubject></ChatSubject>
+      {/* isBuying(모임,상품정보) recoil값으로 전환 후 하단 계좌 컴포넌트 추가 렌더링  */}
+      {inDetail && <SubjectDetail />}
+      {inDetail && isBuying && <AccountInfo />}
       <ChatAnn $registered={true}></ChatAnn>
     </InfoWrapper>
   )

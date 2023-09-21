@@ -16,4 +16,6 @@ const Wrapper = styled.div`
   max-width: 430px;
   box-shadow: rgba(130, 130, 130, 0.15) 0px 0px 20px;
   position: relative;
+  //수정사항 - width100%
+  width: 100%;
 `
