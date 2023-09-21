@@ -1,5 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
+import { useRecoilState } from 'recoil'
+import { msgActionsState } from 'recoil/index'
 import { Wrapper, Sender, Recipient } from 'components/index'
 
 export const ChatField = ({ messages }) => {
@@ -11,7 +13,10 @@ export const ChatField = ({ messages }) => {
     return false
   }
 
-  const [openMsgActionsIndex, setOpenMsgActionsIndex] = useState(-1)
+  //atoms로 처리 후 Recipient && Sender에 존재하는 msgLayer 삭제
+  //useOutsideClick으로 setOpenMsgActionsIndex(-1)로 초기화
+  const [openMsgActionsIndex, setOpenMsgActionsIndex] =
+    useRecoilState(msgActionsState)
 
   const toggleMsgActions = index => {
     if (openMsgActionsIndex === index) {
