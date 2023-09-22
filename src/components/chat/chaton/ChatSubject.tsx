@@ -2,11 +2,11 @@
 import { ChatTopBar, TopBarContent } from 'components/index'
 import { EmojiHappy, ShoppingBag, ArrowUp2, ArrowDown2 } from 'iconsax-react'
 import { inDetailState, isBuyingState } from 'recoil/index'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import { theme } from 'styles/index'
 export const ChatSubject = () => {
   const [inDetail, setInDetail] = useRecoilState(inDetailState)
-  const [isBuying, setIsBuying] = useRecoilState(isBuyingState)
+  const isBuying = useRecoilValue(isBuyingState)
   const handleDetail = () => {
     setInDetail(!inDetail)
   }
