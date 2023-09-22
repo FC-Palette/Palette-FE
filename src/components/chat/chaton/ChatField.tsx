@@ -1,9 +1,17 @@
 import React from 'react'
 import { useRecoilState } from 'recoil'
 import { msgActionsState } from 'recoil/index'
+import { useState, useEffect } from 'react'
 import { Wrapper, Sender, Recipient } from 'components/index'
 
 export const ChatField = ({ messages }) => {
+  const [innerHeight, setInnerHeight] = useState<number>(0)
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setInnerHeight(window.innerHeight)
+    }
+  }, [])
+
   //시간 로직 => 유틸 분리 가능?
   const shouldDisplayTimestamp = (currentMessage, nextMessage) => {
     if (!nextMessage) return true // Display timestamp for the last message
@@ -26,7 +34,7 @@ export const ChatField = ({ messages }) => {
   }
 
   return (
-    <Wrapper>
+    <Wrapper innerHeight={innerHeight}>
       {messages.map((message, index) => {
         //시간 로직
         const nextMessage = messages[index + 1]
