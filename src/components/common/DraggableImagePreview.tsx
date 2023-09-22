@@ -3,8 +3,8 @@ import {
   Droppable,
   Draggable,
   DropResult,
-  DraggableProvided,
-  DraggableStateSnapshot
+  DraggableProvided
+  // DraggableStateSnapshot
 } from 'react-beautiful-dnd'
 import styled from 'styled-components'
 
@@ -39,8 +39,8 @@ export const DraggableImagePreview: React.FC<DraggableImagePreviewProps> = ({
                 draggableId={image.id}
                 index={index}>
                 {(
-                  provided: DraggableProvided,
-                  snapshot: DraggableStateSnapshot
+                  provided: DraggableProvided
+                  // snapshot: DraggableStateSnapshot
                 ) => (
                   <div
                     ref={provided.innerRef}
