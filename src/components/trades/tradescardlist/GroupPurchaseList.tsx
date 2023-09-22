@@ -3,7 +3,7 @@ import {
   TradesCard,
   TradesOption
 } from '@/components/trades/tradescardlist/index'
-import { css, styled } from 'styled-components'
+import { styled } from 'styled-components'
 import {
   FilterBar,
   Category,

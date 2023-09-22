@@ -1,6 +1,6 @@
 import React from 'react'
 import { theme } from 'styles/index'
-import { css, styled } from 'styled-components'
+import { styled } from 'styled-components'
 import { UploadTitle } from 'components/trades/uploadproduct/index'
 import { Input } from 'components/index'
 import { TRADES_TEXT } from 'constants/trades/index'
@@ -13,6 +13,8 @@ export const UploadList = () => {
     tradescreateglobalstate
   )
   const maxTitleLength = 25
+
+  console.log(tradesGlobalState)
 
   return (
     <Wrapper>

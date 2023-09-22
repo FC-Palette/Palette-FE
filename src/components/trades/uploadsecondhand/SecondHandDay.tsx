@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react'
 import { useRecoilState } from 'recoil'
 import { secondhandglobalstate } from 'recoil/index'
 
 import { theme } from 'styles/index'
-import { css, styled } from 'styled-components'
+import { styled } from 'styled-components'
 
 interface selectProps {
   $isSelected: boolean

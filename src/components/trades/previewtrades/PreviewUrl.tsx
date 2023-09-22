@@ -1,5 +1,5 @@
 import { theme } from 'styles/index'
-import { css, styled } from 'styled-components'
+import { styled } from 'styled-components'
 
 export const PreviewUrl = ({ shopUrl }) => {
   return <Wrapper>{shopUrl}</Wrapper>

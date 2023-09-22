@@ -1,7 +1,6 @@
 import { theme } from 'styles/index'
-import { css, styled } from 'styled-components'
+import { styled } from 'styled-components'
 import Select from '@mui/material/Select'
-import MenuItem from '@mui/material/MenuItem'
 
 export interface OptionProps {
   $paddingLeft?: string

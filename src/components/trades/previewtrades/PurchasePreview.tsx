@@ -20,7 +20,6 @@ export const PurchasePreview = () => {
     title,
     description,
     price,
-    category,
     startDay,
     endDay,
     timeRemaining,

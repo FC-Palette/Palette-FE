@@ -1,8 +1,8 @@
 import { theme } from 'styles/index'
 import { Header } from 'components/common/index'
-import { css, styled } from 'styled-components'
+import { styled } from 'styled-components'
 import { ArrowLeft2 } from 'iconsax-react'
-import { UploadFooter } from 'components/trades/uploadproduct/index'
+// import { UploadFooter } from 'components/trades/uploadproduct/index'
 import { SecondHandUploadList } from 'components/trades/uploadsecondhand/index'
 import { useNavigate } from 'react-router-dom'
 
@@ -18,7 +18,7 @@ export const SecondHandUpload = () => {
           </StyledIcon>
         }></Header>
       <SecondHandUploadList></SecondHandUploadList>
-      <UploadFooter></UploadFooter>
+      {/* <UploadFooter handleNextStep={handleNextStep} /> */}
     </>
   )
 }
