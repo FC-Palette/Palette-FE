@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Dropzone from 'react-dropzone'
 import { Add } from 'iconsax-react'
 import { DraggableImagePreview } from '@/components'
@@ -13,8 +13,18 @@ interface Image {
 }
 
 export const MeetupImageSelector = () => {
+  const [showMessage, setShowMessage] = useState(false)
   const [images, setImages] = useState<Image[]>([])
   const setGlobalData = useSetRecoilState(CareerCreateGlobalState)
+
+  useEffect(() => {
+    if (images.length === 1) {
+      setShowMessage(true)
+      setTimeout(() => {
+        setShowMessage(false)
+      }, 2000)
+    }
+  }, [images.length])
 
   // blob
   const encodeImageToBlob = (file: File, callback: (blob: Blob) => void) => {
@@ -28,6 +38,10 @@ export const MeetupImageSelector = () => {
 
   // 업로드시
   const handleImageUpload = (acceptedFiles: File[]) => {
+    if (images.length + acceptedFiles.length > 5) {
+      return
+    }
+
     acceptedFiles.forEach(file => {
       encodeImageToBlob(file, blob => {
         const newImg = {
@@ -92,23 +106,61 @@ export const MeetupImageSelector = () => {
           onDeleteImage={handleImageDelete}
         />
       </TotalContainer>
+
+      {showMessage && (
+        <MessageContainer>
+          드래그로 사진 순서를 변경할 수 있습니다.
+        </MessageContainer>
+      )}
     </>
   )
 }
+
 const TotalContainer = styled.div`
-  width: 380px;
+  width: 100%;
   display: flex;
   margin-top: 8px;
   gap: 8px;
   overflow-x: scroll;
+  padding-bottom: 8px;
 `
+
+// const UploadZoneContainer = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+// `
 
 const UploadZoneContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative; /* 부모 요소에 대해 상대적인 위치 설정 */
 `
+
+// const AddIcon = styled(Add)`
+//   position: absolute;
+//   cursor: pointer;
+// `
+
+const AddIcon = styled(Add)`
+  position: absolute;
+  cursor: pointer;
+  top: 50%; /* 부모 요소인 UploadZoneContainer의 중앙을 기준으로 위치 설정 */
+  left: 50%;
+  transform: translate(-50%, -50%); /* 중앙 정렬 */
+  z-index: 1;
+`
+
+// const UploadZoneBox = styled.div`
+//   background-color: ${props => props.theme.greyScale.grey1};
+//   width: 90px;
+//   height: 90px;
+//   border-radius: 8px;
+//   cursor: pointer;
+// `
 
 const UploadZoneBox = styled.div`
   background-color: ${props => props.theme.greyScale.grey1};
@@ -116,9 +168,29 @@ const UploadZoneBox = styled.div`
   height: 90px;
   border-radius: 8px;
   cursor: pointer;
-`
+  position: relative; /* 자신에 대해 상대적인 위치 설정 */
 
-const AddIcon = styled(Add)`
-  position: absolute;
-  cursor: pointer;
+  /* AddIcon을 정중앙에 위치시키는 스타일 */
+  & > ${AddIcon} {
+    position: absolute;
+    top: 50%; /* UploadZoneBox의 중앙을 기준으로 위치 설정 */
+    left: 50%;
+    transform: translate(-50%, -50%); /* 중앙 정렬 */
+  }
+`
+const MessageContainer = styled.div`
+  width: 250px;
+  height: 37px;
+  background-color: rgba(55, 65, 81, 0.8);
+  font-size: 14px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 4px;
+  z-index: 9999;
 `

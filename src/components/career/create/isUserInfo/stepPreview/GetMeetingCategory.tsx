@@ -21,11 +21,11 @@ export const GetMeetingCategory = ({ selectedMeetingTypes }) => {
 }
 
 const Container = styled.div`
-  width: 430px;
+  width: 100%;
 `
 
 const CategoryChipsWrap = styled.div`
-  margin: 12px 24px 12px;
+  margin: 7% 5.7% 0;
   display: flex;
   flex-wrap: wrap;
   width: auto;

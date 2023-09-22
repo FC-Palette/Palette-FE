@@ -33,12 +33,21 @@ export const GetThumbnail = ({ meetupImages }) => {
 }
 
 const ThumbnailSlider = styled.div`
-  width: 430px;
+  width: 100%;
   height: 322px;
-  background-color: ${props => props.theme.main.blue0};
+  background-color: transparent;
   // 점 위치
   .slick-dots {
     bottom: 10px;
+  }
+
+  .slick-dots li button:before {
+    color: ${props => props.theme.main.blue0};
+    font-size: 20px;
+  }
+
+  .slick-dots li {
+    width: 30px;
   }
 
   .slick-slider {
@@ -48,8 +57,13 @@ const ThumbnailSlider = styled.div`
 `
 const SlideItem = styled.div`
   img {
-    width: 430px;
+    width: 100%;
     height: 322px;
     object-fit: cover;
   }
+`
+
+const UiDiv = styled.li`
+  width: 100px;
+  color: red;
 `

@@ -8,22 +8,38 @@ import {
 } from 'components/career/index'
 import styled from 'styled-components'
 
-export const CareerMainItemsWrap = () => {
+interface CareerData {
+  id: number
+  image: string[]
+  jobs: string[]
+  title: string
+  week: string
+  days: string[]
+  time: string
+  progressTime: string
+  positions: string[]
+}
+export const CareerMainItemsWrap = ({ data }: { data: CareerData }) => {
+  const { image, jobs, title, week, days, time, progressTime, positions } = data
   return (
     <>
       <ItemFlexRowWrapper>
         {/* 이미지 */}
-        <CareerMainItemImage />
+        <CareerMainItemImage image={image[0]} />
 
         <ItemFlexColumnWrapper>
           {/* 글 묶음 */}
-          <CareerMainItemCategory />
-          <CareerMainItemTitle />
-          <CareerMainItemMeetingTime />
+          <CareerMainItemCategory jobs={jobs} />
+          <CareerMainItemTitle title={title} />
+          <CareerMainItemMeetingTime
+            week={week}
+            days={days}
+            time={time}
+            progressTime={progressTime}
+          />
 
-          <CareerMainItemParticipant />
+          <CareerMainItemParticipant positions={positions} />
         </ItemFlexColumnWrapper>
-        {/* 하트 버튼 */}
         <CareerMainItemLikeButton />
       </ItemFlexRowWrapper>
     </>
@@ -32,19 +48,18 @@ export const CareerMainItemsWrap = () => {
 
 // 가로 래퍼
 const ItemFlexRowWrapper = styled.div`
-  width: calc(100% - 48px);
+  gap: 12px;
+  justify-content: space-around;
   display: flex;
   flex-direction: row;
-  gap: 12px;
   align-items: center;
-  margin-right: 24px;
-  margin-left: 24px;
   height: 132px;
+  margin: 12px 24px;
 `
 // 세로 래퍼
 const ItemFlexColumnWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: auto;
-  gap: 9px;
+  gap: 8px;
 `

@@ -8,7 +8,9 @@ interface CommonQuestionProps {
 const QuestionContainer = styled.div`
   display: flex;
   align-items: center;
-  margin-top: 32px;
+  margin: 0 5.7%;
+  margin-top: 7%;
+  margin-bottom: 8px;
 `
 
 const QuestionText = styled.div`

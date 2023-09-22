@@ -33,8 +33,8 @@ export const RecruitmentSizeSelector = () => {
 
 // Title
 const QuestionTitle = styled.div`
-  margin: 0 24px;
-  margin-top: 32px;
+  margin: 7% 5.7% 0;
+
   font-weight: 500;
   font-size: 18px;
   color: ${props => props.theme.greyScale.grey6};
@@ -44,8 +44,7 @@ const QuestionTitle = styled.div`
 `
 
 const InputContainer = styled.div`
-  margin: 8px 24px 0;
-  width: 382px;
+  margin: 0 5.7%;
   height: 48px;
   border-radius: 8px;
   border: 1px solid ${props => props.theme.greyScale.grey3};

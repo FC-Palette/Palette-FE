@@ -4,16 +4,21 @@ import {
   CareerMainItemsWrap
 } from 'components/career/index'
 
-export const CareerMainCard = () => {
+export const CareerMainCard = ({ responseData }) => {
   return (
     <Card>
-      <CareerMainItemsWrap />
-      <CareerMainItemsWrap />
-      <CareerMainItemsWrap />
-      <CareerMainItemsWrap />
-      <CareerMainItemsWrap />
-      <CareerMainItemsWrap />
-      <CareerMainItemsWrap />
+      {responseData && responseData.length > 0 ? (
+        responseData.map(items =>
+          items.map(item => (
+            <CareerMainItemsWrap
+              key={item.id}
+              data={...item}
+            />
+          ))
+        )
+      ) : (
+        <p>데이터 없음</p>
+      )}
 
       <CareerMainItemCreateButton />
     </Card>
@@ -22,6 +27,7 @@ export const CareerMainCard = () => {
 
 const Card = styled.div`
   position: relative;
-  width: 430px;
+  width: 100%;
   margin: 0 auto;
+  min-height: 100vh;
 `

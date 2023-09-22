@@ -118,7 +118,8 @@ export const MeetupDetailsSelector = () => {
           }}
         />
       </InputContainer>
-      {/* 주기적인지 체크 */}
+
+      {/* 주기 체크 */}
       <PeriodicCheckBoxContainer>
         <PeriodicCheckBox
           type="checkbox"
@@ -158,7 +159,7 @@ export const MeetupDetailsSelector = () => {
           {/* 진행시간 */}
           <QuestionTitle>진행시간은 얼마나 될까요?</QuestionTitle>
           <Slider
-            sx={{ width: 360, margin: '0 auto' }}
+            sx={{ width: '85%', margin: '0 auto' }}
             aria-label="progress-time"
             size="medium"
             defaultValue={30}
@@ -179,7 +180,8 @@ export const MeetupDetailsSelector = () => {
   )
 }
 const QuestionTitle = styled.div`
-  margin: 32px 24px 0;
+  margin-top: 7%;
+  margin-left: 5.7%;
   font-weight: 500;
   font-size: 18px;
   color: ${props => props.theme.greyScale.grey6};
@@ -188,15 +190,16 @@ const QuestionTitle = styled.div`
 
 // 토글 텍스트 래퍼 (Row)
 const ToggleNTextWrap = styled.div`
+  /* width: 100%; */
   display: flex;
   position: relative;
-  width: 100%;
   align-items: center;
   justify-content: space-between;
 `
 // 토글 래퍼 (Row)
 const ToggleRowSortContainerTwo = styled.div`
-  margin: 32px 24px 0;
+  margin: 7% 5.7% 0;
+  width: 100%;
   display: flex;
   text-align: center;
   align-items: center;
@@ -204,8 +207,8 @@ const ToggleRowSortContainerTwo = styled.div`
 `
 
 const ToggleRowSortContainerThree = styled.div`
-  margin-top: 32px;
-  margin-right: 24px;
+  width: 100%;
+  margin: 7% 5.7% 0;
   display: flex;
   text-align: center;
   align-items: center;
@@ -213,7 +216,7 @@ const ToggleRowSortContainerThree = styled.div`
 `
 
 const ToggleL = styled.div<selectProps>`
-  width: 68px;
+  width: 10px;
   height: 29px;
   font-size: 14px;
   line-height: 16.71px;
@@ -231,7 +234,7 @@ const ToggleL = styled.div<selectProps>`
 `
 
 const ToggleR = styled.div<selectProps>`
-  width: 68px;
+  width: 10px;
   height: 29px;
   font-size: 14px;
   line-height: 16.71px;
@@ -250,8 +253,8 @@ const ToggleR = styled.div<selectProps>`
 
 // Input
 const InputContainer = styled.div`
-  margin: 0 24px;
-  width: 382px;
+  margin: 0 5.7%;
+  width: 88%;
   height: 48px;
   border-radius: 8px;
   border: 1px solid ${props => props.theme.greyScale.grey3};
@@ -271,12 +274,12 @@ const InputText = styled.input`
 
 // 주기 체크
 const PeriodicCheckBoxContainer = styled.div`
-  margin: 0 24px;
+  margin: 7% 5.7% 0;
+  width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 5px;
-  margin-top: 32px;
 `
 const PeriodicCheckBox = styled.input`
   width: 20px;
@@ -310,16 +313,17 @@ const Answer = styled.div<selectProps>`
 `
 const AnswerFlexWrap = styled.div`
   margin: 0 24px;
-  width: 382px;
+  width: 88%;
   display: flex;
   flex-wrap: nowrap;
-  gap: 15px;
+  justify-content: space-between;
   cursor: pointer;
   min-width: 120px;
 `
 
 const ToggleL60 = styled.div<selectProps>`
-  width: 60px;
+  width: 10px;
+  /* width: 60px; */
   height: 29px;
   font-size: 14px;
   line-height: 16.71px;
@@ -338,7 +342,8 @@ const ToggleL60 = styled.div<selectProps>`
 `
 
 const ToggleM60 = styled.div<selectProps>`
-  width: 60px;
+  /* width: 60px; */
+  width: 10px;
   height: 29px;
   font-size: 14px;
   line-height: 16.71px;
@@ -355,7 +360,8 @@ const ToggleM60 = styled.div<selectProps>`
   justify-content: center;
 `
 const ToggleR60 = styled.div<selectProps>`
-  width: 60px;
+  width: 10px;
+  /* width: 60px; */
   height: 29px;
   font-size: 14px;
   line-height: 16.71px;

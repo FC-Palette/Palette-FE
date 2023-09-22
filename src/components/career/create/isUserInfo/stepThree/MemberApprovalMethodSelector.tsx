@@ -41,13 +41,13 @@ export const MemberApprovalMethodSelector = () => {
 
 const QuestionTitleSmall = styled.div`
   font-size: 18px;
-  margin: 28px 24px 0;
+  margin: 7% 5.7% 0;
   color: ${props => props.theme.greyScale.grey6};
 `
 
 // 토글 관련
 const ToggleNTextWrap = styled.div`
-  margin-top: 28px;
+  margin-top: 5%;
   display: flex;
   position: relative;
   width: 100%;
@@ -57,8 +57,7 @@ const ToggleNTextWrap = styled.div`
 `
 
 const ToggleRowSortContainer = styled.div`
-  margin-top: 28px;
-  margin-right: 24px;
+  margin: 7% 5.7% 0;
   display: flex;
   text-align: center;
   align-items: center;

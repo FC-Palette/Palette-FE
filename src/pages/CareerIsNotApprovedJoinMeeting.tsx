@@ -1,10 +1,11 @@
-import { Header, StepProgressBar } from '@/components'
-import { IsApprovedJoinMeetingStepOneCard } from '@/components/career'
+import { Header } from '@/components'
+import { IsNotApprovedJoinMeetingStepOneCard } from '@/components/career'
+
 import { ArrowLeft2 } from 'iconsax-react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
-export const IsApprovedJoinMeetingStepOne = () => {
+export const CareerIsNotApprovedJoinMeeting = () => {
   const navigate = useNavigate()
   return (
     <>
@@ -17,8 +18,7 @@ export const IsApprovedJoinMeetingStepOne = () => {
             </StyledIcon>
           }
         />
-        <StepProgressBar $currentPage={'1'} />
-        <IsApprovedJoinMeetingStepOneCard />
+        <IsNotApprovedJoinMeetingStepOneCard />
       </Wrap>
     </>
   )

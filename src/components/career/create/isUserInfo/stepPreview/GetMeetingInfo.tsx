@@ -46,11 +46,10 @@ export const GetMeetingInfo = ({
 
   return (
     <>
-      <TitleContainer>
-        <CareerCreateMeetingCommonQuestion>
-          모임정보
-        </CareerCreateMeetingCommonQuestion>
-      </TitleContainer>
+      <CareerCreateMeetingCommonQuestion>
+        모임정보
+      </CareerCreateMeetingCommonQuestion>
+
       <ContentsFielContainer>
         <ContentsFieldL>{icons}</ContentsFieldL>
         <ContentsFieldR>{infos}</ContentsFieldR>
@@ -59,37 +58,31 @@ export const GetMeetingInfo = ({
   )
 }
 
-const TitleContainer = styled.div`
-  width: 382px;
-  margin: 0 24px 0;
-`
-
 const ContentsFielContainer = styled.div`
   display: flex;
 `
 const ContentsFieldL = styled.div`
-  margin-left: 24px;
+  margin-left: 5.7%;
   display: flex;
   flex-direction: column;
   gap: 14px;
   width: 120px;
   height: 214px;
-  margin-top: 12px;
+  margin-top: 1.2%;
   padding: 19px 16px 19px 19px;
   background-color: ${props => props.theme.subColor.blueGrey};
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
-  z-index: 1;
 `
 
 const ContentsFieldR = styled.div`
-  margin-right: 24px;
+  margin-right: 5.7%;
   display: flex;
   flex-direction: column;
   gap: 14px;
   width: 262px;
   height: 214px;
-  margin-top: 12px;
+  margin-top: 1.2%;
   padding: 19px 19px 19px 0;
   background-color: ${props => props.theme.subColor.blueGrey};
   border-top-right-radius: 8px;
