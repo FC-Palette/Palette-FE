@@ -1,4 +1,4 @@
-import { Sender, Recipient } from 'components/index'
+// import { Sender, Recipient } from 'components/index'
 
 export const Message = () => {
   return (

@@ -13,7 +13,7 @@ export const ChatList = () => {
       <Header centerText="채팅" />
       <SubHeader
         items={CHAT_TABS}
-        initialItem={CHAT_TABS[0]}
+        initialItem={CHAT_TABS[0].text}
       />
       <ChatRooms />
       <Footer />
