@@ -20,12 +20,14 @@ export const ChatSubject = () => {
         <ArrowDown2
           color={theme.greyScale.grey6}
           onClick={handleDetail}
+          cursor="pointer"
         />
       )}
       {inDetail && (
         <ArrowUp2
           color={theme.greyScale.grey6}
           onClick={handleDetail}
+          cursor="pointer"
         />
       )}
     </ChatTopBar>
