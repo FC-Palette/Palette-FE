@@ -1,5 +1,5 @@
 import { theme } from 'styles/index'
-import { css, styled } from 'styled-components'
+import { styled } from 'styled-components'
 import { ICON_TEXTS } from 'constants/index'
 import { useNavigate } from 'react-router-dom'
 

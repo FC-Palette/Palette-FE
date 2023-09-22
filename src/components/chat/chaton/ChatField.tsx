@@ -1,5 +1,4 @@
 import React from 'react'
-import { useState } from 'react'
 import { useRecoilState } from 'recoil'
 import { msgActionsState } from 'recoil/index'
 import { Wrapper, Sender, Recipient } from 'components/index'

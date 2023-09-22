@@ -9,7 +9,10 @@ export const CHAT_TEXTS = {
   sendImg: '이미지 전송하기',
   sendFile: '파일 전송하기'
 }
-export const CHAT_TABS = ['단체톡', '개인톡']
+export const CHAT_TABS = [
+  { text: '단체톡', path: '/chatlist' },
+  { text: '개인톡', path: '/chatlist' }
+]
 
 export const CHATON_TEXTS = {
   chatRoomExit: '채팅방 나가기',
