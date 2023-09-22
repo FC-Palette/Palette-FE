@@ -1,6 +1,6 @@
 import { theme } from 'styles/index'
 import { Header } from 'components/common/index'
-import { css, styled } from 'styled-components'
+import { styled } from 'styled-components'
 import { ArrowLeft2 } from 'iconsax-react'
 import { useNavigate } from 'react-router-dom'
 import { UploadDetail } from 'components/trades/uploadproduct/index'

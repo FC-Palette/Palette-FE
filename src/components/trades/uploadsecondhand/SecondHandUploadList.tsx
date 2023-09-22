@@ -1,6 +1,6 @@
 import React from 'react'
 import { theme } from 'styles/index'
-import { css, styled } from 'styled-components'
+import { styled } from 'styled-components'
 import { UploadTitle } from 'components/trades/uploadproduct/index'
 import { Input } from 'components/index'
 import { TRADES_SECONDHAND_TEXT } from 'constants/trades/index'

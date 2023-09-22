@@ -1,7 +1,11 @@
 import { Button } from '@/components'
 import styled from 'styled-components'
 
-export const UploadFooter = ({ handleNextStep }) => {
+interface UploadFooterProps {
+  handleNextStep: () => void
+}
+
+export const UploadFooter = ({ handleNextStep }: UploadFooterProps) => {
   return (
     <Wrapper>
       <BtnWrap>

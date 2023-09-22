@@ -1,7 +1,7 @@
 import { theme } from 'styles/index'
-import { css, styled } from 'styled-components'
+import { styled } from 'styled-components'
 import { tradescreateglobalstate } from 'recoil/index'
-import React, { useState } from 'react'
+
 import { useRecoilState } from 'recoil'
 
 const placeholderText =
