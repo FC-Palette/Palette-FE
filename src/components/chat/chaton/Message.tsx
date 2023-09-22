@@ -1,4 +1,3 @@
-import { styled } from 'styled-components'
 import { Sender, Recipient } from 'components/index'
 
 export const Message = () => {

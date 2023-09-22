@@ -1,5 +1,5 @@
 import { styled } from 'styled-components'
-import { useRef, useEffect } from 'react'
+import { useRef } from 'react'
 
 export const ChatInput = () => {
   const inputRef = useRef<HTMLTextAreaElement>(null)

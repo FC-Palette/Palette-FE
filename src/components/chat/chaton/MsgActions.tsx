@@ -2,11 +2,10 @@ import { styled } from 'styled-components'
 import { Copy, Edit } from 'iconsax-react'
 import { useSetRecoilState } from 'recoil'
 import { msgActionsState } from 'recoil/index'
-import { useRef, forwardRef, Ref } from 'react'
 export const MsgActions = ({ $sender, msgRef }) => {
   const setOpenMsgActionsIndex = useSetRecoilState(msgActionsState)
-  const upperTabRef = useRef<HTMLDivElement>()
-  const lowerTabRef = useRef<HTMLDivElement>()
+  // const upperTabRef = useRef<HTMLDivElement>()
+  // const lowerTabRef = useRef<HTMLDivElement>()
 
   return (
     <Wrapper
