@@ -13,8 +13,6 @@ export const GetTitleAndDescription: React.FC<GetTitleAndDescriptionProps> = ({
     return text.length > maxLength ? text.slice(0, maxLength) + '...' : text
   }
 
-  const asdf = 'asdfasdfasdf'.repeat(1000)
-
   return (
     <>
       <Container>

@@ -1,4 +1,4 @@
-import { Button, Header, StepProgressBar } from '@/components'
+import { Header, StepProgressBar } from '@/components'
 import { JoinMeetingStepTwoTextField, JoinMeetingStepTwoTitle } from '.'
 import { ArrowLeft2 } from 'iconsax-react'
 import styled from 'styled-components'
@@ -23,12 +23,4 @@ export const IsApprovedJoinMeetingStepTwoCard = () => {
 const StyledIcon = styled.button`
   color: #000;
   font-size: ${props => props.theme.customSize.xxlarge};
-`
-
-const BtnContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 282px 24px 32px;
 `

@@ -12,7 +12,7 @@ export const CareerMainCard = ({ responseData }) => {
           items.map(item => (
             <CareerMainItemsWrap
               key={item.id}
-              data={...item}
+              data={item}
             />
           ))
         )

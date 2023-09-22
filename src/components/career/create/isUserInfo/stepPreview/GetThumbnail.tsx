@@ -62,8 +62,3 @@ const SlideItem = styled.div`
     object-fit: cover;
   }
 `
-
-const UiDiv = styled.li`
-  width: 100px;
-  color: red;
-`

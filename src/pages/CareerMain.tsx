@@ -3,7 +3,6 @@ import { ArrowLeft2, SearchNormal1, Notification } from 'iconsax-react'
 import styled from 'styled-components'
 import { CAREER_SUBHEADER_TEXT } from 'constants/index'
 import { CareerMainCard, CareerMainFilterBar } from '@/components/career'
-import { useEffect, useState } from 'react'
 export const CareerMain = () => {
   const mockData = [
     {
@@ -92,12 +91,6 @@ export const CareerMain = () => {
     }
   ]
 
-  const [responseData, setResponseData] = useState([mockData])
-
-  useEffect(() => {
-    // 데이터 가져와서 셋함수로 넣고 넣고
-  }, [])
-
   return (
     <>
       <Header
@@ -118,7 +111,7 @@ export const CareerMain = () => {
 
       <CareerMainFilterBar />
 
-      <CareerMainCard responseData={responseData} />
+      <CareerMainCard responseData={mockData} />
 
       <Footer />
     </>
