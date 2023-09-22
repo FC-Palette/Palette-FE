@@ -18,4 +18,5 @@ const Wrapper = styled.div`
   position: relative;
   //수정사항 - width100%
   width: 100%;
+  height: 100%;
 `

@@ -33,6 +33,7 @@ const StyledInput = styled.textarea`
   border-radius: 21px;
   max-height: 114px;
   resize: none;
+  touch-action: manipulation;
   font-family: 'Pretendard', sans-serif;
   &:focus {
     outline: none;
