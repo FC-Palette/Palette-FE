@@ -1,7 +1,8 @@
 import { Header, ChatAnnListItems, ChatAnnListItem } from 'components/index'
-import { StyledIcon } from 'pages/index'
-import { styled } from 'styled-components'
-import { ArrowLeft2, Add } from 'iconsax-react'
+import { useNavigate } from 'react-router-dom'
+
+import { ArrowLeft2 } from 'iconsax-react'
+
 const anns = [
   {
     id: 1,
@@ -15,14 +16,17 @@ const anns = [
 ]
 
 export const ChatAnnList = () => {
+  const navigate = useNavigate()
+
   return (
     <>
       <Header
         centerText="공지목록"
         leftIcon={
-          <Add
+          <ArrowLeft2
+            cursor="pointer"
             onClick={() => {
-              console.log('tq')
+              navigate('/chat')
             }}
           />
         }></Header>

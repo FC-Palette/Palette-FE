@@ -3,25 +3,25 @@ import { useRef, useEffect } from 'react'
 
 export const ChatInput = () => {
   const inputRef = useRef<HTMLTextAreaElement>(null)
-  useEffect(() => {}, [])
 
-  useEffect(() => {
-    handleResizeHeight()
-  }, [])
+  //해당 로직들 input이 아니라 화면으로 적용?
+  // useEffect(() => {
+  //   handleResizeHeight()
+  // }, [])
 
-  const handleResizeHeight = () => {
-    if (inputRef?.current) {
-      inputRef.current.style.height = 'auto' //height 초기화
-      inputRef.current.style.height = inputRef?.current.scrollHeight + 'px'
-    }
-  }
+  // const handleResizeHeight = () => {
+  //   if (inputRef?.current) {
+  //     inputRef.current.style.height = 'auto' //height 초기화
+  //     inputRef.current.style.height = inputRef?.current.scrollHeight + 'px'
+  //   }
+  // }
 
   return (
     <>
       <StyledInput
         ref={inputRef}
         rows={1}
-        onInput={handleResizeHeight}
+        // onInput={handleResizeHeight}
       />
     </>
   )
