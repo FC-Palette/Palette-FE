@@ -1,27 +1,26 @@
 import { styled } from 'styled-components'
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 
 export const ChatInput = () => {
   const inputRef = useRef<HTMLTextAreaElement>(null)
 
-  //해당 로직들 input이 아니라 화면으로 적용?
-  // useEffect(() => {
-  //   handleResizeHeight()
-  // }, [])
+  useEffect(() => {
+    handleResizeHeight()
+  }, [])
 
-  // const handleResizeHeight = () => {
-  //   if (inputRef?.current) {
-  //     inputRef.current.style.height = 'auto' //height 초기화
-  //     inputRef.current.style.height = inputRef?.current.scrollHeight + 'px'
-  //   }
-  // }
+  const handleResizeHeight = () => {
+    if (inputRef?.current) {
+      inputRef.current.style.height = 'auto' //height 초기화
+      inputRef.current.style.height = inputRef?.current.scrollHeight + 'px'
+    }
+  }
 
   return (
     <>
       <StyledInput
         ref={inputRef}
         rows={1}
-        // onInput={handleResizeHeight}
+        onInput={handleResizeHeight}
       />
     </>
   )
@@ -34,6 +33,7 @@ const StyledInput = styled.textarea`
   border-radius: 21px;
   max-height: 114px;
   resize: none;
+  font-family: 'Pretendard', sans-serif;
   &:focus {
     outline: none;
   }
