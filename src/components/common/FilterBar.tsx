@@ -1,5 +1,5 @@
 import { theme } from 'styles/index'
-import { css, styled } from 'styled-components'
+import { styled } from 'styled-components'
 import { FilterBarProps } from 'types/index'
 
 export const FilterBar: React.FC<FilterBarProps> = ({
