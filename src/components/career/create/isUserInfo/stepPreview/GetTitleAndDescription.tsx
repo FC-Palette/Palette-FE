@@ -9,6 +9,12 @@ export const GetTitleAndDescription: React.FC<GetTitleAndDescriptionProps> = ({
   meetupTitle,
   meetupDescription
 }) => {
+  const truncateText = (text: string, maxLength: number) => {
+    return text.length > maxLength ? text.slice(0, maxLength) + '...' : text
+  }
+
+  const asdf = 'asdfasdfasdf'.repeat(1000)
+
   return (
     <>
       <Container>
@@ -17,7 +23,7 @@ export const GetTitleAndDescription: React.FC<GetTitleAndDescriptionProps> = ({
         </Title>
         <Description>
           {meetupDescription.length > 0
-            ? meetupDescription
+            ? truncateText(meetupDescription, 150)
             : '아직 이 모임에 대한 소개가 작성되지 않았어요.'}
         </Description>
       </Container>
@@ -28,11 +34,11 @@ export const GetTitleAndDescription: React.FC<GetTitleAndDescriptionProps> = ({
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  height: 150px;
-  width: 430px;
+  min-height: 150px;
+  width: 100%;
 `
 const Title = styled.div`
-  margin-left: 24px;
+  margin-left: 5.7%;
   font-size: 18px;
   margin-top: 13px;
   font-size: ${props => props.theme.customSize.xlarge};
@@ -40,9 +46,14 @@ const Title = styled.div`
   font-weight: 500;
 `
 const Description = styled.div`
-  margin-top: 12px;
-  margin: 12px 24px 0;
+  height: 10%;
+  max-height: 96px;
+  margin: 1.2% 5.7% 0;
   line-height: 26px;
   font-size: ${props => props.theme.customSize.large};
   color: #3a3a3a;
+  text-overflow: ellipsis;
+  display: flex;
+  flex-wrap: wrap;
+  word-break: break-all;
 `

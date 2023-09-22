@@ -1,8 +1,11 @@
 import { styled } from 'styled-components'
-export const CareerMainItemImage = () => {
+interface PreviewImgProps {
+  image: string[]
+}
+export const CareerMainItemImage = ({ image }) => {
   return (
     <Wrapper>
-      <PreviewImg>
+      <PreviewImg image={image}>
         <RemainSpaces>
           <ImpactColor>2자리</ImpactColor>
           남았어요
@@ -19,16 +22,17 @@ const Wrapper = styled.div`
 `
 
 //  미리보기 이미지
-const PreviewImg = styled.div`
+const PreviewImg = styled.div<PreviewImgProps>`
   display: flex;
   flex-direction: column;
   width: 100px;
   height: 100px;
   border-radius: 8px;
-  background-color: ${props => props.theme.greyScale.grey5};
+  background-image: ${props => `url(${props.image})`};
+  background-size: 100% 100%;
   font-size: ${props => props.theme.customSize.medium};
   justify-content: flex-end;
-  align-items: center;
+  align-items: contain;
 `
 // 미리보기 아래 잔여 참여석
 const RemainSpaces = styled.div`

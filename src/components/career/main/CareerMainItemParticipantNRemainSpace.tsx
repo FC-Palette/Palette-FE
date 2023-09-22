@@ -1,6 +1,11 @@
 import { styled } from 'styled-components'
-export const CareerMainItemParticipant = () => {
-  return <ParticipantNRemainSpate>신입만 | 4/6명</ParticipantNRemainSpate>
+export const CareerMainItemParticipant = ({ positions }) => {
+  const fetchPositions = positions
+  return (
+    <ParticipantNRemainSpate>
+      {fetchPositions || '없음'} | 4/6명
+    </ParticipantNRemainSpate>
+  )
 }
 
 // 참여자 직급 | 잔여석

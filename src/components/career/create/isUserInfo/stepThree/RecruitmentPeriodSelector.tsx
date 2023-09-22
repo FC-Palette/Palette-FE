@@ -63,5 +63,5 @@ const TimePickerContainer = styled.div`
   gap: 7px;
   color: ${props => props.theme.greyScale.grey9};
   height: 48px;
-  margin: 8px 0px;
+  margin: 0.8% 5.7%;
 `

@@ -10,7 +10,7 @@ export const IsApprovedJoinMeetingStepCompleteCard = () => {
       <JoinMeetingStepCompleteTitle />
       <BtnContainer>
         <Button
-          onClick={() => navigate('/careerMain')}
+          onClick={() => navigate('/career')}
           $btnHeight="60px"
           $btnWidth="382px">
           다른 모임 구경하기
@@ -21,8 +21,8 @@ export const IsApprovedJoinMeetingStepCompleteCard = () => {
 }
 
 const Container = styled.div`
-  width: 430px;
-  height: 932px;
+  width: 100%;
+  height: 100%;
 `
 
 const BtnContainer = styled.div`
@@ -30,7 +30,6 @@ const BtnContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: fixed;
   bottom: 32px;
-  margin: 0 24px 32px;
+  margin: 5.7%;
 `

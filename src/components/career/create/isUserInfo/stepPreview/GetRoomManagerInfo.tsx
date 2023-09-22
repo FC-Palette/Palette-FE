@@ -7,9 +7,7 @@ export const GetRoomManagerInfo = () => {
         <RoomManagerImage />
         <NameAndIntroduceWrap_Column>
           <RoomManagerName>매니저명 미리보기</RoomManagerName>
-          <RoomManagerNameIntroduce>
-            매니저 소개 미리보기
-          </RoomManagerNameIntroduce>
+          <RoomManagerIntroduce>매니저 소개 미리보기</RoomManagerIntroduce>
         </NameAndIntroduceWrap_Column>
         <FollowBtn>팔로우 삭제</FollowBtn>
       </ContentsContainer>
@@ -18,43 +16,49 @@ export const GetRoomManagerInfo = () => {
 }
 
 const ContentsContainer = styled.div`
-  width: 430px;
+  margin: 0 5.7%;
+  width: 100%;
   height: 76px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `
 
 const RoomManagerImage = styled.div`
-  margin-top: 12px;
-  margin-left: 24px;
   background-color: ${props => props.theme.greyScale.grey5};
   border-radius: 8px;
   width: 52px;
   height: 52px;
 `
+
 const NameAndIntroduceWrap_Column = styled.div`
-  margin-top: 18px;
-  margin-left: 12px;
   display: flex;
   flex-direction: column;
+  gap: 4px;
+  width: 45%;
+  height: 45%;
 `
+
 const RoomManagerName = styled.div`
-  color: ${props => props.theme.greyScale.grey8};
+  font-weight: 600;
+  color: ${props => props.theme.main.black};
+  white-space: nowrap;
 `
-const RoomManagerNameIntroduce = styled.div`
+
+const RoomManagerIntroduce = styled.div`
   color: ${props => props.theme.greyScale.grey5};
+  display: flex;
+  flex-wrap: wrap;
 `
 
 const FollowBtn = styled.button`
-  margin-top: 21px;
   display: flex;
-  margin-right: 24px;
   justify-content: center;
   align-items: center;
-  margin-left: 70px;
-  width: 105px;
+  width: 25%;
   height: 35px;
   background-color: ${props => props.theme.subColor.blueGrey};
   color: ${props => props.theme.greyScale.grey5};
   border-radius: 8px;
+  margin-right: 10%;
 `

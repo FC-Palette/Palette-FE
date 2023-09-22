@@ -31,6 +31,9 @@ export const MeetupTypeSelector2 = () => {
       }))
     } else {
       // 선택되지 않은 경우, 해당 아이템을 배열에 추가
+      if (selectedMeetingTypes.length >= 3) {
+        return
+      }
       setGlobalData(prevData => ({
         ...prevData,
         selectedMeetingTypes: [...prevData.selectedMeetingTypes, item]
@@ -57,10 +60,16 @@ export const MeetupTypeSelector2 = () => {
       <CareerCreateMeetingCommonQuestion>
         어떤 종류의 모임을 만드시겠어요?
       </CareerCreateMeetingCommonQuestion>
-      <AnswerItemFlexWrap>{AnswerItems}</AnswerItemFlexWrap>
+      <Wrapper>
+        <AnswerItemFlexWrap>{AnswerItems}</AnswerItemFlexWrap>
+      </Wrapper>
     </>
   )
 }
+
+const Wrapper = styled.div`
+  margin: 0 5.7%;
+`
 
 const AnswerItem = styled.div<SelectedAnswerProps>`
   display: flex;
@@ -77,11 +86,9 @@ const AnswerItem = styled.div<SelectedAnswerProps>`
   color: ${props => (props.$isSelected ? props.theme.main.blue0 : '#000')};
 `
 const AnswerItemFlexWrap = styled.div`
-  width: 382px;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  min-width: 120px;
   cursor: pointer;
 `
 

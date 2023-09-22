@@ -42,5 +42,5 @@ export const CommonTimePicker = ({
 
 const Wrap = styled.div`
   display: flex;
-  width: 430px;
+  width: 100%;
 `
