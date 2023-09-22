@@ -34,27 +34,30 @@ export const ProfileEnterWrap = () => {
           {PROFILE_ENTRY_POINT_TEXT.bottom[1]}
         </SmallText>
       </TextWrap>
-      <BtnWrap>
-        <Button
-          $btnWidth="80%"
-          $btnHeight="60px"
-          $fontSize="20px"
-          $borderRadius="8px">
-          간단 프로필 입력하기
-        </Button>
-      </BtnWrap>
+      <Wrapper>
+        <BtnWrap>
+          <Button
+            $btnWidth="100%"
+            $btnHeight="60px"
+            $fontSize="20px"
+            $borderRadius="8px">
+            간단 프로필 입력하기
+          </Button>
+        </BtnWrap>
+      </Wrapper>
     </Wrap>
   )
 }
 
 const Wrap = styled.div`
-  min-width: 430px;
-`
-const TextWrap = styled.div`
-  position: absolute;
+  width: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  margin: 0 5.7%;
+`
+const TextWrap = styled.div`
+  margin: 0 5.7% 20%;
+  width: 430px;
 `
 const FetchTitle = styled.div`
   margin-top: 14%;
@@ -76,13 +79,27 @@ const SmallText = styled.div`
   font-weight: 400;
 `
 
-const BtnWrap = styled.div`
-  margin-top: 150%;
-  width: 100%;
-  margin: 15% 5.7%;
+const StyledIcon = styled.button`
+  color: ${props => props.theme.main.black};
+  font-size: ${props => props.theme.customSize.xxlarge};
+`
+const Wrapper = styled.footer`
+  display: flex;
+  align-items: center;
+  position: sticky;
+  height: 80px;
+  z-index: 10;
+  bottom: 0;
+  background-color: transparent;
+  box-shadow: 0px -1px 1px rgba(0, 0, 0, 0.2);
+  margin-top: auto;
 `
 
-const StyledIcon = styled.button`
-  color: #000;
-  font-size: ${props => props.theme.customSize.xxlarge};
+const BtnWrap = styled.div`
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: 500;
+  width: 100%;
+  margin: auto 5.7%;
+  bottom: 0;
 `

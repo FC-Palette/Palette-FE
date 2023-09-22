@@ -23,7 +23,9 @@ export const IsApprovedJoinMeetingStepOneCard = () => {
 }
 
 const Container = styled.div`
-  width: 430px;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
 `
 
 const StyledIcon = styled.button`
