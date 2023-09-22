@@ -1,6 +1,6 @@
 import React from 'react'
 import { theme } from 'styles/index'
-import { css, styled } from 'styled-components'
+import { styled } from 'styled-components'
 
 const TRADES_CLOSING_TEXT = [
   '마감 일시 도달 시 자동 마감',
