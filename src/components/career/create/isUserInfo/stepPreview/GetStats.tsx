@@ -32,5 +32,3 @@ const Time = styled.div`
 `
 
 const Dot = styled.div``
-const Like = styled.div``
-const View = styled.div``

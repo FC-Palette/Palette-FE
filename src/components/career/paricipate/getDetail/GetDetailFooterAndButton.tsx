@@ -1,14 +1,10 @@
 import { Button, Modal, ModalButtons } from '@/components'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 export const GetDetailFooterAndButton = () => {
-  const navigate = useNavigate()
   const [isModal, setIsModal] = useState(false)
   const isUserJoined = false
-
-  const meetupCondition = false
 
   const handleModal = () => {
     isUserJoined ? null : setIsModal(true)
@@ -38,26 +34,10 @@ export const GetDetailFooterAndButton = () => {
             꼭 참여하고 싶은 모임이라면
             주최자에게 메시지를 보내보세요!">
             <ModalButtons
-              leftBtn={
-                <Button
-                  onClick={() => setIsModal(false)}
-                  $borderColor="#F5F6FA"
-                  $bgColor="#F5F6FA"
-                  $btnWidth="127px"
-                  $btnHeight="48px"
-                  $fontSize="16px"
-                  color="#6B7280">
-                  취소하기
-                </Button>
-              }
-              rightBtn={
-                <Button
-                  $btnWidth="127px"
-                  $btnHeight="48px"
-                  $fontSize="16px">
-                  메시지보내기
-                </Button>
-              }
+              onLeftClick={() => setIsModal(false)}
+              onRightClick={() => alert('메세지 보내기 로직 필요')}
+              leftBtn={'취소하기'}
+              rightBtn={'메시지보내기'}
             />
           </Modal>
         ) : null}

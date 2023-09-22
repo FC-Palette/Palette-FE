@@ -1,8 +1,8 @@
 import { Button } from 'components/index'
 import { theme } from 'styles/index'
 import { styled } from 'styled-components'
-import { useRecoilState } from 'recoil'
-import { modalOnState } from 'recoil/index'
+// import { useRecoilState } from 'recoil'
+// import { modalOnState } from 'recoil/index'
 import { ModalButtonsProps } from '@/types'
 //두개로 나뉜 모달 버튼들입니다.
 export const ModalButtons = ({
@@ -11,10 +11,10 @@ export const ModalButtons = ({
   onLeftClick,
   onRightClick
 }: ModalButtonsProps) => {
-  const [modalOn, setModalOn] = useRecoilState(modalOnState)
-  const handleModalOn = () => {
-    setModalOn(!modalOn)
-  }
+  // const [modalOn, setModalOn] = useRecoilState(modalOnState)
+  // const handleModalOn = () => {
+  //   setModalOn(!modalOn)
+  // }
 
   return (
     <Buttons>
