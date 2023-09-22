@@ -1,5 +1,4 @@
 //모임/상품 정보(토글)
-import { styled } from 'styled-components'
 import { ChatTopBar, TopBarContent } from 'components/index'
 import { EmojiHappy, ShoppingBag, ArrowUp2, ArrowDown2 } from 'iconsax-react'
 import { inDetailState, isBuyingState } from 'recoil/index'

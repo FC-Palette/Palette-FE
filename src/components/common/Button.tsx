@@ -1,4 +1,3 @@
-import { theme } from 'styles/index'
 import { css, styled } from 'styled-components'
 import { BorderType, ButtonProps, SizeType, StyleType } from 'types/index'
 

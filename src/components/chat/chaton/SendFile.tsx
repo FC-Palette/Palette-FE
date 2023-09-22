@@ -42,8 +42,8 @@ const Wrapper = styled.div`
   bottom: 32px;
   color: ${props => props.theme.greyScale.bluegrey};
 `
-const SendBox = styled.div`
-  background-color: ${props => props.theme.main.white};
-  color: ${props => props.theme.main.blue0};
-  cursor: pointer;
-`
+// const SendBox = styled.div`
+//   background-color: ${props => props.theme.main.white};
+//   color: ${props => props.theme.main.blue0};
+//   cursor: pointer;
+// `

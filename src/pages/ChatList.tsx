@@ -1,5 +1,4 @@
 import { Header, Footer, SubHeader, ChatRooms } from 'components/index'
-import { styled } from 'styled-components'
 import { CHAT_TABS } from 'constants/index'
 /*
     HEADER
