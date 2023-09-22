@@ -7,7 +7,7 @@ import {
 export const CareerMainCard = ({ responseData }) => {
   return (
     <Card>
-      {responseData && responseData.length > 0 ? (
+      {/* {responseData && responseData.length > 0 ? (
         responseData.map(items =>
           items.map(item => (
             <CareerMainItemsWrap
@@ -16,6 +16,17 @@ export const CareerMainCard = ({ responseData }) => {
             />
           ))
         )
+      ) : (
+        <p>데이터 없음</p>
+      )} */}
+
+      {responseData && responseData.length > 0 ? (
+        responseData.map(item => (
+          <CareerMainItemsWrap
+            key={item.id}
+            data={item}
+          />
+        ))
       ) : (
         <p>데이터 없음</p>
       )}
