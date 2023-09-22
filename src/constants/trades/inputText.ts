@@ -1,54 +1,58 @@
 import { ClosingDate, Input } from 'components/common/index'
 import {
-  // DeadLine,
   AgreeMsg1,
   AgreeMsg2,
   Account,
   UploadInputDetail,
-  UploadInputDetail1
+  UploadInputDetail1,
+  DeadLine,
+  UploadOption,
+  UploadImages
 } from 'components/trades/uploadproduct/index'
-import { MeetupImageSelector } from 'components/career/create/isUserInfo/stepTwo/index'
 import {
   SecondHandDay,
   SecondHandTime
 } from 'components/trades/uploadsecondhand/index'
-import { RecruitmentPeriodSelector } from 'components/career/create/isUserInfo/stepThree/index'
 
 export const TRADES_TEXT = [
   {
     title: '제목을 입력해주세요.',
     props: { ph: '제목을 입력해주세요.', item: '' },
-    component: Input
+    component: Input,
+    field: 'title'
   },
   {
     title: '상품 카테고리를 선택해주세요.',
     props: { ph: '상품 카테고리를 선택해주세요.', item: '' },
-    component: Input
+    component: UploadOption
   },
   {
     title: '제품의 구매사이트 URL 링크를 입력해주세요.',
     props: { ph: '해당 상품의 URL 링크를 복사해주세요.', item: '' },
-    component: Input
+    component: Input,
+    field: 'shopUrl'
   },
   {
     title: '모집 인원을 알려주세요.',
     props: { ph: 'ex) 10', item: '명' },
-    component: Input
+    component: Input,
+    field: 'headCount'
   },
   {
     title: '금액을 알려주세요.',
     props: { ph: '인당 부담 금액을 입력해 주세요.', item: '원' },
-    component: Input
+    component: Input,
+    field: 'price'
   },
   {
     title: '제품 이미지를 등록 해주세요.',
-    component: MeetupImageSelector
+    component: UploadImages
   },
   {
     title: '제품에 대한 상세 설명을 입력해주세요.',
     component: UploadInputDetail
   },
-  { title: '마감일자를 설정해주세요.', component: RecruitmentPeriodSelector },
+  { title: '마감일자를 설정해주세요.', component: DeadLine },
 
   { title: '공동구매 자동 마감 시점을 알려주세요.', component: ClosingDate },
 
@@ -73,7 +77,7 @@ export const TRADES_SECONDHAND_TEXT = [
   {
     title: '상품 카테고리를 선택해주세요.',
     props: { ph: '상품 카테고리를 선택해주세요.', item: '' },
-    component: Input
+    component: UploadOption
   },
   {
     title: '금액을 알려주세요.',
@@ -91,7 +95,7 @@ export const TRADES_SECONDHAND_TEXT = [
   },
   {
     title: '제품 이미지를 등록 해주세요.',
-    component: MeetupImageSelector
+    component: UploadImages
   },
   {
     title: '제품에 대한 상세 설명을 입력해주세요.',

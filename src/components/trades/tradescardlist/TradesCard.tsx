@@ -9,7 +9,7 @@ import {
   TradesLikeCount,
   TradesTitle,
   TradesPrice
-} from 'components/trades/index'
+} from '@/components/trades/tradescardlist/index'
 
 export const TradesCard = () => {
   return (
