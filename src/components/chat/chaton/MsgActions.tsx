@@ -24,7 +24,7 @@ const Wrapper = styled.div<{ $sender: string }>`
   display: flex;
   flex-direction: column;
   position: absolute;
-  z-index: 1;
+  z-index: 1000;
   top: 100%;
   right: ${props => (props.$sender === 'sender' ? 0 : '')};
 

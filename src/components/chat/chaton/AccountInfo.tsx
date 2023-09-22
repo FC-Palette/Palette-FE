@@ -5,8 +5,18 @@ export const AccountInfo = ({ isHost }) => {
     <Wrapper>
       <Account>계좌번호</Account>
       <HostAccount>신한은행 123-4444-67897-12 김*운</HostAccount>
-      {isHost && <Edit2 size="16" />}
-      {!isHost && <Copy size="16" />}
+      {isHost && (
+        <Edit2
+          size="16"
+          cursor="pointer"
+        />
+      )}
+      {!isHost && (
+        <Copy
+          size="16"
+          cursor="pointer"
+        />
+      )}
     </Wrapper>
   )
 }

@@ -3,7 +3,7 @@ import { Image } from 'components/index'
 export const AnnPublisher = () => {
   return (
     <Wrapper>
-      <Image></Image>
+      <Image src="https://avatars.githubusercontent.com/u/142562921?s=200&v=4"></Image>
       <AnnInfo>
         <Publisher>고스트 사원</Publisher>
         <Date>7월 12일 오후 12:10</Date>

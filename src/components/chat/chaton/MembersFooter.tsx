@@ -5,12 +5,15 @@ export const MembersFooter = ({ onClick }) => {
   return (
     <Fixer $bottom="0">
       <Container>
-        {/* <IconWrapper> */}
-        <Notification size="24" />
-        {/* </IconWrapper> */}
-        {/* <IconWrapper onClick={onClick}> */}
-        <Logout />
-        {/* </IconWrapper> */}
+        <Notification
+          size="24"
+          cursor="pointer"
+        />
+        <Logout
+          size="24"
+          cursor="pointer"
+          onClick={onClick}
+        />
       </Container>
     </Fixer>
   )
@@ -19,10 +22,6 @@ export const MembersFooter = ({ onClick }) => {
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 8px 24px 32px;
+  padding: 12px 24px 32px;
   background-color: ${props => props.theme.main.white};
 `
-// const IconWrapper = styled.div`
-//   width: 24px;
-//   height: 24px;
-// `
