@@ -19,15 +19,9 @@ export const Recipient = ({
   showMsgActions,
   toggleMsgActions
 }) => {
-  // const [msgLayer, setMsgLayer] = useRecoilState(msgLayerState)
   const setOpenMsgActionsIndex = useSetRecoilState(msgActionsState)
-  // useOutsideClick(msgRef, () => {
-  //   setOpenMsgActionsIndex(-1)
-  // })
   const ref = useOutsideClick({
     onClickOutside: () => {
-      console.log('ref Clicked')
-
       setOpenMsgActionsIndex(-1)
     }
   })
@@ -50,7 +44,7 @@ export const Recipient = ({
             {message}
             {showMsgActions && (
               <MsgActions
-                ref={ref}
+                msgRef={ref}
                 $sender={$sender}
               />
             )}

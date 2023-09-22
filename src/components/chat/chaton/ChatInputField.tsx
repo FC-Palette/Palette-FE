@@ -40,6 +40,8 @@ const ChatWrapper = styled.div`
   max-width: 430px;
   z-index: 100;
 `
+
+// resize로 height props받아서 align-self: center/flex-end 조절
 const IconWrapper = styled.div<{ $position: string }>`
   align-self: flex-end;
   cursor: pointer;

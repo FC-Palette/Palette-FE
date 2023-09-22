@@ -20,4 +20,5 @@ const ImgBox = styled.img`
   box-sizing: content-box;
   padding-top: 14px;
   padding-right: 12px;
+  cursor: pointer;
 `
