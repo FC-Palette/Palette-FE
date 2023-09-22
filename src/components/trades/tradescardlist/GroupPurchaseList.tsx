@@ -1,5 +1,8 @@
 import { theme } from 'styles/index'
-import { TradesCard, TradesOption } from 'components/trades/index'
+import {
+  TradesCard,
+  TradesOption
+} from '@/components/trades/tradescardlist/index'
 import { css, styled } from 'styled-components'
 import {
   FilterBar,
@@ -10,8 +13,8 @@ import {
 import { TRADES_SUBHEADER_TEXT } from 'constants/trades/index'
 import { Setting4, Record } from 'iconsax-react'
 
-export const SecondHandList = () => {
-  const groupUploadPath = '/secondHandUpload'
+export const GroupPurchaseList = () => {
+  const groupUploadPath = '/groupUpload'
 
   return (
     <Wrapper>
@@ -62,6 +65,12 @@ const Main = styled.div`
   margin-top: 10px;
 `
 
+const FilterBarWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`
+
 const CardWrapper = styled.div`
   width: 360px;
   top: 197px;
@@ -97,9 +106,4 @@ const StyledRecord = styled(Record)`
   color: ${theme.main.blue0};
   width: 20px;
   height: 20px;
-`
-const FilterBarWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
 `

@@ -1,7 +1,8 @@
 import { theme } from 'styles/index'
 import { css, styled } from 'styled-components'
-
+import { tradescreateglobalstate } from 'recoil/index'
 import React, { useState } from 'react'
+import { useRecoilState } from 'recoil'
 
 const placeholderText =
   'TIP!\n수금은 어떻게 진행하실 건가요?\n어디서 상품을 나누실 건가요?\n왜 이상품을 공동구매 하시나요?'
@@ -9,13 +10,19 @@ const placeholderText1 =
   'TIP!\n거래는 어떻게 진행하실 건가요?\n어디서 상품을 나누실 건가요?\n왜 이상품을 중고거래 하시나요?'
 
 export const UploadInputDetail = () => {
-  const [text, setText] = useState('')
+  const [tradesGlobalState, setTradesGlobalState] = useRecoilState(
+    tradescreateglobalstate
+  )
+  const { description } = tradesGlobalState
 
   const handleTextChange = e => {
-    const newText = e.target.value
-
-    if (newText.length <= 300) {
-      setText(newText)
+    const text = e.target.value
+    const maxDescriptionLength = 300
+    if (text.length <= maxDescriptionLength) {
+      setTradesGlobalState(prev => ({
+        ...prev,
+        description: text
+      }))
     }
   }
 
@@ -23,24 +30,29 @@ export const UploadInputDetail = () => {
     <Wrapper1>
       <InputWrapper>
         <TextArea
-          value={text}
           placeholder={placeholderText}
           onChange={handleTextChange}
         />
       </InputWrapper>
-      <TextCount>{text.length} / 300</TextCount>
+      <TextCount>{description.length} / 300</TextCount>
     </Wrapper1>
   )
 }
 
 export const UploadInputDetail1 = () => {
-  const [text, setText] = useState('')
+  const [tradesGlobalState, setTradesGlobalState] = useRecoilState(
+    tradescreateglobalstate
+  )
+  const { description } = tradesGlobalState
 
   const handleTextChange = e => {
-    const newText = e.target.value
-
-    if (newText.length <= 300) {
-      setText(newText)
+    const text = e.target.value
+    const maxDescriptionLength = 300
+    if (text.length <= maxDescriptionLength) {
+      setTradesGlobalState(prev => ({
+        ...prev,
+        description: text
+      }))
     }
   }
 
@@ -48,12 +60,11 @@ export const UploadInputDetail1 = () => {
     <Wrapper>
       <InputWrapper>
         <TextArea
-          value={text}
           placeholder={placeholderText1}
           onChange={handleTextChange}
         />
       </InputWrapper>
-      <TextCount>{text.length} / 300</TextCount>
+      <TextCount>{description.length} / 300</TextCount>
     </Wrapper>
   )
 }

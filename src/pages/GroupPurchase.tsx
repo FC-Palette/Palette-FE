@@ -1,5 +1,5 @@
 import { theme } from 'styles/index'
-import { GroupPurchaseList } from 'components/trades/index'
+import { GroupPurchaseList } from '@/components/trades/tradescardlist/index'
 import { Header, Footer } from 'components/common/index'
 import { css, styled } from 'styled-components'
 import { ArrowLeft2, SearchNormal1, Notification } from 'iconsax-react'
@@ -32,9 +32,11 @@ const MainWrapper = styled.div`
   padding-bottom: 10px;
 `
 const StyledIcon = styled.button`
-  /* color: #000;
-  font-size: ${theme.customSize.xxlarge}; */
+  color: ${theme.main.black};
+  font-size: ${theme.customSize.xxlarge};
 `
 const IconWrapper = styled.button`
   margin-right: 10px;
+  color: ${theme.main.black};
+  font-size: ${theme.customSize.xxlarge};
 `

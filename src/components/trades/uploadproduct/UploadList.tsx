@@ -4,8 +4,16 @@ import { css, styled } from 'styled-components'
 import { UploadTitle } from 'components/trades/uploadproduct/index'
 import { Input } from 'components/index'
 import { TRADES_TEXT } from 'constants/trades/index'
+import { inputUtils } from 'utils/index'
+import { tradescreateglobalstate } from 'recoil/index'
+import { useRecoilState } from 'recoil'
 
 export const UploadList = () => {
+  const [tradesGlobalState, setTradesGlobalState] = useRecoilState(
+    tradescreateglobalstate
+  )
+  const maxTitleLength = 25
+
   return (
     <Wrapper>
       {TRADES_TEXT.map((item, index) => (
@@ -27,6 +35,14 @@ export const UploadList = () => {
                   $borderRadius="8px"
                   $paddingLeft="12px"
                   ph={item.props?.ph}
+                  onChange={e =>
+                    inputUtils(
+                      e.target.value,
+                      item.field,
+                      setTradesGlobalState,
+                      maxTitleLength
+                    )
+                  }
                 />
               </InputFocus>
             ) : (
