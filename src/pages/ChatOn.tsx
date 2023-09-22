@@ -29,6 +29,7 @@ export const ChatOn = () => {
             onClick={() => {
               navigate('/chatlist')
             }}
+            cursor="pointer"
           />
         }>
         <StyledIcon onClick={handleShowMembers}>

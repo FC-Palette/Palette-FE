@@ -7,7 +7,7 @@ export const MembersHeader = ({ onClick }) => {
     <Fixer $top="0">
       <Container>
         <IconWrapper onClick={onClick}>
-          <ArrowLeft2 />
+          <ArrowLeft2 cursor="pointer" />
         </IconWrapper>
         <Grow>
           <Members>참여인원</Members>
