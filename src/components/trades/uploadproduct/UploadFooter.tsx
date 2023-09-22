@@ -1,25 +1,39 @@
-import { theme } from 'styles/index'
-import { css, styled } from 'styled-components'
-import { Button } from 'components/index'
+import { Button } from '@/components'
+import styled from 'styled-components'
 
-export const UploadFooter = () => {
+export const UploadFooter = ({ handleNextStep }) => {
   return (
-    <>
-      <Wrapper>
+    <Wrapper>
+      <BtnWrap>
         <Button
-          $bgColor={theme.main.blue0}
-          $borderRadius="8px"
+          onClick={() => handleNextStep()}
+          $btnWidth="100%"
           $btnHeight="60px"
-          $btnWidth="350px"
-          //  $fontSize={$fontSize}
-        ></Button>
-      </Wrapper>
-    </>
+          $fontSize="20px"
+          $borderRadius="8px">
+          다음
+        </Button>
+      </BtnWrap>
+    </Wrapper>
   )
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled.footer`
   display: flex;
-  justify-content: center;
-  margin-bottom: 32px;
+  align-items: center;
+
+  height: 80px;
+  z-index: 10;
+  bottom: 0;
+  background-color: transparent;
+  box-shadow: 0px -1px 1px rgba(0, 0, 0, 0.2);
+  margin-top: 5%;
+`
+
+const BtnWrap = styled.div`
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: 500;
+  width: 100%;
+  margin: 10% 5.5%;
 `

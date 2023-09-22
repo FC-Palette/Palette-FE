@@ -152,6 +152,7 @@ const AdditionalInfo2 = styled.div`
   padding: 14px 20px 0px 20px;
   height: 248px;
   width: 350px;
+  border-radius: 0px 0px 8px 8px;
   background-color: ${theme.greyScale.grey1};
   color: ${theme.greyScale.grey7};
   font-size: ${theme.customSize.small};

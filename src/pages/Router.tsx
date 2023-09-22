@@ -80,7 +80,8 @@ export const router = createBrowserRouter([
         '/secondHandUpload',
         <SecondHandUpload />,
         <ErrorComponent />
-      )
+      ),
+      generateRoute('/GroupUpload/:stepId', <GroupUpload />, <ErrorComponent />)
     ]
   },
   {
