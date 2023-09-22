@@ -6,9 +6,9 @@ import styled from 'styled-components'
 export const GetDetailFooterAndButton = () => {
   const navigate = useNavigate()
   const [isModal, setIsModal] = useState(false)
-  const isUserJoined = true
+  const isUserJoined = false
 
-  const meetupCondition = true
+  const meetupCondition = false
 
   const handleModal = () => {
     isUserJoined ? null : setIsModal(true)

@@ -8,8 +8,10 @@ import {
   GetTitleAndDescription,
   PreviewMember
 } from '.'
-import { CareerCreateGlobalState } from '../..'
-import styled from 'styled-components'
+import {
+  CareerCreateGlobalState,
+  CareerCreateMeetingHeaderDynamic
+} from '../..'
 
 export const StepPreviewCard = () => {
   const globalState = useRecoilValue(CareerCreateGlobalState)
@@ -32,33 +34,28 @@ export const StepPreviewCard = () => {
 
   return (
     <>
-      <Wrap>
-        <GetThumbnail meetupImages={meetupImages} />
-        <GetRoomManagerInfo />
-        <GetTitleAndDescription
-          meetupTitle={meetupTitle}
-          meetupDescription={meetupDescription}
-        />
-        <GetMeetingCategory selectedMeetingTypes={selectedMeetingTypes} />
-        <GetStats />
-        <GetMeetingInfo
-          selectedRoles={selectedRoles}
-          gender={gender}
-          recruitmentSize={recruitmentSize}
-          meetingFrequency={meetingFrequency}
-          selectedDays={selectedDays}
-          meetingTime={meetingTime}
-          progressTime={progressTime}
-          meetupStartDay={meetupStartDay}
-          meetupEndDay={meetupEndDay}
-          isApprove={isApprove}
-        />
-        <PreviewMember />
-      </Wrap>
+      <CareerCreateMeetingHeaderDynamic meetupTitle={meetupTitle} />
+      <GetThumbnail meetupImages={meetupImages} />
+      <GetRoomManagerInfo />
+      <GetTitleAndDescription
+        meetupTitle={meetupTitle}
+        meetupDescription={meetupDescription}
+      />
+      <GetMeetingCategory selectedMeetingTypes={selectedMeetingTypes} />
+      <GetStats />
+      <GetMeetingInfo
+        selectedRoles={selectedRoles}
+        gender={gender}
+        recruitmentSize={recruitmentSize}
+        meetingFrequency={meetingFrequency}
+        selectedDays={selectedDays}
+        meetingTime={meetingTime}
+        progressTime={progressTime}
+        meetupStartDay={meetupStartDay}
+        meetupEndDay={meetupEndDay}
+        isApprove={isApprove}
+      />
+      <PreviewMember />
     </>
   )
 }
-
-const Wrap = styled.div`
-  width: 100%;
-`

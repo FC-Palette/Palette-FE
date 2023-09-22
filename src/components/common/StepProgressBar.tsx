@@ -38,7 +38,7 @@ export const StepProgressBar = ({ $currentPage }: ProgressBarProps) => {
 const Wrap = styled.div`
   position: sticky;
   top: 80px;
-  width: 100%;
+  width: 430px;
   height: 44px;
   display: flex;
   flex-direction: column;

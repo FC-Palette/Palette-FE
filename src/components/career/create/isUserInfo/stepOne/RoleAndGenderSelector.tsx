@@ -89,6 +89,7 @@ export const RoleAndGenderSelector = () => {
     </>
   )
 }
+
 const AnswerItem = styled.div<SelectedAnswerProps>`
   display: flex;
   justify-content: center;
@@ -107,7 +108,7 @@ const AnswerItem = styled.div<SelectedAnswerProps>`
 `
 
 const AnswerItemFlexWrap = styled.div`
-  width: 382px;
+  margin: 0 5.7%;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;

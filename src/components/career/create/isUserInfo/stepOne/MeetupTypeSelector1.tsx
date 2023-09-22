@@ -57,16 +57,20 @@ export const MeetupTypeSelector1 = () => {
       <CareerCreateMeetingCommonQuestion>
         어떤 주제로 모임을 만드시겠어요
       </CareerCreateMeetingCommonQuestion>
+
       <AnswerContainer>{Answer_1}</AnswerContainer>
+
       <CareerCreateMeetingCommonQuestion>
         어떤 주제로 모임을 만드시겠어요
       </CareerCreateMeetingCommonQuestion>
+
       <AnswerContainer>{Answer_2}</AnswerContainer>
     </>
   )
 }
 
 const AnswerContainer = styled.div`
+  margin: 0 5.7%;
   display: flex;
   gap: 8px;
 `

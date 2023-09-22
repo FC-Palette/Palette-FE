@@ -3,9 +3,14 @@ import { theme } from 'styles/index'
 import { styled } from 'styled-components'
 import { useRecoilState } from 'recoil'
 import { modalOnState } from 'recoil/index'
-
+import { ModalButtonsProps } from '@/types'
 //두개로 나뉜 모달 버튼들입니다.
-export const ModalButtons = ({ leftBtn, rightBtn }) => {
+export const ModalButtons = ({
+  leftBtn,
+  rightBtn,
+  onLeftClick,
+  onRightClick
+}: ModalButtonsProps) => {
   const [modalOn, setModalOn] = useRecoilState(modalOnState)
   const handleModalOn = () => {
     setModalOn(!modalOn)
@@ -19,14 +24,15 @@ export const ModalButtons = ({ leftBtn, rightBtn }) => {
         $borderColor={theme.greyScale.bluegrey}
         $btnHeight="48px"
         $fontSize="16px"
-        onClick={handleModalOn}>
+        onClick={onLeftClick}>
         {leftBtn}
       </Button>
       <Button
         $bgColor={theme.main.blue0}
         $btnWidth="127px"
         $btnHeight="48px"
-        $fontSize="16px">
+        $fontSize="16px"
+        onClick={onRightClick}>
         {rightBtn}
       </Button>
     </Buttons>

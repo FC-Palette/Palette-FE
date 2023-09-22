@@ -61,8 +61,10 @@ export const MeetupTitleAndDescription = () => {
 }
 
 // Title
+
 const QuestionTitle = styled.div`
-  margin-top: 32px;
+  margin-top: 7%;
+  margin-bottom: 2%;
   font-weight: 500;
   font-size: 18px;
   color: ${props => props.theme.greyScale.grey6};
@@ -73,18 +75,21 @@ const Asterrisk = styled.span`
 `
 
 const InputContainer = styled.div`
-  margin-top: 8px;
-  width: 382px;
+  width: 100%;
   height: 48px;
   border-radius: 8px;
   border: 1px solid ${props => props.theme.greyScale.grey4};
+
+  &:focus-within {
+    border-color: ${props => props.theme.main.blue0};
+  }
 `
 
 const InputContents = styled.input`
   font-size: 16px;
   padding: 12px 16px;
-  width: 100%;
-  height: 100%;
+  width: inherit;
+  height: inherit;
   resize: none;
   border: none;
   outline: none;
@@ -98,9 +103,7 @@ const InputContents = styled.input`
   }
 `
 const InputLength = styled.div`
-  margin-top: 2px;
   font-size: 12px;
-  margin-left: 345px;
   line-height: 18px;
   text-align: right;
   color: ${props => props.theme.greyScale.grey5};
@@ -108,24 +111,28 @@ const InputLength = styled.div`
 
 // Description
 const QuestionDescription = styled.div`
-  margin-top: 32px;
+  margin-top: 7%;
+  margin-bottom: 2%;
   font-weight: 500;
   font-size: 18px;
   color: ${props => props.theme.greyScale.grey6};
 `
 const TextAreaContainer = styled.div`
-  margin-top: 8px;
-  width: 382px;
+  width: 100%;
   height: 209px;
   border-radius: 8px;
   border: 1px solid ${props => props.theme.greyScale.grey4};
+
+  &:focus-within {
+    border-color: ${props => props.theme.main.blue0};
+  }
 `
 
 const TextAreaContents = styled.textarea`
   font-size: 16px;
   padding: 12px 16px;
-  width: 100%;
-  height: 100%;
+  width: inherit;
+  height: inherit;
   resize: none;
   border: none;
   outline: none;
@@ -140,9 +147,7 @@ const TextAreaContents = styled.textarea`
 `
 
 const TextAreaLengthWrap = styled.div`
-  margin-top: 2px;
   font-size: 12px;
-  margin-left: 335px;
   line-height: 18px;
   text-align: right;
   color: ${props => props.theme.greyScale.grey5};

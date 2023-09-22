@@ -12,10 +12,7 @@ export const CareerMainItemLikeButton = () => {
   )
 }
 
-const StyledWrapper = styled.button`
-  position: absolute;
-  left: 382px;
-`
+const StyledWrapper = styled.button``
 
 const StyledIcon = styled(Heart)`
   width: 24px;

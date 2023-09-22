@@ -1,21 +1,16 @@
 import { styled } from 'styled-components'
-import { profileNCareerFilter } from 'constants/index'
 
-export const CareerMainItemCategory = () => {
-  return (
-    <CategoryWrap>
-      <CategoryItem>{profileNCareerFilter.jobType[0]}</CategoryItem>
-      <CategoryItem>{profileNCareerFilter.male[0]}</CategoryItem>
-      <CategoryItem>{profileNCareerFilter.typeOne[0]}</CategoryItem>
-    </CategoryWrap>
-  )
+export const CareerMainItemCategory = ({ jobs }) => {
+  const categoryChips = jobs.map((category, index) => {
+    return <CategoryItem key={index}>{category}</CategoryItem>
+  })
+  return <CategoryWrap>{categoryChips}</CategoryWrap>
 }
 
 const CategoryWrap = styled.div`
   display: flex;
   width: auto;
   gap: 4px;
-  
 `
 
 const CategoryItem = styled.div`
@@ -27,4 +22,5 @@ const CategoryItem = styled.div`
   line-height: 16.71px;
   padding: 4px 8px;
   border-radius: 4px;
+  white-space: nowrap;
 `

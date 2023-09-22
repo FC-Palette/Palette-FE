@@ -1,12 +1,28 @@
 import { PROFILE_ENTRY_POINT_TEXT } from '@/constants'
-import { Button } from 'components/common'
+import { Button, Header } from 'components/common'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
+import { ArrowLeft2 } from 'iconsax-react'
 
 export const ProfileEnterWrap = () => {
+  const navigate = useNavigate()
+
+  const onClickHandler = () => {
+    navigate(-1)
+  }
+
   return (
     <Wrap>
+      <Header
+        leftIcon={
+          <StyledIcon onClick={onClickHandler}>
+            <ArrowLeft2 />
+          </StyledIcon>
+        }
+        centerText="모임을 위한 간단 프로필"
+      />
       <TextWrap>
-        <PostTitle>[마케팅] 출근 전 트렌드 분석</PostTitle>
+        <FetchTitle>[마케팅] 출근 전 트렌드 분석</FetchTitle>
         <HeaderText>
           {PROFILE_ENTRY_POINT_TEXT.top[0]}
           <br />
@@ -20,7 +36,7 @@ export const ProfileEnterWrap = () => {
       </TextWrap>
       <BtnWrap>
         <Button
-          $btnWidth="382px"
+          $btnWidth="80%"
           $btnHeight="60px"
           $fontSize="20px"
           $borderRadius="8px">
@@ -30,39 +46,43 @@ export const ProfileEnterWrap = () => {
     </Wrap>
   )
 }
+
 const Wrap = styled.div`
-  width: 430px;
-  height: 850px;
-  position: relative;
+  min-width: 430px;
 `
 const TextWrap = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
-  margin-left: 20px;
+  margin: 0 5.7%;
 `
-const PostTitle = styled.div`
-  margin-top: 64px;
+const FetchTitle = styled.div`
+  margin-top: 14%;
   font-weight: 500;
   font-size: 20px;
   line-height: 26px;
   color: ${props => props.theme.greyScale.grey9};
 `
 const HeaderText = styled.div`
-  top: 180px;
-  margin-top: 8px;
+  margin-top: 5%;
   font-size: ${props => props.theme.customSize.xxxlarge};
   font-weight: 700;
   color: ${props => props.theme.greyScale.grey9};
 `
 const SmallText = styled.div`
+  margin-top: 5%;
   color: ${props => props.theme.greyScale.grey5};
   font-size: ${props => props.theme.customSize.xlarge};
   font-weight: 400;
-  margin-top: 12px;
 `
 
 const BtnWrap = styled.div`
-  line-height: 26px;
-  margin: 760px 24px 32px;
+  margin-top: 150%;
+  width: 100%;
+  margin: 15% 5.7%;
+`
+
+const StyledIcon = styled.button`
+  color: #000;
+  font-size: ${props => props.theme.customSize.xxlarge};
 `

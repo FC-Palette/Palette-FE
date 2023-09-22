@@ -4,7 +4,6 @@ import {
   CareerMain,
   GroupPurchase,
   Layout,
-  ProfileEnter,
   SignIn,
   SignUp,
   FindId,
@@ -19,24 +18,20 @@ import {
   SettingManage,
   SecondHand,
   GroupUpload,
-  CareerCreateMeetingStepOne,
-  CareerCreateMeetingStepTwo,
-  CareerCreateMeetingStepThree,
-  CareerCreateMeetingStepPreview,
   ChatList,
   ChatOn,
   ChatAnnList,
   ChatAnnDetail,
-  IsNotApprovedJoinMeetingStepOne,
-  IsApprovedJoinMeetingStepOne,
-  IsApprovedJoinMeetingStepTwo,
-  IsApprovedJoinMeetingStepComplete,
   CareerDetail,
   CareerDetailMemberSeeMore,
-  SecondHandUpload
+  SecondHandUpload,
+  CareerMeetingsCreate,
+  CareerIsNotUserInfo,
+  CareerIsNotApprovedJoinMeeting
 } from 'pages/index'
 import type { RouteObject } from 'react-router-dom'
 import { Start } from './Start'
+import CareerIsApprovedJoinMeeting from './CareerIsApprovedJoinMeeting'
 
 //페이지 정보를 담고있는 객체를 반환하는 함수.
 const generateRoute = (path, component, error, children?): RouteObject => {
@@ -89,63 +84,36 @@ export const router = createBrowserRouter([
     element: <Layout />,
     errorElement: <ErrorComponent />,
     children: [
-      generateRoute('/careerMain', <CareerMain />, <ErrorComponent />),
-      generateRoute('/profile-1', <ProfileEnter />, <ErrorComponent />)
-    ]
-  },
-  {
-    path: '/',
-    element: <Layout />,
-    errorElement: <ErrorComponent />,
-    children: [
+      generateRoute('/career', <CareerMain />, <ErrorComponent />),
       generateRoute(
-        '/createMeeting-1',
-        <CareerCreateMeetingStepOne />,
+        '/profile/:profileid',
+        <CareerIsNotUserInfo />,
         <ErrorComponent />
       ),
       generateRoute(
-        '/createMeeting-2',
-        <CareerCreateMeetingStepTwo />,
+        '/create/:createstepid',
+        <CareerMeetingsCreate />,
         <ErrorComponent />
       ),
       generateRoute(
-        '/createMeeting-3',
-        <CareerCreateMeetingStepThree />,
+        '/joinmeeting/approved/:approvedstepid',
+        <CareerIsApprovedJoinMeeting />,
         <ErrorComponent />
       ),
       generateRoute(
-        '/createMeeting-preview',
-        <CareerCreateMeetingStepPreview />,
+        '/joinmeeting/not',
+        <CareerIsNotApprovedJoinMeeting />,
         <ErrorComponent />
       ),
+      generateRoute('detail', <CareerDetail />, <ErrorComponent />),
       generateRoute(
-        '/isNotApproved-joinMeeting-1',
-        <IsNotApprovedJoinMeetingStepOne />,
-        <ErrorComponent />
-      ),
-      generateRoute(
-        '/isApproved-joinMeeting-1',
-        <IsApprovedJoinMeetingStepOne />,
-        <ErrorComponent />
-      ),
-      generateRoute(
-        'isApproved-joinMeeting-2',
-        <IsApprovedJoinMeetingStepTwo />,
-        <ErrorComponent />
-      ),
-      generateRoute(
-        'isApproved-joinMeeting-complete',
-        <IsApprovedJoinMeetingStepComplete />,
-        <ErrorComponent />
-      ),
-      generateRoute('careerDetail', <CareerDetail />, <ErrorComponent />),
-      generateRoute(
-        'careerDetail/members',
+        'detail/members',
         <CareerDetailMemberSeeMore />,
         <ErrorComponent />
       )
     ]
   },
+
   {
     path: '/',
     element: <Layout />,

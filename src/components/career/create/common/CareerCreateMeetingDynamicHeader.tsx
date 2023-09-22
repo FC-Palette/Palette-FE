@@ -27,7 +27,6 @@ const StyledIcon = styled.button`
 
 const MultiIconWrap = styled.div`
   display: flex;
-  width: 58px;
   gap: 10px;
   font-weight: 100;
   font-size: ${props => props.theme.customSize.xxlarge};
