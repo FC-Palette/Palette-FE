@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { theme } from 'styles/index'
-import { css, styled } from 'styled-components'
+import { styled } from 'styled-components'
 import {
   TRADES_DETAILTITLE_TEXT,
   TRADES_DETAIL_TEXT,

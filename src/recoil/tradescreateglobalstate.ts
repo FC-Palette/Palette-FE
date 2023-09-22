@@ -1,9 +1,13 @@
 import { atom } from 'recoil'
+import {
+  TradeCreateGlobalStateProps,
+  SecondHandGlobalStateProps
+} from 'types/trades/index'
 
 const dateNow = new Date()
 const today = dateNow.toISOString().slice(0, 10)
 
-export const tradescreateglobalstate = atom({
+export const tradescreateglobalstate = atom<TradeCreateGlobalStateProps>({
   key: 'tradesGlobalState',
   default: {
     selectedItem: '공동구매',
@@ -23,7 +27,7 @@ export const tradescreateglobalstate = atom({
   }
 })
 
-export const secondhandglobalstate = atom({
+export const secondhandglobalstate = atom<SecondHandGlobalStateProps>({
   key: 'secondHandGlobalState',
   default: {
     selectedItem: '중고거래',
@@ -31,7 +35,7 @@ export const secondhandglobalstate = atom({
     title: '',
     description: '',
     price: 0,
-    ategory: '',
+    category: '',
     isFree: false,
     selectedDays: [] as string[],
     transactionStartTime: '',

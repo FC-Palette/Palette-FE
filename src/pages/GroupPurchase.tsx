@@ -1,7 +1,7 @@
 import { theme } from 'styles/index'
 import { GroupPurchaseList } from '@/components/trades/tradescardlist/index'
 import { Header, Footer } from 'components/common/index'
-import { css, styled } from 'styled-components'
+import { styled } from 'styled-components'
 import { ArrowLeft2, SearchNormal1, Notification } from 'iconsax-react'
 
 export const GroupPurchase = () => {

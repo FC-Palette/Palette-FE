@@ -1,5 +1,3 @@
-import { theme } from 'styles/index'
-import { css, styled } from 'styled-components'
 import { useNavigate, useParams } from 'react-router-dom'
 import {
   PurchaseStepOne,

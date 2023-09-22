@@ -1,5 +1,5 @@
 import { theme } from 'styles/index'
-import { css, styled } from 'styled-components'
+import { styled } from 'styled-components'
 import { Input } from 'components/index'
 import { UploadOption } from 'components/trades/uploadproduct/UploadOption'
 

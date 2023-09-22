@@ -1,5 +1,4 @@
-import { theme } from 'styles/index'
-import { css, styled } from 'styled-components'
+import { styled } from 'styled-components'
 import { UploadList } from 'components/trades/uploadproduct/index'
 
 export const UploadDetail = () => {
