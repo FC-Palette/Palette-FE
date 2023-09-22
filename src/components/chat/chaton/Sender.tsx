@@ -13,15 +13,16 @@ export const Sender = ({
   showMsgActions,
   toggleMsgActions
 }) => {
-  // const [msgLayer, setMsgLayer] = useRecoilState(msgLayerState)
   const setOpenMsgActionsIndex = useSetRecoilState(msgActionsState)
   const ref = useOutsideClick({
     onClickOutside: () => {
-      console.log('ref Clicked')
-
       setOpenMsgActionsIndex(-1)
     }
   })
+  const handleDbClick = e => {
+    e.preventDefault()
+    toggleMsgActions()
+  }
 
   return (
     <MessageBlock $sender={$sender}>
@@ -32,11 +33,11 @@ export const Sender = ({
         />
         <MessageBox
           $sender={$sender}
-          onDoubleClick={toggleMsgActions}>
+          onDoubleClick={handleDbClick}>
           {message}
           {showMsgActions && (
             <MsgActions
-              ref={ref}
+              msgRef={ref}
               $sender={$sender}
             />
           )}
@@ -58,6 +59,7 @@ const SenderBlock = styled.div`
 `
 export const MessageBox = styled.div<{ $sender: string }>`
   position: relative;
+  user-select: none;
   padding: 12px;
   border-radius: 12px;
   color: ${props =>
