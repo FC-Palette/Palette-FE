@@ -1,5 +1,6 @@
 import styled from "styled-components"
-import { Note, BagHappy, EmojiHappy } from 'iconsax-react'
+// 미리보기 아이콘 
+// import { Note, BagHappy, EmojiHappy } from 'iconsax-react'
 import { MegaPhoneIcon } from "./MegaPhoneIcon"
 import { theme } from "@/styles"
 
