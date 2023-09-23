@@ -22,6 +22,7 @@ export const ChatOn = () => {
   return (
     <>
       <ChatMembers />
+      {/* HIDDEN INITIALLY */}
       <Header
         centerText="USERNAME"
         leftIcon={
@@ -32,8 +33,8 @@ export const ChatOn = () => {
             cursor="pointer"
           />
         }>
-        <StyledIcon onClick={handleShowMembers}>
-          <More />
+        <StyledIcon>
+          <More onClick={handleShowMembers} />
         </StyledIcon>
       </Header>
       <ChatInfo></ChatInfo>

@@ -30,6 +30,6 @@ export const ChatInfo = () => {
 const InfoWrapper = styled.div`
   position: sticky;
   z-index: 2;
-  top: 80px;
+  /* top: 80px; */
   box-shadow: 0px 3px 6px 0px rgba(187, 187, 210, 0.3);
 `

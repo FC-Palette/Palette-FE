@@ -30,7 +30,7 @@ const Wrapper = styled.header`
   align-items: center;
   width: 100%;
   max-width: 430px;
-  height: 80px;
+  min-height: 80px;
   justify-content: center;
   position: sticky;
   top: 0;
