@@ -3,11 +3,13 @@ import styled from 'styled-components'
 interface GetTitleAndDescriptionProps {
   meetupTitle: string
   meetupDescription: string
+  detailText: string
 }
 
 export const GetTitleAndDescription: React.FC<GetTitleAndDescriptionProps> = ({
   meetupTitle,
-  meetupDescription
+  meetupDescription,
+  detailText
 }) => {
   const truncateText = (text: string, maxLength: number) => {
     return text.length > maxLength ? text.slice(0, maxLength) + '...' : text
@@ -22,7 +24,7 @@ export const GetTitleAndDescription: React.FC<GetTitleAndDescriptionProps> = ({
         <Description>
           {meetupDescription.length > 0
             ? truncateText(meetupDescription, 150)
-            : '아직 이 모임에 대한 소개가 작성되지 않았어요.'}
+            : detailText}
         </Description>
       </Container>
     </>

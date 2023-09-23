@@ -12,3 +12,13 @@ export const TRADES_MODAL_TEXT = {
     '유지하기'
   ]
 }
+
+export const SECONDHAND_MODAL_TEXT = {
+  create: [
+    '개인정보 공유 동의',
+    '리버블은 중고거래에 대한 책임을 갖지 않습니다.',
+    '페이지 남기',
+    '채팅방 이동'
+  ],
+  cancel: ['중고거래 취소하기', '작성기록이 모두 삭제돼요.', '삭제', '유지하기']
+}

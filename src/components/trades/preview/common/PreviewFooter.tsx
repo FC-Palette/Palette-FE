@@ -1,6 +1,6 @@
 import { Button } from '@/components'
 import styled from 'styled-components'
-export const PreviewFooter = ({ handleTrades, handleCancel }) => {
+export const PreviewFooter = ({ handleTrades, handleCancel, Text }) => {
   return (
     <Wrapper>
       <BtnWrap>
@@ -18,7 +18,7 @@ export const PreviewFooter = ({ handleTrades, handleCancel }) => {
             $btnWidth="45%"
             $btnHeight="60px"
             $borderRadius="8px">
-            개설하기
+            {Text}
           </Button>
         </BtnWrap>
       </BtnWrap>
