@@ -25,7 +25,8 @@ export const CareerIsNotApprovedJoinMeeting = () => {
 }
 
 const Wrap = styled.div`
-  width: 430px;
+  max-width: 430px;
+  width: 100%;
 `
 const StyledIcon = styled.button`
   color: #000;

@@ -1,47 +1,49 @@
-import { Button, Modal, ModalButtons } from '@/components'
-import { useState } from 'react'
+import { BackgroundModal, Button, ModalButtons } from '@/components'
+import { CREATE_MODAL_TEXT } from '@/constants'
+import { modalOnState } from '@/recoil'
+import { useRecoilState } from 'recoil'
 import styled from 'styled-components'
 
 export const GetDetailFooterAndButton = () => {
-  const [isModal, setIsModal] = useState(false)
+  const [modal, setModal] = useRecoilState(modalOnState)
+  const modalText = CREATE_MODAL_TEXT.condition_not_met
   const isUserJoined = false
 
   const handleModal = () => {
-    isUserJoined ? null : setIsModal(true)
+    setModal(!modal)
   }
 
   return (
     <>
-      {isUserJoined ? (
-        <IsUserNotJoined>이미 참여중인 모임입니다.</IsUserNotJoined>
-      ) : null}
       <Wrapper>
         <BtnWrap>
           <Button
-            onClick={() => handleModal()}
-            $btnWidth="382px"
+            onClick={handleModal}
+            $btnWidth="100%"
             $btnHeight="60px"
             $fontSize="20px"
             $borderRadius="8px">
             {isUserJoined ? '채팅하기' : '참여하기'}
           </Button>
         </BtnWrap>
-
-        {isModal ? (
-          <Modal
-            title="가입요건이 맞지 않아요"
-            content="아쉽지만 가입요건이 충족되지 않았어요
-            꼭 참여하고 싶은 모임이라면
-            주최자에게 메시지를 보내보세요!">
-            <ModalButtons
-              onLeftClick={() => setIsModal(false)}
-              onRightClick={() => alert('메세지 보내기 로직 필요')}
-              leftBtn={'취소하기'}
-              rightBtn={'메시지보내기'}
-            />
-          </Modal>
-        ) : null}
       </Wrapper>
+
+      {isUserJoined && (
+        <IsUserNotJoined>이미 참여중인 모임입니다.</IsUserNotJoined>
+      )}
+
+      {modalOnState && (
+        <BackgroundModal
+          title={modalText[0]}
+          content={modalText[1]}>
+          <ModalButtons
+            onLeftClick={() => setModal(!modal)}
+            onRightClick={() => alert('메세지 보내기 로직 필요')}
+            leftBtn={modalText[2]}
+            rightBtn={modalText[3]}
+          />
+        </BackgroundModal>
+      )}
     </>
   )
 }
@@ -66,6 +68,7 @@ const BtnWrap = styled.div`
   width: 100%;
   margin: 0 24px;
 `
+
 const IsUserNotJoined = styled.div`
   z-index: 100;
   display: flex;

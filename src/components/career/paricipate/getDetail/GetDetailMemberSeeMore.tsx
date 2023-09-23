@@ -20,7 +20,7 @@ export const GetDetailMemberSeeMore = () => {
       },
       {
         nickname: '요한이2',
-        bio: '안녕하세요 처음보는 사람들도 안녕하세요 어~~~우어워어',
+        bio: '안녕하세요 처음보는 사람들도 안녕하세요 어~~~우어워어asdfasdfasdfasdfasdf',
         image: null,
         isFollow: false
       },
@@ -58,7 +58,7 @@ export const GetDetailMemberSeeMore = () => {
         color="#6B7280"
         $bgColor="#F5F6FA"
         $borderColor="F5F6FA"
-        $btnWidth="99px"
+        $btnWidth="100%"
         $btnHeight="35px">
         팔로우 삭제
       </Button>
@@ -67,23 +67,30 @@ export const GetDetailMemberSeeMore = () => {
         onClick={handleFollow}
         $bgColor="#2563EB"
         $borderColor="2563EB"
-        $btnWidth="99px"
+        $btnWidth="100%"
         $btnHeight="35px">
         팔로우
       </Button>
     )
   }
+
+  const longText = (text, maxLength) => {
+    return text.length > maxLength ? text.slice(0, maxLength) + '...' : text
+  }
   return (
     <>
       <Wrap>
-        <Header
-          leftIcon={
-            <StyledIcon onClick={() => navigate(-1)}>
-              <ArrowLeft2 />
-            </StyledIcon>
-          }
-          centerText={'참여 멤버'}
-        />
+        <HeaderWrap>
+          <Header
+            leftIcon={
+              <StyledIcon onClick={() => navigate('/detail')}>
+                <ArrowLeft2 />
+              </StyledIcon>
+            }
+            centerText={'참여 멤버'}
+          />
+        </HeaderWrap>
+
         <MembersContainer>
           {dummyFetchData.members.map((member, index) => (
             <MemberItem key={index}>
@@ -96,7 +103,7 @@ export const GetDetailMemberSeeMore = () => {
               />
               <MemberInfo>
                 <MemberNickname>{member.nickname}</MemberNickname>
-                <MemberBio>{member.bio}</MemberBio>
+                <MemberBio>{longText(member.bio, 20)}</MemberBio>
               </MemberInfo>
               <FollowButtonContainer>
                 {checkFollow(isFollow)}
@@ -109,14 +116,90 @@ export const GetDetailMemberSeeMore = () => {
   )
 }
 
-const Wrap = styled.div`
-  width: 430px;
-  height: 932px;
+// 수정전
+// const Wrap = styled.div`
+//   max-width: 430px;
+//   min-height: 932px;
+// `
+
+// const StyledIcon = styled.button`
+//   color: #000;
+//   font-size: ${props => props.theme.customSize.xxlarge};
+// `
+
+// const MembersContainer = styled.div`
+//   width: 100%;
+//   border-radius: 8px;
+// `
+
+// const MemberItem = styled.div`
+//   display: flex;
+//   align-items: center;
+//   margin-top: 8px;
+//   height: 76px;
+// `
+
+// const MemberImage = styled.img`
+//   width: 54px;
+//   height: 54px;
+//   margin: 8px 12px 8px 24px;
+//   border-radius: 8px;
+// `
+
+// const MemberInfo = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   margin-top: 12px;
+// `
+
+// const MemberNickname = styled.span`
+//   font-size: 16px;
+//   color: ${props => props.theme.greyScale.grey8};
+// `
+
+// const MemberBio = styled.span`
+//   font-size: 16px;
+//   color: ${props => props.theme.greyScale.grey5};
+//   width: 180px;
+//   height: 32px;
+//   white-space: nowrap;
+//   text-overflow: ellipsis;
+//   overflow: hidden;
+//   margin-top: 2px;
+// `
+
+// const FollowButtonContainer = styled.div`
+//   margin-left: 36px;
+// `
+
+// // const FollowBtn = styled.button`
+// //   margin-top: 21px;
+// //   display: flex;
+
+// //   margin-right: 24px;
+// //   justify-content: center;
+// //   align-items: center;
+// //   margin-left: 70px;
+// //   width: 105px;
+// //   height: 35px;
+// //   background-color: ${props => props.theme.subColor.blueGrey};
+// //   color: ${props => props.theme.greyScale.grey5};
+// //   border-radius: 8px;
+// // `
+
+// 수정 후 (9.23)
+const HeaderWrap = styled.div`
+  width: 100%;
 `
 
-const StyledIcon = styled.button`
-  color: #000;
-  font-size: ${props => props.theme.customSize.xxlarge};
+const Wrap = styled.div`
+  max-width: 430px;
+  min-height: 932px;
+
+  @media (max-width: 430px) {
+    max-width: 100%;
+    padding: 16px;
+  }
 `
 
 const MembersContainer = styled.div`
@@ -124,24 +207,39 @@ const MembersContainer = styled.div`
   border-radius: 8px;
 `
 
+const StyledIcon = styled.button`
+  color: #000;
+  font-size: ${props => props.theme.customSize.xxlarge};
+`
+
 const MemberItem = styled.div`
   display: flex;
   align-items: center;
-  margin-top: 8px;
-  height: 76px;
+  max-height: 76px;
+  width: 100%;
+  max-width: 430px;
+  box-sizing: border-box;
+  padding: 16px;
+  border-radius: 8px;
+  @media (max-width: 430px) {
+    max-width: 100%;
+  }
 `
 
 const MemberImage = styled.img`
-  width: 54px;
-  height: 54px;
-  margin: 8px 12px 8px 24px;
+  width: 100%;
+  height: auto;
+  max-width: 54px;
+  max-height: 54px;
+  margin: 8px 12px 8px 0;
   border-radius: 8px;
 `
 
 const MemberInfo = styled.div`
+  flex: 1;
   display: flex;
   flex-direction: column;
-  margin-top: 12px;
+  justify-content: space-between;
 `
 
 const MemberNickname = styled.span`
@@ -152,29 +250,19 @@ const MemberNickname = styled.span`
 const MemberBio = styled.span`
   font-size: 16px;
   color: ${props => props.theme.greyScale.grey5};
-  width: 180px;
-  height: 32px;
-  white-space: nowrap;
+  white-space: wrap;
   text-overflow: ellipsis;
   overflow: hidden;
   margin-top: 2px;
 `
 
 const FollowButtonContainer = styled.div`
-  margin-left: 36px;
+  max-width: 99px;
+  margin-left: 16px;
+  width: 100%;
+  
+  @media (max-width: 430px) {
+    margin-left: 0;
+    width: 100%;
+  }
 `
-
-// const FollowBtn = styled.button`
-//   margin-top: 21px;
-//   display: flex;
-
-//   margin-right: 24px;
-//   justify-content: center;
-//   align-items: center;
-//   margin-left: 70px;
-//   width: 105px;
-//   height: 35px;
-//   background-color: ${props => props.theme.subColor.blueGrey};
-//   color: ${props => props.theme.greyScale.grey5};
-//   border-radius: 8px;
-// `

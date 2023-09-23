@@ -22,7 +22,7 @@ export const GetDetailHeader = () => {
 
   const navigate = useNavigate()
   return (
-    <>
+    <Wrap>
       <Header
         leftIcon={
           <StyledIcon onClick={() => navigate(-1)}>
@@ -32,9 +32,13 @@ export const GetDetailHeader = () => {
         centerText={'Fetch Title'}>
         {dynamicHeaderIcon(isManager)}
       </Header>
-    </>
+    </Wrap>
   )
 }
+
+const Wrap = styled.div`
+  width: 100%;
+`
 
 const StyledIcon = styled.button`
   color: #000;

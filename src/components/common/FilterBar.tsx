@@ -18,6 +18,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   )
 }
 
+// 수정 전
 const Wrapper = styled.div`
   display: flex;
   align-items: center;

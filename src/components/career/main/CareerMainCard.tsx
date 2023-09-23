@@ -8,16 +8,14 @@ export const CareerMainCard = ({ responseData }) => {
   return (
     <Card>
       {responseData && responseData.length > 0 ? (
-        responseData.map(items =>
-          items.map(item => (
-            <CareerMainItemsWrap
-              key={item.id}
-              data={item}
-            />
-          ))
-        )
+        responseData.map(item => (
+          <CareerMainItemsWrap
+            key={item.id}
+            data={item}
+          />
+        ))
       ) : (
-        <p>데이터 없음</p>
+        <div>데이터 없음</div>
       )}
 
       <CareerMainItemCreateButton />
