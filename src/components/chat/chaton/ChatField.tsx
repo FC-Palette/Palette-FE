@@ -1,12 +1,12 @@
 import React from 'react'
 import { useRecoilState } from 'recoil'
 import { msgActionsState } from 'recoil/index'
-import { useState, useEffect } from 'react'
+import { useState, useLayoutEffect } from 'react'
 import { Wrapper, Sender, Recipient } from 'components/index'
 
 export const ChatField = ({ messages }) => {
   const [innerHeight, setInnerHeight] = useState<number>(0)
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (typeof window !== 'undefined') {
       setInnerHeight(window.innerHeight)
     }

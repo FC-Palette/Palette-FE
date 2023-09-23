@@ -26,6 +26,12 @@ export const CHATON_TEXTS = {
   maintain: '유지하기'
 }
 
+export const STATUS_TEXTS = {
+  noGroup: '주최자가 삭제한 모임입니다.',
+  noTrade: '주최자가 삭제한 거래입니다.',
+  noPurchase: '판매자가 삭제한 거래입니다.'
+}
+
 export const messages = [
   {
     sender: 'sender',

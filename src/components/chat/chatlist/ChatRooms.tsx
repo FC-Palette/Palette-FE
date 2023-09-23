@@ -1,10 +1,10 @@
 import { styled } from 'styled-components'
 import { ChatRoom } from 'components/index'
-import { useState, useEffect } from 'react'
+import { useState, useLayoutEffect } from 'react'
 
 export const ChatRooms = () => {
   const [innerHeight, setInnerHeight] = useState<number>(0)
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (typeof window !== 'undefined') {
       setInnerHeight(window.innerHeight)
     }
@@ -12,6 +12,24 @@ export const ChatRooms = () => {
 
   return (
     <Wrapper $innerHeight={innerHeight}>
+      <ChatRoom />
+      <ChatRoom />
+      <ChatRoom />
+      <ChatRoom />
+      <ChatRoom />
+      <ChatRoom />
+      <ChatRoom />
+      <ChatRoom />
+      <ChatRoom />
+      <ChatRoom />
+      <ChatRoom />
+      <ChatRoom />
+      <ChatRoom />
+      <ChatRoom />
+      <ChatRoom />
+      <ChatRoom />
+      <ChatRoom />
+      <ChatRoom />
       <ChatRoom />
     </Wrapper>
   )
