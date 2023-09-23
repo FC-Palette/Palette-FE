@@ -6,13 +6,13 @@ import {
   UploadInputDetail,
   UploadInputDetail1,
   DeadLine,
-  UploadOption,
-  UploadImages
-} from 'components/trades/uploadproduct/index'
-import {
+  SecondHandCOption,
+  PurchaseImages,
+  PurchaseOption,
+  SecondHandImages,
   SecondHandDay,
   SecondHandTime
-} from 'components/trades/uploadsecondhand/index'
+} from 'components/trades/upload/index'
 
 export const TRADES_TEXT = [
   {
@@ -24,7 +24,7 @@ export const TRADES_TEXT = [
   {
     title: '상품 카테고리를 선택해주세요.',
     props: { ph: '상품 카테고리를 선택해주세요.', item: '' },
-    component: UploadOption
+    component: PurchaseOption
   },
   {
     title: '제품의 구매사이트 URL 링크를 입력해주세요.',
@@ -46,7 +46,7 @@ export const TRADES_TEXT = [
   },
   {
     title: '제품 이미지를 등록 해주세요.',
-    component: UploadImages
+    component: PurchaseImages
   },
   {
     title: '제품에 대한 상세 설명을 입력해주세요.',
@@ -72,17 +72,19 @@ export const TRADES_SECONDHAND_TEXT = [
   {
     title: '제목을 입력해주세요.',
     props: { ph: '제목을 입력해주세요.', item: '' },
-    component: Input
+    component: Input,
+    field: 'title'
   },
   {
     title: '상품 카테고리를 선택해주세요.',
     props: { ph: '상품 카테고리를 선택해주세요.', item: '' },
-    component: UploadOption
+    component: SecondHandCOption
   },
   {
     title: '금액을 알려주세요.',
     props: { ph: '인당 부담 금액을 입력해주세요.', item: '원' },
-    component: Input
+    component: Input,
+    field: 'price'
   },
   {
     title: '거래가능 요일을 정해주세요.',
@@ -95,7 +97,7 @@ export const TRADES_SECONDHAND_TEXT = [
   },
   {
     title: '제품 이미지를 등록 해주세요.',
-    component: UploadImages
+    component: SecondHandImages
   },
   {
     title: '제품에 대한 상세 설명을 입력해주세요.',

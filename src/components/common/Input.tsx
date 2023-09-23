@@ -53,10 +53,9 @@ const TextInput = styled.input<InputType>`
   ${({ $paddingLeft = '20px' }) => css`
     padding-left: ${$paddingLeft};
   `}
+  
 
   &:focus {
     outline: none;
   }
 `
-
-

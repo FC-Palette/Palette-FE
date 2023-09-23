@@ -25,7 +25,17 @@ import {
   Calendar,
   ProfileAdd,
   Woman,
-  Man
+  Man,
+  Glass,
+  // Carrot,
+  Calculator,
+  Drop,
+  Ticket,
+  Clock,
+  LikeTag,
+  Monitor,
+  Cake
+  // AddCircle
 } from 'iconsax-react'
 
 export const iconMapping = {
@@ -57,3 +67,62 @@ export const iconMapping = {
   남성만: <Man />,
   여성만: <Woman />
 }
+export const iconMapping1 = {
+  HOUSEHOLD: {
+    label: '생활용품',
+    icon: <Glass />
+  },
+  OFFICE_SUPPLIES: {
+    label: '사무용품',
+    icon: <Calculator />
+  },
+  BEAUTY: {
+    label: '뷰티',
+    icon: <Drop />
+  },
+  TICKET: {
+    label: '티켓/회원권',
+    icon: <Ticket />
+  },
+  FASHION: {
+    label: '패션/잡화',
+    icon: <Clock />
+  },
+  HEALTH_AND_FOOD: {
+    label: '건강/가공식품',
+    icon: <Cake />
+  },
+  INTERIOR: {
+    label: '인테리어',
+    icon: <LikeTag />
+  },
+  ELECTRONICS: {
+    label: '가전/전자제품',
+    icon: <Monitor />
+  },
+  BOOKS: {
+    label: '도서',
+    icon: <Book />
+  }
+}
+
+export const banks = [
+  '국민은행',
+  '기업은행',
+  '농협',
+  '신한은행',
+  '우리은행',
+  '카카오 뱅크',
+  '케이뱅크',
+  '토스뱅크',
+  '한국씨티은행',
+  '하나은행',
+  'SC제일은행',
+  '경남은행',
+  '광주은행',
+  '대구은행',
+  '수협은행',
+  '새마을금고',
+  '우체국',
+  '신협중앙회'
+]

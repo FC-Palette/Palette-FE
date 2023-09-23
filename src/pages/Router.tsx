@@ -11,9 +11,9 @@ import {
   MyPage,
   Alarm,
   Setting,
-  SettingAlarm, 
-  SettingNotice, 
-  SettingPassword, 
+  SettingAlarm,
+  SettingNotice,
+  SettingPassword,
   SettingService,
   SettingManage,
   SecondHand,
@@ -69,10 +69,9 @@ export const router = createBrowserRouter([
     errorElement: <ErrorComponent />,
     children: [
       generateRoute('/groupPurchase', <GroupPurchase />, <ErrorComponent />),
-      generateRoute('/groupUpload', <GroupUpload />, <ErrorComponent />),
       generateRoute('/secondHand', <SecondHand />, <ErrorComponent />),
       generateRoute(
-        '/secondHandUpload',
+        '/secondHandUpload/:stepId',
         <SecondHandUpload />,
         <ErrorComponent />
       ),
@@ -134,11 +133,15 @@ export const router = createBrowserRouter([
       generateRoute('/mypage', <MyPage />, <ErrorComponent />),
       generateRoute('/setting', <Setting />, <ErrorComponent />),
       generateRoute('/alarm', <Alarm />, <ErrorComponent />),
-      generateRoute('/setting-password', <SettingPassword />, <ErrorComponent />),
+      generateRoute(
+        '/setting-password',
+        <SettingPassword />,
+        <ErrorComponent />
+      ),
       generateRoute('/setting-alarm', <SettingAlarm />, <ErrorComponent />),
       generateRoute('/setting-manage', <SettingManage />, <ErrorComponent />),
       generateRoute('/setting-notice', <SettingNotice />, <ErrorComponent />),
-      generateRoute('/setting-service', <SettingService />, <ErrorComponent />),
+      generateRoute('/setting-service', <SettingService />, <ErrorComponent />)
     ]
   },
   {
