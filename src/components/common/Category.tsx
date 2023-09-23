@@ -17,16 +17,17 @@ export const Category: React.FC<CategoryBarProps> = ({
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
-  width: auto;
+  width: 350px;
   height: 48px;
   position: relative;
   gap: 4px;
   margin-top: 10px;
+  justify-content: space-between;
 `
 const CategoryBar = styled.button`
   display: flex;
   position: absolute;
-  left: 8%;
+  left: 1px;
   display: flex;
   align-items: center;
   border-radius: 20px;
@@ -39,5 +40,5 @@ const CategoryBar = styled.button`
 const FilterWrapper = styled.div`
   display: flex;
   position: absolute;
-  right: 8%;
+  right: 1px;
 `

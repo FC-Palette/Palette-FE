@@ -1,10 +1,16 @@
-import { useNavigate, useParams } from 'react-router-dom'
 import {
   PurchaseStepOne,
   PurchasePreview
-} from 'components/trades/previewtrades/index'
-import { UploadFooter } from 'components/trades/uploadproduct/UploadFooter'
-
+} from 'components/trades/preview/index'
+import { UploadFooter } from 'components/trades/upload/index'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useRecoilState } from 'recoil'
+import { modalOnState } from 'recoil/index'
+import { TRADES_MODAL_TEXT } from 'constants/trades/index'
+import { useState } from 'react'
+import { BackgroundModal, ModalButtons } from 'components/index'
+import { PreviewFooter } from 'components/trades/preview/index'
+// import styled from 'styled-components'
 interface Params {
   [key: string]: string | undefined
 }
@@ -12,19 +18,45 @@ interface Params {
 export const GroupUpload = () => {
   const navigate = useNavigate()
   const { stepId = '1' } = useParams<Params>()
+  const [modlaOnState, setModalOnState] = useRecoilState(modalOnState)
+  const initialModalText = TRADES_MODAL_TEXT.create
+  const [modalText, setModalText] = useState(initialModalText)
 
   const handleNextStep = () => {
     const nextStep = parseInt(stepId) + 1
     navigate(`/GroupUpload/${nextStep}`)
   }
 
-  // const handleCreateMeeting = () => {
-  //   console.log('생성')
-  // }
+  const handleTrades = () => {
+    setModalText(TRADES_MODAL_TEXT.create)
+    setModalOnState(true)
+    // 채팅창 생성하는 로직 여기 넣어야함
+  }
 
-  // const handleCreateCancel = () => {
-  //   console.log('취소')
-  // }
+  const handleCancel = () => {
+    setModalText(TRADES_MODAL_TEXT.cancel)
+    setModalOnState(true)
+  }
+
+  // 모달 왼쪽 버튼 클릭 시 실행
+  const handleConfirmYes = () => {
+    if (modalText === TRADES_MODAL_TEXT.create) {
+      alert('상세 페이지 이동 로직')
+    } else if (modalText === TRADES_MODAL_TEXT.cancel) {
+      alert('삭제')
+      navigate(`/GroupPurchase`)
+    }
+  }
+
+  // 모달 오른쪽 버튼 클릭 시 실행
+  const handleConfirmNo = () => {
+    if (modalText === TRADES_MODAL_TEXT.create) {
+      alert('채팅 페이지 이동 로직')
+    } else if (modalText === TRADES_MODAL_TEXT.cancel) {
+      alert('유지')
+      setModalOnState(false)
+    }
+  }
 
   const renderContent = () => {
     switch (stepId) {
@@ -36,19 +68,17 @@ export const GroupUpload = () => {
         return <PurchaseStepOne />
     }
   }
-
   const renderFooter = () => {
     switch (stepId) {
       case '1':
         return <UploadFooter handleNextStep={handleNextStep} />
       case '2':
-        return <UploadFooter handleNextStep={handleNextStep} />
-      //   return (
-      //     <MeetingsPreviewFooter
-      //       handleCreateMeeting={handleCreateMeeting}
-      //       handleCreateCancel={handleCreateCancel}
-      //     />
-      //   )
+        return (
+          <PreviewFooter
+            handleTrades={handleTrades}
+            handleCancel={handleCancel}
+          />
+        )
       default:
         return null
     }
@@ -58,6 +88,18 @@ export const GroupUpload = () => {
     <>
       {renderContent()}
       {renderFooter()}
+      {modlaOnState && (
+        <BackgroundModal
+          title={modalText[0]}
+          content={modalText[1]}>
+          <ModalButtons
+            onLeftClick={handleConfirmYes}
+            onRightClick={handleConfirmNo}
+            leftBtn={modalText[2]}
+            rightBtn={modalText[3]}
+          />
+        </BackgroundModal>
+      )}
     </>
   )
 }
