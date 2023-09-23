@@ -23,21 +23,23 @@ export const ChatOn = () => {
     <>
       <ChatMembers />
       {/* HIDDEN INITIALLY */}
-      <Header
-        centerText="USERNAME"
-        leftIcon={
-          <ArrowLeft2
-            onClick={() => {
-              navigate('/chatlist')
-            }}
-            cursor="pointer"
-          />
-        }>
-        <StyledIcon>
-          <More onClick={handleShowMembers} />
-        </StyledIcon>
-      </Header>
-      <ChatInfo></ChatInfo>
+      <TopFixer>
+        <Header
+          centerText="USERNAME"
+          leftIcon={
+            <ArrowLeft2
+              onClick={() => {
+                navigate('/chatlist')
+              }}
+              cursor="pointer"
+            />
+          }>
+          <StyledIcon>
+            <More onClick={handleShowMembers} />
+          </StyledIcon>
+        </Header>
+        <ChatInfo></ChatInfo>
+      </TopFixer>
       <ChatField messages={messages} />
       <ChatInputField />
     </>
@@ -45,3 +47,4 @@ export const ChatOn = () => {
 }
 
 export const StyledIcon = styled.button``
+const TopFixer = styled.div``
