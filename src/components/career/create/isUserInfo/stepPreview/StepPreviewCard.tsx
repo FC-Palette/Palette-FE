@@ -38,6 +38,7 @@ export const StepPreviewCard = () => {
       <GetThumbnail meetupImages={meetupImages} />
       <GetRoomManagerInfo />
       <GetTitleAndDescription
+        detailText="아직 이 모임에 대한 소개가 작성되지 않았어요."
         meetupTitle={meetupTitle}
         meetupDescription={meetupDescription}
       />

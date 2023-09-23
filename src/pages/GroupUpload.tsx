@@ -41,10 +41,10 @@ export const GroupUpload = () => {
   // 모달 왼쪽 버튼 클릭 시 실행
   const handleConfirmYes = () => {
     if (modalText === TRADES_MODAL_TEXT.create) {
-      alert('상세 페이지 이동 로직')
+      setModalOnState(false)
     } else if (modalText === TRADES_MODAL_TEXT.cancel) {
-      alert('삭제')
       navigate(`/GroupPurchase`)
+      setModalOnState(false)
     }
   }
 
@@ -53,7 +53,6 @@ export const GroupUpload = () => {
     if (modalText === TRADES_MODAL_TEXT.create) {
       alert('채팅 페이지 이동 로직')
     } else if (modalText === TRADES_MODAL_TEXT.cancel) {
-      alert('유지')
       setModalOnState(false)
     }
   }
@@ -75,6 +74,7 @@ export const GroupUpload = () => {
       case '2':
         return (
           <PreviewFooter
+            Text="공동구매 제안하기"
             handleTrades={handleTrades}
             handleCancel={handleCancel}
           />
