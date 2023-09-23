@@ -13,8 +13,10 @@ import {
 import { CHATON_TEXTS } from 'constants/index'
 import { modalOnState, showMembersState } from 'recoil/index'
 import { useRecoilState } from 'recoil'
+import { useNavigate } from 'react-router-dom'
 
 export const ChatMembers = () => {
+  const navigate = useNavigate()
   const [modalOn, setModalOn] = useRecoilState(modalOnState)
   const [showMembers, setShowMembers] = useRecoilState(showMembersState)
 
@@ -34,6 +36,12 @@ export const ChatMembers = () => {
         <ModalButtons
           leftBtn={CHATON_TEXTS.cancel}
           rightBtn={CHATON_TEXTS.exit}
+          onLeftClick={() => {
+            setModalOn(!modalOn)
+          }}
+          onRightClick={() => {
+            navigate('/chatlist')
+          }}
         />
       </BackgroundModal>
       {showMembers && (

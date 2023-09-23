@@ -11,14 +11,14 @@ export const ChatRooms = () => {
   }, [])
 
   return (
-    <Wrapper innerHeight={innerHeight}>
+    <Wrapper $innerHeight={innerHeight}>
       <ChatRoom />
     </Wrapper>
   )
 }
 
-export const Wrapper = styled.div<{ innerHeight?: number }>`
+export const Wrapper = styled.div<{ $innerHeight?: number }>`
   min-width: 375px;
-  height: ${props => props.innerHeight}px;
+  height: ${props => props.$innerHeight}px;
   overflow: scroll;
 `

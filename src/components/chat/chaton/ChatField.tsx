@@ -34,7 +34,7 @@ export const ChatField = ({ messages }) => {
   }
 
   return (
-    <Wrapper innerHeight={innerHeight}>
+    <Wrapper $innerHeight={innerHeight}>
       {messages.map((message, index) => {
         //시간 로직
         const nextMessage = messages[index + 1]
