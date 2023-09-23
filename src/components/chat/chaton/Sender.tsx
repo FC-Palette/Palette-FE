@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 import { MessageTime, MsgActions } from 'components/index'
-import { useSetRecoilState } from 'recoil'
+import { useResetRecoilState } from 'recoil'
 import { msgActionsState } from 'recoil/index'
 import { useOutsideClick } from 'hooks/index'
 
@@ -13,10 +13,10 @@ export const Sender = ({
   showMsgActions,
   toggleMsgActions
 }) => {
-  const setOpenMsgActionsIndex = useSetRecoilState(msgActionsState)
+  const reset = useResetRecoilState(msgActionsState)
   const ref = useOutsideClick({
     onClickOutside: () => {
-      setOpenMsgActionsIndex(-1)
+      reset()
     }
   })
   const handleDbClick = e => {

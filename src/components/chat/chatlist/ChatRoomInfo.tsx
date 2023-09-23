@@ -3,7 +3,7 @@ import { styled } from 'styled-components'
 export const ChatRoomInfo = () => {
   return (
     <Wrapper>
-      <ChatRoomImg></ChatRoomImg>
+      <ChatRoomImg src="https://avatars.githubusercontent.com/u/142562921?s=200&v=4" />
       <ChatPreview></ChatPreview>
     </Wrapper>
   )

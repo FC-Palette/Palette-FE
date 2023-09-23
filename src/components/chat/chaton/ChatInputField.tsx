@@ -32,7 +32,7 @@ export const ChatInputField = () => {
 
 const ChatWrapper = styled.div`
   position: sticky;
-  bottom: 0;
+  top: 100%;
   background-color: ${props => props.theme.greyScale.bluegrey};
   padding: 12px 24px 20px;
   display: flex;

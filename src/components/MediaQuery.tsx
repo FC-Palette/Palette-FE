@@ -1,6 +1,6 @@
 import { useMediaQuery } from 'react-responsive'
 import { styled } from 'styled-components'
-import { useState, useEffect } from 'react'
+import { useState, useLayoutEffect } from 'react'
 
 export const MediaQuery = ({ children }) => {
   const isMobile = useMediaQuery({
@@ -8,7 +8,7 @@ export const MediaQuery = ({ children }) => {
   })
   const notMobile = useMediaQuery({ query: '(min-width:431px)' })
   const [innerHeight, setInnerHeight] = useState<number>(0)
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (typeof window !== 'undefined') {
       setInnerHeight(window.innerHeight)
     }

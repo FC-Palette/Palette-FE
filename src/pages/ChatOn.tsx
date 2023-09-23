@@ -3,7 +3,8 @@ import {
   ChatField,
   ChatInputField,
   ChatInfo,
-  ChatMembers
+  ChatMembers,
+  ChatStatus
 } from 'components/index'
 import { styled } from 'styled-components'
 import { ArrowLeft2, More } from 'iconsax-react'
@@ -11,6 +12,7 @@ import { messages } from 'constants/index'
 import { useRecoilState } from 'recoil'
 import { showMembersState } from 'recoil/index'
 import { useNavigate } from 'react-router-dom'
+import { STATUS_TEXTS } from 'constants/index'
 
 export const ChatOn = () => {
   const navigate = useNavigate()
@@ -23,28 +25,26 @@ export const ChatOn = () => {
     <>
       <ChatMembers />
       {/* HIDDEN INITIALLY */}
-      <TopFixer>
-        <Header
-          centerText="USERNAME"
-          leftIcon={
-            <ArrowLeft2
-              onClick={() => {
-                navigate('/chatlist')
-              }}
-              cursor="pointer"
-            />
-          }>
-          <StyledIcon>
-            <More onClick={handleShowMembers} />
-          </StyledIcon>
-        </Header>
-        <ChatInfo></ChatInfo>
-      </TopFixer>
+      <Header
+        centerText="USERNAME"
+        leftIcon={
+          <ArrowLeft2
+            onClick={() => {
+              navigate('/chatlist')
+            }}
+            cursor="pointer"
+          />
+        }>
+        <StyledIcon>
+          <More onClick={handleShowMembers} />
+        </StyledIcon>
+      </Header>
+      <ChatInfo></ChatInfo>
       <ChatField messages={messages} />
+      {<ChatStatus status={STATUS_TEXTS.noGroup}></ChatStatus>}
       <ChatInputField />
     </>
   )
 }
 
 export const StyledIcon = styled.button``
-const TopFixer = styled.div``

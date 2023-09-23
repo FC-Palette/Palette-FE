@@ -1,5 +1,5 @@
 import { styled } from 'styled-components'
-import { useSetRecoilState } from 'recoil'
+import { useResetRecoilState } from 'recoil'
 import { msgActionsState } from 'recoil/index'
 import { useOutsideClick } from 'hooks/index'
 import {
@@ -19,10 +19,10 @@ export const Recipient = ({
   showMsgActions,
   toggleMsgActions
 }) => {
-  const setOpenMsgActionsIndex = useSetRecoilState(msgActionsState)
+  const reset = useResetRecoilState(msgActionsState)
   const ref = useOutsideClick({
     onClickOutside: () => {
-      setOpenMsgActionsIndex(-1)
+      reset()
     }
   })
 
