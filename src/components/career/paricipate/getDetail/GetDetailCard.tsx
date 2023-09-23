@@ -14,23 +14,25 @@ import {
 
 export const GetDetailCard = () => {
   return (
-    <>
-      <Card>
-        <GetDetailHeader />
-        <GetDetailThumbnail />
-        <GetDetailManagerInfo />
-        <GetDetailTitleAndDescription />
-        <GetDetailCategoryChips />
-        <GetDetailStats />
-        <GetDetailMeetupInfo />
-        <GetDetailMembersInfo />
-        <GetDetailSimilarMeetupInfo />
-        <GetDetailFooterAndButton />
-      </Card>
-    </>
+    <Card>
+      <GetDetailHeader />
+      <GetDetailThumbnail />
+      <GetDetailManagerInfo />
+      <GetDetailTitleAndDescription />
+      <GetDetailCategoryChips />
+      <GetDetailStats />
+      <GetDetailMeetupInfo />
+      <GetDetailMembersInfo />
+      <GetDetailSimilarMeetupInfo />
+      <GetDetailFooterAndButton />
+    </Card>
   )
 }
 
 const Card = styled.div`
-  width: 430px;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
 `

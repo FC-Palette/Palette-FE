@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const GetDetailTitleAndDescription = () => {
   const title = 'Fetch TItle'
-  const rd = '오피스너 그는 전설이다.'.repeat(20)
+  const rd = '오피스너 그는 전설이다.'.repeat(30)
 
   const truncateText = (text: string, maxLength: number) => {
     return text.length > maxLength ? text.slice(0, maxLength) + '...' : text
@@ -23,24 +23,47 @@ export const GetDetailTitleAndDescription = () => {
     </>
   )
 }
+// 수정전
+// const Container = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   min-height: 150px;
+//   width: 100%;
+// `
+// const Title = styled.div`
+//   /* margin-left: 24px; */
+//   font-size: 18px;
+//   margin: 3.5% 6.4% 0;
+//   font-size: ${props => props.theme.customSize.xlarge};
+//   color: ${props => props.theme.greyScale.grey9};
+//   font-weight: 500;
+// `
+// const Description = styled.div`
+//   margin: 3.5% 6.4% 0;
+//   /* margin: 12px 24px 0; */
+//   line-height: 150%;
+//   font-size: ${props => props.theme.customSize.large};
+//   color: #3a3a3a;
+//   overflow-y: hidden;
+// `
 
+// 수정후 (9.23)
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  height: 150px;
-  width: 430px;
+  min-height: 150px;
+  width: 100%;
 `
 const Title = styled.div`
-  margin-left: 24px;
   font-size: 18px;
-  margin-top: 13px;
+  margin: 3.5% 6.4% 0;
   font-size: ${props => props.theme.customSize.xlarge};
   color: ${props => props.theme.greyScale.grey9};
   font-weight: 500;
 `
 const Description = styled.div`
-  margin-top: 12px;
-  margin: 12px 24px 0;
+  margin: 3.5% 6.4% 0;
+
   line-height: 150%;
   font-size: ${props => props.theme.customSize.large};
   color: #3a3a3a;

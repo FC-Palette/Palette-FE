@@ -2,10 +2,16 @@ import { useState } from 'react'
 import { CareerCreateMeetingCommonQuestion } from '../..'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
+import { CommonAddIcon } from '@/components'
 export const GetDetailMembersInfo = () => {
   const isUserJoined = false
   const navigate = useNavigate()
   const [showMessage, setShowMessage] = useState(false)
+
+  const maxLength = 20
+  const longText = (text: string, maxLength: number) => {
+    return text.length > maxLength ? text.slice(0, maxLength) + '...' : text
+  }
 
   const dummyFetchData = {
     response: true,
@@ -17,7 +23,7 @@ export const GetDetailMembersInfo = () => {
       },
       {
         nickname: '요한이2',
-        bio: '안녕하세요 처음보는 사람들도 안녕하세요 어~~~우어워어',
+        bio: '안녕하세요 처음보는 사람들도 안녕하세요 어~~~우어워어 어~~~우어워어 어~~~우어워어 어~~~우어워어',
         image: null
       },
       {
@@ -61,10 +67,11 @@ export const GetDetailMembersInfo = () => {
       <TitleContainer>
         <CareerCreateMeetingCommonQuestion>
           멤버 소개 <span> {fetchMembersCount}명 </span>
-          <SeeMoreLink onClick={handleSeeMoreClick}>+더보기</SeeMoreLink>
+          <SeeMoreLink onClick={handleSeeMoreClick}>
+            <CommonAddIcon size={16} /> 더보기
+          </SeeMoreLink>
         </CareerCreateMeetingCommonQuestion>
       </TitleContainer>
-
       <MembersContainer>
         {dummyFetchData.members.slice(0, 3).map((member, index) => (
           <MemberItem key={index}>
@@ -77,7 +84,7 @@ export const GetDetailMembersInfo = () => {
             />
             <MemberInfo>
               <MemberNickname>{member.nickname}</MemberNickname>
-              <MemberBio>{member.bio}</MemberBio>
+              <MemberBio>{longText(member.bio, maxLength)}</MemberBio>
             </MemberInfo>
           </MemberItem>
         ))}
@@ -89,37 +96,121 @@ export const GetDetailMembersInfo = () => {
   )
 }
 
+// 수정전
+// const TitleContainer = styled.div`
+//   display: flex;
+//   width: 382px;
+//   margin: 0 24px 0;
+//   color: ${props => props.theme.greyScale.grey9};
+
+//   & span {
+//     color: ${props => props.theme.main.blue0};
+//   }
+// `
+
+// const SeeMoreLink = styled.span`
+//   font-size: 14px;
+//   color: ${props => props.theme.main.blue0};
+//   margin-left: 205px;
+//   cursor: pointer;
+// `
+
+// const MembersContainer = styled.div`
+//   width: 382px;
+//   height: 244px;
+//   border-radius: 8px;
+//   background-color: ${props => props.theme.subColor.blueGrey};
+//   margin: 8px 24px 0;
+// `
+
+// const MemberItem = styled.div`
+//   display: flex;
+//   align-items: center;
+//   margin-top: 8px;
+//   height: 76px;
+// `
+
+// const MemberImage = styled.img`
+//   width: 54px;
+//   height: 54px;
+//   background-color: green;
+//   margin: 12px 10px 12px 24px;
+//   border-radius: 8px;
+// `
+
+// const MemberInfo = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   margin-top: 12px;
+// `
+
+// const MemberNickname = styled.span`
+//   font-size: 16px;
+//   color: ${props => props.theme.greyScale.grey8};
+// `
+
+// const MemberBio = styled.span`
+//   font-size: 16px;
+//   color: ${props => props.theme.greyScale.grey5};
+//   width: 250px;
+//   height: 32px;
+//   white-space: nowrap;
+//   text-overflow: ellipsis;
+//   overflow: hidden;
+//   margin-top: 2px;
+// `
+
+// const MessageContainer = styled.div`
+//   width: 200px;
+//   height: 37px;
+//   background-color: rgba(55, 65, 81, 0.8);
+//   font-size: 14px;
+//   color: white;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   position: fixed;
+//   top: 30%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+//   border-radius: 4px;
+//   z-index: 9999;
+// `
+
+// 수정 후 (9.23)
 const TitleContainer = styled.div`
   display: flex;
-  width: 382px;
-  margin: 0 24px 0;
-  color: ${props => props.theme.greyScale.grey9};
-
+  align-items: center;
   & span {
     color: ${props => props.theme.main.blue0};
   }
 `
 
 const SeeMoreLink = styled.span`
+  display: inline-flex;
+  align-items: center;
   font-size: 14px;
-  color: ${props => props.theme.main.blue0};
-  margin-left: 205px;
   cursor: pointer;
+
+  margin-left: 190px;
+
+  @media (max-width: 420px) {
+    margin-left: auto;
+  }
 `
 
 const MembersContainer = styled.div`
-  width: 382px;
-  height: 244px;
+  width: auto;
   border-radius: 8px;
   background-color: ${props => props.theme.subColor.blueGrey};
-  margin: 8px 24px 0;
+  margin: 2.5% 6.4% 3.5%;
 `
 
 const MemberItem = styled.div`
   display: flex;
   align-items: center;
-  margin-top: 8px;
-  height: 76px;
+  margin: 4px auto;
+  max-height: 76px;
 `
 
 const MemberImage = styled.img`
@@ -144,17 +235,16 @@ const MemberNickname = styled.span`
 const MemberBio = styled.span`
   font-size: 16px;
   color: ${props => props.theme.greyScale.grey5};
-  width: 250px;
+  width: auto;
   height: 32px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
+  white-space: pre-wrap;
   margin-top: 2px;
 `
 
 const MessageContainer = styled.div`
-  width: 200px;
-  height: 37px;
+  padding: 1% 2%;
+  min-width: 200px;
+  height: 30px;
   background-color: rgba(55, 65, 81, 0.8);
   font-size: 14px;
   color: white;

@@ -19,7 +19,6 @@ export const GetDetailMeetupInfo = () => {
 
   const {
     isApproved,
-    selectedJopRank,
     gender,
     recruitmentSize,
     meetingFrequency,
@@ -40,15 +39,11 @@ export const GetDetailMeetupInfo = () => {
 
   const participationMethod = isApproved ? '승인제' : '선착순'
 
-  const selectedRolesString = Array.isArray(selectedJopRank)
-    ? selectedJopRank.join(', ')
-    : selectedJopRank
-
   const infos = (
     <InfoZone>
       {/* 모집기준 */}
       <Info>
-        {selectedRolesString} | {gender}
+        {'무관'} | {gender}
       </Info>
       {/* 모집인원 */}
       <Info>{recruitmentSize}명</Info>
@@ -67,57 +62,110 @@ export const GetDetailMeetupInfo = () => {
   )
   return (
     <>
-      <TitleContainer>
-        <CareerCreateMeetingCommonQuestion>
-          모임정보
-        </CareerCreateMeetingCommonQuestion>
-      </TitleContainer>
-      <ContentsFieldContainer>
+      <CareerCreateMeetingCommonQuestion>
+        모임정보
+      </CareerCreateMeetingCommonQuestion>
+
+      {/* <ContentsFieldContainer>
+      
         <ContentsFieldL>{iconsAndTitles}</ContentsFieldL>
         <ContentsFieldR>{infos}</ContentsFieldR>
-      </ContentsFieldContainer>
+      </ContentsFieldContainer> */}
+      {/* <Container>
+        <RowContainer>
+          {iconsAndTitles} {infos}
+        </RowContainer>
+      </Container>
+      <Container> */}
+
+      <MainContainer>
+        <ColumnContainer>{iconsAndTitles}</ColumnContainer>
+        <ColumnContainer>{infos}</ColumnContainer>
+      </MainContainer>
     </>
   )
 }
 
-const TitleContainer = styled.div`
-  width: 382px;
-  margin: 0 24px 0;
-`
+// 수정 전
+// const ContentsFieldContainer = styled.div`
+//   display: flex;
+//   width: 100%;
+// `
 
-const ContentsFieldContainer = styled.div`
+// const ContentsFieldL = styled.div`
+//   margin-left: 24px;
+//   display: flex;
+//   flex-direction: column;
+//   gap: 14px;
+//   width: 120px;
+//   height: 214px;
+//   margin-top: 12px;
+//   padding: 19px 16px 19px 19px;
+//   background-color: ${props => props.theme.subColor.blueGrey};
+//   border-top-left-radius: 8px;
+//   border-bottom-left-radius: 8px;
+//   z-index: 1;
+// `
+
+// const ContentsFieldR = styled.div`
+//   margin-right: 24px;
+//   display: flex;
+//   flex-direction: column;
+//   gap: 14px;
+//   width: 262px;
+//   height: 214px;
+//   margin-top: 12px;
+//   padding: 19px 19px 19px 0;
+//   background-color: ${props => props.theme.subColor.blueGrey};
+//   border-top-right-radius: 8px;
+//   border-bottom-right-radius: 8px;
+// `
+
+// const Icon = styled.div`
+//   width: 24px;
+//   height: 24px;
+// `
+
+// const IconZone = styled.div`
+//   display: flex;
+//   align-items: center;
+//   gap: 7px;
+//   font-size: 14px;
+//   line-height: 16.71px;
+//   width: 80px;
+// `
+
+// const Info = styled.div`
+//   height: 24px;
+// `
+
+// const InfoZone = styled.div`
+//   margin-top: 3px;
+//   display: flex;
+//   flex-direction: column;
+//   gap: 14px;
+//   font-size: 14px;
+//   line-height: 16.71px;
+//   color: ${props => props.theme.greyScale.grey9};
+// `
+
+// 수정 후 (9.23)
+const MainContainer = styled.div`
+  margin: 2.5% 6.4% 3.5%;
+  min-height: 375px;
+  min-height: 214px;
+  background-color: ${props => props.theme.subColor.blueGrey};
+  border-radius: 8px;
   display: flex;
 `
 
-const ContentsFieldL = styled.div`
-  margin-left: 24px;
+const ColumnContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  width: 120px;
-  height: 214px;
-  margin-top: 12px;
-  padding: 19px 16px 19px 19px;
-  background-color: ${props => props.theme.subColor.blueGrey};
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
-  z-index: 1;
+  gap: 17px;
+  padding: 4.5% 16px 4.5% 4.5%;
 `
-
-const ContentsFieldR = styled.div`
-  margin-right: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  width: 262px;
-  height: 214px;
-  margin-top: 12px;
-  padding: 19px 19px 19px 0;
-  background-color: ${props => props.theme.subColor.blueGrey};
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
-`
-
+// left
 const Icon = styled.div`
   width: 24px;
   height: 24px;
@@ -129,19 +177,21 @@ const IconZone = styled.div`
   gap: 7px;
   font-size: 14px;
   line-height: 16.71px;
-  width: 80px;
+  min-width: 80px;
 `
-
+// right
 const Info = styled.div`
+  font-size: 14px;
   height: 24px;
+  line-height: 16.71px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 `
 
 const InfoZone = styled.div`
-  margin-top: 3px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  font-size: 14px;
-  line-height: 16.71px;
+  gap: inherit;
   color: ${props => props.theme.greyScale.grey9};
 `
