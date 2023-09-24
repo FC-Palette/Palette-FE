@@ -1,20 +1,29 @@
 import { styled } from 'styled-components'
 import { Copy, Edit2 } from 'iconsax-react'
-export const AccountInfo = ({ isHost }) => {
+import { useNavigate } from 'react-router-dom'
+export const AccountInfo = ({ isHost, account }) => {
+  const navigate = useNavigate()
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(account)
+  }
   return (
     <Wrapper>
       <Account>계좌번호</Account>
-      <HostAccount>신한은행 123-4444-67897-12 김*운</HostAccount>
+      <HostAccount></HostAccount>
       {isHost && (
         <Edit2
           size="16"
           cursor="pointer"
+          onClick={() => {
+            navigate('/groupupload/1')
+          }}
         />
       )}
       {!isHost && (
         <Copy
           size="16"
           cursor="pointer"
+          onClick={handleCopy}
         />
       )}
     </Wrapper>

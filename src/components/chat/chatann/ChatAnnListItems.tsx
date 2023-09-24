@@ -4,4 +4,5 @@ export const ChatAnnListItems = ({ children }) => {
 }
 const Wrapper = styled.div`
   min-height: calc(100vh - 80px);
+  overflow: scroll;
 `

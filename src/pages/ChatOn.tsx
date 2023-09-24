@@ -34,7 +34,8 @@ export const ChatOn = () => {
             }}
             cursor="pointer"
           />
-        }>
+        }
+        chatCount={2}>
         <StyledIcon>
           <More onClick={handleShowMembers} />
         </StyledIcon>
