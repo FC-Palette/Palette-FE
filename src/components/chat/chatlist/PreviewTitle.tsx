@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 export const PreviewTitle = () => {
-  return <Wrapper>asdasdasdasdasdasdasdasdasdasasdasdasdas</Wrapper>
+  return <Wrapper>TITLE</Wrapper>
 }
 const Wrapper = styled.div`
   max-height: 17px;
