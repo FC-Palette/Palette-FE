@@ -2,7 +2,7 @@ import React from 'react'
 import { useRecoilState } from 'recoil'
 import { msgActionsState } from 'recoil/index'
 import { useState, useLayoutEffect } from 'react'
-import { Wrapper, Sender, Recipient } from 'components/index'
+import { Wrapper, Sender, Recipient, SubjectDetail } from 'components/index'
 
 export const ChatField = ({ messages }) => {
   const [innerHeight, setInnerHeight] = useState<number>(0)
@@ -20,7 +20,6 @@ export const ChatField = ({ messages }) => {
     return false
   }
 
-  //atoms로 처리 후 Recipient && Sender에 존재하는 msgLayer 삭제
   //useOutsideClick으로 setOpenMsgActionsIndex(-1)로 초기화
   const [openMsgActionsIndex, setOpenMsgActionsIndex] =
     useRecoilState(msgActionsState)
@@ -47,7 +46,13 @@ export const ChatField = ({ messages }) => {
           <React.Fragment key={index}>
             {message.sender === 'sender' && (
               <Sender
-                message={message.text}
+                message={
+                  message.type === 'text' ? (
+                    message.text
+                  ) : (
+                    <SubjectDetail shared={true} />
+                  )
+                }
                 $sender={message.sender}
                 createdAt={message.createdAt}
                 showCreatedTime={showTimestamp}
@@ -57,7 +62,13 @@ export const ChatField = ({ messages }) => {
             )}
             {message.sender !== 'sender' && (
               <Recipient
-                message={message.text}
+                message={
+                  message.type === 'text' ? (
+                    message.text
+                  ) : (
+                    <SubjectDetail shared={true} />
+                  )
+                }
                 $sender={message.sender}
                 createdAt={message.createdAt}
                 showCreatedTime={showTimestamp}

@@ -3,11 +3,11 @@ import { isBuyingState } from 'recoil/index'
 import { useRecoilValue } from 'recoil'
 
 const price = 9000
-export const SubjectDetail = () => {
+export const SubjectDetail = ({ shared }) => {
   const isBuying = useRecoilValue(isBuyingState)
 
   return (
-    <Wrapper>
+    <Wrapper shared={shared}>
       <SubjectImg />
       <SubjectText>
         <SubjectTitle isBuying={isBuying}>
@@ -21,10 +21,11 @@ export const SubjectDetail = () => {
   )
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ shared: boolean }>`
   display: flex;
-  padding: 16px 24px;
-  background-color: ${props => props.theme.greyScale.bluegrey};
+  padding: ${props => (props.shared ? '0' : '16px 24px')};
+  background-color: ${props =>
+    props.shared ? '' : props.theme.greyScale.bluegrey};
 `
 const SubjectImg = styled.div`
   background-color: black;

@@ -27,5 +27,4 @@ const Wrapper = styled.div<{ $innerHeight?: number }>`
   justify-content: center;
   background-color: ${props => props.theme.greyScale.grey0};
   height: ${props => props.$innerHeight}px;
-  /* overflow: hidden; */
 `
