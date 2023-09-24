@@ -12,6 +12,18 @@ const anns = [
     publisher: '고스트사원'
   },
   { id: 2, content: 'ㅁㄴㅇ', time: '12:34', publisher: '프론트엔드 개발자' },
+  { id: 3, content: 'ㅁㄴㅇ', time: '12:34', publisher: '프론트엔드 개발자' },
+  { id: 3, content: 'ㅁㄴㅇ', time: '12:34', publisher: '프론트엔드 개발자' },
+  { id: 3, content: 'ㅁㄴㅇ', time: '12:34', publisher: '프론트엔드 개발자' },
+  { id: 3, content: 'ㅁㄴㅇ', time: '12:34', publisher: '프론트엔드 개발자' },
+  { id: 3, content: 'ㅁㄴㅇ', time: '12:34', publisher: '프론트엔드 개발자' },
+
+  { id: 3, content: 'ㅁㄴㅇ', time: '12:34', publisher: '프론트엔드 개발자' },
+  { id: 3, content: 'ㅁㄴㅇ', time: '12:34', publisher: '프론트엔드 개발자' },
+  { id: 3, content: 'ㅁㄴㅇ', time: '12:34', publisher: '프론트엔드 개발자' },
+  { id: 3, content: 'ㅁㄴㅇ', time: '12:34', publisher: '프론트엔드 개발자' },
+  { id: 3, content: 'ㅁㄴㅇ', time: '12:34', publisher: '프론트엔드 개발자' },
+  { id: 3, content: 'ㅁㄴㅇ', time: '12:34', publisher: '프론트엔드 개발자' },
   { id: 3, content: 'ㅁㄴㅇ', time: '12:34', publisher: '프론트엔드 개발자' }
 ]
 

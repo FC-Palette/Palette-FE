@@ -21,7 +21,12 @@ export const ChatInfo = () => {
       <ChatSubject></ChatSubject>
       {/* isBuying(모임,상품정보) recoil값으로 전환 후 하단 계좌 컴포넌트 추가 렌더링  */}
       {inDetail && <SubjectDetail $shared={false} />}
-      {inDetail && isBuying && <AccountInfo isHost={true} />}
+      {inDetail && isBuying && (
+        <AccountInfo
+          isHost={false}
+          account={'신한은행 123-4444-67897-12 김*운'}
+        />
+      )}
       <ChatAnn $registered={true}></ChatAnn>
     </InfoWrapper>
   )
