@@ -12,14 +12,17 @@ export const ChatAnnDetail = () => {
           <Add
             cursor="pointer"
             onClick={() => {
-              navigate('/chatannlist')
+              navigate('/chat')
             }}
           />
         }>
-        <ToAnnList>
+        <ToAnnList
+          onClick={() => {
+            navigate('/chatannlist')
+          }}>
           <TextalignJustifycenter
             size="16"
-            cursor="pointer"
+            // cursor="pointer"
           />
           <Text>공지목록</Text>
         </ToAnnList>
