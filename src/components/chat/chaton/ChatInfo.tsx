@@ -20,7 +20,7 @@ export const ChatInfo = () => {
     <InfoWrapper>
       <ChatSubject></ChatSubject>
       {/* isBuying(모임,상품정보) recoil값으로 전환 후 하단 계좌 컴포넌트 추가 렌더링  */}
-      {inDetail && <SubjectDetail shared={false} />}
+      {inDetail && <SubjectDetail $shared={false} />}
       {inDetail && isBuying && <AccountInfo isHost={true} />}
       <ChatAnn $registered={true}></ChatAnn>
     </InfoWrapper>
