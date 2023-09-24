@@ -6,10 +6,10 @@ import {
 } from '@/components/career'
 import { useNavigate, useParams } from 'react-router-dom'
 import { CareerUseParamsProps } from '@/types'
+import styled from 'styled-components'
 
 const CareerIsApprovedJoinMeeting = () => {
   const navigate = useNavigate()
-
   const { approvedstepid = '1' } = useParams<CareerUseParamsProps>()
 
   const handleNextStep = () => {
@@ -22,7 +22,7 @@ const CareerIsApprovedJoinMeeting = () => {
     approvedstepid !== '2' &&
     approvedstepid !== '3'
   ) {
-    navigate('/')
+    navigate('/career')
   }
 
   const handleBtnText = () => {
@@ -71,11 +71,14 @@ const CareerIsApprovedJoinMeeting = () => {
   }
 
   return (
-    <div>
-      {renderContent()}
+    <>
+      <Wrap>{renderContent()}</Wrap>
       {renderFooter()}
-    </div>
+    </>
   )
 }
 
+const Wrap = styled.div`
+  overflow-y: scroll;
+`
 export default CareerIsApprovedJoinMeeting

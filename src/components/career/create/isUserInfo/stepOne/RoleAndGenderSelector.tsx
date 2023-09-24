@@ -25,16 +25,23 @@ export const RoleAndGenderSelector = () => {
 
   const updateSelectedRoles = role => {
     setGlobalState(prevGlobalState => {
-      let newSelectedRoles
+      let newSelectedRoles: string[]
 
-      if (role === '무관') {
-        // 무관 선택시 다 제거하고 무관만 선택
-        newSelectedRoles = ['무관']
+      if (prevGlobalState.selectedRoles.includes(role)) {
+        // If the role is already selected, remove it
+        newSelectedRoles = prevGlobalState.selectedRoles.filter(
+          item => item !== role
+        )
       } else {
-        // 무관 이외 아이템 선택시, 무관 빼고 아이템 선택
-        newSelectedRoles = prevGlobalState.selectedRoles.includes('무관')
-          ? [role]
-          : [...prevGlobalState.selectedRoles, role]
+        if (role === '무관') {
+          // 무관 선택시 다 제거하고 무관만 선택
+          newSelectedRoles = ['무관']
+        } else {
+          // 무관 이외 아이템 선택시, 무관 빼고 아이템 선택
+          newSelectedRoles = prevGlobalState.selectedRoles.includes('무관')
+            ? [role]
+            : [...prevGlobalState.selectedRoles, role]
+        }
       }
 
       return {

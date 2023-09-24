@@ -27,7 +27,8 @@ import {
   SecondHandUpload,
   CareerMeetingsCreate,
   CareerIsNotUserInfo,
-  CareerIsNotApprovedJoinMeeting
+  CareerIsNotApprovedJoinMeeting,
+  CareerMeetingConfirm
 } from 'pages/index'
 import type { RouteObject } from 'react-router-dom'
 import { Start } from './Start'
@@ -87,6 +88,11 @@ export const router = createBrowserRouter([
       generateRoute(
         '/profile/:profileid',
         <CareerIsNotUserInfo />,
+        <ErrorComponent />
+      ),
+      generateRoute(
+        '/participate/confirm',
+        <CareerMeetingConfirm />,
         <ErrorComponent />
       ),
       generateRoute(

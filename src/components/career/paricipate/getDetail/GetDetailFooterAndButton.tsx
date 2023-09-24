@@ -54,7 +54,7 @@ const Wrapper = styled.footer`
   position: sticky;
   width: 100%;
   max-width: 430px;
-  height: 80px;
+  min-height: 80px;
   z-index: 100;
   bottom: 0;
   background-color: ${props => props.theme.main.white};

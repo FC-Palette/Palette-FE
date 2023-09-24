@@ -27,6 +27,7 @@ export const CareerIsNotApprovedJoinMeeting = () => {
 const Wrap = styled.div`
   max-width: 430px;
   width: 100%;
+  overflow-y: scroll;
 `
 const StyledIcon = styled.button`
   color: #000;

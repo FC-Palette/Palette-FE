@@ -54,6 +54,7 @@ export const GetDetailThumbnail = () => {
 const ThumbnailSlider = styled.div`
   width: 100%;
   height: 322px;
+  min-height: 322px;
   background-color: rosybrown;
   // 점 위치
   .slick-dots {

@@ -181,6 +181,7 @@ export const GetDetailMembersInfo = () => {
 const TitleContainer = styled.div`
   display: flex;
   align-items: center;
+  
   & span {
     color: ${props => props.theme.main.blue0};
   }
@@ -192,7 +193,7 @@ const SeeMoreLink = styled.span`
   font-size: 14px;
   cursor: pointer;
 
-  margin-left: 190px;
+  margin-left: 180px;
 
   @media (max-width: 420px) {
     margin-left: auto;

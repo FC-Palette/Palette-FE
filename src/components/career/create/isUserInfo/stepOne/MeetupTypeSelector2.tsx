@@ -4,6 +4,7 @@ import { CareerCreateMeetingCommonQuestion } from '../..'
 import { iconMapping } from '@/components'
 import { useRecoilState } from 'recoil'
 import { CareerCreateGlobalState } from '../..'
+import { useEffect, useState } from 'react'
 
 interface SelectedAnswerProps {
   $isSelected: boolean
@@ -13,6 +14,12 @@ interface SelectedAnswerProps {
 export const MeetupTypeSelector2 = () => {
   const [globalData, setGlobalData] = useRecoilState(CareerCreateGlobalState)
   const { selectedMeetingTypes } = globalData
+  const [message, setMessage] = useState(false)
+  const checkLength = selectedMeetingTypes.length
+  
+  useEffect(() => {
+    checkLength >= 3 ? setMessage(true) : setMessage(false)
+  }, [checkLength])
 
   const isItemSelected = (item: string) => {
     return selectedMeetingTypes.includes(item)
@@ -63,6 +70,12 @@ export const MeetupTypeSelector2 = () => {
       <Wrapper>
         <AnswerItemFlexWrap>{AnswerItems}</AnswerItemFlexWrap>
       </Wrapper>
+
+      {message && (
+        <MessageContainer>
+          모임 종류는 3개까지 선택 가능합니다.
+        </MessageContainer>
+      )}
     </>
   )
 }
@@ -100,4 +113,22 @@ const IconWrapper = styled.div<SelectedAnswerProps>`
   color: ${props => (props.$isSelected ? props.theme.main.blue0 : ' #ff4040')};
   width: 16px;
   height: 16px;
+`
+
+const MessageContainer = styled.div`
+  padding: 1% 2%;
+  min-width: 200px;
+  height: 30px;
+  background-color: rgba(55, 65, 81, 0.8);
+  font-size: 14px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 4px;
+  z-index: 9999;
 `
