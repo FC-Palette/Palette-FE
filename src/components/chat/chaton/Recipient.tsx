@@ -42,7 +42,7 @@ export const Recipient = ({
             $sender={$sender}
             onDoubleClick={toggleMsgActions}>
             {message}
-            {showMsgActions && (
+            {showMsgActions && typeof message === 'string' && (
               <MsgActions
                 msgRef={ref}
                 $sender={$sender}
