@@ -35,6 +35,7 @@ export const GetThumbnail = ({ meetupImages }) => {
 const ThumbnailSlider = styled.div`
   width: 100%;
   height: 322px;
+  min-height: 322px;
   background-color: transparent;
   // 점 위치
   .slick-dots {

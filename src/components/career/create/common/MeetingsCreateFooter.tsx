@@ -25,7 +25,7 @@ const Wrapper = styled.footer`
   height: 80px;
   z-index: 10;
   bottom: 0;
-  background-color: transparent;
+  background-color: white;
   box-shadow: 0px -1px 1px rgba(0, 0, 0, 0.2);
   margin-top: 10%;
 `

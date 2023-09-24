@@ -92,7 +92,7 @@ export const CareerMain = () => {
   ]
 
   return (
-    <>
+    <Wrap>
       <Header
         leftIcon={<ArrowLeft2 />}
         centerText="같이 성장해요">
@@ -114,10 +114,14 @@ export const CareerMain = () => {
       <CareerMainCard responseData={mockData} />
 
       <Footer />
-    </>
+    </Wrap>
   )
 }
 
+const Wrap = styled.div`
+  overflow-y: scroll;
+  height: 100%;
+`
 const StyledIcon = styled.button``
 const IconWrapper = styled.button`
   margin-right: 10px;

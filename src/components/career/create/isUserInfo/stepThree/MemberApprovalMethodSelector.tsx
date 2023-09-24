@@ -41,7 +41,7 @@ export const MemberApprovalMethodSelector = () => {
 
 const QuestionTitleSmall = styled.div`
   font-size: 18px;
-  margin: 7% 5.7% 0;
+  margin: 5% 5.7% 0;
   color: ${props => props.theme.greyScale.grey6};
 `
 
@@ -57,7 +57,7 @@ const ToggleNTextWrap = styled.div`
 `
 
 const ToggleRowSortContainer = styled.div`
-  margin: 7% 5.7% 0;
+  margin: 5% 5.7% 0;
   display: flex;
   text-align: center;
   align-items: center;

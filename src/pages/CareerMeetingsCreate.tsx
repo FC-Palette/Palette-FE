@@ -59,8 +59,10 @@ export const CareerMeetingsCreate = () => {
   const handleConfirmYes = () => {
     if (modalText === CREATE_MODAL_TEXT.create) {
       alert('상세 페이지 이동 로직')
+      setModalOnState(false)
     } else if (modalText === CREATE_MODAL_TEXT.cancel) {
       alert('삭제')
+      setModalOnState(false)
     }
   }
 
@@ -68,6 +70,7 @@ export const CareerMeetingsCreate = () => {
   const handleConfirmNo = () => {
     if (modalText === CREATE_MODAL_TEXT.create) {
       alert('채팅 페이지 이동 로직')
+      setModalOnState(false)
     } else if (modalText === CREATE_MODAL_TEXT.cancel) {
       alert('유지')
       setModalOnState(false)
@@ -121,5 +124,6 @@ const Wrap = styled.div`
   flex-direction: column;
   position: relative;
   gap: 8px;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: scroll;
 `

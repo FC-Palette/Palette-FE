@@ -25,14 +25,14 @@ const NumOfMembers = styled.span`
 
 const ContentsContainer = styled.div`
   display: flex;
-  height: 92px;
+  align-items: center;
+  min-height: 92px;
   margin: 1.2% 5.7% 0;
   border-radius: 8px;
   background-color: ${props => props.theme.subColor.blueGrey};
 `
 
 const MemberImage = styled.div`
-  margin-top: 20px;
   margin-left: 24px;
   background-color: ${props => props.theme.greyScale.grey5};
   border-radius: 8px;
@@ -40,11 +40,10 @@ const MemberImage = styled.div`
   height: 52px;
 `
 const NameAndIntroduceWrap_Column = styled.div`
-  margin-top: 26px;
   margin-left: 12px;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
 `
 const MemberName = styled.div`
   color: ${props => props.theme.greyScale.grey8};
