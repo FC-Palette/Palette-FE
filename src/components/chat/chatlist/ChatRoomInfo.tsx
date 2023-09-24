@@ -14,5 +14,6 @@ const Wrapper = styled.div`
   flex-direction: row;
   margin-right: 6px;
   align-items: center;
+  flex-grow: 1;
   padding-left: 24px;
 `

@@ -1,8 +1,6 @@
 import { styled } from 'styled-components'
 export const PreviewContent = () => {
-  return (
-    <Wrapper>asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasas</Wrapper>
-  )
+  return <Wrapper>CONTENT</Wrapper>
 }
 
 const Wrapper = styled.div`

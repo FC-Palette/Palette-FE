@@ -5,7 +5,6 @@ export const UnreadTime = () => {
 }
 
 const Wrapper = styled.div`
-  border: 1px solid black;
   font-size: 10px;
   min-width: 45px;
 `

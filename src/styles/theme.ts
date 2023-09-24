@@ -35,7 +35,8 @@ export const theme = {
     green0: '#1CAB67',
     greenD1: '#15965A',
     blie10: '#E7F2FE',
-    blueGrey: '#F5F6FA'
+    blueGrey: '#F5F6FA',
+    prettyRed: '#ff5a5a'
   },
   customSize: {
     tiny: '10px',

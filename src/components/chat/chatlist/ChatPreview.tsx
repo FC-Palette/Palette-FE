@@ -12,7 +12,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  border: 1px solid black;
   max-width: auto;
   word-break: keep-all;
 `
