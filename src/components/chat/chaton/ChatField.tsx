@@ -50,7 +50,7 @@ export const ChatField = ({ messages }) => {
                   message.type === 'text' ? (
                     message.text
                   ) : (
-                    <SubjectDetail shared={true} />
+                    <SubjectDetail $shared={true} />
                   )
                 }
                 $sender={message.sender}
@@ -66,7 +66,7 @@ export const ChatField = ({ messages }) => {
                   message.type === 'text' ? (
                     message.text
                   ) : (
-                    <SubjectDetail shared={true} />
+                    <SubjectDetail $shared={true} />
                   )
                 }
                 $sender={message.sender}

@@ -2,7 +2,7 @@ import { styled } from 'styled-components'
 import { Copy, Edit } from 'iconsax-react'
 import { useResetRecoilState } from 'recoil'
 import { msgActionsState } from 'recoil/index'
-export const MsgActions = ({ $sender, msgRef }) => {
+export const MsgActions = ({ $sender, msgRef, message }) => {
   const reset = useResetRecoilState(msgActionsState)
   // const upperTabRef = useRef<HTMLDivElement>()
   // const lowerTabRef = useRef<HTMLDivElement>()
@@ -14,8 +14,9 @@ export const MsgActions = ({ $sender, msgRef }) => {
       <Tab
         $isTop={true}
         onClick={() => {
-          setTimeout(() => {
-            reset()
+          setTimeout(async () => {
+            await reset()
+            await navigator.clipboard.writeText(message)
           }, 300)
         }}>
         <TabTitle>복사하기</TabTitle>

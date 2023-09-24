@@ -46,6 +46,7 @@ export const Recipient = ({
               <MsgActions
                 msgRef={ref}
                 $sender={$sender}
+                message={message}
               />
             )}
           </MessageBox>
