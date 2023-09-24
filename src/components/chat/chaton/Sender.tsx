@@ -35,7 +35,7 @@ export const Sender = ({
           $sender={$sender}
           onDoubleClick={handleDbClick}>
           {message}
-          {showMsgActions && (
+          {showMsgActions && typeof message === 'string' && (
             <MsgActions
               msgRef={ref}
               $sender={$sender}
