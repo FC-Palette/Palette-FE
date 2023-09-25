@@ -3,14 +3,16 @@ import { Header, SettingAlarmBtn } from "components/index"
 import { ArrowLeft2 } from "iconsax-react"
 import { styled } from "styled-components"
 import { SETTING_ALARM_TEXT } from "constants/index"
-import { theme } from "@/styles"
+import { theme } from "styles/index"
+import { useNavigate } from "react-router-dom"
 
 export const SettingAlarm = () => {
+  const navigate = useNavigate()
   return (
     <ServiceWrap>
       <Header 
       leftIcon={
-      <StyledIcon>
+      <StyledIcon onClick={() => navigate(-1)}>
         <ArrowLeft2 />
       </StyledIcon>}
       centerText="알림 설정">
@@ -34,6 +36,9 @@ const ServiceWrap = styled.div`
   position: relative;
   width: 100%;
   max-width: 430px;
+  svg{
+    cursor: pointer;
+  }
 `
 
 

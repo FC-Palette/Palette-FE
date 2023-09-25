@@ -1,15 +1,17 @@
 import { AlarmList, Footer, Header } from "components/index"
 import { ArrowLeft2 } from "iconsax-react"
-import { StyledIcon } from "."
+import { StyledIcon } from "pages/index"
 import { styled } from "styled-components"
 import { AlarmSelectTab } from "components/index"
+import { useNavigate } from "react-router-dom"
 
 export const Alarm = () => {
+    const navigate = useNavigate()
   return (
     <AlarmWrap>
         <Header 
         leftIcon={
-        <StyledIcon>
+        <StyledIcon onClick={() => navigate(-1)}>
         <ArrowLeft2 />
         </StyledIcon>}
         centerText="알림내역">

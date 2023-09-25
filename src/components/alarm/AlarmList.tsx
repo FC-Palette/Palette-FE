@@ -2,7 +2,7 @@ import styled from "styled-components"
 // 미리보기 아이콘 
 // import { Note, BagHappy, EmojiHappy } from 'iconsax-react'
 import { MegaPhoneIcon } from "./MegaPhoneIcon"
-import { theme } from "@/styles"
+import { theme } from "styles/index"
 
 export const AlarmList = () => {
   return (

@@ -1,7 +1,7 @@
-import { NAVIGATION_PATH, SETTING_MENU_TEXT } from "@/constants"
-import { SettingBtnStyle } from "."
+import { NAVIGATION_PATH, SETTING_MENU_TEXT } from "constants/index"
+import { SettingBtnStyle } from "components/index"
 import styled from "styled-components"
-import { theme } from "@/styles"
+import { theme } from "styles/index"
 import { Link } from "react-router-dom"
 
 export const SettingMenuList = () => {
@@ -12,16 +12,16 @@ export const SettingMenuList = () => {
       text={SETTING_MENU_TEXT.settingChangePwdText}>
       </SettingBtnStyle>
     </Link>
-    <Link {...NAVIGATION_PATH.navigatorSettingManagePage}>
-      <SettingBtnStyle
-        text={SETTING_MENU_TEXT.settingManagementText}>
-      </SettingBtnStyle>
-    </Link>
     <Link {...NAVIGATION_PATH.navigatorSettingAlarmPage}>
       <SettingBtnStyle
         text={SETTING_MENU_TEXT.settingAlarmText}>
       </SettingBtnStyle>
     </Link>
+    <ManageWrap>
+        <SettingBtnStyle
+          text={SETTING_MENU_TEXT.settingManagementText}>
+        </SettingBtnStyle>
+    </ManageWrap>
     <NoticeWrap>
       <BorderLine />
       <Link {...NAVIGATION_PATH.navigatorSettingNoticePage}>
@@ -55,4 +55,10 @@ const SettingVersionWrap = styled.div`
     text-align: right;
     font-size: 12px;
     padding-right: 25.5px;
+`
+
+const ManageWrap = styled.div`
+    button{
+      cursor: not-allowed
+      };
 `

@@ -15,7 +15,6 @@ import {
   SettingNotice,
   SettingPassword,
   SettingService,
-  SettingManage,
   SecondHand,
   GroupUpload,
   ChatList,
@@ -143,7 +142,6 @@ export const router = createBrowserRouter([
       generateRoute('/alarm', <Alarm />, <ErrorComponent />),
       generateRoute('/setting/password', <SettingPassword />, <ErrorComponent />),
       generateRoute('/setting/alarm', <SettingAlarm />, <ErrorComponent />),
-      generateRoute('/setting/manage', <SettingManage />, <ErrorComponent />),
       generateRoute('/setting/notice', <SettingNotice />, <ErrorComponent />),
       generateRoute('/setting/service', <SettingService />, <ErrorComponent />),
     ]

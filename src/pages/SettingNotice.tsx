@@ -1,10 +1,9 @@
-
-import { Header } from "@/components"
+import { Header } from "components/index"
 import { ArrowLeft2 } from "iconsax-react"
-import styled from "styled-components"
-import { StyledIcon } from "."
-import { theme } from "@/styles"
-import { SETTING_NOTICE_TEXT } from "@/constants"
+import { styled } from "styled-components"
+import { StyledIcon } from "pages/index"
+import { theme } from "styles/index"
+import { SETTING_NOTICE_TEXT } from "constants/index"
 import { useNavigate } from "react-router-dom"
 
 export const SettingNotice = () => {

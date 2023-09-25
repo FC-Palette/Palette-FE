@@ -21,7 +21,6 @@ export const SettingBtnStyle = ({ text, children }:SettingBtnProps) => {
     
     
 const ButtonWrap = styled.div`
-    margin: 0 24px;
     height: 56px;
     margin-bottom: 12px;
     margin-top: 12px;    
