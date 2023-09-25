@@ -68,6 +68,6 @@ const ItemFlexColumnWrapper = styled.div`
 const Wrap = styled.div`
 
   &:last-child {
-    padding-bottom: 100px;
+    padding-bottom: 80px;
   }
 `

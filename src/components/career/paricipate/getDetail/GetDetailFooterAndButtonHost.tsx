@@ -42,18 +42,3 @@ const BtnWrap = styled.div`
   width: 100%;
   margin: 0 24px;
 `
-
-const IsUserNotJoined = styled.div`
-  z-index: 100;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: sticky;
-  bottom: 80px;
-  width: 100%;
-  height: 32px;
-  font-size: 16px;
-  border-radius: 4px;
-  background-color: ${props => props.theme.greyScale.grey7};
-  color: ${props => props.theme.main.white};
-`

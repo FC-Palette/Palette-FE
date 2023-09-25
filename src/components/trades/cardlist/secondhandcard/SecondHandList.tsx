@@ -21,7 +21,7 @@ export const SecondHandList = () => {
       />
       <CategoryWrapper>
         <Category
-          categoryList="전체"
+          categoryList={["전체"]}
           categoryFilter={
             <StyledIcon>
               <StyledSetting4>
