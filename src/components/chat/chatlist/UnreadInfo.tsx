@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
-import { UnreadTime, UnreadCount, columnise } from 'components/index'
-
+import { UnreadTime, UnreadCount } from 'components/index'
+import { columnise } from 'styles/index'
 export const UnreadInfo = () => {
   return (
     <Wrapper>

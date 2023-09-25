@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 import { Calendar } from 'iconsax-react'
-import { rowCentralise } from 'components/index'
+import { rowCentralise } from 'styles/index'
 
 export const DateSeperator = ({ date, $isFirst }) => {
   return (

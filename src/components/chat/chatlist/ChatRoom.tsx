@@ -1,6 +1,7 @@
-import { ChatRoomInfo, UnreadInfo, rowCentralise } from 'components/index'
+import { ChatRoomInfo, UnreadInfo } from 'components/index'
 import { styled } from 'styled-components'
 import { useNavigate } from 'react-router-dom'
+import { rowCentralise } from 'styles/index'
 export const ChatRoom = () => {
   const navigate = useNavigate()
   return (

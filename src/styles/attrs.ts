@@ -1,4 +1,4 @@
-import { css, styled } from 'styled-components'
+import { css } from 'styled-components'
 
 export const centralise = css`
   display: flex;

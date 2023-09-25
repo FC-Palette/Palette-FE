@@ -1,8 +1,7 @@
-import { theme } from 'styles/index'
+import { theme, centralise } from 'styles/index'
 import { styled } from 'styled-components'
 import { ICON_TEXTS } from 'constants/index'
 import { useNavigate } from 'react-router-dom'
-import { centralise } from 'components/index'
 
 export const Footer = () => {
   const navigate = useNavigate()

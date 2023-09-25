@@ -1,5 +1,6 @@
-import { styled, css } from 'styled-components'
-import { Badge, centralise } from 'components/index'
+import { styled } from 'styled-components'
+import { Badge } from 'components/index'
+import { centralise } from 'styles/index'
 export const Participation = ({ status, $prev, $prevtype }) => {
   return (
     <Wrapper

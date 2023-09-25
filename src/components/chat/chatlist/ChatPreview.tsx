@@ -1,4 +1,5 @@
-import { PreviewContent, PreviewTitle, columnise } from 'components/index'
+import { PreviewContent, PreviewTitle } from 'components/index'
+import { columnise } from 'styles/index'
 import { styled } from 'styled-components'
 export const ChatPreview = () => {
   return (

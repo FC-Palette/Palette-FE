@@ -1,6 +1,6 @@
+import { centralise } from 'styles/index'
 import { css, styled } from 'styled-components'
 import { BorderType, ButtonProps, SizeType, StyleType } from 'types/index'
-import { centralise } from 'components/index'
 
 //$ 접두사를 사용 - transpiled props생성, styled-components 오류 해결
 //배경색($bgColor), 텍스트컬러(color), 사이즈($btnSize), 테두리 색상($borderColor)

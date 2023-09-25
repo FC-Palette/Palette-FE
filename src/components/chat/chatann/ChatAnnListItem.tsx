@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 import { useNavigate } from 'react-router-dom'
-import { columnise } from 'components/index'
+import { columnise } from 'styles/index'
 const interpoint = '\u00B7 '
 export const ChatAnnListItem = ({ content, time, publisher }) => {
   const navigate = useNavigate()

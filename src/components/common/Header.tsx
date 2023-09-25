@@ -1,8 +1,7 @@
-import { theme } from 'styles/index'
+import { theme, centralise } from 'styles/index'
 import { styled } from 'styled-components'
 import { HeaderProps } from 'types/headerProps'
 import {} from 'iconsax-react'
-import { centralise } from 'components/index'
 
 export const Header: React.FC<HeaderProps> = ({
   leftIcon,
@@ -27,7 +26,6 @@ export const Header: React.FC<HeaderProps> = ({
 }
 
 const Wrapper = styled.header`
-  ${centralise}
   width: 100%;
   max-width: 430px;
   min-height: 80px;
@@ -35,6 +33,7 @@ const Wrapper = styled.header`
   top: 0;
   z-index: 100;
   background-color: ${theme.main.white};
+  ${centralise}
 `
 
 const LeftIcon = styled.div`
