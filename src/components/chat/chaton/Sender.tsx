@@ -48,7 +48,7 @@ export const Sender = ({
   )
 }
 export const MessageBlock = styled.div<{ $sender: string }>`
-  padding: 10px 24px;
+  padding: 4px 24px;
   word-break: break-all;
   display: flex;
   justify-content: ${props =>

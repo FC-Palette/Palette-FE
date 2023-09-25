@@ -1,5 +1,6 @@
 import { css, styled } from 'styled-components'
 import { BorderType, ButtonProps, SizeType, StyleType } from 'types/index'
+import { centralise } from 'components/index'
 
 //$ 접두사를 사용 - transpiled props생성, styled-components 오류 해결
 //배경색($bgColor), 텍스트컬러(color), 사이즈($btnSize), 테두리 색상($borderColor)
@@ -12,7 +13,7 @@ export const Button = ({
   $btnHeight,
   $btnWidth,
   $fontSize,
-  disabled, 
+  disabled,
   children,
   ...props
 }: ButtonProps) => {
@@ -26,13 +27,11 @@ export const Button = ({
       $btnWidth={$btnWidth}
       $fontSize={$fontSize}
       disabled={disabled}
-      {...props}
-    >
+      {...props}>
       {children}
     </Wrapper>
   )
 }
-
 
 //사이즈 정리 필요
 const sizeStyles = css<SizeType>`
@@ -52,9 +51,7 @@ const borderStyles = css<BorderType>`
 `
 
 const Wrapper = styled.button<StyleType>`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  ${centralise};
   ${borderStyles};
   color: ${({ theme, color }) => color || theme.main.white};
   background-color: ${({ theme, $bgColor }) => $bgColor || theme.main.blue0};
@@ -62,10 +59,9 @@ const Wrapper = styled.button<StyleType>`
   ${({ disabled }) => disabled && disabledStyles};
 `
 
-
 const disabledStyles = css<StyleType>`
   background-color: ${({ theme }) => theme.greyScale.grey1};
   color: ${({ theme }) => theme.greyScale.grey3};
   border: 1px solid transparent;
   cursor: not-allowed;
-`;
+`

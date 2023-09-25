@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 import { useNavigate } from 'react-router-dom'
-
+import { columnise } from 'components/index'
 const interpoint = '\u00B7 '
 export const ChatAnnListItem = ({ content, time, publisher }) => {
   const navigate = useNavigate()
@@ -21,8 +21,7 @@ export const ChatAnnListItem = ({ content, time, publisher }) => {
 
 const Wrapper = styled.div`
   cursor: pointer;
-  display: flex;
-  flex-direction: column;
+  ${columnise};
   padding: 14px 22px 0 24px;
   border-bottom: 1px solid ${props => props.theme.greyScale.grey2};
 `

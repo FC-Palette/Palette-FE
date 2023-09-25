@@ -1,5 +1,5 @@
 import { styled } from 'styled-components'
-import { UnreadTime, UnreadCount } from 'components/index'
+import { UnreadTime, UnreadCount, columnise } from 'components/index'
 
 export const UnreadInfo = () => {
   return (
@@ -11,8 +11,7 @@ export const UnreadInfo = () => {
 }
 
 const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
+  ${columnise};
   justify-content: space-between;
   padding: 10px 24px 28px 0;
 `

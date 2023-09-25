@@ -1,5 +1,7 @@
 import { styled } from 'styled-components'
 import { Calendar } from 'iconsax-react'
+import { rowCentralise } from 'components/index'
+
 export const DateSeperator = ({ date, $isFirst }) => {
   return (
     <Wrapper $isFirst={$isFirst}>
@@ -11,16 +13,16 @@ export const DateSeperator = ({ date, $isFirst }) => {
   )
 }
 const Wrapper = styled.div<{ $isFirst: string }>`
-  display: flex;
-  justify-content: center;
-  padding-top: ${props => (props.$isFirst ? '' : '8px')};
+  ${rowCentralise};
+  padding: 20px 0;
+  padding-top: ${props => (props.$isFirst ? '' : '24px')};
 `
-const Badge = styled.div`
+export const Badge = styled.div`
   border-radius: 24px;
   display: flex;
   padding: 4px 10px;
-  color: ${props => props.theme.main.white};
-  background-color: ${props => props.theme.greyScale.grey5};
+  color: ${props => props.theme.greyScale.grey5};
+  background-color: ${props => props.theme.greyScale.bluegrey};
 `
 const Date = styled.div`
   padding-left: 4px;

@@ -1,7 +1,7 @@
 import { Edit } from 'iconsax-react'
 import { styled } from 'styled-components'
 import { useNavigate } from 'react-router-dom'
-
+import { centralise } from 'components/index'
 export const ToChatList = () => {
   const navigate = useNavigate()
 
@@ -17,10 +17,8 @@ export const ToChatList = () => {
 }
 
 const Wrapper = styled.button`
-  display: flex;
-  align-items: center;
+  ${centralise};
   font-size: 14px;
-  justify-content: center;
   padding: 9px 14px;
   box-sizing: content-box;
   border: 1px solid ${props => props.theme.greyScale.grey2};

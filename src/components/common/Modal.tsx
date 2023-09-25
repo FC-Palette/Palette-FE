@@ -1,4 +1,6 @@
 import { styled } from 'styled-components'
+import { columnise } from 'components/index'
+
 export const Modal = ({ title, content, children }) => {
   return (
     <>
@@ -23,8 +25,7 @@ const ModalBox = styled.div`
   transform: translate(-50%, -50%);
   //상위 속성들 화면중앙정렬
   width: 311px;
-  display: flex;
-  flex-direction: column;
+  ${columnise};
   border-radius: 16px;
   background-color: ${props => props.theme.main.white};
   padding: 24px;

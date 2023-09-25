@@ -1,4 +1,4 @@
-import { ChatRoomInfo, UnreadInfo } from 'components/index'
+import { ChatRoomInfo, UnreadInfo, rowCentralise } from 'components/index'
 import { styled } from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 export const ChatRoom = () => {
@@ -16,8 +16,7 @@ export const ChatRoom = () => {
 
 const Wrapper = styled.div`
   cursor: pointer;
-  display: flex;
-  justify-content: center;
+  ${rowCentralise};
   position: relative;
   max-width: 430px;
 `

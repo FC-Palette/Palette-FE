@@ -98,12 +98,36 @@ export const messages = [
     type: 'text',
     sender: 'recipient',
     text: '11:47에 다른 사람이 안녕하세요',
-    createdAt: '23.09.25 11:47'
+    createdAt: '23.09.26 11:47'
+  },
+  {
+    type: 'exit',
+    sender: 'server',
+    text: '현하님이 퇴장하셨습니다.',
+    createdAt: '23.09.27 11:47'
   },
   {
     type: 'text',
     sender: 'sender',
     text: '11:47에 내가 같은 시간에 한번 더 안녕하세요를 입력할 때는 다른 사람이 보냈으므로 시간이 나타납니다.',
-    createdAt: '23.09.26 11:47'
+    createdAt: '23.09.27 11:47'
+  },
+  {
+    type: 'join',
+    sender: 'server',
+    text: '지민님이 입장하셨습니다.',
+    createdAt: '23.09.27 11:47'
+  },
+  {
+    type: 'join',
+    sender: 'server',
+    text: '중후님이 입장하셨습니다.',
+    createdAt: '23.09.27 11:47'
+  },
+  {
+    type: 'exit',
+    sender: 'server',
+    text: '지민님이 퇴장하셨습니다.',
+    createdAt: '23.09.27 11:47'
   }
 ]

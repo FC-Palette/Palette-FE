@@ -45,6 +45,7 @@ const Wrapper = styled.div<{ $sender: string }>`
   flex-direction: column;
   position: absolute;
   z-index: 1000;
+  user-select: none;
   top: 100%;
   right: ${props => (props.$sender === 'sender' ? 0 : '')};
   left: ${props => (props.$sender === 'sender' ? '' : 0)};

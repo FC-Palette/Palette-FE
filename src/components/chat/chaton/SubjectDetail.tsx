@@ -1,6 +1,7 @@
 import { styled } from 'styled-components'
 import { isBuyingState } from 'recoil/index'
 import { useRecoilValue } from 'recoil'
+import { columnise } from 'components/index'
 
 const price = 9000
 export const SubjectDetail = ({ $shared }) => {
@@ -37,8 +38,7 @@ const SubjectImg = styled.div`
 const SubjectText = styled.div`
   overflow-wrap: break-word;
   overflow-x: hidden;
-  display: flex;
-  flex-direction: column;
+  ${columnise};
   justify-content: center;
   box-sizing: content-box;
   margin-left: 12px;

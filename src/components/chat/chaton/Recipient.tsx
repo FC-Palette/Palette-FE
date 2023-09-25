@@ -7,7 +7,8 @@ import {
   MessageTime,
   MessageBox,
   MemberImg,
-  MsgActions
+  MsgActions,
+  columnise
 } from 'components/index'
 
 //ChatField
@@ -61,8 +62,7 @@ export const Recipient = ({
 }
 
 const RecipientBlock = styled.div`
-  display: flex;
-  flex-direction: column;
+  ${columnise};
 `
 const MemberName = styled.span`
   color: ${props => props.theme.greyScale.grey7};
