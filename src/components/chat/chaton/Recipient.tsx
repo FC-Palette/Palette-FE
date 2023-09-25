@@ -68,4 +68,3 @@ const MemberName = styled.span`
   font-size: 12px;
   line-height: 18px;
 `
-const MessageBubble = styled(Flexbox)``
