@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 import { FilterBar, Category } from 'components/common/index'
-import { Setting4, Record } from 'iconsax-react'
+import { Setting4, Record, RecordCircle } from 'iconsax-react'
 import { CareerMainFilterSortOption } from 'components/career/index'
 
 // import { GroupBuyingList, TradesOption } from 'components/trades/index'
@@ -29,9 +29,7 @@ export const CareerMainFilterBar = () => {
         <FilterBar
           filterButton={
             <StyledRecordWrapper>
-              <StyledRecord>
-                <Record />
-              </StyledRecord>
+              <CheckBox type="checkbox" />
             </StyledRecordWrapper>
           }
           filterText="마감된 모임 제외"
@@ -75,9 +73,18 @@ const StyledRecordWrapper = styled.button`
   height: 20px;
   margin-right: 8px;
 `
-// 파란 동그라미 아이템 [생성일자 필터]
-const StyledRecord = styled(Record)`
-  color: ${props => props.theme.main.blue0};
+
+const CheckBox = styled.input`
   width: 20px;
   height: 20px;
+  border-radius: 50%;
+  border: 2px solid ${props => props.theme.main.blue0};
+  appearance: none;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:checked {
+    border: 4px solid ${props => props.theme.main.blueChat};
+    background-color: ${props => props.theme.main.blueD1};
+  }
 `

@@ -15,6 +15,7 @@ export const SubHeader: React.FC<SubHeaderProps> = ({ items, initialItem }) => {
     )
   }, [items, initialItem])
 
+  
   const handleSubHeaderClick = (item: SubHeaderItemProps) => {
     setSelectedHeader(item.text)
     navigate(item.path)

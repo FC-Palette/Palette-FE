@@ -22,7 +22,7 @@ interface CareerData {
 export const CareerMainItemsWrap = ({ data }: { data: CareerData }) => {
   const { image, jobs, title, week, days, time, progressTime, positions } = data
   return (
-    <>
+    <Wrap>
       <ItemFlexRowWrapper>
         {/* 이미지 */}
         <CareerMainItemImage image={image[0]} />
@@ -42,7 +42,7 @@ export const CareerMainItemsWrap = ({ data }: { data: CareerData }) => {
         </ItemFlexColumnWrapper>
         <CareerMainItemLikeButton />
       </ItemFlexRowWrapper>
-    </>
+    </Wrap>
   )
 }
 
@@ -62,4 +62,12 @@ const ItemFlexColumnWrapper = styled.div`
   flex-direction: column;
   width: auto;
   gap: 8px;
+`
+
+
+const Wrap = styled.div`
+
+  &:last-child {
+    padding-bottom: 100px;
+  }
 `

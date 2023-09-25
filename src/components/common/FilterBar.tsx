@@ -31,7 +31,7 @@ const Wrapper = styled.div`
   width: 100%;
   position: relative;
   min-height: 30px;
-  margin: auto 20px;
+  margin: 0 0 0 20px;
 `
 const FilterWrapper = styled.div`
   display: flex;
