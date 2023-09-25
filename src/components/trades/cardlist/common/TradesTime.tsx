@@ -2,14 +2,14 @@ import { theme } from 'styles/index'
 import { styled } from 'styled-components'
 import { Timer1 } from 'iconsax-react'
 
-export const TradesTime = () => {
+export const TradesTime = ({ time }) => {
   return (
     <Wrapper>
       <Time>
         <StyledIcon>
           <Timer1 />
         </StyledIcon>
-        2:59:59
+        {time}
       </Time>
     </Wrapper>
   )

@@ -1,6 +1,5 @@
 import { useRecoilState } from 'recoil'
-import { secondhandglobalstate } from 'recoil/index'
-
+import { secondhandcreateglobalstate } from 'recoil/index'
 import { theme } from 'styles/index'
 import { styled } from 'styled-components'
 
@@ -12,7 +11,7 @@ const daysOfWeek = ['월', '화', '수', '목', '금', '토', '일']
 
 export const SecondHandDay = () => {
   const [secondHandGlobalState, SetSecondHandGlobalState] = useRecoilState(
-    secondhandglobalstate
+    secondhandcreateglobalstate
   )
 
   const toggleDaySelection = (day: string) => {

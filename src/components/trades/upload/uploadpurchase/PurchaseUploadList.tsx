@@ -63,6 +63,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  overflow-y: scroll;
   margin-top: 12px;
 `
 

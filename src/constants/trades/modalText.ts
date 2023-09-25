@@ -16,7 +16,7 @@ export const TRADES_MODAL_TEXT = {
 export const SECONDHAND_MODAL_TEXT = {
   create: [
     '개인정보 공유 동의',
-    '리버블은 중고거래에 대한 책임을 갖지 않습니다.',
+    '중고거래를 위한 채팅방이 개설되었어요! 지금 바로 중고거래 채팅으로 이동하시겠어요?',
     '페이지 남기',
     '채팅방 이동'
   ],

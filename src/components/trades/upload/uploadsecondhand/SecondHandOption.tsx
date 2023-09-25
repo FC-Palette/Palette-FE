@@ -5,12 +5,12 @@ import Select from '@mui/material/Select'
 import MenuItem from '@mui/material/MenuItem'
 import { ArrowRight2 } from 'iconsax-react'
 import { iconMapping1 } from 'components/common/index'
-import { secondhandglobalstate } from 'recoil/index'
+import { secondhandcreateglobalstate } from 'recoil/index'
 import { useRecoilState } from 'recoil'
 
-export const SecondHandCOption = ({}) => {
+export const SecondHandOption = () => {
   const [secondHandGlobalState, setSecondHandGlobalState] = useRecoilState(
-    secondhandglobalstate
+    secondhandcreateglobalstate
   )
   const { category } = secondHandGlobalState
 

@@ -1,14 +1,14 @@
 import { styled } from 'styled-components'
 import { Eye } from 'iconsax-react'
 
-export const TradesViews = () => {
+export const TradesViews = ({ bookmarkCount }) => {
   return (
     <>
       <StyledWrapper>
         <StyledIcon>
           <Eye />
         </StyledIcon>
-        10
+        {bookmarkCount}
       </StyledWrapper>
     </>
   )

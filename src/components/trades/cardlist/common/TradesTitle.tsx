@@ -1,10 +1,10 @@
 import { theme } from 'styles/index'
 import { styled } from 'styled-components'
 
-export const TradesTitle = () => {
+export const TradesTitle = ({ title }) => {
   return (
     <>
-      <Title>삼성주식 공동구매 하실분 구해요</Title>
+      <Title>{title}</Title>
     </>
   )
 }

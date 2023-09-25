@@ -1,13 +1,8 @@
 import { theme } from 'styles/index'
 import { TradesCard, TradesOption } from 'components/trades/cardlist/index'
 import { styled } from 'styled-components'
-import {
-  FilterBar,
-  Category,
-  CreateBtn,
-  SubHeader
-} from 'components/common/index'
-import { TRADES_SUBHEADER_TEXT } from 'constants/trades/index'
+import { FilterBar, Category, CreateBtn } from 'components/common/index'
+
 import { Setting4, Record } from 'iconsax-react'
 
 export const SecondHandList = () => {
@@ -15,10 +10,6 @@ export const SecondHandList = () => {
 
   return (
     <Wrapper>
-      <SubHeader
-        items={TRADES_SUBHEADER_TEXT}
-        initialItem="공동구매"
-      />
       <CategoryWrapper>
         <Category
           categoryList={["전체"]}
@@ -58,19 +49,16 @@ const Wrapper = styled.div`
 `
 
 const Main = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 1fr;
+  margin: 0px 4%;
 `
 
 const CardWrapper = styled.div`
   width: 100%;
-  top: 197px;
-  justify-content: center;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  margin-top: 10px;
 `
 
 const StyledIcon = styled.button`

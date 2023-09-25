@@ -2,12 +2,12 @@ import { DesktopTimePicker } from '@mui/x-date-pickers'
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import styled from 'styled-components'
-import { secondhandglobalstate } from 'recoil/index'
+import { secondhandcreateglobalstate } from 'recoil/index'
 import { useRecoilState } from 'recoil'
 
 export const SecondHandTime = () => {
   const [secondHandGlobalState, setSecondHandGlobalState] = useRecoilState(
-    secondhandglobalstate
+    secondhandcreateglobalstate
   )
   const { transactionStartTime, transactionEndTime } = secondHandGlobalState
 

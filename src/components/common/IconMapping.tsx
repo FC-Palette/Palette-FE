@@ -106,23 +106,94 @@ export const iconMapping1 = {
   }
 }
 
-export const banks = [
-  '국민은행',
-  '기업은행',
-  '농협',
-  '신한은행',
-  '우리은행',
-  '카카오 뱅크',
-  '케이뱅크',
-  '토스뱅크',
-  '한국씨티은행',
-  '하나은행',
-  'SC제일은행',
-  '경남은행',
-  '광주은행',
-  '대구은행',
-  '수협은행',
-  '새마을금고',
-  '우체국',
-  '신협중앙회'
+export const bankOptions = [
+  {
+    // icon: process.env.PUBLIC_URL + '/public/bankLogos/citibank.png',
+    label: '한국씨티은행'
+  },
+  {
+    // icon: process.env.PUBLIC_URL + '/public/bankLogos/cubank.png',
+    label: '신협중앙회'
+  },
+  {
+    // icon: process.env.PUBLIC_URL + '/public/bankLogos/dgbank.png',
+    label: '대구은행'
+  },
+  {
+    // icon:
+    //   import.meta.env.VITE_REACT_APP_PUBLIC_URL +
+    //   '/public/bankLogos/epostbank.png',
+    label: '우체국'
+  },
+  {
+    // icon:
+    //   import.meta.env.VITE_REACT_APP_PUBLIC_URL +
+    //   '/public/bankLogos/hanabank.png',
+    label: '하나은행'
+  },
+  {
+    // icon:
+    //   import.meta.env.VITE_REACT_APP_PUBLIC_URL +
+    //   '/public/bankLogos/ibkbank.png',
+    label: '기업은행'
+  },
+  {
+    // icon:
+    //   import.meta.env.VITE_REACT_APP_PUBLIC_URL +
+    //   '/public/bankLogos/kakaobank.png',
+    label: '카카오 뱅크'
+  },
+  {
+    // icon:
+    //   import.meta.env.VITE_REACT_APP_PUBLIC_URL + '/public/bankLogos/kbank.png',
+    label: '케이뱅크'
+  },
+  {
+    // icon:
+    //   import.meta.env.VITE_REACT_APP_PUBLIC_URL +
+    //   '/public/bankLogos/kbbank.png',
+    label: '국민은행'
+  },
+  {
+    // icon:
+    //   import.meta.env.VITE_REACT_APP_PUBLIC_URL +
+    //   '/public/bankLogos/mgbank.png',
+    label: '새마을금고'
+  },
+  {
+    // icon:
+    //   import.meta.env.VITE_REACT_APP_PUBLIC_URL +
+    //   '/public/bankLogos/nhbank.png',
+    label: '농협'
+  },
+  {
+    // icon:
+    //   import.meta.env.VITE_REACT_APP_PUBLIC_URL +
+    //   '/public/bankLogos/ourbank.png',
+    label: '우리은행'
+  },
+  {
+    // icon:
+    //   import.meta.env.VITE_REACT_APP_PUBLIC_URL +
+    //   '/public/bankLogos/scbank.png',
+    label: 'SC제일은행'
+  },
+  {
+    // icon:
+    //   import.meta.env.VITE_REACT_APP_PUBLIC_URL +
+    //   '/public/bankLogos/shinhanbank.png',
+    label: '신한은행'
+  },
+  {
+    // icon:
+    //   import.meta.env.VITE_REACT_APP_PUBLIC_URL +
+    //   '/public/bankLogos/suhyupbank.png',
+    label: '수협은행'
+  },
+  {
+    // icon:
+    //   import.meta.env.VITE_REACT_APP_PUBLIC_URL +
+    //   '/public/bankLogos/tossbank.png',
+    label: '토스뱅크'
+  }
 ]

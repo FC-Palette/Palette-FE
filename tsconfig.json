@@ -33,7 +33,7 @@
       "types/*": ["src/types/*"],
       "api/*": ["src/api/*"],
       "styles/*": ["src/styles/*"],
-      "assets/*": ["src/assets/*"],
+      "assets/*": ["src/public/*"],
       "constants/*": ["src/constants/*"],
       "utils/*": ["src/utils/*"],
       "chat/*": ["src/components/chat/*"],

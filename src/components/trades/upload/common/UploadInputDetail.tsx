@@ -1,6 +1,9 @@
 import { theme } from 'styles/index'
 import { styled } from 'styled-components'
-import { tradescreateglobalstate, secondhandglobalstate } from 'recoil/index'
+import {
+  tradescreateglobalstate,
+  secondhandcreateglobalstate
+} from 'recoil/index'
 import { useRecoilState } from 'recoil'
 
 const placeholderText =
@@ -40,7 +43,7 @@ export const UploadInputDetail = () => {
 
 export const UploadInputDetail1 = () => {
   const [secondHandGlobalState, setSecondHandGlobalState] = useRecoilState(
-    secondhandglobalstate
+    secondhandcreateglobalstate
   )
   const { description } = secondHandGlobalState
 

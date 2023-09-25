@@ -1,14 +1,14 @@
 import { styled } from 'styled-components'
 import { Heart } from 'iconsax-react'
 
-export const TradesLikeCount = () => {
+export const TradesLikeCount = ({ hits }) => {
   return (
     <>
       <StyledWrapper>
         <StyledIcon>
           <Heart />
         </StyledIcon>
-        10
+        {hits}
       </StyledWrapper>
     </>
   )

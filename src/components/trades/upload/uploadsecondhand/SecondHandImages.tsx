@@ -4,7 +4,7 @@ import Dropzone from 'react-dropzone'
 import { Add } from 'iconsax-react'
 import { DraggableImagePreview } from 'components/index'
 import { useSetRecoilState } from 'recoil'
-import { secondhandglobalstate } from 'recoil/index'
+import { secondhandcreateglobalstate } from 'recoil/index'
 
 interface Image {
   id: string
@@ -14,7 +14,9 @@ interface Image {
 
 export const SecondHandImages = () => {
   const [tradesImages, setTradesImages] = useState<Image[]>([])
-  const setSecondHandGlobalState = useSetRecoilState(secondhandglobalstate)
+  const setSecondHandGlobalState = useSetRecoilState(
+    secondhandcreateglobalstate
+  )
 
   // blob
   const encodeImageToBlob = (file: File, callback: (blob: Blob) => void) => {
@@ -108,6 +110,7 @@ const UploadZoneContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 `
 
 const UploadZoneBox = styled.div`
@@ -115,10 +118,8 @@ const UploadZoneBox = styled.div`
   width: 90px;
   height: 90px;
   border-radius: 8px;
-  cursor: pointer;
 `
 
 const AddIcon = styled(Add)`
   position: absolute;
-  cursor: pointer;
 `
