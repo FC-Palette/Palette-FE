@@ -7,7 +7,8 @@ import {
   Sender,
   Recipient,
   SubjectDetail,
-  DateSeperator
+  DateSeperator,
+  Participation
 } from 'components/index'
 
 export const ChatField = ({ messages }) => {
@@ -26,7 +27,6 @@ export const ChatField = ({ messages }) => {
     return false
   }
 
-  //useOutsideClick으로 setOpenMsgActionsIndex(-1)로 초기화
   const [openMsgActionsIndex, setOpenMsgActionsIndex] =
     useRecoilState(msgActionsState)
 
@@ -38,12 +38,16 @@ export const ChatField = ({ messages }) => {
     setOpenMsgActionsIndex(index)
   }
 
-  // let prevMsgDate = null
-
   const renderMessage = (message, index) => {
     const nextMessage = messages[index + 1]
     const showTimestamp = shouldDisplayTimestamp(message, nextMessage)
+
     const isSender = message.sender === 'sender'
+    const isRecipient = message.sender === 'recipient'
+    const isExit = message.type === 'exit'
+    const isJoin = message.type === 'join'
+    const prevMsgType = index > 0 ? messages[index - 1].type : null
+
     const prevMsgDate =
       index > 0 ? messages[index - 1].createdAt.split(' ')[0] : null
     const MsgDate = message.createdAt.split(' ')[0]
@@ -58,7 +62,7 @@ export const ChatField = ({ messages }) => {
             date={MsgDate}
             $isFirst={prevMsgDate}
           />
-          {isSender ? (
+          {isSender && (
             <Sender
               message={
                 message.type === 'text' ? (
@@ -73,7 +77,8 @@ export const ChatField = ({ messages }) => {
               showMsgActions={openMsgActionsIndex === index}
               toggleMsgActions={() => toggleMsgActions(index)}
             />
-          ) : (
+          )}
+          {isRecipient && (
             <Recipient
               message={
                 message.type === 'text' ? (
@@ -89,13 +94,27 @@ export const ChatField = ({ messages }) => {
               toggleMsgActions={() => toggleMsgActions(index)}
             />
           )}
+          {isExit && (
+            <Participation
+              status={message.text}
+              $prev={dateSeperator}
+              $prevtype={prevMsgType}
+            />
+          )}
+          {isJoin && (
+            <Participation
+              status={message.text}
+              $prev={dateSeperator}
+              $prevtype={prevMsgType}
+            />
+          )}
         </React.Fragment>
       )
     }
 
     return (
       <React.Fragment key={index}>
-        {isSender ? (
+        {isSender && (
           <Sender
             message={
               message.type === 'text' ? (
@@ -110,7 +129,8 @@ export const ChatField = ({ messages }) => {
             showMsgActions={openMsgActionsIndex === index}
             toggleMsgActions={() => toggleMsgActions(index)}
           />
-        ) : (
+        )}
+        {isRecipient && (
           <Recipient
             message={
               message.type === 'text' ? (
@@ -124,6 +144,20 @@ export const ChatField = ({ messages }) => {
             showCreatedTime={showTimestamp}
             showMsgActions={openMsgActionsIndex === index}
             toggleMsgActions={() => toggleMsgActions(index)}
+          />
+        )}
+        {isExit && (
+          <Participation
+            status={message.text}
+            $prev={dateSeperator}
+            $prevtype={prevMsgType}
+          />
+        )}
+        {isJoin && (
+          <Participation
+            status={message.text}
+            $prev={dateSeperator}
+            $prevtype={prevMsgType}
           />
         )}
       </React.Fragment>

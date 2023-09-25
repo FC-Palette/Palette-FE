@@ -24,6 +24,9 @@ const anns = [
   { id: 3, content: 'ㅁㄴㅇ', time: '12:34', publisher: '프론트엔드 개발자' },
   { id: 3, content: 'ㅁㄴㅇ', time: '12:34', publisher: '프론트엔드 개발자' },
   { id: 3, content: 'ㅁㄴㅇ', time: '12:34', publisher: '프론트엔드 개발자' },
+  { id: 3, content: 'ㅁㄴㅇ', time: '12:34', publisher: '프론트엔드 개발자' },
+  { id: 3, content: 'ㅁㄴㅇ', time: '12:34', publisher: '프론트엔드 개발자' },
+  { id: 3, content: 'ㅁㄴㅇ', time: '12:34', publisher: '프론트엔드 개발자' },
   { id: 3, content: 'ㅁㄴㅇ', time: '12:34', publisher: '프론트엔드 개발자' }
 ]
 

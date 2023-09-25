@@ -9,7 +9,7 @@ export const AccountInfo = ({ isHost, account }) => {
   return (
     <Wrapper>
       <Account>계좌번호</Account>
-      <HostAccount></HostAccount>
+      <HostAccount>{account}</HostAccount>
       {isHost && (
         <Edit2
           size="16"

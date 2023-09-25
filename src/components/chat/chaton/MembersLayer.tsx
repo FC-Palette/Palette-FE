@@ -1,12 +1,12 @@
 import { styled } from 'styled-components'
+import { columnise } from 'components/index'
 
 export const MembersLayer = ({ children }) => {
   return <Layer>{children}</Layer>
 }
 
 const Layer = styled.div`
-  display: flex;
-  flex-direction: column;
+  ${columnise};
   position: absolute;
   z-index: 10000;
   top: 0;

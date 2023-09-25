@@ -2,6 +2,8 @@ import { styled } from 'styled-components'
 import { Button } from 'components/index'
 import { Additem, Image } from 'iconsax-react'
 import { theme } from '@/styles'
+import { columnise } from 'components/index'
+
 export const SendFile = () => {
   return (
     <Wrapper>
@@ -34,8 +36,7 @@ const Wrapper = styled.div`
   max-width: 430px;
   width: 100%;
   height: 128px;
-  display: flex;
-  flex-direction: column;
+  ${columnise};
   justify-content: space-between;
   align-items: center;
   position: fixed;

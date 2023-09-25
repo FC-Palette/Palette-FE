@@ -1,4 +1,4 @@
-import { PreviewContent, PreviewTitle } from 'components/index'
+import { PreviewContent, PreviewTitle, columnise } from 'components/index'
 import { styled } from 'styled-components'
 export const ChatPreview = () => {
   return (
@@ -9,8 +9,7 @@ export const ChatPreview = () => {
   )
 }
 const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
+  ${columnise};
   overflow: hidden;
   max-width: auto;
   word-break: keep-all;

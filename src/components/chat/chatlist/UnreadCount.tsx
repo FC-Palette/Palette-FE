@@ -12,5 +12,4 @@ const Wrapper = styled.div`
   line-height: 15px;
   color: ${props => props.theme.main.white};
   padding: 3px 6px;
-  /* position: absolute; */
 `

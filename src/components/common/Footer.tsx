@@ -2,6 +2,7 @@ import { theme } from 'styles/index'
 import { styled } from 'styled-components'
 import { ICON_TEXTS } from 'constants/index'
 import { useNavigate } from 'react-router-dom'
+import { centralise } from 'components/index'
 
 export const Footer = () => {
   const navigate = useNavigate()
@@ -47,9 +48,7 @@ const IconWrapper = styled.button`
 `
 
 const StyledIcon = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  ${centralise};
   font-size: ${theme.customSize.small};
   margin-top: 4px;
 `

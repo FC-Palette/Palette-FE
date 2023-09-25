@@ -11,7 +11,6 @@ export const ChatRoomInfo = () => {
 
 const Wrapper = styled.div`
   display: flex;
-  flex-direction: row;
   margin-right: 6px;
   align-items: center;
   flex-grow: 1;

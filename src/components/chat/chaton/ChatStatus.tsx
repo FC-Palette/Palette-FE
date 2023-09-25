@@ -4,6 +4,8 @@ export const ChatStatus = ({ status }) => {
   return <StatusBar>{status}</StatusBar>
 }
 const StatusBar = styled.div`
+  margin-top: 8px;
+  font-size: 14px;
   padding: 7px 0;
   text-align: center;
   color: ${props => props.theme.main.white};
