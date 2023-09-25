@@ -1,7 +1,7 @@
 import { Edit } from 'iconsax-react'
 import { styled } from 'styled-components'
 import { useNavigate } from 'react-router-dom'
-import { centralise } from 'components/index'
+import { centralise } from 'styles/index'
 export const ToChatList = () => {
   const navigate = useNavigate()
 

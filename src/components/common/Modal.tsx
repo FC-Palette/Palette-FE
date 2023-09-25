@@ -1,5 +1,5 @@
 import { styled } from 'styled-components'
-import { columnise } from 'components/index'
+import { columnise } from 'styles/index'
 
 export const Modal = ({ title, content, children }) => {
   return (

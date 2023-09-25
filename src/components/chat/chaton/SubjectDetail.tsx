@@ -1,7 +1,7 @@
 import { styled } from 'styled-components'
 import { isBuyingState } from 'recoil/index'
 import { useRecoilValue } from 'recoil'
-import { columnise } from 'components/index'
+import { columnise } from 'styles/index'
 
 const price = 9000
 export const SubjectDetail = ({ $shared }) => {

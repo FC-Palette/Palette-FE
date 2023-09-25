@@ -1,8 +1,7 @@
 import { styled } from 'styled-components'
 import { Button } from 'components/index'
 import { Additem, Image } from 'iconsax-react'
-import { theme } from '@/styles'
-import { columnise } from 'components/index'
+import { theme, columnise } from 'styles/index'
 
 export const SendFile = () => {
   return (

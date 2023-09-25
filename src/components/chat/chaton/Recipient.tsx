@@ -7,10 +7,9 @@ import {
   MessageTime,
   MessageBox,
   MemberImg,
-  MsgActions,
-  columnise
+  MsgActions
 } from 'components/index'
-
+import { columnise } from 'styles/index'
 //ChatField
 export const Recipient = ({
   message,
