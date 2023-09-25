@@ -1,8 +1,5 @@
 import styled from 'styled-components'
-import {
-  CareerMainItemCreateButton,
-  CareerMainItemsWrap
-} from 'components/career/index'
+import { CareerMainItemsWrap } from 'components/career/index'
 
 export const CareerMainCard = ({ responseData }) => {
   return (
@@ -17,8 +14,6 @@ export const CareerMainCard = ({ responseData }) => {
       ) : (
         <div>데이터 없음</div>
       )}
-
-      <CareerMainItemCreateButton />
     </Card>
   )
 }
@@ -26,6 +21,6 @@ export const CareerMainCard = ({ responseData }) => {
 const Card = styled.div`
   position: relative;
   width: 100%;
+  height: 100%;
   margin: 0 auto;
-  min-height: 100vh;
 `

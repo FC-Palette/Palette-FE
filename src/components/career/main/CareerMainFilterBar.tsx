@@ -6,45 +6,53 @@ import { CareerMainFilterSortOption } from 'components/career/index'
 // import { GroupBuyingList, TradesOption } from 'components/trades/index'
 
 export const CareerMainFilterBar = () => {
+  const list = ['전체1', '전체2', '전체3', '전체4']
+
   return (
-    <Wrapper>
+    <>
       {/* 카테고리 필터 [직무, 직급, 성별 등] */}
-      <Category
-        categoryList={['전체']}
-        categoryFilter={
-          <StyledIcon>
-            <StyledSetting4>
-              <Setting4 />
-            </StyledSetting4>
-          </StyledIcon>
-        }
-      />
+      <CaregoryWrap>
+        <Category
+          categoryList={list}
+          categoryFilter={
+            <StyledIcon>
+              <StyledSetting4>
+                <Setting4 />
+              </StyledSetting4>
+            </StyledIcon>
+          }
+        />
+      </CaregoryWrap>
 
       {/* 생성일자 필터 [최신순, 오래된순]*/}
-      <FilterBar
-        filterButton={
-          <StyledRecordWrapper>
-            <StyledRecord>
-              <Record />
-            </StyledRecord>
-          </StyledRecordWrapper>
-        }
-        filterText="마감된 모임 제외"
-        filterOption={<CareerMainFilterSortOption />}></FilterBar>
-    </Wrapper>
+      <FilterWrap>
+        <FilterBar
+          filterButton={
+            <StyledRecordWrapper>
+              <StyledRecord>
+                <Record />
+              </StyledRecord>
+            </StyledRecordWrapper>
+          }
+          filterText="마감된 모임 제외"
+          filterOption={<CareerMainFilterSortOption />}></FilterBar>
+      </FilterWrap>
+    </>
   )
 }
 
-const Wrapper = styled.div`
-  background-color: ${props => props.theme.main.white};
-  width: 100%;
+const CaregoryWrap = styled.div`
   display: flex;
-  position: sticky;
-  flex-direction: column;
-  top: 108px;
-  padding-top: 10px;
-  z-index: 1;
+  justify-content: center;
+  width: auto;
 `
+
+const FilterWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  width: auto;
+`
+
 // 파란 아이콘 래퍼 [카테고리 필터]
 const StyledIcon = styled.button`
   background-color: ${props => props.theme.main.blue0};

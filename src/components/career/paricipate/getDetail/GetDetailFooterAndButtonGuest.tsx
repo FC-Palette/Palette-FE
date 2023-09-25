@@ -4,7 +4,7 @@ import { modalOnState } from '@/recoil'
 import { useRecoilState } from 'recoil'
 import styled from 'styled-components'
 
-export const GetDetailFooterAndButton = () => {
+export const GetDetailFooterAndButtonGuest = () => {
   const [modal, setModal] = useRecoilState(modalOnState)
   const modalText = CREATE_MODAL_TEXT.condition_not_met
   const isUserJoined = false

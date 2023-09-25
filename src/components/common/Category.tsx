@@ -6,9 +6,13 @@ export const Category: React.FC<CategoryBarProps> = ({
   categoryList,
   categoryFilter
 }) => {
+  const chips = categoryList?.map(item => (
+    <CategoryBar key={item}>{item}</CategoryBar>
+  ))
+
   return (
     <Wrapper>
-      <CategoryBar>{categoryList}</CategoryBar>
+      {chips}
       <FilterWrapper>{categoryFilter}</FilterWrapper>
     </Wrapper>
   )
@@ -17,28 +21,29 @@ export const Category: React.FC<CategoryBarProps> = ({
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
-  width: 350px;
-  height: 48px;
+  width: 100%;
   position: relative;
-  gap: 4px;
-  margin-top: 10px;
-  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 20px;
+  overflow-x: auto;
 `
+
 const CategoryBar = styled.button`
-  display: flex;
-  position: absolute;
+  width: auto;
+  white-space: nowrap;
   left: 1px;
   display: flex;
   align-items: center;
-  border-radius: 20px;
-  padding: 12px;
+  border-radius: 21px;
+  padding: 8px 10px;
   background-color: ${theme.greyScale.grey2};
   font-weight: 400;
   font-size: ${theme.customSize.large};
 `
 
 const FilterWrapper = styled.div`
-  display: flex;
   position: absolute;
-  right: 1px;
+  right: 20px;
 `

@@ -20,12 +20,18 @@ export const FilterBar: React.FC<FilterBarProps> = ({
 
 // 수정 전
 const Wrapper = styled.div`
-  display: flex;
+  /* display: flex;
   align-items: center;
   width: 350px;
   height: 30px;
   position: relative;
-  margin-top: 10px;
+  margin-top: 10px; */
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  min-height: 30px;
+  margin: auto 20px;
 `
 const FilterWrapper = styled.div`
   display: flex;

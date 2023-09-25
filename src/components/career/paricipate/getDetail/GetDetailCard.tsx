@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 import {
   GetDetailCategoryChips,
-  GetDetailFooterAndButton,
+  GetDetailFooterAndButtonGuest,
+  GetDetailFooterAndButtonHost,
   GetDetailHeader,
   GetDetailManagerInfo,
   GetDetailMeetupInfo,
@@ -13,6 +14,19 @@ import {
 } from '.'
 
 export const GetDetailCard = () => {
+  let isAdmin = true
+
+  const renderFooter = () => {
+    switch (isAdmin) {
+      case true:
+        return <GetDetailFooterAndButtonHost />
+      case false:
+        return <GetDetailFooterAndButtonGuest />
+      default:
+        return <GetDetailFooterAndButtonGuest />
+    }
+  }
+
   return (
     <Card>
       <GetDetailHeader />
@@ -24,7 +38,7 @@ export const GetDetailCard = () => {
       <GetDetailMeetupInfo />
       <GetDetailMembersInfo />
       <GetDetailSimilarMeetupInfo />
-      <GetDetailFooterAndButton />
+      {renderFooter()}
     </Card>
   )
 }

@@ -96,9 +96,11 @@ export const CareerMeetingsCreate = () => {
   }
 
   return (
-    <Wrap>
-      {renderContent()}
-      {renderFooter()}
+    <>
+      <Wrap>
+        {renderContent()}
+        {renderFooter()}
+      </Wrap>
 
       {modlaOnState && (
         <BackgroundModal
@@ -112,7 +114,7 @@ export const CareerMeetingsCreate = () => {
           />
         </BackgroundModal>
       )}
-    </Wrap>
+    </>
   )
 }
 

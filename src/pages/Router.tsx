@@ -91,7 +91,7 @@ export const router = createBrowserRouter([
         <ErrorComponent />
       ),
       generateRoute(
-        '/participate/confirm',
+        '/participate/confirm/:checkid',
         <CareerMeetingConfirm />,
         <ErrorComponent />
       ),

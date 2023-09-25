@@ -16,6 +16,7 @@ export const SubHeader: React.FC<SubHeaderProps> = ({ items, initialItem }) => {
   }, [items, initialItem])
 
   const handleSubHeaderClick = (item: SubHeaderItemProps) => {
+    setSelectedHeader(item.text)
     navigate(item.path)
   }
 
@@ -25,6 +26,7 @@ export const SubHeader: React.FC<SubHeaderProps> = ({ items, initialItem }) => {
         {items.map(item => (
           <HeaderItemSimple
             key={item.text}
+            // $isSelected={selectedHeader === item.text}
             $isSelected={selectedHeader === item.text}
             onClick={() => handleSubHeaderClick(item)}>
             {item.text}
@@ -38,12 +40,12 @@ export const SubHeader: React.FC<SubHeaderProps> = ({ items, initialItem }) => {
 // 서브 헤더 래퍼
 const HeaderWrapperSimple = styled.div`
   display: flex;
+  align-items: center;
   position: sticky;
   top: 80px;
   height: 50px;
-  margin-top: 5px;
+  padding-top: 15px;
   width: 100%;
-  padding-bottom: 6px;
   justify-content: space-evenly;
   border-bottom: 1.5px solid ${props => props.theme.greyScale.grey3};
   background-color: ${props => props.theme.main.white};
@@ -57,15 +59,25 @@ const HeaderItemSimple = styled.button<{
   width: auto;
   color: ${props =>
     props.$isSelected ? props.theme.main.blue0 : props.theme.greyScale.grey5};
-  border-bottom: ${props => (props.$isSelected ? '2px solid #fff' : 'none')};
-  text-decoration: ${props => (props.$isSelected ? '4px underline' : 'none')};
   text-underline-offset: 19.5px;
   font-size: 16px;
   line-height: 19.09px;
-  z-index: 2;
+  z-index: 30;
+  height: 30px;
+  display: inline-block;
 
   &:hover {
     cursor: pointer;
     color: ${props => props.theme.main.blue0};
+  }
+
+  &::after {
+    content: '';
+    height: 5px;
+    background: ${props =>
+      props.$isSelected ? props.theme.main.blue0 : 'transparent'};
+    margin-top: 11px;
+    border-radius: 5px;
+    display: block;
   }
 `

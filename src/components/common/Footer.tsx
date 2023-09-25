@@ -35,7 +35,8 @@ const Wrapper = styled.footer`
   border-top: 2px solid ${theme.greyScale.grey2};
   z-index: 100;
   position: sticky;
-  bottom: 0;
+  /* bottom: 0; */
+  top: 100%;
   background-color: ${theme.main.white};
 `
 
