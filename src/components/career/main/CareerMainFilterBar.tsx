@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 import { FilterBar, Category } from 'components/common/index'
-import { Setting4, Record, RecordCircle } from 'iconsax-react'
+import { Setting4 } from 'iconsax-react'
 import { CareerMainFilterSortOption } from 'components/career/index'
 
 // import { GroupBuyingList, TradesOption } from 'components/trades/index'
