@@ -17,6 +17,7 @@ export * from 'chat/chaton/SubjectDetail'
 export * from 'chat/chaton/SendFile'
 export * from 'chat/chaton/AccountInfo'
 export * from 'chat/chaton/MsgActions'
+export * from 'chat/chaton/DateSeperator'
 
 // CHAT MEMBERS
 export * from 'chat/chaton/ChatMembers'
