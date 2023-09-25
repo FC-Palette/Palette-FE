@@ -1,5 +1,5 @@
 
-import { Header, SettingChangePwd } from "@/components"
+import { Header, SettingChangePwd } from "components/index"
 import { ArrowLeft2 } from "iconsax-react"
 import styled from "styled-components"
 import { StyledIcon } from "."

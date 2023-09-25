@@ -2,14 +2,16 @@ import { Header } from "components/index"
 import { ArrowLeft2 } from "iconsax-react"
 import { styled } from "styled-components"
 import { SettingMenuList } from "components/setting"
+import { useNavigate } from "react-router-dom"
 
 
 export const Setting = () => {
+  const navigate = useNavigate()
   return (
     <SettingContainer>
       <Header 
         leftIcon={
-        <StyledIcon>
+        <StyledIcon onClick={() => navigate(-1)}>
           <ArrowLeft2 />
         </StyledIcon>}
         centerText="설정">
@@ -27,6 +29,9 @@ const SettingContainer = styled.div`
   height: 100vh;
   position: relative;
   width: 100%;
+  svg{
+    cursor: pointer;
+  }
 `
 
 const StyledIcon = styled.div`
@@ -37,4 +42,5 @@ const StyledIcon = styled.div`
 const SettingListWrap = styled.div`
   width: 430px;
   max-width: 100%;
+  padding: 0 24px;
 `
