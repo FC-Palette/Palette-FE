@@ -3,13 +3,15 @@ import { Header, SettingChangePwd } from "@/components"
 import { ArrowLeft2 } from "iconsax-react"
 import styled from "styled-components"
 import { StyledIcon } from "."
+import { useNavigate } from "react-router-dom"
 
 export const SettingPassword = () => {
+  const navigate = useNavigate()
   return (
     <ServiceWrap>
       <Header 
       leftIcon={
-      <StyledIcon>
+      <StyledIcon onClick={() => navigate(-1)}>
         <ArrowLeft2 />
       </StyledIcon>}
       centerText="비밀번호 변경">

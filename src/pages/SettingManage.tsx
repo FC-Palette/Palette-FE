@@ -4,14 +4,16 @@
 import { Header } from "@/components"
 import { ArrowLeft2 } from "iconsax-react"
 import styled from "styled-components"
-import { StyledIcon } from "."
+import { StyledIcon } from "pages/index"
+import { useNavigate } from "react-router-dom"
 
 export const SettingManage = () => {
+  const navigate = useNavigate()
   return (
     <ServiceWrap>
       <Header 
       leftIcon={
-      <StyledIcon>
+      <StyledIcon onClick={() => navigate(-1)}>
         <ArrowLeft2 />
       </StyledIcon>}
       centerText="오피스 관리">

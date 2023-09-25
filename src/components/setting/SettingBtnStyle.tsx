@@ -34,7 +34,7 @@ const ButtonWrap = styled.div`
         justify-content: space-between;
         align-items: center;
         background-color: ${theme.main.white};
-        border-color: ${theme.greyScale.grey2};
+        border-color: ${theme.greyScale.grey3};
         color: ${theme.greyScale.grey9};
         font-size: 16px;
         margin-top: 8px;
