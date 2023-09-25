@@ -7,7 +7,7 @@ import {
   GetTitleAndDescription
 } from 'components/career/create/isUserInfo/index'
 import { iconMapping1 } from 'components/common/index'
-import { secondhandglobalstate } from 'recoil/index'
+import { secondhandcreateglobalstate } from 'recoil/index'
 import {
   SecondHandInfo,
   PreviewPrice,
@@ -16,7 +16,7 @@ import {
 } from 'components/trades/preview/index'
 
 export const SecondHandPre = () => {
-  const secondHandGlobalState = useRecoilValue(secondhandglobalstate)
+  const secondHandGlobalState = useRecoilValue(secondhandcreateglobalstate)
   const {
     tradesImages,
     title,

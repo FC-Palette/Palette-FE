@@ -1,10 +1,10 @@
 import { theme } from 'styles/index'
 import { styled } from 'styled-components'
 
-export const TradesImage = () => {
+export const TradesImage = ({ image }) => {
   return (
     <>
-      <Image />
+      <Image>{image}</Image>
     </>
   )
 }

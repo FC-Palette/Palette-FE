@@ -1,6 +1,7 @@
 import { theme } from 'styles/index'
 import { GroupPurchaseList } from 'components/trades/cardlist/index'
-import { Header, Footer } from 'components/common/index'
+import { Header, Footer, SubHeader } from 'components/common/index'
+import { TRADES_SUBHEADER_TEXT } from 'constants/trades/index'
 import { styled } from 'styled-components'
 import { ArrowLeft2, SearchNormal1, Notification } from 'iconsax-react'
 
@@ -21,6 +22,11 @@ export const GroupPurchase = () => {
           <Notification />
         </StyledIcon>
       </Header>
+      <SubHeader
+        items={TRADES_SUBHEADER_TEXT}
+        initialItem="공동구매"
+      />
+
       <MainWrapper>
         <GroupPurchaseList />
       </MainWrapper>
@@ -29,6 +35,8 @@ export const GroupPurchase = () => {
   )
 }
 const MainWrapper = styled.div`
+  height: 100%;
+  overflow-y: scroll;
   padding-bottom: 10px;
 `
 const StyledIcon = styled.button`

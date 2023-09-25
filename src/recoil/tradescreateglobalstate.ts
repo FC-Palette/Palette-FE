@@ -23,11 +23,12 @@ export const tradescreateglobalstate = atom<TradeCreateGlobalStateProps>({
     closingType: 'DATETIME' || 'HEAD_COUNT',
     accountOwner: '',
     accountNumber: '',
-    shopUrl: ''
+    shopUrl: '',
+    bank: ''
   }
 })
 
-export const secondhandglobalstate = atom<SecondHandGlobalStateProps>({
+export const secondhandcreateglobalstate = atom<SecondHandGlobalStateProps>({
   key: 'secondHandGlobalState',
   default: {
     selectedItem: '중고거래',
@@ -42,3 +43,36 @@ export const secondhandglobalstate = atom<SecondHandGlobalStateProps>({
     transactionEndTime: ''
   }
 })
+
+// tradescreateglobalstate 초기값
+export const initialTradeCreateGlobalState: TradeCreateGlobalStateProps = {
+  selectedItem: '공동구매',
+  images: [] as Blob[],
+  title: '',
+  description: '',
+  price: 0,
+  category: '',
+  startDay: today,
+  endDay: today,
+  timeRemaining: '',
+  headCount: 0,
+  closingType: 'DATETIME' || 'HEAD_COUNT',
+  accountOwner: '',
+  accountNumber: '',
+  shopUrl: '',
+  bank: ''
+}
+
+// secondhandcreateglobalstate 초기값
+export const initialSecondHandGlobalState: SecondHandGlobalStateProps = {
+  selectedItem: '중고거래',
+  tradesImages: [] as Blob[],
+  title: '',
+  description: '',
+  price: 0,
+  category: '',
+  isFree: false,
+  selectedDays: [] as string[],
+  transactionStartTime: '',
+  transactionEndTime: ''
+}

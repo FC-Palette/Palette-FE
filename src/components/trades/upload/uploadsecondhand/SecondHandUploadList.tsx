@@ -5,12 +5,12 @@ import { UploadTitle } from 'components/trades/upload/index'
 import { Input } from 'components/index'
 import { TRADES_SECONDHAND_TEXT } from 'constants/trades/index'
 import { secondHandUtils } from 'utils/index'
-import { secondhandglobalstate } from 'recoil/index'
+import { secondhandcreateglobalstate } from 'recoil/index'
 import { useRecoilState } from 'recoil'
 
 export const SecondHandUploadList = () => {
   const [secondHandGlobalState, setSecondHandGlobalState] = useRecoilState(
-    secondhandglobalstate
+    secondhandcreateglobalstate
   )
   const maxTitleLength = 25
   console.log(secondHandGlobalState)
@@ -75,6 +75,7 @@ const Wrapper = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   margin-top: 12px;
+  overflow-y: scroll;
 `
 
 const ComponentWappper = styled.div`

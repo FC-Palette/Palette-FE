@@ -13,6 +13,7 @@ export interface TradeCreateGlobalStateProps {
   accountOwner: string
   accountNumber: string
   shopUrl: string
+  bank: string
 }
 
 export interface SecondHandGlobalStateProps {

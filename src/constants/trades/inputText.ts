@@ -6,7 +6,7 @@ import {
   UploadInputDetail,
   UploadInputDetail1,
   DeadLine,
-  SecondHandCOption,
+  SecondHandOption,
   PurchaseImages,
   PurchaseOption,
   SecondHandImages,
@@ -78,7 +78,7 @@ export const TRADES_SECONDHAND_TEXT = [
   {
     title: '상품 카테고리를 선택해주세요.',
     props: { ph: '상품 카테고리를 선택해주세요.', item: '' },
-    component: SecondHandCOption
+    component: SecondHandOption
   },
   {
     title: '금액을 알려주세요.',

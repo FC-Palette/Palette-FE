@@ -10,72 +10,138 @@ import {
   TradesTitle,
   TradesPrice
 } from 'components/trades/cardlist/index'
+// import { useEffect, useState } from 'react'
+// import { GroupPurchaseListApi, GroupPurchaseResProps } from 'api/trades/index'
 
 export const TradesCard = () => {
+  // const [purchaseList, setPurchaseList] = useState<GroupPurchaseResProps[]>([])
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const response = await GroupPurchaseListApi()
+  //     if (response.success) {
+  //       setPurchaseList(response.response)
+  //     }
+  //   }
+
+  //   fetchData()
+  // }, [])
   return (
     <>
       <Container>
+        {/* {purchaseList.map(item => (
+          <div key={item.id}>
+            <TradesPreview>
+              <TradesImage image={item.thumbnailUrl} />
+              <TradesLikeBtn />
+              <TradesTime time="2:59:59" />
+            </TradesPreview>
+            <TradesCategory category={item.category} />
+            <TitleWrapper>
+              <TradesTitle title={item.title} />
+              <TradesPrice price={item.price} />
+            </TitleWrapper>
+            <TradesCount>
+              <TradesLikeCount hits={item.hits} />
+              <TradesViews bookmarkCount={item.bookmarkCount} />
+            </TradesCount>
+          </div>
+        ))} */}
+      </Container>
+      <Container>
         <TradesPreview>
-          <TradesImage />
+          <TradesImage image="" />
           <TradesLikeBtn />
-          <TradesTime />
+          <TradesTime time="2:59:59" />
         </TradesPreview>
-        <TradesCategory />
+        <TradesCategory category="디지털/가전" />
         <TitleWrapper>
-          <TradesTitle />
-          <TradesPrice />
+          <TradesTitle title="언제 끝나냐 하하하하하하하하하" />
+          <TradesPrice price="10000" />
         </TitleWrapper>
         <TradesCount>
-          <TradesLikeCount />
-          <TradesViews />
+          <TradesLikeCount hits="10" />
+          <TradesViews bookmarkCount="100" />
         </TradesCount>
       </Container>
       <Container>
         <TradesPreview>
-          <TradesImage />
+          <TradesImage image="" />
           <TradesLikeBtn />
-          <TradesTime />
+          <TradesTime time="2:59:59" />
         </TradesPreview>
-        <TradesCategory />
+        <TradesCategory category="디지털/가전" />
         <TitleWrapper>
-          <TradesTitle />
-          <TradesPrice />
+          <TradesTitle title="언제 끝나냐 하하하하하하하하하" />
+          <TradesPrice price="10000" />
         </TitleWrapper>
         <TradesCount>
-          <TradesLikeCount />
-          <TradesViews />
+          <TradesLikeCount hits="10" />
+          <TradesViews bookmarkCount="100" />
         </TradesCount>
       </Container>
       <Container>
         <TradesPreview>
-          <TradesImage />
+          <TradesImage image="" />
           <TradesLikeBtn />
-          <TradesTime />
+          <TradesTime time="2:59:59" />
         </TradesPreview>
-        <TradesCategory />
+        <TradesCategory category="디지털/가전" />
         <TitleWrapper>
-          <TradesTitle />
-          <TradesPrice />
+          <TradesTitle title="언제 끝나냐 하하하하하하하하하" />
+          <TradesPrice price="10000" />
         </TitleWrapper>
         <TradesCount>
-          <TradesLikeCount />
-          <TradesViews />
+          <TradesLikeCount hits="10" />
+          <TradesViews bookmarkCount="100" />
         </TradesCount>
       </Container>
       <Container>
         <TradesPreview>
-          <TradesImage />
+          <TradesImage image="" />
           <TradesLikeBtn />
-          <TradesTime />
+          <TradesTime time="2:59:59" />
         </TradesPreview>
-        <TradesCategory />
+        <TradesCategory category="디지털/가전" />
         <TitleWrapper>
-          <TradesTitle />
-          <TradesPrice />
+          <TradesTitle title="언제 끝나냐 하하하하하하하하하" />
+          <TradesPrice price="10000" />
         </TitleWrapper>
         <TradesCount>
-          <TradesLikeCount />
-          <TradesViews />
+          <TradesLikeCount hits="10" />
+          <TradesViews bookmarkCount="100" />
+        </TradesCount>
+      </Container>
+      <Container>
+        <TradesPreview>
+          <TradesImage image="" />
+          <TradesLikeBtn />
+          <TradesTime time="2:59:59" />
+        </TradesPreview>
+        <TradesCategory category="디지털/가전" />
+        <TitleWrapper>
+          <TradesTitle title="언제 끝나냐 하하하하하하하하하" />
+          <TradesPrice price="10000" />
+        </TitleWrapper>
+        <TradesCount>
+          <TradesLikeCount hits="10" />
+          <TradesViews bookmarkCount="100" />
+        </TradesCount>
+      </Container>
+      <Container>
+        <TradesPreview>
+          <TradesImage image="" />
+          <TradesLikeBtn />
+          <TradesTime time="2:59:59" />
+        </TradesPreview>
+        <TradesCategory category="디지털/가전" />
+        <TitleWrapper>
+          <TradesTitle title="언제 끝나냐 하하하하하하하하하" />
+          <TradesPrice price="10000" />
+        </TitleWrapper>
+        <TradesCount>
+          <TradesLikeCount hits="10" />
+          <TradesViews bookmarkCount="100" />
         </TradesCount>
       </Container>
     </>
@@ -89,6 +155,8 @@ const Container = styled.div`
   box-shadow: 0px 8px 16px ${theme.greyScale.grey3};
   border-radius: 8px;
   position: relative;
+  margin-bottom: 15px;
+  justify-self: center;
 `
 
 const TradesPreview = styled.div`

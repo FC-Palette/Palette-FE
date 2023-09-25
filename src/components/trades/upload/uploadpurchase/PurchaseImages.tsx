@@ -107,6 +107,7 @@ const UploadZoneContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: relative;
   align-items: center;
 `
 
@@ -115,10 +116,8 @@ const UploadZoneBox = styled.div`
   width: 90px;
   height: 90px;
   border-radius: 8px;
-  cursor: pointer;
 `
 
 const AddIcon = styled(Add)`
   position: absolute;
-  cursor: pointer;
 `

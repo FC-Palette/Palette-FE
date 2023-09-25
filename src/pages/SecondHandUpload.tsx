@@ -4,12 +4,17 @@ import {
 } from 'components/trades/preview/index'
 import { UploadFooter } from 'components/trades/upload/index'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 import { modalOnState } from 'recoil/index'
 import { SECONDHAND_MODAL_TEXT } from 'constants/trades/index'
 import { useState } from 'react'
 import { BackgroundModal, ModalButtons } from 'components/index'
 import { PreviewFooter } from 'components/trades/preview/index'
+import {
+  secondhandcreateglobalstate,
+  initialSecondHandGlobalState
+} from 'recoil/index'
+// import { styled } from 'styled-components'
 
 interface Params {
   [key: string]: string | undefined
@@ -21,6 +26,9 @@ export const SecondHandUpload = ({}) => {
   const [modlaOnState, setModalOnState] = useRecoilState(modalOnState)
   const initialModalText = SECONDHAND_MODAL_TEXT.create
   const [modalText, setModalText] = useState(initialModalText)
+  const SetSecondHandGlobalState = useSetRecoilState(
+    secondhandcreateglobalstate
+  )
 
   const handleNextStep = () => {
     const nextStep = parseInt(stepId) + 1
@@ -43,6 +51,7 @@ export const SecondHandUpload = ({}) => {
     if (modalText === SECONDHAND_MODAL_TEXT.create) {
       setModalOnState(false)
     } else if (modalText === SECONDHAND_MODAL_TEXT.cancel) {
+      SetSecondHandGlobalState(initialSecondHandGlobalState)
       navigate(`/secondHand`)
       setModalOnState(false)
     }
@@ -88,8 +97,6 @@ export const SecondHandUpload = ({}) => {
 
   return (
     <>
-      {renderContent()}
-      {renderFooter()}
       {modlaOnState && (
         <BackgroundModal
           title={modalText[0]}
@@ -102,6 +109,9 @@ export const SecondHandUpload = ({}) => {
           />
         </BackgroundModal>
       )}
+
+      {renderContent()}
+      {renderFooter()}
     </>
   )
 }

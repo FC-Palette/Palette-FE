@@ -1,10 +1,11 @@
 import { theme } from 'styles/index'
 import { styled } from 'styled-components'
 
-export const TradesPrice = () => {
+export const TradesPrice = ({ price }) => {
+  const formattedPrice = new Intl.NumberFormat().format(price)
   return (
     <PriceWrapper>
-      <Price>9000</Price>
+      <Price>{formattedPrice}</Price>
       <Won>원</Won>
     </PriceWrapper>
   )

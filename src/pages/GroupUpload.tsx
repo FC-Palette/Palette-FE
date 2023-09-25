@@ -4,10 +4,14 @@ import {
 } from 'components/trades/preview/index'
 import { UploadFooter } from 'components/trades/upload/index'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useRecoilState } from 'recoil'
+import { useSetRecoilState, useRecoilState } from 'recoil'
 import { modalOnState } from 'recoil/index'
 import { TRADES_MODAL_TEXT } from 'constants/trades/index'
 import { useState } from 'react'
+import {
+  tradescreateglobalstate,
+  initialTradeCreateGlobalState
+} from 'recoil/index'
 import { BackgroundModal, ModalButtons } from 'components/index'
 import { PreviewFooter } from 'components/trades/preview/index'
 // import styled from 'styled-components'
@@ -21,6 +25,7 @@ export const GroupUpload = () => {
   const [modlaOnState, setModalOnState] = useRecoilState(modalOnState)
   const initialModalText = TRADES_MODAL_TEXT.create
   const [modalText, setModalText] = useState(initialModalText)
+  const setTradesGlobalState = useSetRecoilState(tradescreateglobalstate)
 
   const handleNextStep = () => {
     const nextStep = parseInt(stepId) + 1
@@ -43,6 +48,7 @@ export const GroupUpload = () => {
     if (modalText === TRADES_MODAL_TEXT.create) {
       setModalOnState(false)
     } else if (modalText === TRADES_MODAL_TEXT.cancel) {
+      setTradesGlobalState(initialTradeCreateGlobalState)
       navigate(`/GroupPurchase`)
       setModalOnState(false)
     }

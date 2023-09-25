@@ -1,10 +1,10 @@
 import { theme } from 'styles/index'
 import { styled } from 'styled-components'
 
-export const TradesCategory = () => {
+export const TradesCategory = ({ category }) => {
   return (
     <>
-      <CategoryWrapper>가전/디지털</CategoryWrapper>
+      <CategoryWrapper>{category}</CategoryWrapper>
     </>
   )
 }
