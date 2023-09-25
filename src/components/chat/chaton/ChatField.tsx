@@ -11,6 +11,13 @@ import {
   Participation
 } from 'components/index'
 
+const renderTime = (currentMessage, nextMessage) => {
+  if (!nextMessage) return true // Display timestamp for the last message
+  if (currentMessage.sender !== nextMessage.sender) return true // Different sender
+  if (currentMessage.createdAt !== nextMessage.createdAt) return true // Different timestamp
+  return false
+}
+
 export const ChatField = ({ messages }) => {
   const [innerHeight, setInnerHeight] = useState<number>(0)
   useLayoutEffect(() => {
@@ -18,14 +25,6 @@ export const ChatField = ({ messages }) => {
       setInnerHeight(window.innerHeight)
     }
   }, [])
-
-  //시간 로직 => 유틸 분리 가능?
-  const shouldDisplayTimestamp = (currentMessage, nextMessage) => {
-    if (!nextMessage) return true // Display timestamp for the last message
-    if (currentMessage.sender !== nextMessage.sender) return true // Different sender
-    if (currentMessage.createdAt !== nextMessage.createdAt) return true // Different timestamp
-    return false
-  }
 
   const [openMsgActionsIndex, setOpenMsgActionsIndex] =
     useRecoilState(msgActionsState)
@@ -40,20 +39,37 @@ export const ChatField = ({ messages }) => {
 
   const renderMessage = (message, index) => {
     const nextMessage = messages[index + 1]
-    const showTimestamp = shouldDisplayTimestamp(message, nextMessage)
+    const showTimestamp = renderTime(message, nextMessage)
 
     const isSender = message.sender === 'sender'
     const isRecipient = message.sender === 'recipient'
     const isExit = message.type === 'exit'
     const isJoin = message.type === 'join'
-    const prevMsgType = index > 0 ? messages[index - 1].type : null
 
+    const prevMsgType = index > 0 ? messages[index - 1].type : null
     const prevMsgDate =
       index > 0 ? messages[index - 1].createdAt.split(' ')[0] : null
     const MsgDate = message.createdAt.split(' ')[0]
-    // 이전 메시지의 날짜와 이후 메시지의 날짜를 비교해 같지 않다면(0826,0827)
-    // 이후 메시지의 날짜를 이용해 구분한다.
     const dateSeperator = prevMsgDate !== MsgDate
+
+    const msgProps = {
+      message:
+        message.type === 'text' ? (
+          message.text
+        ) : (
+          <SubjectDetail $shared={true} />
+        ),
+      $sender: message.sender,
+      createdAt: message.createdAt,
+      showCreatedTime: showTimestamp,
+      showMsgActions: openMsgActionsIndex === index,
+      toggleMsgActions: () => toggleMsgActions(index)
+    }
+    const statusProps = {
+      status: message.text,
+      $prev: dateSeperator,
+      $prevtype: prevMsgType
+    }
 
     if (dateSeperator) {
       return (
@@ -62,104 +78,20 @@ export const ChatField = ({ messages }) => {
             date={MsgDate}
             $isFirst={prevMsgDate}
           />
-          {isSender && (
-            <Sender
-              message={
-                message.type === 'text' ? (
-                  message.text
-                ) : (
-                  <SubjectDetail $shared={true} />
-                )
-              }
-              $sender={message.sender}
-              createdAt={message.createdAt}
-              showCreatedTime={showTimestamp}
-              showMsgActions={openMsgActionsIndex === index}
-              toggleMsgActions={() => toggleMsgActions(index)}
-            />
-          )}
-          {isRecipient && (
-            <Recipient
-              message={
-                message.type === 'text' ? (
-                  message.text
-                ) : (
-                  <SubjectDetail $shared={true} />
-                )
-              }
-              $sender={message.sender}
-              createdAt={message.createdAt}
-              showCreatedTime={showTimestamp}
-              showMsgActions={openMsgActionsIndex === index}
-              toggleMsgActions={() => toggleMsgActions(index)}
-            />
-          )}
-          {isExit && (
-            <Participation
-              status={message.text}
-              $prev={dateSeperator}
-              $prevtype={prevMsgType}
-            />
-          )}
-          {isJoin && (
-            <Participation
-              status={message.text}
-              $prev={dateSeperator}
-              $prevtype={prevMsgType}
-            />
-          )}
+          {isSender && <Sender {...msgProps} />}
+          {isRecipient && <Recipient {...msgProps} />}
+          {isExit && <Participation {...statusProps} />}
+          {isJoin && <Participation {...statusProps} />}
         </React.Fragment>
       )
     }
 
     return (
       <React.Fragment key={index}>
-        {isSender && (
-          <Sender
-            message={
-              message.type === 'text' ? (
-                message.text
-              ) : (
-                <SubjectDetail $shared={true} />
-              )
-            }
-            $sender={message.sender}
-            createdAt={message.createdAt}
-            showCreatedTime={showTimestamp}
-            showMsgActions={openMsgActionsIndex === index}
-            toggleMsgActions={() => toggleMsgActions(index)}
-          />
-        )}
-        {isRecipient && (
-          <Recipient
-            message={
-              message.type === 'text' ? (
-                message.text
-              ) : (
-                <SubjectDetail $shared={true} />
-              )
-            }
-            $sender={message.sender}
-            createdAt={message.createdAt}
-            showCreatedTime={showTimestamp}
-            showMsgActions={openMsgActionsIndex === index}
-            toggleMsgActions={() => toggleMsgActions(index)}
-          />
-        )}
-        {isExit && (
-          <Participation
-            status={message.text}
-            $prev={dateSeperator}
-            $prevtype={prevMsgType}
-          />
-        )}
-        {isJoin && (
-          <Participation
-            status={message.text}
-            $prev={dateSeperator}
-            $prevtype={prevMsgType}
-          />
-        )}
+        {isSender && <Sender {...msgProps} />}
+        {isRecipient && <Recipient {...msgProps} />}
+        {isExit && <Participation {...statusProps} />}
+        {isJoin && <Participation {...statusProps} />}
       </React.Fragment>
     )
   }
