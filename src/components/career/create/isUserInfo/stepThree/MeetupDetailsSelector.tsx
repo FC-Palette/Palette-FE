@@ -153,8 +153,10 @@ export const MeetupDetailsSelector = () => {
           <AnswerFlexWrap>{daysList}</AnswerFlexWrap>
 
           {/* 모임시간 */}
-          <QuestionTitle>모임 시간을 정해주세요.</QuestionTitle>
-          <CommonTimePicker onTimeChange={handleMeetingTime} />
+          <TimePickerContainer>
+            <QuestionTitle>모임 시간을 정해주세요.</QuestionTitle>
+            <CommonTimePicker onTimeChange={handleMeetingTime} />
+          </TimePickerContainer>
 
           {/* 진행시간 */}
           <QuestionTitle>진행시간은 얼마나 될까요?</QuestionTitle>
@@ -376,4 +378,10 @@ const ToggleR60 = styled.div<selectProps>`
   display: flex;
   align-items: center;
   justify-content: center;
+`
+
+const TimePickerContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 `

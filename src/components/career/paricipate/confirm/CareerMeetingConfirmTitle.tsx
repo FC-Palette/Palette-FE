@@ -28,9 +28,12 @@ const Container = styled.div`
 const FetchTItle = styled.div`
   max-height: 40px;
   font-size: 20px;
+  white-space: wrap;
 `
 
 const FixedTitle = styled.div`
+  min-width: 310px;
+  white-space: nowrap;
   font-size: 36px;
   font-weight: 700;
   line-height: 46px;
