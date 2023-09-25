@@ -1,5 +1,7 @@
 import { styled } from 'styled-components'
 import { Image } from 'components/index'
+import { Flexbox } from 'styles/index'
+
 export const AnnPublisher = () => {
   return (
     <Wrapper>
@@ -11,8 +13,7 @@ export const AnnPublisher = () => {
     </Wrapper>
   )
 }
-const Wrapper = styled.div`
-  display: flex;
+const Wrapper = styled(Flexbox)`
   padding: 11px 0 12px 24px;
 `
 const AnnInfo = styled.div`

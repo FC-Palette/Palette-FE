@@ -2,6 +2,7 @@ import { styled } from 'styled-components'
 import { Header, AnnPublisher, AnnContent, Wrapper } from 'components/index'
 import { Add, TextalignJustifycenter } from 'iconsax-react'
 import { useNavigate } from 'react-router-dom'
+import { Flexbox } from 'styles/index'
 export const ChatAnnDetail = () => {
   const navigate = useNavigate()
   return (
@@ -41,8 +42,7 @@ const Text = styled.div`
   padding-top: 1px;
 `
 
-const ToAnnList = styled.div`
+const ToAnnList = styled(Flexbox)`
   cursor: pointer;
-  display: flex;
   align-items: center;
 `

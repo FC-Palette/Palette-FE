@@ -1,4 +1,4 @@
-import { css } from 'styled-components'
+import { css, styled } from 'styled-components'
 
 export const centralise = css`
   display: flex;
@@ -12,4 +12,7 @@ export const columnise = css`
 export const rowCentralise = css`
   display: flex;
   justify-content: center;
+`
+export const Flexbox = styled.div`
+  display: flex;
 `

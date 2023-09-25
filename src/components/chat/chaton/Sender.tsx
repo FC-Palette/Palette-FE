@@ -3,6 +3,7 @@ import { MessageTime, MsgActions } from 'components/index'
 import { useResetRecoilState } from 'recoil'
 import { msgActionsState } from 'recoil/index'
 import { useOutsideClick } from 'hooks/index'
+import { Flexbox } from 'styles/index'
 
 //ChatField
 export const Sender = ({
@@ -26,7 +27,7 @@ export const Sender = ({
 
   return (
     <MessageBlock $sender={$sender}>
-      <SenderBlock>
+      <Flexbox>
         <MessageTime
           time={showCreatedTime ? createdAt : null}
           $sender={$sender}
@@ -43,20 +44,16 @@ export const Sender = ({
             />
           )}
         </MessageBox>
-      </SenderBlock>
+      </Flexbox>
     </MessageBlock>
   )
 }
-export const MessageBlock = styled.div<{ $sender: string }>`
+export const MessageBlock = styled(Flexbox)<{ $sender: string }>`
   padding: 4px 24px;
   word-break: break-all;
-  display: flex;
   justify-content: ${props =>
     props.$sender === 'sender' ? 'flex-end' : 'flex-start'};
   font-size: 14px;
-`
-const SenderBlock = styled.div`
-  display: flex;
 `
 export const MessageBox = styled.div<{ $sender: string }>`
   position: relative;
