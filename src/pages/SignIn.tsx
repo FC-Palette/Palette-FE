@@ -1,14 +1,15 @@
 import { SignInField, FindUserField, Header } from 'components/index'
 import { SignUp } from 'components/index'
 import { ArrowLeft2 } from 'iconsax-react'
+import { useNavigate } from 'react-router-dom'
 import { styled } from 'styled-components'
 
-
 export const SignIn = () => {
+  const navigate = useNavigate()
   return (
     <SignInContainer>
         <Header leftIcon={
-          <StyledIcon>
+          <StyledIcon onClick={() => navigate(-1)}>
             <ArrowLeft2 />
           </StyledIcon>}
         centerText="로그인">

@@ -1,2 +1,5 @@
-export * from 'constants/setting/SettingMenuText'
-export * from 'constants/setting/settingChangePwdText.ts'
+export * from 'constants/setting/settingChangePwdText'
+export * from 'constants/setting/settingMenuText'
+export * from 'constants/setting/settingAlarmText'
+export * from 'constants/setting/settingNoticeText'
+export * from 'constants/setting/settingServiceText'  

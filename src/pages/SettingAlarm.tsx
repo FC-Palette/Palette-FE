@@ -1,8 +1,9 @@
 
-import { Header } from "@/components"
+import { Header, SettingAlarmBtn } from "components/index"
 import { ArrowLeft2 } from "iconsax-react"
-import styled from "styled-components"
-import { StyledIcon } from "."
+import { styled } from "styled-components"
+import { SETTING_ALARM_TEXT } from "constants/index"
+import { theme } from "@/styles"
 
 export const SettingAlarm = () => {
   return (
@@ -14,15 +15,13 @@ export const SettingAlarm = () => {
       </StyledIcon>}
       centerText="알림 설정">
       </Header>
-
-
       <SettingListWrap>
-        <AllList>전체</AllList>
-        <AlarmList>공지사항 및 일정</AlarmList>
-        <AlarmList>공용시설</AlarmList>
-        <AlarmList>불편접수</AlarmList>
-        <AlarmList>설문조사</AlarmList>
-        <AlarmList>관리비 조회</AlarmList>
+        <AllList>{SETTING_ALARM_TEXT.settingAlarmAllText}<SettingAlarmBtn id="button1" /></AllList>
+        <AlarmList>{SETTING_ALARM_TEXT.settingAlarmNoticeText}<SettingAlarmBtn id="button2" /></AlarmList>
+        <AlarmList>{SETTING_ALARM_TEXT.settingAlarmBuildingText}<SettingAlarmBtn id="button3" /></AlarmList>
+        <AlarmList>{SETTING_ALARM_TEXT.settingAlarmReportText}<SettingAlarmBtn id="button4" /></AlarmList>
+        <AlarmList>{SETTING_ALARM_TEXT.settingAlarmResearchText}<SettingAlarmBtn id="button5" /></AlarmList>
+        <AlarmList>{SETTING_ALARM_TEXT.settingAlarmCheckText}<SettingAlarmBtn id="button6" /></AlarmList>
       </SettingListWrap>
     </ServiceWrap>
   )
@@ -48,15 +47,23 @@ const SettingListWrap = styled.div`
 const AllList = styled.div`
   font-size: 16px;
   padding: 13px 0;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
-  margin-bottom: 11px;
+  border-top: 1px solid ${theme.greyScale.grey5};
+  border-bottom: 1px solid ${theme.greyScale.grey5};
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `
 
 const AlarmList = styled.div`
   padding-top: 11px;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 24px;
-  font-family: inter;
+  display: flex;
+  justify-content: space-between;
+`
+
+const StyledIcon = styled.div`
+  color: #000;
+  font-size: ${props => props.theme.customSize.xxlarge};
 `
