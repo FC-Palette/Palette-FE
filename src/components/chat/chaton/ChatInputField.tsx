@@ -3,7 +3,7 @@ import { ChatInput, Background, SendFile } from 'components/index'
 import { AddSquare, Send2 } from 'iconsax-react'
 import { sendFileState } from 'recoil/index'
 import { useRecoilState } from 'recoil'
-
+import { Flexbox } from 'styles/index'
 export const ChatInputField = () => {
   const [sendFile, setSendFile] = useRecoilState(sendFileState)
   const handleSendFile = () => {
@@ -30,12 +30,11 @@ export const ChatInputField = () => {
   )
 }
 
-const ChatWrapper = styled.div`
+const ChatWrapper = styled(Flexbox)`
   position: sticky;
   top: 100%;
   background-color: ${props => props.theme.greyScale.bluegrey};
   padding: 12px 24px 20px;
-  display: flex;
   width: 100%;
   max-width: 430px;
   z-index: 100;

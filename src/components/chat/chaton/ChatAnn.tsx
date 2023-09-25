@@ -1,6 +1,7 @@
 //채팅방 상단 공지(토글X)
 import { styled } from 'styled-components'
 import { Edit } from 'iconsax-react'
+import { Flexbox } from 'styles/index'
 
 export const ChatAnn = ({ $registered }) => {
   return (
@@ -15,8 +16,7 @@ export const ChatAnn = ({ $registered }) => {
   )
 }
 
-export const ChatTopBar = styled.div<{ $registered?: boolean }>`
-  display: flex;
+export const ChatTopBar = styled(Flexbox)<{ $registered?: boolean }>`
   padding: 12px 24px;
   background-color: ${props => props.theme.greyScale.bluegrey};
   color: ${props => props.theme.main.blue0};

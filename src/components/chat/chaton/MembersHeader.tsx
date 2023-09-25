@@ -1,6 +1,7 @@
 import { styled } from 'styled-components'
 import { ArrowLeft2 } from 'iconsax-react'
 import { ToChatList } from 'components/index'
+import { Flexbox } from 'styles/index'
 
 export const MembersHeader = ({ onClick }) => {
   return (
@@ -31,8 +32,7 @@ export const Fixer = styled.div<{
   height: ${props => (props.$center ? 'calc(100vh - 128px)' : '')};
 `
 
-const Container = styled.div`
-  display: flex;
+const Container = styled(Flexbox)`
   align-items: center;
   height: 64px;
 `

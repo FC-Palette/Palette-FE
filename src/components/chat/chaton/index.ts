@@ -1,7 +1,6 @@
 // export * from 'chat/chaton/Chatting'
 // CHAT ON(FIELD)
 export * from 'chat/chaton/ChatField'
-export * from 'chat/chaton/Message'
 export * from 'chat/chaton/Sender'
 export * from 'chat/chaton/Recipient'
 export * from 'chat/chaton/ChatInput'

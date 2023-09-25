@@ -9,7 +9,7 @@ import {
   MemberImg,
   MsgActions
 } from 'components/index'
-import { columnise } from 'styles/index'
+import { Flexbox, columnise } from 'styles/index'
 //ChatField
 export const Recipient = ({
   message,
@@ -37,7 +37,7 @@ export const Recipient = ({
       {!showCreatedTime && <MemberImg src="" />}
       <RecipientBlock>
         {showCreatedTime && <MemberName>고스트 사원</MemberName>}
-        <MessageBubble>
+        <Flexbox>
           <MessageBox
             $sender={$sender}
             onDoubleClick={toggleMsgActions}>
@@ -54,7 +54,7 @@ export const Recipient = ({
             time={showCreatedTime ? createdAt : null}
             $sender={$sender}
           />
-        </MessageBubble>
+        </Flexbox>
       </RecipientBlock>
     </MessageBlock>
   )
@@ -68,6 +68,4 @@ const MemberName = styled.span`
   font-size: 12px;
   line-height: 18px;
 `
-const MessageBubble = styled.div`
-  display: flex;
-`
+const MessageBubble = styled(Flexbox)``

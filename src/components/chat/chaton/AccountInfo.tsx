@@ -1,6 +1,8 @@
 import { styled } from 'styled-components'
 import { Copy, Edit2 } from 'iconsax-react'
 import { useNavigate } from 'react-router-dom'
+import { Flexbox } from 'styles/index'
+
 export const AccountInfo = ({ isHost, account }) => {
   const navigate = useNavigate()
   const handleCopy = async () => {
@@ -30,8 +32,7 @@ export const AccountInfo = ({ isHost, account }) => {
   )
 }
 
-const Wrapper = styled.div`
-  display: flex;
+const Wrapper = styled(Flexbox)`
   align-items: center;
   min-width: 375px;
   max-height: 28px;

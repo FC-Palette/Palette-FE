@@ -1,5 +1,5 @@
 import { Button } from 'components/index'
-import { theme } from 'styles/index'
+import { Flexbox, theme } from 'styles/index'
 import { styled } from 'styled-components'
 import { useRecoilState } from 'recoil'
 import { modalOnState } from 'recoil/index'
@@ -39,8 +39,7 @@ export const ModalButtons = ({
   )
 }
 
-const Buttons = styled.div`
-  display: flex;
+const Buttons = styled(Flexbox)`
   justify-content: space-between;
   width: 263px;
 `

@@ -1,6 +1,8 @@
 import { styled } from 'styled-components'
 import { Fixer } from 'components/index'
 import { Logout, Notification } from 'iconsax-react'
+import { Flexbox } from 'styles/index'
+
 export const MembersFooter = ({ onClick }) => {
   return (
     <Fixer $bottom="0">
@@ -19,7 +21,7 @@ export const MembersFooter = ({ onClick }) => {
   )
 }
 
-const Container = styled.div`
+const Container = styled(Flexbox)`
   display: flex;
   justify-content: space-between;
   padding: 12px 24px 32px;

@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 import { useNavigate } from 'react-router-dom'
-import { columnise } from 'styles/index'
+import { Flexbox, columnise } from 'styles/index'
 const interpoint = '\u00B7 '
 export const ChatAnnListItem = ({ content, time, publisher }) => {
   const navigate = useNavigate()
@@ -29,8 +29,7 @@ const Title = styled.div`
   max-height: 32px;
   overflow: hidden;
 `
-const Info = styled.div`
-  display: flex;
+const Info = styled(Flexbox)`
   white-space: nowrap;
   font-size: 14px;
   padding: 2px 0 13px;

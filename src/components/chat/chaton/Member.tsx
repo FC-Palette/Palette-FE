@@ -1,4 +1,5 @@
 import { styled } from 'styled-components'
+import { Flexbox } from 'styles/index'
 export const Member = () => {
   return (
     <Wrapper>
@@ -7,8 +8,7 @@ export const Member = () => {
     </Wrapper>
   )
 }
-const Wrapper = styled.div`
-  display: flex;
+const Wrapper = styled(Flexbox)`
   padding: 10px 0 9px 16px;
 `
 

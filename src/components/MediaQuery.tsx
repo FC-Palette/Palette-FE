@@ -1,6 +1,7 @@
 import { useMediaQuery } from 'react-responsive'
 import { styled } from 'styled-components'
 import { useState, useLayoutEffect } from 'react'
+import { Flexbox } from 'styles/index'
 
 export const MediaQuery = ({ children }) => {
   const isMobile = useMediaQuery({
@@ -22,8 +23,7 @@ export const MediaQuery = ({ children }) => {
   )
 }
 
-const Wrapper = styled.div<{ $innerHeight?: number }>`
-  display: flex;
+const Wrapper = styled(Flexbox)<{ $innerHeight?: number }>`
   justify-content: center;
   background-color: ${props => props.theme.greyScale.grey0};
   height: ${props => props.$innerHeight}px;
