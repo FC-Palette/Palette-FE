@@ -2,7 +2,13 @@ import React from 'react'
 import { useRecoilState } from 'recoil'
 import { msgActionsState } from 'recoil/index'
 import { useState, useLayoutEffect } from 'react'
-import { Wrapper, Sender, Recipient, SubjectDetail } from 'components/index'
+import {
+  Wrapper,
+  Sender,
+  Recipient,
+  SubjectDetail,
+  DateSeperator
+} from 'components/index'
 
 export const ChatField = ({ messages }) => {
   const [innerHeight, setInnerHeight] = useState<number>(0)
@@ -32,53 +38,99 @@ export const ChatField = ({ messages }) => {
     setOpenMsgActionsIndex(index)
   }
 
+  // let prevMsgDate = null
+
+  const renderMessage = (message, index) => {
+    const nextMessage = messages[index + 1]
+    const showTimestamp = shouldDisplayTimestamp(message, nextMessage)
+    const isSender = message.sender === 'sender'
+    const prevMsgDate =
+      index > 0 ? messages[index - 1].createdAt.split(' ')[0] : null
+    const MsgDate = message.createdAt.split(' ')[0]
+    // 이전 메시지의 날짜와 이후 메시지의 날짜를 비교해 같지 않다면(0826,0827)
+    // 이후 메시지의 날짜를 이용해 구분한다.
+    const dateSeperator = prevMsgDate !== MsgDate
+
+    if (dateSeperator) {
+      return (
+        <React.Fragment key={index}>
+          <DateSeperator
+            date={MsgDate}
+            $isFirst={prevMsgDate}
+          />
+          {isSender ? (
+            <Sender
+              message={
+                message.type === 'text' ? (
+                  message.text
+                ) : (
+                  <SubjectDetail $shared={true} />
+                )
+              }
+              $sender={message.sender}
+              createdAt={message.createdAt}
+              showCreatedTime={showTimestamp}
+              showMsgActions={openMsgActionsIndex === index}
+              toggleMsgActions={() => toggleMsgActions(index)}
+            />
+          ) : (
+            <Recipient
+              message={
+                message.type === 'text' ? (
+                  message.text
+                ) : (
+                  <SubjectDetail $shared={true} />
+                )
+              }
+              $sender={message.sender}
+              createdAt={message.createdAt}
+              showCreatedTime={showTimestamp}
+              showMsgActions={openMsgActionsIndex === index}
+              toggleMsgActions={() => toggleMsgActions(index)}
+            />
+          )}
+        </React.Fragment>
+      )
+    }
+
+    return (
+      <React.Fragment key={index}>
+        {isSender ? (
+          <Sender
+            message={
+              message.type === 'text' ? (
+                message.text
+              ) : (
+                <SubjectDetail $shared={true} />
+              )
+            }
+            $sender={message.sender}
+            createdAt={message.createdAt}
+            showCreatedTime={showTimestamp}
+            showMsgActions={openMsgActionsIndex === index}
+            toggleMsgActions={() => toggleMsgActions(index)}
+          />
+        ) : (
+          <Recipient
+            message={
+              message.type === 'text' ? (
+                message.text
+              ) : (
+                <SubjectDetail $shared={true} />
+              )
+            }
+            $sender={message.sender}
+            createdAt={message.createdAt}
+            showCreatedTime={showTimestamp}
+            showMsgActions={openMsgActionsIndex === index}
+            toggleMsgActions={() => toggleMsgActions(index)}
+          />
+        )}
+      </React.Fragment>
+    )
+  }
+
   return (
-    <Wrapper $innerHeight={innerHeight}>
-      {messages.map((message, index) => {
-        //시간 로직
-        const nextMessage = messages[index + 1]
-        const showTimestamp = shouldDisplayTimestamp(message, nextMessage)
-
-        //복사/공지 오버레이 로직
-        const showMsgActions = openMsgActionsIndex === index
-
-        return (
-          <React.Fragment key={index}>
-            {message.sender === 'sender' && (
-              <Sender
-                message={
-                  message.type === 'text' ? (
-                    message.text
-                  ) : (
-                    <SubjectDetail $shared={true} />
-                  )
-                }
-                $sender={message.sender}
-                createdAt={message.createdAt}
-                showCreatedTime={showTimestamp}
-                showMsgActions={showMsgActions}
-                toggleMsgActions={() => toggleMsgActions(index)}
-              />
-            )}
-            {message.sender !== 'sender' && (
-              <Recipient
-                message={
-                  message.type === 'text' ? (
-                    message.text
-                  ) : (
-                    <SubjectDetail $shared={true} />
-                  )
-                }
-                $sender={message.sender}
-                createdAt={message.createdAt}
-                showCreatedTime={showTimestamp}
-                showMsgActions={showMsgActions}
-                toggleMsgActions={() => toggleMsgActions(index)}
-              />
-            )}
-          </React.Fragment>
-        )
-      })}
-    </Wrapper>
+    <Wrapper $innerHeight={innerHeight}>{messages.map(renderMessage)}</Wrapper>
   )
 }
