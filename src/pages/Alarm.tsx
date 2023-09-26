@@ -33,7 +33,6 @@ export const Alarm = () => {
 }
 
 const AlarmWrap = styled.div`
-
     max-width: 430px;
     min-height: 100vh;
 `

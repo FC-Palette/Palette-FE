@@ -1,6 +1,7 @@
 import { styled } from "styled-components"
 import { Button } from "components/index"
 import { START_MEET_TEXT } from "constants/index"
+import { Link } from "react-router-dom"
 
 export const MyPagePostDisplay = () => {
   return (
@@ -9,9 +10,11 @@ export const MyPagePostDisplay = () => {
         <RequestText>
           {START_MEET_TEXT.startRequestText}
         </RequestText>
-        <Button>        
-          {START_MEET_TEXT.startMeetingBtnText}
-        </Button>
+        <Link to={"/career"}>
+          <Button>        
+            {START_MEET_TEXT.startMeetingBtnText}
+          </Button>
+        </Link>
       </DisplayWrap>
     </DisplayArea>
   )
