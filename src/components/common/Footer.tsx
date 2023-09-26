@@ -1,29 +1,37 @@
 import { theme, centralise } from 'styles/index'
 import { styled } from 'styled-components'
 import { ICON_TEXTS } from 'constants/index'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom';
+import { MyPageFooterIcon } from 'components/index';
 
 export const Footer = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const handleIconClick = path => {
-    navigate(path)
-  }
+    navigate(path);
+  };
 
   return (
     <Wrapper>
       {ICON_TEXTS.map(({ text, icon: IconComponent, path }) => (
         <IconWrapper
           key={text}
-          onClick={() => handleIconClick(path)}>
-          <StyledIcon>
-            <IconComponent />
-          </StyledIcon>
+          onClick={() => handleIconClick(path)}
+        >
+    <StyledIcon>
+      {(location.pathname === '/mypage' || location.pathname === '/alarm') && path === '/mypage' ? (
+        <MyPageFooterIcon />
+      ) : (
+        <IconComponent />
+      )}
+    </StyledIcon>
           <StyledIcon>{text}</StyledIcon>
         </IconWrapper>
       ))}
     </Wrapper>
-  )
-}
+  );
+};
 
 const Wrapper = styled.footer`
   display: flex;
@@ -38,16 +46,16 @@ const Wrapper = styled.footer`
   bottom: 0%;
   /* top: 100%; */
   background-color: ${theme.main.white};
-`
+`;
 
 const IconWrapper = styled.button`
   width: 82px;
   height: 58px;
   padding-top: 10px;
-`
+`;
 
 const StyledIcon = styled.div`
   ${centralise};
   font-size: ${theme.customSize.small};
   margin-top: 4px;
-`
+`;

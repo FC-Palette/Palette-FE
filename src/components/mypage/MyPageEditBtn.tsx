@@ -2,18 +2,21 @@ import { Button } from "components/index"
 import { theme } from "styles/index"
 import { styled } from "styled-components"
 import { PROFILE_EDIT_TEXT } from "constants/index"
+import { Link } from "react-router-dom"
 
 
 export const MyPageEditBtn = () => {
   return (
     <ButtonWrap>
-      <Button
-      color={theme.main.blue0}
-      $bgColor={theme.main.white}
-      $btnWidth="382px"
-      $btnHeight="60px">
-        {PROFILE_EDIT_TEXT.profileEditBtnText}
-      </Button>
+      <Link to={"/changeprofile"}>
+        <Button
+        color={theme.main.blue0}
+        $bgColor={theme.main.white}
+        $btnWidth="382px"
+        $btnHeight="60px">
+          {PROFILE_EDIT_TEXT.profileEditBtnText}
+        </Button>
+      </Link>
     </ButtonWrap>
   )
 }

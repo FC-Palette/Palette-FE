@@ -1,12 +1,13 @@
 import { styled } from "styled-components"
 import { theme } from "styles/index"
 import { SIGNIN_FORM_TEXT, SIGNIN_REGEX_TEXT } from 'constants/index'
-import { Input, Button } from "components/index"
+import { Input, Button, RegIcon } from "components/index"
 import { useState } from "react"
 
 export const SignInField = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const defaultBorderColor = theme.greyScale.grey4;
 
     const emailRegex = SIGNIN_REGEX_TEXT.idCondition;
     const isValidEmail = emailRegex.test(email);
@@ -20,7 +21,7 @@ export const SignInField = () => {
 
     const renderEmailErrorMessage = () => {
         if (!email) {
-            return SIGNIN_REGEX_TEXT.emptyId;
+            return ""; 
         }
     
         if (!isValidEmail) {
@@ -30,10 +31,9 @@ export const SignInField = () => {
         return null;
     };
     
-
     const renderPasswordErrorMessage = () => {
         if (!password) {
-            return SIGNIN_REGEX_TEXT.emptyPwd;
+            return ""; 
         }
         if (!passwordRegex.test(password)) {
             if (!SIGNIN_REGEX_TEXT.engInPwd.test(password)) {
@@ -52,8 +52,8 @@ export const SignInField = () => {
                 return SIGNIN_REGEX_TEXT.pwdLengLeast;
             }
         }
-        return null; 
-        };
+        return null;
+    };
     
     
 
@@ -65,12 +65,12 @@ export const SignInField = () => {
                 <Input                     
                 ph={SIGNIN_FORM_TEXT.idInputPlaceholderText}
                 $inputWidth={'100%'}
-                $borderColor={isValidEmail ? theme.greyScale.grey4 : theme.subColor.redD2}
+                $borderColor={isValidEmail ? theme.greyScale.grey4 : (email ? theme.subColor.redD2 : defaultBorderColor)}
                 value={email}
                 onChange={handleEmailChange}>
                 </Input>
                 <IdRexErrorMessage>
-                    {renderEmailErrorMessage() && (<ErrorMessage>{renderEmailErrorMessage()}</ErrorMessage>)}
+                    {renderEmailErrorMessage() && (<ErrorMessage><RegIcon/>{renderEmailErrorMessage()}</ErrorMessage>)}
                 </IdRexErrorMessage>
             </IdFieldWrap>  
             <PasswordFieldWrap>
@@ -79,15 +79,14 @@ export const SignInField = () => {
                 type="password"
                 ph={SIGNIN_FORM_TEXT.passwordInputPlaceholderText}
                 $inputWidth={'100%'}             
-                $borderColor={isValidPassword ? theme.greyScale.grey4 : theme.subColor.redD2}
+                $borderColor={isValidPassword ? theme.greyScale.grey4 : (password ? theme.subColor.redD2 : defaultBorderColor)}
                 value={password}
                 onChange={handlePasswordChange}>
                 </Input>
                 <PasswordRexErrorMessage>
-                    {renderPasswordErrorMessage() && (<ErrorMessage>{renderPasswordErrorMessage()}</ErrorMessage>)}
+                    {renderPasswordErrorMessage() && (<ErrorMessage><RegIcon/>{renderPasswordErrorMessage()}</ErrorMessage>)}
                 </PasswordRexErrorMessage>
             </PasswordFieldWrap>              
-                
                 <Button 
                 $btnWidth={'100%'}
                 $fontSize={'20px'}
@@ -111,7 +110,7 @@ const IdFieldWrap = styled.div`
     max-width: 100%;
     display: flex;
     flex-direction: column;
-    margin-bottom: 30px;
+    margin-bottom: 16px;
     :focus{
         border: 1px solid ${theme.main.blue0};
     }
@@ -142,18 +141,28 @@ const PasswordText = styled.div`
 `
 
 const ErrorMessage = styled.div`
+    display: flex;
+    align-items: center;
 `
 
 
 const IdRexErrorMessage = styled.div`
+    height: 28px;
     color: ${theme.subColor.redD2};
     font-size: 12px;
     line-height: 28px;
+    svg{
+        margin-right: 3px;
+    }
 
 `
 
 const PasswordRexErrorMessage = styled.div`
+    height: 28px;
     color: ${theme.subColor.redD2};
     font-size: 12px;
     line-height: 28px;
+    svg{
+        margin-right: 3px;
+    }
 `

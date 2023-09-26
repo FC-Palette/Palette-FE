@@ -44,11 +44,17 @@ const IconWrapper = styled.div`
   :visited{
     color: inherit;
   }
+  :link{
+    color: inherit;
+  }
     `
 
 const StyledIcon = styled.div`
   margin-right: 5px;
   :visited{
+    color: inherit;
+  }
+  :link{
     color: inherit;
   }
 `
