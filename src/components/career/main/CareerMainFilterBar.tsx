@@ -31,7 +31,7 @@ export const CareerMainFilterBar = ({ toggleSideBar }) => {
           filterButton={<CheckBox type="checkbox" />}
           filterText="마감된 모임 제외"
           filterOption={
-            <CareerMainFilterSortOption items={CAREER_MAIN_FILTER_ITEMS} />
+            <CareerMainFilterSortOption items={CAREER_MAIN_FILTER_ITEMS} initialItem='최신순'/>
           }></FilterBar>
       </FilterWrap>
     </Wrap>

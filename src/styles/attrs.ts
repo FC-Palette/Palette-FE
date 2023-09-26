@@ -16,3 +16,8 @@ export const rowCentralise = css`
 export const Flexbox = styled.div`
   display: flex;
 `
+
+export const fullSize = css`
+  width: 100%;
+  height: 100%;
+`
