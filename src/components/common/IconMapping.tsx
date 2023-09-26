@@ -27,7 +27,8 @@ import {
   Woman,
   Man,
   Glass,
-  // Carrot,
+  AddCircle,
+  Apple,
   Calculator,
   Drop,
   Ticket,
@@ -35,7 +36,6 @@ import {
   LikeTag,
   Monitor,
   Cake
-  // AddCircle
 } from 'iconsax-react'
 
 export const iconMapping = {
@@ -103,6 +103,14 @@ export const iconMapping1 = {
   BOOKS: {
     label: '도서',
     icon: <Book />
+  },
+  PROCESSED_WELLNESS_FOODS: {
+    label: '식품',
+    icon: <Apple />
+  },
+  ETC: {
+    label: '기타',
+    icon: <AddCircle />
   }
 }
 

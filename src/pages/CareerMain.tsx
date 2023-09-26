@@ -7,7 +7,18 @@ import {
   CareerMainFilterBar,
   CareerMainItemCreateButton
 } from '@/components/career'
+import { SideBar } from 'components/common/index'
+import { CATEGORY_TEXT } from 'constants/trades/index'
+import { sideBarState } from 'recoil/index'
+import { useRecoilState } from 'recoil'
+
 export const CareerMain = () => {
+  const [isOpen, setIsOpen] = useRecoilState(sideBarState)
+
+  const toggleSideBar = () => {
+    setIsOpen(true)
+  }
+
   const mockData = [
     {
       id: 1,
@@ -292,31 +303,39 @@ export const CareerMain = () => {
   ]
 
   return (
-    <Wrap>
-      <Header
-        leftIcon={<ArrowLeft2 />}
-        centerText="같이 성장해요">
-        <IconWrapper>
-          <SearchNormal1 />
-        </IconWrapper>
-        <StyledIcon>
-          <Notification />
-        </StyledIcon>
-      </Header>
+    <>
+      {isOpen && (
+        <SideBar
+          centerText="커리어"
+          items={CATEGORY_TEXT}
+        />
+      )}
+      <Wrap>
+        <Header
+          leftIcon={<ArrowLeft2 />}
+          centerText="같이 성장해요">
+          <IconWrapper>
+            <SearchNormal1 />
+          </IconWrapper>
+          <StyledIcon>
+            <Notification />
+          </StyledIcon>
+        </Header>
 
-      <SubHeader
-        items={CAREER_SUBHEADER_TEXT}
-        initialItem="커리어"
-      />
+        <SubHeader
+          items={CAREER_SUBHEADER_TEXT}
+          initialItem="커리어"
+        />
 
-      <CareerMainFilterBar />
+        <CareerMainFilterBar toggleSideBar={toggleSideBar} />
 
-      <CareerMainCard responseData={mockData} />
+        <CareerMainCard responseData={mockData} />
 
-      <CareerMainItemCreateButton />
+        <CareerMainItemCreateButton />
 
-      <Footer />
-    </Wrap>
+        <Footer />
+      </Wrap>
+    </>
   )
 }
 

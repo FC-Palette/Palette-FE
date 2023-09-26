@@ -1,17 +1,18 @@
 import { theme, centralise } from 'styles/index'
 import { styled } from 'styled-components'
 import { HeaderProps } from 'types/headerProps'
-import {} from 'iconsax-react'
 
 export const Header: React.FC<HeaderProps> = ({
   leftIcon,
   centerText,
   children,
-  chatCount
+  chatCount,
+  $borderRadius,
+  cancelClick
 }) => {
   return (
-    <Wrapper>
-      {leftIcon && <LeftIcon>{leftIcon}</LeftIcon>}
+    <HeaderWrapper $borderRadius={$borderRadius}>
+      {leftIcon && <LeftIcon onClick={cancelClick}>{leftIcon}</LeftIcon>}
       <CenterText>
         {centerText}
         {chatCount !== undefined && chatCount > 0 && (
@@ -21,22 +22,23 @@ export const Header: React.FC<HeaderProps> = ({
         )}
       </CenterText>
       <RightContent>{children}</RightContent>
-    </Wrapper>
+    </HeaderWrapper>
   )
 }
 
-const Wrapper = styled.header`
+const HeaderWrapper = styled.header<{ $borderRadius?: string }>`
   width: 100%;
   max-width: 430px;
   min-height: 80px;
   position: sticky;
   top: 0;
   z-index: 100;
+  border-radius: ${props => props.$borderRadius};
   background-color: ${theme.main.white};
   ${centralise}
 `
 
-const LeftIcon = styled.div`
+const LeftIcon = styled.button`
   position: absolute;
   left: 5%;
 `
