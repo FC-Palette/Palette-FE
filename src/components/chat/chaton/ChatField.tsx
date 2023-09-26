@@ -37,7 +37,7 @@ export const ChatField = ({ messages }) => {
       return
     }
     setOpenMsgActionsIndex(index)
-  }, [])
+  }, [openMsgActionsIndex])
 
   const renderMessage = (message, index) => {
     const nextMessage = messages[index + 1]
