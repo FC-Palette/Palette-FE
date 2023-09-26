@@ -17,11 +17,11 @@ export const Image = styled.div<{ src: string }>`
   background-size: contain;
   min-width: 32px;
   height: 32px;
+  border-radius: 8px;
 `
 
 const Username = styled.div`
   padding-top: 7px;
   padding-left: 12px;
-
   color: ${props => props.theme.greyScale.grey8};
 `

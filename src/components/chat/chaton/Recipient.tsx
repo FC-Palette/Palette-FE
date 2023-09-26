@@ -33,7 +33,6 @@ export const Recipient = ({
           src={'https://avatars.githubusercontent.com/u/142562921?s=200&v=4'}
         />
       )}
-      {/* 하위 단축평가에 빈 공간으로 영역 차지하게 출력 */}
       {!showCreatedTime && <MemberImg src="" />}
       <RecipientBlock>
         {showCreatedTime && <MemberName>고스트 사원</MemberName>}

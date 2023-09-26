@@ -2,30 +2,29 @@ import { styled } from 'styled-components'
 import { Button } from 'components/index'
 import { Additem, Image } from 'iconsax-react'
 import { theme, columnise } from 'styles/index'
-
+import { useMemo } from 'react'
 export const SendFile = () => {
+  const ButtonProps = useMemo(
+    () => ({
+      color: theme.greyScale.grey5,
+      $bgColor: theme.greyScale.bluegrey,
+      $borderColor: theme.greyScale.bluegrey,
+      $btnHeight: '60px',
+      $btnWidth: '89%'
+    }),
+    []
+  )
+
   return (
     <Wrapper>
-      <Button
-        color={theme.greyScale.grey5}
-        $bgColor={theme.greyScale.bluegrey}
-        $borderColor={theme.greyScale.bluegrey}
-        $btnHeight="60px"
-        $btnWidth="89%">
+      <Button {...ButtonProps}>
         <Image />
         &nbsp;이미지 전송하기
       </Button>
-      <Button
-        color={theme.greyScale.grey5}
-        $bgColor={theme.greyScale.bluegrey}
-        $borderColor={theme.greyScale.bluegrey}
-        $btnHeight="60px"
-        $btnWidth="89%">
+      <Button {...ButtonProps}>
         <Additem />
         &nbsp;파일 전송하기
       </Button>
-      {/* <SendBox>SendFile</SendBox>
-      <SendBox>SendFile</SendBox> */}
     </Wrapper>
   )
 }
@@ -42,8 +41,3 @@ const Wrapper = styled.div`
   bottom: 32px;
   color: ${props => props.theme.greyScale.bluegrey};
 `
-// const SendBox = styled.div`
-//   background-color: ${props => props.theme.main.white};
-//   color: ${props => props.theme.main.blue0};
-//   cursor: pointer;
-// `

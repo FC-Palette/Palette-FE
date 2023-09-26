@@ -25,9 +25,9 @@ export const sendFileState = atom<boolean>({
   default: false
 })
 
-export const msgLayerState = atom<boolean>({
-  key: 'msgLayerState',
-  default: true
+export const isPersonalState = atom<boolean>({
+  key: 'isPersonalState',
+  default: false
 })
 
 export const msgActionsState = atom<number>({

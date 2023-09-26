@@ -4,7 +4,7 @@
 */
 import { styled } from 'styled-components'
 import { useRecoilValue } from 'recoil'
-import { inDetailState, isBuyingState } from 'recoil/index'
+import { inDetailState, isBuyingState, isPersonalState } from 'recoil/index'
 
 import {
   ChatAnn,
@@ -15,11 +15,11 @@ import {
 export const ChatInfo = () => {
   const inDetail = useRecoilValue(inDetailState)
   const isBuying = useRecoilValue(isBuyingState)
+  const isPersonal = useRecoilValue(isPersonalState)
 
   return (
     <InfoWrapper>
-      <ChatSubject></ChatSubject>
-      {/* isBuying(모임,상품정보) recoil값으로 전환 후 하단 계좌 컴포넌트 추가 렌더링  */}
+      {!isPersonal && <ChatSubject></ChatSubject>}
       {inDetail && <SubjectDetail $shared={false} />}
       {inDetail && isBuying && (
         <AccountInfo
@@ -27,7 +27,9 @@ export const ChatInfo = () => {
           account={'신한은행 123-4444-67897-12 김*운'}
         />
       )}
-      <ChatAnn $registered={true}></ChatAnn>
+      <ChatAnn
+        $registered={true}
+        $personal={isPersonal}></ChatAnn>
     </InfoWrapper>
   )
 }
