@@ -5,11 +5,11 @@ import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import 'dayjs/locale/ko'
 import { useSetRecoilState } from 'recoil'
-import { CareerCreateGlobalState } from '../..'
+import { careerCreateGlobalState } from '@/recoil'
 import dayjs from 'dayjs'
 
 export const RecruitmentPeriodSelector = () => {
-  const setGlobalState = useSetRecoilState(CareerCreateGlobalState)
+  const setGlobalState = useSetRecoilState(careerCreateGlobalState)
 
   const handleStartDateChange = date => {
     const dateFormat_Start = dayjs(date).format('YYYY-MM-DD')
@@ -30,7 +30,6 @@ export const RecruitmentPeriodSelector = () => {
 
   return (
     <>
-      {/* <QuestionTitle>기간을 설정해주세요.</QuestionTitle> */}
       <LocalizationProvider
         dateAdapter={AdapterDayjs}
         adapterLocale="ko">
@@ -49,13 +48,6 @@ export const RecruitmentPeriodSelector = () => {
     </>
   )
 }
-// Title
-// const QuestionTitle = styled.div`
-//   margin: 32px 24px 0;
-//   font-weight: 500;
-//   font-size: 18px;
-//   color: ${props => props.theme.greyScale.grey6};
-// `
 
 const TimePickerContainer = styled.div`
   display: flex;

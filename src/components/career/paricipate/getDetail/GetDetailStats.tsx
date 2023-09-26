@@ -22,26 +22,6 @@ export const GetDetailStats = () => {
   )
 }
 
-// 수정전
-// const Container = styled.div`
-//   width: 430px;
-//   display: flex;
-// `
-
-// const IconWrap = styled.div`
-//   display: flex;
-//   gap: 4px;
-//   color: ${props => props.theme.greyScale.grey6};
-//   margin: 12px 24px 0;
-// `
-// const Time = styled.div`
-//   font-size: 14px;
-// `
-
-// const Dot = styled.div``
-
-
-// 수정 후 (9.23)
 const Container = styled.div`
   width: 100%;
   display: flex;

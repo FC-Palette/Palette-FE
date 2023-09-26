@@ -32,40 +32,6 @@ export const GetDetailCategoryChips = () => {
   )
 }
 
-// 수정전
-// const Container = styled.div`
-//   width: 430px;
-// `
-
-// const CategoryChipsWrap = styled.div`
-//   margin: 12px 24px 12px;
-//   display: flex;
-//   flex-wrap: wrap;
-//   gap: 4px;
-// `
-
-// const CategoryChip = styled.div`
-//   width: auto;
-//   height: 25px;
-//   color: ${props => props.theme.greyScale.grey7};
-//   background-color: ${props => props.theme.greyScale.grey2};
-//   font-size: 14px;
-//   line-height: 16.71px;
-//   padding: 4px 8px;
-//   border-radius: 4px;
-// `
-// const DummyCategoryChip = styled.div`
-//   width: auto;
-//   height: 25px;
-//   color: ${props => props.theme.greyScale.grey7};
-//   background-color: ${props => props.theme.greyScale.grey2};
-//   font-size: 14px;
-//   line-height: 16.71px;
-//   padding: 4px 8px;
-//   border-radius: 4px;
-// `
-
-// 수정 후 (9.23)
 const Container = styled.div`
   width: 100%;
 `

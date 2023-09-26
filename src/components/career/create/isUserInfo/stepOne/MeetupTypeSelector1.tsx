@@ -2,7 +2,7 @@
 import { profileNCareerFilter } from '@/constants'
 import { useState } from 'react'
 import { useRecoilState } from 'recoil'
-import { CareerCreateGlobalState } from '../..'
+import { careerCreateGlobalState } from '@/recoil'
 import styled from 'styled-components'
 import { CareerCreateMeetingCommonQuestion } from '../..'
 
@@ -12,7 +12,7 @@ interface SelectedAnswerProps {
 }
 
 export const MeetupTypeSelector1 = () => {
-  const [globalData, setGlobalData] = useRecoilState(CareerCreateGlobalState)
+  const [globalData, setGlobalData] = useRecoilState(careerCreateGlobalState)
   const [selectedItem1, setSelectedItem1] = useState<string>('')
   const { selectedItem2 } = globalData
 

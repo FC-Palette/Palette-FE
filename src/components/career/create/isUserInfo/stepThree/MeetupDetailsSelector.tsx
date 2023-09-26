@@ -1,17 +1,17 @@
 // 모임 장소, 요일, 모임 시간, 진행 시간 선택 컴포넌트
 import styled from 'styled-components'
-import { days, timeSliderMarks } from '@/constants'
+import { dayList, timeSliderMarks } from '@/constants'
 import { CommonTimePicker } from '@/components'
 import Slider from '@mui/material/Slider'
 import { useRecoilState } from 'recoil'
-import { CareerCreateGlobalState } from '../..'
+import { careerCreateGlobalState } from '@/recoil'
 
 interface selectProps {
   $isSelected: boolean | string
 }
 
 export const MeetupDetailsSelector = () => {
-  const [globalState, setGlobalState] = useRecoilState(CareerCreateGlobalState)
+  const [globalState, setGlobalState] = useRecoilState(careerCreateGlobalState)
   const { onlineToggleState, periodicMeeting, selectedDays, meetingFrequency } =
     globalState
 
@@ -75,7 +75,7 @@ export const MeetupDetailsSelector = () => {
   }
 
   // 요일 리스트
-  const daysList = days.dayOfTheWeek.map(item => (
+  const daysItems = dayList.dayOfTheWeek.map(item => (
     <Answer
       key={item}
       onClick={() => toggleDaySelection(item)}
@@ -150,7 +150,7 @@ export const MeetupDetailsSelector = () => {
               </ToggleR60>
             </ToggleRowSortContainerThree>
           </ToggleNTextWrap>
-          <AnswerFlexWrap>{daysList}</AnswerFlexWrap>
+          <AnswerFlexWrap>{daysItems}</AnswerFlexWrap>
 
           {/* 모임시간 */}
           <TimePickerContainer>

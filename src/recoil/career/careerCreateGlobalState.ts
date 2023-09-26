@@ -3,8 +3,8 @@ import { atom } from 'recoil'
 const dateNow = new Date()
 const today = dateNow.toISOString().slice(0, 10)
 
-export const CareerCreateGlobalState = atom({
-  key: 'globalState',
+export const careerCreateGlobalState = atom({
+  key: 'careerCreateGlobalState',
   default: {
     // MeetupTypeSelecor1
     selectedItem1: '커리어',
@@ -33,6 +33,6 @@ export const CareerCreateGlobalState = atom({
     meetingTime: '',
     progressTime: '',
     // MemberApprovalMethod
-    isApprove: false
+    isApprove: '선착순'
   }
 })

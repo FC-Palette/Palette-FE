@@ -4,7 +4,7 @@ import Dropzone from 'react-dropzone'
 import { Add } from 'iconsax-react'
 import { DraggableImagePreview } from '@/components'
 import { useSetRecoilState } from 'recoil'
-import { CareerCreateGlobalState } from '../..'
+import { careerCreateGlobalState } from '@/recoil'
 
 interface Image {
   id: string
@@ -15,7 +15,7 @@ interface Image {
 export const MeetupImageSelector = () => {
   const [showMessage, setShowMessage] = useState(false)
   const [images, setImages] = useState<Image[]>([])
-  const setGlobalData = useSetRecoilState(CareerCreateGlobalState)
+  const setGlobalData = useSetRecoilState(careerCreateGlobalState)
 
   useEffect(() => {
     if (images.length === 1) {
@@ -125,42 +125,22 @@ const TotalContainer = styled.div`
   padding-bottom: 8px;
 `
 
-// const UploadZoneContainer = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-// `
-
 const UploadZoneContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: relative; /* 부모 요소에 대해 상대적인 위치 설정 */
+  position: relative;
 `
-
-// const AddIcon = styled(Add)`
-//   position: absolute;
-//   cursor: pointer;
-// `
 
 const AddIcon = styled(Add)`
   position: absolute;
   cursor: pointer;
-  top: 50%; /* 부모 요소인 UploadZoneContainer의 중앙을 기준으로 위치 설정 */
+  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* 중앙 정렬 */
+  transform: translate(-50%, -50%);
   z-index: 1;
 `
-
-// const UploadZoneBox = styled.div`
-//   background-color: ${props => props.theme.greyScale.grey1};
-//   width: 90px;
-//   height: 90px;
-//   border-radius: 8px;
-//   cursor: pointer;
-// `
 
 const UploadZoneBox = styled.div`
   background-color: ${props => props.theme.greyScale.grey1};
@@ -168,14 +148,13 @@ const UploadZoneBox = styled.div`
   height: 90px;
   border-radius: 8px;
   cursor: pointer;
-  position: relative; /* 자신에 대해 상대적인 위치 설정 */
+  position: relative;
 
-  /* AddIcon을 정중앙에 위치시키는 스타일 */
   & > ${AddIcon} {
     position: absolute;
-    top: 50%; /* UploadZoneBox의 중앙을 기준으로 위치 설정 */
+    top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* 중앙 정렬 */
+    transform: translate(-50%, -50%);
   }
 `
 const MessageContainer = styled.div`

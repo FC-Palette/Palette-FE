@@ -31,30 +31,36 @@ const BtnLocationChangeDiv = styled.div`
   position: fixed;
   top: 82%;
   z-index: 1;
-  margin-left: 260px;
+  margin-left: 270px;
+  transition: 0.3s;
 
-  @media (max-width: 482px) {
-    margin-left: 270px;
+  @media (max-width: 432px) {
+    margin-left: 60%;
     top: 80%;
+    transition: 0.3s;
   }
 
-  @media (max-width: 430px) {
-    margin-left: 270px;
-    top: 80%;
+  @media (max-width: 390px) {
+    margin-left: 60%;
+    top: 83%;
+    transition: 0.3s;
   }
   @media (max-width: 391px) {
-    margin-left: 240px;
-    top: 79%;
+    margin-left: 60%;
+    top: 78%;
+    transition: 0.3s;
   }
 
   @media (max-width: 375px) {
-    margin-left: 220px;
-    top: 78%;
+    margin-left: 60%;
+    top: 77%;
+    transition: 0.3s;
   }
 
   @media (max-width: 325px) {
-    margin-left: 180px;
-    top: 73%;
+    margin-left: 55%;
+    top: 68%;
+    transition: 0.3s;
   }
 `
 

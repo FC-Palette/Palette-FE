@@ -28,7 +28,8 @@ import {
   CareerMeetingsCreate,
   CareerIsNotUserInfo,
   CareerIsNotApprovedJoinMeeting,
-  CareerMeetingConfirm
+  CareerMeetingConfirm,
+  CareerEdit
 } from 'pages/index'
 import type { RouteObject } from 'react-router-dom'
 import { Start } from './Start'
@@ -115,7 +116,8 @@ export const router = createBrowserRouter([
         'detail/members',
         <CareerDetailMemberSeeMore />,
         <ErrorComponent />
-      )
+      ),
+      generateRoute('/edit/:editstep', <CareerEdit />, <ErrorComponent />)
     ]
   },
 

@@ -3,15 +3,6 @@ import styled from 'styled-components'
 
 export const IsApprovedJoinMeetingFooter = ({ handleNextStep, btnText }) => {
   return (
-    // <BtnContainer>
-    //   <Button
-    //     onClick={handleNextStep}
-    //     $btnHeight="60px"
-    //     $btnWidth="382px">
-    //     동의하기
-    //   </Button>
-    // </BtnContainer>
-
     <Wrapper>
       <BtnWrap>
         <Button
@@ -26,16 +17,7 @@ export const IsApprovedJoinMeetingFooter = ({ handleNextStep, btnText }) => {
     </Wrapper>
   )
 }
-// 수정 전
-// const BtnContainer = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-//   margin: 282px 24px 32px;
-// `
 
-// 수정 후 (9.23)
 const Wrapper = styled.footer`
   display: flex;
   align-items: center;

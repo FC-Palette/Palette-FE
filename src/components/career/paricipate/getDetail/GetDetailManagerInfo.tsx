@@ -55,53 +55,7 @@ export const GetDetailManagerInfo = () => {
   )
 }
 
-// 수정전
-// const Container = styled.div`
-//   width: 430px;
-//   height: 76px;
-//   display: flex;
-// `
 
-// const RoomManagerImage = styled.div`
-//   margin: 12px 0 0 24px;
-//   width: 52px;
-//   height: 52px;
-//   background-color: ${props => props.theme.greyScale.grey5};
-//   border-radius: 8px;
-// `
-
-// const NameAndIntroduceWrap_Column = styled.div`
-//   margin: 18px 0 0 12px;
-//   display: flex;
-//   flex-direction: column;
-// `
-// const RoomManagerName = styled.div`
-//   color: ${props => props.theme.greyScale.grey8};
-// `
-// const RoomManagerIntroduce = styled.div`
-//   color: ${props => props.theme.greyScale.grey5};
-//   overflow: hidden;
-//   white-space: nowrap;
-//   max-width: 140px;
-//   text-overflow: ellipsis;
-// `
-
-// const FollowBtn = styled.button`
-//   margin-top: 21px;
-//   display: flex;
-
-//   margin-right: 24px;
-//   justify-content: center;
-//   align-items: center;
-//   margin-left: 70px;
-//   width: 105px;
-//   height: 35px;
-//   background-color: ${props => props.theme.subColor.blueGrey};
-//   color: ${props => props.theme.greyScale.grey5};
-//   border-radius: 8px;
-// `
-
-// 수정 (9.23)
 const Container = styled.div`
   margin: 0 5.7%;
   width: 100%;

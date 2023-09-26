@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { CareerCreateMeetingCommonQuestion } from '../..'
 import { iconMapping } from '@/components'
 import { useRecoilState } from 'recoil'
-import { CareerCreateGlobalState } from '../..'
+import { careerCreateGlobalState } from '@/recoil'
 import { useEffect, useState } from 'react'
 
 interface SelectedAnswerProps {
@@ -12,7 +12,7 @@ interface SelectedAnswerProps {
 }
 
 export const MeetupTypeSelector2 = () => {
-  const [globalData, setGlobalData] = useRecoilState(CareerCreateGlobalState)
+  const [globalData, setGlobalData] = useRecoilState(careerCreateGlobalState)
   const { selectedMeetingTypes } = globalData
   const [message, setMessage] = useState(false)
   const checkLength = selectedMeetingTypes.length
