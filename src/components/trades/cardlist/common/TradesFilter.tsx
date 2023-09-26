@@ -1,8 +1,8 @@
 import { styled } from 'styled-components'
 import { FilterBar, Category } from 'components/common/index'
 import { Setting4 } from 'iconsax-react'
-
 import { CareerMainFilterSortOption } from 'components/career/index'
+import { TRADES_MAIN_FILTER_ITEMS } from 'constants/trades/index'
 
 export const TradesFilter = ({ toggleSideBar }) => {
   const list = ['전체1', '전체2', '전체3', '전체4']
@@ -31,7 +31,9 @@ export const TradesFilter = ({ toggleSideBar }) => {
             </StyledRecordWrapper>
           }
           filterText="마감된 거래 제외"
-          filterOption={<CareerMainFilterSortOption />}></FilterBar>
+          filterOption={
+            <CareerMainFilterSortOption items={TRADES_MAIN_FILTER_ITEMS} />
+          }></FilterBar>
       </FilterWrap>
     </>
   )
