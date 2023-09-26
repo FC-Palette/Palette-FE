@@ -11,8 +11,11 @@ export interface CategoryBarProps {
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 }
 export interface SideBarProps {
-  titles?: React.ReactNode[]
-  contents?: React.ReactNode[]
-  filterText?: React.ReactNode
+  items?: {
+    title: React.ReactNode
+    content: React.ReactNode
+  }[]
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+  count?: number
+  centerText?: string
 }

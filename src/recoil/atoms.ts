@@ -34,3 +34,8 @@ export const msgActionsState = atom<number>({
   key: 'msgActionsState',
   default: -1
 })
+
+export const sideBarState = atom<boolean>({
+  key: 'sideBarState',
+  default: false
+})
