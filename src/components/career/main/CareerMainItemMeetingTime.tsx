@@ -18,7 +18,6 @@ export const CareerMainItemMeetingTime = ({
       {fetchProgressTiem}
     </MeetingTime>
   )
-  // return <MeetingTime>매주 월요일 ・ AM 08:00</MeetingTime>
 }
 
 const MeetingTime = styled.div`

@@ -15,7 +15,6 @@ export const SubHeader: React.FC<SubHeaderProps> = ({ items, initialItem }) => {
     )
   }, [items, initialItem])
 
-  
   const handleSubHeaderClick = (item: SubHeaderItemProps) => {
     setSelectedHeader(item.text)
     navigate(item.path)
@@ -60,6 +59,7 @@ const HeaderItemSimple = styled.button<{
   width: auto;
   color: ${props =>
     props.$isSelected ? props.theme.main.blue0 : props.theme.greyScale.grey5};
+  font-weight: ${props => (props.$isSelected ? 700 : 400)};
   text-underline-offset: 19.5px;
   font-size: 16px;
   line-height: 19.09px;

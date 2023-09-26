@@ -22,35 +22,6 @@ export const GetDetailThumbnail = () => {
   )
 }
 
-// const ThumbnailSlider = styled.div`
-//   width: 430px;
-//   height: 322px;
-//   overflow: hidden;
-//   // 점 위치
-//   .slick-dots {
-//     bottom: 10px !important;
-//   }
-
-//   /* 슬라이더 컨테이너 크기 고정  */
-//   .slick-slider {
-//     width: 100%;
-//     height: 100%;
-//   }
-// `
-
-// const SlideItem = styled.div`
-//   background-color: rosybrown;
-//   width: 430px;
-//   height: 322px;
-//   img {
-//     width: 430px;
-//     height: 322px;
-
-//     object-fit: cover;
-//   }
-// `
-
-// 수정 (9.23)
 const ThumbnailSlider = styled.div`
   width: 100%;
   height: 322px;

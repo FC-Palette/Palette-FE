@@ -1,6 +1,5 @@
 import { styled } from 'styled-components'
 export const CareerMainItemTitle = ({ title }) => {
-  // return <Title>출근 전 트렌드 분석</Title>
   return <Title>{title || '없음'}</Title>
 }
 

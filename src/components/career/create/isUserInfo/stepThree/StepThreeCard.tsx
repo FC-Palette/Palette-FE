@@ -22,17 +22,13 @@ export const StepThreeCard = () => {
       </CareerCreateMeetingCommonQuestion>
       <SmallTitle>입력하신 내용은 추후 변경할 수 있어요</SmallTitle>
 
-      {/* new 모집인원 */}
       <RecruitmentSizeSelector />
 
-      {/* new 기간 설정 */}
       <QuestionTitle>기간을 설정해주세요.</QuestionTitle>
       <RecruitmentPeriodSelector />
 
-      {/* new 모임 장소, 요일, 시간, 진행시간 */}
       <MeetupDetailsSelector />
 
-      {/* new 승인제   */}
       <MemberApprovalMethodSelector />
     </>
   )

@@ -1,9 +1,9 @@
 import { useRecoilState } from 'recoil'
 import styled from 'styled-components'
-import { CareerCreateGlobalState } from '../..'
+import { careerCreateGlobalState } from '@/recoil'
 
 export const MeetupTitleAndDescription = () => {
-  const [globalState, setGlobalState] = useRecoilState(CareerCreateGlobalState)
+  const [globalState, setGlobalState] = useRecoilState(careerCreateGlobalState)
   const { meetupTitle, meetupDescription } = globalState
 
   const maxTitleLength = 25
@@ -59,8 +59,6 @@ export const MeetupTitleAndDescription = () => {
     </>
   )
 }
-
-// Title
 
 const QuestionTitle = styled.div`
   margin-top: 7%;

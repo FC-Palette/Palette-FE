@@ -15,35 +15,7 @@ export const JoinMeetingStepCompleteTitle = () => {
     </Container>
   )
 }
-// 수정 전
-// const Container = styled.div`
-//   width: 100%;
-//   height: 100vh;
-//   overflow: hidden;
-// `
 
-// const FetchTitle = styled.div`
-//   margin: 144px 182px 0 24px;
-//   font-size: 20px;
-//   line-height: 26px;
-//   color: ${props => props.theme.greyScale.grey9};
-// `
-
-// const CompleteTitle = styled.div`
-//   color: ${props => props.theme.greyScale.grey9};
-//   margin: 8px 100px 0 24px;
-//   line-height: 50px;
-//   font-size: 48px;
-//   font-weight: 600;
-// `
-// const SubTitle = styled.div`
-//   margin: 12px 0 0 24px;
-//   color: ${props => props.theme.greyScale.grey5};
-//   line-height: 27px;
-//   font-size: 18px;
-// `
-
-// 수정 후 (9.23)
 const Container = styled.div`
   width: 100%;
   height: 100vh;

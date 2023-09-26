@@ -3,7 +3,7 @@ import { CareerCreateMeetingCommonQuestion } from '../..'
 import { profileNCareerFilter } from '@/constants'
 import { iconMapping } from '@/components'
 import { useRecoilState } from 'recoil'
-import { CareerCreateGlobalState } from '../..'
+import { careerCreateGlobalState } from '@/recoil'
 
 interface SelectedAnswerProps {
   $isSelected: boolean
@@ -11,7 +11,7 @@ interface SelectedAnswerProps {
 }
 
 export const RoleAndGenderSelector = () => {
-  const [globalState, setGlobalState] = useRecoilState(CareerCreateGlobalState)
+  const [globalState, setGlobalState] = useRecoilState(careerCreateGlobalState)
   const { gender, selectedRoles } = globalState
 
   const genderList = ['무관', '남성만', '여성만']
@@ -102,8 +102,6 @@ const AnswerItem = styled.div<SelectedAnswerProps>`
   justify-content: center;
   align-items: center;
   height: 43px;
-  background-color: orange;
-  color: royalblue;
   border-radius: 21px;
   padding: 12px;
   cursor: pointer;

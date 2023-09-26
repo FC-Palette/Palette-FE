@@ -8,13 +8,11 @@ import {
   GetTitleAndDescription,
   PreviewMember
 } from '.'
-import {
-  CareerCreateGlobalState,
-  CareerCreateMeetingHeaderDynamic
-} from '../..'
+import { CareerCreateMeetingHeaderDynamic } from '../..'
+import { careerCreateGlobalState } from '@/recoil'
 
 export const StepPreviewCard = () => {
-  const globalState = useRecoilValue(CareerCreateGlobalState)
+  const globalState = useRecoilValue(careerCreateGlobalState)
   const {
     selectedMeetingTypes,
     selectedRoles,

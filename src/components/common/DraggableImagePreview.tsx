@@ -47,6 +47,10 @@ export const DraggableImagePreview: React.FC<DraggableImagePreviewProps> = ({
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}>
                     <StyledContainer>
+                      {index === 0 && (
+                        <FirstImageLabel>대표 사진</FirstImageLabel>
+                      )}
+
                       <StyledImage
                         src={image.url}
                         alt={`사진 ${index}`}
@@ -121,4 +125,18 @@ const StyledSVG = styled.svg`
   right: 2px;
   width: 24px;
   height: 24px;
+`
+
+const FirstImageLabel = styled.div`
+  position: absolute;
+  top: 65%;
+  left: 15%;
+  background-color: ${props => props.theme.greyScale.grey7};
+  color: ${props => props.theme.main.white};
+  border-radius: 8px;
+  font-size: 12px;
+  padding: 5px 10px;
+  font-size: 12px;
+  min-width: 42px;
+  z-index: 2;
 `

@@ -1,17 +1,17 @@
 // 맴버 승인 방법 선택 컴포넌트 (선착순, 승인제)
 import { useRecoilState } from 'recoil'
 import styled from 'styled-components'
-import { CareerCreateGlobalState } from '../..'
+import { careerCreateGlobalState } from '@/recoil'
 
 interface selectProps {
   $isSelected: boolean | string
   onClick: () => void
 }
 export const MemberApprovalMethodSelector = () => {
-  const [globalState, setGlobalState] = useRecoilState(CareerCreateGlobalState)
+  const [globalState, setGlobalState] = useRecoilState(careerCreateGlobalState)
   const { isApprove } = globalState // 선착순 => false(default)
 
-  const handleToggleApprovalType = (type: boolean) => {
+  const handleToggleApprovalType = (type: string) => {
     setGlobalState(prevState => ({
       ...prevState,
       isApprove: type
@@ -24,13 +24,13 @@ export const MemberApprovalMethodSelector = () => {
         <QuestionTitleSmall>멤버승인</QuestionTitleSmall>
         <ToggleRowSortContainer>
           <ToggleL
-            onClick={() => handleToggleApprovalType(!isApprove)}
-            $isSelected={!isApprove}>
+            onClick={() => handleToggleApprovalType('선착순')}
+            $isSelected={isApprove === '선착순'}>
             선착순
           </ToggleL>
           <ToggleR
-            onClick={() => handleToggleApprovalType(!isApprove)}
-            $isSelected={isApprove}>
+            onClick={() => handleToggleApprovalType('승인제')}
+            $isSelected={isApprove === '승인제'}>
             승인제
           </ToggleR>
         </ToggleRowSortContainer>

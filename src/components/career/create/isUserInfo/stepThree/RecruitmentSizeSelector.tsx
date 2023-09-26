@@ -1,10 +1,10 @@
 // 모집인원 설정
 import { useSetRecoilState } from 'recoil'
 import styled from 'styled-components'
-import { CareerCreateGlobalState } from '../..'
+import { careerCreateGlobalState } from '@/recoil'
 
 export const RecruitmentSizeSelector = () => {
-  const setGlobalState = useSetRecoilState(CareerCreateGlobalState)
+  const setGlobalState = useSetRecoilState(careerCreateGlobalState)
 
   const handleNumofMembers = (e: number) => {
     let count = e
@@ -31,7 +31,6 @@ export const RecruitmentSizeSelector = () => {
   )
 }
 
-// Title
 const QuestionTitle = styled.div`
   margin: 7% 5.7% 0;
 
