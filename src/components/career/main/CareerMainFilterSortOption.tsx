@@ -16,14 +16,17 @@ export interface CareerMainFilterSortOptionItem {
   label: string
 }
 
-export const CareerMainFilterSortOption = ({
-  items
-}: {
+interface CareerMainFilterSortOptionProps {
   items: CareerMainFilterSortOptionItem[]
-}) => {
+  initialItem: string
+}
+
+export const CareerMainFilterSortOption = ({
+  items,
+  initialItem
+}: CareerMainFilterSortOptionProps) => {
   const [isOpen, setIsOpen] = useState(false)
-  // const [selectedOptions, setSelectedOptions] = useState<string[]>(['최신순'])
-  const [selectedOption, setSelectedOption] = useState('최신순')
+  const [selectedOption, setSelectedOption] = useState<string>(initialItem)
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen)
