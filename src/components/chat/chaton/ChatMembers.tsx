@@ -22,11 +22,11 @@ export const ChatMembers = () => {
 
   const handleShowMembers = useCallback(() => {
     setShowMembers(!showMembers)
-  }, [])
+  }, [showMembers])
   const handleExit = useCallback(async () => {
     await setShowMembers(!showMembers)
     await setModalOn(!modalOn)
-  }, [])
+  }, [showMembers, modalOn])
 
   return (
     <>
