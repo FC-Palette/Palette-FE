@@ -2,12 +2,13 @@ import { styled } from 'styled-components'
 import { Copy, Edit2 } from 'iconsax-react'
 import { useNavigate } from 'react-router-dom'
 import { Flexbox } from 'styles/index'
+import { useCallback } from 'react'
 
 export const AccountInfo = ({ isHost, account }) => {
   const navigate = useNavigate()
-  const handleCopy = async () => {
-    await navigator.clipboard.writeText(account)
-  }
+  const handleCopy = useCallback(async () => {
+    await navigator.clipboard.writeText(account.split(' ')[1])
+  }, [])
   return (
     <Wrapper>
       <Account>계좌번호</Account>

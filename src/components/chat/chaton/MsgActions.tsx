@@ -2,6 +2,7 @@ import { styled } from 'styled-components'
 import { Copy, Edit } from 'iconsax-react'
 import { useResetRecoilState } from 'recoil'
 import { msgActionsState } from 'recoil/index'
+import { columnise } from 'styles/index'
 export const MsgActions = ({ $sender, msgRef, message }) => {
   const reset = useResetRecoilState(msgActionsState)
   // const upperTabRef = useRef<HTMLDivElement>()
@@ -41,8 +42,7 @@ export const MsgActions = ({ $sender, msgRef, message }) => {
 }
 
 const Wrapper = styled.div<{ $sender: string }>`
-  display: flex;
-  flex-direction: column;
+  ${columnise};
   position: absolute;
   z-index: 1000;
   user-select: none;
@@ -79,10 +79,3 @@ const Tab = styled(isTop)`
   }
 `
 const TabTitle = styled.div``
-// const Tab = forwardRef<HTMLDivElement, { $isTop: boolean }>((props, ref) => {
-//   return (
-//     <StyledTab
-//       ref={ref as Ref<HTMLDivElement>}
-//       {...props}></StyledTab>
-//   )
-// })

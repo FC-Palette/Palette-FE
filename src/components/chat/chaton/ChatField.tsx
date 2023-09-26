@@ -10,11 +10,13 @@ import {
   DateSeperator,
   Participation
 } from 'components/index'
+import { useCallback } from 'react'
 
-const renderTime = (currentMessage, nextMessage) => {
-  if (!nextMessage) return true // Display timestamp for the last message
-  if (currentMessage.sender !== nextMessage.sender) return true // Different sender
-  if (currentMessage.createdAt !== nextMessage.createdAt) return true // Different timestamp
+//메시지 생성시간을 보여주는 조건
+const renderTime = (curMsg, nextMsg) => {
+  if (!nextMsg) return true //다음 메시지가 없을 경우
+  if (curMsg.sender !== nextMsg.sender) return true // 다음 메시지가 내 메시지가 아닌 경우
+  if (curMsg.createdAt !== nextMsg.createdAt) return true // 현재 메시지와 다음 메시지의 시간이 다른 경우
   return false
 }
 
@@ -29,13 +31,13 @@ export const ChatField = ({ messages }) => {
   const [openMsgActionsIndex, setOpenMsgActionsIndex] =
     useRecoilState(msgActionsState)
 
-  const toggleMsgActions = index => {
+  const toggleMsgActions = useCallback(index => {
     if (openMsgActionsIndex === index) {
       setOpenMsgActionsIndex(-1)
       return
     }
     setOpenMsgActionsIndex(index)
-  }
+  }, [])
 
   const renderMessage = (message, index) => {
     const nextMessage = messages[index + 1]

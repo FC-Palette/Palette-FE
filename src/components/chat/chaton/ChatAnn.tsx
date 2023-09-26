@@ -3,11 +3,13 @@ import { styled } from 'styled-components'
 import { Edit } from 'iconsax-react'
 import { Flexbox } from 'styles/index'
 
-export const ChatAnn = ({ $registered }) => {
+export const ChatAnn = ({ $registered, $personal }) => {
   return (
     <>
       {$registered && (
-        <ChatTopBar $registered={true}>
+        <ChatTopBar
+          $registered={true}
+          $personal={$personal}>
           <Edit />
           <TopBarContent>공지입니다.</TopBarContent>
         </ChatTopBar>
@@ -16,12 +18,15 @@ export const ChatAnn = ({ $registered }) => {
   )
 }
 
-export const ChatTopBar = styled(Flexbox)<{ $registered?: boolean }>`
+export const ChatTopBar = styled(Flexbox)<{
+  $registered?: boolean
+  $personal?: boolean
+}>`
   padding: 12px 24px;
   background-color: ${props => props.theme.greyScale.bluegrey};
   color: ${props => props.theme.main.blue0};
   border-top: ${props =>
-    props.$registered === true
+    props.$registered === true && props.$personal === false
       ? `1px solid ${props.theme.greyScale.grey3}`
       : 'none'};
 `

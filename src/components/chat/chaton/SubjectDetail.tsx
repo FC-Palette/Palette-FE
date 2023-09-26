@@ -1,7 +1,7 @@
 import { styled } from 'styled-components'
 import { isBuyingState } from 'recoil/index'
 import { useRecoilValue } from 'recoil'
-import { columnise } from 'styles/index'
+import { columnise, Flexbox } from 'styles/index'
 
 const price = 9000
 export const SubjectDetail = ({ $shared }) => {
@@ -22,8 +22,7 @@ export const SubjectDetail = ({ $shared }) => {
   )
 }
 
-const Wrapper = styled.div<{ $shared: boolean }>`
-  display: flex;
+const Wrapper = styled(Flexbox)<{ $shared: boolean }>`
   padding: ${props => (props.$shared ? '0' : '16px 24px')};
   background-color: ${props =>
     props.$shared ? '' : props.theme.greyScale.bluegrey};

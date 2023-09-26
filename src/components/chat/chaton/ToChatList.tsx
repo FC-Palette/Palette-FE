@@ -28,5 +28,6 @@ const Wrapper = styled.button`
   cursor: pointer;
 `
 const Notice = styled.div`
+  padding-top: 2px;
   padding-left: 2px;
 `

@@ -1,12 +1,14 @@
 import { styled } from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { Flexbox, columnise } from 'styles/index'
+import { useCallback } from 'react'
+
 const interpoint = '\u00B7 '
 export const ChatAnnListItem = ({ content, time, publisher }) => {
   const navigate = useNavigate()
-  const handleNavigate = () => {
+  const handleNavigate = useCallback(() => {
     navigate('/chatann')
-  }
+  }, [])
   return (
     <Wrapper onClick={handleNavigate}>
       <Title>{content}</Title>

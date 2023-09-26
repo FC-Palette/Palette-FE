@@ -14,19 +14,19 @@ import { CHATON_TEXTS } from 'constants/index'
 import { modalOnState, showMembersState } from 'recoil/index'
 import { useRecoilState } from 'recoil'
 import { useNavigate } from 'react-router-dom'
-
+import { useCallback } from 'react'
 export const ChatMembers = () => {
   const navigate = useNavigate()
   const [modalOn, setModalOn] = useRecoilState(modalOnState)
   const [showMembers, setShowMembers] = useRecoilState(showMembersState)
 
-  const handleShowMembers = () => {
+  const handleShowMembers = useCallback(() => {
     setShowMembers(!showMembers)
-  }
-  const handleExit = async () => {
+  }, [])
+  const handleExit = useCallback(async () => {
     await setShowMembers(!showMembers)
     await setModalOn(!modalOn)
-  }
+  }, [])
 
   return (
     <>
