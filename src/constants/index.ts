@@ -12,4 +12,4 @@ export * from 'constants/Alarm'
 export * from 'constants/setting'
 export * from 'constants/timeSliderMarks'
 export * from 'constants/chat'
-
+export * from 'constants/home'

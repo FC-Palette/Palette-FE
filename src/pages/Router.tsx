@@ -31,7 +31,8 @@ import {
   CareerIsNotApprovedJoinMeeting,
   ChangeProfile,
   CareerMeetingConfirm,
-  CareerEdit
+  CareerEdit,
+  Home
 } from 'pages/index'
 import type { RouteObject } from 'react-router-dom'
 import { Start } from './Start'
@@ -65,7 +66,7 @@ export const router = createBrowserRouter([
     path: '/',
     element: <Layout />,
     errorElement: <ErrorComponent />,
-    children: []
+    children: [generateRoute('/', <Home />, <ErrorComponent />)]
   },
   {
     path: '/',
