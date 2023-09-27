@@ -1,101 +1,132 @@
-import { styled } from "styled-components"
-import { theme } from "styles/index"
-import { SIGNIN_FORM_TEXT, SIGNIN_REGEX_TEXT } from 'constants/index'
-import { Input, Button, RegIcon } from "components/index"
-import { useState } from "react"
+import { useState } from 'react';
+import { styled } from 'styled-components';
+import { theme } from 'styles/index';
+import { useNavigate } from 'react-router-dom';
+import { SIGNIN_FORM_TEXT, SIGNIN_REGEX_TEXT } from 'constants/index';
+import { Input, Button, RegIcon } from 'components/index';
+import { login } from 'api/index';
 
 export const SignInField = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const defaultBorderColor = theme.greyScale.grey4;
 
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const defaultBorderColor = theme.greyScale.grey4;
     const emailRegex = SIGNIN_REGEX_TEXT.idCondition;
     const isValidEmail = emailRegex.test(email);
-
     const passwordRegex = SIGNIN_REGEX_TEXT.pwdCondition;
     const isValidPassword = passwordRegex.test(password);
 
     const handleEmailChange = (e) => setEmail(e.target.value);
     const handlePasswordChange = (e) => setPassword(e.target.value);
     
+    const handleLogin = async () => {
+        try {
+        const response = await login();
+        console.log('로그인 성공:', response);
 
-    const renderEmailErrorMessage = () => {
-        if (!email) {
-            return ""; 
+      
+        
+        } catch (error) {
+        console.error('로그인 실패:', error);
         }
-    
-        if (!isValidEmail) {
-            return SIGNIN_REGEX_TEXT.wrongId;
-        }
-    
-        return null;
     };
-    
-    const renderPasswordErrorMessage = () => {
-        if (!password) {
-            return ""; 
-        }
-        if (!passwordRegex.test(password)) {
-            if (!SIGNIN_REGEX_TEXT.engInPwd.test(password)) {
-                return SIGNIN_REGEX_TEXT.pwdReqEng;
-            }
-    
-            if (!SIGNIN_REGEX_TEXT.numInPwd.test(password)) {
-                return SIGNIN_REGEX_TEXT.pwdReqNum;
-            }
-    
-            if (!SIGNIN_REGEX_TEXT.symInPwd.test(password)) {
-                return SIGNIN_REGEX_TEXT.pwdReqSym;
-            }
-    
-            if (password.length < 8) {
-                return SIGNIN_REGEX_TEXT.pwdLengLeast;
-            }
-        }
-        return null;
-    };
-    
-    
 
+  const renderEmailErrorMessage = () => {
+    if (!email) {
+      return "";
+    }
 
-    return (
-        <SignInFieldWrap>
-            <IdFieldWrap>
-                <IdText>{SIGNIN_FORM_TEXT.idFormText}</IdText>
-                <Input                     
-                ph={SIGNIN_FORM_TEXT.idInputPlaceholderText}
-                $inputWidth={'100%'}
-                $borderColor={isValidEmail ? theme.greyScale.grey4 : (email ? theme.subColor.redD2 : defaultBorderColor)}
-                value={email}
-                onChange={handleEmailChange}>
-                </Input>
-                <IdRexErrorMessage>
-                    {renderEmailErrorMessage() && (<ErrorMessage><RegIcon/>{renderEmailErrorMessage()}</ErrorMessage>)}
-                </IdRexErrorMessage>
-            </IdFieldWrap>  
-            <PasswordFieldWrap>
-                <PasswordText>{SIGNIN_FORM_TEXT.passwordFormText}</PasswordText>
-                <Input 
-                type="password"
-                ph={SIGNIN_FORM_TEXT.passwordInputPlaceholderText}
-                $inputWidth={'100%'}             
-                $borderColor={isValidPassword ? theme.greyScale.grey4 : (password ? theme.subColor.redD2 : defaultBorderColor)}
-                value={password}
-                onChange={handlePasswordChange}>
-                </Input>
-                <PasswordRexErrorMessage>
-                    {renderPasswordErrorMessage() && (<ErrorMessage><RegIcon/>{renderPasswordErrorMessage()}</ErrorMessage>)}
-                </PasswordRexErrorMessage>
-            </PasswordFieldWrap>              
-                <Button 
-                $btnWidth={'100%'}
-                $fontSize={'20px'}
-                disabled={!isValidEmail || !isValidPassword}>
-                {SIGNIN_FORM_TEXT.submitButtonText}
-                </Button>
-        </SignInFieldWrap>
-    )
-}
+    if (!isValidEmail) {
+      return SIGNIN_REGEX_TEXT.wrongId;
+    }
+
+    return null;
+  };
+
+  const renderPasswordErrorMessage = () => {
+    if (!password) {
+      return "";
+    }
+    if (!passwordRegex.test(password)) {
+      if (!SIGNIN_REGEX_TEXT.engInPwd.test(password)) {
+        return SIGNIN_REGEX_TEXT.pwdReqEng;
+      }
+
+      if (!SIGNIN_REGEX_TEXT.numInPwd.test(password)) {
+        return SIGNIN_REGEX_TEXT.pwdReqNum;
+      }
+
+      // 특수문자 포함 정규식 추가 필요 
+      
+      if (password.length < 8) {
+        return SIGNIN_REGEX_TEXT.pwdLengLeast;
+      }
+    }
+    return null;
+  };
+
+  return (
+    <SignInFieldWrap>
+      <IdFieldWrap>
+        <IdText>{SIGNIN_FORM_TEXT.idFormText}</IdText>
+        <Input
+          ph={SIGNIN_FORM_TEXT.idInputPlaceholderText}
+          $inputWidth={"100%"}
+          $borderColor={
+            isValidEmail
+              ? theme.greyScale.grey4
+              : email
+              ? theme.subColor.redD2
+              : defaultBorderColor
+          }
+          value={email}
+          onChange={handleEmailChange}
+        ></Input>
+        <IdRexErrorMessage>
+          {renderEmailErrorMessage() && (
+            <ErrorMessage>
+              <RegIcon />
+              {renderEmailErrorMessage()}
+            </ErrorMessage>
+          )}
+        </IdRexErrorMessage>
+      </IdFieldWrap>
+      <PasswordFieldWrap>
+        <PasswordText>{SIGNIN_FORM_TEXT.passwordFormText}</PasswordText>
+        <Input
+          type="password"
+          ph={SIGNIN_FORM_TEXT.passwordInputPlaceholderText}
+          $inputWidth={"100%"}
+          $borderColor={
+            isValidPassword
+              ? theme.greyScale.grey4
+              : password
+              ? theme.subColor.redD2
+              : defaultBorderColor
+          }
+          value={password}
+          onChange={handlePasswordChange}
+        ></Input>
+        <PasswordRexErrorMessage>
+          {renderPasswordErrorMessage() && (
+            <ErrorMessage>
+              <RegIcon />
+              {renderPasswordErrorMessage()}
+            </ErrorMessage>
+          )}
+        </PasswordRexErrorMessage>
+      </PasswordFieldWrap>
+      <Button
+        $btnWidth={"100%"}
+        $fontSize={"20px"}
+        disabled={!isValidEmail || !isValidPassword}
+        onClick={handleLogin} 
+      >
+        {SIGNIN_FORM_TEXT.submitButtonText}
+      </Button>
+    </SignInFieldWrap>
+  );
+};
 
 const SignInFieldWrap = styled.div`
     margin: 0 auto;

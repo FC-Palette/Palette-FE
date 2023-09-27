@@ -27,7 +27,9 @@ import {
   CareerMeetingsCreate,
   CareerIsNotUserInfo,
   CareerIsNotApprovedJoinMeeting,
-  ChangeProfile
+  ChangeProfile,
+  CareerMeetingConfirm,
+  CareerEdit
 } from 'pages/index'
 import type { RouteObject } from 'react-router-dom'
 import { Start } from './Start'
@@ -137,6 +139,7 @@ export const router = createBrowserRouter([
     errorElement: <ErrorComponent />,
     children: [
       generateRoute('/mypage', <MyPage />, <ErrorComponent />),
+      generateRoute('/mypage/:member_id', <MyPage />, <ErrorComponent />),
       generateRoute('/changeprofile', <ChangeProfile />, <ErrorComponent />),
       generateRoute('/setting', <Setting />, <ErrorComponent />),
       generateRoute('/alarm', <Alarm />, <ErrorComponent />),
