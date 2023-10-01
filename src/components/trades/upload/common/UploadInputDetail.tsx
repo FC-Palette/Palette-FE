@@ -74,14 +74,12 @@ export const UploadInputDetail1 = () => {
 //
 const Wrapper = styled.div`
   width: 100%;
-  justify-content: center;
   margin-top: 8px;
   height: 209px;
 `
 
 const Wrapper1 = styled.div`
   width: 100%;
-  justify-content: center;
   margin-top: 8px;
   margin-bottom: -20px;
   height: 209px;

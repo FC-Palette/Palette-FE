@@ -4,6 +4,10 @@ import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 export const PreviewHeader = ({ title }) => {
   const navigate = useNavigate()
+  const maxLength = 13 // 최대 글자 수
+
+  const truncatedTitle =
+    title.length > maxLength ? `${title.substring(0, maxLength)}..` : title
 
   return (
     <Header
@@ -12,7 +16,7 @@ export const PreviewHeader = ({ title }) => {
           <ArrowLeft2 />
         </StyledIcon>
       }
-      centerText={title ? title : '미리보기'}>
+      centerText={title ? truncatedTitle : '미리보기'}>
       <MultiIconWrap>
         <Send2 />
         <More />

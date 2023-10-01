@@ -1,4 +1,4 @@
-import { TradesCard } from 'components/trades/cardlist/index'
+import { PurchaseCard } from 'components/trades/cardlist/index'
 import { styled } from 'styled-components'
 import { CreateBtn } from 'components/common/index'
 
@@ -9,7 +9,7 @@ export const GroupPurchaseList = () => {
     <Wrapper>
       <Main>
         <CardWrapper>
-          <TradesCard />
+          <PurchaseCard />
         </CardWrapper>
       </Main>
       <CreateBtn path={groupUploadPath} />
@@ -33,4 +33,5 @@ const CardWrapper = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
   margin-top: 20px;
   margin-bottom: 70px;
+  justify-items: center;
 `

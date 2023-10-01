@@ -2,6 +2,7 @@ import { useRecoilState } from 'recoil'
 import { secondhandcreateglobalstate } from 'recoil/index'
 import { theme } from 'styles/index'
 import { styled } from 'styled-components'
+import { centralise } from 'styles/index'
 
 interface selectProps {
   $isSelected: boolean
@@ -61,9 +62,7 @@ const Wrapper = styled.div`
   margin: 15px 0px;
 `
 const DayButton = styled.div<selectProps>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${centralise};
   line-height: 19.09px;
   font-size: 16px;
   border-radius: 21px;

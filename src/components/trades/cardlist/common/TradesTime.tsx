@@ -1,6 +1,7 @@
 import { theme } from 'styles/index'
 import { styled } from 'styled-components'
 import { Timer1 } from 'iconsax-react'
+import { centralise } from 'styles/index'
 
 export const TradesTime = ({ time }) => {
   return (
@@ -21,9 +22,7 @@ const Wrapper = styled.div`
   top: 125px;
   background-color: ${theme.greyScale.grey6};
   position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  ${centralise};
   z-index: 10;
 `
 

@@ -3,6 +3,7 @@ import { FilterBar, Category } from 'components/common/index'
 import { Setting4 } from 'iconsax-react'
 import { CareerMainFilterSortOption } from 'components/career/index'
 import { TRADES_MAIN_FILTER_ITEMS } from 'constants/trades/index'
+import { centralise, rowCentralise } from 'styles/index'
 
 export const TradesFilter = ({ toggleSideBar }) => {
   const list = ['전체1', '전체2', '전체3', '전체4']
@@ -23,7 +24,7 @@ export const TradesFilter = ({ toggleSideBar }) => {
       </CaregoryWrap>
 
       {/* 생성일자 필터 [최신순, 오래된순]*/}
-      <FilterWrap>
+      <CaregoryWrap>
         <FilterBar
           filterButton={
             <StyledRecordWrapper>
@@ -34,20 +35,13 @@ export const TradesFilter = ({ toggleSideBar }) => {
           filterOption={
             <CareerMainFilterSortOption items={TRADES_MAIN_FILTER_ITEMS} />
           }></FilterBar>
-      </FilterWrap>
+      </CaregoryWrap>
     </>
   )
 }
 
 const CaregoryWrap = styled.div`
-  display: flex;
-  justify-content: center;
-  width: auto;
-`
-
-const FilterWrap = styled.div`
-  display: flex;
-  justify-content: center;
+  ${rowCentralise};
   width: auto;
 `
 
@@ -57,9 +51,7 @@ const StyledIcon = styled.button`
   width: 34px;
   height: 34px;
   border-radius: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${centralise};
 `
 // 파란 아이콘 아이템 [카테고리 필터]
 const StyledSetting4 = styled(Setting4)`

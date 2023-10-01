@@ -32,7 +32,7 @@ export const SecondHandTime = () => {
           <DesktopTimePicker
             label="시작 시간"
             value={transactionStartTime}
-            onChange={newValue => handleStartTime(newValue)}
+            onChange={handleStartTime}
           />
           {' ~ '}
         </>
@@ -40,7 +40,7 @@ export const SecondHandTime = () => {
           <DesktopTimePicker
             label="종료 시간"
             value={transactionEndTime}
-            onChange={newValue => handleEndTime(newValue)}
+            onChange={handleEndTime}
           />
         </>
       </LocalizationProvider>

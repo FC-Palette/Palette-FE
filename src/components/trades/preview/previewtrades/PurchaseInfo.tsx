@@ -13,7 +13,8 @@ export const PurchaseInfo = ({
   startDay,
   endDay,
   timeRemaining,
-  headCount
+  headCount,
+  currentCount
 }) => {
   const icons = PREVIEW_ICON_INFO.map((iconKey, idx) => (
     <IconZone key={idx}>
@@ -28,7 +29,9 @@ export const PurchaseInfo = ({
         {startDay} ~ {endDay}
       </Info>
       <Info>{timeRemaining}</Info>
-      <Info>{headCount}명</Info>
+      <Info>
+        {currentCount}/{headCount}명
+      </Info>
     </InfoZone>
   )
 

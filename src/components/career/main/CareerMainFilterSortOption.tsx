@@ -83,7 +83,7 @@ const DropdownMenu = styled.div<DropdownProps>`
   border: 1px solid #ccc;
   border-radius: 8px;
   display: ${props => (props.$isOpen ? 'block' : 'none')};
-  z-index: 1;
+  z-index: 12;
   white-space: nowrap;
 `
 

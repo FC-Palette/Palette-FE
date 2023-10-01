@@ -1,12 +1,11 @@
 import { theme } from 'styles/index'
 import { styled } from 'styled-components'
+import { categoryMap } from 'constants/trades/index'
 
 export const TradesCategory = ({ category }) => {
-  return (
-    <>
-      <CategoryWrapper>{category}</CategoryWrapper>
-    </>
-  )
+  const formattedCategory = categoryMap[category] || '알 수 없음'
+
+  return <CategoryWrapper>{formattedCategory}</CategoryWrapper>
 }
 
 const CategoryWrapper = styled.div`

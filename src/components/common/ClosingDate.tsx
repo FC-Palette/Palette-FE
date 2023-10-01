@@ -1,26 +1,42 @@
 import React from 'react'
 import { theme } from 'styles/index'
 import { styled } from 'styled-components'
+import { useRecoilState } from 'recoil'
+import { tradescreateglobalstate } from 'recoil/index'
 
-const TRADES_CLOSING_TEXT = [
-  '마감 일시 도달 시 자동 마감',
-  '마감 인원 도달 시 자동 마감'
+const TRADES_CLOSING_OPTIONS = [
+  { label: '마감 일시 도달 시 자동 마감', value: 'DATETIME' },
+  { label: '마감 인원 도달 시 자동 마감', value: 'HEAD_COUNT' }
 ]
 
 export const ClosingDate = () => {
+  const [tradesGlobalState, setTradesGlobalState] = useRecoilState(
+    tradescreateglobalstate
+  )
+
+  const handleOptionChange = selectedOption => {
+    setTradesGlobalState(prevGlobalState => ({
+      ...prevGlobalState,
+      closingType: selectedOption
+    }))
+  }
+
   return (
     <Wrapper>
-      {TRADES_CLOSING_TEXT.map((text, index) => (
-        <React.Fragment key={text}>
+      {TRADES_CLOSING_OPTIONS.map(option => (
+        <React.Fragment key={option.value}>
           <CheckBoxWrapper>
-            <Label htmlFor={`radio${index}`}>
+            <Label htmlFor={`radio${option.value}`}>
               <CustomCheckBox
                 type="radio"
-                id={`radio${index}`}
+                id={`radio${option.value}`}
                 name="closingOption"
+                value={option.value}
+                checked={tradesGlobalState.closingType === option.value}
+                onChange={() => handleOptionChange(option.value)}
               />
             </Label>
-            <DetailText>{text}</DetailText>
+            <DetailText>{option.label}</DetailText>
           </CheckBoxWrapper>
         </React.Fragment>
       ))}

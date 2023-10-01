@@ -56,5 +56,6 @@ export const SecondHandPre = () => {
 const Wrapper = styled.div`
   width: 100%;
   overflow-x: hidden;
+  margin-bottom: 50px;
 `
 //

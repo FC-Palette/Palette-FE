@@ -7,13 +7,20 @@ import { TRADES_SECONDHAND_TEXT } from 'constants/trades/index'
 import { secondHandUtils } from 'utils/index'
 import { secondhandcreateglobalstate } from 'recoil/index'
 import { useRecoilState } from 'recoil'
+import { centralise } from 'styles/index'
 
 export const SecondHandUploadList = () => {
   const [secondHandGlobalState, setSecondHandGlobalState] = useRecoilState(
     secondhandcreateglobalstate
   )
   const maxTitleLength = 25
-  console.log(secondHandGlobalState)
+
+  const toggleIsFree = () => {
+    setSecondHandGlobalState(prevGlobalState => ({
+      ...prevGlobalState,
+      isFree: !prevGlobalState.isFree
+    }))
+  }
 
   return (
     <Wrapper>
@@ -57,7 +64,11 @@ export const SecondHandUploadList = () => {
             {item.title === '금액을 알려주세요.' && (
               <FreeSharingCheckbox>
                 <CheckboxLabel>
-                  <Checkbox type="checkbox" />
+                  <Checkbox
+                    type="checkbox"
+                    checked={secondHandGlobalState.isFree}
+                    onChange={toggleIsFree}
+                  />
                 </CheckboxLabel>
                 <FreeSharingText>무료나눔</FreeSharingText>
               </FreeSharingCheckbox>
@@ -149,8 +160,6 @@ const FreeSharingCheckbox = styled.div`
 
 const FreeSharingText = styled.div`
   flex-wrap: wrap;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  ${centralise}
   margin-left: 5px;
 `
