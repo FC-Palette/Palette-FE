@@ -7,63 +7,62 @@ import { Input, Button, RegIcon } from 'components/index';
 import { login } from 'api/index';
 
 export const SignInField = () => {
-
+  const navigate = useNavigate(); 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const defaultBorderColor = theme.greyScale.grey4;
     const emailRegex = SIGNIN_REGEX_TEXT.idCondition;
-    const isValidEmail = emailRegex.test(email);
     const passwordRegex = SIGNIN_REGEX_TEXT.pwdCondition;
+    const isValidEmail = emailRegex.test(email);
     const isValidPassword = passwordRegex.test(password);
+
 
     const handleEmailChange = (e) => setEmail(e.target.value);
     const handlePasswordChange = (e) => setPassword(e.target.value);
-    
+
     const handleLogin = async () => {
         try {
-        const response = await login();
+        const response = await login(email, password);
         console.log('로그인 성공:', response);
-
-      
+        alert('로그인 성공 테스트 메세지');
+        navigate('/home')
         
         } catch (error) {
         console.error('로그인 실패:', error);
         }
     };
 
-  const renderEmailErrorMessage = () => {
-    if (!email) {
-      return "";
-    }
-
-    if (!isValidEmail) {
-      return SIGNIN_REGEX_TEXT.wrongId;
-    }
-
-    return null;
-  };
-
-  const renderPasswordErrorMessage = () => {
-    if (!password) {
-      return "";
-    }
-    if (!passwordRegex.test(password)) {
-      if (!SIGNIN_REGEX_TEXT.engInPwd.test(password)) {
-        return SIGNIN_REGEX_TEXT.pwdReqEng;
+    const renderEmailErrorMessage = () => {
+      if (!email) {
+        return null; 
       }
-
-      if (!SIGNIN_REGEX_TEXT.numInPwd.test(password)) {
-        return SIGNIN_REGEX_TEXT.pwdReqNum;
+      if (!isValidEmail) {
+        return SIGNIN_REGEX_TEXT.wrongId;
       }
-
-      // 특수문자 포함 정규식 추가 필요 
-      
-      if (password.length < 8) {
-        return SIGNIN_REGEX_TEXT.pwdLengLeast;
+      return null;
+    };
+    
+    const renderPasswordErrorMessage = () => {
+      if (!password) {
+        return null; 
       }
-    }
-    return null;
-  };
+      if (!passwordRegex.test(password)) {
+        if (!SIGNIN_REGEX_TEXT.engInPwd.test(password)) {
+          return SIGNIN_REGEX_TEXT.pwdReqEng;
+        }
+    
+        if (!SIGNIN_REGEX_TEXT.numInPwd.test(password)) {
+          return SIGNIN_REGEX_TEXT.pwdReqNum;
+        }
+    
+        // 특수문자 포함 정규식 추가 필요 
+    
+        if (password.length < 8) {
+          return SIGNIN_REGEX_TEXT.pwdLengLeast;
+        }
+      }
+      return null;
+    };
 
   return (
     <SignInFieldWrap>
