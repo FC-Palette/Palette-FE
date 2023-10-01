@@ -1,4 +1,4 @@
-import { TradesCard } from 'components/trades/cardlist/index'
+import { SecondHandCard } from 'components/trades/cardlist/index'
 import { styled } from 'styled-components'
 import { CreateBtn } from 'components/common/index'
 
@@ -9,7 +9,7 @@ export const SecondHandList = () => {
     <Wrapper>
       <Main>
         <CardWrapper>
-          <TradesCard />
+          <SecondHandCard />
         </CardWrapper>
       </Main>
       <CreateBtn path={groupUploadPath} />
@@ -24,6 +24,7 @@ const Wrapper = styled.div`
 const Main = styled.div`
   display: grid;
   grid-template-columns: 1fr;
+
   margin: 0px 4%;
 `
 
@@ -33,4 +34,5 @@ const CardWrapper = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
   margin-top: 20px;
   margin-bottom: 70px;
+  justify-items: center;
 `

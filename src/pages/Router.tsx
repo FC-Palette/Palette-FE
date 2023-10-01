@@ -25,6 +25,8 @@ import {
   CareerDetailMemberSeeMore,
   SecondHandUpload,
   CareerMeetingsCreate,
+  SecondHandDetail,
+  GroupPurchaseDetail,
   CareerIsNotUserInfo,
   CareerIsNotApprovedJoinMeeting,
   ChangeProfile,
@@ -77,7 +79,21 @@ export const router = createBrowserRouter([
         <SecondHandUpload />,
         <ErrorComponent />
       ),
-      generateRoute('/GroupUpload/:stepId', <GroupUpload />, <ErrorComponent />)
+      generateRoute(
+        '/GroupUpload/:stepId',
+        <GroupUpload />,
+        <ErrorComponent />
+      ),
+      generateRoute(
+        '/secondHand/:productId',
+        <SecondHandDetail />,
+        <ErrorComponent />
+      ),
+      generateRoute(
+        '/groupPurchase/:offerId',
+        <GroupPurchaseDetail />,
+        <ErrorComponent />
+      )
     ]
   },
   {

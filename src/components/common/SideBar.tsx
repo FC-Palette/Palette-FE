@@ -6,6 +6,7 @@ import { Header, Background } from 'components/common/index'
 import { ArrowLeft2, ArrowRotateRight } from 'iconsax-react'
 import { useRecoilState } from 'recoil'
 import { sideBarState } from 'recoil/index'
+import { useState } from 'react'
 
 export const SideBar: React.FC<SideBarProps> = ({
   items,
@@ -13,9 +14,18 @@ export const SideBar: React.FC<SideBarProps> = ({
   centerText
 }) => {
   const [isOpen, setIsOpen] = useRecoilState(sideBarState)
+  const [selectedContent, setSelectedContent] = useState<number | null>(null)
 
   const handleCancelSide = () => {
     setIsOpen(false)
+  }
+
+  const handleContentClick = (index: number) => {
+    setSelectedContent(index === selectedContent ? null : index)
+  }
+
+  const handleRefreshClick = () => {
+    setSelectedContent(null) // 선택 초기화
   }
 
   return (
@@ -31,7 +41,7 @@ export const SideBar: React.FC<SideBarProps> = ({
           }
           centerText={centerText}
           children={
-            <StyledIcon>
+            <StyledIcon onClick={handleRefreshClick}>
               <ArrowRotateRight />
             </StyledIcon>
           }
@@ -45,12 +55,19 @@ export const SideBar: React.FC<SideBarProps> = ({
               item.content.map((content, contentIndex) => (
                 <ContentWrapper
                   key={contentIndex}
-                  $isOpen={isOpen}>
+                  $isOpen={isOpen}
+                  $isSelected={contentIndex === selectedContent}
+                  onClick={() => handleContentClick(contentIndex)}>
                   <ContentWrap>{content}</ContentWrap>
                 </ContentWrapper>
               ))
             ) : (
-              <ContentWrapper $isOpen={isOpen}>{item.content}</ContentWrapper>
+              <ContentWrapper
+                $isOpen={isOpen}
+                $isSelected={index === selectedContent}
+                onClick={() => handleContentClick(index)}>
+                {item.content}
+              </ContentWrapper>
             )}
           </FilterWrapper>
         ))}
@@ -72,7 +89,7 @@ const SideBarWrapper = styled.div<{ $isOpen?: boolean }>`
   transition: right 0.3s;
 `
 
-const FooterWrapper = styled.button<{ $isOpen?: boolean }>`
+const FooterWrapper = styled.div<{ $isOpen?: boolean }>`
   width: 100%;
   height: 80px;
   background-color: ${theme.main.blue0};
@@ -103,15 +120,17 @@ const FilterWrapper = styled.div<{ $isOpen?: boolean }>`
   flex-wrap: wrap;
   gap: 15px;
 `
-const ContentWrapper = styled.div<{ $isOpen?: boolean }>`
+const ContentWrapper = styled.div<{ $isOpen?: boolean; $isSelected?: boolean }>`
   display: flex;
   border-radius: 20px;
   height: 43px;
   font-size: ${theme.customSize.medium};
-  background-color: ${theme.greyScale.blueGrey};
+  background-color: ${({ $isSelected }) =>
+    $isSelected ? theme.subColor.blie10 : theme.greyScale.blueGrey};
   align-items: center;
   justify-content: center;
   padding: 5px 10px;
+  color: ${({ $isSelected }) => ($isSelected ? theme.main.blueL1 : 'inherit')};
 `
 
 const StyledIcon = styled.div<{ $isOpen?: boolean }>`

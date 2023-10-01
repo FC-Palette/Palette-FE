@@ -3,9 +3,10 @@ import styled from 'styled-components'
 
 interface UploadFooterProps {
   handleNextStep: () => void
+  text: string
 }
 
-export const UploadFooter = ({ handleNextStep }: UploadFooterProps) => {
+export const UploadFooter = ({ handleNextStep, text }: UploadFooterProps) => {
   return (
     <Wrapper>
       <BtnWrap>
@@ -15,7 +16,7 @@ export const UploadFooter = ({ handleNextStep }: UploadFooterProps) => {
           $btnHeight="60px"
           $fontSize="20px"
           $borderRadius="8px">
-          미리보기
+          {text}
         </Button>
       </BtnWrap>
     </Wrapper>

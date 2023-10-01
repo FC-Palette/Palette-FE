@@ -4,7 +4,7 @@ import {
 } from 'components/trades/preview/index'
 import { UploadFooter } from 'components/trades/upload/index'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useSetRecoilState, useRecoilState } from 'recoil'
+import { useRecoilState } from 'recoil'
 import { modalOnState } from 'recoil/index'
 import { TRADES_MODAL_TEXT } from 'constants/trades/index'
 import { useState } from 'react'
@@ -12,6 +12,7 @@ import {
   tradescreateglobalstate,
   initialTradeCreateGlobalState
 } from 'recoil/index'
+import { GroupPurchasePostApi } from 'api/trades/index'
 import { BackgroundModal, ModalButtons } from 'components/index'
 import { PreviewFooter } from 'components/trades/preview/index'
 // import styled from 'styled-components'
@@ -25,17 +26,50 @@ export const GroupUpload = () => {
   const [modlaOnState, setModalOnState] = useRecoilState(modalOnState)
   const initialModalText = TRADES_MODAL_TEXT.create
   const [modalText, setModalText] = useState(initialModalText)
-  const setTradesGlobalState = useSetRecoilState(tradescreateglobalstate)
+  const [tradesGlobalState, setTradesGlobalState] = useRecoilState(
+    tradescreateglobalstate
+  )
 
   const handleNextStep = () => {
     const nextStep = parseInt(stepId) + 1
     navigate(`/GroupUpload/${nextStep}`)
   }
 
-  const handleTrades = () => {
-    setModalText(TRADES_MODAL_TEXT.create)
-    setModalOnState(true)
-    // 채팅창 생성하는 로직 여기 넣어야함
+  const handleTrades = async () => {
+    try {
+      setModalText(TRADES_MODAL_TEXT.create)
+      setModalOnState(true)
+
+      //이미지 데이터추가
+      const formData = new FormData()
+
+      if (tradesGlobalState.images.length > 0) {
+        tradesGlobalState.images.forEach((imageBlob, index) => {
+          formData.append(`images[${index}]`, imageBlob)
+        })
+      }
+
+      // DTO 데이터 추가
+      formData.append('title', tradesGlobalState.title)
+      formData.append('description', tradesGlobalState.description)
+      formData.append('price', tradesGlobalState.price.toString())
+      formData.append('category', tradesGlobalState.category)
+      formData.append('startDay', tradesGlobalState.startDay)
+      formData.append('endDay', tradesGlobalState.endDay)
+      formData.append('timeRemaining', tradesGlobalState.timeRemaining)
+      formData.append('headCount', tradesGlobalState.headCount.toString())
+      formData.append('closingType', tradesGlobalState.closingType)
+      formData.append('accountOwner', tradesGlobalState.accountOwner)
+      formData.append('accountNumber', tradesGlobalState.accountNumber)
+      formData.append('shopUrl', tradesGlobalState.shopUrl)
+      formData.append('bank', tradesGlobalState.bank)
+
+      const response = await GroupPurchasePostApi(formData)
+
+      console.log('서버 응답:', response)
+    } catch (error) {
+      console.log('요청 오류', error)
+    }
   }
 
   const handleCancel = () => {
@@ -76,7 +110,12 @@ export const GroupUpload = () => {
   const renderFooter = () => {
     switch (stepId) {
       case '1':
-        return <UploadFooter handleNextStep={handleNextStep} />
+        return (
+          <UploadFooter
+            text="미리보기"
+            handleNextStep={handleNextStep}
+          />
+        )
       case '2':
         return (
           <PreviewFooter

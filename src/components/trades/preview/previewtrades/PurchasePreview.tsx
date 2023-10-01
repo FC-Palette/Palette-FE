@@ -47,6 +47,7 @@ export const PurchasePreview = () => {
         <PreviewCategory category={categoryLabel} />
         <GetStats />
         <PurchaseInfo
+          currentCount="1"
           startDay={startDay}
           endDay={endDay}
           timeRemaining={timeRemaining}

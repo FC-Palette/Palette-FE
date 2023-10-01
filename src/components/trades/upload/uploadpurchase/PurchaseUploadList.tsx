@@ -6,15 +6,11 @@ import { Input } from 'components/index'
 import { TRADES_TEXT } from 'constants/trades/index'
 import { inputUtils } from 'utils/index'
 import { tradescreateglobalstate } from 'recoil/index'
-import { useRecoilState } from 'recoil'
+import { useSetRecoilState } from 'recoil'
 
 export const PurchaseUploadList = () => {
-  const [tradesGlobalState, setTradesGlobalState] = useRecoilState(
-    tradescreateglobalstate
-  )
+  const setTradesGlobalState = useSetRecoilState(tradescreateglobalstate)
   const maxTitleLength = 25
-
-  console.log(tradesGlobalState)
 
   return (
     <Wrapper>

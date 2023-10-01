@@ -80,7 +80,12 @@ export const SecondHandUpload = ({}) => {
   const renderFooter = () => {
     switch (stepId) {
       case '1':
-        return <UploadFooter handleNextStep={handleNextStep} />
+        return (
+          <UploadFooter
+            text="미리보기"
+            handleNextStep={handleNextStep}
+          />
+        )
       case '2':
         return (
           <PreviewFooter

@@ -5,6 +5,7 @@ import { Add } from 'iconsax-react'
 import { DraggableImagePreview } from 'components/index'
 import { useSetRecoilState } from 'recoil'
 import { secondhandcreateglobalstate } from 'recoil/index'
+import { centralise } from 'styles/index'
 
 interface Image {
   id: string
@@ -106,10 +107,8 @@ const TotalContainer = styled.div`
 `
 
 const UploadZoneContainer = styled.div`
-  display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  ${centralise}
   position: relative;
 `
 
