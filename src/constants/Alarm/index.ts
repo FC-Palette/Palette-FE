@@ -1,2 +1,2 @@
-export * from 'constants/alarm/alarmSelectText'
-export * from 'constants/alarm/alarmCategoryText'
+export * from 'constants/Alarm/alarmSelectText'
+export * from 'constants/Alarm/alarmCategoryText'
