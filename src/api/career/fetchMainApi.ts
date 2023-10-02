@@ -1,5 +1,5 @@
 import { fetchMainResponseDataProps } from '@/types'
-import { baseInstance } from '../axios'
+import { authInstance, baseInstance } from '../axios'
 
 export async function fetchMainApi(
   isClose: number,
