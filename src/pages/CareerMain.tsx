@@ -40,22 +40,23 @@ export const CareerMain = () => {
     setClosedFilter(value)
   }
 
-  // 필터 결과
-  const fetchMainData = async () => {
-    const data = await fetchMainApi(
-      closedFilter,
-      filter,
-      onOff,
-      type,
-      job,
-      position,
-      sex
-    )
-    setResponseData(data)
-    setIsLoading(false)
-  }
-
   useEffect(() => {
+    const fetchMainData = async () => {
+      const mainData = await fetchMainApi(
+        closedFilter,
+        filter,
+        onOff,
+        type,
+        job,
+        position,
+        sex
+      )
+      if (mainData) {
+        setResponseData(mainData)
+        setIsLoading(false)
+      }
+    }
+
     fetchMainData()
   }, [closedFilter, filter, onOff, type, job, position, sex])
 

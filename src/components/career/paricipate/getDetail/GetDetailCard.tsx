@@ -21,14 +21,20 @@ import {
 } from '@/api'
 import { CommonSpinner } from '@/components'
 import { fetchDetailInitialState, fetchMemberInitailState } from '@/constants'
+import { decoder } from '@/utils'
 
 export const GetDetailCard = () => {
-  const isAdmin = true
   const { detailid } = useParams()
   const [isLoading, setIsLoading] = useState(true)
   const [meetingRes, setMeetingRes] = useState(fetchDetailInitialState)
   const [memberRes, setMemberRes] = useState(fetchMemberInitailState)
   const [recommendRes, setRecommendRes] = useState([])
+  const roomAdminId = meetingRes.meetingMemberDto.id
+  const loggedInuser = decoder().memberId
+  const isAdmin = loggedInuser === roomAdminId // 게시자 정보 === 로그인한 회원 정보
+  const closing = meetingRes.closing
+
+  console.log('detail: ',closing)
 
   useEffect(() => {
     const fetchDetailData = async () => {
@@ -53,8 +59,8 @@ export const GetDetailCard = () => {
         }
       }
     }
-    console.log('멤버 API 호출', memberRes) // 현재 서버에서 넘겨주는 멤버 배열이 빈 배열임
-    console.log('비슷한 모임 추천 호출', recommendRes)
+    // console.log('멤버 API 호출', memberRes) // 현재 서버에서 넘겨주는 멤버 배열이 빈 배열임
+    // console.log('비슷한 모임 추천 호출', recommendRes)
     fetchDetailData()
   }, [detailid])
 
@@ -78,16 +84,17 @@ export const GetDetailCard = () => {
     createdAt
   } = meetingRes
 
-  console.log(meetingRes)
   const renderContent = () => {
     if (isLoading) {
       return <CommonSpinner />
     }
-    
 
     return (
       <>
-        <GetDetailHeader title={title} />
+        <GetDetailHeader
+          title={title}
+          isAdmin={isAdmin}
+        />
         <GetDetailThumbnail image={image} />
         <GetDetailManagerInfo
           meetingMemberResponseDto={meetingMemberResponseDto}
@@ -125,7 +132,7 @@ export const GetDetailCard = () => {
 
   const renderFooter = () => {
     return isAdmin ? (
-      <GetDetailFooterAndButtonHost />
+      <GetDetailFooterAndButtonHost closing={closing} meetingId ={detailid}/>
     ) : (
       <GetDetailFooterAndButtonGuest />
     )
@@ -141,3 +148,6 @@ const Card = styled.div`
   overflow-x: hidden;
   overflow-y: scroll;
 `
+
+
+
