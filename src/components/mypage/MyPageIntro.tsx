@@ -4,10 +4,15 @@ import { useEffect, useState } from "react";
 import { getMyPage, getOtherUserPage } from "@/api/mypage/mypageApi";
 import { useParams } from "react-router-dom";
 import { myPageIntroProps } from "@/types";
-
+import { useRecoilValue } from "recoil";
+import { tokenPayloadState } from "@/api";
+import { decoder } from "@/utils";
+import { PROFILE_EDIT_TEXT } from "@/constants";
 export const MyPageIntro = () => {
   const { member_id } = useParams();
   const [userData, setUserData] = useState<myPageIntroProps | null>(null);
+  const tokenPayload = useRecoilValue(tokenPayloadState);
+  const decodedPayload = decoder();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,20 +22,21 @@ export const MyPageIntro = () => {
         if (member_id) {
           data = await getOtherUserPage(member_id);
         } else {
-          data = await getMyPage(member_id);
+
+          data = await getMyPage(decodedPayload.memberId);
         }
 
         setUserData(data);
         console.log(data);
       } catch (error) {
-        let data;
         console.error('사용자 데이터 가져오기 오류:', error);
-        console.log(data);
+        
       }
     };
 
     fetchData();
-  }, [member_id]); 
+  }, [member_id, tokenPayload]);
+
 
   return (
     <Container>
@@ -43,11 +49,11 @@ export const MyPageIntro = () => {
         </CategoryWrap>
         <FollowUserArea>
           <FollowerWrap>
-            <Follower>팔로워</Follower>
+            <Follower>{PROFILE_EDIT_TEXT.profileFollowText}</Follower>
             <FollowerNumber>{userData?.response?.followedCount}</FollowerNumber>
           </FollowerWrap>
           <FollowingWrap>
-            <Following>팔로잉</Following>
+            <Following>{PROFILE_EDIT_TEXT.profileFollowingText}</Following>
             <FollowingNumber>{userData?.response?.followingCount}</FollowingNumber>
           </FollowingWrap>
         </FollowUserArea>

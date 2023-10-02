@@ -17,7 +17,7 @@ export const SignInField = () => {
   const isValidEmail = emailRegex.test(email);
   const isValidPassword = passwordRegex.test(password);
   
-  const setTokenPayload = useSetRecoilState(tokenPayloadState); 
+  const setTokenPayload = useSetRecoilState(tokenPayloadState); // Recoil 상태 업데이트 함수
   
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
