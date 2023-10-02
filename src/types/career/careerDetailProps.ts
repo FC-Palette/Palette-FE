@@ -28,4 +28,6 @@ export interface fetchDetailProps {
   likes: number
   createdAt: string
   closing: boolean
+  meetingMemberDto: any
 }
+

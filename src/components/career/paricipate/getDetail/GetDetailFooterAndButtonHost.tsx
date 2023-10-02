@@ -1,20 +1,36 @@
+import { requestMeetingCloseApi } from '@/api'
 import { Button } from '@/components'
 
 import styled from 'styled-components'
 
-export const GetDetailFooterAndButtonHost = () => {
-  const isClosed = true
+export const GetDetailFooterAndButtonHost = ({ closing, meetingId }) => {
+  console.log('footer: ', closing)
+  const isClosed = closing
+  const roomId = meetingId
+
+  const handleButtonClick = async () => {
+    const response = await requestMeetingCloseApi(roomId)
+    if (response) {
+      console.log('완료')
+    }
+  }
+
+  const renderText = (isClosed: boolean) => {
+    const text = isClosed ? '다시 모집하기' : '모집 마감하기'
+    return text
+  }
 
   return (
     <>
       <Wrapper>
         <BtnWrap>
           <Button
+            onClick={() => handleButtonClick}
             $btnWidth="100%"
             $btnHeight="60px"
             $fontSize="20px"
             $borderRadius="8px">
-            {isClosed ? '다시 모집하기' : '모집 마감하기'}
+            {renderText(isClosed)}
           </Button>
         </BtnWrap>
       </Wrapper>

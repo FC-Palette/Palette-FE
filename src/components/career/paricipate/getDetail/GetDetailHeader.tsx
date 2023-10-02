@@ -16,12 +16,12 @@ interface OptionItemProps {
   onClick: () => void
 }
 
-export const GetDetailHeader = ({ title }) => {
+export const GetDetailHeader = ({ title, isAdmin }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedOption, setSelectedOption] = useState<string>('')
-  const isManager = true
   const navigate = useNavigate()
   const [isModalOpen, setIsModalOpen] = useRecoilState(modalOnState)
+  const isManager = isAdmin
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen)

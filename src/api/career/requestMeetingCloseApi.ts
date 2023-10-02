@@ -1,12 +1,9 @@
 import { fetchMainResponseDataProps } from '@/types'
-import { baseInstance } from '../axios'
+import { authInstance } from '../axios'
 
-export async function fetchRecommendMeetingsApi(meetingId: string) {
+export async function requestMeetingCloseApi(meetingId: string) {
   try {
-    const response = await baseInstance.get(`/develop/recommend/${meetingId}`, {
-      withCredentials: true
-    })
-
+    const response = await authInstance.post(`/develop/close/${meetingId}`)
     return response.data
   } catch (error: any) {
     const errorResponseData: fetchMainResponseDataProps = {
