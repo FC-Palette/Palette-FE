@@ -1,7 +1,7 @@
 //채팅방 상단 공지(토글X)
 import { styled } from 'styled-components'
 import { Flexbox } from 'styles/index'
-import { MegaPhoneIcon } from '@/components/alarm/MegaPhoneIcon'
+import { MegaPhoneIcon } from 'components/index'
 // import { getNotice } from 'api/index'
 // import { useQuery } from '@tanstack/react-query'
 
