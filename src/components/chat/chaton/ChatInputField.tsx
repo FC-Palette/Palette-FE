@@ -4,12 +4,20 @@ import { AddSquare, Send2 } from 'iconsax-react'
 import { sendFileState } from 'recoil/index'
 import { useRecoilState } from 'recoil'
 import { Flexbox } from 'styles/index'
-export const ChatInputField = ({ inputRef, onEnterPress }) => {
+export const ChatInputField = ({ inputRef, sendMessage, client }) => {
   const [sendFile, setSendFile] = useRecoilState(sendFileState)
   const handleSendFile = () => {
     setSendFile(!sendFile)
   }
-
+  const onBtnClick = e => {
+    if (e.type === 'click' && client) {
+      e.preventDefault()
+      sendMessage(inputRef.current.value)
+      inputRef.current.value = ''
+      inputRef.current.style.height = 'auto'
+      return
+    }
+  }
   return (
     <>
       {sendFile && (
@@ -24,10 +32,11 @@ export const ChatInputField = ({ inputRef, onEnterPress }) => {
           </IconWrapper>
           <ChatInput
             inputRef={inputRef}
-            onEnterPress={onEnterPress}
+            client={client}
+            sendMessage={sendMessage}
           />
           <IconWrapper $position="right">
-            <Send2 onClick={onEnterPress} />
+            <Send2 onClick={onBtnClick} />
           </IconWrapper>
         </ChatWrapper>
       </ChatForm>
