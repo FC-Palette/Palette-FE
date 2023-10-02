@@ -29,7 +29,7 @@ import {
   GroupPurchaseDetail,
   CareerIsNotUserInfo,
   CareerIsNotApprovedJoinMeeting,
-  ChangeProfile,
+  ModifyProfile,
   CareerMeetingConfirm,
   CareerEdit,
   Home
@@ -108,6 +108,7 @@ export const router = createBrowserRouter([
       generateRoute('/mypage', <MyPage />),
       generateRoute('/mypage/:member_id', <MyPage />),
       generateRoute('/changeprofile', <ChangeProfile />),
+      generateRoute('/modifyprofile', <ModifyProfile />, <ErrorComponent />),
       generateRoute('/setting', <Setting />),
       generateRoute('/alarm', <Alarm />),
       generateRoute('/setting/password', <SettingPassword />),

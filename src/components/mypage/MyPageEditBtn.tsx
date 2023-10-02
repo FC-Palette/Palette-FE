@@ -8,7 +8,7 @@ import { Link } from "react-router-dom"
 export const MyPageEditBtn = () => {
   return (
     <ButtonWrap>
-      <Link to={"/changeprofile"}>
+      <Link to={"/modifyprofile"}>
         <Button
         color={theme.main.blue0}
         $bgColor={theme.main.white}

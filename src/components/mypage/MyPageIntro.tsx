@@ -1,24 +1,54 @@
 import { theme } from "styles/index";
 import { styled } from "styled-components";
+import { useEffect, useState } from "react";
+import { getMyPage, getOtherUserPage } from "@/api/mypage/mypageApi";
+import { useParams } from "react-router-dom";
+import { myPageIntroProps } from "@/types";
 
 export const MyPageIntro = () => {
+  const { member_id } = useParams();
+  const [userData, setUserData] = useState<myPageIntroProps | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        let data;
+
+        if (member_id) {
+          data = await getOtherUserPage(member_id);
+        } else {
+          data = await getMyPage(member_id);
+        }
+
+        setUserData(data);
+        console.log(data);
+      } catch (error) {
+        let data;
+        console.error('사용자 데이터 가져오기 오류:', error);
+        console.log(data);
+      }
+    };
+
+    fetchData();
+  }, [member_id]); 
+
   return (
     <Container>
       <TextInformation>
-        <NickName></NickName>
-        <TextArea></TextArea>
+      <NickName>{userData?.response?.nickname}</NickName>
+        <TextArea>{userData?.response?.bio}</TextArea>
         <CategoryWrap>
-          <JobCategory></JobCategory>
-          <PositionCategory></PositionCategory>
+          <JobCategory>{userData?.response?.job}</JobCategory>
+          <PositionCategory>{userData?.response?.position}</PositionCategory>
         </CategoryWrap>
         <FollowUserArea>
           <FollowerWrap>
             <Follower>팔로워</Follower>
-            <FollowerNumber></FollowerNumber>
+            <FollowerNumber>{userData?.response?.followedCount}</FollowerNumber>
           </FollowerWrap>
           <FollowingWrap>
             <Following>팔로잉</Following>
-            <FollowingNumber></FollowingNumber>
+            <FollowingNumber>{userData?.response?.followingCount}</FollowingNumber>
           </FollowingWrap>
         </FollowUserArea>
       </TextInformation>
@@ -48,6 +78,9 @@ const NickName = styled.div`
 `;
 
 const TextArea = styled.div`
+  word-break: break-all;
+  max-width: 293px;
+  min-width: 293px;
   color: ${theme.greyScale.grey5};
   font-size: 16px;
   line-height: 19.09px;
