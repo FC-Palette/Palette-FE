@@ -4,9 +4,10 @@ import { BrushSquare } from 'iconsax-react'
 import { useNavigate } from 'react-router-dom'
 
 export const CareerMainItemCreateButton = () => {
+  const isProfile = true
   const naviage = useNavigate()
   const handleClickBtn = () => {
-    naviage('/profile/1')
+    isProfile ? naviage('/create/1') : naviage('/profile/1')
   }
   return (
     <>

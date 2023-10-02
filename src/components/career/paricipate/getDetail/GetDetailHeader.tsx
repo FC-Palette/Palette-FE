@@ -1,9 +1,11 @@
-import { Header } from '@/components'
+import { BackgroundModal, Header, ModalButtons } from '@/components'
 import { ArrowLeft2, Heart, More, Send2, Trash, Edit } from 'iconsax-react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import { CREATE_EDIT_TEXT } from '@/constants'
+import { CREATE_EDIT_TEXT, DELETE_MODAL_TEXT } from '@/constants'
 import { useState } from 'react'
+import { useRecoilState } from 'recoil'
+import { modalOnState } from '@/recoil'
 
 interface DropdownProps {
   $isOpen: boolean
@@ -14,10 +16,12 @@ interface OptionItemProps {
   onClick: () => void
 }
 
-export const GetDetailHeader = () => {
+export const GetDetailHeader = ({ title }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedOption, setSelectedOption] = useState<string>('')
   const isManager = true
+  const navigate = useNavigate()
+  const [isModalOpen, setIsModalOpen] = useRecoilState(modalOnState)
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen)
@@ -26,9 +30,24 @@ export const GetDetailHeader = () => {
   const handleOptionClick = (value: string) => {
     setSelectedOption(value)
     setIsOpen(false)
+    if (value === '수정하기') {
+      navigate('/edit/1')
+    }
+    if (value === '삭제하기') {
+      setIsModalOpen(!isModalOpen)
+    }
+  }
+
+  const handleConfirmYes = () => {
+    alert('삭제')
+  }
+
+  const handleConfirmNo = () => {
+    setIsModalOpen(false)
   }
 
   const dynamicHeaderIcon = (isManager: boolean) => {
+    const iconSize = 18
     return isManager ? (
       <MultiIconWrap>
         <Send2 />
@@ -40,9 +59,9 @@ export const GetDetailHeader = () => {
               $isSelected={item.label === selectedOption}>
               {item.label}
               {item.label === '수정하기' ? (
-                <Edit size={18} />
+                <Edit size={iconSize} />
               ) : (
-                <Trash size={18} />
+                <Trash size={iconSize} />
               )}
             </OptionItem>
           ))}
@@ -57,7 +76,6 @@ export const GetDetailHeader = () => {
     )
   }
 
-  const navigate = useNavigate()
   return (
     <Wrap>
       <Header
@@ -66,9 +84,22 @@ export const GetDetailHeader = () => {
             <ArrowLeft2 />
           </StyledIcon>
         }
-        centerText={'Fetch Title'}>
+        centerText={title}>
         {dynamicHeaderIcon(isManager)}
       </Header>
+
+      {isModalOpen && (
+        <BackgroundModal
+          title={DELETE_MODAL_TEXT[0]}
+          content={DELETE_MODAL_TEXT[1]}>
+          <ModalButtons
+            onLeftClick={handleConfirmYes}
+            onRightClick={handleConfirmNo}
+            leftBtn={DELETE_MODAL_TEXT[2]}
+            rightBtn={DELETE_MODAL_TEXT[3]}
+          />
+        </BackgroundModal>
+      )}
     </Wrap>
   )
 }

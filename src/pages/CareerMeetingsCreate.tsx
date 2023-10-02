@@ -1,3 +1,7 @@
+import { useState } from 'react'
+import styled from 'styled-components'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import { BackgroundModal, ModalButtons } from '@/components'
 import {
   MeetingsCreateFooter,
@@ -7,49 +11,39 @@ import {
   StepThreeCard,
   StepTwoCard
 } from '@/components/career'
-import { useNavigate, useParams } from 'react-router-dom'
-import styled from 'styled-components'
-import { useRecoilState } from 'recoil'
-import { modalOnState } from '@/recoil'
+import { careerCreateGlobalState, modalOnState } from '@/recoil'
 import { CREATE_MODAL_TEXT } from '@/constants'
-import { useState } from 'react'
-
 import { CareerUseParamsProps } from '@/types'
+import { careerCreateApi } from '@/api'
 
 export const CareerMeetingsCreate = () => {
   const [modlaOnState, setModalOnState] = useRecoilState(modalOnState)
-  const initialModalText = CREATE_MODAL_TEXT.create
-  const [modalText, setModalText] = useState(initialModalText)
-
+  const [modalText, setModalText] = useState(CREATE_MODAL_TEXT.create)
+  const createAtom = useRecoilValue(careerCreateGlobalState)
   const navigate = useNavigate()
   const { createstepid = '1' } = useParams<CareerUseParamsProps>()
-
-  const renderContent = () => {
-    switch (createstepid) {
-      case '1':
-        return <StepOneCard />
-      case '2':
-        return <StepTwoCard />
-      case '3':
-        return <StepThreeCard />
-      case '4':
-        return <StepPreviewCard />
-      default:
-        return <StepOneCard />
-    }
-  }
 
   const handleNextStep = () => {
     const nextStep = parseInt(createstepid) + 1
     navigate(`/create/${nextStep}`)
   }
 
-  const handleCreateMeeting = () => {
+  // 개설하기
+  const handleCreateMeeting = async () => {
     setModalText(CREATE_MODAL_TEXT.create)
     setModalOnState(true)
     // 채팅창 생성하는 로직 여기 넣어야함
+
+    const response = await careerCreateApi(createAtom)
+
+    if (response.response === 200) {
+      navigate('/career')
+    }
   }
 
+  console.log(createAtom)
+
+  // 취소하기
   const handleCreateCancel = () => {
     setModalText(CREATE_MODAL_TEXT.cancel)
     setModalOnState(true)
@@ -58,7 +52,7 @@ export const CareerMeetingsCreate = () => {
   // 모달 왼쪽 버튼 클릭 시 실행
   const handleConfirmYes = () => {
     if (modalText === CREATE_MODAL_TEXT.create) {
-      alert('상세 페이지 이동 로직')
+      // alert('상세 페이지 이동 로직')
       setModalOnState(false)
     } else if (modalText === CREATE_MODAL_TEXT.cancel) {
       alert('삭제')
@@ -74,6 +68,21 @@ export const CareerMeetingsCreate = () => {
     } else if (modalText === CREATE_MODAL_TEXT.cancel) {
       alert('유지')
       setModalOnState(false)
+    }
+  }
+
+  const renderContent = () => {
+    switch (createstepid) {
+      case '1':
+        return <StepOneCard />
+      case '2':
+        return <StepTwoCard />
+      case '3':
+        return <StepThreeCard />
+      case '4':
+        return <StepPreviewCard />
+      default:
+        return <StepOneCard />
     }
   }
 
@@ -107,8 +116,8 @@ export const CareerMeetingsCreate = () => {
           title={modalText[0]}
           content={modalText[1]}>
           <ModalButtons
-            onLeftClick={handleConfirmYes} // '네' 버튼 클릭 시
-            onRightClick={handleConfirmNo} // '아니오' 버튼 클릭 시
+            onLeftClick={handleConfirmYes}
+            onRightClick={handleConfirmNo}
             leftBtn={modalText[2]}
             rightBtn={modalText[3]}
           />
@@ -120,8 +129,6 @@ export const CareerMeetingsCreate = () => {
 
 const Wrap = styled.div`
   width: 100%;
-  /* height: 100%; */
-  /* min-height: 100vh; */
   display: flex;
   flex-direction: column;
   position: relative;

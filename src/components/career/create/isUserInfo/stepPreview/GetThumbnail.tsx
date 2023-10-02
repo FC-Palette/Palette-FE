@@ -37,6 +37,7 @@ const ThumbnailSlider = styled.div`
   height: 322px;
   min-height: 322px;
   background-color: transparent;
+
   // 점 위치
   .slick-dots {
     bottom: 10px;

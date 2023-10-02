@@ -1,5 +1,7 @@
 import { CommonArrowDownFill, CommonCheckIcon } from '@/components'
+import { careerSortGlobalState } from '@/recoil'
 import { useState } from 'react'
+import { useSetRecoilState } from 'recoil'
 import { styled } from 'styled-components'
 
 interface DropdownProps {
@@ -28,6 +30,8 @@ export const CareerMainFilterSortOption = ({
   const [isOpen, setIsOpen] = useState(false)
   const [selectedOption, setSelectedOption] = useState<string>(initialItem)
 
+  const setSortItem = useSetRecoilState(careerSortGlobalState)
+
   const toggleDropdown = () => {
     setIsOpen(!isOpen)
   }
@@ -35,6 +39,10 @@ export const CareerMainFilterSortOption = ({
   const handleOptionClick = (value: string) => {
     setSelectedOption(value)
     setIsOpen(false)
+    setSortItem(prev => ({
+      ...prev,
+      filter: value
+    }))
   }
 
   return (

@@ -14,7 +14,7 @@ interface SelectedAnswerProps {
 export const MeetupTypeSelector1 = () => {
   const [globalData, setGlobalData] = useRecoilState(careerCreateGlobalState)
   const [selectedItem1, setSelectedItem1] = useState<string>('')
-  const { selectedItem2 } = globalData
+  const { type } = globalData
 
   const handleItemSelect = (item: string, questionKey: string) => {
     if (questionKey === 'Answer1') {
@@ -22,7 +22,7 @@ export const MeetupTypeSelector1 = () => {
     } else if (questionKey === 'Answer2') {
       setGlobalData(prevData => ({
         ...prevData,
-        selectedItem2: item
+        type: item
       }))
     }
   }
@@ -30,7 +30,7 @@ export const MeetupTypeSelector1 = () => {
   const isAnswerSelected = (item: string, questionKey: string) => {
     return (
       (questionKey === 'Answer1' && selectedItem1 === item) ||
-      (questionKey === 'Answer2' && selectedItem2 === item)
+      (questionKey === 'Answer2' && type === item)
     )
   }
 

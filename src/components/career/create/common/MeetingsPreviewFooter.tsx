@@ -7,25 +7,23 @@ export const MeetingsPreviewFooter = ({
   return (
     <Wrapper>
       <BtnWrap>
-        <BtnWrap>
-          <Button
-            onClick={handleCreateCancel}
-            $bgColor="#fff"
-            $btnWidth="45%"
-            $btnHeight="60px"
-            $fontSize="20px"
-            $borderRadius="8px">
-            <BlueText>취소하기</BlueText>
-          </Button>
-          <Button
-            onClick={handleCreateMeeting}
-            $btnWidth="45%"
-            $btnHeight="60px"
-            $fontSize="20px"
-            $borderRadius="8px">
-            개설하기
-          </Button>
-        </BtnWrap>
+        <Button
+          onClick={handleCreateCancel}
+          $bgColor="#fff"
+          $btnWidth="45%"
+          $btnHeight="60px"
+          $fontSize="20px"
+          $borderRadius="8px">
+          <BlueText>취소하기</BlueText>
+        </Button>
+        <Button
+          onClick={handleCreateMeeting}
+          $btnWidth="45%"
+          $btnHeight="60px"
+          $fontSize="20px"
+          $borderRadius="8px">
+          개설하기
+        </Button>
       </BtnWrap>
     </Wrapper>
   )
@@ -61,4 +59,3 @@ const BtnWrap = styled.div`
 const BlueText = styled.span`
   color: ${props => props.theme.main.blue0};
 `
-

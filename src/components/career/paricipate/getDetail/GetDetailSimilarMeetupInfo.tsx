@@ -1,9 +1,11 @@
 import styled from 'styled-components'
 import { CareerCreateMeetingCommonQuestion } from '../..'
 import { CommonLikeIcon, CommonViewIcon } from '@/components'
+
+// export const GetDetailSimilarMeetupInfo = ({ recommendRes }) => {
 export const GetDetailSimilarMeetupInfo = () => {
+  // const fetchRecommendRes = recommendRes
   const dummyObj = {
-    dummyImage: ['url1', 'url2'],
     dummyCategory: ['카테고리', '카테고리', '카테고리', '카테고리', '카테고리'],
     dummyTitle:
       '출근 전 트렌드 분석출근 전 트렌드 분석 출근 전 트렌드 분석출근 전 트렌드 분석',
@@ -14,10 +16,7 @@ export const GetDetailSimilarMeetupInfo = () => {
   const { dummyCategory, dummyTitle, dummyLike, dummyView } = dummyObj
 
   const checkTitleLength = (title: string, length: number) => {
-    const splitTitle = title.split('')
-    return splitTitle.length > length
-      ? splitTitle.splice(0, length).join('') + '...'
-      : title
+    return title.length > length ? title.slice(0, length) + '...' : title
   }
 
   return (

@@ -4,7 +4,7 @@ import { careerCreateGlobalState } from '@/recoil'
 
 export const MeetupTitleAndDescription = () => {
   const [globalState, setGlobalState] = useRecoilState(careerCreateGlobalState)
-  const { meetupTitle, meetupDescription } = globalState
+  const { title, description } = globalState
 
   const maxTitleLength = 25
   const maxDescriptionLength = 500
@@ -14,7 +14,7 @@ export const MeetupTitleAndDescription = () => {
     if (text.length <= maxDescriptionLength) {
       setGlobalState(prev => ({
         ...prev,
-        meetupTitle: text
+        title: text
       }))
     }
   }
@@ -24,7 +24,7 @@ export const MeetupTitleAndDescription = () => {
     if (text.length <= maxDescriptionLength) {
       setGlobalState(prev => ({
         ...prev,
-        meetupDescription: text
+        description: text
       }))
     }
   }
@@ -43,7 +43,7 @@ export const MeetupTitleAndDescription = () => {
         />
       </InputContainer>
       <InputLength>
-        {meetupTitle.length}/{maxTitleLength}
+        {title.length}/{maxTitleLength}
       </InputLength>
       <QuestionDescription>모임 소개글을 입력해주세요.</QuestionDescription>
       <TextAreaContainer>
@@ -54,7 +54,7 @@ export const MeetupTitleAndDescription = () => {
         />
       </TextAreaContainer>
       <TextAreaLengthWrap>
-        {meetupDescription.length}/{maxDescriptionLength}
+        {description.length}/{maxDescriptionLength}
       </TextAreaLengthWrap>
     </>
   )

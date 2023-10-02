@@ -1,14 +1,29 @@
+//
 import { Button, Header } from '@/components'
 import { ArrowLeft2 } from 'iconsax-react'
-import { useState } from 'react'
+// import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 export const GetDetailMemberSeeMore = () => {
-  const [isFollow, setIsFollow] = useState(false)
-  const handleFollow = () => {
-    setIsFollow(!isFollow)
-  }
+  // const [members, setMembers] = useState([])
   const navigate = useNavigate()
+
+  // useEffect(() => {
+  //   // 서버에서 멤버 정보를 가져오기
+  //   const fetchData = async () => {
+  //     const response = await fetch('api')
+  //     // const data = response
+  //   }
+
+  //   fetchData()
+  // }, [])
+
+  // const handleFollow = index => {
+  //   const updatedMembers = [...members]
+  //   // updatedMembers[index].isFollow = !updatedMembers[index].isFollow
+  //   setMembers(updatedMembers)
+  // }
+
   const dummyFetchData = {
     response: true,
     members: [
@@ -47,67 +62,8 @@ export const GetDetailMemberSeeMore = () => {
         bio: '안녕하세요',
         image: null,
         isFollow: false
-      },
-      {
-        nickname: '요한이2',
-        bio: '안녕하세요',
-        image: null,
-        isFollow: true
-      },
-      {
-        nickname: '요한이3',
-        bio: '안녕하세요',
-        image: null,
-        isFollow: false
-      },
-      {
-        nickname: '요한이3',
-        bio: '안녕하세요',
-        image: null,
-        isFollow: false
-      },
-      {
-        nickname: '요한이3',
-        bio: '안녕하세요',
-        image: null,
-        isFollow: false
-      },
-      {
-        nickname: '요한이3',
-        bio: '안녕하세요',
-        image: null,
-        isFollow: false
-      },
-      {
-        nickname: '요한이3',
-        bio: '안녕하세요',
-        image: null,
-        isFollow: false
       }
     ]
-  }
-
-  const checkFollow = (followInfo: boolean) => {
-    return followInfo ? (
-      <Button
-        onClick={handleFollow}
-        color="#6B7280"
-        $bgColor="#F5F6FA"
-        $borderColor="F5F6FA"
-        $btnWidth="100%"
-        $btnHeight="35px">
-        팔로우 삭제
-      </Button>
-    ) : (
-      <Button
-        onClick={handleFollow}
-        $bgColor="#2563EB"
-        $borderColor="2563EB"
-        $btnWidth="100%"
-        $btnHeight="35px">
-        팔로우
-      </Button>
-    )
   }
 
   const longText = (text, maxLength) => {
@@ -141,7 +97,26 @@ export const GetDetailMemberSeeMore = () => {
               <MemberBio>{longText(member.bio, 20)}</MemberBio>
             </MemberInfo>
             <FollowButtonContainer>
-              {checkFollow(isFollow)}
+              {member.isFollow ? (
+                <Button
+                  // onClick={() => handleFollow(index)}
+                  color="#6B7280"
+                  $bgColor="#F5F6FA"
+                  $borderColor="F5F6FA"
+                  $btnWidth="100%"
+                  $btnHeight="35px">
+                  팔로우 삭제
+                </Button>
+              ) : (
+                <Button
+                  // onClick={() => handleFollow(index)}
+                  $bgColor="#2563EB"
+                  $borderColor="2563EB"
+                  $btnWidth="100%"
+                  $btnHeight="35px">
+                  팔로우
+                </Button>
+              )}
             </FollowButtonContainer>
           </MemberItem>
         ))}

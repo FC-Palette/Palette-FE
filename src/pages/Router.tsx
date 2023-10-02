@@ -127,9 +127,9 @@ export const router = createBrowserRouter([
         <CareerIsNotApprovedJoinMeeting />,
         <ErrorComponent />
       ),
-      generateRoute('detail', <CareerDetail />, <ErrorComponent />),
+      generateRoute('detail/:detailid', <CareerDetail />, <ErrorComponent />),
       generateRoute(
-        'detail/members',
+        'detail/:detailid/members',
         <CareerDetailMemberSeeMore />,
         <ErrorComponent />
       ),

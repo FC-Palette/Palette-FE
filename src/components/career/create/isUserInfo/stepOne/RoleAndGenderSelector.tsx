@@ -12,14 +12,14 @@ interface SelectedAnswerProps {
 
 export const RoleAndGenderSelector = () => {
   const [globalState, setGlobalState] = useRecoilState(careerCreateGlobalState)
-  const { gender, selectedRoles } = globalState
+  const { sex, positions } = globalState
 
   const genderList = ['무관', '남성만', '여성만']
 
-  const updateGender = newGender => {
+  const updateGender = (newGender: string) => {
     setGlobalState(prevGlobalState => ({
       ...prevGlobalState,
-      gender: newGender
+      sex: newGender
     }))
   }
 
@@ -27,32 +27,29 @@ export const RoleAndGenderSelector = () => {
     setGlobalState(prevGlobalState => {
       let newSelectedRoles: string[]
 
-      if (prevGlobalState.selectedRoles.includes(role)) {
-        // If the role is already selected, remove it
-        newSelectedRoles = prevGlobalState.selectedRoles.filter(
+      if (prevGlobalState.positions.includes(role)) {
+        newSelectedRoles = prevGlobalState.positions.filter(
           item => item !== role
         )
       } else {
         if (role === '무관') {
-          // 무관 선택시 다 제거하고 무관만 선택
           newSelectedRoles = ['무관']
         } else {
-          // 무관 이외 아이템 선택시, 무관 빼고 아이템 선택
-          newSelectedRoles = prevGlobalState.selectedRoles.includes('무관')
+          newSelectedRoles = prevGlobalState.positions.includes('무관')
             ? [role]
-            : [...prevGlobalState.selectedRoles, role]
+            : [...prevGlobalState.positions, role]
         }
       }
 
       return {
         ...prevGlobalState,
-        selectedRoles: newSelectedRoles
+        positions: newSelectedRoles
       }
     })
   }
 
   const isItemSelected = (item: string) => {
-    return gender.includes(item)
+    return sex.includes(item)
   }
 
   // 직급
@@ -61,17 +58,18 @@ export const RoleAndGenderSelector = () => {
       <AnswerItem
         key={item}
         onClick={() => updateSelectedRoles(item)}
-        $isSelected={selectedRoles.includes(item)}>
+        $isSelected={positions.includes(item)}>
         {item}
       </AnswerItem>
     )
   })
 
+  // 성별
   const AnswerItems_2 = genderList.map(item => (
     <AnswerItem
       key={item}
       onClick={() => updateGender(item)}
-      $isSelected={gender === item}>
+      $isSelected={sex === item}>
       {item !== '무관' && (
         <IconWrapper
           $isSelected={isItemSelected(item)}

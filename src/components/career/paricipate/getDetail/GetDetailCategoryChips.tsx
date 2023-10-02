@@ -1,19 +1,7 @@
 import styled from 'styled-components'
 
-export const GetDetailCategoryChips = () => {
-  const dummyCategory = [
-    '카테고리1',
-    '카테고리2',
-    '카테고리3',
-    '카테고리4',
-    '카테고리5',
-    '카테고리6',
-    '카테고리7',
-    '카테고리8',
-    '카테고리9'
-  ]
-
-  const categoryMap = dummyCategory.map((item, idx) => (
+export const GetDetailCategoryChips = ({ jobs }) => {
+  const categoryMap = jobs.map((item: string, idx: string) => (
     <CategoryChip key={idx}>{item}</CategoryChip>
   ))
 
@@ -22,19 +10,11 @@ export const GetDetailCategoryChips = () => {
   }
 
   return (
-    <>
-      <Container>
-        <CategoryChipsWrap>
-          {categoryMap.length > 0 ? categoryMap : isNotCategory()}
-        </CategoryChipsWrap>
-      </Container>
-    </>
+    <CategoryChipsWrap>
+      {categoryMap.length > 0 ? categoryMap : isNotCategory()}
+    </CategoryChipsWrap>
   )
 }
-
-const Container = styled.div`
-  width: 100%;
-`
 
 const CategoryChipsWrap = styled.div`
   margin: 3.5% 6.4%;
@@ -44,7 +24,6 @@ const CategoryChipsWrap = styled.div`
 `
 
 const CategoryChip = styled.div`
-  width: auto;
   min-height: 25px;
   color: ${props => props.theme.greyScale.grey7};
   background-color: ${props => props.theme.greyScale.grey2};
@@ -54,7 +33,6 @@ const CategoryChip = styled.div`
   border-radius: 4px;
 `
 const DummyCategoryChip = styled.div`
-  width: auto;
   height: 25px;
   color: ${props => props.theme.greyScale.grey7};
   background-color: ${props => props.theme.greyScale.grey2};

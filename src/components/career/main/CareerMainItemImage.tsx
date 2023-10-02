@@ -2,12 +2,12 @@ import { styled } from 'styled-components'
 interface PreviewImgProps {
   image: string[]
 }
-export const CareerMainItemImage = ({ image }) => {
+export const CareerMainItemImage = ({ image, remainingSeats }) => {
   return (
     <Wrapper>
       <PreviewImg image={image}>
         <RemainSpaces>
-          <ImpactColor>2자리</ImpactColor>
+          <ImpactColor>{remainingSeats}자리</ImpactColor>
           남았어요
         </RemainSpaces>
       </PreviewImg>

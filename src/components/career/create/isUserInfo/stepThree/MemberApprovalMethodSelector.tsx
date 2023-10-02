@@ -9,12 +9,12 @@ interface selectProps {
 }
 export const MemberApprovalMethodSelector = () => {
   const [globalState, setGlobalState] = useRecoilState(careerCreateGlobalState)
-  const { isApprove } = globalState // 선착순 => false(default)
+  const { acceptType } = globalState // 선착순 => false(default)
 
   const handleToggleApprovalType = (type: string) => {
     setGlobalState(prevState => ({
       ...prevState,
-      isApprove: type
+      acceptType: type
     }))
   }
 
@@ -25,12 +25,12 @@ export const MemberApprovalMethodSelector = () => {
         <ToggleRowSortContainer>
           <ToggleL
             onClick={() => handleToggleApprovalType('선착순')}
-            $isSelected={isApprove === '선착순'}>
+            $isSelected={acceptType === '선착순'}>
             선착순
           </ToggleL>
           <ToggleR
             onClick={() => handleToggleApprovalType('승인제')}
-            $isSelected={isApprove === '승인제'}>
+            $isSelected={acceptType === '승인제'}>
             승인제
           </ToggleR>
         </ToggleRowSortContainer>

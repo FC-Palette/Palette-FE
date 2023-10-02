@@ -1,7 +1,7 @@
 import { styled } from 'styled-components'
 
 export const CareerMainItemCategory = ({ jobs }) => {
-  const categoryChips = jobs.map((category, index) => {
+  const categoryChips = jobs.slice(0, 2).map((category, index) => {
     return <CategoryItem key={index}>{category}</CategoryItem>
   })
   return <CategoryWrap>{categoryChips}</CategoryWrap>
@@ -9,8 +9,14 @@ export const CareerMainItemCategory = ({ jobs }) => {
 
 const CategoryWrap = styled.div`
   display: flex;
-  width: auto;
+  max-width: 230px;
+  width: 230px;
   gap: 4px;
+  overflow-x: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `
 
 const CategoryItem = styled.div`

@@ -1,9 +1,17 @@
 import { styled } from 'styled-components'
-export const CareerMainItemParticipant = ({ positions }) => {
+export const CareerMainItemParticipant = ({
+  positions, // 직급
+  recruitedPersonnel, // 모집된 인원수
+  headCount // 모집 인원수
+}) => {
   const fetchPositions = positions
+  const fetchsubscription = recruitedPersonnel
+  const fetchHeadCount = headCount
+
   return (
     <ParticipantNRemainSpate>
-      {fetchPositions || '없음'} | 4/6명
+      {fetchPositions.join(' ') || '없음'} |{' '}
+      {`${fetchsubscription}/${fetchHeadCount}`}명
     </ParticipantNRemainSpate>
   )
 }

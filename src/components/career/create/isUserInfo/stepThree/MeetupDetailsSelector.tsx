@@ -5,6 +5,7 @@ import { CommonTimePicker } from '@/components'
 import Slider from '@mui/material/Slider'
 import { useRecoilState } from 'recoil'
 import { careerCreateGlobalState } from '@/recoil'
+import { useState } from 'react'
 
 interface selectProps {
   $isSelected: boolean | string
@@ -12,66 +13,36 @@ interface selectProps {
 
 export const MeetupDetailsSelector = () => {
   const [globalState, setGlobalState] = useRecoilState(careerCreateGlobalState)
-  const { onlineToggleState, periodicMeeting, selectedDays, meetingFrequency } =
-    globalState
+  const { onOff, days, week } = globalState
+  const [periodicMeeting, setPeriodicMeeting] = useState(false)
 
   const handleToggleOnline = (isOnline: boolean) => {
     setGlobalState(prevGlobalState => ({
       ...prevGlobalState,
-      onlineToggleState: isOnline
+      onOff: isOnline
     }))
   }
 
-  const handleTogglePeriodicMeeting = () => {
+  const handleToggle = (value, key) => {
     setGlobalState(prevGlobalState => ({
       ...prevGlobalState,
-      periodicMeeting: !prevGlobalState.periodicMeeting,
-      onlineToggleState: !prevGlobalState.periodicMeeting
+      [key]: value
     }))
   }
 
-  const toggleDaySelection = (day: string) => {
-    if (selectedDays.includes(day)) {
-      setGlobalState(prevGlobalState => ({
-        ...prevGlobalState,
-        selectedDays: prevGlobalState.selectedDays.filter(
-          selectedDay => selectedDay !== day
-        )
-      }))
+  const toggleDaySelection = day => {
+    if (days.includes(day)) {
+      handleToggle(
+        globalState.days.filter(selectedDay => selectedDay !== day),
+        'days'
+      )
     } else {
-      setGlobalState(prevGlobalState => ({
-        ...prevGlobalState,
-        selectedDays: [...prevGlobalState.selectedDays, day]
-      }))
+      handleToggle([...globalState.days, day], 'days')
     }
   }
 
-  const handleToggleMeetingFrequency = (frequency: string) => {
-    setGlobalState(prevGlobalState => ({
-      ...prevGlobalState,
-      meetingFrequency: frequency
-    }))
-  }
-
-  const handleProgressTime = (time: string) => {
-    setGlobalState(prevGlobalState => ({
-      ...prevGlobalState,
-      progressTime: time
-    }))
-  }
-
-  const handleMeetingTime = (time: string) => {
-    setGlobalState(prevGlobalState => ({
-      ...prevGlobalState,
-      meetingTime: time
-    }))
-  }
-
-  const handleMeetingPlace = (place: string) => {
-    setGlobalState(provGlobalState => ({
-      ...provGlobalState,
-      meetingPlace: place
-    }))
+  const handleTogglePeriodicMeeting = () => {
+    setPeriodicMeeting(!periodicMeeting)
   }
 
   // 요일 리스트
@@ -79,8 +50,8 @@ export const MeetupDetailsSelector = () => {
     <Answer
       key={item}
       onClick={() => toggleDaySelection(item)}
-      $isSelected={selectedDays.includes(item)}
-      className={selectedDays.includes(item) ? 'selected' : ''}>
+      $isSelected={days.includes(item)}
+      className={days.includes(item) ? 'selected' : ''}>
       {item}
     </Answer>
   ))
@@ -92,29 +63,28 @@ export const MeetupDetailsSelector = () => {
         <QuestionTitle>모임 장소를 어디로 할까요?</QuestionTitle>
         <ToggleRowSortContainerTwo>
           <ToggleL
-            onClick={() => handleToggleOnline(!onlineToggleState)}
-            $isSelected={!onlineToggleState}>
+            onClick={() => handleToggleOnline(!onOff)}
+            $isSelected={!onOff}>
             온라인
           </ToggleL>
           <ToggleR
-            onClick={() => handleToggleOnline(!onlineToggleState)}
-            $isSelected={onlineToggleState}>
+            onClick={() => handleToggleOnline(!onOff)}
+            $isSelected={onOff}>
             오프라인
           </ToggleR>
         </ToggleRowSortContainerTwo>
       </ToggleNTextWrap>
       <InputContainer>
         <InputText
-          onChange={e => handleMeetingPlace(e.target.value)}
+          maxLength={30}
+          onChange={e => handleToggle(e.target.value, 'place')}
           placeholder={
-            onlineToggleState
-              ? '텍스트를 입력하세요'
-              : '오프라인 선택시 활성화됩니다.'
+            onOff ? '텍스트를 입력하세요' : '오프라인 선택시 활성화됩니다.'
           }
-          disabled={!onlineToggleState}
+          disabled={!onOff}
           style={{
-            background: onlineToggleState ? 'inherit' : '#F5F6FA',
-            color: onlineToggleState ? 'inherit' : '#F5F6FA'
+            background: onOff ? 'inherit' : '#F5F6FA',
+            color: onOff ? 'inherit' : '#F5F6FA'
           }}
         />
       </InputContainer>
@@ -123,7 +93,7 @@ export const MeetupDetailsSelector = () => {
       <PeriodicCheckBoxContainer>
         <PeriodicCheckBox
           type="checkbox"
-          onClick={() => handleTogglePeriodicMeeting()}
+          onClick={handleTogglePeriodicMeeting}
         />
         <PeriodicCheckBoxText>주기적으로 모이시겠어요?</PeriodicCheckBoxText>
       </PeriodicCheckBoxContainer>
@@ -134,18 +104,18 @@ export const MeetupDetailsSelector = () => {
             <QuestionTitle>모임 요일을 정해주세요.</QuestionTitle>
             <ToggleRowSortContainerThree>
               <ToggleL60
-                onClick={() => handleToggleMeetingFrequency('매주')}
-                $isSelected={meetingFrequency === '매주'}>
+                onClick={() => handleToggle('매주', 'week')}
+                $isSelected={week === '매주'}>
                 매주
               </ToggleL60>
               <ToggleM60
-                onClick={() => handleToggleMeetingFrequency('격주')}
-                $isSelected={meetingFrequency === '격주'}>
+                onClick={() => handleToggle('격주', 'week')}
+                $isSelected={week === '격주'}>
                 격주
               </ToggleM60>
               <ToggleR60
-                onClick={() => handleToggleMeetingFrequency('매달')}
-                $isSelected={meetingFrequency === '매달'}>
+                onClick={() => handleToggle('매달', 'week')}
+                $isSelected={week === '매달'}>
                 매달
               </ToggleR60>
             </ToggleRowSortContainerThree>
@@ -155,7 +125,10 @@ export const MeetupDetailsSelector = () => {
           {/* 모임시간 */}
           <TimePickerContainer>
             <QuestionTitle>모임 시간을 정해주세요.</QuestionTitle>
-            <CommonTimePicker onTimeChange={handleMeetingTime} />
+            {/* <CommonTimePicker onTimeChange={handleMeetingTime} /> */}
+            <CommonTimePicker
+              onTimeChange={time => handleToggle(time, 'time')}
+            />
           </TimePickerContainer>
 
           {/* 진행시간 */}
@@ -172,7 +145,7 @@ export const MeetupDetailsSelector = () => {
             max={180}
             onChange={(_, value) => {
               if (typeof value === 'number') {
-                handleProgressTime(value.toString())
+                handleToggle(value.toString(), 'progressTime')
               }
             }}
           />

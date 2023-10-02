@@ -22,7 +22,6 @@ export const GetMeetingInfo = ({
     </IconZone>
   ))
 
-  const participationMethod = isApprove ? '승인제' : '선착순'
   const selectedRolesString = Array.isArray(selectedRoles)
     ? selectedRoles.join(', ')
     : selectedRoles
@@ -40,7 +39,7 @@ export const GetMeetingInfo = ({
       <Info>
         {meetupStartDay} ~ {meetupEndDay}
       </Info>
-      <Info>{participationMethod}</Info>
+      <Info>{isApprove}</Info>
     </InfoZone>
   )
 

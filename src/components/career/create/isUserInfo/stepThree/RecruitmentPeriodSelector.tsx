@@ -1,4 +1,3 @@
-// 모집 기간
 import styled from 'styled-components'
 import { DesktopDatePicker } from '@mui/x-date-pickers'
 import { LocalizationProvider } from '@mui/x-date-pickers'
@@ -9,43 +8,33 @@ import { careerCreateGlobalState } from '@/recoil'
 import dayjs from 'dayjs'
 
 export const RecruitmentPeriodSelector = () => {
+  const formatDate = (date: string) => dayjs(date).format('YYYY-MM-DD')
   const setGlobalState = useSetRecoilState(careerCreateGlobalState)
 
-  const handleStartDateChange = date => {
-    const dateFormat_Start = dayjs(date).format('YYYY-MM-DD')
+  const handleDateChange = (date: any, type: string) => {
+    const formattedDate = formatDate(date)
     setGlobalState(prevDate => ({
       ...prevDate,
-      meetupStartDay: dateFormat_Start
-    }))
-  }
-
-  // 종료일 변경 핸들러
-  const handleEndDateChange = date => {
-    const dateFormat_End = dayjs(date).format('YYYY-MM-DD')
-    setGlobalState(prevDate => ({
-      ...prevDate,
-      meetupEndDay: dateFormat_End
+      [type]: formattedDate
     }))
   }
 
   return (
-    <>
-      <LocalizationProvider
-        dateAdapter={AdapterDayjs}
-        adapterLocale="ko">
-        <TimePickerContainer>
-          <DesktopDatePicker
-            label="시작일"
-            onChange={handleStartDateChange}
-          />
-          ~
-          <DesktopDatePicker
-            label="종료일"
-            onChange={handleEndDateChange}
-          />
-        </TimePickerContainer>
-      </LocalizationProvider>
-    </>
+    <LocalizationProvider
+      dateAdapter={AdapterDayjs}
+      adapterLocale="ko">
+      <TimePickerContainer>
+        <DesktopDatePicker
+          label="시작일"
+          onChange={date => handleDateChange(date, 'startDate')}
+        />
+        ~
+        <DesktopDatePicker
+          label="종료일"
+          onChange={date => handleDateChange(date, 'endDate')}
+        />
+      </TimePickerContainer>
+    </LocalizationProvider>
   )
 }
 

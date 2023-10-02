@@ -1,22 +1,19 @@
 import styled from 'styled-components'
 
-export const GetDetailTitleAndDescription = () => {
-  const title = 'Fetch TItle'
-  const rd = '오피스너 그는 전설이다.'.repeat(30)
-
+export const GetDetailTitleAndDescription = ({ title, description }) => {
   const truncateText = (text: string, maxLength: number) => {
     return text.length > maxLength ? text.slice(0, maxLength) + '...' : text
   }
 
-  const description = truncateText(rd, 120)
+  const maxDescription = truncateText(description, 10)
 
   return (
     <>
       <Container>
         <Title>{title.length > 0 ? title : '모임 제목 미리보기'}</Title>
         <Description>
-          {description.length > 0
-            ? description
+          {maxDescription.length > 0
+            ? maxDescription
             : '아직 이 모임에 대한 소개가 작성되지 않았어요.'}
         </Description>
       </Container>

@@ -7,7 +7,8 @@ export const theme = {
     blueD2: '#19429D',
     white: '#fff',
     black: '#000000E6',
-    blueChat: '#0080FE'
+    blueChat: '#0080FE',
+    blueSpin: '#2B80FF'
   },
   greyScale: {
     grey0: '#F9FAFB',
