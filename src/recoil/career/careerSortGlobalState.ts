@@ -1,12 +1,7 @@
 import { atom } from 'recoil'
 
 export interface CareerSortGlobalStateProps {
-  filter?: string
-  onOff?: string | null
-  type?: string | null
-  job?: string[] | null
-  position?: string[] | null
-  sex?: string | null
+  filter: any
 }
 
 export const careerSortGlobalState = atom<CareerSortGlobalStateProps>({

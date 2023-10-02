@@ -74,7 +74,7 @@ export const CareerMain = () => {
     setIsOpen(!isOpen)
   }
 
-  const resLength = responseData?.response?.length || 0;
+  const resLength = responseData?.response?.length || 0
 
   const renderContents = () => {
     if (isLoading) return <CommonSpinner />
