@@ -12,7 +12,7 @@ export const CareerMainCard = ({ responseData }) => {
           />
         ))
       ) : (
-        <div>데이터 없음</div>
+        <IsNotData>작성된 글이 없습니다.</IsNotData>
       )}
     </Card>
   )
@@ -23,4 +23,12 @@ const Card = styled.div`
   width: 100%;
   height: 100%;
   margin: 0 auto;
+`
+
+const IsNotData = styled.div`
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 58px;
+  margin-left: 24px;
+  color: ${props => props.theme.main.black};
 `

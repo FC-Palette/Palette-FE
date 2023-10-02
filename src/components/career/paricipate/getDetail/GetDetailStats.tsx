@@ -1,21 +1,25 @@
 import { CommonLikeIcon, CommonViewIcon } from '@/components'
+import { getTimeDiff } from '@/utils'
 import styled from 'styled-components'
 
-export const GetDetailStats = () => {
-  const like = 7234234
-  const view = 72342342
-  const time = '20년 전'
+export const GetDetailStats = ({ hits, likes, createdAt }) => {
+  const fetchLike = likes
+  const fetchHits = hits
+  const fetchCreatedAt = createdAt
+  const serverDate = new Date(fetchCreatedAt)
+
+  const timeAgoText = getTimeDiff(serverDate)
 
   return (
     <>
       <Container>
         <IconWrap>
           <CommonLikeIcon size={16} />
-          {like}
+          {fetchLike}
           <CommonViewIcon size={16} />
-          {view}
+          {fetchHits}
           <Dot>・</Dot>
-          {time}
+          {timeAgoText}
         </IconWrap>
       </Container>
     </>

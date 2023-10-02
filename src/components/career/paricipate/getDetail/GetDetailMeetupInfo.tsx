@@ -1,34 +1,19 @@
 import { iconMapping } from '@/components'
-import { MEETUP_SIMPLE_INFO, profileNCareerFilter } from '@/constants'
+import { MEETUP_SIMPLE_INFO } from '@/constants'
 import styled from 'styled-components'
 import { CareerCreateMeetingCommonQuestion } from '../..'
 
-export const GetDetailMeetupInfo = () => {
-  const fetchInfo = {
-    isApproved: true, // 승인제
-    selectedJopRank: profileNCareerFilter.rank, // 직급
-    gender: profileNCareerFilter.male[2], // 성별
-    recruitmentSize: 7, // 모집 인원수
-    meetingFrequency: ['매주', '격주', '매달'][0],
-    selectedDays: ['월', '화', '수', '목', '금', '토', '일'].splice(0, 3),
-    progressTime: 60, // 진행시간 (분단위)
-    meetingTime: '오전 08: 00', // 모임 시작 시간
-    meetupStartDay: '2023-01-01',
-    meetupEndDay: '2023-01-02'
-  }
-
-  const {
-    isApproved,
-    gender,
-    recruitmentSize,
-    meetingFrequency,
-    selectedDays,
-    progressTime,
-    meetingTime,
-    meetupStartDay,
-    meetupEndDay
-  } = fetchInfo
-
+export const GetDetailMeetupInfo = ({
+  acceptType,
+  sex,
+  headCount,
+  startDate,
+  endDate,
+  week,
+  days,
+  time,
+  progressTime
+}) => {
   // 아이콘 및 아이콘 맵핑 타이틀
   const iconsAndTitles = MEETUP_SIMPLE_INFO.map((iconKey, idx) => (
     <IconZone key={idx}>
@@ -37,24 +22,26 @@ export const GetDetailMeetupInfo = () => {
     </IconZone>
   ))
 
-  const participationMethod = isApproved ? '승인제' : '선착순'
+  const sliceDate = (date: string) => {
+    return date.split('T')[0]
+  }
+
+  const participationMethod = acceptType ? '승인제' : '선착순'
 
   const infos = (
     <InfoZone>
       {/* 모집기준 */}
-      <Info>
-        {'무관'} | {gender}
-      </Info>
+      <Info>{sex}</Info>
       {/* 모집인원 */}
-      <Info>{recruitmentSize}명</Info>
+      <Info>{headCount}명</Info>
       {/* 모집시간 */}
       <Info>
-        {`${meetingFrequency} `} {selectedDays.join(', ')} {meetingTime}
-        {progressTime ? ` / ${progressTime}분 진행` : ''}
+        {`${week} `} {days} {time}
+        {`${progressTime}분 진행`}
       </Info>
       {/* 모집기간 */}
       <Info>
-        {meetupStartDay} ~ {meetupEndDay}
+        {sliceDate(startDate)} ~ {sliceDate(endDate)}
       </Info>
       {/* 멤버승인 */}
       <Info>{participationMethod}</Info>

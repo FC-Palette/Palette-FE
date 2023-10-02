@@ -13,37 +13,32 @@ interface SelectedAnswerProps {
 
 export const MeetupTypeSelector2 = () => {
   const [globalData, setGlobalData] = useRecoilState(careerCreateGlobalState)
-  const { selectedMeetingTypes } = globalData
+  const { jobs } = globalData
   const [message, setMessage] = useState(false)
-  const checkLength = selectedMeetingTypes.length
-  
+  const checkLength = jobs.length
+
   useEffect(() => {
     checkLength >= 3 ? setMessage(true) : setMessage(false)
   }, [checkLength])
 
   const isItemSelected = (item: string) => {
-    return selectedMeetingTypes.includes(item)
+    return jobs.includes(item)
   }
   const handleSelectedItem = (item: string) => {
-    // 아이템이 이미 선택되었는지 확인
-    const isSelected = selectedMeetingTypes.includes(item)
+    const isSelected = jobs.includes(item)
 
     if (isSelected) {
-      // 이미 선택된 경우, 해당 아이템을 배열에서 제거
       setGlobalData(prevData => ({
         ...prevData,
-        selectedMeetingTypes: prevData.selectedMeetingTypes.filter(
-          prevItem => prevItem !== item
-        )
+        jobs: prevData.jobs.filter(prevItem => prevItem !== item)
       }))
     } else {
-      // 선택되지 않은 경우, 해당 아이템을 배열에 추가
-      if (selectedMeetingTypes.length >= 3) {
+      if (jobs.length >= 3) {
         return
       }
       setGlobalData(prevData => ({
         ...prevData,
-        selectedMeetingTypes: [...prevData.selectedMeetingTypes, item]
+        jobs: [...prevData.jobs, item]
       }))
     }
   }

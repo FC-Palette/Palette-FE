@@ -14,45 +14,45 @@ import { careerCreateGlobalState } from '@/recoil'
 export const StepPreviewCard = () => {
   const globalState = useRecoilValue(careerCreateGlobalState)
   const {
-    selectedMeetingTypes,
-    selectedRoles,
-    gender,
-    meetupImages,
-    meetupTitle,
-    meetupDescription,
-    recruitmentSize,
-    meetupStartDay,
-    meetupEndDay,
-    selectedDays,
-    meetingFrequency,
-    meetingTime,
+    jobs,
+    positions,
+    sex,
+    image,
+    title,
+    description,
+    headCount,
+    startDate,
+    endDate,
+    days,
+    week,
+    time,
     progressTime,
-    isApprove
+    acceptType
   } = globalState
 
   return (
     <>
-      <CareerCreateMeetingHeaderDynamic meetupTitle={meetupTitle} />
-      <GetThumbnail meetupImages={meetupImages} />
+      <CareerCreateMeetingHeaderDynamic meetupTitle={title} />
+      <GetThumbnail meetupImages={image} />
       <GetRoomManagerInfo />
       <GetTitleAndDescription
         detailText="아직 이 모임에 대한 소개가 작성되지 않았어요."
-        meetupTitle={meetupTitle}
-        meetupDescription={meetupDescription}
+        meetupTitle={title}
+        meetupDescription={description}
       />
-      <GetMeetingCategory selectedMeetingTypes={selectedMeetingTypes} />
+      <GetMeetingCategory selectedMeetingTypes={jobs} />
       <GetStats />
       <GetMeetingInfo
-        selectedRoles={selectedRoles}
-        gender={gender}
-        recruitmentSize={recruitmentSize}
-        meetingFrequency={meetingFrequency}
-        selectedDays={selectedDays}
-        meetingTime={meetingTime}
+        selectedRoles={positions}
+        gender={sex}
+        recruitmentSize={headCount}
+        meetingFrequency={week}
+        selectedDays={days}
+        meetingTime={time}
         progressTime={progressTime}
-        meetupStartDay={meetupStartDay}
-        meetupEndDay={meetupEndDay}
-        isApprove={isApprove}
+        meetupStartDay={startDate}
+        meetupEndDay={endDate}
+        isApprove={acceptType}
       />
       <PreviewMember />
     </>

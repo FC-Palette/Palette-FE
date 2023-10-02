@@ -12,10 +12,7 @@ export const CareerMainItemMeetingTime = ({
 
   return (
     <MeetingTime>
-      {fetchWeek}
-      {fetchDays}
-      {fetchTime}
-      {fetchProgressTiem}
+      {fetchWeek} {fetchDays} {fetchTime} {fetchProgressTiem}
     </MeetingTime>
   )
 }

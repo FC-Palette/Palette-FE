@@ -25,5 +25,13 @@ export const baseInstance: AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL
 })
 
+export const baseInstanceFormData = axios.create({
+  baseURL: import.meta.env.VITE_BASE_URL,
+  headers: {
+    Authorization: `${localStorage.getItem('token')}`,
+    'Content-Type': 'multipart/form-data'
+  }
+})
+
 // Authorization 설정이 추가된 로그인한 사용자 API용 Instance --유저 API 에서 공통적으로 사용할 인스턴스
 export const authInstance: AxiosInstance = authInterceptors(baseInstance)

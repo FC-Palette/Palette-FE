@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import Slider from 'react-slick'
 
-export const GetDetailThumbnail = () => {
+export const GetDetailThumbnail = ({ image }) => {
   const settings = {
     dots: true,
     arrows: false,
@@ -10,8 +10,7 @@ export const GetDetailThumbnail = () => {
     slidesToScroll: 1
   }
 
-  const dummyArr = ['a', 'b', 'c']
-  const previewSlides = dummyArr.map(item => <SlideItem key={item} />)
+  const previewSlides = image.map(item => <SlideItem key={item} />)
 
   return (
     <>
@@ -26,7 +25,7 @@ const ThumbnailSlider = styled.div`
   width: 100%;
   height: 322px;
   min-height: 322px;
-  background-color: rosybrown;
+  background-color: ${props => props.theme.main.blue0};
   // 점 위치
   .slick-dots {
     bottom: 10px;
@@ -34,7 +33,7 @@ const ThumbnailSlider = styled.div`
 
   .slick-dots li button:before {
     color: ${props => props.theme.main.blue0};
-    font-size: 20px;
+    font-size: 10px;
   }
 
   .slick-dots li {
@@ -46,6 +45,7 @@ const ThumbnailSlider = styled.div`
     height: 100%;
   }
 `
+
 const SlideItem = styled.div`
   img {
     width: 100%;

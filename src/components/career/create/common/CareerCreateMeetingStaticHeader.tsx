@@ -12,7 +12,7 @@ export const CareerCreateMeetingStaticHeader = () => {
         </StyledIcon>
       }
       centerText="모임생성">
-      <X onClick={() => navigate('/careerMain')}>
+      <X onClick={() => navigate('/career')}>
         <svg
           width="25"
           height="25"

@@ -1,14 +1,33 @@
 import { theme } from 'styles/index'
 import { styled } from 'styled-components'
 import { CategoryBarProps } from 'types/filterBarProps'
+import { CommonArrowDownFill } from '.'
 
 export const Category: React.FC<CategoryBarProps> = ({
   categoryList,
   categoryFilter
 }) => {
-  const chips = categoryList?.map(item => (
-    <CategoryBar key={item}>{item}</CategoryBar>
-  ))
+  const chips = categoryList?.map((item, index) => {
+    if (Array.isArray(item)) {
+      return (
+        <CategoryContainer key={index}>
+          {item.map((innerItem, innerIndex) => (
+            <CategoryBar key={innerIndex}>
+              {innerItem} <CommonArrowDownFill size={16} />
+            </CategoryBar>
+          ))}
+        </CategoryContainer>
+      )
+    } else if (typeof item === 'string') {
+      return (
+        <CategoryBar key={index}>
+          {item} <CommonArrowDownFill size={16} />
+        </CategoryBar>
+      )
+    }
+
+    return null
+  })
 
   return (
     <Wrapper>
@@ -22,18 +41,19 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  position: relative;
   gap: 10px;
-  width: 100%;
   min-height: 48px;
   padding: 10px 20px;
   overflow-x: auto;
 `
 
+const CategoryContainer = styled.div`
+  width: 100%;
+  display: flex;
+  gap: 12px;
+`
 const CategoryBar = styled.button`
-  width: auto;
   white-space: nowrap;
-  left: 1px;
   display: flex;
   align-items: center;
   border-radius: 21px;
@@ -45,6 +65,5 @@ const CategoryBar = styled.button`
 `
 
 const FilterWrapper = styled.div`
-  position: absolute;
   right: 20px;
 `

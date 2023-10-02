@@ -1,4 +1,7 @@
-// IconMapping.js
+export interface IconMapping {
+  [key: string]: React.ReactNode
+}
+
 import {
   FolderOpen,
   UserCirlceAdd,
@@ -38,27 +41,27 @@ import {
   Cake
 } from 'iconsax-react'
 
-export const iconMapping = {
-  '경영 · 비즈니스': <FolderOpen />,
-  '고객 · 영업': <UserCirlceAdd />,
-  개발: <MessageProgramming />,
-  '게임 기획 · 개발': <Game />,
-  '금융 · 컨설팅 · VC': <Moneys />,
-  교육: <Edit />,
-  '데이터 · AI · ML': <Data />,
-  디자인: <Brush2 />,
-  '마케팅 · 광고 · 홍보': <PresentionChart />,
-  '미디어 · 커뮤니케이션': <Video />,
-  '물류 · 구매': <Truck />,
-  '서비스기획 · 운영': <SliderHorizontal />,
-  '이커머스 · 리테일': <Shop />,
-  '인사 · 채용 · 노무': <Profile2User />,
-  '의료 · 제약 · 바이오': <Health />,
-  '회계 · 재무': <Gameboy />,
-  '연구 · R&D': <Trade />,
-  '법률 · 특허': <Book />,
-  '엔지니어링 · 설계': <Setting2 />,
-  '생산 · 품질': <ReceiptSearch />,
+export const iconMapping: IconMapping = {
+  '경영・비즈니스': <FolderOpen />,
+  '고객・영업': <UserCirlceAdd />,
+  '개발': <MessageProgramming />,
+  '게임기획・개발': <Game />,
+  '금융∙컨설팅・VC': <Moneys />,
+  '교육': <Edit />,
+  '데이터・AI∙ML': <Data />,
+  '디자인': <Brush2 />,
+  '마케팅・광고・홍보': <PresentionChart />,
+  '미디어・커뮤니케이션': <Video />,
+  '물류・구매': <Truck />,
+  '서비스기획・운영': <SliderHorizontal />,
+  '이커머스・리테일': <Shop />,
+  '인사・채용・노무': <Profile2User />,
+  '의류・제약・바이오': <Health />,
+  '회계・재무': <Gameboy />,
+  '연구・개발': <Trade />,
+  '법률・특허': <Book />,
+  '엔지니어링・설계': <Setting2 />,
+  '생산・품질': <ReceiptSearch />,
   모집기준: <UserOctagon />,
   모집인원: <Profile2User />,
   모집시간: <Timer1 />,
