@@ -13,6 +13,7 @@ export const Input = ({
   type,
   value,
   $paddingLeft,
+  disabled,
   ...props
 }: InputProps) => {
   return (
@@ -28,6 +29,7 @@ export const Input = ({
         type={type}
         value={value}
         placeholder={ph}
+        disabled={disabled}
       />
       {/* absolute를 통해 Icon */}
       {children}

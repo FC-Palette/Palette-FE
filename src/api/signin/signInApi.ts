@@ -1,28 +1,28 @@
-import axios from 'axios';
+import axios from 'axios'
 
 export async function login(email, password) {
   try {
-    const apiUrl = 'http://43.201.146.20/api/login'; 
+    const apiUrl = 'http://43.201.146.20/api/login'
 
     const requestData = {
       email: email,
-      password: password,
-    };
+      password: password
+    }
 
     const response = await axios.post(apiUrl, requestData, {
       headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+        'Content-Type': 'application/json'
+      }
+    })
 
-    const responseData = response.data;
+    const responseData = response.data
 
     if (responseData && responseData.token) {
-      localStorage.setItem('accessToken', responseData.token);
+      localStorage.setItem('accessToken', responseData.Token)
     }
 
-    return responseData;
+    return responseData
   } catch (error) {
-    throw error;
+    throw error
   }
 }

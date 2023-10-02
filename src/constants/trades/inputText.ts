@@ -82,7 +82,7 @@ export const TRADES_SECONDHAND_TEXT = [
   },
   {
     title: '금액을 알려주세요.',
-    props: { ph: '인당 부담 금액을 입력해주세요.', item: '원' },
+    props: { ph: '부담 금액을 입력해주세요.', item: '원' },
     component: Input,
     field: 'price'
   },

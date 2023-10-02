@@ -26,8 +26,11 @@ export const PurchaseImages = () => {
     reader.readAsArrayBuffer(file)
   }
 
-  // 업로드시
   const handleImageUpload = (acceptedFiles: File[]) => {
+    if (images.length + acceptedFiles.length > 5) {
+      return
+    }
+
     acceptedFiles.forEach(file => {
       encodeImageToBlob(file, blob => {
         const newImg = {

@@ -19,6 +19,7 @@ import { useEffect, useState } from 'react'
 export const PurchaseDetailCard = ({ offerId }) => {
   const [purchaseDetailList, setPurchaseDetailList] =
     useState<GroupPurchaseDetailResProps | null>(null)
+  const [timeremaining, setTimeremaining] = useState<string>('')
 
   useEffect(() => {
     const DetailData = async () => {
@@ -26,15 +27,42 @@ export const PurchaseDetailCard = ({ offerId }) => {
         const res = await GroupPurchaseDetail(offerId)
         if (res.success) {
           setPurchaseDetailList(res.response)
+
+          const endDate = new Date(res.response.endDate)
+          const currentTime = new Date()
+          const timeDifference = endDate.getTime() - currentTime.getTime()
+          const days = Math.floor(timeDifference / (3600000 * 24)) // 일
+          const hours = Math.floor((timeDifference % (3600000 * 24)) / 3600000) // 시간
+          const minutes = Math.floor((timeDifference % 3600000) / 60000) // 분
+
+          const remainingTime = `${days}일 ${hours} : ${minutes} `
+
+          setTimeremaining(remainingTime)
         } else {
-          console.error('서버에서 오류 응답을 받았습니다.')
         }
-      } catch (error) {
-        console.error('요청을 보낼 때 오류가 발생했습니다.', error)
-      }
+      } catch (error) {}
     }
     DetailData()
   }, [offerId])
+
+  const startDateString = purchaseDetailList
+    ? new Date(purchaseDetailList.startDate)
+        .toLocaleString('ko-KR', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit'
+        })
+        .replace(/\.$/, '') // 마지막 마침표 제거
+    : ''
+  const endDateString = purchaseDetailList
+    ? new Date(purchaseDetailList.endDate)
+        .toLocaleString('ko-KR', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit'
+        })
+        .replace(/\.$/, '') // 마지막 마침표 제거
+    : ''
 
   return (
     <>
@@ -58,9 +86,9 @@ export const PurchaseDetailCard = ({ offerId }) => {
             <GetStats />
             <PurchaseInfo
               currentCount={purchaseDetailList.currentParticipantCount}
-              startDay={purchaseDetailList.startDate}
-              endDay={purchaseDetailList.endDate}
-              timeRemaining={''}
+              startDay={startDateString}
+              endDay={endDateString}
+              timeRemaining={timeremaining}
               headCount={purchaseDetailList.headCount}
             />
             <PreviewUrl shopUrl={purchaseDetailList.shopUrl} />

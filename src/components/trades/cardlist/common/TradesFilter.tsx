@@ -6,7 +6,7 @@ import { centralise, rowCentralise } from 'styles/index'
 import { CareerMainFilterSortOption } from '@/components/career'
 
 export const TradesFilter = ({ toggleSideBar }) => {
-  const list = ['전체1', '전체2', '전체3', '전체4']
+  const list = ['']
 
   return (
     <>
@@ -72,14 +72,12 @@ const StyledRecordWrapper = styled.button`
 const CheckBox = styled.input`
   width: 20px;
   height: 20px;
-  border-radius: 50%;
+
   border: 2px solid ${props => props.theme.main.blue0};
-  appearance: none;
+
   cursor: pointer;
   transition: background 0.2s;
 
   &:checked {
-    border: 4px solid ${props => props.theme.main.blueChat};
-    background-color: ${props => props.theme.main.blueD1};
   }
 `
