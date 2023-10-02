@@ -2,6 +2,21 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
+    <script type="application/javascript">
+      const global = window
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "@stomp/stompjs": "https://ga.jspm.io/npm:@stomp/stompjs@7.0.0/esm6/index.js"
+        }
+      }
+    </script>
+    <script
+      async
+      src="https://ga.jspm.io/npm:es-module-shims@1.5.1/dist/es-module-shims.js"
+      crossorigin="anonymous"></script>
     <link
       rel="icon"
       type="image/svg+xml"

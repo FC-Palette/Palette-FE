@@ -1,14 +1,14 @@
-import styled from "styled-components"
-// 미리보기 아이콘 
+import styled from 'styled-components'
+// 미리보기 아이콘
 // import { Note, BagHappy, EmojiHappy } from 'iconsax-react'
-import { MegaPhoneIcon } from "../common/svgicon/MegaPhoneIcon"
-import { theme } from "styles/index"
+import { MegaPhoneIcon } from '../common/svgicon/MegaPhoneIcon'
+import { theme } from 'styles/index'
 
 export const AlarmList = () => {
   return (
     <AlarmListWrap>
       <PreviewIcon>
-        <MegaPhoneIcon></MegaPhoneIcon>
+        <MegaPhoneIcon $iconColor="blueL1" />
       </PreviewIcon>
 
       <PreviewInfo>
@@ -19,7 +19,6 @@ export const AlarmList = () => {
     </AlarmListWrap>
   )
 }
-
 
 const AlarmListWrap = styled.div`
   display: flex;
@@ -39,7 +38,6 @@ const PreviewIcon = styled.div`
   margin-left: 24px;
   margin-right: 12px;
   border-radius: 8px;
-
 `
 
 const PreviewInfo = styled.div`

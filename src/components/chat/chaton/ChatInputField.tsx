@@ -4,7 +4,7 @@ import { AddSquare, Send2 } from 'iconsax-react'
 import { sendFileState } from 'recoil/index'
 import { useRecoilState } from 'recoil'
 import { Flexbox } from 'styles/index'
-export const ChatInputField = () => {
+export const ChatInputField = ({ inputRef, onEnterPress }) => {
   const [sendFile, setSendFile] = useRecoilState(sendFileState)
   const handleSendFile = () => {
     setSendFile(!sendFile)
@@ -17,15 +17,20 @@ export const ChatInputField = () => {
           <SendFile></SendFile>
         </Background>
       )}
-      <ChatWrapper>
-        <IconWrapper $position="left">
-          <AddSquare onClick={handleSendFile} />
-        </IconWrapper>
-        <ChatInput />
-        <IconWrapper $position="right">
-          <Send2 />
-        </IconWrapper>
-      </ChatWrapper>
+      <ChatForm>
+        <ChatWrapper>
+          <IconWrapper $position="left">
+            <AddSquare onClick={handleSendFile} />
+          </IconWrapper>
+          <ChatInput
+            inputRef={inputRef}
+            onEnterPress={onEnterPress}
+          />
+          <IconWrapper $position="right">
+            <Send2 onClick={onEnterPress} />
+          </IconWrapper>
+        </ChatWrapper>
+      </ChatForm>
     </>
   )
 }
@@ -46,3 +51,4 @@ const IconWrapper = styled.div<{ $position: string }>`
   cursor: pointer;
   padding: ${props => (props.$position === 'left' ? '0 8px 0 0' : '0 0 0 8px')};
 `
+const ChatForm = styled.form``

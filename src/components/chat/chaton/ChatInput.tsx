@@ -1,9 +1,6 @@
 import { styled } from 'styled-components'
-import { useRef, useEffect } from 'react'
-
-export const ChatInput = () => {
-  const inputRef = useRef<HTMLTextAreaElement>(null)
-
+import { useEffect } from 'react'
+export const ChatInput = ({ inputRef, onEnterPress }) => {
   useEffect(() => {
     handleResizeHeight()
   }, [])
@@ -21,6 +18,7 @@ export const ChatInput = () => {
         ref={inputRef}
         rows={1}
         onInput={handleResizeHeight}
+        onKeyDown={onEnterPress}
       />
     </>
   )

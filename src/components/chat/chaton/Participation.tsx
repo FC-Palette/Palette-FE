@@ -17,8 +17,9 @@ export const Participation = ({ status, $prev, $prevtype }) => {
 
 const Wrapper = styled.div<{ $prev: boolean; $prevtype: string }>`
   ${centralise};
+  user-select: none;
   padding: ${props =>
-    props.$prev || props.$prevtype === 'join' || props.$prevtype === 'exit'
+    props.$prev || props.$prevtype === 'JOIN' || props.$prevtype === 'LEAVE'
       ? '4px 0 20px'
       : '20px 0'};
   font-size: 14px;

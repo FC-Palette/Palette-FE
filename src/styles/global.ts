@@ -3,6 +3,12 @@ import { createGlobalStyle } from 'styled-components'
 export const GlobalStyles = createGlobalStyle`
   html,body{
     font-family: 'Pretendard', sans-serif;
+    -ms-overflow-style: none;
+
+::-webkit-scrollbar {
+  display: none;
+}
+
   }
   * {
     box-sizing: border-box;

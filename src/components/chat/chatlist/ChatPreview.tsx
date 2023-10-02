@@ -1,11 +1,13 @@
 import { PreviewContent, PreviewTitle } from 'components/index'
 import { columnise } from 'styles/index'
 import { styled } from 'styled-components'
-export const ChatPreview = () => {
+export const ChatPreview = ({ title, members, msg }) => {
   return (
     <Wrapper>
-      <PreviewTitle></PreviewTitle>
-      <PreviewContent></PreviewContent>
+      <PreviewTitle
+        title={title}
+        members={members}></PreviewTitle>
+      <PreviewContent msg={msg}></PreviewContent>
     </Wrapper>
   )
 }

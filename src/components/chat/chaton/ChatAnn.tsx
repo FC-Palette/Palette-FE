@@ -1,8 +1,11 @@
 //채팅방 상단 공지(토글X)
 import { styled } from 'styled-components'
-import { Edit } from 'iconsax-react'
 import { Flexbox } from 'styles/index'
+import { MegaPhoneIcon } from '@/components/alarm/MegaPhoneIcon'
+// import { getNotice } from 'api/index'
+// import { useQuery } from '@tanstack/react-query'
 
+// $registered 대신 getNotice를 통해 받아온 채팅방공지를 상태에 저장, 조건부 렌더링
 export const ChatAnn = ({ $registered, $personal }) => {
   return (
     <>
@@ -10,7 +13,7 @@ export const ChatAnn = ({ $registered, $personal }) => {
         <ChatTopBar
           $registered={true}
           $personal={$personal}>
-          <Edit />
+          <MegaPhoneIcon $iconColor="blue0" />
           <TopBarContent>공지입니다.</TopBarContent>
         </ChatTopBar>
       )}

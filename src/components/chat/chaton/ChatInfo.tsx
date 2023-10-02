@@ -20,7 +20,12 @@ export const ChatInfo = () => {
   return (
     <InfoWrapper>
       {!isPersonal && <ChatSubject></ChatSubject>}
-      {inDetail && <SubjectDetail $shared={false} />}
+      {inDetail && (
+        <SubjectDetail
+          src={''}
+          $shared={false}
+        />
+      )}
       {inDetail && isBuying && (
         <AccountInfo
           isHost={false}

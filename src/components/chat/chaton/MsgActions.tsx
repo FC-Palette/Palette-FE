@@ -3,6 +3,24 @@ import { Copy, Edit } from 'iconsax-react'
 import { useResetRecoilState } from 'recoil'
 import { msgActionsState } from 'recoil/index'
 import { columnise } from 'styles/index'
+// import { createNotice } from 'api/index'
+
+/*
+POST -REQUEST BODY
+{
+	"roomId" : "1234",
+	"messageId" : "1234"
+}
+RESPONSE => 상단에 등록(notice)
+{
+	"status": 201, 
+	"success": true,
+	"response": 
+		{
+			"notice" : "공지 확인해주세요",
+		}
+}
+*/
 export const MsgActions = ({ $sender, msgRef, message }) => {
   const reset = useResetRecoilState(msgActionsState)
   // const upperTabRef = useRef<HTMLDivElement>()
@@ -41,14 +59,14 @@ export const MsgActions = ({ $sender, msgRef, message }) => {
   )
 }
 
-const Wrapper = styled.div<{ $sender: string }>`
+const Wrapper = styled.div<{ $sender: boolean }>`
   ${columnise};
   position: absolute;
   z-index: 1000;
   user-select: none;
   top: 100%;
-  right: ${props => (props.$sender === 'sender' ? 0 : '')};
-  left: ${props => (props.$sender === 'sender' ? '' : 0)};
+  right: ${props => (props.$sender ? 0 : '')};
+  left: ${props => (props.$sender ? '' : 0)};
 `
 
 const isTop = styled.div<{ $isTop: boolean }>``

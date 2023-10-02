@@ -5,51 +5,66 @@ import {
   AreaTitle,
   Navigation
 } from 'components/index'
-import { HOME_TEXTS } from 'constants/index'
-import { MoreNews } from 'components/index'
+import { HOME_TEXTS, NEWS_TEXTS } from 'constants/index'
+import {
+  MoreNews,
+  NavContainer,
+  NewsTab,
+  NavTabs,
+  CommunityTabs,
+  ImgArea
+} from 'components/index'
+import { formatLocalDateTime } from 'utils/index'
 export const Home = () => {
   return (
     <>
       <Template>
+        <ImgArea />
         <NavArea>
           <AreaTitle
             title={HOME_TEXTS.news}
             subitem={<MoreNews />}
-            between={true}
+            $between={true}
           />
           <Navigation>
-            하단 내비게이션 아이콘들입니다. 현재는 chidren으로 넘기기만 해놔서
-            스타일 아무것도 없습니다. 컴포넌트 생성 후 여백 고려해서 스타일 적용
-            예정{' '}
-          </Navigation>{' '}
+            <NavContainer
+              $top={8}
+              $middle={20}
+              $bottom={17}>
+              <NewsTab
+                title={NEWS_TEXTS.inspection}
+                content={NEWS_TEXTS.cleaning}
+              />
+              <NewsTab
+                title={NEWS_TEXTS.living}
+                content={NEWS_TEXTS.reservation}
+              />
+              <NewsTab
+                title={NEWS_TEXTS.inspection}
+                content={NEWS_TEXTS.lift}
+              />
+            </NavContainer>
+          </Navigation>
         </NavArea>
         <NavArea>
           <AreaTitle title={HOME_TEXTS.residents} />
           <Navigation>
-            하단 내비게이션 아이콘들입니다. 현재는 chidren으로 넘기기만 해놔서
-            스타일 아무것도 없습니다. 컴포넌트 생성 후 여백 고려해서 스타일 적용
-            예정
+            <NavTabs />
           </Navigation>
         </NavArea>
         <NavArea>
           <AreaTitle title={HOME_TEXTS.community} />
           <Navigation>
-            하단 내비게이션 아이콘들입니다. 현재는 chidren으로 넘기기만 해놔서
-            스타일 아무것도 없습니다. 컴포넌트 생성 후 여백 고려해서 스타일 적용
-            예정
+            <CommunityTabs />
           </Navigation>
         </NavArea>
         <NavArea>
           {/* datenow */}
           <AreaTitle
             title={HOME_TEXTS.timetable}
-            subitem={'2023년 10월 2일 마감...'}
+            subitem={formatLocalDateTime(new Date())}
           />
-          <Navigation>
-            하단 내비게이션 아이콘들입니다. 현재는 chidren으로 넘기기만 해놔서
-            스타일 아무것도 없습니다. 컴포넌트 생성 후 여백 고려해서 스타일 적용
-            예정
-          </Navigation>
+          <Navigation>만들어야함</Navigation>
         </NavArea>
       </Template>
       <Footer />

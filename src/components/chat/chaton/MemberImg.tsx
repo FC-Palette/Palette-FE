@@ -12,12 +12,14 @@ export const MemberImg = ({ src }) => {
   )
 }
 
-const ImgBox = styled.img`
+const ImgBox = styled.div<{ src: string }>`
+  content: url(${props => props.src});
   min-width: 32px;
   height: 32px;
+  background-clip: content-box;
   border-radius: 8px;
   box-sizing: content-box;
-  padding-top: 14px;
-  padding-right: 12px;
+  margin-top: 14px;
+  margin-right: 12px;
   cursor: pointer;
 `

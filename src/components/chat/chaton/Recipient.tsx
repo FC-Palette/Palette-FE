@@ -2,6 +2,8 @@ import { styled } from 'styled-components'
 import { useResetRecoilState } from 'recoil'
 import { msgActionsState } from 'recoil/index'
 import { useOutsideClick } from 'hooks/index'
+import { formatHourMinute } from 'utils/index'
+
 import {
   MessageBlock,
   MessageTime,
@@ -14,7 +16,9 @@ import { Flexbox, columnise } from 'styles/index'
 export const Recipient = ({
   message,
   $sender,
+  nickName,
   createdAt,
+  profile,
   showCreatedTime,
   showMsgActions,
   toggleMsgActions
@@ -28,14 +32,10 @@ export const Recipient = ({
 
   return (
     <MessageBlock $sender={$sender}>
-      {showCreatedTime && (
-        <MemberImg
-          src={'https://avatars.githubusercontent.com/u/142562921?s=200&v=4'}
-        />
-      )}
+      {showCreatedTime && <MemberImg src={profile} />}
       {!showCreatedTime && <MemberImg src="" />}
       <RecipientBlock>
-        {showCreatedTime && <MemberName>고스트 사원</MemberName>}
+        {showCreatedTime && <MemberName>{nickName}</MemberName>}
         <Flexbox>
           <MessageBox
             $sender={$sender}
@@ -50,7 +50,7 @@ export const Recipient = ({
             )}
           </MessageBox>
           <MessageTime
-            time={showCreatedTime ? createdAt : null}
+            time={showCreatedTime ? formatHourMinute(createdAt) : null}
             $sender={$sender}
           />
         </Flexbox>
