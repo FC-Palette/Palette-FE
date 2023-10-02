@@ -67,7 +67,7 @@ export const Home = () => {
           <Navigation>만들어야함</Navigation>
         </NavArea>
       </Template>
-      <Footer />
+      <Footer $fixed={false} />
     </>
   )
 }
