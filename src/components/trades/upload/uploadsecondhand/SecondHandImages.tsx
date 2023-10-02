@@ -14,16 +14,16 @@ interface Image {
 }
 
 export const SecondHandImages = () => {
-  const [tradesImages, setTradesImages] = useState<Image[]>([])
+  const [images, setImages] = useState<Image[]>([])
 
   const setSecondHandGlobalState = useSetRecoilState(
     secondhandcreateglobalstate
   )
 
   useEffect(() => {
-    if (tradesImages.length === 1) {
+    if (images.length === 1) {
     }
-  }, [tradesImages.length])
+  }, [images.length])
 
   // blob
   const encodeImageToBlob = (file: File, callback: (blob: Blob) => void) => {
@@ -38,7 +38,7 @@ export const SecondHandImages = () => {
   // 업로드시
 
   const handleImageUpload = (acceptedFiles: File[]) => {
-    if (tradesImages.length + acceptedFiles.length > 5) {
+    if (images.length + acceptedFiles.length > 5) {
       return
     }
 
@@ -49,12 +49,12 @@ export const SecondHandImages = () => {
           url: URL.createObjectURL(file),
           blob: blob
         }
-        setTradesImages(prevTradesImages => [...prevTradesImages, newImg])
+        setImages(previmages => [...previmages, newImg])
 
         // 이미지를 전역 images 배열에 추가
         setSecondHandGlobalState(prevData => ({
           ...prevData,
-          tradesImages: [...prevData.tradesImages, blob]
+          images: [...prevData.images, blob]
         }))
       })
     })
@@ -65,25 +65,25 @@ export const SecondHandImages = () => {
       return
     }
 
-    const reorderedImages = [...tradesImages]
+    const reorderedImages = [...images]
     const [movedImage] = reorderedImages.splice(result.source.index, 1)
     reorderedImages.splice(result.destination.index, 0, movedImage)
-    setTradesImages(reorderedImages)
+    setImages(reorderedImages)
 
     setSecondHandGlobalState((prevData: any) => ({
       ...prevData,
-      tradesImages: reorderedImages.map(img => img.blob)
+      images: reorderedImages.map(img => img.blob)
     }))
   }
 
   // 이미지 삭제
   const handleImageDelete = (imageId: string) => {
-    const updatedImages = tradesImages.filter(image => image.id !== imageId)
+    const updatedImages = images.filter(image => image.id !== imageId)
     setSecondHandGlobalState((prevData: any) => ({
       ...prevData,
-      tradesImages: updatedImages
+      images: updatedImages
     }))
-    setTradesImages(updatedImages)
+    setImages(updatedImages)
   }
 
   return (
@@ -101,7 +101,7 @@ export const SecondHandImages = () => {
           </Dropzone>
         </UploadZoneContainer>
         <DraggableImagePreview
-          images={tradesImages}
+          images={images}
           onDragEnd={handleDragEnd}
           onDeleteImage={handleImageDelete}
         />

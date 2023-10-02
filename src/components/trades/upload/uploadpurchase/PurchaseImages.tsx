@@ -13,7 +13,7 @@ interface Image {
 }
 
 export const PurchaseImages = () => {
-  const [images, setImages] = useState<Image[]>([])
+  const [image, setImage] = useState<Image[]>([])
   const setTradesGlobalState = useSetRecoilState(tradescreateglobalstate)
 
   // blob
@@ -27,7 +27,7 @@ export const PurchaseImages = () => {
   }
 
   const handleImageUpload = (acceptedFiles: File[]) => {
-    if (images.length + acceptedFiles.length > 5) {
+    if (image.length + acceptedFiles.length > 5) {
       return
     }
 
@@ -38,12 +38,12 @@ export const PurchaseImages = () => {
           url: URL.createObjectURL(file),
           blob: blob
         }
-        setImages(prevImages => [...prevImages, newImg])
+        setImage(previmage => [...previmage, newImg])
 
-        // 이미지를 전역 images 배열에 추가
+        // 이미지를 전역 image 배열에 추가
         setTradesGlobalState(prevData => ({
           ...prevData,
-          images: [...prevData.images, blob]
+          image: [...prevData.image, blob]
         }))
       })
     })
@@ -54,25 +54,25 @@ export const PurchaseImages = () => {
       return
     }
 
-    const reorderedImages = [...images]
-    const [movedImage] = reorderedImages.splice(result.source.index, 1)
-    reorderedImages.splice(result.destination.index, 0, movedImage)
-    setImages(reorderedImages)
+    const reorderedimage = [...image]
+    const [movedImage] = reorderedimage.splice(result.source.index, 1)
+    reorderedimage.splice(result.destination.index, 0, movedImage)
+    setImage(reorderedimage)
 
     setTradesGlobalState((prevData: any) => ({
       ...prevData,
-      images: reorderedImages.map(img => img.blob)
+      image: reorderedimage.map(img => img.blob)
     }))
   }
 
   // 이미지 삭제
   const handleImageDelete = (imageId: string) => {
-    const updatedImages = images.filter(image => image.id !== imageId)
+    const updatedimage = image.filter(image => image.id !== imageId)
     setTradesGlobalState((prevData: any) => ({
       ...prevData,
-      images: updatedImages
+      image: updatedimage
     }))
-    setImages(updatedImages)
+    setImage(updatedimage)
   }
 
   return (
@@ -90,7 +90,7 @@ export const PurchaseImages = () => {
           </Dropzone>
         </UploadZoneContainer>
         <DraggableImagePreview
-          images={images}
+          images={image}
           onDragEnd={handleDragEnd}
           onDeleteImage={handleImageDelete}
         />

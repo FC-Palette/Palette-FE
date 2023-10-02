@@ -19,7 +19,7 @@ import {
 export const PurchasePreview = () => {
   const tradesGlobalState = useRecoilValue(tradescreateglobalstate)
   const {
-    images,
+    image,
     title,
     description,
     price,
@@ -36,7 +36,7 @@ export const PurchasePreview = () => {
     <>
       <PreviewHeader title={title} />
       <Wrapper>
-        <GetThumbnail meetupImages={images} />
+        <GetThumbnail meetupImages={image} />
         <GetRoomManagerInfo />
         <PreviewPrice price={price} />
         <GetTitleAndDescription

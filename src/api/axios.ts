@@ -8,7 +8,7 @@ const authInterceptors = (instance: AxiosInstance): AxiosInstance => {
       const accessToken = localStorage.getItem('Token')
       if (config.headers && accessToken) {
         // accessToken이 정상적으로 저장 => headers에 authorization 값을 추가.
-        config.headers.Authorization = `${accessToken}`
+        config.headers.Authorization = `Bearer ${accessToken}`
       }
       // authorization을 추가한 config 반환
       return config

@@ -10,7 +10,7 @@ const today = dateNow.toISOString().slice(0, 10)
 export const tradescreateglobalstate = atom<TradeCreateGlobalStateProps>({
   key: 'tradesGlobalState',
   default: {
-    images: [] as Blob[],
+    image: [] as Blob[],
     title: '',
     description: '',
     price: 0,
@@ -30,7 +30,7 @@ export const tradescreateglobalstate = atom<TradeCreateGlobalStateProps>({
 export const secondhandcreateglobalstate = atom<SecondHandGlobalStateProps>({
   key: 'secondHandGlobalState',
   default: {
-    tradesImages: [] as Blob[],
+    images: [] as Blob[],
     title: '',
     description: '',
     price: 0,
@@ -44,7 +44,7 @@ export const secondhandcreateglobalstate = atom<SecondHandGlobalStateProps>({
 
 // tradescreateglobalstate 초기값
 export const initialTradeCreateGlobalState: TradeCreateGlobalStateProps = {
-  images: [] as Blob[],
+  image: [] as Blob[],
   title: '',
   description: '',
   price: 0,
@@ -62,7 +62,7 @@ export const initialTradeCreateGlobalState: TradeCreateGlobalStateProps = {
 
 // secondhandcreateglobalstate 초기값
 export const initialSecondHandGlobalState: SecondHandGlobalStateProps = {
-  tradesImages: [] as Blob[],
+  images: [] as Blob[],
   title: '',
   description: '',
   price: 0,

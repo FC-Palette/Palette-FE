@@ -6,9 +6,9 @@ export const GetDetailStats = ({ hits, likes, createdAt }) => {
   const fetchLike = likes
   const fetchHits = hits
   const fetchCreatedAt = createdAt
-  const serverDate = new Date(fetchCreatedAt)
+  const serverDate = fetchCreatedAt ? new Date(fetchCreatedAt) : null
 
-  const timeAgoText = getTimeDiff(serverDate)
+  const timeAgoText = serverDate ? getTimeDiff(serverDate) : '알 수 없음'
 
   return (
     <>
