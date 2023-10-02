@@ -4,13 +4,23 @@ import { useNavigate } from 'react-router-dom'
 import { rowCentralise } from 'styles/index'
 
 //`onClick`으로 `roomid`를 통해 => `ChatOn` 으로 진입시킴
-export const ChatRoom = ({ title, image, members, msg, time, unread }) => {
+export const ChatRoom = ({
+  title,
+  image,
+  members,
+  msg,
+  time,
+  unread,
+  roomid
+}) => {
   const navigate = useNavigate()
+  const moveToChat = () => {
+    navigate('/chat', {
+      state: { roomid }
+    })
+  }
   return (
-    <Wrapper
-      onClick={() => {
-        navigate('/chat')
-      }}>
+    <Wrapper onClick={moveToChat}>
       <ChatRoomInfo
         title={title}
         members={members}

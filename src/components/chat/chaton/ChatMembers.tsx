@@ -15,33 +15,10 @@ import { modalOnState, showMembersState } from 'recoil/index'
 import { useRecoilState } from 'recoil'
 import { useNavigate } from 'react-router-dom'
 import { useCallback } from 'react'
-// import { quitChatRoom } from 'api/index'
-/*
- 
- /api/chat/exit?roomId 채팅방 나가기 `delete`
+import { quitChatRoom, getMembers } from 'api/index'
+import { useQuery } from '@tanstack/react-query'
 
- 유저 목록 확인 -get
- {
-	"status": 200, 
-	"success": true,
-	"response": [
-		{
-			"memberId" : 2, 
-			"prifileImgUrl" : "https://",
-			"nickName" : "호스트",
-	    "host" : 2
-		},
-		{
-			"memberId" : 3, 
-			"prifileImgUrl" : "https://",
-			"nickName" : "고슴도치",
-	    "host" : 2
-		},
-		...
-	] 
-}
-*/
-export const ChatMembers = () => {
+export const ChatMembers = ({ roomid }) => {
   const navigate = useNavigate()
   const [modalOn, setModalOn] = useRecoilState(modalOnState)
   const [showMembers, setShowMembers] = useRecoilState(showMembersState)
@@ -76,7 +53,7 @@ export const ChatMembers = () => {
           <MembersLayer>
             <Fixer $top="0">
               <MembersHeader onClick={handleShowMembers} />
-              <MembersList />
+              <MembersList roomid={roomid} />
               <MembersFooter onClick={handleExit} />
             </Fixer>
           </MembersLayer>

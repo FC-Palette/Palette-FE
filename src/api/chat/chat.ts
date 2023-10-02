@@ -4,7 +4,7 @@ const [CHAT] = [import.meta.env.VITE_BASE_CHAT_PATH]
 
 //1. 채팅 메시지 내역, useQuery 콜백함수
 export const getChatLog = async (roomId: string) => {
-  const res = await authInstance.get(`${CHAT}/room/history?${roomId}`)
+  const res = await authInstance.get(`${CHAT}/history?${roomId}`)
   return res.data
 }
 
@@ -27,8 +27,8 @@ export const quitChatRoom = async (roomId: string) => {
 }
 
 //5. 채팅방 입장시 필요? + MembersList useQuery관리 => ChatAnnList에서도 필요, Recoil로 관리
-export const getMembers = async () => {
-  const res = await authInstance.get(`${CHAT}/member`)
+export const getMembers = async (roomId: string) => {
+  const res = await authInstance.get(`${CHAT}/member?${roomId}`)
   return res.data
 }
 
