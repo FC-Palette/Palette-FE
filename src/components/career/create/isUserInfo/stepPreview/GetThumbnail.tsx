@@ -14,10 +14,10 @@ export const GetThumbnail = ({ meetupImages }) => {
     slidesToScroll: 1
   }
 
-  const previewSlides = thumbnailImage.map((item, index) => (
+  const previewSlides = thumbnailImage.map((item: any, index: any) => (
     <SlideItem key={index}>
       <img
-        src={item}
+        src={URL.createObjectURL(item)}
         alt={`Thumbnail ${index + 1}`}
       />
     </SlideItem>

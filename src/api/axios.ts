@@ -29,7 +29,7 @@ export const baseInstance: AxiosInstance = axios.create({
 export const baseInstanceFormData = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
   headers: {
-    Authorization: `${localStorage.getItem('token')}`,
+    Authorization: `${localStorage.getItem('Token')}`,
     'Content-Type': 'multipart/form-data'
   }
 })
