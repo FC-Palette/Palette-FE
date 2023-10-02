@@ -30,6 +30,7 @@ export const StepPreviewCard = () => {
     acceptType
   } = globalState
 
+  console.log(image)
   return (
     <>
       <CareerCreateMeetingHeaderDynamic meetupTitle={title} />

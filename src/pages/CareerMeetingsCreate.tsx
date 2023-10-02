@@ -36,12 +36,14 @@ export const CareerMeetingsCreate = () => {
 
     const response = await careerCreateApi(createAtom)
 
+    console.log(response)
     if (response.response === 200) {
       navigate('/career')
     }
   }
 
   console.log(createAtom)
+  
 
   // 취소하기
   const handleCreateCancel = () => {

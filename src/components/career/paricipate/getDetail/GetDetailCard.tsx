@@ -78,10 +78,12 @@ export const GetDetailCard = () => {
     createdAt
   } = meetingRes
 
+  console.log(meetingRes)
   const renderContent = () => {
     if (isLoading) {
       return <CommonSpinner />
     }
+    
 
     return (
       <>

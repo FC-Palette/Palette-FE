@@ -17,10 +17,9 @@ export async function login(email, password) {
 
     const responseData = response.data
 
-    if (responseData && responseData.token) {
-      localStorage.setItem('accessToken', responseData.Token)
+    if (responseData && responseData.response.token) {
+      localStorage.setItem('Token', responseData.response.token)
     }
-
     return responseData
   } catch (error) {
     throw error
