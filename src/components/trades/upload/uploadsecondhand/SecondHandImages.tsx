@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Dropzone from 'react-dropzone'
 import { Add } from 'iconsax-react'
 import { DraggableImagePreview } from 'components/index'
@@ -15,9 +15,15 @@ interface Image {
 
 export const SecondHandImages = () => {
   const [tradesImages, setTradesImages] = useState<Image[]>([])
+
   const setSecondHandGlobalState = useSetRecoilState(
     secondhandcreateglobalstate
   )
+
+  useEffect(() => {
+    if (tradesImages.length === 1) {
+    }
+  }, [tradesImages.length])
 
   // blob
   const encodeImageToBlob = (file: File, callback: (blob: Blob) => void) => {
@@ -30,7 +36,12 @@ export const SecondHandImages = () => {
   }
 
   // 업로드시
+
   const handleImageUpload = (acceptedFiles: File[]) => {
+    if (tradesImages.length + acceptedFiles.length > 5) {
+      return
+    }
+
     acceptedFiles.forEach(file => {
       encodeImageToBlob(file, blob => {
         const newImg = {

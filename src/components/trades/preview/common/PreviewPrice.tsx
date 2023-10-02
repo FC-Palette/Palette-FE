@@ -2,10 +2,16 @@ import { theme } from 'styles/index'
 import { styled } from 'styled-components'
 
 export const PreviewPrice = ({ price }) => {
-  const parsedPrice = parseFloat(price)
+  let priceText = ''
 
-  const formattedPrice = parsedPrice.toLocaleString()
-  return <Wrapper>{formattedPrice}원</Wrapper>
+  if (price === 0) {
+    priceText = '무료나눔'
+  } else {
+    const parsedPrice = parseFloat(price)
+    priceText = `${parsedPrice.toLocaleString()}원`
+  }
+
+  return <Wrapper>{priceText}</Wrapper>
 }
 
 const Wrapper = styled.div`

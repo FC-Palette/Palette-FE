@@ -1,15 +1,16 @@
 export interface InputProps {
-  placeholder?: string;
-  $inputWidth?: string;
-  $inputHeight?: string;
-  $borderColor?: string;
-  $borderRadius?: string;
-  $paddingLeft?: string;
-  type?: string;
-  ph?: string;
-  value?: string;
-  children?: React.ReactNode;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void; 
+  placeholder?: string
+  $inputWidth?: string
+  $inputHeight?: string
+  $borderColor?: string
+  $borderRadius?: string
+  $paddingLeft?: string
+  type?: string
+  ph?: string
+  value?: string
+  children?: React.ReactNode
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  disabled?: boolean
 }
 
 export type InputType = Pick<
@@ -20,5 +21,5 @@ export type InputType = Pick<
   | '$borderRadius'
   | '$paddingLeft'
   | 'type'
-  | 'onChange' 
->;
+  | 'onChange'
+>

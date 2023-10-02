@@ -37,9 +37,6 @@ export const GroupUpload = () => {
 
   const handleTrades = async () => {
     try {
-      setModalText(TRADES_MODAL_TEXT.create)
-      setModalOnState(true)
-
       //이미지 데이터추가
       const formData = new FormData()
 
@@ -65,6 +62,8 @@ export const GroupUpload = () => {
       formData.append('bank', tradesGlobalState.bank)
 
       const response = await GroupPurchasePostApi(formData)
+      setModalText(TRADES_MODAL_TEXT.create)
+      setModalOnState(true)
 
       console.log('서버 응답:', response)
     } catch (error) {

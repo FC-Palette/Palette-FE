@@ -12,20 +12,18 @@ export const SecondHandInfo = ({
   transactionEndTime,
   selectedDays
 }) => {
-  const startTime = new Date(transactionStartTime)
-  const endTime = new Date(transactionEndTime)
+  const startTimeComponents = transactionStartTime.split(':')
 
-  const startTimeString = startTime.toLocaleTimeString('ko-KR', {
-    hour: '2-digit',
-    minute: 'numeric',
-    hour12: false
-  })
+  const startHour = startTimeComponents[0]
+  const startMinute = startTimeComponents[1]
 
-  const endTimeString = endTime.toLocaleTimeString('ko-KR', {
-    hour: '2-digit',
-    minute: 'numeric',
-    hour12: false
-  })
+  const endTimeComponents = transactionEndTime.split(':')
+  const endHour = endTimeComponents[0]
+  const endMinute = endTimeComponents[1]
+
+  // 형식에 맞게 문자열을 조합합니다.
+  const formattedStartTime = `${startHour}:${startMinute}`
+  const formattedEndTime = `${endHour}:${endMinute}`
   // 요일 순서 배열
   const daysOfWeek = ['월', '화', '수', '목', '금', '토', '일']
 
@@ -71,7 +69,7 @@ export const SecondHandInfo = ({
   const infos = (
     <InfoZone>
       <Info>
-        {selectedText} {startTimeString} ~ {endTimeString} 거래가능
+        {selectedText} {formattedStartTime} ~ {formattedEndTime} 거래가능
       </Info>
     </InfoZone>
   )

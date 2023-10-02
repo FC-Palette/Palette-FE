@@ -7,6 +7,7 @@ import { TRADES_SECONDHAND_TEXT } from 'constants/trades/index'
 import { secondHandUtils } from 'utils/index'
 import { secondhandcreateglobalstate } from 'recoil/index'
 import { useRecoilState } from 'recoil'
+import { useState } from 'react'
 import { centralise } from 'styles/index'
 
 export const SecondHandUploadList = () => {
@@ -14,12 +15,17 @@ export const SecondHandUploadList = () => {
     secondhandcreateglobalstate
   )
   const maxTitleLength = 25
+  const [isPriceEnabled, setIsPriceEnabled] = useState(true)
 
   const toggleIsFree = () => {
+    const updatedIsFree = !secondHandGlobalState.isFree
+
     setSecondHandGlobalState(prevGlobalState => ({
       ...prevGlobalState,
-      isFree: !prevGlobalState.isFree
+      isFree: updatedIsFree
     }))
+
+    setIsPriceEnabled(!updatedIsFree)
   }
 
   return (
@@ -55,6 +61,7 @@ export const SecondHandUploadList = () => {
                       maxTitleLength
                     )
                   }
+                  disabled={item.field === 'price' ? !isPriceEnabled : false}
                 />
               </InputFocus>
             ) : (
@@ -136,18 +143,13 @@ const EssentialIcon = styled.div`
   margin-bottom: 2px;
 `
 
-const CheckboxLabel = styled.label`
+const CheckboxLabel = styled.label``
+
+const Checkbox = styled.input`
   margin: 10px 0px;
   width: 20px;
   height: 20px;
   border-radius: 4px;
-  border: 2px solid ${theme.main.blue0};
-`
-
-const Checkbox = styled.input`
-  width: 20px;
-  height: 20px;
-  display: none;
 `
 
 const FreeSharingCheckbox = styled.div`
@@ -162,4 +164,5 @@ const FreeSharingText = styled.div`
   flex-wrap: wrap;
   ${centralise}
   margin-left: 5px;
+  color: ${theme.greyScale.grey9};
 `

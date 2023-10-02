@@ -20,12 +20,7 @@ export const AgreeMsg1 = () => {
     <>
       <Wrapper>
         <LabelTextWrapper>
-          <LabelWrapper htmlFor="checkboxId">
-            <Checkbox
-              id="checkboxId"
-              type="checkbox"
-            />
-          </LabelWrapper>
+          <Checkbox type="checkbox" />
           <AgreeText>동의합니다.</AgreeText>
         </LabelTextWrapper>
         <AgreeWrapper onClick={toggleMsg}>
@@ -80,26 +75,9 @@ const Wrapper1 = styled.div`
   margin-top: -20px;
 `
 
-const LabelWrapper = styled.label`
-  margin: 10px 0px;
-  width: 20px;
-  height: 20px;
-  border-radius: 4px;
-  border: 2px solid ${theme.main.blue0};
-
-  &:hover {
-    cursor: pointer;
-  }
-
-  input[type='checkbox']:checked + & {
-    background-color: ${theme.main.blue0};
-  }
-`
-
 const Checkbox = styled.input`
   width: 20px;
   height: 20px;
-  display: none;
 `
 
 const AgreeWrapper = styled.button`
@@ -129,6 +107,7 @@ const LabelTextWrapper = styled.div`
   display: flex;
   gap: 6px;
   align-items: center;
+  margin-top: 16px;
   margin-bottom: 24px;
 `
 const AgreeTitle = styled.div`

@@ -1,7 +1,6 @@
 import { theme } from 'styles/index'
 import { styled } from 'styled-components'
 import {
-  TradesTime,
   TradesViews,
   TradesLikeBtn,
   TradesCategory,
@@ -42,8 +41,6 @@ export const SecondHandCard = () => {
           <ClickWrapper onClick={() => handleDetail(item.id)}>
             <TradesPreview>
               <TradesImage imageUrl={item.thumbnailUrl} />
-
-              <TradesTime time="2:59:59" />
             </TradesPreview>
             <TradesCategory category={item.category} />
             <TitleWrapper>

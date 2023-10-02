@@ -12,19 +12,20 @@ export const SecondHandTime = () => {
   const { transactionStartTime, transactionEndTime } = secondHandGlobalState
 
   const handleStartTime = time => {
+    // 시간을 문자열로 변환하여 상태에 업데이트
     setSecondHandGlobalState(prev => ({
       ...prev,
-      transactionStartTime: time
+      transactionStartTime: time.format('HH:mm:ss')
     }))
   }
 
   const handleEndTime = time => {
+    // 시간을 문자열로 변환하여 상태에 업데이트
     setSecondHandGlobalState(prev => ({
       ...prev,
-      transactionEndTime: time
+      transactionEndTime: time.format('HH:mm:ss')
     }))
   }
-
   return (
     <TimePickerContainer>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -33,6 +34,7 @@ export const SecondHandTime = () => {
             label="시작 시간"
             value={transactionStartTime}
             onChange={handleStartTime}
+            format="HH:mm:ss"
           />
           {' ~ '}
         </>
@@ -41,6 +43,7 @@ export const SecondHandTime = () => {
             label="종료 시간"
             value={transactionEndTime}
             onChange={handleEndTime}
+            format="HH:mm:ss" //
           />
         </>
       </LocalizationProvider>
