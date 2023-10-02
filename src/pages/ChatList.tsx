@@ -16,7 +16,7 @@ export const ChatList = () => {
         initialItem={CHAT_TABS[0].text}
       />
       <ChatRooms />
-      <Footer />
+      <Footer $fixed={false} />
     </>
   )
 }

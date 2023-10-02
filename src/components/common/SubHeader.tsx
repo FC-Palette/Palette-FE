@@ -78,7 +78,7 @@ const HeaderItemSimple = styled.button<{
     background: ${props =>
       props.$isSelected ? props.theme.main.blue0 : 'transparent'};
     margin-top: 11px;
-    border-radius: 5px;
+    border-radius: 4px;
     display: block;
   }
 `
