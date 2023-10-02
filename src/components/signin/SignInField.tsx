@@ -1,36 +1,43 @@
 import { useState } from 'react';
 import { styled } from 'styled-components';
 import { theme } from 'styles/index';
-import { useNavigate } from 'react-router-dom';
 import { SIGNIN_FORM_TEXT, SIGNIN_REGEX_TEXT } from 'constants/index';
 import { Input, Button, RegIcon } from 'components/index';
-import { login } from 'api/index';
+import { login, tokenPayloadState } from 'api/index';
+import { useSetRecoilState } from 'recoil';
+import { decoder } from '@/utils';
 
 export const SignInField = () => {
-  const navigate = useNavigate(); 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const defaultBorderColor = theme.greyScale.grey4;
-    const emailRegex = SIGNIN_REGEX_TEXT.idCondition;
-    const passwordRegex = SIGNIN_REGEX_TEXT.pwdCondition;
-    const isValidEmail = emailRegex.test(email);
-    const isValidPassword = passwordRegex.test(password);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const defaultBorderColor = theme.greyScale.grey4;
+  const emailRegex = SIGNIN_REGEX_TEXT.idCondition;
+  const passwordRegex = SIGNIN_REGEX_TEXT.pwdCondition;
+  const isValidEmail = emailRegex.test(email);
+  const isValidPassword = passwordRegex.test(password);
+  
+  const setTokenPayload = useSetRecoilState(tokenPayloadState); 
+  
+  const handleEmailChange = (e) => setEmail(e.target.value);
+  const handlePasswordChange = (e) => setPassword(e.target.value);
+ 
+  const handleLogin = async () => {
+    try {
+      const response = await login(email, password);
+      console.log('로그인 성공:', response);
+      alert('로그인 성공 테스트 메세지');
+
+      const decodedPayload = decoder();
+      console.log('Decoded Token Payload:', decodedPayload);
+
+      setTokenPayload(decodedPayload);
 
 
-    const handleEmailChange = (e) => setEmail(e.target.value);
-    const handlePasswordChange = (e) => setPassword(e.target.value);
-
-    const handleLogin = async () => {
-        try {
-        const response = await login(email, password);
-        console.log('로그인 성공:', response);
-        alert('로그인 성공 테스트 메세지');
-        navigate('/home')
-        
-        } catch (error) {
-        console.error('로그인 실패:', error);
-        }
-    };
+    } catch (error) {
+      console.error('로그인 실패:', error);
+    }
+  };
 
     const renderEmailErrorMessage = () => {
       if (!email) {
