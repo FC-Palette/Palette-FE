@@ -10,6 +10,7 @@ export const Member = () => {
 }
 const Wrapper = styled(Flexbox)`
   padding: 10px 0 9px 16px;
+  cursor: pointer;
 `
 
 export const Image = styled.div<{ src: string }>`

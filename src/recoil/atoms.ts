@@ -17,7 +17,7 @@ export const inDetailState = atom<boolean>({
 
 export const isBuyingState = atom<boolean>({
   key: 'isByuyingState',
-  default: true
+  default: false
 })
 
 export const sendFileState = atom<boolean>({

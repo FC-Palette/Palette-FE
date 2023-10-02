@@ -4,12 +4,12 @@ import { useRecoilValue } from 'recoil'
 import { columnise, Flexbox } from 'styles/index'
 
 const price = 9000
-export const SubjectDetail = ({ $shared }) => {
+export const SubjectDetail = ({ $shared, src }) => {
   const isBuying = useRecoilValue(isBuyingState)
 
   return (
     <Wrapper $shared={$shared}>
-      <SubjectImg />
+      <SubjectImg src={src} />
       <SubjectText>
         <SubjectTitle $isBuying={isBuying}>
           asdasdasdasdasdasdad asdasdasdasdasd이쯤?
@@ -27,8 +27,9 @@ const Wrapper = styled(Flexbox)<{ $shared: boolean }>`
   background-color: ${props =>
     props.$shared ? '' : props.theme.greyScale.bluegrey};
 `
-const SubjectImg = styled.div`
-  background-color: black;
+const SubjectImg = styled.div<{ src: string }>`
+  background-image: url(${props => props.src});
+  background-size: cover;
   min-width: 100px;
   height: 80px;
   border-radius: 8px;

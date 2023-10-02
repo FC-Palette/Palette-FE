@@ -1,11 +1,15 @@
 import { Flexbox } from 'styles/index'
 import { ChatRoomImg, ChatPreview } from 'components/index'
 import { styled } from 'styled-components'
-export const ChatRoomInfo = () => {
+
+export const ChatRoomInfo = ({ image, title, members, msg }) => {
   return (
     <Wrapper>
-      <ChatRoomImg src="https://avatars.githubusercontent.com/u/142562921?s=200&v=4" />
-      <ChatPreview></ChatPreview>
+      <ChatRoomImg src={image} />
+      <ChatPreview
+        title={title}
+        members={members}
+        msg={msg}></ChatPreview>
     </Wrapper>
   )
 }

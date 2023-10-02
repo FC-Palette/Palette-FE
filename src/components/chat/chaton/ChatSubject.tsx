@@ -4,6 +4,28 @@ import { EmojiHappy, ShoppingBag, ArrowUp2, ArrowDown2 } from 'iconsax-react'
 import { inDetailState, isBuyingState } from 'recoil/index'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { theme } from 'styles/index'
+import { CHAT_TEXTS } from 'constants/index'
+/*
+{
+	"status": 200, 
+	"success": true,
+	"response":
+		{
+			"host" : 2 // memberId
+			"notice" : "저희 모임에 오신 것을 환영합니다.", 
+			"isDelete" : false,
+			"cotentNotice" : 
+				{
+					"contentId" : 1,
+					"title" : "출근 전 트랜드 분석",
+					"image" : "https://",
+					"type" : "MEETING"
+					"week" : null,
+					"price" : 10000
+				}
+		}
+}
+*/
 export const ChatSubject = () => {
   const [inDetail, setInDetail] = useRecoilState(inDetailState)
   const isBuying = useRecoilValue(isBuyingState)
@@ -14,7 +36,10 @@ export const ChatSubject = () => {
     <ChatTopBar>
       {!isBuying && <EmojiHappy />}
       {isBuying && <ShoppingBag />}
-      <TopBarContent>상품/계좌정보</TopBarContent>
+      <TopBarContent>
+        {isBuying && CHAT_TEXTS.product}
+        {!isBuying && CHAT_TEXTS.group}
+      </TopBarContent>
       {!inDetail && (
         <ArrowDown2
           color={theme.greyScale.grey6}

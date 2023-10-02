@@ -1,11 +1,12 @@
 import { styled } from 'styled-components'
 import { UnreadTime, UnreadCount } from 'components/index'
 import { columnise } from 'styles/index'
-export const UnreadInfo = () => {
+
+export const UnreadInfo = ({ time, unread }) => {
   return (
     <Wrapper>
-      <UnreadTime />
-      <UnreadCount />
+      <UnreadTime time={time} />
+      <UnreadCount unread={unread} />
     </Wrapper>
   )
 }

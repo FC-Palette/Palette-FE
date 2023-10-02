@@ -2,15 +2,25 @@ import { ChatRoomInfo, UnreadInfo } from 'components/index'
 import { styled } from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { rowCentralise } from 'styles/index'
-export const ChatRoom = () => {
+
+//`onClick`으로 `roomid`를 통해 => `ChatOn` 으로 진입시킴
+export const ChatRoom = ({ title, image, members, msg, time, unread }) => {
   const navigate = useNavigate()
   return (
     <Wrapper
       onClick={() => {
         navigate('/chat')
       }}>
-      <ChatRoomInfo></ChatRoomInfo>
-      <UnreadInfo></UnreadInfo>
+      <ChatRoomInfo
+        title={title}
+        members={members}
+        msg={msg}
+        image={image}
+      />
+      <UnreadInfo
+        time={time}
+        unread={unread}
+      />
     </Wrapper>
   )
 }

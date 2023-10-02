@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
-export const UnreadCount = () => {
-  return <Wrapper>100</Wrapper>
+export const UnreadCount = ({ unread }) => {
+  return <Wrapper>{unread}</Wrapper>
 }
 
 const Wrapper = styled.div`

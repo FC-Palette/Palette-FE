@@ -4,18 +4,18 @@ import { Flexbox, columnise } from 'styles/index'
 import { useCallback } from 'react'
 
 const interpoint = '\u00B7 '
-export const ChatAnnListItem = ({ content, time, publisher }) => {
+export const ChatAnnListItem = ({ notice, createdAt, memberId }) => {
   const navigate = useNavigate()
   const handleNavigate = useCallback(() => {
     navigate('/chatann')
   }, [])
   return (
     <Wrapper onClick={handleNavigate}>
-      <Title>{content}</Title>
+      <Title>{notice}</Title>
       <Info>
-        <Date>{time}</Date>
+        <Date>{createdAt}</Date>
         {interpoint}
-        <Publisher>{publisher}</Publisher>
+        <Publisher>{memberId}</Publisher>
       </Info>
     </Wrapper>
   )

@@ -7,13 +7,15 @@ export const DateSeperator = ({ date, $isFirst }) => {
     <Wrapper $isFirst={$isFirst}>
       <Badge>
         <Calendar size="16" />
-        <Date>{date} 목요일</Date>
+        <Date>{date}</Date>
       </Badge>
     </Wrapper>
   )
 }
 const Wrapper = styled.div<{ $isFirst: string }>`
   ${rowCentralise};
+  user-select: none;
+
   padding: 20px 0;
   padding-top: ${props => (props.$isFirst ? '' : '24px')};
 `

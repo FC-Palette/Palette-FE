@@ -15,6 +15,32 @@ import { modalOnState, showMembersState } from 'recoil/index'
 import { useRecoilState } from 'recoil'
 import { useNavigate } from 'react-router-dom'
 import { useCallback } from 'react'
+// import { quitChatRoom } from 'api/index'
+/*
+ 
+ /api/chat/exit?roomId 채팅방 나가기 `delete`
+
+ 유저 목록 확인 -get
+ {
+	"status": 200, 
+	"success": true,
+	"response": [
+		{
+			"memberId" : 2, 
+			"prifileImgUrl" : "https://",
+			"nickName" : "호스트",
+	    "host" : 2
+		},
+		{
+			"memberId" : 3, 
+			"prifileImgUrl" : "https://",
+			"nickName" : "고슴도치",
+	    "host" : 2
+		},
+		...
+	] 
+}
+*/
 export const ChatMembers = () => {
   const navigate = useNavigate()
   const [modalOn, setModalOn] = useRecoilState(modalOnState)
@@ -40,13 +66,13 @@ export const ChatMembers = () => {
             setModalOn(!modalOn)
           }}
           onRightClick={() => {
-            navigate('/chatlist')
+            navigate('/chatlist/g')
           }}
         />
       </BackgroundModal>
       {showMembers && (
         <>
-          <Background onClick={handleShowMembers}></Background>
+          <Background onClick={handleShowMembers} />
           <MembersLayer>
             <Fixer $top="0">
               <MembersHeader onClick={handleShowMembers} />

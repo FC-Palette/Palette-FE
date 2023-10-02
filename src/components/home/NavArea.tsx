@@ -6,7 +6,9 @@ export const NavArea = ({ children }) => {
 }
 export const Area = styled.div`
   ${columnise};
-  margin: 24px;
+  position: relative;
+  z-index: 100;
+  margin: 0 24px 24px;
   border-radius: 16px;
   background-color: ${props => props.theme.main.white};
 `

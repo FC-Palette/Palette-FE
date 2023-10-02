@@ -3,7 +3,20 @@ import { Copy, Edit2 } from 'iconsax-react'
 import { useNavigate } from 'react-router-dom'
 import { Flexbox } from 'styles/index'
 import { useCallback } from 'react'
-
+// import { getAccount } from 'api/index'
+// import { useQuery } from '@tanstack/react-query'
+/*
+{
+	"status": 200, 
+	"success": true,
+	"response":
+		{
+			"bank" : "신한은행",
+			"accountNumber" : "123-4444-67897-1",
+			"accountOwner" : "김*운",
+		}
+}
+*/
 export const AccountInfo = ({ isHost, account }) => {
   const navigate = useNavigate()
   const handleCopy = useCallback(async () => {

@@ -171,7 +171,7 @@ export const router = createBrowserRouter([
     element: <Layout />,
     errorElement: <ErrorComponent />,
     children: [
-      generateRoute('/chatlist', <ChatList />, <ErrorComponent />),
+      generateRoute('/chatlist/:chattype', <ChatList />, <ErrorComponent />),
       generateRoute('/chat', <ChatOn />, <ErrorComponent />),
       generateRoute('/chatannlist', <ChatAnnList />, <ErrorComponent />),
       generateRoute('/chatann', <ChatAnnDetail />, <ErrorComponent />)

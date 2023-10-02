@@ -1,10 +1,11 @@
 import axios, { AxiosError, AxiosInstance } from 'axios'
 
+axios.defaults.withCredentials = true
 const authInterceptors = (instance: AxiosInstance): AxiosInstance => {
   instance.interceptors.request.use(
     config => {
       // 로컬스토리지에 저장되어 있는 AccessToken을 호출.
-      const accessToken = localStorage.getItem('token')
+      const accessToken = localStorage.getItem('Token')
       if (config.headers && accessToken) {
         // accessToken이 정상적으로 저장 => headers에 authorization 값을 추가.
         config.headers.Authorization = `${accessToken}`

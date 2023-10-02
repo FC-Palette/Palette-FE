@@ -14,7 +14,8 @@ export const Template = ({ children }) => {
 }
 
 const Align = styled.div<{ $innerHeight?: number }>`
-  overflow-y: scroll;
+  overflow: scroll;
+  padding-top: 323px;
   background-color: ${props => props.theme.greyScale.grey1};
   height: ${props => props.$innerHeight}px;
 `
