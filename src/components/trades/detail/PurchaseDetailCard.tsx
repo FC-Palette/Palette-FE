@@ -1,9 +1,5 @@
 import styled from 'styled-components'
-import {
-  GetStats,
-  GetThumbnail,
-  GetTitleAndDescription
-} from 'components/career/create/isUserInfo/index'
+import { GetTitleAndDescription } from 'components/career/create/isUserInfo/index'
 import {
   PurchaseInfo,
   PreviewPrice,
@@ -11,15 +7,22 @@ import {
   PreviewHeader,
   PreviewUrl
 } from 'components/trades/preview/index'
-import { ManagerInfo } from 'components/trades/detail/index'
+import {
+  ManagerInfo,
+  PurchaseGuestFooter
+} from 'components/trades/detail/index'
 import { GroupPurchaseDetail } from 'api/trades/index'
 import { GroupPurchaseDetailResProps } from 'types/trades/index'
 import { useEffect, useState } from 'react'
+import { GetDetailStats } from 'components/career/paricipate/getDetail/index'
+import { ImageDetail } from 'components/trades/detail/index'
+import { PurchaseAdminFooter } from 'components/trades/detail'
 
 export const PurchaseDetailCard = ({ offerId }) => {
   const [purchaseDetailList, setPurchaseDetailList] =
     useState<GroupPurchaseDetailResProps | null>(null)
   const [timeremaining, setTimeremaining] = useState<string>('')
+  const isAdmin = false
 
   useEffect(() => {
     const DetailData = async () => {
@@ -70,7 +73,7 @@ export const PurchaseDetailCard = ({ offerId }) => {
         <>
           <PreviewHeader title={purchaseDetailList.title} />
           <Wrapper>
-            <GetThumbnail meetupImages={purchaseDetailList.image} />
+            <ImageDetail meetupImages={purchaseDetailList.image} />
             <ManagerInfo
               managerImg={purchaseDetailList.member.image}
               managerInfo={purchaseDetailList.member.bio}
@@ -83,7 +86,11 @@ export const PurchaseDetailCard = ({ offerId }) => {
               meetupDescription={purchaseDetailList.description}
             />
             <PreviewCategory category={purchaseDetailList.category} />
-            <GetStats />
+            <GetDetailStats
+              hits={purchaseDetailList.bookmarkCount}
+              likes={purchaseDetailList.hits}
+              createdAt={purchaseDetailList.createdAt}
+            />
             <PurchaseInfo
               currentCount={purchaseDetailList.currentParticipantCount}
               startDay={startDateString}
@@ -93,6 +100,7 @@ export const PurchaseDetailCard = ({ offerId }) => {
             />
             <PreviewUrl shopUrl={purchaseDetailList.shopUrl} />
           </Wrapper>
+          {isAdmin ? <PurchaseAdminFooter /> : <PurchaseGuestFooter />}
         </>
       )}
     </>

@@ -34,7 +34,7 @@ export const secondHandUpload = (
     SecondHandCreateData.price ? SecondHandCreateData.price.toString() : ''
   )
 
-  const imageBlobs = SecondHandCreateData.tradesImages
+  const imageBlobs = SecondHandCreateData.images
   if (imageBlobs && imageBlobs.length > 0) {
     for (let i = 0; i < imageBlobs.length; i++) {
       formData.append(`images${i}`, imageBlobs[i])

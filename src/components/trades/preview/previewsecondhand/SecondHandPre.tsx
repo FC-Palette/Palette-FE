@@ -18,7 +18,7 @@ import {
 export const SecondHandPre = () => {
   const secondHandGlobalState = useRecoilValue(secondhandcreateglobalstate)
   const {
-    tradesImages,
+    images,
     title,
     description,
     price,
@@ -33,7 +33,7 @@ export const SecondHandPre = () => {
     <>
       <PreviewHeader title={title} />
       <Wrapper>
-        <GetThumbnail meetupImages={tradesImages} />
+        <GetThumbnail meetupImages={images} />
         <GetRoomManagerInfo />
         <PreviewPrice price={price} />
         <GetTitleAndDescription

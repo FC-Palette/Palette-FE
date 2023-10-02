@@ -26,7 +26,7 @@ export const purchaseUploadData = (
     PurchaseCreateData.price ? PurchaseCreateData.price.toString() : ''
   )
 
-  const imageBlobs = PurchaseCreateData.images
+  const imageBlobs = PurchaseCreateData.image
   if (imageBlobs && imageBlobs.length > 0) {
     for (let i = 0; i < imageBlobs.length; i++) {
       formData.append(`images${i}`, imageBlobs[i])

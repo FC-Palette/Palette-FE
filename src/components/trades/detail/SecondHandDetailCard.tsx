@@ -1,9 +1,5 @@
 import styled from 'styled-components'
-import {
-  GetStats,
-  GetThumbnail,
-  GetTitleAndDescription
-} from 'components/career/create/isUserInfo/index'
+import { GetTitleAndDescription } from 'components/career/create/isUserInfo/index'
 import {
   SecondHandInfo,
   PreviewPrice,
@@ -12,9 +8,10 @@ import {
 } from 'components/trades/preview/index'
 import { ManagerInfo } from 'components/trades/detail/index'
 import { SecondHandDetailResProps } from 'types/trades/index'
+import { GetDetailStats } from 'components/career/paricipate/getDetail/index'
 import { useEffect, useState } from 'react'
 import { SecondHandDetail } from 'api/trades/index'
-import { OthertProducts } from 'components/trades/detail/index'
+import { OthertProducts, ImageDetail } from 'components/trades/detail/index'
 import { CareerCreateMeetingCommonQuestion } from 'components/career/create/common/index'
 
 export const SecondHandDetailCard = ({ productId }) => {
@@ -43,7 +40,7 @@ export const SecondHandDetailCard = ({ productId }) => {
         <>
           <PreviewHeader title={secondHandDetailList.title} />
           <Wrapper>
-            <GetThumbnail meetupImages={secondHandDetailList.images} />
+            <ImageDetail meetupImages={secondHandDetailList.images} />
             <ManagerInfo
               managerImg={secondHandDetailList.member.image}
               managerInfo={secondHandDetailList.member.bio}
@@ -56,7 +53,11 @@ export const SecondHandDetailCard = ({ productId }) => {
               meetupDescription={secondHandDetailList.description}
             />
             <PreviewCategory category={secondHandDetailList.category} />
-            <GetStats />
+            <GetDetailStats
+              hits={secondHandDetailList.bookmarkCount}
+              likes={secondHandDetailList.hits}
+              createdAt={secondHandDetailList.createdAt}
+            />
             <SecondHandInfo
               selectedDays={''}
               transactionStartTime={secondHandDetailList.transactionStartTime}

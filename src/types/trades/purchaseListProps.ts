@@ -33,7 +33,7 @@ export interface GroupPurchaseDetailResProps {
     image: null | string
   }
   headCount: number
-  BookmarkCount: number
+  bookmarkCount: number
   shopUrl: string
   image: {
     url: string

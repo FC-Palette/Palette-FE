@@ -3,7 +3,7 @@ import { FilterBar, Category } from 'components/common/index'
 import { Setting4 } from 'iconsax-react'
 import { TRADES_MAIN_FILTER_ITEMS } from 'constants/trades/index'
 import { centralise, rowCentralise } from 'styles/index'
-import { CareerMainFilterSortOption } from '@/components/career'
+import { CareerMainFilterSortOption } from 'components/career/index'
 
 export const TradesFilter = ({ toggleSideBar }) => {
   const list = ['']
@@ -23,7 +23,6 @@ export const TradesFilter = ({ toggleSideBar }) => {
         />
       </CaregoryWrap>
 
-      {/* 생성일자 필터 [최신순, 오래된순]*/}
       <CaregoryWrap>
         <FilterBar
           filterButton={

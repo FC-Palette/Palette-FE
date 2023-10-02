@@ -1,5 +1,5 @@
 export interface TradeCreateGlobalStateProps {
-  images: Blob[]
+  image: Blob[]
   title: string
   description: string
   price: number
@@ -16,7 +16,7 @@ export interface TradeCreateGlobalStateProps {
 }
 
 export interface SecondHandGlobalStateProps {
-  tradesImages: Blob[]
+  images: Blob[]
   title: string
   description: string
   price: number
