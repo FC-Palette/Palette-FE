@@ -3,7 +3,6 @@ import { styled } from 'styled-components'
 import { ICON_TEXTS } from 'constants/index'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { MyPageFooterIcon } from 'components/index'
-import { TrushSquare } from 'iconsax-react'
 
 export const Footer = ({ $fixed = true }) => {
   const navigate = useNavigate()
