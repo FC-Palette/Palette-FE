@@ -23,8 +23,8 @@ export const PurchasePreview = () => {
     title,
     description,
     price,
-    startDay,
-    endDay,
+    startDate,
+    endDate,
     timeRemaining,
     headCount,
     shopUrl,
@@ -48,8 +48,8 @@ export const PurchasePreview = () => {
         <GetStats />
         <PurchaseInfo
           currentCount="1"
-          startDay={startDay}
-          endDay={endDay}
+          startDay={startDate}
+          endDay={endDate}
           timeRemaining={timeRemaining}
           headCount={headCount}
         />

@@ -3,7 +3,6 @@ import { GetTitleAndDescription } from 'components/career/create/isUserInfo/inde
 import {
   SecondHandInfo,
   PreviewPrice,
-  PreviewHeader,
   PreviewCategory
 } from 'components/trades/preview/index'
 import { ManagerInfo } from 'components/trades/detail/index'
@@ -11,7 +10,11 @@ import { SecondHandDetailResProps } from 'types/trades/index'
 import { GetDetailStats } from 'components/career/paricipate/getDetail/index'
 import { useEffect, useState } from 'react'
 import { SecondHandDetail } from 'api/trades/index'
-import { OthertProducts, ImageDetail } from 'components/trades/detail/index'
+import {
+  OthertProducts,
+  ImageDetail,
+  DetailHeader
+} from 'components/trades/detail/index'
 import { CareerCreateMeetingCommonQuestion } from 'components/career/create/common/index'
 
 export const SecondHandDetailCard = ({ productId }) => {
@@ -38,7 +41,7 @@ export const SecondHandDetailCard = ({ productId }) => {
     <>
       {secondHandDetailList && (
         <>
-          <PreviewHeader title={secondHandDetailList.title} />
+          <DetailHeader title={secondHandDetailList.title} />
           <Wrapper>
             <ImageDetail meetupImages={secondHandDetailList.images} />
             <ManagerInfo

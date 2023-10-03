@@ -4,7 +4,7 @@ import {
 } from 'components/trades/preview/index'
 import { UploadFooter } from 'components/trades/upload/index'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useRecoilState, useSetRecoilState } from 'recoil'
+import { useRecoilState } from 'recoil'
 import { modalOnState } from 'recoil/index'
 import { SECONDHAND_MODAL_TEXT } from 'constants/trades/index'
 import { useState } from 'react'
@@ -14,6 +14,7 @@ import {
   secondhandcreateglobalstate,
   initialSecondHandGlobalState
 } from 'recoil/index'
+import { SecondHandPostApi } from 'api/trades/index'
 // import { styled } from 'styled-components'
 
 interface Params {
@@ -26,7 +27,7 @@ export const SecondHandUpload = ({}) => {
   const [modlaOnState, setModalOnState] = useRecoilState(modalOnState)
   const initialModalText = SECONDHAND_MODAL_TEXT.create
   const [modalText, setModalText] = useState(initialModalText)
-  const SetSecondHandGlobalState = useSetRecoilState(
+  const [secondHandGlobalState, SetSecondHandGlobalState] = useRecoilState(
     secondhandcreateglobalstate
   )
 
@@ -35,10 +36,56 @@ export const SecondHandUpload = ({}) => {
     navigate(`/secondhandUpload/${nextStep}`)
   }
 
-  const handleTrades = () => {
-    setModalText(SECONDHAND_MODAL_TEXT.create)
-    setModalOnState(true)
-    // 채팅창 생성하는 로직 여기 넣어야함
+  const handleTrades = async () => {
+    try {
+      //이미지 데이터추가
+      const formData = new FormData()
+
+      formData.append('title', secondHandGlobalState.title || '')
+      formData.append('category', secondHandGlobalState.category || '')
+      formData.append(
+        'transactionStartTime',
+        secondHandGlobalState.transactionStartTime || ''
+      )
+      formData.append(
+        'transactionEndTime',
+        secondHandGlobalState.transactionEndTime || ''
+      )
+      formData.append('description', secondHandGlobalState.description || '')
+
+      // boolean
+      formData.append('isFree', secondHandGlobalState.isFree ? 'true' : 'false')
+
+      if (
+        secondHandGlobalState.selectedDays &&
+        secondHandGlobalState.selectedDays.length > 0
+      ) {
+        secondHandGlobalState.selectedDays.forEach((day, index) => {
+          formData.append(`selectedDays[${index}]`, day)
+        })
+      }
+
+      formData.append(
+        'price',
+        secondHandGlobalState.price
+          ? secondHandGlobalState.price.toString()
+          : ''
+      )
+
+      const imageBlobs = secondHandGlobalState.images
+      if (imageBlobs && imageBlobs.length > 0) {
+        for (let i = 0; i < imageBlobs.length; i++) {
+          formData.append(`images${i}`, imageBlobs[i])
+        }
+      }
+      const response = await SecondHandPostApi(formData)
+
+      setModalOnState(true)
+
+      console.log('서버 응답:', response)
+    } catch (error) {
+      console.log('요청 오류', error)
+    }
   }
 
   const handleCancel = () => {

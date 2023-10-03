@@ -4,7 +4,6 @@ import {
   PurchaseInfo,
   PreviewPrice,
   PreviewCategory,
-  PreviewHeader,
   PreviewUrl
 } from 'components/trades/preview/index'
 import {
@@ -15,7 +14,7 @@ import { GroupPurchaseDetail } from 'api/trades/index'
 import { GroupPurchaseDetailResProps } from 'types/trades/index'
 import { useEffect, useState } from 'react'
 import { GetDetailStats } from 'components/career/paricipate/getDetail/index'
-import { ImageDetail } from 'components/trades/detail/index'
+import { ImageDetail, DetailGroupHeader } from 'components/trades/detail/index'
 import { PurchaseAdminFooter } from 'components/trades/detail'
 
 export const PurchaseDetailCard = ({ offerId }) => {
@@ -71,7 +70,7 @@ export const PurchaseDetailCard = ({ offerId }) => {
     <>
       {purchaseDetailList && (
         <>
-          <PreviewHeader title={purchaseDetailList.title} />
+          <DetailGroupHeader title={purchaseDetailList.title} />
           <Wrapper>
             <ImageDetail meetupImages={purchaseDetailList.image} />
             <ManagerInfo
