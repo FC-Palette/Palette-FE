@@ -2,16 +2,19 @@ import { Edit } from 'iconsax-react'
 import { styled } from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { centralise } from 'styles/index'
-export const ToChatList = () => {
+import { CHAT_TEXTS } from 'constants/index'
+export const ToChatList = ({ roomid }) => {
   const navigate = useNavigate()
 
   return (
     <Wrapper
       onClick={() => {
-        navigate('/chatannlist')
+        navigate('/chatannlist', {
+          state: { roomid }
+        })
       }}>
       <Edit size="16" />
-      <Notice>공지</Notice>
+      <Notice>{CHAT_TEXTS.register}</Notice>
     </Wrapper>
   )
 }

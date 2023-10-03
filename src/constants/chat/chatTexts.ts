@@ -9,7 +9,8 @@ export const CHAT_TEXTS = {
   sendImg: '이미지 전송하기',
   sendFile: '파일 전송하기',
   product: '상품 / 계좌정보',
-  group: '모임정보'
+  group: '모임정보',
+  count: '명'
 }
 export const CHAT_TABS = [
   { text: '단체톡', path: '/chatlist/g' },

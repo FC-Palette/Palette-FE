@@ -2,8 +2,11 @@ import { styled } from 'styled-components'
 import { ArrowLeft2 } from 'iconsax-react'
 import { ToChatList } from 'components/index'
 import { Flexbox } from 'styles/index'
+import { CHAT_TEXTS } from 'constants/index'
 
-export const MembersHeader = ({ onClick }) => {
+export const MembersHeader = ({ onClick, client, roomid }) => {
+  const members = client.getQueryData(['chatMembers'])?.response?.length
+
   return (
     <Fixer $top="0">
       <Container>
@@ -11,10 +14,13 @@ export const MembersHeader = ({ onClick }) => {
           <ArrowLeft2 cursor="pointer" />
         </IconWrapper>
         <Grow>
-          <Members>참여인원</Members>
-          <MembersNum>3명</MembersNum>
+          <Members>{CHAT_TEXTS.groupInfo}</Members>
+          <MembersNum>
+            {members}
+            {CHAT_TEXTS.count}
+          </MembersNum>
         </Grow>
-        <ToChatList />
+        <ToChatList roomid={roomid} />
       </Container>
     </Fixer>
   )
