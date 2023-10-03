@@ -1,7 +1,7 @@
+import { useState, useLayoutEffect, useMemo } from 'react'
 import React from 'react'
 import { useRecoilState } from 'recoil'
 import { msgActionsState } from 'recoil/index'
-import { useState, useLayoutEffect, useMemo } from 'react'
 import {
   Wrapper,
   Sender,
@@ -11,14 +11,13 @@ import {
   Participation
 } from 'components/index'
 import { useCallback } from 'react'
-import { renderTime, formatLocalDateTime } from 'utils/index'
+import { renderTime, formatLocalDateTime, decoder } from 'utils/index'
 
 // ############################################################
-export const ChatField = ({ messages }) => {
-  // let memberId = decoder().memberId
-  let memberId = 1
-
+export const ChatField = ({ messages, roomId }) => {
   const [innerHeight, setInnerHeight] = useState<number>(0)
+  let memberId = decoder().memberId
+
   useLayoutEffect(() => {
     if (typeof window !== 'undefined') {
       setInnerHeight(window.innerHeight)
@@ -41,27 +40,29 @@ export const ChatField = ({ messages }) => {
   )
 
   const renderMessage = (message, index) => {
-    const nextMessage = messages[index + 1]
+    const nextMessage = messages.response[index + 1]
     const showTimestamp = renderTime(message, nextMessage)
 
     //메시지 유형별 조건부 렌더링 조건들
-    const msgInfo = useMemo(() => {
-      return {
-        isSender: message.memberId === memberId,
-        isRecipient:
-          message.memberId !== memberId &&
-          (message.type === 'CHAT' || message.type === 'SHARE'),
-        isLeave: message.type === 'LEAVE',
-        isJoin: message.type === 'JOIN',
-        isShare: message.type === 'SHARE',
-        isChat: message.type === 'CHAT'
-      }
-    }, [message, memberId])
+    const msgInfo = {
+      isSender:
+        message.memberId === memberId &&
+        (message.type === 'CHAT' || message.type === 'SHARE'),
+      isRecipient:
+        message.memberId !== memberId &&
+        (message.type === 'CHAT' || message.type === 'SHARE'),
+      isLeave: message.type === 'LEAVE',
+      isJoin: message.type === 'JOIN',
+      isShare: message.type === 'SHARE',
+      isChat: message.type === 'CHAT'
+    }
 
     // TimeStamp 렌더링 용도
-    const prevMsgType = index > 0 ? messages[index - 1].type : null
+    const prevMsgType = index > 0 ? messages.response[index - 1].type : null
     const prevMsgDate =
-      index > 0 ? formatLocalDateTime(messages[index - 1].createdAt) : null
+      index > 0
+        ? formatLocalDateTime(messages.response[index - 1].createdAt)
+        : null
     const MsgDate = formatLocalDateTime(message.createdAt)
     const dateSeperator = prevMsgDate !== MsgDate
 
@@ -73,7 +74,9 @@ export const ChatField = ({ messages }) => {
       createdAt: message.createdAt,
       showCreatedTime: showTimestamp,
       showMsgActions: openMsgActionsIndex === index && msgInfo.isChat,
-      toggleMsgActions: () => toggleMsgActions(index)
+      toggleMsgActions: () => toggleMsgActions(index),
+      roomId: roomId,
+      msgId: message.id
     }
     if (msgInfo.isShare) {
       msgProps.message = (
@@ -94,7 +97,7 @@ export const ChatField = ({ messages }) => {
     //채팅방 날짜 변경 조건부 렌더링
     if (dateSeperator) {
       return (
-        <React.Fragment key={index}>
+        <React.Fragment key={message.id}>
           <DateSeperator
             date={MsgDate}
             $isFirst={prevMsgDate}
@@ -106,10 +109,9 @@ export const ChatField = ({ messages }) => {
         </React.Fragment>
       )
     }
-
     //채팅방 날짜변경 없을시 조건부 렌더링
     return (
-      <React.Fragment key={index}>
+      <React.Fragment key={message.id}>
         {msgInfo.isSender && <Sender {...msgProps} />}
         {msgInfo.isRecipient && <Recipient {...msgProps} />}
         {msgInfo.isLeave && <Participation {...statusProps} />}
@@ -119,6 +121,8 @@ export const ChatField = ({ messages }) => {
   }
 
   return (
-    <Wrapper $innerHeight={innerHeight}>{messages.map(renderMessage)}</Wrapper>
+    <Wrapper $innerHeight={innerHeight}>
+      {messages && messages.response && messages.response.map(renderMessage)}
+    </Wrapper>
   )
 }

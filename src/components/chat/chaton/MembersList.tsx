@@ -10,44 +10,21 @@ export const MembersList = ({ roomid }) => {
   } = useQuery(['chatMembers', roomid], () => {
     return getMembers(roomid)
   })
-  /**
- * 		{
-			"memberId" : 3, 
-			"prifileImgUrl" : "https://",
-			"nickName" : "고슴도치",
-	    "host" : 2
-		},
- */
+
   console.log(members)
   return (
     <Fixer $center={true}>
       {members &&
-        members.map(m => (
+        members.response &&
+        members.response.map(m => (
           <Member
+            key={m.memberId}
             memberId={m.memberId}
             url={m.profileImgUrl}
             name={m.nickName}
             host={m.host}
           />
         ))}
-      {/* <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member /> */}
     </Fixer>
   )
 }

@@ -12,8 +12,8 @@ export const CHAT_TEXTS = {
   group: '모임정보'
 }
 export const CHAT_TABS = [
-  { text: '단체톡', path: '/chatlist/p' },
-  { text: '개인톡', path: '/chatlist/g' }
+  { text: '단체톡', path: '/chatlist/g' },
+  { text: '개인톡', path: '/chatlist/p' }
 ]
 
 export const CHATON_TEXTS = {
@@ -27,7 +27,9 @@ export const CHATON_TEXTS = {
   delete: '삭제',
   maintain: '유지하기',
   noToken: '회원정보를 확인할 수 없습니다. 로그인 후 이용해주세요',
-  noRoomId: '잘못된 접근입니다.'
+  noRoomId: '잘못된 접근입니다.',
+  register: '공지 등록하기',
+  copy: '복사하기'
 }
 
 export const STATUS_TEXTS = {

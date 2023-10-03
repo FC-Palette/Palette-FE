@@ -12,6 +12,7 @@ import {
   MsgActions
 } from 'components/index'
 import { Flexbox, columnise } from 'styles/index'
+
 //ChatField
 export const Recipient = ({
   message,
@@ -21,7 +22,9 @@ export const Recipient = ({
   profile,
   showCreatedTime,
   showMsgActions,
-  toggleMsgActions
+  toggleMsgActions,
+  roomId,
+  msgId
 }) => {
   const reset = useResetRecoilState(msgActionsState)
   const ref = useOutsideClick({
@@ -46,6 +49,8 @@ export const Recipient = ({
                 msgRef={ref}
                 $sender={$sender}
                 message={message}
+                roomId={roomId}
+                msgId={msgId}
               />
             )}
           </MessageBox>
