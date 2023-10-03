@@ -1,31 +1,29 @@
-import { atom } from 'recoil'; 
-import { authInstance } from '../axios';
+import { atom } from 'recoil'
+import { authInstance } from '../axios'
 
-const apiUrl = import.meta.env.VITE_BASE_URL; 
+const apiUrl = import.meta.env.VITE_BASE_URL
 
 export const tokenPayloadState = atom({
   key: 'tokenPayload',
-  default: { memberId: null },
-});
+  default: { memberId: null }
+})
 
 export async function login(email, password) {
   try {
     const requestData = {
       email: email,
-      password: password,
-    };
-
-    const response = await authInstance.post(`${apiUrl}/api/login`, requestData);
-
-    const responseData = response.data;
-
-    if (responseData && responseData.response.token) {
-      localStorage.setItem('token', responseData.response.token);
-
+      password: password
     }
-    return responseData;
+
+    const response = await authInstance.post(`${apiUrl}/api/login`, requestData)
+
+    const responseData = response.data
+
+    if (responseData && responseData.response.Token) {
+      localStorage.setItem('Token', responseData.response.Token)
+    }
+    return responseData
   } catch (error) {
-    throw error;
+    throw error
   }
 }
-

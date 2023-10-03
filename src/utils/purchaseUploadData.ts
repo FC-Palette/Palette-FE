@@ -7,8 +7,8 @@ export const purchaseUploadData = (
   // string
   formData.append('title', PurchaseCreateData.title || '')
   formData.append('category', PurchaseCreateData.category || '')
-  formData.append('startDate', PurchaseCreateData.startDay || '')
-  formData.append('endDate', PurchaseCreateData.endDay || '')
+  formData.append('startDate', PurchaseCreateData.startDate || '')
+  formData.append('endDate', PurchaseCreateData.endDate || '')
   formData.append('description', PurchaseCreateData.description || '')
   formData.append('shopUrl', PurchaseCreateData.shopUrl || '')
   formData.append('closingType', PurchaseCreateData.closingType || '')

@@ -22,3 +22,10 @@ export const SECONDHAND_MODAL_TEXT = {
   ],
   cancel: ['중고거래 취소하기', '작성기록이 모두 삭제돼요.', '삭제', '유지하기']
 }
+
+export const SECONDHAND_DELETE_MODAL_TEXT = [
+  '거래 삭제하기',
+  '거래글을 삭제하시겠습니까?',
+  '삭제',
+  '유지하기'
+]

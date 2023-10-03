@@ -37,30 +37,36 @@ export const GroupUpload = () => {
 
   const handleTrades = async () => {
     try {
-      //이미지 데이터추가
+      // 이미지 데이터 추가
       const formData = new FormData()
 
-      if (tradesGlobalState.images.length > 0) {
-        tradesGlobalState.images.forEach((imageBlob, index) => {
-          formData.append(`images[${index}]`, imageBlob)
-        })
+      if (tradesGlobalState.image.length > 0) {
+        for (const imageFile of tradesGlobalState.image) {
+          formData.append('images', imageFile, `${Date.now()}.png`)
+        }
+      }
+      // DTO 데이터 추가
+      const jsonData = {
+        title: tradesGlobalState.title,
+        description: tradesGlobalState.description,
+        price: tradesGlobalState.price,
+        category: tradesGlobalState.category,
+        startDate: tradesGlobalState.startDate,
+        endDate: tradesGlobalState.endDate,
+        headCount: tradesGlobalState.headCount,
+        closingType: tradesGlobalState.closingType,
+        accountOwner: tradesGlobalState.accountOwner,
+        accountNumber: tradesGlobalState.accountNumber,
+        shopUrl: tradesGlobalState.shopUrl,
+        bank: tradesGlobalState.bank
       }
 
-      // DTO 데이터 추가
-      formData.append('title', tradesGlobalState.title)
-      formData.append('description', tradesGlobalState.description)
-      formData.append('price', tradesGlobalState.price.toString())
-      formData.append('category', tradesGlobalState.category)
-      formData.append('startDay', tradesGlobalState.startDay)
-      formData.append('endDay', tradesGlobalState.endDay)
-      formData.append('timeRemaining', tradesGlobalState.timeRemaining)
-      formData.append('headCount', tradesGlobalState.headCount.toString())
-      formData.append('closingType', tradesGlobalState.closingType)
-      formData.append('accountOwner', tradesGlobalState.accountOwner)
-      formData.append('accountNumber', tradesGlobalState.accountNumber)
-      formData.append('shopUrl', tradesGlobalState.shopUrl)
-      formData.append('bank', tradesGlobalState.bank)
+      formData.append(
+        'dto',
+        new Blob([JSON.stringify(jsonData)], { type: 'application/json' })
+      )
 
+      // 서버로 데이터 전송
       const response = await GroupPurchasePostApi(formData)
       setModalText(TRADES_MODAL_TEXT.create)
       setModalOnState(true)

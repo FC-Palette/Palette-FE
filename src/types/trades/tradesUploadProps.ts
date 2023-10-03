@@ -4,8 +4,8 @@ export interface TradeCreateGlobalStateProps {
   description: string
   price: number
   category: string
-  startDay: string
-  endDay: string
+  startDate: string
+  endDate: string
   timeRemaining: string
   headCount: number
   closingType: string
