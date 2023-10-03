@@ -53,7 +53,10 @@ export const ChatMembers = ({ roomid }) => {
           <Background onClick={handleShowMembers} />
           <MembersLayer>
             <Fixer $top="0">
-              <MembersHeader onClick={handleShowMembers} />
+              <MembersHeader
+                onClick={handleShowMembers}
+                roomid={roomid}
+              />
               <MembersList roomid={roomid} />
               <MembersFooter
                 onClick={handleExit}

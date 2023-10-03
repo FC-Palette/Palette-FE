@@ -1,9 +1,9 @@
 import { Header, ChatAnnListItems, ChatAnnListItem } from 'components/index'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft2 } from 'iconsax-react'
-// import { getNoticeList } from 'api/index'
-// import { useQuery } from '@tanstack/react-query'
-import { anns } from 'constants/index'
+import { getNoticeList } from 'api/index'
+import { useQuery } from '@tanstack/react-query'
+import { useLocation } from 'react-router-dom'
 
 /*
 {
@@ -29,7 +29,15 @@ import { anns } from 'constants/index'
 // => 공지에 memberId만 있기 때문에
 export const ChatAnnList = () => {
   const navigate = useNavigate()
+  const roomId = useLocation().state.roomid
 
+  const {
+    data: notices,
+    isLoading,
+    isError
+  } = useQuery(['notices', roomId], () => {
+    return getNoticeList(roomId)
+  })
   return (
     <>
       <Header
@@ -44,14 +52,16 @@ export const ChatAnnList = () => {
         }></Header>
       <ChatAnnListItems>
         {/* 응답에 맞춰 수정필요 */}
-        {anns.map(({ noticeId, notice, createdAt, memberId }) => (
-          <ChatAnnListItem
-            key={noticeId}
-            notice={notice}
-            createdAt={createdAt}
-            memberId={memberId}
-          />
-        ))}
+        {notices &&
+          notices.response &&
+          notices.response.map(({ noticeId, notice, createdAt, memberId }) => (
+            <ChatAnnListItem
+              key={noticeId}
+              notice={notice}
+              createdAt={createdAt}
+              memberId={memberId}
+            />
+          ))}
       </ChatAnnListItems>
     </>
   )
