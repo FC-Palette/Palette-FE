@@ -12,7 +12,7 @@ export const showMembersState = atom<boolean>({
 
 export const inDetailState = atom<boolean>({
   key: 'inDetailState',
-  default: false
+  default: true
 })
 
 export const isBuyingState = atom<boolean>({

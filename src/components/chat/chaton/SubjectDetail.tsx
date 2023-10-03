@@ -1,21 +1,21 @@
 import { styled } from 'styled-components'
-import { isBuyingState } from 'recoil/index'
-import { useRecoilValue } from 'recoil'
 import { columnise, Flexbox } from 'styles/index'
 
-const price = 9000
-export const SubjectDetail = ({ $shared, src }) => {
-  const isBuying = useRecoilValue(isBuyingState)
-
+export const SubjectDetail = ({
+  $shared,
+  src,
+  title,
+  week,
+  price,
+  isBuying
+}) => {
   return (
     <Wrapper $shared={$shared}>
       <SubjectImg src={src} />
       <SubjectText>
-        <SubjectTitle $isBuying={isBuying}>
-          asdasdasdasdasdasdad asdasdasdasdasd이쯤?
-        </SubjectTitle>
+        <SubjectTitle $isBuying={isBuying}>{title}</SubjectTitle>
         <SubjectInfo $isBuying={isBuying}>
-          {price.toLocaleString()}원
+          {isBuying && price.toLocaleString()}원{!isBuying && week}
         </SubjectInfo>
       </SubjectText>
     </Wrapper>

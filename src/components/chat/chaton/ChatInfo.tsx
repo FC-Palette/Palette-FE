@@ -5,6 +5,8 @@
 import { styled } from 'styled-components'
 import { useRecoilValue } from 'recoil'
 import { inDetailState, isBuyingState, isPersonalState } from 'recoil/index'
+import { useQuery } from '@tanstack/react-query'
+import { getAccount, getNotice } from 'api/index'
 
 import {
   ChatAnn,
@@ -12,17 +14,42 @@ import {
   SubjectDetail,
   AccountInfo
 } from 'components/index'
-export const ChatInfo = () => {
+export const ChatInfo = ({ roomid }) => {
   const inDetail = useRecoilValue(inDetailState)
-  const isBuying = useRecoilValue(isBuyingState)
-  const isPersonal = useRecoilValue(isPersonalState)
 
+  const {
+    data: notice,
+    isLoading,
+    isError
+  } = useQuery(['notice', roomid], () => {
+    return getNotice(roomid)
+  })
+  console.log(notice)
+  const registered = notice?.response?.notice
+
+  const contentNotice = notice?.response?.contentNotice
+  const type = contentNotice?.type
+  const isBuying =
+    contentNotice?.type === 'PURCHASE' || contentNotice?.type === 'SECONDHAND'
+  // isPersonal => 개인 챗 조건 추가 확인 필요
+  const isPersonal = type => {
+    const chatTypes = ['PURCHASE', 'SECONDHAND', 'MEETING']
+    if (chatTypes.includes(type)) {
+      return false
+    }
+    return true
+  }
+  console.log(isPersonal(type), type)
   return (
     <InfoWrapper>
-      {!isPersonal && <ChatSubject></ChatSubject>}
+      {!isPersonal(type) && <ChatSubject isBuying={isBuying}></ChatSubject>}
       {inDetail && (
         <SubjectDetail
-          src={''}
+          src={contentNotice?.image}
+          title={contentNotice?.title}
+          week={contentNotice?.week}
+          price={contentNotice?.price}
+          isBuying={isBuying}
           $shared={false}
         />
       )}
@@ -33,8 +60,8 @@ export const ChatInfo = () => {
         />
       )}
       <ChatAnn
-        $registered={true}
-        $personal={isPersonal}></ChatAnn>
+        $registered={registered}
+        $personal={isPersonal(type)}></ChatAnn>
     </InfoWrapper>
   )
 }
@@ -45,3 +72,11 @@ const InfoWrapper = styled.div`
   top: 0;
   box-shadow: 0px 3px 6px 0px rgba(187, 187, 210, 0.3);
 `
+
+// const {
+//   data: account,
+//   isLoading,
+//   isError
+// } = useQuery(['account', contentId], () => {
+//   return getNotice(contentId)
+// })

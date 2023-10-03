@@ -11,10 +11,10 @@ export const ChatAnn = ({ $registered, $personal }) => {
     <>
       {$registered && (
         <ChatTopBar
-          $registered={true}
+          $registered={$registered}
           $personal={$personal}>
           <MegaPhoneIcon $iconColor="blue0" />
-          <TopBarContent>공지입니다.</TopBarContent>
+          <TopBarContent>{$registered}</TopBarContent>
         </ChatTopBar>
       )}
     </>
@@ -22,14 +22,14 @@ export const ChatAnn = ({ $registered, $personal }) => {
 }
 
 export const ChatTopBar = styled(Flexbox)<{
-  $registered?: boolean
+  $registered?: string
   $personal?: boolean
 }>`
   padding: 12px 24px;
   background-color: ${props => props.theme.greyScale.bluegrey};
   color: ${props => props.theme.main.blue0};
   border-top: ${props =>
-    props.$registered === true && props.$personal === false
+    props.$registered && props.$personal === false
       ? `1px solid ${props.theme.greyScale.grey3}`
       : 'none'};
 `

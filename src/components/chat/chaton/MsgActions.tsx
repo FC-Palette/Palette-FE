@@ -3,7 +3,8 @@ import { Copy, Edit } from 'iconsax-react'
 import { useResetRecoilState } from 'recoil'
 import { msgActionsState } from 'recoil/index'
 import { columnise } from 'styles/index'
-// import { createNotice } from 'api/index'
+import { CHATON_TEXTS } from 'constants/index'
+import { createNotice } from 'api/index'
 
 /*
 POST -REQUEST BODY
@@ -21,10 +22,9 @@ RESPONSE => 상단에 등록(notice)
 		}
 }
 */
-export const MsgActions = ({ $sender, msgRef, message }) => {
+
+export const MsgActions = ({ $sender, msgRef, message, roomId, msgId }) => {
   const reset = useResetRecoilState(msgActionsState)
-  // const upperTabRef = useRef<HTMLDivElement>()
-  // const lowerTabRef = useRef<HTMLDivElement>()
 
   return (
     <Wrapper
@@ -38,7 +38,7 @@ export const MsgActions = ({ $sender, msgRef, message }) => {
             await navigator.clipboard.writeText(message)
           }, 300)
         }}>
-        <TabTitle>복사하기</TabTitle>
+        <TabTitle>{CHATON_TEXTS.copy}</TabTitle>
         <TabIcon $isTop={true}>
           <Copy size="18" />
         </TabIcon>
@@ -46,11 +46,12 @@ export const MsgActions = ({ $sender, msgRef, message }) => {
       <Tab
         $isTop={false}
         onClick={() => {
-          setTimeout(() => {
-            reset()
+          setTimeout(async () => {
+            await reset()
+            await createNotice(roomId, msgId)
           }, 300)
         }}>
-        <TabTitle>공지 등록하기</TabTitle>
+        <TabTitle>{CHATON_TEXTS.register}</TabTitle>
         <TabIcon $isTop={false}>
           <Edit size="18" />
         </TabIcon>

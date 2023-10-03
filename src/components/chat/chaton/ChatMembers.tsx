@@ -43,6 +43,7 @@ export const ChatMembers = ({ roomid }) => {
             setModalOn(!modalOn)
           }}
           onRightClick={() => {
+            quitChatRoom(roomid)
             navigate('/chatlist/g')
           }}
         />
@@ -54,7 +55,10 @@ export const ChatMembers = ({ roomid }) => {
             <Fixer $top="0">
               <MembersHeader onClick={handleShowMembers} />
               <MembersList roomid={roomid} />
-              <MembersFooter onClick={handleExit} />
+              <MembersFooter
+                onClick={handleExit}
+                roomid={roomid}
+              />
             </Fixer>
           </MembersLayer>
         </>
