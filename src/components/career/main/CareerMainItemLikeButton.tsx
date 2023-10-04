@@ -8,20 +8,20 @@ export const CareerMainItemLikeButton = ({ meetingId }) => {
   const [like, setLike] = useState(false)
   // const [cancel, setCancel] = useState(false)
 
-  const fetchLikeStatus = async () => {
-    const [likeResponse, cancelResponse] = await Promise.all([
-      requestMeetingLikeApi(meetingId),
-      requestMeetingLikeCancelApi(meetingId)
-    ])
-    if (likeResponse !== null) {
-      setLike(likeResponse.success) // 성공 시 찜 상태로 설정
-      console.log(likeResponse)
-    }
+  // const fetchLikeStatus = async () => {
+  //   const [likeResponse, cancelResponse] = await Promise.all([
+  //     requestMeetingLikeApi(meetingId),
+  //     requestMeetingLikeCancelApi(meetingId)
+  //   ])
+  //   if (likeResponse !== null) {
+  //     setLike(likeResponse.success) // 성공 시 찜 상태로 설정
+  //     console.log(likeResponse)
+  //   }
 
-    if (cancelResponse !== null) {
-      // setCancel(cancelResponse.success) // 성공 시 취소 상태로 설정
-    }
-  }
+  //   if (cancelResponse !== null) {
+  //     // setCancel(cancelResponse.success) // 성공 시 취소 상태로 설정
+  //   }
+  // }
 
   useEffect(() => {
     // 초기 랜더링 시 데이터 가져오기

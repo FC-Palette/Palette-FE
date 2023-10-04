@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import Slider from 'react-slick'
 import { useRecoilValue } from 'recoil'
 import { fetchDetailGlobalState } from '@/recoil'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 export const GetDetailThumbnail = () => {
   const atom = useRecoilValue(fetchDetailGlobalState)
