@@ -39,3 +39,18 @@ export const sideBarState = atom<boolean>({
   key: 'sideBarState',
   default: false
 })
+
+export const headerOnState = atom<boolean>({
+  key: 'headerOnState',
+  default: false
+})
+
+export const headerModalOnState = atom({
+  key: 'headerModalOnState',
+  default: false
+})
+
+export const agreeModalOnState = atom({
+  key: 'agreeModalOnState',
+  default: false
+})

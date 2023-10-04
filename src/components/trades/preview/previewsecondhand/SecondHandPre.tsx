@@ -6,8 +6,7 @@ import {
   GetThumbnail,
   GetTitleAndDescription
 } from 'components/career/create/isUserInfo/index'
-import { iconMapping1 } from 'components/common/index'
-import { secondhandcreateglobalstate } from 'recoil/index'
+import { secondhandcreateglobalstate, ImageState } from 'recoil/index'
 import {
   SecondHandInfo,
   PreviewPrice,
@@ -18,7 +17,6 @@ import {
 export const SecondHandPre = () => {
   const secondHandGlobalState = useRecoilValue(secondhandcreateglobalstate)
   const {
-    images,
     title,
     description,
     price,
@@ -27,13 +25,15 @@ export const SecondHandPre = () => {
     transactionEndTime,
     category
   } = secondHandGlobalState
-  const categoryLabel = iconMapping1[category]?.label || '미리보기'
+
+  const imageGlobalState = useRecoilValue(ImageState)
+  const { file } = imageGlobalState
 
   return (
     <>
       <PreviewHeader title={title} />
       <Wrapper>
-        <GetThumbnail meetupImages={images} />
+        <GetThumbnail meetupImages={file} />
         <GetRoomManagerInfo />
         <PreviewPrice price={price} />
         <GetTitleAndDescription
@@ -41,7 +41,7 @@ export const SecondHandPre = () => {
           meetupTitle={title}
           meetupDescription={description}
         />
-        <PreviewCategory category={categoryLabel} />
+        <PreviewCategory category={category} />
         <GetStats />
         <SecondHandInfo
           selectedDays={selectedDays}

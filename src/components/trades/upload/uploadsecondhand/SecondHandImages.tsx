@@ -4,24 +4,25 @@ import Dropzone from 'react-dropzone'
 import { Add } from 'iconsax-react'
 import { DraggableImagePreview } from 'components/index'
 import { useSetRecoilState } from 'recoil'
-import { secondhandcreateglobalstate } from 'recoil/index'
-import { centralise } from 'styles/index'
+import { ImageState } from 'recoil/index'
 
-interface Image {
+interface ImageFile {
   id: string
   url: string
   blob: Blob | null
 }
 
 export const SecondHandImages = () => {
-  const [images, setImages] = useState<Image[]>([])
-
-  const setSecondHandGlobalState = useSetRecoilState(
-    secondhandcreateglobalstate
-  )
+  const [showMessage, setShowMessage] = useState(false)
+  const [images, setImages] = useState<ImageFile[]>([])
+  const setImageGlobalState = useSetRecoilState(ImageState)
 
   useEffect(() => {
     if (images.length === 1) {
+      setShowMessage(true)
+      setTimeout(() => {
+        setShowMessage(false)
+      }, 2000)
     }
   }, [images.length])
 
@@ -36,7 +37,6 @@ export const SecondHandImages = () => {
   }
 
   // 업로드시
-
   const handleImageUpload = (acceptedFiles: File[]) => {
     if (images.length + acceptedFiles.length > 5) {
       return
@@ -49,16 +49,18 @@ export const SecondHandImages = () => {
           url: URL.createObjectURL(file),
           blob: blob
         }
-        setImages(previmages => [...previmages, newImg])
 
-        // 이미지를 전역 images 배열에 추가
-        setSecondHandGlobalState(prevData => ({
+        setImages(prevImages => [...prevImages, newImg])
+
+        // 이미지를 전역 상태 meetupImages 배열에 추가
+        setImageGlobalState((prevData: any) => ({
           ...prevData,
-          images: [...prevData.images, blob]
+          file: prevData.file ? [...prevData.file, blob] : [blob] // 수정
         }))
       })
     })
   }
+
   // 순서 변경
   const handleDragEnd = (result: any) => {
     if (!result.destination) {
@@ -70,18 +72,18 @@ export const SecondHandImages = () => {
     reorderedImages.splice(result.destination.index, 0, movedImage)
     setImages(reorderedImages)
 
-    setSecondHandGlobalState((prevData: any) => ({
+    setImageGlobalState((prevData: any) => ({
       ...prevData,
-      images: reorderedImages.map(img => img.blob)
+      file: reorderedImages.map(img => img.blob)
     }))
   }
 
   // 이미지 삭제
   const handleImageDelete = (imageId: string) => {
     const updatedImages = images.filter(image => image.id !== imageId)
-    setSecondHandGlobalState((prevData: any) => ({
+    setImageGlobalState((prevData: any) => ({
       ...prevData,
-      images: updatedImages
+      file: updatedImages
     }))
     setImages(updatedImages)
   }
@@ -106,21 +108,40 @@ export const SecondHandImages = () => {
           onDeleteImage={handleImageDelete}
         />
       </TotalContainer>
+
+      {showMessage && (
+        <MessageContainer>
+          드래그로 사진 순서를 변경할 수 있습니다.
+        </MessageContainer>
+      )}
     </>
   )
 }
+
 const TotalContainer = styled.div`
-  width: 380px;
+  width: 100%;
   display: flex;
   margin-top: 8px;
   gap: 8px;
   overflow-x: scroll;
+  padding-bottom: 8px;
 `
 
 const UploadZoneContainer = styled.div`
+  display: flex;
   flex-direction: column;
-  ${centralise}
+  justify-content: center;
+  align-items: center;
   position: relative;
+`
+
+const AddIcon = styled(Add)`
+  position: absolute;
+  cursor: pointer;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
 `
 
 const UploadZoneBox = styled.div`
@@ -128,8 +149,30 @@ const UploadZoneBox = styled.div`
   width: 90px;
   height: 90px;
   border-radius: 8px;
+  cursor: pointer;
+  position: relative;
+
+  & > ${AddIcon} {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 `
 
-const AddIcon = styled(Add)`
-  position: absolute;
+const MessageContainer = styled.div`
+  width: 250px;
+  height: 37px;
+  background-color: rgba(55, 65, 81, 0.8);
+  font-size: 14px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 4px;
+  z-index: 9999;
 `

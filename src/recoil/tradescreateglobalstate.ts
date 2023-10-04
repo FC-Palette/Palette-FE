@@ -10,14 +10,12 @@ const today = dateNow.toISOString().slice(0, 10)
 export const tradescreateglobalstate = atom<TradeCreateGlobalStateProps>({
   key: 'tradesGlobalState',
   default: {
-    image: [] as Blob[],
     title: '',
     description: '',
     price: 0,
     category: '',
     startDate: today,
     endDate: today,
-    timeRemaining: '',
     headCount: 0,
     closingType: '',
     accountOwner: '',
@@ -30,7 +28,6 @@ export const tradescreateglobalstate = atom<TradeCreateGlobalStateProps>({
 export const secondhandcreateglobalstate = atom<SecondHandGlobalStateProps>({
   key: 'secondHandGlobalState',
   default: {
-    images: [] as Blob[],
     title: '',
     description: '',
     price: 0,
@@ -44,14 +41,12 @@ export const secondhandcreateglobalstate = atom<SecondHandGlobalStateProps>({
 
 // tradescreateglobalstate 초기값
 export const initialTradeCreateGlobalState: TradeCreateGlobalStateProps = {
-  image: [] as Blob[],
   title: '',
   description: '',
   price: 0,
   category: '',
   startDate: today,
   endDate: today,
-  timeRemaining: '',
   headCount: 0,
   closingType: 'DATETIME' || 'HEAD_COUNT',
   accountOwner: '',
@@ -62,7 +57,6 @@ export const initialTradeCreateGlobalState: TradeCreateGlobalStateProps = {
 
 // secondhandcreateglobalstate 초기값
 export const initialSecondHandGlobalState: SecondHandGlobalStateProps = {
-  images: [] as Blob[],
   title: '',
   description: '',
   price: 0,
@@ -72,3 +66,14 @@ export const initialSecondHandGlobalState: SecondHandGlobalStateProps = {
   transactionStartTime: '',
   transactionEndTime: ''
 }
+
+interface CreateFile {
+  file: Blob[] | null
+}
+
+export const ImageState = atom<CreateFile>({
+  key: 'imageGlobalState',
+  default: {
+    file: null
+  }
+})

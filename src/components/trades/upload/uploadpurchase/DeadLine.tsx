@@ -15,7 +15,7 @@ export const DeadLine = () => {
     const dateFormat_Start = dayjs(date).format('YYYY-MM-DD')
     tradesGlobalState(prevDate => ({
       ...prevDate,
-      startDay: dateFormat_Start
+      startDate: dateFormat_Start
     }))
   }
 
@@ -24,7 +24,7 @@ export const DeadLine = () => {
     const dateFormat_End = dayjs(date).format('YYYY-MM-DD')
     tradesGlobalState(prevDate => ({
       ...prevDate,
-      endDay: dateFormat_End
+      endDate: dateFormat_End
     }))
   }
 

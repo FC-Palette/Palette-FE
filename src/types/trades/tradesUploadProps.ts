@@ -1,12 +1,10 @@
 export interface TradeCreateGlobalStateProps {
-  image: Blob[]
   title: string
   description: string
   price: number
   category: string
   startDate: string
   endDate: string
-  timeRemaining: string
   headCount: number
   closingType: string
   accountOwner: string
@@ -16,7 +14,6 @@ export interface TradeCreateGlobalStateProps {
 }
 
 export interface SecondHandGlobalStateProps {
-  images: Blob[]
   title: string
   description: string
   price: number
