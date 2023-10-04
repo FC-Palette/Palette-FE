@@ -77,3 +77,7 @@ export const ImageState = atom<CreateFile>({
     file: null
   }
 })
+
+export const initialImageState: CreateFile = {
+  file: []
+}

@@ -19,8 +19,8 @@ export async function login(email, password) {
 
     const responseData = response.data
 
-    if (responseData && responseData.response.token) {
-      localStorage.setItem('Token', responseData.response.token)
+    if (responseData && responseData.response.Token) {
+      localStorage.setItem('Token', responseData.response.Token)
     }
     return responseData
   } catch (error) {

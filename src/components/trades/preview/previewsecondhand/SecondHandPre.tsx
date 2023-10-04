@@ -3,17 +3,16 @@ import styled from 'styled-components'
 import {
   GetRoomManagerInfo,
   GetStats,
-  GetThumbnail,
   GetTitleAndDescription
 } from 'components/career/create/isUserInfo/index'
-// import { secondhandcreateglobalstate, ImageState } from 'recoil/index'
-import { secondhandcreateglobalstate } from 'recoil/index'
+import { secondhandcreateglobalstate, ImageState } from 'recoil/index'
 import {
   SecondHandInfo,
   PreviewPrice,
   PreviewCategory,
   PreviewHeader
 } from 'components/trades/preview/index'
+import { Thumbnail } from 'components/trades/detail/index'
 
 export const SecondHandPre = () => {
   const secondHandGlobalState = useRecoilValue(secondhandcreateglobalstate)
@@ -27,14 +26,14 @@ export const SecondHandPre = () => {
     category
   } = secondHandGlobalState
 
-  // const imageGlobalState = useRecoilValue(ImageState)
-  // const { file } = imageGlobalState
+  const imageGlobalState = useRecoilValue(ImageState)
+  const { file } = imageGlobalState
 
   return (
     <>
       <PreviewHeader title={title} />
       <Wrapper>
-        <GetThumbnail />
+        <Thumbnail images={file} />
         <GetRoomManagerInfo />
         <PreviewPrice price={price} />
         <GetTitleAndDescription

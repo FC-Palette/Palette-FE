@@ -20,14 +20,18 @@ export const SecondHandUploadList = () => {
   const toggleIsFree = () => {
     const updatedIsFree = !secondHandGlobalState.isFree
 
+    const updatedPrice = updatedIsFree ? 0 : secondHandGlobalState.price
+
     setSecondHandGlobalState(prevGlobalState => ({
       ...prevGlobalState,
-      isFree: updatedIsFree
+      isFree: updatedIsFree,
+      price: updatedPrice
     }))
 
     setIsPriceEnabled(!updatedIsFree)
   }
 
+  console.log(secondHandGlobalState)
   return (
     <Wrapper>
       {TRADES_SECONDHAND_TEXT.map((item, index) => (
