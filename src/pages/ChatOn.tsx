@@ -9,8 +9,13 @@ import {
 import { styled } from 'styled-components'
 import { ArrowLeft2, More } from 'iconsax-react'
 import { STATUS_TEXTS, CHATON_TEXTS } from 'constants/index'
-import { useRecoilState } from 'recoil'
-import { showMembersState, roomIdState, roomInfoState } from 'recoil/index'
+import { useRecoilState, useSetRecoilState } from 'recoil'
+import {
+  showMembersState,
+  roomIdState,
+  roomInfoState,
+  inDetailState
+} from 'recoil/index'
 import { useNavigate } from 'react-router-dom'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { decoder } from 'utils/index'
@@ -35,15 +40,18 @@ const [HTTP, CHATPATH, ENTER, SUB] = [
 export const ChatOn = () => {
   const queryClient = useQueryClient()
   const memberId = decoder().memberId
+
   const roomId = useRecoilValue(roomIdState)
   const roomInfo = useRecoilValue(roomInfoState)
+  const setInDetail = useSetRecoilState(inDetailState)
+  const [showMembers, setShowMembers] = useRecoilState(showMembersState)
+
   const [client, setClient] = useState<Client>()
 
   const [chatLog, setChatLog] = useState<msgProps[]>([])
   const inputRef = useRef<HTMLTextAreaElement>(null)
 
   const navigate = useNavigate()
-  const [showMembers, setShowMembers] = useRecoilState(showMembersState)
 
   const handleShowMembers = useCallback(() => {
     setShowMembers(!showMembers)
@@ -90,6 +98,7 @@ export const ChatOn = () => {
 
   const handleHistory = () => {
     setShowMembers(false)
+    setInDetail(false)
   }
 
   // SOCKET EFFECT
@@ -162,7 +171,7 @@ export const ChatOn = () => {
       <ChatInfo />
       {/* messages => chatLog(상태) */}
       <ChatField messages={chatLog} />
-      {<ChatStatus status={STATUS_TEXTS.noGroup}></ChatStatus>}
+      <ChatStatus />
       <ChatInputField
         inputRef={inputRef}
         client={client}
