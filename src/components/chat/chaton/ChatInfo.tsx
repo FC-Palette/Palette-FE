@@ -6,7 +6,7 @@ import { styled } from 'styled-components'
 import { useRecoilValue } from 'recoil'
 import { inDetailState } from 'recoil/index'
 import { useQuery } from '@tanstack/react-query'
-import { getAccount, getNotice } from 'api/index'
+import { getNotice } from 'api/index'
 
 import {
   ChatAnn,
@@ -19,8 +19,8 @@ export const ChatInfo = ({ roomid }) => {
 
   const {
     data: notice,
-    isLoading,
-    isError
+    // isLoading,
+    // isError
   } = useQuery(['notice', roomid], () => {
     return getNotice(roomid)
   })
