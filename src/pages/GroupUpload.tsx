@@ -4,13 +4,14 @@ import {
 } from 'components/trades/preview/index'
 import { UploadFooter } from 'components/trades/upload/index'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilState } from 'recoil'
 import { modalOnState } from 'recoil/index'
 import { TRADES_MODAL_TEXT } from 'constants/trades/index'
 import { useState } from 'react'
 import {
   tradescreateglobalstate,
   initialTradeCreateGlobalState,
+  initialImageState,
   ImageState
 } from 'recoil/index'
 import { GroupPurchasePostApi } from 'api/trades/index'
@@ -31,7 +32,7 @@ export const GroupUpload = () => {
   const [tradesGlobalState, setTradesGlobalState] = useRecoilState(
     tradescreateglobalstate
   )
-  const imageGlobalState = useRecoilValue(ImageState)
+  const [imageGlobalState, setImageGlobalState] = useRecoilState(ImageState)
 
   const handleNextStep = () => {
     const nextStep = parseInt(stepId) + 1
@@ -52,9 +53,13 @@ export const GroupUpload = () => {
   // 모달 왼쪽 버튼 클릭 시 실행
   const handleConfirmYes = () => {
     if (modalText === TRADES_MODAL_TEXT.create) {
+      setTradesGlobalState(initialTradeCreateGlobalState)
+      setImageGlobalState(initialImageState)
+      navigate(`/GroupPurchase`)
       setModalOnState(false)
     } else if (modalText === TRADES_MODAL_TEXT.cancel) {
       setTradesGlobalState(initialTradeCreateGlobalState)
+      setImageGlobalState(initialImageState)
       navigate(`/GroupPurchase`)
       setModalOnState(false)
     }
@@ -65,6 +70,8 @@ export const GroupUpload = () => {
     if (modalText === TRADES_MODAL_TEXT.create) {
       alert('채팅 페이지 이동 로직')
     } else if (modalText === TRADES_MODAL_TEXT.cancel) {
+      setTradesGlobalState(initialTradeCreateGlobalState)
+      setImageGlobalState(initialImageState)
       setModalOnState(false)
     }
   }

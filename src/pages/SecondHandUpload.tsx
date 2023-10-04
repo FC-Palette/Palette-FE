@@ -4,7 +4,7 @@ import {
 } from 'components/trades/preview/index'
 import { UploadFooter } from 'components/trades/upload/index'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilState } from 'recoil'
 import { modalOnState } from 'recoil/index'
 import { SECONDHAND_MODAL_TEXT } from 'constants/trades/index'
 import { useState } from 'react'
@@ -13,6 +13,7 @@ import { PreviewFooter } from 'components/trades/preview/index'
 import {
   secondhandcreateglobalstate,
   initialSecondHandGlobalState,
+  initialImageState,
   ImageState
 } from 'recoil/index'
 import { SecondHandPostApi } from 'api/trades/index'
@@ -29,10 +30,10 @@ export const SecondHandUpload = ({}) => {
   const [modlaOnState, setModalOnState] = useRecoilState(modalOnState)
   const initialModalText = SECONDHAND_MODAL_TEXT.create
   const [modalText, setModalText] = useState(initialModalText)
-  const [secondHandGlobalState, SetSecondHandGlobalState] = useRecoilState(
+  const [secondHandGlobalState, setSecondHandGlobalState] = useRecoilState(
     secondhandcreateglobalstate
   )
-  const imageGlobalState = useRecoilValue(ImageState)
+  const [imageGlobalState, setImageGlobalState] = useRecoilState(ImageState)
 
   const handleNextStep = () => {
     const nextStep = parseInt(stepId) + 1
@@ -53,11 +54,15 @@ export const SecondHandUpload = ({}) => {
   // 모달 왼쪽 버튼 클릭 시 실행
   const handleConfirmYes = () => {
     if (modalText === SECONDHAND_MODAL_TEXT.create) {
+      setSecondHandGlobalState(initialSecondHandGlobalState)
+      setImageGlobalState(initialImageState)
       setModalOnState(false)
-    } else if (modalText === SECONDHAND_MODAL_TEXT.cancel) {
-      SetSecondHandGlobalState(initialSecondHandGlobalState)
       navigate(`/secondHand`)
+    } else if (modalText === SECONDHAND_MODAL_TEXT.cancel) {
+      setSecondHandGlobalState(initialSecondHandGlobalState)
+      setImageGlobalState(initialImageState)
       setModalOnState(false)
+      navigate(`/secondHand`)
     }
   }
 

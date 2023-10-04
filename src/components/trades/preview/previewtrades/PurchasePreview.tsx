@@ -3,11 +3,9 @@ import styled from 'styled-components'
 import {
   GetRoomManagerInfo,
   GetStats,
-  GetThumbnail,
   GetTitleAndDescription
 } from 'components/career/create/isUserInfo/index'
-import { tradescreateglobalstate } from 'recoil/index'
-// import { tradescreateglobalstate, ImageState } from 'recoil/index'
+import { tradescreateglobalstate, ImageState } from 'recoil/index'
 import {
   PurchaseInfo,
   PreviewPrice,
@@ -15,6 +13,7 @@ import {
   PreviewHeader,
   PreviewUrl
 } from 'components/trades/preview/index'
+import { Thumbnail } from 'components/trades/detail/index'
 
 export const PurchasePreview = () => {
   const tradesGlobalState = useRecoilValue(tradescreateglobalstate)
@@ -30,15 +29,14 @@ export const PurchasePreview = () => {
     category
   } = tradesGlobalState
 
-  // const imageGlobalState = useRecoilValue(ImageState)
-  // const { file } = imageGlobalState
+  const imageGlobalState = useRecoilValue(ImageState)
+  const { file } = imageGlobalState
 
   return (
     <>
       <PreviewHeader title={title} />
       <Wrapper>
-        {/* <GetThumbnail meetupImages={file} /> */}
-        <GetThumbnail />
+        <Thumbnail images={file} />
         <GetRoomManagerInfo />
         <PreviewPrice price={price} />
         <GetTitleAndDescription

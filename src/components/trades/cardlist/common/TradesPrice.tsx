@@ -3,13 +3,18 @@ import { styled } from 'styled-components'
 
 export const TradesPrice = ({ price }) => {
   const formattedPrice = new Intl.NumberFormat().format(price)
+  const displayPrice = price === 0 ? '무료나눔' : formattedPrice
+
+  const displayWon = price !== 0 && <Won>원</Won>
+
   return (
     <PriceWrapper>
-      <Price>{formattedPrice}</Price>
-      <Won>원</Won>
+      <Price>{displayPrice}</Price>
+      {displayWon}
     </PriceWrapper>
   )
 }
+
 const PriceWrapper = styled.div`
   display: flex;
   width: 141px;

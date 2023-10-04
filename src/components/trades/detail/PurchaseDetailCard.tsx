@@ -10,7 +10,7 @@ import { ManagerInfo } from 'components/trades/detail/index'
 import { GroupPurchaseDetail } from 'api/trades/index'
 import { GroupPurchaseDetailResProps } from 'types/trades/index'
 import { useEffect, useState } from 'react'
-import { GetDetailStats } from 'components/career/paricipate/getDetail/index'
+import { DetailStats } from 'components/trades/detail/index'
 import { ImageDetail, DetailHeader } from 'components/trades/detail/index'
 import { PurchaseFooter } from 'components/trades/detail'
 import { decoder } from 'utils/index'
@@ -86,7 +86,11 @@ export const PurchaseDetailCard = ({ offerId }) => {
               description={purchaseDetailList.description}
             />
             <PreviewCategory category={purchaseDetailList.category} />
-            <GetDetailStats />
+            <DetailStats
+              hits={purchaseDetailList.bookmarkCount}
+              likes={purchaseDetailList.hits}
+              createdAt={purchaseDetailList.createdAt}
+            />
             <PurchaseInfo
               currentCount={purchaseDetailList.currentParticipantCount}
               startDay={startDateString}

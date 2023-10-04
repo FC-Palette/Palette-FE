@@ -7,7 +7,6 @@ import {
 } from 'components/trades/preview/index'
 import { ManagerInfo } from 'components/trades/detail/index'
 import { SecondHandDetailResProps } from 'types/trades/index'
-import { GetDetailStats } from 'components/career/paricipate/getDetail/index'
 import { useEffect, useState } from 'react'
 import { SecondHandDetail } from 'api/trades/index'
 import {
@@ -17,7 +16,7 @@ import {
 } from 'components/trades/detail/index'
 import { CareerCreateMeetingCommonQuestion } from 'components/career/create/common/index'
 import { decoder } from 'utils/index'
-import { PurchaseFooter } from 'components/trades/detail'
+import { PurchaseFooter, DetailStats } from 'components/trades/detail/index'
 
 export const SecondHandDetailCard = ({ productId }) => {
   const [secondHandDetailList, setSecondHandDetailList] =
@@ -59,7 +58,11 @@ export const SecondHandDetailCard = ({ productId }) => {
               description={secondHandDetailList.description}
             />
             <PreviewCategory category={secondHandDetailList.category} />
-            <GetDetailStats />
+            <DetailStats
+              hits={secondHandDetailList.bookmarkCount}
+              likes={secondHandDetailList.hits}
+              createdAt={secondHandDetailList.createdAt}
+            />
             <SecondHandInfo
               selectedDays={''}
               transactionStartTime={secondHandDetailList.transactionStartTime}
