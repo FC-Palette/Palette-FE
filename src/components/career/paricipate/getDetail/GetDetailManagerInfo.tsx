@@ -1,13 +1,17 @@
 import { Button } from '@/components'
-import { useState } from 'react'
+import { fetchDetailGlobalState } from '@/recoil'
+import { useEffect, useState } from 'react'
+import { useRecoilValue } from 'recoil'
 import styled from 'styled-components'
 
-export const GetDetailManagerInfo = ({ meetingMemberResponseDto }) => {
+export const GetDetailManagerInfo = () => {
+  const atom = useRecoilValue(fetchDetailGlobalState)
+  const { meetingMemberDto } = atom
   const [isFollow, setIsFollow] = useState(false)
-  const managerName = meetingMemberResponseDto?.nickname || '오피스너 매니저'
-  const managerIntroduce =
-    meetingMemberResponseDto?.bio ||
-    '오피스너 그는 전설이다. 오피스너 그는 전설이다. '
+  const managerName = meetingMemberDto?.nickname
+  const managerIntroduce = meetingMemberDto?.bio
+
+  useEffect(() => {}, [managerName, managerIntroduce])
 
   // 대충 구현만 한거고 실제 사용시에는 클릭시마다 api호출 필요할듯
   const handleFollow = () => {

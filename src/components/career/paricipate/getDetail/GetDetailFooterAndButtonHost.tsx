@@ -1,36 +1,52 @@
-import { requestMeetingCloseApi } from '@/api'
+import { requestMeetingCloseApi, requestMeetingReopenApi } from '@/api'
 import { Button } from '@/components'
-
+import { fetchDetailGlobalState } from '@/recoil'
+import { theme } from '@/styles'
+import { useParams } from 'react-router-dom'
+import { useRecoilValue } from 'recoil'
 import styled from 'styled-components'
 
-export const GetDetailFooterAndButtonHost = ({ closing, meetingId }) => {
-  console.log('footer: ', closing)
-  const isClosed = closing
-  const roomId = meetingId
+export const GetDetailFooterAndButtonHost = () => {
+  const { detailid } = useParams()
+  const atom = useRecoilValue(fetchDetailGlobalState)
+  const { closing } = atom
+  const roomId = detailid
+
+  if (!roomId) {
+    return null
+  }
 
   const handleButtonClick = async () => {
-    const response = await requestMeetingCloseApi(roomId)
-    if (response) {
-      console.log('완료')
+    let api
+    if (closing) {
+      api = requestMeetingReopenApi
+    } else {
+      api = requestMeetingCloseApi
     }
+
+    const res = await api(roomId)
+    console.log(res)
   }
 
-  const renderText = (isClosed: boolean) => {
-    const text = isClosed ? '다시 모집하기' : '모집 마감하기'
-    return text
-  }
+  const buttonText = closing ? '모집 종료' : '모집 마감하기'
+  const bgColor = closing ? theme.greyScale.grey2 : ''
+  const borderColor = closing ? theme.greyScale.grey2 : ''
+  const color = closing ? theme.greyScale.grey3 : ''
 
   return (
     <>
       <Wrapper>
         <BtnWrap>
           <Button
-            onClick={() => handleButtonClick}
+            onClick={() => handleButtonClick()}
             $btnWidth="100%"
             $btnHeight="60px"
             $fontSize="20px"
-            $borderRadius="8px">
-            {renderText(isClosed)}
+            $borderRadius="8px"
+            $borderColor={borderColor}
+            $bgColor={bgColor}
+            color={color}>
+            {buttonText}
           </Button>
         </BtnWrap>
       </Wrapper>

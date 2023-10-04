@@ -1,33 +1,22 @@
 import { useRecoilState } from 'recoil'
 import styled from 'styled-components'
-import { careerEditGlobalState } from '@/recoil'
+import { editDtoAtom } from '@/recoil'
 
 export const EditTitleAndDescription = () => {
-  const [globalState, setGlobalState] = useRecoilState(careerEditGlobalState)
+  const [globalState, setGlobalState] = useRecoilState(editDtoAtom)
   const { title, description } = globalState
 
   const maxTitleLength = 25
   const maxDescriptionLength = 500
 
-  const handleTitleChange = e => {
+  const handleInputChange = (e: any, propertyKey: string) => {
     const text = e.target.value
-    if (text.length <= maxDescriptionLength) {
-      setGlobalState(prev => ({
-        ...prev,
-        title: text
-      }))
-    }
+    setGlobalState(prevText => ({
+      ...prevText,
+      [propertyKey]: text
+    }))
   }
-
-  const handleDescriptionChange = e => {
-    const text = e.target.value
-    if (text.length <= maxDescriptionLength) {
-      setGlobalState(prev => ({
-        ...prev,
-        description: text
-      }))
-    }
-  }
+  
   return (
     <>
       <QuestionTitle>
@@ -36,24 +25,26 @@ export const EditTitleAndDescription = () => {
 
       <InputContainer>
         <InputContents
+          value={title || ''}
           placeholder="제목을 입력하세요"
-          onChange={handleTitleChange}
+          onChange={e => handleInputChange(e, 'title')}
           maxLength={maxTitleLength}
         />
       </InputContainer>
       <InputLength>
-        {title.length}/{maxTitleLength}
+        {title?.length}/{maxTitleLength}
       </InputLength>
       <QuestionDescription>모임 소개글을 입력해주세요.</QuestionDescription>
       <TextAreaContainer>
         <TextAreaContents
+          value={description || ''}
           placeholder="텍스트를 입력하세요"
-          onChange={handleDescriptionChange}
+          onChange={e => handleInputChange(e, 'description')}
           maxLength={maxDescriptionLength}
         />
       </TextAreaContainer>
       <TextAreaLengthWrap>
-        {description.length}/{maxDescriptionLength}
+        {description?.length}/{maxDescriptionLength}
       </TextAreaLengthWrap>
     </>
   )

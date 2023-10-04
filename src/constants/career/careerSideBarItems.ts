@@ -14,7 +14,7 @@ export const CAREER_SIDEBAR_ITMES = [
       '고객・영업',
       '개발',
       '게임기획・개발',
-      '금융∙컨설팅・VC',
+      '금융・컨설팅・VC',
       '교육',
       '데이터・AI∙ML',
       '디자인',

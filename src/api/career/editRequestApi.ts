@@ -1,13 +1,11 @@
 import { baseInstanceFormData } from '../axios'
 import { requestCreateResponseDataProps } from '@/types'
 
-export async function careerCreateApi(dto, file) {
+export async function editRequestApi(dto, file, meetingId) {
   try {
     const formData = new FormData()
-    // formData.append('dto', JSON.stringify(dto)) // 요거 안댐
 
     formData.append(
-      // 요거 댐
       'dto',
       new Blob([JSON.stringify(dto)], { type: 'application/json' })
     )
@@ -17,7 +15,7 @@ export async function careerCreateApi(dto, file) {
     }
 
     const response = await baseInstanceFormData.post(
-      '/develop/create',
+      `/develop/update/${meetingId}`,
       formData
     )
 

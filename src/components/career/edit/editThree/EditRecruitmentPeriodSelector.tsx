@@ -4,11 +4,11 @@ import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import 'dayjs/locale/ko'
 import { useSetRecoilState } from 'recoil'
-import { careerEditGlobalState } from '@/recoil'
+import { editDtoAtom } from '@/recoil'
 import dayjs from 'dayjs'
 
 export const EditRecruitmentPeriodSelector = () => {
-  const setGlobalState = useSetRecoilState(careerEditGlobalState)
+  const setGlobalState = useSetRecoilState(editDtoAtom)
 
   const handleStartDateChange = date => {
     const dateFormat_Start = dayjs(date).format('YYYY-MM-DD')

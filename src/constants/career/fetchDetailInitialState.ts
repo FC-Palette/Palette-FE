@@ -1,7 +1,8 @@
 import { fetchDetailProps } from '@/types/career/careerDetailProps'
 
 export const fetchDetailInitialState: fetchDetailProps = {
-  meetingMemberResponseDto: {
+  meetingMemberDto: {
+    id: 0,
     nickname: '요한이',
     bio: '안녕하세요',
     image: null
@@ -29,6 +30,5 @@ export const fetchDetailInitialState: fetchDetailProps = {
   hits: 1,
   likes: 0,
   createdAt: '2023-09-26T17:56:43.916435',
-  closing: false,
-  meetingMemberDto: {}
+  closing: false
 }

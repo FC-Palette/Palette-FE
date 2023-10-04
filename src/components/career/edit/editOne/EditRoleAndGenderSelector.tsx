@@ -3,7 +3,7 @@ import { CareerCreateMeetingCommonQuestion } from '../..'
 import { profileNCareerFilter } from '@/constants'
 import { iconMapping } from '@/components'
 import { useRecoilState } from 'recoil'
-import { careerEditGlobalState } from '@/recoil'
+import { editDtoAtom } from '@/recoil'
 
 interface SelectedAnswerProps {
   $isSelected: boolean
@@ -11,7 +11,7 @@ interface SelectedAnswerProps {
 }
 
 export const EditRoleAndGenderSelector = () => {
-  const [globalState, setGlobalState] = useRecoilState(careerEditGlobalState)
+  const [globalState, setGlobalState] = useRecoilState(editDtoAtom)
   const { sex, positions } = globalState // position === 직급
 
   const sexList = ['무관', '남성만', '여성만']

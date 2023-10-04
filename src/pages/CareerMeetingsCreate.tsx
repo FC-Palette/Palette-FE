@@ -11,7 +11,11 @@ import {
   StepThreeCard,
   StepTwoCard
 } from '@/components/career'
-import { careerCreateGlobalState, modalOnState } from '@/recoil'
+import {
+  careerCreateGlobalState,
+  careerImageState,
+  modalOnState
+} from '@/recoil'
 import { CREATE_MODAL_TEXT } from '@/constants'
 import { CareerUseParamsProps } from '@/types'
 import { careerCreateApi } from '@/api'
@@ -20,6 +24,7 @@ export const CareerMeetingsCreate = () => {
   const [modlaOnState, setModalOnState] = useRecoilState(modalOnState)
   const [modalText, setModalText] = useState(CREATE_MODAL_TEXT.create)
   const createAtom = useRecoilValue(careerCreateGlobalState)
+  const imageAtom = useRecoilValue(careerImageState)
   const navigate = useNavigate()
   const { createstepid = '1' } = useParams<CareerUseParamsProps>()
 
@@ -28,22 +33,18 @@ export const CareerMeetingsCreate = () => {
     navigate(`/create/${nextStep}`)
   }
 
+  const blobImageFiles = imageAtom.file
+
   // 개설하기
   const handleCreateMeeting = async () => {
     setModalText(CREATE_MODAL_TEXT.create)
-    setModalOnState(true)
-    // 채팅창 생성하는 로직 여기 넣어야함
 
-    const response = await careerCreateApi(createAtom)
+    const response = await careerCreateApi(createAtom, blobImageFiles)
 
-    console.log(response)
-    if (response.response === 200) {
-      navigate('/career')
+    if (!response) {
+      setModalOnState(true)
     }
   }
-
-  console.log(createAtom)
-  
 
   // 취소하기
   const handleCreateCancel = () => {
@@ -54,7 +55,7 @@ export const CareerMeetingsCreate = () => {
   // 모달 왼쪽 버튼 클릭 시 실행
   const handleConfirmYes = () => {
     if (modalText === CREATE_MODAL_TEXT.create) {
-      // alert('상세 페이지 이동 로직')
+      navigate('/career')
       setModalOnState(false)
     } else if (modalText === CREATE_MODAL_TEXT.cancel) {
       alert('삭제')
@@ -68,8 +69,8 @@ export const CareerMeetingsCreate = () => {
       alert('채팅 페이지 이동 로직')
       setModalOnState(false)
     } else if (modalText === CREATE_MODAL_TEXT.cancel) {
+      // setModalOnState(false)
       alert('유지')
-      setModalOnState(false)
     }
   }
 

@@ -46,7 +46,7 @@ export const iconMapping: IconMapping = {
   '고객・영업': <UserCirlceAdd />,
   '개발': <MessageProgramming />,
   '게임기획・개발': <Game />,
-  '금융∙컨설팅・VC': <Moneys />,
+  '금융・컨설팅・VC': <Moneys />,
   '교육': <Edit />,
   '데이터・AI∙ML': <Data />,
   '디자인': <Brush2 />,
