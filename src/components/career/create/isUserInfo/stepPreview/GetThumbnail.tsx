@@ -9,8 +9,6 @@ export const GetThumbnail = () => {
   const atom = useRecoilValue(careerImageState)
   const thumbnailImage = atom.file
 
-  console.log('thumbnailImage: ', thumbnailImage)
-
   const settings = {
     dots: true,
     arrows: false,

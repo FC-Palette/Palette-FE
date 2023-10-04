@@ -55,15 +55,11 @@ export const SecondHandDetailCard = ({ productId }) => {
             <PreviewPrice price={secondHandDetailList.price} />
             <GetTitleAndDescription
               detailText="아직 이 중고거래에 대한 소개가 작성되지 않았어요."
-              meetupTitle={secondHandDetailList.title}
-              meetupDescription={secondHandDetailList.description}
+              title={secondHandDetailList.title}
+              description={secondHandDetailList.description}
             />
             <PreviewCategory category={secondHandDetailList.category} />
-            <GetDetailStats
-              hits={secondHandDetailList.bookmarkCount}
-              likes={secondHandDetailList.hits}
-              createdAt={secondHandDetailList.createdAt}
-            />
+            <GetDetailStats />
             <SecondHandInfo
               selectedDays={''}
               transactionStartTime={secondHandDetailList.transactionStartTime}

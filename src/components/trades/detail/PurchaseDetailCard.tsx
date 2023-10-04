@@ -82,15 +82,11 @@ export const PurchaseDetailCard = ({ offerId }) => {
             <PreviewPrice price={purchaseDetailList.price} />
             <GetTitleAndDescription
               detailText="아직 이 공동거래에 대한 소개가 작성되지 않았어요."
-              meetupTitle={purchaseDetailList.title}
-              meetupDescription={purchaseDetailList.description}
+              title={purchaseDetailList.title}
+              description={purchaseDetailList.description}
             />
             <PreviewCategory category={purchaseDetailList.category} />
-            <GetDetailStats
-              hits={purchaseDetailList.bookmarkCount}
-              likes={purchaseDetailList.hits}
-              createdAt={purchaseDetailList.createdAt}
-            />
+            <GetDetailStats />
             <PurchaseInfo
               currentCount={purchaseDetailList.currentParticipantCount}
               startDay={startDateString}
