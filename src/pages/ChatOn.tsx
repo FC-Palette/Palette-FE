@@ -11,17 +11,17 @@ import { ArrowLeft2, More } from 'iconsax-react'
 import { STATUS_TEXTS, CHATON_TEXTS } from 'constants/index'
 import { useRecoilState } from 'recoil'
 import { showMembersState, roomIdState } from 'recoil/index'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { decoder } from 'utils/index'
 import { msgProps } from 'types/index'
-import { useSetRecoilState } from 'recoil'
+import { useRecoilValue } from 'recoil'
 
 import * as SockJS from 'sockjs-client'
-import * as Stomp from '@stomp/stompjs'
+import { Client } from '@stomp/stompjs'
 
 import { getChatLog } from 'api/index'
-import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 
 const [HTTP, CHATPATH, ENTER, SUB] = [
   import.meta.env.VITE_BASE_WS_URL,
@@ -33,13 +33,9 @@ const [HTTP, CHATPATH, ENTER, SUB] = [
 // const nickname = localStorage.getItem('nickname')
 
 export const ChatOn = () => {
-  const location = useLocation()
-  const queryClient = useQueryClient()
-  let roomId = location.state.roomid
-  let memberId = decoder().memberId
-  const setRoomId = useSetRecoilState(roomIdState)
-
-  const [client, setClient] = useState<Stomp.Client>()
+  const memberId = decoder().memberId
+  const roomId = useRecoilValue(roomIdState)
+  const [client, setClient] = useState<Client>()
 
   const [chatLog, setChatLog] = useState<msgProps[]>([])
   const inputRef = useRef<HTMLTextAreaElement>(null)
@@ -56,28 +52,32 @@ export const ChatOn = () => {
 
   const token = `${localStorage.getItem('Token')} `
 
-  const {
-    data: history
-    // isLoading,
-    // isError
-  } = useQuery(['history', roomId], () => {
-    return getChatLog(roomId)
-  })
-  queryClient.invalidateQueries(history)
-  console.log(history)
+  const { data: history } = useQuery(
+    ['history', roomId],
+    () => {
+      return getChatLog(roomId)
+    },
+    {
+      onSuccess: data => {
+        setChatLog(data)
+        return
+      }
+    }
+  )
+
   const sendMessage = (value: string) => {
     const data = {
-      // memberId: memberId,
-      // sender: nickname,
-      content: value
-      // type: 'CHAT',
-      // roomId: roomId
+      memberId: memberId,
+      sender: memberId,
+      content: value,
+      type: 'CHAT',
+      roomId: roomId
     }
     if (client) {
       client.publish({
         destination: CHATPATH,
-        headers: { token },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
+        skipContentLengthHeader: true
       })
       console.log(chatLog)
     }
@@ -92,7 +92,6 @@ export const ChatOn = () => {
 
   // 1. useEffect로 채팅방 메시지 리스트(DB 내부)를 받아와 상태값(state)에 저장
   useEffect(() => {
-    setRoomId(roomId)
     if (!token) {
       alert(CHATON_TEXTS.noToken)
       return backToList()
@@ -101,11 +100,8 @@ export const ChatOn = () => {
       alert(CHATON_TEXTS.noRoomId)
       return backToList()
     }
-    if (history) {
-      setChatLog(history)
-      console.log(history)
-    }
-    let client = new Stomp.Client({
+
+    let client = new Client({
       webSocketFactory: () => {
         const sockjs = new SockJS(`${HTTP}`)
         return sockjs
@@ -116,6 +112,7 @@ export const ChatOn = () => {
           data => {
             const received = JSON.parse(data.body)
             console.log(received)
+            data.nack()
             setChatLog(prev => [...prev, received])
           },
           { token }
@@ -124,7 +121,7 @@ export const ChatOn = () => {
           destination: ENTER,
           body: JSON.stringify({
             roomId: roomId,
-            memberId: memberId
+            sender: memberId
           })
         })
       },
@@ -140,6 +137,7 @@ export const ChatOn = () => {
     })
     client.activate()
     setClient(client)
+
     return () => {
       client.deactivate()
     }

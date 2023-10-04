@@ -47,6 +47,8 @@ export const MsgActions = ({ $sender, msgRef, message, roomId, msgId }) => {
         $isTop={false}
         onClick={() => {
           setTimeout(async () => {
+            console.log(msgId)
+
             await reset()
             await createNotice(roomId, msgId)
           }, 300)

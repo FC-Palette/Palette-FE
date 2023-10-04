@@ -15,6 +15,7 @@ import { renderTime, formatLocalDateTime, decoder } from 'utils/index'
 
 // ############################################################
 export const ChatField = ({ messages }) => {
+  console.log(messages)
   const roomId = useRecoilValue(roomIdState)
   const [innerHeight, setInnerHeight] = useState<number>(0)
   let memberId = decoder().memberId
@@ -77,7 +78,7 @@ export const ChatField = ({ messages }) => {
       showMsgActions: openMsgActionsIndex === index && msgInfo.isChat,
       toggleMsgActions: () => toggleMsgActions(index),
       roomId: roomId,
-      msgId: message.id
+      msgId: message.messageId
     }
     if (msgInfo.isShare) {
       msgProps.message = (
@@ -102,21 +103,62 @@ export const ChatField = ({ messages }) => {
           <DateSeperator
             date={MsgDate}
             $isFirst={prevMsgDate}
+            key={`date-${message.id}`}
           />
-          {msgInfo.isSender && <Sender {...msgProps} />}
-          {msgInfo.isRecipient && <Recipient {...msgProps} />}
-          {msgInfo.isLeave && <Participation {...statusProps} />}
-          {msgInfo.isJoin && <Participation {...statusProps} />}
+          {msgInfo.isSender && (
+            <Sender
+              {...msgProps}
+              key={`date-${message.id}`}
+            />
+          )}
+          {msgInfo.isRecipient && (
+            <Recipient
+              {...msgProps}
+              key={`recipient-${message.id}`}
+            />
+          )}
+          {msgInfo.isLeave && (
+            <Participation
+              {...statusProps}
+              key={`leave-${message.id}`}
+            />
+          )}
+          {msgInfo.isJoin && (
+            <Participation
+              {...statusProps}
+              key={`join-${message.id}`}
+            />
+          )}
         </React.Fragment>
       )
     }
     //채팅방 날짜변경 없을시 조건부 렌더링
     return (
       <React.Fragment key={message.id}>
-        {msgInfo.isSender && <Sender {...msgProps} />}
-        {msgInfo.isRecipient && <Recipient {...msgProps} />}
-        {msgInfo.isLeave && <Participation {...statusProps} />}
-        {msgInfo.isJoin && <Participation {...statusProps} />}
+        {msgInfo.isSender && (
+          <Sender
+            {...msgProps}
+            key={`date-${message.id}`}
+          />
+        )}
+        {msgInfo.isRecipient && (
+          <Recipient
+            {...msgProps}
+            key={`recipient-${message.id}`}
+          />
+        )}
+        {msgInfo.isLeave && (
+          <Participation
+            {...statusProps}
+            key={`leave-${message.id}`}
+          />
+        )}
+        {msgInfo.isJoin && (
+          <Participation
+            {...statusProps}
+            key={`join-${message.id}`}
+          />
+        )}
       </React.Fragment>
     )
   }
