@@ -3,13 +3,18 @@ import { useNavigate } from 'react-router-dom'
 import { Flexbox, columnise } from 'styles/index'
 import { useCallback } from 'react'
 import { formatHourMinute, formatLocalDateTime } from 'utils/index'
+import { useSetRecoilState } from 'recoil'
+import { noticeState } from '@/recoil'
 
 const interpoint = '\u00B7 '
-export const ChatAnnListItem = ({ notice, createdAt, memberId }) => {
+export const ChatAnnListItem = ({ notice, createdAt, memberId, noticeId }) => {
   const navigate = useNavigate()
-  const handleNavigate = useCallback(() => {
+  const setNotice = useSetRecoilState(noticeState)
+
+  const handleNavigate = () => {
+    setNotice(noticeId)
     navigate('/chatann')
-  }, [])
+  }
   return (
     <Wrapper onClick={handleNavigate}>
       <Title>{notice}</Title>

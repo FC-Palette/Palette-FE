@@ -6,13 +6,14 @@ import { MegaPhoneIcon } from 'components/index'
 // import { useQuery } from '@tanstack/react-query'
 
 // $registered 대신 getNotice를 통해 받아온 채팅방공지를 상태에 저장, 조건부 렌더링
-export const ChatAnn = ({ $registered, $personal }) => {
+export const ChatAnn = ({ $registered, $personal, onClick }) => {
   return (
     <>
       {$registered && (
         <ChatTopBar
           $registered={$registered}
-          $personal={$personal}>
+          $personal={$personal}
+          onClick={onClick}>
           <MegaPhoneIcon $iconColor="blue0" />
           <TopBarContent>{$registered}</TopBarContent>
         </ChatTopBar>
@@ -32,6 +33,7 @@ export const ChatTopBar = styled(Flexbox)<{
     props.$registered && props.$personal === false
       ? `1px solid ${props.theme.greyScale.grey3}`
       : 'none'};
+  cursor: pointer;
 `
 export const TopBarContent = styled.div`
   width: 100%;

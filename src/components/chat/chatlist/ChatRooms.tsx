@@ -17,12 +17,9 @@ export const ChatRooms = () => {
 
   //authInstance를 통해 토큰값을 담아 고유하게 식별된 유저의 [채팅 리스트]를 g/p로 불러온다.
   //ReactQuery를 통해 탭을 통해 subpath가 바뀔 때 리페칭.
-  const { data: rooms, isLoading } = useQuery(['chatRooms', chatwith], () => {
+  const { data: rooms } = useQuery(['chatRooms', chatwith], () => {
     return getChatList(chatwith)
   })
-  if (isLoading) {
-    return <div>Loading...</div>
-  }
   console.log(rooms)
   return (
     <Wrapper $innerHeight={innerHeight}>

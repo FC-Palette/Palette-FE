@@ -7,7 +7,7 @@ export const Member = ({ memberId, url, name, host }) => {
   const isMyself = memberId === decoder().memberId
   return (
     <Wrapper>
-      <Image src={url}></Image>
+      <Image src={url} />
       <Username>{name}</Username>
     </Wrapper>
   )

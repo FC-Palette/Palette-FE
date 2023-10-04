@@ -1,14 +1,16 @@
 import { styled } from 'styled-components'
 import { Image } from 'components/index'
 import { Flexbox } from 'styles/index'
+import { formatLocalDateTime } from 'utils/index'
 
-export const AnnPublisher = () => {
+export const AnnPublisher = ({ src, createdAt }) => {
+  console.log(createdAt, formatLocalDateTime(createdAt))
   return (
     <Wrapper>
-      <Image src="https://avatars.githubusercontent.com/u/142562921?s=200&v=4"></Image>
+      <Image src={src} />
       <AnnInfo>
         <Publisher>고스트 사원</Publisher>
-        <Date>7월 12일 오후 12:10</Date>
+        <Date>{formatLocalDateTime(createdAt)}</Date>
       </AnnInfo>
     </Wrapper>
   )
