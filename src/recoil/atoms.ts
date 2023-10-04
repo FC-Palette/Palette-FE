@@ -57,3 +57,6 @@ export const noticeState = atom({
   key: 'noticeState',
   default: ''
 })
+export const chatTypeState = atom<string>({
+  key: 'chatTypeState'
+})

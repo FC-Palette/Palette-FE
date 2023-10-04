@@ -103,7 +103,7 @@ export const ChatField = ({ messages }) => {
     }
 
     //채팅방 날짜 변경 조건부 렌더링
-    if (dateSeperator) {
+    if (MsgDate && dateSeperator) {
       return (
         <React.Fragment key={message.messageId}>
           <DateSeperator
