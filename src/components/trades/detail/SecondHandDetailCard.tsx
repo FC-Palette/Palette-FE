@@ -16,32 +16,35 @@ import {
   DetailHeader
 } from 'components/trades/detail/index'
 import { CareerCreateMeetingCommonQuestion } from 'components/career/create/common/index'
+import { decoder } from 'utils/index'
+import { PurchaseFooter } from 'components/trades/detail'
 
 export const SecondHandDetailCard = ({ productId }) => {
   const [secondHandDetailList, setSecondHandDetailList] =
     useState<SecondHandDetailResProps | null>(null)
+  const decodedToken = decoder()
+  const isAdmin = decodedToken?.memberId === secondHandDetailList?.member?.id
 
   useEffect(() => {
     const DetailData = async () => {
-      try {
-        const res = await SecondHandDetail(productId)
-        if (res.success) {
-          setSecondHandDetailList(res.response)
-        } else {
-          console.error('서버에서 오류 응답을 받았습니다.')
-        }
-      } catch (error) {
-        console.error('요청을 보낼 때 오류가 발생했습니다.', error)
+      const res = await SecondHandDetail(productId)
+      if (res.success) {
+        setSecondHandDetailList(res.response)
       }
     }
+
     DetailData()
   }, [productId])
-
   return (
     <>
       {secondHandDetailList && (
         <>
-          <DetailHeader title={secondHandDetailList.title} />
+          <DetailHeader
+            title={secondHandDetailList.title}
+            productId={productId}
+            offerId={null}
+            isAdmin={isAdmin}
+          />
           <Wrapper>
             <ImageDetail meetupImages={secondHandDetailList.images} />
             <ManagerInfo
@@ -71,6 +74,13 @@ export const SecondHandDetailCard = ({ productId }) => {
             </CareerCreateMeetingCommonQuestion>
             <OthertProducts />
           </Wrapper>
+          <PurchaseFooter
+            isAdmin={isAdmin}
+            isClosing={null}
+            isSoldOut={secondHandDetailList.isSoldOut}
+            offerId={null}
+            productId={productId}
+          />
         </>
       )}
     </>

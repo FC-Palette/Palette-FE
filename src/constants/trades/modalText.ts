@@ -29,3 +29,17 @@ export const SECONDHAND_DELETE_MODAL_TEXT = [
   '삭제',
   '유지하기'
 ]
+
+export const SECONDHAND_CLOSING_MODAL_TEXT = [
+  '거래 종료하기',
+  '거래글을 종료하시겠습니까?',
+  '종료',
+  '유지하기'
+]
+
+export const AGREE_MODAL_TEXT = [
+  '개인정보 공유 동의',
+  '공동구매에 참여하기 위해서 개인정보 공유 동의가 필요합니다. 공동구매 참여자들에게 재직 중인 회사, 층수,이름, 계좌번호 정보가 제공됩니다.',
+  '페이지 남기',
+  '채팅방 이동'
+]

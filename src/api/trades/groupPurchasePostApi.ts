@@ -1,13 +1,24 @@
-import { authInstance } from 'api/index'
+import { baseInstanceFormData } from 'api/index'
 
-export async function GroupPurchasePostApi(data: FormData) {
+export async function GroupPurchasePostApi(dto, file) {
+  console.log(dto)
+  console.log(file)
   try {
-    const response = await authInstance.post('/api/groupPurchase', data, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    })
+    const formData = new FormData()
 
+    formData.append(
+      'dto',
+      new Blob([JSON.stringify(dto)], { type: 'application/json' })
+    )
+
+    for (const blob of file) {
+      formData.append('file', blob, `${Date.now()}.png`)
+    }
+
+    const response = await baseInstanceFormData.post(
+      '/api/groupPurchase',
+      formData
+    )
     return response.data
   } catch (error) {
     console.error('PURCHASEPOST_FAILURE', error)

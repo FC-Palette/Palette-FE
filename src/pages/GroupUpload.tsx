@@ -4,17 +4,19 @@ import {
 } from 'components/trades/preview/index'
 import { UploadFooter } from 'components/trades/upload/index'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import { modalOnState } from 'recoil/index'
 import { TRADES_MODAL_TEXT } from 'constants/trades/index'
 import { useState } from 'react'
 import {
   tradescreateglobalstate,
-  initialTradeCreateGlobalState
+  initialTradeCreateGlobalState,
+  ImageState
 } from 'recoil/index'
 import { GroupPurchasePostApi } from 'api/trades/index'
 import { BackgroundModal, ModalButtons } from 'components/index'
 import { PreviewFooter } from 'components/trades/preview/index'
+
 // import styled from 'styled-components'
 interface Params {
   [key: string]: string | undefined
@@ -29,6 +31,7 @@ export const GroupUpload = () => {
   const [tradesGlobalState, setTradesGlobalState] = useRecoilState(
     tradescreateglobalstate
   )
+  const imageGlobalState = useRecoilValue(ImageState)
 
   const handleNextStep = () => {
     const nextStep = parseInt(stepId) + 1
@@ -36,45 +39,9 @@ export const GroupUpload = () => {
   }
 
   const handleTrades = async () => {
-    try {
-      // 이미지 데이터 추가
-      const formData = new FormData()
-
-      if (tradesGlobalState.image.length > 0) {
-        for (const imageFile of tradesGlobalState.image) {
-          formData.append('images', imageFile, `${Date.now()}.png`)
-        }
-      }
-      // DTO 데이터 추가
-      const jsonData = {
-        title: tradesGlobalState.title,
-        description: tradesGlobalState.description,
-        price: tradesGlobalState.price,
-        category: tradesGlobalState.category,
-        startDate: tradesGlobalState.startDate,
-        endDate: tradesGlobalState.endDate,
-        headCount: tradesGlobalState.headCount,
-        closingType: tradesGlobalState.closingType,
-        accountOwner: tradesGlobalState.accountOwner,
-        accountNumber: tradesGlobalState.accountNumber,
-        shopUrl: tradesGlobalState.shopUrl,
-        bank: tradesGlobalState.bank
-      }
-
-      formData.append(
-        'dto',
-        new Blob([JSON.stringify(jsonData)], { type: 'application/json' })
-      )
-
-      // 서버로 데이터 전송
-      const response = await GroupPurchasePostApi(formData)
-      setModalText(TRADES_MODAL_TEXT.create)
-      setModalOnState(true)
-
-      console.log('서버 응답:', response)
-    } catch (error) {
-      console.log('요청 오류', error)
-    }
+    await GroupPurchasePostApi(tradesGlobalState, imageGlobalState.file)
+    setModalText(TRADES_MODAL_TEXT.create)
+    setModalOnState(true)
   }
 
   const handleCancel = () => {

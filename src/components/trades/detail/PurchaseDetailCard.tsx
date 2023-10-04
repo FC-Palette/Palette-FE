@@ -6,43 +6,39 @@ import {
   PreviewCategory,
   PreviewUrl
 } from 'components/trades/preview/index'
-import {
-  ManagerInfo,
-  PurchaseGuestFooter
-} from 'components/trades/detail/index'
+import { ManagerInfo } from 'components/trades/detail/index'
 import { GroupPurchaseDetail } from 'api/trades/index'
 import { GroupPurchaseDetailResProps } from 'types/trades/index'
 import { useEffect, useState } from 'react'
 import { GetDetailStats } from 'components/career/paricipate/getDetail/index'
-import { ImageDetail, DetailGroupHeader } from 'components/trades/detail/index'
-import { PurchaseAdminFooter } from 'components/trades/detail'
+import { ImageDetail, DetailHeader } from 'components/trades/detail/index'
+import { PurchaseFooter } from 'components/trades/detail'
+import { decoder } from 'utils/index'
 
 export const PurchaseDetailCard = ({ offerId }) => {
   const [purchaseDetailList, setPurchaseDetailList] =
     useState<GroupPurchaseDetailResProps | null>(null)
   const [timeremaining, setTimeremaining] = useState<string>('')
-  const isAdmin = false
+  const decodedToken = decoder()
+  const isAdmin = decodedToken?.memberId === purchaseDetailList?.member?.id
 
   useEffect(() => {
     const DetailData = async () => {
-      try {
-        const res = await GroupPurchaseDetail(offerId)
-        if (res.success) {
-          setPurchaseDetailList(res.response)
+      const res = await GroupPurchaseDetail(offerId)
+      if (res.success) {
+        setPurchaseDetailList(res.response)
 
-          const endDate = new Date(res.response.endDate)
-          const currentTime = new Date()
-          const timeDifference = endDate.getTime() - currentTime.getTime()
-          const days = Math.floor(timeDifference / (3600000 * 24)) // 일
-          const hours = Math.floor((timeDifference % (3600000 * 24)) / 3600000) // 시간
-          const minutes = Math.floor((timeDifference % 3600000) / 60000) // 분
+        const endDate = new Date(res.response.endDate)
+        const currentTime = new Date()
+        const timeDifference = endDate.getTime() - currentTime.getTime()
+        const days = Math.floor(timeDifference / (3600000 * 24)) // 일
+        const hours = Math.floor((timeDifference % (3600000 * 24)) / 3600000) // 시간
+        const minutes = Math.floor((timeDifference % 3600000) / 60000) // 분
 
-          const remainingTime = `${days}일 ${hours} : ${minutes} `
+        const remainingTime = `${days}일 ${hours} : ${minutes} `
 
-          setTimeremaining(remainingTime)
-        } else {
-        }
-      } catch (error) {}
+        setTimeremaining(remainingTime)
+      }
     }
     DetailData()
   }, [offerId])
@@ -70,7 +66,12 @@ export const PurchaseDetailCard = ({ offerId }) => {
     <>
       {purchaseDetailList && (
         <>
-          <DetailGroupHeader title={purchaseDetailList.title} />
+          <DetailHeader
+            title={purchaseDetailList.title}
+            offerId={offerId}
+            productId={null}
+            isAdmin={isAdmin}
+          />
           <Wrapper>
             <ImageDetail meetupImages={purchaseDetailList.image} />
             <ManagerInfo
@@ -99,7 +100,13 @@ export const PurchaseDetailCard = ({ offerId }) => {
             />
             <PreviewUrl shopUrl={purchaseDetailList.shopUrl} />
           </Wrapper>
-          {isAdmin ? <PurchaseAdminFooter /> : <PurchaseGuestFooter />}
+          <PurchaseFooter
+            isAdmin={isAdmin}
+            isClosing={purchaseDetailList.isClosing}
+            isSoldOut={null}
+            offerId={offerId}
+            productId={null}
+          />
         </>
       )}
     </>

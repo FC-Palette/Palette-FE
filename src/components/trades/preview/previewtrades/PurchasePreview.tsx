@@ -6,8 +6,7 @@ import {
   GetThumbnail,
   GetTitleAndDescription
 } from 'components/career/create/isUserInfo/index'
-import { iconMapping1 } from 'components/common/index'
-import { tradescreateglobalstate } from 'recoil/index'
+import { tradescreateglobalstate, ImageState } from 'recoil/index'
 import {
   PurchaseInfo,
   PreviewPrice,
@@ -19,24 +18,25 @@ import {
 export const PurchasePreview = () => {
   const tradesGlobalState = useRecoilValue(tradescreateglobalstate)
   const {
-    image,
     title,
     description,
     price,
     startDate,
     endDate,
-    timeRemaining,
+
     headCount,
     shopUrl,
     category
   } = tradesGlobalState
-  const categoryLabel = iconMapping1[category]?.label || '미리보기'
+
+  const imageGlobalState = useRecoilValue(ImageState)
+  const { file } = imageGlobalState
 
   return (
     <>
       <PreviewHeader title={title} />
       <Wrapper>
-        <GetThumbnail meetupImages={image} />
+        <GetThumbnail meetupImages={file} />
         <GetRoomManagerInfo />
         <PreviewPrice price={price} />
         <GetTitleAndDescription
@@ -44,13 +44,13 @@ export const PurchasePreview = () => {
           meetupTitle={title}
           meetupDescription={description}
         />
-        <PreviewCategory category={categoryLabel} />
+        <PreviewCategory category={category} />
         <GetStats />
         <PurchaseInfo
           currentCount="1"
           startDay={startDate}
           endDay={endDate}
-          timeRemaining={timeRemaining}
+          timeRemaining={''}
           headCount={headCount}
         />
         <PreviewUrl shopUrl={shopUrl} />

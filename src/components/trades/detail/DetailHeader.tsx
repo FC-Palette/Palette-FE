@@ -1,12 +1,15 @@
-import { BackgroundModal, Header, ModalButtons } from '@/components'
+// CommonHeader.js
+import { useState } from 'react'
+import styled from 'styled-components'
+import { Header, ModalButtons } from 'components/index'
 import { ArrowLeft2, Heart, More, Send2, Trash, Edit } from 'iconsax-react'
 import { useNavigate } from 'react-router-dom'
-import styled from 'styled-components'
 import { SECONDHAND_DELETE_MODAL_TEXT } from 'constants/trades/index'
-import { useState } from 'react'
 import { useRecoilState } from 'recoil'
-import { modalOnState } from 'recoil/index'
+import { HeaderModal } from 'components/trades/detail/index'
+import { headerModalOnState } from 'recoil/index'
 import { CREATE_EDIT_TEXT } from 'constants/index'
+import { GroupPurchaseDeleteApi, SecondHandDeleteApi } from 'api/trades/index'
 
 interface DropdownProps {
   $isOpen: boolean
@@ -16,40 +19,57 @@ interface OptionItemProps {
   $isSelected: boolean
   onClick: () => void
 }
-
-export const DetailHeader = ({ title }) => {
+// 공통 헤더 컴포넌트
+export const DetailHeader = ({ title, isAdmin, productId, offerId }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [selectedOption, setSelectedOption] = useState<string>('')
-  const isManager = true
+  const [selectedOption, setSelectedOption] = useState('')
   const navigate = useNavigate()
-  const [isModalOpen, setIsModalOpen] = useRecoilState(modalOnState)
+  const [isModalOpen, setIsModalOpen] = useRecoilState(headerModalOnState)
+  const maxLength = 13
+
+  const truncatedTitle =
+    title.length > maxLength ? `${title.substring(0, maxLength)}..` : title
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen)
   }
 
-  const handleOptionClick = (value: string) => {
+  const handleOptionClick = value => {
     setSelectedOption(value)
     setIsOpen(false)
     if (value === '수정하기') {
-      navigate('/secondhandUpload/1')
+      if (offerId) {
+        navigate(`/groupUpload/1`)
+      } else {
+        navigate('/secondhandupload/1')
+      }
     }
     if (value === '삭제하기') {
       setIsModalOpen(!isModalOpen)
     }
   }
 
-  const handleConfirmYes = () => {
-    alert('삭제')
+  const handleConfirmYes = async () => {
+    if (offerId) {
+      await GroupPurchaseDeleteApi(offerId)
+      alert('삭제되었습니다.')
+      navigate('/grouppurchase')
+      setIsModalOpen(false)
+    } else {
+      await SecondHandDeleteApi(productId)
+      alert('삭제되었습니다.')
+      navigate('/secondhand')
+      setIsModalOpen(false)
+    }
   }
 
   const handleConfirmNo = () => {
     setIsModalOpen(false)
   }
 
-  const dynamicHeaderIcon = (isManager: boolean) => {
+  const dynamicHeaderIcon = () => {
     const iconSize = 18
-    return isManager ? (
+    return isAdmin ? (
       <MultiIconWrap>
         <Send2 />
         <DropdownMenu $isOpen={isOpen}>
@@ -85,12 +105,12 @@ export const DetailHeader = ({ title }) => {
             <ArrowLeft2 />
           </StyledIcon>
         }
-        centerText={title}>
-        {dynamicHeaderIcon(isManager)}
+        centerText={truncatedTitle}>
+        {dynamicHeaderIcon()}
       </Header>
 
       {isModalOpen && (
-        <BackgroundModal
+        <HeaderModal
           title={SECONDHAND_DELETE_MODAL_TEXT[0]}
           content={SECONDHAND_DELETE_MODAL_TEXT[1]}>
           <ModalButtons
@@ -99,7 +119,7 @@ export const DetailHeader = ({ title }) => {
             leftBtn={SECONDHAND_DELETE_MODAL_TEXT[2]}
             rightBtn={SECONDHAND_DELETE_MODAL_TEXT[3]}
           />
-        </BackgroundModal>
+        </HeaderModal>
       )}
     </Wrap>
   )

@@ -1,20 +1,30 @@
 import styled from 'styled-components'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Dropzone from 'react-dropzone'
 import { Add } from 'iconsax-react'
 import { DraggableImagePreview } from 'components/index'
 import { useSetRecoilState } from 'recoil'
-import { tradescreateglobalstate } from 'recoil/index'
+import { ImageState } from 'recoil/index'
 
-interface Image {
+interface ImageFile {
   id: string
   url: string
   blob: Blob | null
 }
 
 export const PurchaseImages = () => {
-  const [image, setImage] = useState<Image[]>([])
-  const setTradesGlobalState = useSetRecoilState(tradescreateglobalstate)
+  const [showMessage, setShowMessage] = useState(false)
+  const [images, setImages] = useState<ImageFile[]>([])
+  const setImageGlobalState = useSetRecoilState(ImageState)
+
+  useEffect(() => {
+    if (images.length === 1) {
+      setShowMessage(true)
+      setTimeout(() => {
+        setShowMessage(false)
+      }, 2000)
+    }
+  }, [images.length])
 
   // blob
   const encodeImageToBlob = (file: File, callback: (blob: Blob) => void) => {
@@ -26,8 +36,9 @@ export const PurchaseImages = () => {
     reader.readAsArrayBuffer(file)
   }
 
+  // 업로드시
   const handleImageUpload = (acceptedFiles: File[]) => {
-    if (image.length + acceptedFiles.length > 5) {
+    if (images.length + acceptedFiles.length > 5) {
       return
     }
 
@@ -38,41 +49,43 @@ export const PurchaseImages = () => {
           url: URL.createObjectURL(file),
           blob: blob
         }
-        setImage(previmage => [...previmage, newImg])
 
-        // 이미지를 전역 image 배열에 추가
-        setTradesGlobalState(prevData => ({
+        setImages(prevImages => [...prevImages, newImg])
+
+        // 이미지를 전역 상태 meetupImages 배열에 추가
+        setImageGlobalState((prevData: any) => ({
           ...prevData,
-          image: [...prevData.image, blob]
+          file: prevData.file ? [...prevData.file, blob] : [blob] // 수정
         }))
       })
     })
   }
+
   // 순서 변경
   const handleDragEnd = (result: any) => {
     if (!result.destination) {
       return
     }
 
-    const reorderedimage = [...image]
-    const [movedImage] = reorderedimage.splice(result.source.index, 1)
-    reorderedimage.splice(result.destination.index, 0, movedImage)
-    setImage(reorderedimage)
+    const reorderedImages = [...images]
+    const [movedImage] = reorderedImages.splice(result.source.index, 1)
+    reorderedImages.splice(result.destination.index, 0, movedImage)
+    setImages(reorderedImages)
 
-    setTradesGlobalState((prevData: any) => ({
+    setImageGlobalState((prevData: any) => ({
       ...prevData,
-      image: reorderedimage.map(img => img.blob)
+      file: reorderedImages.map(img => img.blob)
     }))
   }
 
   // 이미지 삭제
   const handleImageDelete = (imageId: string) => {
-    const updatedimage = image.filter(image => image.id !== imageId)
-    setTradesGlobalState((prevData: any) => ({
+    const updatedImages = images.filter(image => image.id !== imageId)
+    setImageGlobalState((prevData: any) => ({
       ...prevData,
-      image: updatedimage
+      file: updatedImages
     }))
-    setImage(updatedimage)
+    setImages(updatedImages)
   }
 
   return (
@@ -90,28 +103,45 @@ export const PurchaseImages = () => {
           </Dropzone>
         </UploadZoneContainer>
         <DraggableImagePreview
-          images={image}
+          images={images}
           onDragEnd={handleDragEnd}
           onDeleteImage={handleImageDelete}
         />
       </TotalContainer>
+
+      {showMessage && (
+        <MessageContainer>
+          드래그로 사진 순서를 변경할 수 있습니다.
+        </MessageContainer>
+      )}
     </>
   )
 }
+
 const TotalContainer = styled.div`
-  width: 380px;
+  width: 100%;
   display: flex;
   margin-top: 8px;
   gap: 8px;
   overflow-x: scroll;
+  padding-bottom: 8px;
 `
 
 const UploadZoneContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  position: relative;
   align-items: center;
+  position: relative;
+`
+
+const AddIcon = styled(Add)`
+  position: absolute;
+  cursor: pointer;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
 `
 
 const UploadZoneBox = styled.div`
@@ -119,8 +149,30 @@ const UploadZoneBox = styled.div`
   width: 90px;
   height: 90px;
   border-radius: 8px;
+  cursor: pointer;
+  position: relative;
+
+  & > ${AddIcon} {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 `
 
-const AddIcon = styled(Add)`
-  position: absolute;
+const MessageContainer = styled.div`
+  width: 250px;
+  height: 37px;
+  background-color: rgba(55, 65, 81, 0.8);
+  font-size: 14px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 4px;
+  z-index: 9999;
 `

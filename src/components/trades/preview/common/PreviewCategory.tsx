@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { categoryMap } from 'constants/trades/index'
 export const PreviewCategory = ({ category }) => {
   const formattedCategory = categoryMap[category] || '알 수 없음'
+
   return (
     <>
       <Container>

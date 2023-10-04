@@ -2,13 +2,16 @@ export interface SortedData {
   createdAt: string
   likes: number
   startDate: string
+  price: number
 }
 
 export enum SortFilter {
   Latest = '최신순',
   Oldest = '오래된순',
   MostLiked = '찜 많은 순',
-  StartDate = '모임시작일 순'
+  StartDate = '모임시작일 순',
+  LowPrice = '가격 낮은 순',
+  HighPrice = '가격 높은 순'
 }
 
 export const sortResponseData = (
@@ -25,6 +28,10 @@ export const sortResponseData = (
         return b.likes - a.likes
       case SortFilter.StartDate:
         return new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
+      case SortFilter.LowPrice:
+        return a.price - b.price
+      case SortFilter.HighPrice:
+        return b.price - a.price
       default:
         return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
     }
