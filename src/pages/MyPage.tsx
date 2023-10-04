@@ -1,13 +1,15 @@
 import { NAVIGATION_PATH } from "constants/index";
-import { Footer, Header } from "components/index";
+import { Footer, Header, MyPageChatBtn } from "components/index";
 import { MyPageEditBtn, MyPageIntro, MyPagePostDisplay, MyPageSelectTab } from "components/index";
 import { Notification, Setting2 } from "iconsax-react";
 import { Link } from "react-router-dom";
-import { styled } from "styled-components";
+import { css, styled } from "styled-components";
+import { useState } from "react";
+import { myPageIntroProps } from "@/types";
 
 export const MyPage = () => {
-
-
+  const [userData, setUserData] = useState<myPageIntroProps | null>(null);
+  
   return (
     <MyPageWrap>      
       <Header centerText="마이페이지">
@@ -22,11 +24,14 @@ export const MyPage = () => {
           </Link>
         </IconWrapper>
       </Header>
-      <MyPageIntro />
-      <MyPageEditBtn></MyPageEditBtn>
-      <MyPagePostArea>
-        <MyPageSelectTab />
-        <MyPagePostDisplay></MyPagePostDisplay>
+      <MyPageIntro userData={userData} setUserData={setUserData} />
+      <BtnWrap>
+        <MyPageEditBtn userData={userData} />
+        <MyPageChatBtn hide={location.pathname === '/mypage/:member_id'}/>
+      </BtnWrap>
+      <MyPageSelectTab />
+      <MyPagePostArea hide={userData?.response?.job === null && location.pathname === '/mypage'} >
+        <MyPagePostDisplay/>
       </MyPagePostArea>
       <Footer />
     </MyPageWrap>
@@ -60,5 +65,18 @@ const StyledIcon = styled.div`
 `
 
 const MyPagePostArea = styled.div`
-  
+    ${(props) =>
+    props.hide &&
+    css`
+      opacity: 0;
+    `}
+`;
+
+const BtnWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  margin-bottom: 20px;
+  width: 100%;
 `

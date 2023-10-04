@@ -1,21 +1,20 @@
 import { MODIFY_PROFILE_INPUT_TEXTS } from "@/constants/modifyprofile";
 import { theme } from "@/styles";
-import { useState } from "react";
 import styled from "styled-components";
 
-export const ModifyPhoneNumberInput = () => {
-  const [phoneNumber, setPhoneNumber] = useState("");
+export const ModifyPhoneNumberInput = ({ formData, setFormData }) => {
 
-  const formatPhoneNumber = (input) => {
-    const cleaned = input.replace(/\D/g, "");
-    const formatted = cleaned.replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
-    return formatted;
-  };
 
   const handleInputChange = (event) => {
-    const inputValue = event.target.value;
-    const formattedValue = formatPhoneNumber(inputValue);
-    setPhoneNumber(formattedValue);
+    const { name, value } = event.target;
+    // 하이픈 제거
+    const cleanedValue = value.replace(/-/g, "");
+    // 최대 길이를 11자로 제한
+    const formattedValue = cleanedValue.slice(0, 11);
+    setFormData({
+      ...formData,
+      [name]: formattedValue
+    });
   };
 
   return (
@@ -23,7 +22,8 @@ export const ModifyPhoneNumberInput = () => {
       <label>{MODIFY_PROFILE_INPUT_TEXTS.phonenumberText}</label>
       <input
         type="text"
-        value={phoneNumber}
+        name="phoneNumber"
+        value={formData.phoneNumber}
         onChange={handleInputChange}
         placeholder="010-0000-0000"
         maxLength={11}

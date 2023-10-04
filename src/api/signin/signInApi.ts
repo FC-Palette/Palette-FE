@@ -20,8 +20,7 @@ export async function login(email, password) {
     const responseData = response.data;
 
     if (responseData && responseData.response.token) {
-      localStorage.setItem('token', responseData.response.token);
-
+      localStorage.setItem('Token', responseData.response.token);
     }
     return responseData;
   } catch (error) {

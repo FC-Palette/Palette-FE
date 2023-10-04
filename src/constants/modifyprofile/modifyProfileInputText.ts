@@ -8,10 +8,11 @@ export const MODIFY_PROFILE_INPUT_TEXTS = {
   nicknameText: '닉네임',
   bioText: '한 줄 자기소개',
   sexText: '성별',
-  sexFemaleText: '여자',
-  sexMaleText:'남자',
+  sexFemaleText: '여성',
+  sexMaleText:'남성',
   positionText: '현재 직급',
   jobText: '직무',
   completeWriteText: '작성완료',
   completeModifytext: '수정완료',
+  necessarySymbol:'*',
 }

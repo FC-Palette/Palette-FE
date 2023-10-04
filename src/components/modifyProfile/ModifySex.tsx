@@ -2,27 +2,32 @@ import { MODIFY_PROFILE_INPUT_TEXTS } from "@/constants/modifyprofile";
 import { theme } from "@/styles";
 import styled from "styled-components";
 import { ModifySexIcon } from "../common/svgicon";
-import React, { useState } from "react";
+import { useState } from "react";
 
-export const ModifySex = () => {
-  const [selectedSex, setSelectedSex] = useState(null);
+export const ModifySex = ({ formData, setFormData }) => {
 
   const handleSexClick = (isMale) => {
     setSelectedSex(isMale);
+    setFormData({
+      ...formData,
+      sex: isMale ? "남성" : "여성" 
+    });
   };
+
+  const [selectedSex, setSelectedSex] = useState(null);
 
   return (
     <SexWrap>
       <Category
         onClick={() => handleSexClick(false)}
-        selected={!selectedSex}
+        selected={selectedSex === false} 
       >
-        <ModifySexIcon male={false} strokeColor={selectedSex ? theme.greyScale.grey5 : theme.main.blueL1} />
+        <ModifySexIcon male={false} strokeColor={selectedSex === false ? theme.main.blueL1 : theme.greyScale.grey5} />
         {MODIFY_PROFILE_INPUT_TEXTS.sexFemaleText}
       </Category>
       <Category
         onClick={() => handleSexClick(true)}
-        selected={selectedSex}
+        selected={selectedSex === true} 
       >
         <ModifySexIcon male={true} strokeColor={selectedSex ? theme.main.blueL1 : theme.greyScale.grey5} />
         {MODIFY_PROFILE_INPUT_TEXTS.sexMaleText}
@@ -50,9 +55,8 @@ const Category = styled.div`
   margin-bottom: 8px;
   border-radius: 21px;
   cursor: pointer;
-
   svg {
     margin-right: 4px;
     stroke: ${(props) => (props.selected ? "white" : theme.greyScale.blueGrey)};
   }
-`;
+`
