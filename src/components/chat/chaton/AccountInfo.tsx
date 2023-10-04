@@ -19,26 +19,29 @@ import { useCallback } from 'react'
 */
 export const AccountInfo = ({ isHost, account }) => {
   const navigate = useNavigate()
+  const toEditPage = () => {
+    navigate('/groupupload/1')
+  }
   const handleCopy = useCallback(async () => {
     await navigator.clipboard.writeText(account.split(' ')[1])
   }, [])
+  const iconProps = {
+    size: '16',
+    cursor: 'pointer'
+  }
   return (
     <Wrapper>
       <Account>계좌번호</Account>
       <HostAccount>{account}</HostAccount>
       {isHost && (
         <Edit2
-          size="16"
-          cursor="pointer"
-          onClick={() => {
-            navigate('/groupupload/1')
-          }}
+          {...iconProps}
+          onClick={toEditPage}
         />
       )}
       {!isHost && (
         <Copy
-          size="16"
-          cursor="pointer"
+          {...iconProps}
           onClick={handleCopy}
         />
       )}

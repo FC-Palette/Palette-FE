@@ -62,15 +62,15 @@ export const ChatOn = () => {
   } = useQuery(['history', roomId], () => {
     return getChatLog(roomId)
   })
-  // queryClient.invalidateQueries(history)
-
+  queryClient.invalidateQueries(history)
+  console.log(history)
   const sendMessage = (value: string) => {
     const data = {
-      memberId: memberId,
-      sender: nickname,
-      content: value,
-      type: 'CHAT',
-      roomId: roomId
+      // memberId: memberId,
+      // sender: nickname,
+      content: value
+      // type: 'CHAT',
+      // roomId: roomId
     }
     if (client) {
       client.publish({
