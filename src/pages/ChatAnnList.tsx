@@ -33,8 +33,8 @@ export const ChatAnnList = () => {
 
   const {
     data: notices,
-    isLoading,
-    isError
+    // isLoading,
+    // isError
   } = useQuery(['notices', roomId], () => {
     return getNoticeList(roomId)
   })

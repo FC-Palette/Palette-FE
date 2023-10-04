@@ -5,8 +5,8 @@ import { useQuery } from '@tanstack/react-query'
 export const MembersList = ({ roomid }) => {
   const {
     data: members,
-    isLoading,
-    isError
+    // isLoading,
+    // isError
   } = useQuery(['chatMembers', roomid], () => {
     return getMembers(roomid)
   })

@@ -30,7 +30,7 @@ const [HTTP, CHATPATH, ENTER, SUB] = [
   import.meta.env.VITE_WS_CHAT_SUB
 ]
 
-const nickname = localStorage.getItem('nickname')
+// const nickname = localStorage.getItem('nickname')
 
 export const ChatOn = () => {
   const location = useLocation()
@@ -56,9 +56,9 @@ export const ChatOn = () => {
   const token = `${localStorage.getItem('Token')} `
 
   const {
-    data: history,
-    isLoading,
-    isError
+    data: history
+    // isLoading,
+    // isError
   } = useQuery(['history', roomId], () => {
     return getChatLog(roomId)
   })

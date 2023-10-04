@@ -9,8 +9,8 @@ import { useQuery } from '@tanstack/react-query'
 export const MembersHeader = ({ onClick, roomid }) => {
   const {
     data: members,
-    isLoading,
-    isError
+    // isLoading,
+    // isError
   } = useQuery(['chatMembers', roomid], () => {
     return getMembers(roomid)
   })
