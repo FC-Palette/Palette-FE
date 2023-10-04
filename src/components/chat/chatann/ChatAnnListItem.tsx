@@ -2,6 +2,7 @@ import { styled } from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { Flexbox, columnise } from 'styles/index'
 import { useCallback } from 'react'
+import { formatHourMinute, formatLocalDateTime } from 'utils/index'
 
 const interpoint = '\u00B7 '
 export const ChatAnnListItem = ({ notice, createdAt, memberId }) => {
@@ -13,7 +14,10 @@ export const ChatAnnListItem = ({ notice, createdAt, memberId }) => {
     <Wrapper onClick={handleNavigate}>
       <Title>{notice}</Title>
       <Info>
-        <Date>{createdAt}</Date>
+        <Date>
+          {formatLocalDateTime(createdAt).split('일')[0]}일{' '}
+          {formatHourMinute(createdAt)}
+        </Date>
         {interpoint}
         <Publisher>{memberId}</Publisher>
       </Info>

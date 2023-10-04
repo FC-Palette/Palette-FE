@@ -4,7 +4,7 @@
 */
 import { styled } from 'styled-components'
 import { useRecoilValue } from 'recoil'
-import { inDetailState, isBuyingState, isPersonalState } from 'recoil/index'
+import { inDetailState } from 'recoil/index'
 import { useQuery } from '@tanstack/react-query'
 import { getAccount, getNotice } from 'api/index'
 
