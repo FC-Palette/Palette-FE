@@ -2,7 +2,6 @@ import { ChatRoomInfo, UnreadInfo } from 'components/index'
 import { styled } from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { rowCentralise } from 'styles/index'
-
 //`onClick`으로 `roomid`를 통해 => `ChatOn` 으로 진입시킴
 export const ChatRoom = ({
   title,
@@ -19,6 +18,7 @@ export const ChatRoom = ({
       state: { roomid }
     })
   }
+
   return (
     <Wrapper onClick={moveToChat}>
       <ChatRoomInfo

@@ -44,3 +44,8 @@ export const agreeModalOnState = atom({
   key: 'agreeModalOnState',
   default: false
 })
+
+export const roomIdState = atom({
+  key: 'roomIdStateState',
+  default: ''
+})

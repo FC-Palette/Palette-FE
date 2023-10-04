@@ -4,7 +4,7 @@ export const ManagerInfo = ({ managerName, managerInfo, managerImg }) => {
   return (
     <>
       <ContentsContainer>
-        <RoomManagerImage>{managerImg}</RoomManagerImage>
+        <RoomManager  Image>{managerImg}</RoomManager>
         <NameAndIntroduceWrap_Column>
           <RoomManagerName>{managerName}</RoomManagerName>
           <RoomManagerIntroduce>{managerInfo}</RoomManagerIntroduce>

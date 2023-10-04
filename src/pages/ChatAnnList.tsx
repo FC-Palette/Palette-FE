@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { ArrowLeft2 } from 'iconsax-react'
 import { getNoticeList } from 'api/index'
 import { useQuery } from '@tanstack/react-query'
-import { useLocation } from 'react-router-dom'
+import { roomIdState } from 'recoil/index'
+import { useRecoilValue } from 'recoil'
 
 /*
 {
@@ -29,10 +30,10 @@ import { useLocation } from 'react-router-dom'
 // => 공지에 memberId만 있기 때문에
 export const ChatAnnList = () => {
   const navigate = useNavigate()
-  const roomId = useLocation().state.roomid
+  const roomId = useRecoilValue(roomIdState)
 
   const {
-    data: notices,
+    data: notices
     // isLoading,
     // isError
   } = useQuery(['notices', roomId], () => {
