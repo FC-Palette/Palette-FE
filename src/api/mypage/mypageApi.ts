@@ -1,6 +1,5 @@
 import { authInstance } from '../axios';
 
-
 export async function getMyPage(memberId) {
 
   const apiUrl = import.meta.env.VITE_BASE_URL; 
@@ -13,3 +12,4 @@ export async function getMyPage(memberId) {
     throw error;
   }
 }
+

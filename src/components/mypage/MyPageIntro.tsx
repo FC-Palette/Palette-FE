@@ -1,18 +1,19 @@
 import { theme } from "styles/index";
-import { styled } from "styled-components";
-import { useEffect, useState } from "react";
-import { getMyPage, getOtherUserPage } from "@/api/mypage/mypageApi";
+import { css, styled } from "styled-components";
+import { useEffect } from "react";
+import { getMyPage } from "@/api/mypage/mypageApi";
 import { useParams } from "react-router-dom";
-import { myPageIntroProps } from "@/types";
-import { useRecoilValue } from "recoil";
-import { tokenPayloadState } from "@/api";
 import { decoder } from "@/utils";
 import { PROFILE_EDIT_TEXT } from "@/constants";
-export const MyPageIntro = () => {
+import { MyPageSimpleProfileBtn } from "./MyPageSimpleProfileBtn";
+
+
+export const MyPageIntro = (props) => {
   const { member_id } = useParams();
-  const [userData, setUserData] = useState<myPageIntroProps | null>(null);
-  const tokenPayload = useRecoilValue(tokenPayloadState);
+  const { userData, setUserData } = props;
+
   const decodedPayload = decoder();
+  console.log(decodedPayload);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,7 +21,7 @@ export const MyPageIntro = () => {
         let data;
 
         if (member_id) {
-          data = await getOtherUserPage(member_id);
+          data = await getMyPage(member_id);
         } else {
 
           data = await getMyPage(decodedPayload.memberId);
@@ -28,6 +29,7 @@ export const MyPageIntro = () => {
 
         setUserData(data);
         console.log(data);
+
       } catch (error) {
         console.error('사용자 데이터 가져오기 오류:', error);
         
@@ -35,33 +37,43 @@ export const MyPageIntro = () => {
     };
 
     fetchData();
-  }, [member_id, tokenPayload]);
-
-
+  }, [member_id]);
   return (
     <Container>
       <TextInformation>
       <NickName>{userData?.response?.nickname}</NickName>
-        <TextArea>{userData?.response?.bio}</TextArea>
-        <CategoryWrap>
-          <JobCategory>{userData?.response?.job}</JobCategory>
-          <PositionCategory>{userData?.response?.position}</PositionCategory>
-        </CategoryWrap>
-        <FollowUserArea>
-          <FollowerWrap>
-            <Follower>{PROFILE_EDIT_TEXT.profileFollowText}</Follower>
-            <FollowerNumber>{userData?.response?.followedCount}</FollowerNumber>
-          </FollowerWrap>
-          <FollowingWrap>
-            <Following>{PROFILE_EDIT_TEXT.profileFollowingText}</Following>
-            <FollowingNumber>{userData?.response?.followingCount}</FollowingNumber>
-          </FollowingWrap>
-        </FollowUserArea>
+      <TextArea>{userData?.response?.bio}</TextArea>
+      <CategoryWrap>
+        {userData?.response?.job !== null ? (
+          <>
+            <JobCategory>{userData?.response?.job}</JobCategory>
+            <PositionCategory>{userData?.response?.position}</PositionCategory>
+          </>
+        ) : (
+          <BuildingWrap>
+            <div>{userData?.response?.building}</div>
+            <div>{userData?.response?.wing}</div>
+            <div>{userData?.response?.roomNumber}</div>
+          </BuildingWrap>
+        )}
+          </CategoryWrap>
+          <FollowUserArea hide={userData?.response?.job === null}>
+            <FollowerWrap>
+              <Follower>{PROFILE_EDIT_TEXT.profileFollowText}</Follower>
+              <FollowerNumber>{userData?.response?.followedCount}</FollowerNumber>
+            </FollowerWrap>
+            <FollowingWrap>
+              <Following>{PROFILE_EDIT_TEXT.profileFollowingText}</Following>
+              <FollowingNumber>{userData?.response?.followingCount}</FollowingNumber>
+            </FollowingWrap>
+          </FollowUserArea>
       </TextInformation>
-
       <ImageInformation>
-        <CircleImage></CircleImage>
+        <CircleImage>
+          <img src={userData?.response?.image} alt="User Profile" />
+        </CircleImage>
       </ImageInformation>
+      <MyPageSimpleProfileBtn hide={userData?.response?.job === null && location.pathname === '/mypage'} />
     </Container>
   );
 };
@@ -95,6 +107,9 @@ const TextArea = styled.div`
 
 const CategoryWrap = styled.div`
   display: flex;
+  div{
+    padding-right: 5px;
+  }
 `;
 
 const JobCategory = styled.div`
@@ -104,7 +119,14 @@ const JobCategory = styled.div`
   border-radius: 4px;
   margin-right: 4px;
   padding: 4px 8px;
+
+  ${(props) =>
+    props.hide &&
+    css`
+      display: none;
+    `}
 `;
+
 
 const PositionCategory = styled.div`
   color: ${theme.greyScale.grey7};
@@ -113,11 +135,21 @@ const PositionCategory = styled.div`
   border-radius: 4px;
   padding: 4px 8px;
   padding-left: 4px;
+    ${(props) =>
+    props.hide &&
+    css`
+      display: none;
+    `}
 `;
 
 const FollowUserArea = styled.div`
   display: flex;
-  padding: 12px 0;
+  padding: 24px 0;
+  ${(props) =>
+    props.hide &&
+    css`
+      padding-top: 50px;
+    `}
 `;
 
 const FollowerWrap = styled.div`
@@ -158,4 +190,17 @@ const CircleImage = styled.div`
   width: 75px;
   height: 75px;
   border-radius: 50%;
+  border: 1px solid rgba( 0,0,0, .3);
+  img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
 `;
+
+
+const BuildingWrap = styled.div`
+    display: flex;
+    color: #6B7280;
+    font-size: 16px;
+`

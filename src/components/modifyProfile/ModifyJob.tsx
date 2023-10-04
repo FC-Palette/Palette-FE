@@ -3,13 +3,12 @@ import { theme } from "@/styles";
 import styled from "styled-components";
 import { ModifyProfileJobIcon } from "../common/svgicon";
 
-export const ModifyJob = () => {
-
+export const ModifyJob = ({ formData, setFormData }) => {
   return (
     <JobWrap>
       <label>{MODIFY_PROFILE_INPUT_TEXTS.jobText}</label>
       <JobList>
-        <ModifyProfileJobIcon></ModifyProfileJobIcon>
+          <ModifyProfileJobIcon formData={formData} setFormData={setFormData} />
       </JobList>
     </JobWrap>
   );

@@ -2,39 +2,46 @@ import { MODIFY_PROFILE_INPUT_TEXTS } from '@/constants/modifyprofile'
 import { MODIFY_PROFILE_CATEGORY_TEXTS } from '@/constants/modifyprofile/modifyProfileCategoryText'
 import { theme } from '@/styles';
 import styled from 'styled-components';
-import React, { useState } from 'react';
 
-export const ModifyPosition = () => {
+export const ModifyPosition = ({ formData, setFormData }) => {
   const positions = MODIFY_PROFILE_CATEGORY_TEXTS.position;
-  const [selectedPosition, setSelectedPosition] = useState(null);
+  const selectedPosition = formData.position || null;
 
   const handlePositionClick = (position) => {
-    setSelectedPosition(position);
+    const newPosition = position === selectedPosition ? null : position;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      position: newPosition,
+    }));
   };
 
   return (
     <PositionWrap>
       <label>{MODIFY_PROFILE_INPUT_TEXTS.positionText}</label>
+      <span>{MODIFY_PROFILE_INPUT_TEXTS.necessarySymbol}</span>
       <PositionList>
         {positions.map((position, index) => (
           <PositionItem
             key={index}
             onClick={() => handlePositionClick(position)}
-            selected={selectedPosition === position}
+            selected={position === selectedPosition}
           >
             {position}
           </PositionItem>
         ))}
       </PositionList>
     </PositionWrap>
-  )
-}
-
+  );
+};
 const PositionWrap = styled.div`
   max-width: 365px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
+  span{
+    padding-left: 2px;
+    color: #FF5A5A;
+  }
 `
 
 const PositionList = styled.ul`

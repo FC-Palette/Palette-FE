@@ -32,7 +32,8 @@ import {
   ModifyProfile,
   CareerMeetingConfirm,
   CareerEdit,
-  Home
+  Home,
+  SimpleProfile
 } from 'pages/index'
 import type { RouteObject } from 'react-router-dom'
 import { Start } from './Start'
@@ -109,12 +110,13 @@ export const router = createBrowserRouter([
       generateRoute('/mypage/:member_id', <MyPage />),
       generateRoute('/changeprofile', <ChangeProfile />),
       generateRoute('/modifyprofile', <ModifyProfile />, <ErrorComponent />),
-      generateRoute('/setting', <Setting />),
-      generateRoute('/alarm', <Alarm />),
-      generateRoute('/setting/password', <SettingPassword />),
-      generateRoute('/setting/alarm', <SettingAlarm />),
-      generateRoute('/setting/notice', <SettingNotice />),
-      generateRoute('/setting/service', <SettingService />)
+      generateRoute('/simpleprofile', <ModifyProfile />, <ErrorComponent />),
+      generateRoute('/setting', <Setting />, <ErrorComponent />),
+      generateRoute('/alarm', <Alarm />, <ErrorComponent />),
+      generateRoute('/setting/password', <SettingPassword />, <ErrorComponent />),
+      generateRoute('/setting/alarm', <SettingAlarm />, <ErrorComponent />),
+      generateRoute('/setting/notice', <SettingNotice />, <ErrorComponent />),
+      generateRoute('/setting/service', <SettingService />, <ErrorComponent />),
     ]
   },
   {

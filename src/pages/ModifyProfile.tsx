@@ -1,12 +1,15 @@
-import { ChangeProfilImage, Header, Input, ModifyProfileArea } from "@/components"
-import { StyledIcon } from "."
-import { useNavigate } from "react-router-dom"
+import { Header, ModifyProfileArea } from "@/components"
+import { useLocation, useNavigate } from "react-router-dom"
 import { ArrowLeft2 } from "iconsax-react"
-import styled from "styled-components"
-import { theme } from "@/styles"
-
+import { styled } from "styled-components"
+import { StyledIcon } from "."
 export const ModifyProfile = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const location = useLocation();
+  const centerText = location.pathname === "/simpleprofile"
+    ? "간단 프로필 작성"
+    : "프로필 수정하기";
+    
   return (
     <ModifyProfileWrap>
       <Header 
@@ -14,13 +17,9 @@ export const ModifyProfile = () => {
         <StyledIcon onClick={() => navigate(-1)}>
           <ArrowLeft2 />
         </StyledIcon>}
-        centerText="프로필 수정하기">
+            centerText={centerText}>
       </Header>
-      <ImageWrap>
-        <ChangeProfilImage />
-      </ImageWrap>
       <ModifyProfileArea/>
-
     </ModifyProfileWrap>
   )
 }
@@ -32,20 +31,3 @@ overflow-y: scroll;
 position: relative;
 width: 100%;
 `
-
-
-const ImageWrap = styled.div`
-  width: 122px;
-  height: 122px;
-  background-color: ${theme.greyScale.grey1};
-  margin: 0 auto;
-  border-radius: 50%;
-  margin-top: 22px;
-  margin-bottom: 46px;
-  svg{
-    position: relative;
-    margin: 49px;
-  }
-`
-
-

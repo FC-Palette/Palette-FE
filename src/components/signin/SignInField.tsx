@@ -16,12 +16,10 @@ export const SignInField = () => {
   const passwordRegex = SIGNIN_REGEX_TEXT.pwdCondition;
   const isValidEmail = emailRegex.test(email);
   const isValidPassword = passwordRegex.test(password);
-  
-  const setTokenPayload = useSetRecoilState(tokenPayloadState); // Recoil 상태 업데이트 함수
-  
+  const setTokenPayload = useSetRecoilState(tokenPayloadState); 
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
- 
+  
   const handleLogin = async () => {
     try {
       const response = await login(email, password);
