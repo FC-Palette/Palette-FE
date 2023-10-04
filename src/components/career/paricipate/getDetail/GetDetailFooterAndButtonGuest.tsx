@@ -1,16 +1,36 @@
+import { participateCheckApi } from '@/api'
 import { BackgroundModal, Button, ModalButtons } from '@/components'
 import { CREATE_MODAL_TEXT } from '@/constants'
-import { modalOnState } from '@/recoil'
-import { useRecoilState } from 'recoil'
+import { fetchDetailGlobalState, modalOnState } from '@/recoil'
+import { useParams } from 'react-router-dom'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import styled from 'styled-components'
 
 export const GetDetailFooterAndButtonGuest = () => {
+  const { detailid } = useParams()
+  if (!detailid) {
+    return
+  }
   const [modal, setModal] = useRecoilState(modalOnState)
   const modalText = CREATE_MODAL_TEXT.condition_not_met
-  const isUserJoined = false
+  const meetingRes = useRecoilValue(fetchDetailGlobalState)
+  const { msg } = meetingRes
+  const isUserJoined = msg === '참여하고 있지않은 모임입니다.' ? false : true
 
-  const handleModal = () => {
-    setModal(!modal)
+  // 일단 주석처리
+  // const handleModal = () => {
+  //   setModal(!modal)
+  // }
+
+  const checkCondition = async () => {
+    if (detailid) {
+      const checkRes = await participateCheckApi(detailid)
+      if (checkRes.status === 200) {
+        console.log(checkRes)
+      } else {
+        console.log(checkRes)
+      }
+    }
   }
 
   return (
@@ -18,7 +38,7 @@ export const GetDetailFooterAndButtonGuest = () => {
       <Wrapper>
         <BtnWrap>
           <Button
-            onClick={handleModal}
+            onClick={checkCondition}
             $btnWidth="100%"
             $btnHeight="60px"
             $fontSize="20px"
@@ -32,7 +52,7 @@ export const GetDetailFooterAndButtonGuest = () => {
         <IsUserNotJoined>이미 참여중인 모임입니다.</IsUserNotJoined>
       )}
 
-      {modalOnState && (
+      {isUserJoined && (
         <BackgroundModal
           title={modalText[0]}
           content={modalText[1]}>
@@ -47,6 +67,21 @@ export const GetDetailFooterAndButtonGuest = () => {
     </>
   )
 }
+
+const IsUserNotJoined = styled.div`
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 80px;
+  width: 100%;
+  height: 32px;
+  font-size: 16px;
+  border-radius: 4px;
+  background-color: ${props => props.theme.greyScale.grey7};
+  color: ${props => props.theme.main.white};
+`
 
 const Wrapper = styled.footer`
   display: flex;
@@ -67,19 +102,4 @@ const BtnWrap = styled.div`
   font-weight: 500;
   width: 100%;
   margin: 0 24px;
-`
-
-const IsUserNotJoined = styled.div`
-  z-index: 100;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: sticky;
-  bottom: 80px;
-  width: 100%;
-  height: 32px;
-  font-size: 16px;
-  border-radius: 4px;
-  background-color: ${props => props.theme.greyScale.grey7};
-  color: ${props => props.theme.main.white};
 `

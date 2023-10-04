@@ -1,7 +1,24 @@
-import { requestCreateResponseProps } from '@/types'
-
+export interface RequestCreateDto {
+  category: string
+  type: string
+  jobs: string[]
+  positions: string[]
+  sex: string
+  title: string
+  description: string
+  headCount: number
+  startDate: string
+  endDate: string
+  onOff: boolean
+  place: string
+  week: string
+  days: string[]
+  time: string
+  progressTime: string
+  acceptType: string
+}
 export const collectUserData = (
-  careerCreateData: requestCreateResponseProps
+  careerCreateData: RequestCreateDto
 ): FormData => {
   const formData = new FormData()
   // string
@@ -41,13 +58,6 @@ export const collectUserData = (
     careerCreateData.days.forEach((day, index) => {
       formData.append(`days[${index}]`, day)
     })
-  }
-
-  const imageBlobs = careerCreateData.image
-  if (imageBlobs && imageBlobs.length > 0) {
-    for (let i = 0; i < imageBlobs.length; i++) {
-      formData.append(`image${i}`, imageBlobs[i])
-    }
   }
 
   return formData

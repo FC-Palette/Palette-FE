@@ -15,15 +15,28 @@ export const MeetupTypeSelector2 = () => {
   const [globalData, setGlobalData] = useRecoilState(careerCreateGlobalState)
   const { jobs } = globalData
   const [message, setMessage] = useState(false)
-  const checkLength = jobs.length
 
   useEffect(() => {
-    checkLength >= 3 ? setMessage(true) : setMessage(false)
-  }, [checkLength])
+    let timer: any
+    setMessage(jobs.length >= 3)
+
+    if (jobs.length >= 3) {
+      timer = setTimeout(() => {
+        setMessage(false)
+      }, 2000)
+    }
+
+    return () => {
+      if (timer) {
+        clearTimeout(timer)
+      }
+    }
+  }, [jobs])
 
   const isItemSelected = (item: string) => {
     return jobs.includes(item)
   }
+  
   const handleSelectedItem = (item: string) => {
     const isSelected = jobs.includes(item)
 

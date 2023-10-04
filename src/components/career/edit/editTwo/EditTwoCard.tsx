@@ -5,13 +5,8 @@ import {
   EditTitleAndDescription
 } from '../..'
 import styled from 'styled-components'
-import { useRecoilValue } from 'recoil'
-import { careerEditGlobalState } from '@/recoil'
 
 export const EditTwoCard = () => {
-  const editGlobal = useRecoilValue(careerEditGlobalState)
-  const log = console.log
-  log(editGlobal)
   return (
     <>
       <StepProgressBar $currentPage={2} />

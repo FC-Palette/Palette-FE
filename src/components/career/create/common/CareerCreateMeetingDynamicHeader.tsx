@@ -5,6 +5,10 @@ import { useNavigate } from 'react-router-dom'
 export const CareerCreateMeetingHeaderDynamic = ({ meetupTitle }) => {
   const navigate = useNavigate()
 
+  const maxLength = 10
+  const titleSlice = (title: string, mLength) => {
+    return title.length > mLength ? title.slice(0, mLength) + '..' : title
+  }
   return (
     <Header
       leftIcon={
@@ -12,7 +16,9 @@ export const CareerCreateMeetingHeaderDynamic = ({ meetupTitle }) => {
           <ArrowLeft2 />
         </StyledIcon>
       }
-      centerText={meetupTitle ? meetupTitle : '미리보기'}>
+      centerText={
+        meetupTitle ? titleSlice(meetupTitle, maxLength) : '미리보기'
+      }>
       <MultiIconWrap>
         <Send2 />
         <More />

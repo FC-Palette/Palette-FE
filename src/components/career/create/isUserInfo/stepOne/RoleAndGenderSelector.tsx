@@ -1,9 +1,11 @@
+// useCallback
 import styled from 'styled-components'
 import { CareerCreateMeetingCommonQuestion } from '../..'
 import { profileNCareerFilter } from '@/constants'
 import { iconMapping } from '@/components'
 import { useRecoilState } from 'recoil'
 import { careerCreateGlobalState } from '@/recoil'
+import { useCallback } from 'react'
 
 interface SelectedAnswerProps {
   $isSelected: boolean
@@ -13,84 +15,92 @@ interface SelectedAnswerProps {
 export const RoleAndGenderSelector = () => {
   const [globalState, setGlobalState] = useRecoilState(careerCreateGlobalState)
   const { sex, positions } = globalState
-
   const genderList = ['무관', '남성만', '여성만']
 
-  const updateGender = (newGender: string) => {
-    setGlobalState(prevGlobalState => ({
-      ...prevGlobalState,
-      sex: newGender
-    }))
-  }
-
-  const updateSelectedRoles = role => {
-    setGlobalState(prevGlobalState => {
-      let newSelectedRoles: string[]
-
-      if (prevGlobalState.positions.includes(role)) {
-        newSelectedRoles = prevGlobalState.positions.filter(
-          item => item !== role
-        )
-      } else {
-        if (role === '무관') {
-          newSelectedRoles = ['무관']
-        } else {
-          newSelectedRoles = prevGlobalState.positions.includes('무관')
-            ? [role]
-            : [...prevGlobalState.positions, role]
-        }
-      }
-
-      return {
+  const updateGender = useCallback(
+    (newGender: string) => {
+      setGlobalState(prevGlobalState => ({
         ...prevGlobalState,
-        positions: newSelectedRoles
-      }
-    })
-  }
+        sex: newGender
+      }))
+    },
+    [setGlobalState]
+  )
 
-  const isItemSelected = (item: string) => {
-    return sex.includes(item)
-  }
+  const updateSelectedRoles = useCallback(
+    (role: string) => {
+      setGlobalState(prevGlobalState => {
+        let newSelectedRoles: string[]
 
-  // 직급
-  const AnswerItems_1 = profileNCareerFilter.rank.map(item => {
-    return (
+        if (prevGlobalState.positions.includes(role)) {
+          newSelectedRoles = prevGlobalState.positions.filter(
+            item => item !== role
+          )
+        } else {
+          if (role === '무관') {
+            newSelectedRoles = ['무관']
+          } else {
+            newSelectedRoles = prevGlobalState.positions.includes('무관')
+              ? [role]
+              : [...prevGlobalState.positions, role]
+          }
+        }
+
+        return {
+          ...prevGlobalState,
+          positions: newSelectedRoles
+        }
+      })
+    },
+    [setGlobalState]
+  )
+
+  const isItemSelected = useCallback(
+    (item: string) => {
+      return sex.includes(item)
+    },
+    [sex]
+  )
+
+  const renderAnswerItems_1 = useCallback(() => {
+    return profileNCareerFilter.rank.map(item => (
       <AnswerItem
         key={item}
         onClick={() => updateSelectedRoles(item)}
         $isSelected={positions.includes(item)}>
         {item}
       </AnswerItem>
-    )
-  })
+    ))
+  }, [updateSelectedRoles, positions])
 
-  // 성별
-  const AnswerItems_2 = genderList.map(item => (
-    <AnswerItem
-      key={item}
-      onClick={() => updateGender(item)}
-      $isSelected={sex === item}>
-      {item !== '무관' && (
-        <IconWrapper
-          $isSelected={isItemSelected(item)}
-          onClick={() => updateGender(item)}>
-          {iconMapping[item]}
-        </IconWrapper>
-      )}
-      {item}
-    </AnswerItem>
-  ))
+  const renderAnswerItems_2 = useCallback(() => {
+    return genderList.map(item => (
+      <AnswerItem
+        key={item}
+        onClick={() => updateGender(item)}
+        $isSelected={sex === item}>
+        {item !== '무관' && (
+          <IconWrapper
+            $isSelected={isItemSelected(item)}
+            onClick={() => updateGender(item)}>
+            {iconMapping[item]}
+          </IconWrapper>
+        )}
+        {item}
+      </AnswerItem>
+    ))
+  }, [updateGender, isItemSelected, sex])
 
   return (
     <>
       <CareerCreateMeetingCommonQuestion>
         원하시는 직급이 있으신가요?
       </CareerCreateMeetingCommonQuestion>
-      <AnswerItemFlexWrap>{AnswerItems_1}</AnswerItemFlexWrap>
+      <AnswerItemFlexWrap>{renderAnswerItems_1()}</AnswerItemFlexWrap>
       <CareerCreateMeetingCommonQuestion>
         원하시는 성별이 있으신가요?
       </CareerCreateMeetingCommonQuestion>
-      <AnswerItemFlexWrap>{AnswerItems_2}</AnswerItemFlexWrap>
+      <AnswerItemFlexWrap>{renderAnswerItems_2()}</AnswerItemFlexWrap>
     </>
   )
 }

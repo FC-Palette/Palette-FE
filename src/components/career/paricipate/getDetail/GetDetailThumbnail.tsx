@@ -1,7 +1,15 @@
 import styled from 'styled-components'
 import Slider from 'react-slick'
+import { useRecoilValue } from 'recoil'
+import { fetchDetailGlobalState } from '@/recoil'
+import { useEffect, useState } from 'react'
 
-export const GetDetailThumbnail = ({ image }) => {
+export const GetDetailThumbnail = () => {
+  const atom = useRecoilValue(fetchDetailGlobalState)
+
+  const { image } = atom
+
+  useEffect(() => {}, [image])
   const settings = {
     dots: true,
     arrows: false,
@@ -10,7 +18,11 @@ export const GetDetailThumbnail = ({ image }) => {
     slidesToScroll: 1
   }
 
-  const previewSlides = image.map(item => <SlideItem key={item} />)
+  const previewSlides = image.map((item, index) => (
+    <SlideItem key={item}>
+      <img src={image[index]} />
+    </SlideItem>
+  ))
 
   return (
     <>
@@ -25,7 +37,8 @@ const ThumbnailSlider = styled.div`
   width: 100%;
   height: 322px;
   min-height: 322px;
-  background-color: ${props => props.theme.main.blue0};
+
+  background-color: transparent;
   // 점 위치
   .slick-dots {
     bottom: 10px;
@@ -50,6 +63,8 @@ const SlideItem = styled.div`
   img {
     width: 100%;
     height: 322px;
+    max-height: 322px;
+    min-height: 322px;
     object-fit: cover;
   }
 `

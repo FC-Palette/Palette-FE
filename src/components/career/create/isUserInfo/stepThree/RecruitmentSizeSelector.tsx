@@ -1,10 +1,12 @@
 // 모집인원 설정
-import { useSetRecoilState } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 import styled from 'styled-components'
 import { careerCreateGlobalState } from '@/recoil'
 
 export const RecruitmentSizeSelector = () => {
   const setGlobalState = useSetRecoilState(careerCreateGlobalState)
+  const atomValue = useRecoilValue(careerCreateGlobalState)
+  const { headCount } = atomValue
 
   const handleNumofMembers = (count: number) => {
     setGlobalState(prev => ({
@@ -22,6 +24,7 @@ export const RecruitmentSizeSelector = () => {
       <TextNInputWrapper>
         <InputContainer>
           <InputContents
+            value={headCount || ''}
             onChange={e => handleNumofMembers(+e.target.value)}
             placeholder="인원수를 적어주세요."
             type="number"

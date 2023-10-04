@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { CareerCreateMeetingCommonQuestion } from '../..'
 import { iconMapping } from '@/components'
 import { useRecoilState } from 'recoil'
-import { careerEditGlobalState } from '@/recoil'
+import { editDtoAtom } from '@/recoil'
 import { useEffect, useState } from 'react'
 
 interface SelectedAnswerProps {
@@ -12,7 +12,7 @@ interface SelectedAnswerProps {
 }
 
 export const EditTypeSelector2 = () => {
-  const [globalData, setGlobalData] = useRecoilState(careerEditGlobalState)
+  const [globalData, setGlobalData] = useRecoilState(editDtoAtom)
   const { jobs } = globalData
   const [message, setMessage] = useState(false)
   const itemsLength = jobs.length

@@ -1,7 +1,14 @@
+import { fetchDetailGlobalState } from '@/recoil'
+import { useEffect } from 'react'
+import { useRecoilValue } from 'recoil'
 import styled from 'styled-components'
 
-export const GetDetailCategoryChips = ({ jobs }) => {
-  const categoryMap = jobs.map((item: string, idx: string) => (
+export const GetDetailCategoryChips = () => {
+  const atom = useRecoilValue(fetchDetailGlobalState)
+  const { jobs } = atom
+
+  useEffect(() => {}, [jobs])
+  const categoryMap = jobs.map((item: string, idx: any) => (
     <CategoryChip key={idx}>{item}</CategoryChip>
   ))
 

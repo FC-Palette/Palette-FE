@@ -8,12 +8,8 @@ import {
   EditRecruitmentPeriodSelector,
   EditRecruitmentSizeSelectore
 } from '../..'
-import { useRecoilValue } from 'recoil'
-import { careerEditGlobalState } from '@/recoil'
+
 export const EditThreeCard = () => {
-  const globalData = useRecoilValue(careerEditGlobalState)
-  const log = console.log
-  log(globalData)
   return (
     <>
       <StepProgressBar $currentPage={3} />

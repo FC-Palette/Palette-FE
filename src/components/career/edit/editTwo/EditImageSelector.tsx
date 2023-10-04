@@ -1,9 +1,9 @@
 import { DraggableImagePreview } from '@/components'
-import { careerEditGlobalState } from '@/recoil'
+import { editImageAtom } from '@/recoil'
 import { Add } from 'iconsax-react'
 import { useEffect, useState } from 'react'
 import Dropzone from 'react-dropzone'
-import { useSetRecoilState } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 import styled from 'styled-components'
 
 interface Image {
@@ -14,15 +14,34 @@ interface Image {
 export const EditImageSelector = () => {
   const [showMessage, setShowMessage] = useState(false)
   const [images, setImages] = useState<Image[]>([])
-  const setGlobalData = useSetRecoilState(careerEditGlobalState)
+  const setEditImage = useSetRecoilState(editImageAtom)
+  const initialImages = useRecoilValue(editImageAtom)
 
-  // 메세지 알림
   useEffect(() => {
     if (images.length === 1) {
       setShowMessage(true)
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         setShowMessage(false)
-      }, 2000)
+      }, 1000)
+
+      return () => clearTimeout(timer)
+    }
+    if (!initialImages.file) {
+      return
+    }
+
+    const previewImages = initialImages.file
+      .filter(blob => blob instanceof Blob)
+      .map((blob, idx) => ({
+        id: `image-${idx}`,
+        url: URL.createObjectURL(blob),
+        blob
+      }))
+
+    setImages(previewImages)
+
+    return () => {
+      images.forEach(image => URL.revokeObjectURL(image.url))
     }
   }, [images.length])
 
@@ -36,30 +55,32 @@ export const EditImageSelector = () => {
     reader.readAsArrayBuffer(file)
   }
 
-  // 업로드
+  // 업로드시
   const handleImageUpload = (acceptedFiles: File[]) => {
     if (images.length + acceptedFiles.length > 5) {
-      return // 5개 제한
+      return
     }
 
     acceptedFiles.forEach(file => {
       encodeImageToBlob(file, blob => {
+        const uniqueId = `${file.name}-${Date.now()}`
         const newImg = {
-          id: file.name,
+          id: uniqueId,
           url: URL.createObjectURL(file),
           blob: blob
         }
-        setImages(prev => [...prev, newImg])
 
-        setGlobalData(prev => ({
-          ...prev,
-          editImages: [...prev.editImages, blob]
+        setImages(prevImages => [...prevImages, newImg])
+
+        setEditImage((prevData: any) => ({
+          ...prevData,
+          file: prevData.file ? [...prevData.file, blob] : [blob]
         }))
       })
     })
   }
 
-  // 위치 이동
+  // 순서 변경
   const handleDragEnd = (result: any) => {
     if (!result.destination) {
       return
@@ -70,20 +91,21 @@ export const EditImageSelector = () => {
     reorderedImages.splice(result.destination.index, 0, movedImage)
     setImages(reorderedImages)
 
-    setGlobalData((prevData: any) => ({
+    setEditImage((prevData: any) => ({
       ...prevData,
-      editImages: reorderedImages.map(img => img.blob)
+      file: reorderedImages.map(img => img.blob)
     }))
   }
 
   // 이미지 삭제
   const handleImageDelete = (imageId: string) => {
     const updatedImages = images.filter(image => image.id !== imageId)
-    setGlobalData((prevData: any) => ({
-      ...prevData,
-      editImages: updatedImages
-    }))
     setImages(updatedImages)
+
+    setEditImage((prevData: any) => ({
+      ...prevData,
+      file: updatedImages.map(img => img.blob)
+    }))
   }
 
   return (
