@@ -49,3 +49,7 @@ export const roomIdState = atom({
   key: 'roomIdState',
   default: ''
 })
+export const roomInfoState = atom({
+  key: 'roomInfoState',
+  default: { title: '', members: 0 }
+})

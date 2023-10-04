@@ -10,7 +10,7 @@ import { styled } from 'styled-components'
 import { ArrowLeft2, More } from 'iconsax-react'
 import { STATUS_TEXTS, CHATON_TEXTS } from 'constants/index'
 import { useRecoilState } from 'recoil'
-import { showMembersState, roomIdState } from 'recoil/index'
+import { showMembersState, roomIdState, roomInfoState } from 'recoil/index'
 import { useNavigate } from 'react-router-dom'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { decoder } from 'utils/index'
@@ -21,7 +21,7 @@ import * as SockJS from 'sockjs-client'
 import { Client } from '@stomp/stompjs'
 
 import { getChatLog } from 'api/index'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 
 const [HTTP, CHATPATH, ENTER, SUB] = [
   import.meta.env.VITE_BASE_WS_URL,
@@ -33,8 +33,10 @@ const [HTTP, CHATPATH, ENTER, SUB] = [
 // const nickname = localStorage.getItem('nickname')
 
 export const ChatOn = () => {
+  const queryClient = useQueryClient()
   const memberId = decoder().memberId
   const roomId = useRecoilValue(roomIdState)
+  const roomInfo = useRecoilValue(roomInfoState)
   const [client, setClient] = useState<Client>()
 
   const [chatLog, setChatLog] = useState<msgProps[]>([])
@@ -48,6 +50,7 @@ export const ChatOn = () => {
   }, [showMembers])
   const backToList = useCallback(() => {
     navigate('/chatlist/g')
+    setShowMembers(false)
   }, [])
 
   const token = `${localStorage.getItem('Token')} `
@@ -59,19 +62,15 @@ export const ChatOn = () => {
     },
     {
       onSuccess: data => {
-        setChatLog(data)
+        setChatLog(data.response)
         return
       }
     }
   )
-
+  queryClient.invalidateQueries(history)
   const sendMessage = (value: string) => {
     const data = {
-      memberId: memberId,
-      sender: memberId,
-      content: value,
-      type: 'CHAT',
-      roomId: roomId
+      content: value
     }
     if (client) {
       client.publish({
@@ -79,7 +78,6 @@ export const ChatOn = () => {
         body: JSON.stringify(data),
         skipContentLengthHeader: true
       })
-      console.log(chatLog)
     }
     if (!client) {
       console.error()
@@ -90,7 +88,11 @@ export const ChatOn = () => {
     console.error(frame)
   }
 
-  // 1. useEffect로 채팅방 메시지 리스트(DB 내부)를 받아와 상태값(state)에 저장
+  const handleHistory = () => {
+    setShowMembers(false)
+  }
+
+  // SOCKET EFFECT
   useEffect(() => {
     if (!token) {
       alert(CHATON_TEXTS.noToken)
@@ -100,6 +102,8 @@ export const ChatOn = () => {
       alert(CHATON_TEXTS.noRoomId)
       return backToList()
     }
+
+    window.onpopstate = handleHistory
 
     let client = new Client({
       webSocketFactory: () => {
@@ -111,8 +115,6 @@ export const ChatOn = () => {
           `${SUB}${roomId}`,
           data => {
             const received = JSON.parse(data.body)
-            console.log(received)
-            data.nack()
             setChatLog(prev => [...prev, received])
           },
           { token }
@@ -137,7 +139,6 @@ export const ChatOn = () => {
     })
     client.activate()
     setClient(client)
-
     return () => {
       client.deactivate()
     }
@@ -146,14 +147,14 @@ export const ChatOn = () => {
     <>
       <ChatMembers />
       <Header
-        centerText="USERNAME"
+        centerText={roomInfo.title}
         leftIcon={
           <ArrowLeft2
             onClick={backToList}
             cursor="pointer"
           />
         }
-        chatCount={2}>
+        chatCount={roomInfo.members}>
         <StyledIcon>
           <More onClick={handleShowMembers} />
         </StyledIcon>

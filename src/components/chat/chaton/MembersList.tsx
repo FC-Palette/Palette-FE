@@ -13,8 +13,6 @@ export const MembersList = () => {
   } = useQuery(['chatMembers', roomId], () => {
     return getMembers(roomId)
   })
-
-  console.log(members)
   return (
     <Fixer $center={true}>
       {members &&
