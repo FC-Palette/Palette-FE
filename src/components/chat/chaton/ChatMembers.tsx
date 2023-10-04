@@ -15,8 +15,7 @@ import { modalOnState, showMembersState } from 'recoil/index'
 import { useRecoilState } from 'recoil'
 import { useNavigate } from 'react-router-dom'
 import { useCallback } from 'react'
-import { quitChatRoom, getMembers } from 'api/index'
-import { useQuery } from '@tanstack/react-query'
+import { quitChatRoom } from 'api/index'
 
 export const ChatMembers = ({ roomid }) => {
   const navigate = useNavigate()
@@ -60,7 +59,6 @@ export const ChatMembers = ({ roomid }) => {
               <MembersList roomid={roomid} />
               <MembersFooter
                 onClick={handleExit}
-                roomid={roomid}
               />
             </Fixer>
           </MembersLayer>

@@ -3,7 +3,7 @@ import { Fixer } from 'components/index'
 import { Logout, Notification } from 'iconsax-react'
 import { Flexbox } from 'styles/index'
 
-export const MembersFooter = ({ onClick, roomid }) => {
+export const MembersFooter = ({ onClick }) => {
   return (
     <Fixer $bottom="0">
       <Container>

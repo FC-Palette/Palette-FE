@@ -2,19 +2,19 @@ import { authInstance } from 'api/index'
 
 const [CHAT] = [import.meta.env.VITE_BASE_CHAT_PATH]
 
-//1. 채팅 메시지 내역, useQuery 콜백함수
+//1. 채팅 메시지 내역
 export const getChatLog = async (roomId: string) => {
   const res = await authInstance.get(`${CHAT}/history?roomId=${roomId}`)
   return res.data
 }
 
-//2. 공지 리스트, useQuery를 통해 관리(ChatAnnList)
+//2. 공지 리스트
 export const getNoticeList = async (roomId: string) => {
   const res = await authInstance.get(`${CHAT}/notice?roomId=${roomId}`)
   return res.data
 }
 
-//3. 채팅방 상단 계좌정보, useQuery를 통해 관리(AccountInfo)
+//3. 채팅방 상단 계좌정보
 export const getAccount = async (contentId: string) => {
   const res = await authInstance.get(
     `${CHAT}/notice/account?contentId=${contentId}`
@@ -22,7 +22,7 @@ export const getAccount = async (contentId: string) => {
   return res.data
 }
 
-//4. 채팅방 나가기, ModalButtons에 우측버튼
+//4. 채팅방 나가기
 export const quitChatRoom = async (roomId: string) => {
   const res = await authInstance.delete(`${CHAT}/exit?roomId=${roomId}`)
   return res.status
@@ -34,13 +34,13 @@ export const getMembers = async (roomId: string) => {
   return res.data
 }
 
-//6. 채팅방 리스트, ChatRooms, useQuery관리
+//6. 채팅방 리스트
 export const getChatList = async (roomtype: string) => {
   const res = await authInstance.get(`${CHAT}/list?type=${roomtype}`)
   return res.data
 }
 
-//7. 공지 등록, MsgActions 핸들러
+//7. 공지 등록
 export const createNotice = async (roomId: string, messageId: string) => {
   const res = await authInstance.post(`${CHAT}/notice`, {
     roomId: roomId,

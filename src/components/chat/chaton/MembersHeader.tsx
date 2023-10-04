@@ -3,10 +3,18 @@ import { ArrowLeft2 } from 'iconsax-react'
 import { ToChatList } from 'components/index'
 import { Flexbox } from 'styles/index'
 import { CHAT_TEXTS } from 'constants/index'
+import { getMembers } from 'api/index'
+import { useQuery } from '@tanstack/react-query'
 
-export const MembersHeader = ({ onClick, client, roomid }) => {
-  const members = client.getQueryData(['chatMembers'])?.response?.length
-
+export const MembersHeader = ({ onClick, roomid }) => {
+  const {
+    data: members,
+    isLoading,
+    isError
+  } = useQuery(['chatMembers', roomid], () => {
+    return getMembers(roomid)
+  })
+  const membersCount = members?.response?.length
   return (
     <Fixer $top="0">
       <Container>
@@ -16,7 +24,7 @@ export const MembersHeader = ({ onClick, client, roomid }) => {
         <Grow>
           <Members>{CHAT_TEXTS.groupInfo}</Members>
           <MembersNum>
-            {members}
+            {membersCount}
             {CHAT_TEXTS.count}
           </MembersNum>
         </Grow>

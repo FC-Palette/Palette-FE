@@ -38,6 +38,7 @@ export const ChatAnnList = () => {
   } = useQuery(['notices', roomId], () => {
     return getNoticeList(roomId)
   })
+
   return (
     <>
       <Header

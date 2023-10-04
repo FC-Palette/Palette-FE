@@ -21,7 +21,7 @@ import * as SockJS from 'sockjs-client'
 import * as Stomp from '@stomp/stompjs'
 
 import { getChatLog } from 'api/index'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 
 const [HTTP, CHATPATH, ENTER, SUB] = [
   import.meta.env.VITE_BASE_WS_URL,
@@ -34,6 +34,7 @@ const nickname = localStorage.getItem('nickname')
 
 export const ChatOn = () => {
   const location = useLocation()
+  const queryClient = useQueryClient()
   let roomId = location.state.roomid
   let memberId = decoder().memberId
 
@@ -61,9 +62,7 @@ export const ChatOn = () => {
   } = useQuery(['history', roomId], () => {
     return getChatLog(roomId)
   })
-  {
-    props => props.queryClient.invalidateQueries(history)
-  }
+  // queryClient.invalidateQueries(history)
 
   const sendMessage = (value: string) => {
     const data = {
