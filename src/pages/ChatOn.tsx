@@ -63,7 +63,7 @@ export const ChatOn = () => {
 
   const token = `${localStorage.getItem('Token')} `
 
-  const { data: history } = useQuery(
+  const { data: history, isLoading } = useQuery(
     ['history', roomId],
     () => {
       return getChatLog(roomId)
@@ -75,8 +75,14 @@ export const ChatOn = () => {
       }
     }
   )
+  if (isLoading) {
+    null
+  }
   queryClient.invalidateQueries(history)
   const sendMessage = (value: string) => {
+    if (value === '') {
+      return
+    }
     const data = {
       content: value
     }

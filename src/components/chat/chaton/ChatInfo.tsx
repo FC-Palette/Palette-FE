@@ -4,7 +4,12 @@
 */
 import { styled } from 'styled-components'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
-import { inDetailState, noticeState, roomIdState } from 'recoil/index'
+import {
+  inDetailState,
+  noticeState,
+  roomIdState,
+  chatTypeState
+} from 'recoil/index'
 import { useQuery } from '@tanstack/react-query'
 import { getNotice } from 'api/index'
 import { useNavigate } from 'react-router-dom'
@@ -22,6 +27,7 @@ export const ChatInfo = () => {
   const inDetail = useRecoilValue(inDetailState)
   const roomId = useRecoilValue(roomIdState)
   // const setNotice = useSetRecoilState(noticeState)
+  const setChatType = useSetRecoilState(chatTypeState)
 
   const { data: notice } = useQuery(
     ['notice', roomId],
@@ -54,6 +60,10 @@ export const ChatInfo = () => {
     }
     return true
   }
+
+  useEffect(() => {
+    setChatType(type)
+  }, [])
   return (
     <InfoWrapper>
       {/* 1. 개인챗이 아니면, 모임/구매정보 토글탭을 띄운다  */}
