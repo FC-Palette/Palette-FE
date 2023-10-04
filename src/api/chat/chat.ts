@@ -55,14 +55,19 @@ export const getNotice = async (roomId: string) => {
   return res.data
 }
 
-// //9. 파일, 이미지 전송
-// export const sendFile = async (type: string, messageId: string) => {
-//   const res = await authInstance.post(`${CHAT}/notice`, {
-//     roomId: roomId,
-//     messageId: messageId
-//   })
-//   return res.data
-// }
+//9. 파일, 이미지 전송
+export const sendFile = async (roomId: string, images: Blob[]) => {
+  const res = await authInstance.post(`${CHAT}/file`, {
+    detail: {
+      roomId: roomId,
+      type: 'IMAGE'
+    },
+    file: {
+      images: images
+    }
+  })
+  return res.data
+}
 /*
 {
 	"status": 201, 

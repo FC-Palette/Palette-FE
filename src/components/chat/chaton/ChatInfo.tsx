@@ -39,7 +39,7 @@ export const ChatInfo = ({ roomid }) => {
     }
     return true
   }
-  console.log(isPersonal(type), type)
+  console.log(type, isPersonal(type), isBuying)
   return (
     <InfoWrapper>
       {!isPersonal(type) && <ChatSubject isBuying={isBuying}></ChatSubject>}

@@ -64,7 +64,7 @@ export const Home = () => {
             title={HOME_TEXTS.timetable}
             subitem={formatLocalDateTime(new Date())}
           />
-          <Navigation>만들어야함</Navigation>
+          <Navigation> </Navigation>
         </NavArea>
       </Template>
       <Footer $fixed={false} />

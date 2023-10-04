@@ -12,21 +12,11 @@ export const showMembersState = atom<boolean>({
 
 export const inDetailState = atom<boolean>({
   key: 'inDetailState',
-  default: true
-})
-
-export const isBuyingState = atom<boolean>({
-  key: 'isByuyingState',
   default: false
 })
 
 export const sendFileState = atom<boolean>({
   key: 'sendFileState',
-  default: false
-})
-
-export const isPersonalState = atom<boolean>({
-  key: 'isPersonalState',
   default: false
 })
 

@@ -14,8 +14,8 @@ export const SubjectDetail = ({
     <Wrapper $shared={$shared}>
       <SubjectImg src={src} />
       <SubjectText>
-        <SubjectTitle $isBuying={isBuying}>{title}</SubjectTitle>
-        <SubjectInfo $isBuying={isBuying}>
+        <SubjectTitle isBuying={isBuying}>{title}</SubjectTitle>
+        <SubjectInfo isBuying={isBuying}>
           {isBuying && price && price.toLocaleString()}원{!isBuying && week}
         </SubjectInfo>
       </SubjectText>
@@ -47,12 +47,12 @@ const SubjectText = styled.div`
 `
 
 //하단 컴포넌트들 isBuying(boolean, 모임,상품정보)에 따라 유동적 변경
-const SubjectTitle = styled.div<{ $isBuying?: boolean }>`
-  font-size: ${props => (props.$isBuying ? '16px' : '20px')};
-  font-weight: ${props => (props.$isBuying ? '400' : '500')};
+const SubjectTitle = styled.div<{ isBuying?: boolean }>`
+  font-size: ${props => (props.isBuying ? '16px' : '20px')};
+  font-weight: ${props => (props.isBuying ? '400' : '500')};
 `
-const SubjectInfo = styled.div<{ $isBuying?: boolean }>`
-  font-size: ${props => (props.$isBuying ? '26px' : '16px')};
-  font-weight: ${props => (props.$isBuying ? '600' : '400')};
-  line-height: ${props => (props.$isBuying ? '36px' : 'normal')};
+const SubjectInfo = styled.div<{ isBuying?: boolean }>`
+  font-size: ${props => (props.isBuying ? '26px' : '16px')};
+  font-weight: ${props => (props.isBuying ? '600' : '400')};
+  line-height: ${props => (props.isBuying ? '36px' : 'normal')};
 `
