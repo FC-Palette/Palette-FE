@@ -3,15 +3,14 @@ import { styled } from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { centralise } from 'styles/index'
 import { CHAT_TEXTS } from 'constants/index'
-export const ToChatList = ({ roomid }) => {
+
+export const ToChatList = () => {
   const navigate = useNavigate()
 
   return (
     <Wrapper
       onClick={() => {
-        navigate('/chatannlist', {
-          state: { roomid }
-        })
+        navigate('/chatannlist')
       }}>
       <Edit size="16" />
       <Notice>{CHAT_TEXTS.register}</Notice>

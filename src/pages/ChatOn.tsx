@@ -9,13 +9,13 @@ import {
 import { styled } from 'styled-components'
 import { ArrowLeft2, More } from 'iconsax-react'
 import { STATUS_TEXTS, CHATON_TEXTS } from 'constants/index'
-
 import { useRecoilState } from 'recoil'
-import { showMembersState } from 'recoil/index'
+import { showMembersState, roomIdState } from 'recoil/index'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { decoder } from 'utils/index'
 import { msgProps } from 'types/index'
+import { useSetRecoilState } from 'recoil'
 
 import * as SockJS from 'sockjs-client'
 import * as Stomp from '@stomp/stompjs'
@@ -37,6 +37,7 @@ export const ChatOn = () => {
   const queryClient = useQueryClient()
   let roomId = location.state.roomid
   let memberId = decoder().memberId
+  const setRoomId = useSetRecoilState(roomIdState)
 
   const [client, setClient] = useState<Stomp.Client>()
 
@@ -91,6 +92,7 @@ export const ChatOn = () => {
 
   // 1. useEffect로 채팅방 메시지 리스트(DB 내부)를 받아와 상태값(state)에 저장
   useEffect(() => {
+    setRoomId(roomId)
     if (!token) {
       alert(CHATON_TEXTS.noToken)
       return backToList()
@@ -108,19 +110,7 @@ export const ChatOn = () => {
         const sockjs = new SockJS(`${HTTP}`)
         return sockjs
       },
-      debug: str => {
-        console.log(str)
-      },
-      reconnectDelay: 5000,
-      heartbeatIncoming: 4000,
-      heartbeatOutgoing: 4000,
-      onStompError: errorCallback,
-      onWebSocketError: errorCallback,
-      logRawCommunication: true
-    })
-    setClient(client)
-    client.onConnect = () => {
-      if (client) {
+      onConnect: () => {
         client?.subscribe(
           `${SUB}${roomId}`,
           data => {
@@ -137,18 +127,26 @@ export const ChatOn = () => {
             memberId: memberId
           })
         })
-      }
-    }
+      },
+      debug: str => {
+        console.log(str)
+      },
+      reconnectDelay: 5000,
+      heartbeatIncoming: 4000,
+      heartbeatOutgoing: 4000,
+      onStompError: errorCallback,
+      onWebSocketError: errorCallback,
+      logRawCommunication: true
+    })
     client.activate()
+    setClient(client)
     return () => {
-      if (client) {
-        client.deactivate()
-      }
+      client.deactivate()
     }
   }, [])
   return (
     <>
-      <ChatMembers roomid={roomId} />
+      <ChatMembers />
       <Header
         centerText="USERNAME"
         leftIcon={
@@ -162,12 +160,9 @@ export const ChatOn = () => {
           <More onClick={handleShowMembers} />
         </StyledIcon>
       </Header>
-      <ChatInfo roomid={roomId} />
+      <ChatInfo />
       {/* messages => chatLog(상태) */}
-      <ChatField
-        messages={chatLog}
-        roomId={roomId}
-      />
+      <ChatField messages={chatLog} />
       {<ChatStatus status={STATUS_TEXTS.noGroup}></ChatStatus>}
       <ChatInputField
         inputRef={inputRef}

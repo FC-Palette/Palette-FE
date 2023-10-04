@@ -12,16 +12,17 @@ import {
 } from 'components/index'
 import { CHATON_TEXTS } from 'constants/index'
 import { modalOnState, showMembersState } from 'recoil/index'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import { useNavigate } from 'react-router-dom'
 import { useCallback } from 'react'
 import { quitChatRoom } from 'api/index'
+import { roomIdState } from 'recoil/index'
 
-export const ChatMembers = ({ roomid }) => {
+export const ChatMembers = () => {
   const navigate = useNavigate()
   const [modalOn, setModalOn] = useRecoilState(modalOnState)
   const [showMembers, setShowMembers] = useRecoilState(showMembersState)
-
+  const roomId = useRecoilValue(roomIdState)
   const handleShowMembers = useCallback(() => {
     setShowMembers(!showMembers)
   }, [showMembers])
@@ -42,7 +43,7 @@ export const ChatMembers = ({ roomid }) => {
             setModalOn(!modalOn)
           }}
           onRightClick={() => {
-            quitChatRoom(roomid)
+            quitChatRoom(roomId)
             navigate('/chatlist/g')
           }}
         />
@@ -52,14 +53,9 @@ export const ChatMembers = ({ roomid }) => {
           <Background onClick={handleShowMembers} />
           <MembersLayer>
             <Fixer $top="0">
-              <MembersHeader
-                onClick={handleShowMembers}
-                roomid={roomid}
-              />
-              <MembersList roomid={roomid} />
-              <MembersFooter
-                onClick={handleExit}
-              />
+              <MembersHeader onClick={handleShowMembers} />
+              <MembersList />
+              <MembersFooter onClick={handleExit} />
             </Fixer>
           </MembersLayer>
         </>

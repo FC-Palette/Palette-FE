@@ -27,11 +27,6 @@ export const ChatRooms = () => {
   if (isLoading) {
     return <div>Loading...</div>
   }
-
-  if (isError) {
-    return <div>Error loading chat rooms</div>
-  }
-  console.log(rooms)
   return (
     <Wrapper $innerHeight={innerHeight}>
       {rooms &&

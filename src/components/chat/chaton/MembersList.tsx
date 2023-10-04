@@ -1,14 +1,17 @@
 import { Fixer, Member } from 'components/index'
 import { getMembers } from 'api/index'
 import { useQuery } from '@tanstack/react-query'
+import { roomIdState } from 'recoil/index'
+import { useRecoilValue } from 'recoil'
+export const MembersList = () => {
+  const roomId = useRecoilValue(roomIdState)
 
-export const MembersList = ({ roomid }) => {
   const {
-    data: members,
+    data: members
     // isLoading,
     // isError
-  } = useQuery(['chatMembers', roomid], () => {
-    return getMembers(roomid)
+  } = useQuery(['chatMembers', roomId], () => {
+    return getMembers(roomId)
   })
 
   console.log(members)

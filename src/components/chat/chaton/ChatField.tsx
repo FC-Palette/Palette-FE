@@ -1,7 +1,7 @@
 import { useState, useLayoutEffect } from 'react'
 import React from 'react'
-import { useRecoilState } from 'recoil'
-import { msgActionsState } from 'recoil/index'
+import { useRecoilState, useRecoilValue } from 'recoil'
+import { msgActionsState, roomIdState } from 'recoil/index'
 import {
   Wrapper,
   Sender,
@@ -14,7 +14,8 @@ import { useCallback } from 'react'
 import { renderTime, formatLocalDateTime, decoder } from 'utils/index'
 
 // ############################################################
-export const ChatField = ({ messages, roomId }) => {
+export const ChatField = ({ messages }) => {
+  const roomId = useRecoilValue(roomIdState)
   const [innerHeight, setInnerHeight] = useState<number>(0)
   let memberId = decoder().memberId
 
