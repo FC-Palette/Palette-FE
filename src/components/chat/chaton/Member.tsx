@@ -5,7 +5,6 @@ export const Member = ({ memberId, url, name, host }) => {
   // host면 호스트표시, myself면 나표시
   const isHost = memberId === host
   const isMyself = memberId === decoder().memberId
-  console.log(isHost, isMyself)
   return (
     <Wrapper>
       <Image src={url}></Image>

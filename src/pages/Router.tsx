@@ -49,19 +49,6 @@ const generateRoute = (path, component, error, children?): RouteObject => {
 }
 
 export const router = createBrowserRouter([
-  // Layout의 Outlet내로 children 내부 경로입력시 컴포넌트 렌더링,
-  // 4번째인수의 배열(children)에서 다음의 예시에서는 "/test/3" 경로사용 (첫번째 인수에서 slash입력시{'/3'} "test//3"로 사용해야함)
-  // 따라서 경로입력시 슬래시(/)중복주의, ex) '/signin'대신 'signin' + 최상위 /test는 예외
-  // {
-  //   path: '/',
-  //   element: <Layout />,
-  //   errorElement: <ErrorComponent />,
-  //   children: [
-  //     generateRoute('/trades', <Test />, <ErrorComponent />, [
-  //       generateRoute('3', <Test3 />, <ErrorComponent />),
-  //     ]),
-  //   ]
-  // }
   {
     path: '/',
     element: <Layout />,
@@ -160,10 +147,14 @@ export const router = createBrowserRouter([
       generateRoute('/changeprofile', <ChangeProfile />, <ErrorComponent />),
       generateRoute('/setting', <Setting />, <ErrorComponent />),
       generateRoute('/alarm', <Alarm />, <ErrorComponent />),
-      generateRoute('/setting/password', <SettingPassword />, <ErrorComponent />),
+      generateRoute(
+        '/setting/password',
+        <SettingPassword />,
+        <ErrorComponent />
+      ),
       generateRoute('/setting/alarm', <SettingAlarm />, <ErrorComponent />),
       generateRoute('/setting/notice', <SettingNotice />, <ErrorComponent />),
-      generateRoute('/setting/service', <SettingService />, <ErrorComponent />),
+      generateRoute('/setting/service', <SettingService />, <ErrorComponent />)
     ]
   },
   {

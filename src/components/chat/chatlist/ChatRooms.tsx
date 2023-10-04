@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 import { ChatRoom } from 'components/index'
-import { useState, useLayoutEffect } from 'react'
+import { useState, useLayoutEffect, RefObject } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { getChatList } from 'api/index'
 import { useParams } from 'react-router-dom'
@@ -44,8 +44,12 @@ export const ChatRooms = () => {
   )
 }
 
-export const Wrapper = styled.div<{ $innerHeight?: number }>`
+export const Wrapper = styled.div<{
+  $innerHeight?: number
+  ref?: RefObject<HTMLDivElement>
+}>`
   min-width: 375px;
   height: ${props => props.$innerHeight}px;
   overflow: scroll;
+  transition: 'scroll 0.5s ease-in-out';
 `

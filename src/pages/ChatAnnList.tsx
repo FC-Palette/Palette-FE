@@ -3,34 +3,18 @@ import { useNavigate } from 'react-router-dom'
 import { ArrowLeft2 } from 'iconsax-react'
 import { getNoticeList } from 'api/index'
 import { useQuery } from '@tanstack/react-query'
-import { roomIdState } from 'recoil/index'
-import { useRecoilValue } from 'recoil'
+import { roomIdState, showMembersState } from 'recoil/index'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useEffect } from 'react'
 
-/*
-{
-	"status": 200, 
-	"success": true,
-	"response": [
-		{
-			"noticeId" : 1, 
-			"notice" : "공지 확인해주세요",
-	    "memberId" : 1,
-			"profileImgUrl" : "https://",
-	    "createdAt" : 23.09.18,
-			"host" : 2
-		},
-		...
-	] 
-}
-*/
-// 1. 채팅방 멤버를 불러온다.
-// 2. 멤버들을 상태에 저장한다.
-// 3. 상태에 저장한 멤버 내에서 공지의 멤버 아이디를 비교한다.
-// 4. 일치하는 멤버의 닉네임을 불러온다.
-// => 공지에 memberId만 있기 때문에
 export const ChatAnnList = () => {
   const navigate = useNavigate()
   const roomId = useRecoilValue(roomIdState)
+  const setShowMembers = useSetRecoilState(showMembersState)
+
+  const handleHistory = () => {
+    setShowMembers(false)
+  }
 
   const {
     data: notices
@@ -40,6 +24,15 @@ export const ChatAnnList = () => {
     return getNoticeList(roomId)
   })
 
+  const handleGoBack = () => {
+    navigate('/chat')
+    setShowMembers(false)
+  }
+
+  useEffect(() => {
+    window.onpopstate = handleHistory
+  }, [])
+
   return (
     <>
       <Header
@@ -47,9 +40,7 @@ export const ChatAnnList = () => {
         leftIcon={
           <ArrowLeft2
             cursor="pointer"
-            onClick={() => {
-              navigate('/chat')
-            }}
+            onClick={handleGoBack}
           />
         }></Header>
       <ChatAnnListItems>
