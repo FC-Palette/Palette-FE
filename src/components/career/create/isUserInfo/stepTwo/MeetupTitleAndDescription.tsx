@@ -9,24 +9,12 @@ export const MeetupTitleAndDescription = () => {
   const maxTitleLength = 25
   const maxDescriptionLength = 500
 
-  const handleTitleChange = e => {
+  const handleInputChange = (e: any, propertyKey: string) => {
     const text = e.target.value
-    if (text.length <= maxDescriptionLength) {
-      setGlobalState(prev => ({
-        ...prev,
-        title: text
-      }))
-    }
-  }
-
-  const handleDescriptionChange = e => {
-    const text = e.target.value
-    if (text.length <= maxDescriptionLength) {
-      setGlobalState(prev => ({
-        ...prev,
-        description: text
-      }))
-    }
+    setGlobalState(prevText => ({
+      ...prevText,
+      [propertyKey]: text
+    }))
   }
 
   return (
@@ -37,24 +25,26 @@ export const MeetupTitleAndDescription = () => {
 
       <InputContainer>
         <InputContents
+          value={title || ''}
           placeholder="제목을 입력하세요"
-          onChange={handleTitleChange}
+          onChange={e => handleInputChange(e, 'title')}
           maxLength={maxTitleLength}
         />
       </InputContainer>
       <InputLength>
-        {title.length}/{maxTitleLength}
+        {title?.length}/{maxTitleLength}
       </InputLength>
       <QuestionDescription>모임 소개글을 입력해주세요.</QuestionDescription>
       <TextAreaContainer>
         <TextAreaContents
+          value={description || ''}
           placeholder="텍스트를 입력하세요"
-          onChange={handleDescriptionChange}
+          onChange={e => handleInputChange(e, 'description')}
           maxLength={maxDescriptionLength}
         />
       </TextAreaContainer>
       <TextAreaLengthWrap>
-        {description.length}/{maxDescriptionLength}
+        {description?.length}/{maxDescriptionLength}
       </TextAreaLengthWrap>
     </>
   )

@@ -1,5 +1,6 @@
 export interface fetchDetailProps {
-  meetingMemberResponseDto: {
+  meetingMemberDto: {
+    id: number
     nickname: string
     bio: string
     image: null | string
@@ -28,6 +29,4 @@ export interface fetchDetailProps {
   likes: number
   createdAt: string
   closing: boolean
-  meetingMemberDto: any
 }
-

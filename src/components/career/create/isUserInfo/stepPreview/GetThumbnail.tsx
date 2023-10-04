@@ -2,9 +2,14 @@ import styled from 'styled-components'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import { useRecoilValue } from 'recoil'
+import { careerImageState } from '@/recoil'
 
-export const GetThumbnail = ({ meetupImages }) => {
-  const thumbnailImage = meetupImages || []
+export const GetThumbnail = () => {
+  const atom = useRecoilValue(careerImageState)
+  const thumbnailImage = atom.file
+
+  console.log('thumbnailImage: ', thumbnailImage)
 
   const settings = {
     dots: true,
@@ -13,16 +18,21 @@ export const GetThumbnail = ({ meetupImages }) => {
     slidesToShow: 1,
     slidesToScroll: 1
   }
-  
 
-  const previewSlides = thumbnailImage.map((item: any, index: any) => (
-    <SlideItem key={index}>
-      <img
-        src={URL.createObjectURL(item)}
-        alt={`Thumbnail ${index + 1}`}
-      />
-    </SlideItem>
-  ))
+  if (!thumbnailImage || !Array.isArray(thumbnailImage)) {
+    return null
+  }
+
+  const previewSlides = thumbnailImage
+    .filter((item: any) => item instanceof Blob || item instanceof File)
+    .map((item, index) => (
+      <SlideItem key={index}>
+        <img
+          src={URL.createObjectURL(item)}
+          alt={`Thumbnail ${index + 1}`}
+        />
+      </SlideItem>
+    ))
 
   return (
     <>
@@ -46,7 +56,7 @@ const ThumbnailSlider = styled.div`
 
   .slick-dots li button:before {
     color: ${props => props.theme.main.blue0};
-    font-size: 20px;
+    font-size: 10px;
   }
 
   .slick-dots li {

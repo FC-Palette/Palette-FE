@@ -17,7 +17,6 @@ export const StepPreviewCard = () => {
     jobs,
     positions,
     sex,
-    image,
     title,
     description,
     headCount,
@@ -30,16 +29,15 @@ export const StepPreviewCard = () => {
     acceptType
   } = globalState
 
-  console.log(image)
   return (
     <>
       <CareerCreateMeetingHeaderDynamic meetupTitle={title} />
-      <GetThumbnail meetupImages={image} />
+      <GetThumbnail />
       <GetRoomManagerInfo />
       <GetTitleAndDescription
         detailText="아직 이 모임에 대한 소개가 작성되지 않았어요."
-        meetupTitle={title}
-        meetupDescription={description}
+        title={title}
+        description={description}
       />
       <GetMeetingCategory selectedMeetingTypes={jobs} />
       <GetStats />

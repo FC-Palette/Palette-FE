@@ -11,11 +11,11 @@ export const RecruitmentPeriodSelector = () => {
   const formatDate = (date: string) => dayjs(date).format('YYYY-MM-DD')
   const setGlobalState = useSetRecoilState(careerCreateGlobalState)
 
-  const handleDateChange = (date: any, type: string) => {
+  const handleDateChange = (date: any, propertyKey: string) => {
     const formattedDate = formatDate(date)
     setGlobalState(prevDate => ({
       ...prevDate,
-      [type]: formattedDate
+      [propertyKey]: formattedDate
     }))
   }
 

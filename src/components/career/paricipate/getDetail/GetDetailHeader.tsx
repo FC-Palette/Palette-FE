@@ -4,8 +4,9 @@ import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { CREATE_EDIT_TEXT, DELETE_MODAL_TEXT } from '@/constants'
 import { useState } from 'react'
-import { useRecoilState } from 'recoil'
-import { modalOnState } from '@/recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
+import { fetchDetailGlobalState, modalOnState } from '@/recoil'
+import { meetingDeleteRequestApi } from '@/api'
 
 interface DropdownProps {
   $isOpen: boolean
@@ -16,12 +17,19 @@ interface OptionItemProps {
   onClick: () => void
 }
 
-export const GetDetailHeader = ({ title, isAdmin }) => {
+export const GetDetailHeader = ({ isAdmin, meetingId }) => {
+  const navigate = useNavigate()
+  const atom = useRecoilValue(fetchDetailGlobalState)
+  const { title } = atom
   const [isOpen, setIsOpen] = useState(false)
   const [selectedOption, setSelectedOption] = useState<string>('')
-  const navigate = useNavigate()
   const [isModalOpen, setIsModalOpen] = useRecoilState(modalOnState)
   const isManager = isAdmin
+  const moveToEdit = () => {
+    navigate('/edit/1', {
+      state: {meetingId}
+    })
+  }
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen)
@@ -31,15 +39,18 @@ export const GetDetailHeader = ({ title, isAdmin }) => {
     setSelectedOption(value)
     setIsOpen(false)
     if (value === '수정하기') {
-      navigate('/edit/1')
+      moveToEdit()
     }
     if (value === '삭제하기') {
       setIsModalOpen(!isModalOpen)
     }
   }
 
-  const handleConfirmYes = () => {
-    alert('삭제')
+  const handleConfirmYes = async () => {
+    const res = await meetingDeleteRequestApi(meetingId)
+    if (res.status === 200) {
+      navigate('/career')
+    }
   }
 
   const handleConfirmNo = () => {

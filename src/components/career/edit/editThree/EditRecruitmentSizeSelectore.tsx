@@ -1,9 +1,9 @@
 import { useSetRecoilState } from 'recoil'
 import styled from 'styled-components'
-import { careerEditGlobalState } from '@/recoil'
+import { editDtoAtom } from '@/recoil'
 
 export const EditRecruitmentSizeSelectore = () => {
-  const setGlobalState = useSetRecoilState(careerEditGlobalState)
+  const setGlobalState = useSetRecoilState(editDtoAtom)
 
   const handleNumofMembers = (e: number) => {
     let count = e

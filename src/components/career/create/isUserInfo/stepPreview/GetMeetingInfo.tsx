@@ -29,11 +29,11 @@ export const GetMeetingInfo = ({
   const infos = (
     <InfoZone>
       <Info>
-        {selectedRolesString || '-'} | {gender}
+        {selectedRolesString || ''} | {gender}
       </Info>
       <Info>{recruitmentSize}명</Info>
       <Info>
-        {meetingFrequency || '-'} {selectedDays ? `${selectedDays}` : ''}{' '}
+        {meetingFrequency || ''} {selectedDays ? `${selectedDays}` : ''}{' '}
         {meetingTime || ''} {progressTime ? `/ ${progressTime}분 진행` : ''}
       </Info>
       <Info>

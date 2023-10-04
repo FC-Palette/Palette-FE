@@ -1,6 +1,6 @@
 import { useRecoilState } from 'recoil'
 import styled from 'styled-components'
-import { careerEditGlobalState } from '@/recoil'
+import { editDtoAtom } from '@/recoil'
 
 interface selectProps {
   $isSelected: boolean | string
@@ -8,7 +8,7 @@ interface selectProps {
 }
 
 export const EditMemberApprovalMethodSelector = () => {
-  const [globalState, setGlobalState] = useRecoilState(careerEditGlobalState)
+  const [globalState, setGlobalState] = useRecoilState(editDtoAtom)
   const { acceptType } = globalState // 선착순 => false(default)
 
   const handleToggleApprovalType = (type: string) => {

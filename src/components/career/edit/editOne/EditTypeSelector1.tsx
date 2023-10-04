@@ -1,7 +1,7 @@
 import { profileNCareerFilter } from '@/constants'
 import { useState } from 'react'
 import { useRecoilState } from 'recoil'
-import { careerEditGlobalState } from '@/recoil'
+import { editDtoAtom } from '@/recoil'
 import styled from 'styled-components'
 import { CareerCreateMeetingCommonQuestion } from '../..'
 
@@ -11,7 +11,7 @@ interface SelectedAnswerProps {
 }
 
 export const EditTypeSelector1 = () => {
-  const [globalData, setGlobalData] = useRecoilState(careerEditGlobalState)
+  const [globalData, setGlobalData] = useRecoilState(editDtoAtom)
   const [selectedCategory, setSelectedCategory] = useState<string>('')
   const { type } = globalData
 

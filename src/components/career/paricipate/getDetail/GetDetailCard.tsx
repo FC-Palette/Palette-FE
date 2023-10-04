@@ -12,7 +12,7 @@ import {
   GetDetailThumbnail,
   GetDetailTitleAndDescription
 } from '.'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import {
   fetchDetailIdApi,
@@ -20,69 +20,57 @@ import {
   fetchRecommendMeetingsApi
 } from '@/api'
 import { CommonSpinner } from '@/components'
-import { fetchDetailInitialState, fetchMemberInitailState } from '@/constants'
 import { decoder } from '@/utils'
+import { useRecoilState, useSetRecoilState } from 'recoil'
+import {
+  fetchDetailGlobalState,
+  fetchDetailMemberState,
+  fetchDetailRecommendState
+} from '@/recoil'
 
 export const GetDetailCard = () => {
   const { detailid } = useParams()
   const [isLoading, setIsLoading] = useState(true)
-  const [meetingRes, setMeetingRes] = useState(fetchDetailInitialState)
-  const [memberRes, setMemberRes] = useState(fetchMemberInitailState)
-  const [recommendRes, setRecommendRes] = useState([])
-  const roomAdminId = meetingRes.meetingMemberDto.id
-  const loggedInuser = decoder().memberId
-  const isAdmin = loggedInuser === roomAdminId // 게시자 정보 === 로그인한 회원 정보
-  const closing = meetingRes.closing
+  const [meetingRes, setMeetingRes] = useRecoilState(fetchDetailGlobalState)
+  const setMemberRes = useSetRecoilState(fetchDetailMemberState)
+  const setRecommendRes = useSetRecoilState(fetchDetailRecommendState)
+  const roomAdminId = meetingRes.meetingMemberDto.id // 게시글 글쓴이 id
+  const loggedInUser = decoder()?.memberId // 현재 로그인한 유저 id
+  const isAdmin = loggedInUser === roomAdminId // 글쓴이 === 로그인한 유저
+  const navitate = useNavigate()
 
-  console.log('detail: ',closing)
+
+  console.log(meetingRes)
+  if (!detailid && !loggedInUser) {
+    navitate('/career')
+  }
 
   useEffect(() => {
     const fetchDetailData = async () => {
       if (detailid) {
-        const [meetingRes, memberRes, recommendRes] = await Promise.all([
-          fetchDetailIdApi(detailid),
-          fetchMemberInfoApi(detailid),
-          fetchRecommendMeetingsApi(detailid)
-        ])
-        if (meetingRes.response !== null) {
-          setMeetingRes(meetingRes.response)
-
+        const [meetingResponse, memberResponse, recommendResponse] =
+          await Promise.all([
+            fetchDetailIdApi(detailid),
+            fetchMemberInfoApi(detailid),
+            fetchRecommendMeetingsApi(detailid)
+          ])
+        if (meetingResponse.status === 200) {
+          setMeetingRes(meetingResponse.response)
           setIsLoading(false)
         }
 
-        if (memberRes.response !== null) {
-          setMemberRes(memberRes.response)
+        if (memberResponse.status === 200) {
+          setMemberRes(memberResponse.response)
         }
 
-        if (recommendRes.response !== null) {
-          setRecommendRes(recommendRes.response)
+        if (recommendResponse.status === 200) {
+          setRecommendRes(recommendResponse.response)
         }
       }
     }
-    // console.log('멤버 API 호출', memberRes) // 현재 서버에서 넘겨주는 멤버 배열이 빈 배열임
-    // console.log('비슷한 모임 추천 호출', recommendRes)
+
     fetchDetailData()
   }, [detailid])
-
-  const {
-    title,
-    description,
-    acceptType,
-    meetingMemberResponseDto,
-    image,
-    sex,
-    headCount,
-    startDate,
-    endDate,
-    jobs,
-    week,
-    days,
-    time,
-    progressTime,
-    hits,
-    likes,
-    createdAt
-  } = meetingRes
 
   const renderContent = () => {
     if (isLoading) {
@@ -92,37 +80,20 @@ export const GetDetailCard = () => {
     return (
       <>
         <GetDetailHeader
-          title={title}
           isAdmin={isAdmin}
+          meetingId={detailid}
         />
-        <GetDetailThumbnail image={image} />
-        <GetDetailManagerInfo
-          meetingMemberResponseDto={meetingMemberResponseDto}
-        />
-        <GetDetailTitleAndDescription
-          title={title}
-          description={description}
-        />
-        <GetDetailCategoryChips jobs={jobs} />
-        <GetDetailStats
-          hits={hits}
-          likes={likes}
-          createdAt={createdAt}
-        />
-        <GetDetailMeetupInfo
-          sex={sex}
-          headCount={headCount}
-          week={week}
-          days={days}
-          acceptType={acceptType}
-          startDate={startDate}
-          endDate={endDate}
-          time={time}
-          progressTime={progressTime}
-        />
-        <GetDetailMembersInfo memberRes={memberRes.response} />
-        {/* <GetDetailSimilarMeetupInfo recommendRes={recommendRes} /> */}
+        <GetDetailThumbnail />
+        <GetDetailManagerInfo />
+        <GetDetailTitleAndDescription />
+        <GetDetailCategoryChips />
+        <GetDetailStats />
+        <GetDetailMeetupInfo />
 
+        {/* 멤버소개: 지금 멤버 데이터 없어서 빈배열 출력됨 */}
+        <GetDetailMembersInfo />
+
+        {/* 비슷한 모임 추천: 현재 이미지 없음 */}
         <GetDetailSimilarMeetupInfo />
 
         {renderFooter()}
@@ -132,7 +103,7 @@ export const GetDetailCard = () => {
 
   const renderFooter = () => {
     return isAdmin ? (
-      <GetDetailFooterAndButtonHost closing={closing} meetingId ={detailid}/>
+      <GetDetailFooterAndButtonHost />
     ) : (
       <GetDetailFooterAndButtonGuest />
     )
@@ -148,6 +119,3 @@ const Card = styled.div`
   overflow-x: hidden;
   overflow-y: scroll;
 `
-
-
-

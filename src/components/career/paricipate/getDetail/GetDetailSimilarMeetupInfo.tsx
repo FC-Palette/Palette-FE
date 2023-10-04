@@ -1,23 +1,18 @@
 import styled from 'styled-components'
 import { CareerCreateMeetingCommonQuestion } from '../..'
 import { CommonLikeIcon, CommonViewIcon } from '@/components'
+import { useRecoilValue } from 'recoil'
+import { fetchDetailRecommendState } from '@/recoil'
+import { useEffect } from 'react'
 
-// export const GetDetailSimilarMeetupInfo = ({ recommendRes }) => {
 export const GetDetailSimilarMeetupInfo = () => {
-  // const fetchRecommendRes = recommendRes
-  const dummyObj = {
-    dummyCategory: ['카테고리', '카테고리', '카테고리', '카테고리', '카테고리'],
-    dummyTitle:
-      '출근 전 트렌드 분석출근 전 트렌드 분석 출근 전 트렌드 분석출근 전 트렌드 분석',
-    dummyLike: 7234,
-    dummyView: 72342
-  }
-
-  const { dummyCategory, dummyTitle, dummyLike, dummyView } = dummyObj
+  const recommendations = useRecoilValue(fetchDetailRecommendState)
 
   const checkTitleLength = (title: string, length: number) => {
     return title.length > length ? title.slice(0, length) + '...' : title
   }
+
+  useEffect(() => {}, [recommendations])
 
   return (
     <>
@@ -26,46 +21,27 @@ export const GetDetailSimilarMeetupInfo = () => {
       </CareerCreateMeetingCommonQuestion>
 
       <Container>
-        <CardContainer>
-          <CardImage
-            src={
-              'https://images.velog.io/images/mokyoungg/post/6659a8e8-5234-49e5-b3da-a3816c08bfdc/%ED%83%80%EC%9E%85%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20%EB%A1%9C%EA%B3%A0.svg'
-            }
-          />
-          <CardCategoryChipsWrap>
-            {dummyCategory.slice(0, 2).map((item, index) => (
-              <CardCategoryChip key={index}>{item}</CardCategoryChip>
-            ))}
-          </CardCategoryChipsWrap>
-          <CardTitle>{checkTitleLength(dummyTitle, 15)}</CardTitle>
-          <CardMeetupInfoRowWrap>매주 월요일 · AM 08:00</CardMeetupInfoRowWrap>
-          <IconWrapper>
-            <CommonLikeIcon size={14} />
-            {dummyLike}
-            <CommonViewIcon size={14} />
-            {dummyView}
-          </IconWrapper>
-        </CardContainer>
-        <CardContainer>
-          <CardImage
-            src={
-              'https://images.velog.io/images/mokyoungg/post/6659a8e8-5234-49e5-b3da-a3816c08bfdc/%ED%83%80%EC%9E%85%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20%EB%A1%9C%EA%B3%A0.svg'
-            }
-          />
-          <CardCategoryChipsWrap>
-            {dummyCategory.slice(0, 2).map((item, index) => (
-              <CardCategoryChip key={index}>{item}</CardCategoryChip>
-            ))}
-          </CardCategoryChipsWrap>
-          <CardTitle>{checkTitleLength(dummyTitle, 15)}</CardTitle>
-          <CardMeetupInfoRowWrap>매주 월요일 · AM 08:00</CardMeetupInfoRowWrap>
-          <IconWrapper>
-            <CommonLikeIcon size={14} />
-            {dummyLike}
-            <CommonViewIcon size={14} />
-            {dummyView}
-          </IconWrapper>
-        </CardContainer>
+        {recommendations.map((recommendation, index) => (
+          <CardContainer key={index}>
+            {/* Render each recommendation here */}
+            <CardImage src={recommendation.image[index]} />
+            <CardCategoryChipsWrap>
+              {recommendation.jobs.slice(0, 2).map((job, jobIndex) => (
+                <CardCategoryChip key={jobIndex}>{job}</CardCategoryChip>
+              ))}
+            </CardCategoryChipsWrap>
+            <CardTitle>{checkTitleLength(recommendation.title, 15)}</CardTitle>
+            <CardMeetupInfoRowWrap>
+              {recommendation.week} {recommendation.time}
+            </CardMeetupInfoRowWrap>
+            <IconWrapper>
+              <CommonLikeIcon size={14} />
+              {recommendation.likes}
+              <CommonViewIcon size={14} />
+              {recommendation.hits}
+            </IconWrapper>
+          </CardContainer>
+        ))}
       </Container>
     </>
   )
@@ -76,6 +52,7 @@ const Container = styled.div`
   margin: 2.5% 6.4% 3.5%;
   gap: 16px;
   max-width: 430px;
+  margin-bottom: 50px;
 
   @media (max-width: 215px) {
     flex-direction: column;
@@ -115,13 +92,13 @@ const CardCategoryChipsWrap = styled.div`
   flex-wrap: wrap;
   text-align: center;
   gap: 4px;
+  overflow-x: scroll;
 `
 
 const CardCategoryChip = styled.div`
   flex: 1;
   width: auto;
-  max-height: 23px;
-  max-width: 65px;
+  max-height: 25px;
   color: ${props => props.theme.greyScale.grey7};
   background-color: ${props => props.theme.greyScale.grey2};
   font-size: 14px;
@@ -129,6 +106,7 @@ const CardCategoryChip = styled.div`
   padding: 4px 8px;
   border-radius: 4px;
   white-space: nowrap;
+  overflow-x: auto;
 `
 
 const CardTitle = styled.div`

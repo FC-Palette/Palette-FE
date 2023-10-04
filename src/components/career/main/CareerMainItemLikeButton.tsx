@@ -15,6 +15,7 @@ export const CareerMainItemLikeButton = ({ meetingId }) => {
     ])
     if (likeResponse !== null) {
       setLike(likeResponse.success) // 성공 시 찜 상태로 설정
+      console.log(likeResponse)
     }
 
     if (cancelResponse !== null) {
@@ -23,7 +24,7 @@ export const CareerMainItemLikeButton = ({ meetingId }) => {
   }
 
   useEffect(() => {
-    fetchLikeStatus() // 초기 랜더링 시 데이터 가져오기
+    // 초기 랜더링 시 데이터 가져오기
   }, [meetingId])
 
   // 찜하기 또는 취소하기 클릭 시 상태를 변경하는 함수
@@ -35,7 +36,8 @@ export const CareerMainItemLikeButton = ({ meetingId }) => {
         setLike(false) // 찜 상태 해제
       } else {
         // 현재 찜하지 않은 상태인 경우, 찜 API 호출
-        await requestMeetingLikeApi(meetingId)
+        const likeRes = await requestMeetingLikeApi(meetingId)
+        console.log(likeRes)
         setLike(true) // 찜 상태 설정
       }
     } catch (error) {

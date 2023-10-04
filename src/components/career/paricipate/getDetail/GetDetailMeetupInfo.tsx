@@ -2,18 +2,37 @@ import { iconMapping } from '@/components'
 import { MEETUP_SIMPLE_INFO } from '@/constants'
 import styled from 'styled-components'
 import { CareerCreateMeetingCommonQuestion } from '../..'
+import { useRecoilValue } from 'recoil'
+import { fetchDetailGlobalState } from '@/recoil'
+import { useEffect } from 'react'
 
-export const GetDetailMeetupInfo = ({
-  acceptType,
-  sex,
-  headCount,
-  startDate,
-  endDate,
-  week,
-  days,
-  time,
-  progressTime
-}) => {
+export const GetDetailMeetupInfo = () => {
+  const atom = useRecoilValue(fetchDetailGlobalState)
+  const {
+    acceptType,
+    sex,
+    headCount,
+    startDate,
+    endDate,
+    week,
+    days,
+    time,
+    progressTime,
+    positions
+  } = atom
+
+  useEffect(() => {}, [
+    acceptType,
+    sex,
+    headCount,
+    startDate,
+    endDate,
+    week,
+    days,
+    time,
+    progressTime,
+    positions
+  ])
   // 아이콘 및 아이콘 맵핑 타이틀
   const iconsAndTitles = MEETUP_SIMPLE_INFO.map((iconKey, idx) => (
     <IconZone key={idx}>
@@ -31,17 +50,21 @@ export const GetDetailMeetupInfo = ({
   const infos = (
     <InfoZone>
       {/* 모집기준 */}
-      <Info>{sex}</Info>
+      <Info>
+        {sex} | {positions.join(' ')}
+      </Info>
       {/* 모집인원 */}
       <Info>{headCount}명</Info>
       {/* 모집시간 */}
       <Info>
-        {`${week} `} {days} {time}
-        {`${progressTime}분 진행`}
+        {week ? `${week} ` : ''} {days ? days.join(',') : ''} {time ? time : ''}{' '}
+        {progressTime ? `${progressTime}분 진행` : '-'}
       </Info>
       {/* 모집기간 */}
       <Info>
-        {sliceDate(startDate)} ~ {sliceDate(endDate)}
+        {startDate && endDate
+          ? `${sliceDate(startDate)} ~ ${sliceDate(endDate)}`
+          : '-'}
       </Info>
       {/* 멤버승인 */}
       <Info>{participationMethod}</Info>

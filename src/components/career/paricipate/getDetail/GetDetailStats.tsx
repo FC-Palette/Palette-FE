@@ -1,23 +1,26 @@
 import { CommonLikeIcon, CommonViewIcon } from '@/components'
+import { fetchDetailGlobalState } from '@/recoil'
 import { getTimeDiff } from '@/utils'
+import { useEffect } from 'react'
+import { useRecoilValue } from 'recoil'
 import styled from 'styled-components'
 
-export const GetDetailStats = ({ hits, likes, createdAt }) => {
-  const fetchLike = likes
-  const fetchHits = hits
-  const fetchCreatedAt = createdAt
-  const serverDate = fetchCreatedAt ? new Date(fetchCreatedAt) : null
+export const GetDetailStats = () => {
+  const atom = useRecoilValue(fetchDetailGlobalState)
+  const { hits, likes, createdAt } = atom
+  const serverDate = new Date(createdAt)
+  const timeAgoText = getTimeDiff(serverDate)
 
-  const timeAgoText = serverDate ? getTimeDiff(serverDate) : '알 수 없음'
+  useEffect(() => {}, [likes, hits, timeAgoText])
 
   return (
     <>
       <Container>
         <IconWrap>
           <CommonLikeIcon size={16} />
-          {fetchLike}
+          {likes}
           <CommonViewIcon size={16} />
-          {fetchHits}
+          {hits}
           <Dot>・</Dot>
           {timeAgoText}
         </IconWrap>
