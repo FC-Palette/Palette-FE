@@ -18,14 +18,9 @@ export const ChatInfo = () => {
   const inDetail = useRecoilValue(inDetailState)
   const roomId = useRecoilValue(roomIdState)
 
-  const {
-    data: notice
-    // isLoading,
-    // isError
-  } = useQuery(['notice', roomId], () => {
+  const { data: notice } = useQuery(['notice', roomId], () => {
     return getNotice(roomId)
   })
-  console.log(notice)
   const registered = notice?.response?.notice
 
   const contentNotice = notice?.response?.contentNotice
@@ -40,7 +35,6 @@ export const ChatInfo = () => {
     }
     return true
   }
-  console.log(type, isPersonal(type), isBuying)
   return (
     <InfoWrapper>
       {!isPersonal(type) && <ChatSubject isBuying={isBuying}></ChatSubject>}

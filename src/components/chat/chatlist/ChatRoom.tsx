@@ -2,6 +2,9 @@ import { ChatRoomInfo, UnreadInfo } from 'components/index'
 import { styled } from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { rowCentralise } from 'styles/index'
+import { useSetRecoilState } from 'recoil'
+import { roomIdState } from 'recoil/index'
+import { useEffect } from 'react'
 //`onClick`으로 `roomid`를 통해 => `ChatOn` 으로 진입시킴
 export const ChatRoom = ({
   title,
@@ -13,10 +16,12 @@ export const ChatRoom = ({
   roomid
 }) => {
   const navigate = useNavigate()
-  const moveToChat = () => {
-    navigate('/chat', {
-      state: { roomid }
-    })
+  const setRoomId = useSetRecoilState(roomIdState)
+  const moveToChat = async () => {
+    console.log(`beforeroomId:${roomid}`)
+    await setRoomId(roomid)
+    console.log(`afterroomId:${roomid}`)
+    await navigate('/chat')
   }
 
   return (
