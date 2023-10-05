@@ -49,6 +49,7 @@ export interface GroupPurchaseDetailResProps {
   currentParticipantCount: number
   isClosing: boolean
   createdAt: string
+  isParticipating: boolean
 }
 
 export interface GroupPurchaseListDetailViewResProps {

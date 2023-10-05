@@ -2,13 +2,15 @@ import {
   SecondHandStepOne,
   SecondHandPre
 } from 'components/trades/preview/index'
+import {
+  UseBackgroundModal,
+  UseButtons
+} from 'components/common/useActions/index'
 import { UploadFooter } from 'components/trades/upload/index'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useRecoilState } from 'recoil'
-import { modalOnState } from 'recoil/index'
 import { SECONDHAND_MODAL_TEXT } from 'constants/trades/index'
 import { useState } from 'react'
-import { BackgroundModal, ModalButtons } from 'components/index'
 import { PreviewFooter } from 'components/trades/preview/index'
 import {
   secondhandcreateglobalstate,
@@ -27,7 +29,7 @@ interface Params {
 export const SecondHandUpload = ({}) => {
   const navigate = useNavigate()
   const { stepId = '1' } = useParams<Params>()
-  const [modlaOnState, setModalOnState] = useRecoilState(modalOnState)
+  const [modal3, setModal3] = useState(false)
   const initialModalText = SECONDHAND_MODAL_TEXT.create
   const [modalText, setModalText] = useState(initialModalText)
   const [secondHandGlobalState, setSecondHandGlobalState] = useRecoilState(
@@ -43,12 +45,12 @@ export const SecondHandUpload = ({}) => {
   const handleTrades = async () => {
     await SecondHandPostApi(secondHandGlobalState, imageGlobalState.file)
     setModalText(SECONDHAND_MODAL_TEXT.create)
-    setModalOnState(true)
+    setModal3(true)
   }
 
   const handleCancel = () => {
     setModalText(SECONDHAND_MODAL_TEXT.cancel)
-    setModalOnState(true)
+    setModal3(true)
   }
 
   // 모달 왼쪽 버튼 클릭 시 실행
@@ -56,12 +58,12 @@ export const SecondHandUpload = ({}) => {
     if (modalText === SECONDHAND_MODAL_TEXT.create) {
       setSecondHandGlobalState(initialSecondHandGlobalState)
       setImageGlobalState(initialImageState)
-      setModalOnState(false)
+      setModal3(false)
       navigate(`/secondHand`)
     } else if (modalText === SECONDHAND_MODAL_TEXT.cancel) {
       setSecondHandGlobalState(initialSecondHandGlobalState)
       setImageGlobalState(initialImageState)
-      setModalOnState(false)
+      setModal3(false)
       navigate(`/secondHand`)
     }
   }
@@ -71,7 +73,7 @@ export const SecondHandUpload = ({}) => {
     if (modalText === SECONDHAND_MODAL_TEXT.create) {
       alert('채팅 페이지 이동 로직')
     } else if (modalText === SECONDHAND_MODAL_TEXT.cancel) {
-      setModalOnState(false)
+      setModal3(false)
     }
   }
 
@@ -111,17 +113,18 @@ export const SecondHandUpload = ({}) => {
 
   return (
     <>
-      {modlaOnState && (
-        <BackgroundModal
+      {modal3 && (
+        <UseBackgroundModal
           title={modalText[0]}
-          content={modalText[1]}>
-          <ModalButtons
+          content={modalText[1]}
+          modalState={modal3}>
+          <UseButtons
             onLeftClick={handleConfirmYes}
             onRightClick={handleConfirmNo}
             leftBtn={modalText[2]}
             rightBtn={modalText[3]}
           />
-        </BackgroundModal>
+        </UseBackgroundModal>
       )}
 
       {renderContent()}

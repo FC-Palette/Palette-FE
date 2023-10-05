@@ -1,11 +1,13 @@
-import { BackgroundModal, Button, ModalButtons } from 'components/index'
-import { modalOnState, agreeModalOnState } from 'recoil/index'
-import { AgreeModal } from 'components/trades/detail/index'
-import { useRecoilState } from 'recoil'
+import {
+  UseBackgroundModal,
+  UseButtons
+} from 'components/common/useActions/index'
+import { Button } from 'components/common/index'
 import styled from 'styled-components'
 import { GroupPurchaseClosingApi, SecondHandClosingApi } from 'api/trades/index'
 import {
   SECONDHAND_CLOSING_MODAL_TEXT,
+  PURCHASE_CLOSING_MODAL_TEXT,
   AGREE_MODAL_TEXT
 } from 'constants/trades/index'
 import { useState, useEffect } from 'react'
@@ -17,10 +19,10 @@ export const PurchaseFooter = ({
   offerId,
   productId
 }) => {
-  const [modal, setModal] = useRecoilState(modalOnState)
-  const [checkModal, setCheckModal] = useRecoilState(agreeModalOnState)
   const [buttonText, setButtonText] = useState('')
-
+  const [modal1, setModal1] = useState(false)
+  const [modal2, setModal2] = useState(false)
+  const [modal3, setModal3] = useState(false)
   useEffect(() => {
     if (productId) {
       if (isAdmin) {
@@ -41,9 +43,10 @@ export const PurchaseFooter = ({
     if (productId) {
       if (isAdmin) {
         if (isSoldOut) {
-          setModal(true)
+          setModal1(true)
         } else {
           setButtonText('종료하기')
+          setModal1(true)
         }
       } else {
         setButtonText('채팅하기')
@@ -51,12 +54,13 @@ export const PurchaseFooter = ({
     } else if (offerId) {
       if (isAdmin) {
         if (isClosing) {
-          setModal(true)
+          setModal2(true)
         } else {
           setButtonText('종료하기')
+          setModal3(true)
         }
       } else {
-        setCheckModal(true)
+        setModal2(true)
       }
     }
   }
@@ -69,7 +73,7 @@ export const PurchaseFooter = ({
       await GroupPurchaseClosingApi(offerId)
       setButtonText('종료된 거래입니다')
     }
-    setModal(false)
+    setModal1(false)
   }
 
   return (
@@ -88,29 +92,44 @@ export const PurchaseFooter = ({
         </ButtonWrap>
       </FooterWrapper>
 
-      {modal && (
-        <BackgroundModal
+      {modal1 && (
+        <UseBackgroundModal
           title={SECONDHAND_CLOSING_MODAL_TEXT[0]}
-          content={SECONDHAND_CLOSING_MODAL_TEXT[1]}>
-          <ModalButtons
+          content={SECONDHAND_CLOSING_MODAL_TEXT[1]}
+          modalState={modal1}>
+          <UseButtons
             onLeftClick={handleDeleteButton}
-            onRightClick={() => setModal(false)}
+            onRightClick={() => setModal1(false)}
             leftBtn={SECONDHAND_CLOSING_MODAL_TEXT[2]}
             rightBtn={SECONDHAND_CLOSING_MODAL_TEXT[3]}
           />
-        </BackgroundModal>
+        </UseBackgroundModal>
       )}
-      {checkModal && (
-        <AgreeModal
+      {modal2 && (
+        <UseBackgroundModal
+          modalState={modal2}
           title={AGREE_MODAL_TEXT[0]}
           content={AGREE_MODAL_TEXT[1]}>
-          <ModalButtons
-            onLeftClick={() => setCheckModal(false)}
+          <UseButtons
+            onLeftClick={() => setModal2(false)}
             onRightClick={() => alert('채팅방')}
             leftBtn={AGREE_MODAL_TEXT[2]}
             rightBtn={AGREE_MODAL_TEXT[3]}
           />
-        </AgreeModal>
+        </UseBackgroundModal>
+      )}
+      {modal3 && (
+        <UseBackgroundModal
+          modalState={modal3}
+          title={PURCHASE_CLOSING_MODAL_TEXT[0]}
+          content={PURCHASE_CLOSING_MODAL_TEXT[1]}>
+          <UseButtons
+            onLeftClick={handleDeleteButton}
+            onRightClick={() => setModal3(false)}
+            leftBtn={PURCHASE_CLOSING_MODAL_TEXT[2]}
+            rightBtn={PURCHASE_CLOSING_MODAL_TEXT[3]}
+          />
+        </UseBackgroundModal>
       )}
     </>
   )

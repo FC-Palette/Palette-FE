@@ -5,7 +5,6 @@ import {
 import { UploadFooter } from 'components/trades/upload/index'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useRecoilState } from 'recoil'
-import { modalOnState } from 'recoil/index'
 import { TRADES_MODAL_TEXT } from 'constants/trades/index'
 import { useState } from 'react'
 import {
@@ -15,7 +14,10 @@ import {
   ImageState
 } from 'recoil/index'
 import { GroupPurchasePostApi } from 'api/trades/index'
-import { BackgroundModal, ModalButtons } from 'components/index'
+import {
+  UseBackgroundModal,
+  UseButtons
+} from 'components/common/useActions/index'
 import { PreviewFooter } from 'components/trades/preview/index'
 
 // import styled from 'styled-components'
@@ -26,7 +28,7 @@ interface Params {
 export const GroupUpload = () => {
   const navigate = useNavigate()
   const { stepId = '1' } = useParams<Params>()
-  const [modlaOnState, setModalOnState] = useRecoilState(modalOnState)
+  const [modal, setModal] = useState(false)
   const initialModalText = TRADES_MODAL_TEXT.create
   const [modalText, setModalText] = useState(initialModalText)
   const [tradesGlobalState, setTradesGlobalState] = useRecoilState(
@@ -42,12 +44,12 @@ export const GroupUpload = () => {
   const handleTrades = async () => {
     await GroupPurchasePostApi(tradesGlobalState, imageGlobalState.file)
     setModalText(TRADES_MODAL_TEXT.create)
-    setModalOnState(true)
+    setModal(true)
   }
 
   const handleCancel = () => {
     setModalText(TRADES_MODAL_TEXT.cancel)
-    setModalOnState(true)
+    setModal(true)
   }
 
   // 모달 왼쪽 버튼 클릭 시 실행
@@ -56,12 +58,12 @@ export const GroupUpload = () => {
       setTradesGlobalState(initialTradeCreateGlobalState)
       setImageGlobalState(initialImageState)
       navigate(`/GroupPurchase`)
-      setModalOnState(false)
+      setModal(false)
     } else if (modalText === TRADES_MODAL_TEXT.cancel) {
       setTradesGlobalState(initialTradeCreateGlobalState)
       setImageGlobalState(initialImageState)
       navigate(`/GroupPurchase`)
-      setModalOnState(false)
+      setModal(false)
     }
   }
 
@@ -72,7 +74,7 @@ export const GroupUpload = () => {
     } else if (modalText === TRADES_MODAL_TEXT.cancel) {
       setTradesGlobalState(initialTradeCreateGlobalState)
       setImageGlobalState(initialImageState)
-      setModalOnState(false)
+      setModal(false)
     }
   }
 
@@ -112,17 +114,18 @@ export const GroupUpload = () => {
     <>
       {renderContent()}
       {renderFooter()}
-      {modlaOnState && (
-        <BackgroundModal
+      {modal && (
+        <UseBackgroundModal
+          modalState={modal}
           title={modalText[0]}
           content={modalText[1]}>
-          <ModalButtons
+          <UseButtons
             onLeftClick={handleConfirmYes}
             onRightClick={handleConfirmNo}
             leftBtn={modalText[2]}
             rightBtn={modalText[3]}
           />
-        </BackgroundModal>
+        </UseBackgroundModal>
       )}
     </>
   )
