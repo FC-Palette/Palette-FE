@@ -6,4 +6,5 @@ export * from 'types/career/fetchMainResponseDataProps'
 export * from 'types/career/requestCreateResponseProps'
 export * from 'types/career/requestCreateResponseDataProps'
 export * from 'types/career/fetchMemberResponseProps'
+export * from 'types/career/isGreyProps'
 

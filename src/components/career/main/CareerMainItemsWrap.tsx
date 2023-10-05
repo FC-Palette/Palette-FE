@@ -59,9 +59,16 @@ export const CareerMainItemsWrap = ({ data }: { data: CareerData }) => {
 
         <ItemFlexColumnWrapper>
           {/* 글 묶음 */}
-          <CareerMainItemCategory jobs={jobs} />
-          <CareerMainItemTitle title={title} />
+          <CareerMainItemCategory
+            jobs={jobs}
+            remainingSeats={remainingSeats}
+          />
+          <CareerMainItemTitle
+            title={title}
+            remainingSeats={remainingSeats}
+          />
           <CareerMainItemMeetingTime
+            remainingSeats={remainingSeats}
             week={week}
             days={days || '월요일'}
             time={time}
@@ -69,6 +76,7 @@ export const CareerMainItemsWrap = ({ data }: { data: CareerData }) => {
           />
 
           <CareerMainItemParticipant
+            remainingSeats={remainingSeats}
             positions={positions}
             recruitedPersonnel={recruitedPersonnel}
             headCount={headCount}
