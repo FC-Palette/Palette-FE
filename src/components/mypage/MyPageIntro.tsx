@@ -2,7 +2,7 @@ import { theme } from "styles/index";
 import { css, styled } from "styled-components";
 import { useEffect } from "react";
 import { getMyPage } from "@/api/mypage/mypageApi";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, Link } from "react-router-dom";
 import { decoder } from "@/utils";
 import { PROFILE_EDIT_TEXT } from "@/constants";
 import { MyPageSimpleProfileBtn } from "./MyPageSimpleProfileBtn";
@@ -57,12 +57,16 @@ export const MyPageIntro = ({ userData, setUserData }) => {
         </CategoryWrap>
         <FollowUserArea hide={userData?.response?.job === null}>
           <FollowerWrap>
+            <Link to={"/friend"}>
             <Follower>{PROFILE_EDIT_TEXT.profileFollowText}</Follower>
             <FollowerNumber>{userData?.response?.followedCount}</FollowerNumber>
+            </Link>
           </FollowerWrap>
           <FollowingWrap>
+            <Link to={"/friend"}>
             <Following>{PROFILE_EDIT_TEXT.profileFollowingText}</Following>
             <FollowingNumber>{userData?.response?.followingCount}</FollowingNumber>
+            </Link>
           </FollowingWrap>
         </FollowUserArea>
       </TextInformation>
@@ -141,6 +145,9 @@ const PositionCategory = styled.div<{ hide: boolean }>`
 const FollowUserArea = styled.div<{ hide: boolean }>`
   display: flex;
   padding: 24px 0;
+  :visited{
+    color: inherit;
+  }
   ${(props) =>
     props.hide &&
     css`

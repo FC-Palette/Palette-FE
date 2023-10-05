@@ -32,7 +32,8 @@ import {
   ModifyProfile,
   CareerMeetingConfirm,
   CareerEdit,
-  Home
+  Home,
+  Friend
 } from 'pages/index'
 import type { RouteObject } from 'react-router-dom'
 import { Start } from './Start'
@@ -110,6 +111,7 @@ export const routes = [
       generateRoute('/mypage/:member_id', <MyPage />),
       generateRoute('/modifyprofile', <ModifyProfile />),
       generateRoute('/simpleprofile', <ModifyProfile />),
+      generateRoute('/friend', <Friend />),
       generateRoute('/setting', <Setting />),
       generateRoute('/alarm', <Alarm />),
       generateRoute('/setting/password', <SettingPassword />),

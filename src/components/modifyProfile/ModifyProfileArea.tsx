@@ -32,7 +32,6 @@ export const ModifyProfileArea = () => {
     job: null,
   });
 
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -73,6 +72,7 @@ export const ModifyProfileArea = () => {
             job: job || null,
           });
 
+          console.log(data.response);
         } else {
           console.error('사용자 데이터를 불러오지 못했습니다.');
         }
@@ -99,7 +99,7 @@ export const ModifyProfileArea = () => {
     try {
       // FormData 객체 생성
       const profileData = new FormData();
-  
+      
       // 이미지 데이터를 추가
       profileData.append('image', formData.image || '');
   
@@ -114,39 +114,40 @@ export const ModifyProfileArea = () => {
         }
       );
   
+      // JSON 형식의 데이터를 만들기 위해 dto 객체 생성
+      const dtoData = new FormData();
 
-
+      const bodyData = {
+        email: formData.email,
+        name: formData.name,
+        phoneNumber: formData.phoneNumber,
+        birthday: formData.birthday,
+        nickname: formData.nickname,
+        bio: formData.bio,
+        sex: formData.sex,
+        position: formData.position,
+        job: formData.job,
+      };
+      
+      dtoData.append(
+        'dto',
+        new Blob([JSON.stringify(bodyData)], { type: 'application/json' })
+      );
+      
+      // 나머지 코드는 그대로 유지
       const textResponse = await authInstance.post(
         `${apiUrl}api/mypage/${decodedPayload.memberId}`,
-        profileData,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          params: {
-            dto: JSON.stringify({
-              email: formData.email,
-              name: formData.name,
-              phoneNumber: formData.phoneNumber,
-              birthday: formData.birthday,
-              nickname: formData.nickname,
-              bio: formData.bio,
-              sex: formData.sex,
-              position: formData.position,
-              job: formData.job,
-            }),
-          },
-        }
+        dtoData,
       );
-  
-      console.log('프로필 수정 결과 (이미지):', imageResponse.data);
+      
+      console.log('프로필 수정 결과 (이미지):', imageResponse);
       console.log('프로필 수정 결과 (텍스트):', textResponse.data);
       alert('데이터 수정 완료 테스트 메세지');
     } catch (error) {
       console.error('프로필 수정 오류:', error);
     }
   };
-
+  
 
 
 
@@ -159,6 +160,14 @@ export const ModifyProfileArea = () => {
       setFormData({
         ...formData,
         [name]: file,
+      });
+    } else if (name === 'birthday') {
+      // '0000-00-00' 형식의 생일을 '00000000'으로 변경
+      const value = event.target.value;
+      const formattedBirthday = value.replace(/-/g, '');
+      setFormData({
+        ...formData,
+        [name]: formattedBirthday || null,
       });
     } else {
       const value = event.target.value;
@@ -282,7 +291,7 @@ const ImageWrap = styled.div`
   background-color: ${theme.greyScale.grey1};
   margin: 0 auto;
   border-radius: 50%;
-  border: 1px solid rgba( 0,0,0, .3);
+  border: 1px solid rgba( 0,0,0, .2);
   margin-top: 22px;
   margin-bottom: 46px;
   cursor: pointer;
@@ -290,6 +299,7 @@ const ImageWrap = styled.div`
     width: 122px;
     height: 122px;
     border-radius: 50%;
+    border: 1px solid rgba( 0,0,0, .3);
     position: absolute;
     cursor: pointer;
   }
@@ -300,9 +310,14 @@ const ImageWrap = styled.div`
     border: 1px solid rgba( 0,0,0, .3);
     padding: 1px;
     cursor: pointer;
+    
   }
 `
 const SvgWrap = styled.div`
   position: absolute;
   height: 30px;
+  svg{
+    z-index: 9;
+    position: absolute;
+  }
 `

@@ -1,9 +1,10 @@
 import { theme } from '@/styles';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-export const ModifyProfileJobIcon = ({ value, formData, setFormData }) => {
-  const [selectedJob, setSelectedJob] = useState(value);
+
+export const ModifyProfileJobIcon = ({ formData, setFormData }) => {
+  const [selectedJob, setSelectedJob] = useState(formData.job);
 
   const handleJobClick = (job) => {
     if (selectedJob === job) {
@@ -21,11 +22,15 @@ export const ModifyProfileJobIcon = ({ value, formData, setFormData }) => {
     }
   };
 
+  useEffect(() => {
+  }, [selectedJob]);
+
+
   return (
     <JobWrap>
         <Job
         onClick={() => handleJobClick("경영・비즈니스")}
-        clicked={selectedJob === "경영・비즈니스" ? "true" : "false"}
+        clicked={selectedJob === "경영・비즈니스"}
       >
         <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M14.9459 10.033L14.6792 13.3663C14.5792 14.3863 14.4992 15.1663 12.6925 15.1663H4.30586C2.49919 15.1663 2.41919 14.3863 2.31919 13.3663L2.05253 10.033C1.99919 9.47967 2.17253 8.96634 2.48586 8.57301C2.49253 8.56634 2.49253 8.56634 2.49919 8.55967C2.86586 8.11301 3.41919 7.83301 4.03919 7.83301H12.9592C13.5792 7.83301 14.1259 8.11301 14.4859 8.54634C14.4925 8.55301 14.4992 8.55967 14.4992 8.56634C14.8259 8.95967 15.0059 9.47301 14.9459 10.033Z" stroke={selectedJob === "경영・비즈니스" ? "#2563EB" : "#FF706F"} stroke-width="1.5" stroke-miterlimit="10"/>
@@ -40,7 +45,7 @@ export const ModifyProfileJobIcon = ({ value, formData, setFormData }) => {
 
       <Job
         onClick={() => handleJobClick("고객・영업")}
-        clicked={selectedJob === "고객・영업" ? "true" : "false"}
+        clicked={selectedJob === "고객・영업" }
       >
         <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M8.13896 9.65291C9.17357 9.65291 10.0123 8.8142 10.0123 7.77958C10.0123 6.74497 9.17357 5.90625 8.13896 5.90625C7.10434 5.90625 6.26562 6.74497 6.26562 7.77958C6.26562 8.8142 7.10434 9.65291 8.13896 9.65291Z" stroke={selectedJob === "고객・영업" ? "#2563EB" : "#FF706F"}  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -57,7 +62,7 @@ export const ModifyProfileJobIcon = ({ value, formData, setFormData }) => {
 
       <Job
         onClick={() => handleJobClick("개발")}
-        clicked={selectedJob === "개발" ? "true" : "false"}
+        clicked={selectedJob === "개발" }
         >
         <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M6.16536 13.1468H5.83203C3.16536 13.1468 1.83203 12.4801 1.83203 9.14681V5.81348C1.83203 3.14681 3.16536 1.81348 5.83203 1.81348H11.1654C13.832 1.81348 15.1654 3.14681 15.1654 5.81348V9.14681C15.1654 11.8135 13.832 13.1468 11.1654 13.1468H10.832C10.6254 13.1468 10.4254 13.2468 10.2987 13.4135L9.29871 14.7468C8.85871 15.3335 8.13869 15.3335 7.69869 14.7468L6.69869 13.4135C6.59202 13.2668 6.35203 13.1468 6.16536 13.1468Z" stroke={selectedJob === "개발" ? "#2563EB" : "#FF706F"} stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -73,7 +78,7 @@ export const ModifyProfileJobIcon = ({ value, formData, setFormData }) => {
 
       <Job
         onClick={() => handleJobClick("게임기획・개발")}
-        clicked={selectedJob === "게임기획・개발" ? "true" : "false"}
+        clicked={selectedJob === "게임기획・개발" }
         >
         <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M6.88099 8.80664L4.84766 10.84" stroke={selectedJob === "게임기획・개발" ? "#2563EB" : "#FF706F"} stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -92,7 +97,7 @@ export const ModifyProfileJobIcon = ({ value, formData, setFormData }) => {
 
       <Job
         onClick={() => handleJobClick("금융・컨설팅・VC")}
-        clicked={selectedJob === "금융・컨설팅・VC" ? "true" : "false"}
+        clicked={selectedJob === "금융・컨설팅・VC" }
         >
         <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M13.3673 5.77999V9.21334C13.3673 11.2667 12.194 12.1466 10.434 12.1466H4.57395C4.27395 12.1466 3.98729 12.12 3.72062 12.06C3.55395 12.0334 3.39396 11.9867 3.24729 11.9333C2.24729 11.56 1.64062 10.6933 1.64062 9.21334V5.77999C1.64062 3.72666 2.81395 2.84668 4.57395 2.84668H10.434C11.9273 2.84668 13.0006 3.48001 13.2873 4.92668C13.334 5.19334 13.3673 5.46666 13.3673 5.77999Z" stroke={selectedJob === "금융・컨설팅・VC" ? "#2563EB" : "#FF706F"} stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -109,7 +114,7 @@ export const ModifyProfileJobIcon = ({ value, formData, setFormData }) => {
 
       <Job
         onClick={() => handleJobClick("교육")}
-        clicked={selectedJob === "교육" ? "true" : "false"}
+        clicked={selectedJob === "교육" }
         > 
         <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M7.83203 1.83301H6.4987C3.16536 1.83301 1.83203 3.16634 1.83203 6.49967V10.4997C1.83203 13.833 3.16536 15.1663 6.4987 15.1663H10.4987C13.832 15.1663 15.1654 13.833 15.1654 10.4997V9.16634" stroke={selectedJob === "교육" ? "#2563EB" : "#FF706F"} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -123,7 +128,7 @@ export const ModifyProfileJobIcon = ({ value, formData, setFormData }) => {
 
     <Job
       onClick={() => handleJobClick("데이터・AI・ML")}
-      clicked={selectedJob === "데이터・AI・ML" ? "true" : "false"}
+      clicked={selectedJob === "데이터・AI・ML" }
       >
       <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M13.8333 9.83366C14.5697 9.83366 15.1667 9.23671 15.1667 8.50033C15.1667 7.76395 14.5697 7.16699 13.8333 7.16699C13.097 7.16699 12.5 7.76395 12.5 8.50033C12.5 9.23671 13.097 9.83366 13.8333 9.83366Z" stroke={selectedJob === "데이터・AI・ML" ? "#2563EB" : "#FF706F"} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -142,7 +147,7 @@ export const ModifyProfileJobIcon = ({ value, formData, setFormData }) => {
 
     <Job
       onClick={() => handleJobClick('디자인')}
-      clicked={selectedJob === '디자인' ? "true" : "false"}
+      clicked={selectedJob === '디자인' }
       >
       <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M15.0397 3.12658C14.013 5.68658 11.4397 9.16658 9.28635 10.8933L7.97302 11.9466C7.80635 12.0666 7.63969 12.1733 7.45302 12.2466C7.45302 12.1266 7.44635 11.9933 7.42635 11.8666C7.35302 11.3066 7.09969 10.7866 6.65302 10.3399C6.19969 9.88658 5.64635 9.61992 5.07969 9.54658C4.94635 9.53992 4.81302 9.52658 4.67969 9.53992C4.75302 9.33325 4.86635 9.13992 5.00635 8.97992L6.04635 7.66658C7.76635 5.51325 11.2597 2.92658 13.813 1.90658C14.2064 1.75992 14.5864 1.86658 14.8264 2.11325C15.0797 2.35992 15.1997 2.73992 15.0397 3.12658Z" stroke={selectedJob === "디자인" ? "#2563EB" : "#FF706F"} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -158,7 +163,7 @@ export const ModifyProfileJobIcon = ({ value, formData, setFormData }) => {
 
     <Job
       onClick={() => handleJobClick("마케팅・광고・홍보")}
-      clicked={selectedJob === "마케팅・광고・홍보" ? "true" : "false"}
+      clicked={selectedJob === "마케팅・광고・홍보" }
       >
       <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M4.43219 11.833H12.5589C13.8255 11.833 14.4922 11.1663 14.4922 9.89968V1.83301H2.49219V9.89968C2.49885 11.1663 3.16552 11.833 4.43219 11.833Z" stroke={selectedJob === "마케팅・광고・홍보" ? "#2563EB" : "#FF706F"} stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -175,7 +180,7 @@ export const ModifyProfileJobIcon = ({ value, formData, setFormData }) => {
 
     <Job
       onClick={() => handleJobClick("미디어・커뮤니케이션")}
-      clicked={selectedJob === "미디어・커뮤니케이션" ? "true" : "false"}
+      clicked={selectedJob === "미디어・커뮤니케이션" }
       >
       <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M8.85203 14.1134H4.6387C2.53203 14.1134 1.83203 12.7134 1.83203 11.3067V5.69339C1.83203 3.58672 2.53203 2.88672 4.6387 2.88672H8.85203C10.9587 2.88672 11.6587 3.58672 11.6587 5.69339V11.3067C11.6587 13.4134 10.952 14.1134 8.85203 14.1134Z" stroke={selectedJob === "미디어・커뮤니케이션" ? "#2563EB" : "#FF706F"} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -190,7 +195,7 @@ export const ModifyProfileJobIcon = ({ value, formData, setFormData }) => {
 
     <Job
       onClick={() => handleJobClick("물류・구매")}
-      clicked={selectedJob === "물류・구매" ? "true" : "false"}
+      clicked={selectedJob === "물류・구매" }
       >
       <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M10.4987 1.83301V8.49967C10.4987 9.23301 9.8987 9.83301 9.16536 9.83301H1.83203V4.49967C1.83203 3.02634 3.02536 1.83301 4.4987 1.83301H10.4987Z" stroke={selectedJob === "물류・구매" ? "#2563EB" : "#FF706F"} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -206,7 +211,7 @@ export const ModifyProfileJobIcon = ({ value, formData, setFormData }) => {
 
     <Job
       onClick={() => handleJobClick("서비스기획・운영")}
-      clicked={selectedJob === "서비스기획・운영" ? "true" : "false"}
+      clicked={selectedJob === "서비스기획・운영"}
       >
       <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M3.83203 11.5003V5.50033C3.83203 5.08699 3.84536 4.72033 3.89203 4.39366C4.08536 2.64033 4.91203 2.16699 7.16536 2.16699H9.83203C12.0854 2.16699 12.912 2.64033 13.1054 4.39366C13.152 4.72033 13.1654 5.08699 13.1654 5.50033V11.5003C13.1654 11.9137 13.152 12.2803 13.1054 12.607C12.912 14.3603 12.0854 14.8337 9.83203 14.8337H7.16536C4.91203 14.8337 4.08536 14.3603 3.89203 12.607C3.84536 12.2803 3.83203 11.9137 3.83203 11.5003Z" stroke={selectedJob === "서비스기획・운영" ? "#2563EB" : "#FF706F"} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -223,7 +228,7 @@ export const ModifyProfileJobIcon = ({ value, formData, setFormData }) => {
 
     <Job
       onClick={() => handleJobClick("이커머스・리테일")}
-      clicked={selectedJob === "이커머스・리테일" ? "true" : "false"}
+      clicked={selectedJob === "이커머스・리테일" }
       >
       <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M2.50781 7.98047V10.9738C2.50781 13.9671 3.70781 15.1671 6.70115 15.1671H10.2945C13.2878 15.1671 14.4878 13.9671 14.4878 10.9738V7.98047" stroke={selectedJob === "이커머스・리테일" ? "#2563EB" : "#FF706F"} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -241,7 +246,7 @@ export const ModifyProfileJobIcon = ({ value, formData, setFormData }) => {
 
     <Job
       onClick={() => handleJobClick("인사・채용・노무")}
-      clicked={selectedJob === "인사・채용・노무" ? "true" : "false"}
+      clicked={selectedJob === "인사・채용・노무" }
       >
       <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M6.60573 7.74634C6.53906 7.73967 6.45906 7.73967 6.38573 7.74634C4.79906 7.69301 3.53906 6.39301 3.53906 4.79301C3.53906 3.15967 4.85906 1.83301 6.49906 1.83301C8.1324 1.83301 9.45906 3.15967 9.45906 4.79301C9.45239 6.39301 8.1924 7.69301 6.60573 7.74634Z" stroke={selectedJob === "인사・채용・노무" ? "#2563EB" : "#FF706F"} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -257,7 +262,7 @@ export const ModifyProfileJobIcon = ({ value, formData, setFormData }) => {
 
     <Job
       onClick={() => handleJobClick("의류・제약・바이오")}
-      clicked={selectedJob === "의류・제약・바이오" ? "true" : "false"}
+      clicked={selectedJob === "의류・제약・바이오" }
       >
       <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M6.47917 15.1663H10.4792C13.8125 15.1663 15.1458 13.833 15.1458 10.4997V6.49967C15.1458 3.16634 13.8125 1.83301 10.4792 1.83301H6.47917C3.14583 1.83301 1.8125 3.16634 1.8125 6.49967V10.4997C1.8125 13.833 3.14583 15.1663 6.47917 15.1663Z" stroke={selectedJob === "의류・제약・바이오" ? "#2563EB" : "#FF706F"} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -272,7 +277,7 @@ export const ModifyProfileJobIcon = ({ value, formData, setFormData }) => {
 
     <Job
       onClick={() => handleJobClick("회계・재무")}
-      clicked={selectedJob === "회계・재무" ? "true" : "false"}
+      clicked={selectedJob === "회계・재무" }
       >
       <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M14.5 5.16634V11.833C14.5 13.833 13.5 15.1663 11.1667 15.1663H5.83333C3.5 15.1663 2.5 13.833 2.5 11.833V5.16634C2.5 3.16634 3.5 1.83301 5.83333 1.83301H11.1667C13.5 1.83301 14.5 3.16634 14.5 5.16634Z" stroke={selectedJob === "회계・재무" ? "#2563EB" : "#FF706F"} stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -290,7 +295,7 @@ export const ModifyProfileJobIcon = ({ value, formData, setFormData }) => {
 
     <Job
       onClick={() => handleJobClick("연구・R&D")}
-      clicked={selectedJob === "연구・R&D" ? "true" : "false"}
+      clicked={selectedJob === "연구・R&D" }
       >
       <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M15.1667 6.16634C15.1667 8.55967 13.2267 10.4997 10.8333 10.4997C10.72 10.4997 10.6 10.493 10.4867 10.4863C10.32 8.37302 8.62666 6.67967 6.51333 6.513C6.50666 6.39967 6.5 6.27967 6.5 6.16634C6.5 3.77301 8.44 1.83301 10.8333 1.83301C13.2267 1.83301 15.1667 3.77301 15.1667 6.16634Z" stroke={selectedJob === "연구・R&D" ? "#2563EB" : "#FF706F"} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -306,7 +311,7 @@ export const ModifyProfileJobIcon = ({ value, formData, setFormData }) => {
 
     <Job
       onClick={() => handleJobClick("법률・특허")}
-      clicked={selectedJob === "법률・특허" ? "true" : "false"}
+      clicked={selectedJob === "법률・특허" }
       >
       <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M15.1654 11.6605V3.61378C15.1654 2.81378 14.512 2.22045 13.7187 2.28712H13.6787C12.2787 2.40712 10.152 3.12045 8.96536 3.86712L8.85203 3.94045C8.6587 4.06045 8.3387 4.06045 8.14536 3.94045L7.9787 3.84045C6.79203 3.10045 4.67203 2.39378 3.27203 2.28045C2.4787 2.21378 1.83203 2.81378 1.83203 3.60712V11.6605C1.83203 12.3005 2.35203 12.9005 2.99203 12.9805L3.18536 13.0071C4.63203 13.2005 6.86536 13.9338 8.14536 14.6338L8.17203 14.6471C8.35203 14.7471 8.6387 14.7471 8.81203 14.6471C10.092 13.9405 12.332 13.2005 13.7854 13.0071L14.0054 12.9805C14.6454 12.9005 15.1654 12.3005 15.1654 11.6605Z" stroke={selectedJob === "법률・특허" ? "#2563EB" : "#FF706F"} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -323,7 +328,7 @@ export const ModifyProfileJobIcon = ({ value, formData, setFormData }) => {
 
       <Job
         onClick={() => handleJobClick("엔지니어링・설계")}
-        clicked={selectedJob === "엔지니어링・설계" ? "true" : "false"}
+        clicked={selectedJob === "엔지니어링・설계" }
         >
         <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M8.5 10.5C9.60457 10.5 10.5 9.60457 10.5 8.5C10.5 7.39543 9.60457 6.5 8.5 6.5C7.39543 6.5 6.5 7.39543 6.5 8.5C6.5 9.60457 7.39543 10.5 8.5 10.5Z" stroke={selectedJob === "엔지니어링・설계" ? "#2563EB" : "#FF706F"} stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -337,7 +342,7 @@ export const ModifyProfileJobIcon = ({ value, formData, setFormData }) => {
 
     <Job
       onClick={() => handleJobClick("생산・품질")}
-      clicked={selectedJob === "생산・품질" ? "true" : "false"}
+      clicked={selectedJob === "생산・품질" }
       >
       <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M14.1654 8.033V5.19301C14.1654 2.50635 13.5387 1.83301 11.0187 1.83301H5.9787C3.4587 1.83301 2.83203 2.50635 2.83203 5.19301V12.6997C2.83203 14.473 3.80537 14.893 4.98537 13.6263L4.99202 13.6197C5.53869 13.0397 6.37202 13.0863 6.84536 13.7197L7.5187 14.6197" stroke={selectedJob === "생산・품질" ? "#2563EB" : "#FF706F"} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -360,9 +365,9 @@ const JobWrap = styled.div`
   align-items: center;
 `;
 
-const Job = styled.div<{ clicked?: string }>`
+const Job = styled.div<{ clicked?: boolean }>`
   display: flex;
-  background-color: ${(props) => (props.clicked === "true" ? theme.greyScale.blie : theme.greyScale.blueGrey)};
+  background-color: ${(props) => (props.clicked ? theme.greyScale.blie : theme.greyScale.blueGrey)};
   padding: 12px;
   margin-right: 8px;
   margin-bottom: 8px;
@@ -375,7 +380,7 @@ const Job = styled.div<{ clicked?: string }>`
   }
 
   &:hover {
-    background-color: ${(props) => (props.clicked === "true" ? theme.greyScale.blie : theme.greyScale.blueGrey)};
+    background-color: ${(props) => (props.clicked ? theme.greyScale.blie : theme.greyScale.blueGrey)};
   }
 `;
 

@@ -8,7 +8,7 @@ export const ModifyJob = ({ formData, setFormData }) => {
     <JobWrap>
       <label>{MODIFY_PROFILE_INPUT_TEXTS.jobText}</label>
       <JobList>
-          <ModifyProfileJobIcon value={formData.job} formData={formData} setFormData={setFormData} />
+          <ModifyProfileJobIcon formData={formData} setFormData={setFormData} />
       </JobList>
     </JobWrap>
   );

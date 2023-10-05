@@ -13,8 +13,7 @@ interface CategoryProps {
 const Category: React.FC<CategoryProps> = ({ selected, children, onClick }) => (
   <CategoryContainer
     onClick={onClick}
-    selected={selected}
-  >
+    selected={selected}>
     <ModifySexIcon male={selected} strokeColor={selected ? theme.main.blueL1 : theme.greyScale.grey5} />
     {children}
   </CategoryContainer>
@@ -29,7 +28,7 @@ export const ModifySex = ({ formData, setFormData }) => {
     });
   };
 
-  const [selectedSex, setSelectedSex] = useState(null);
+  const [selectedSex, setSelectedSex] = useState(formData.sex === "남성");
 
   return (
     <SexWrap>
