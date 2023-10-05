@@ -1,7 +1,6 @@
 import { styled } from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { Flexbox, columnise } from 'styles/index'
-import { useCallback } from 'react'
 import { formatHourMinute, formatLocalDateTime } from 'utils/index'
 import { useSetRecoilState } from 'recoil'
 import { noticeState } from '@/recoil'

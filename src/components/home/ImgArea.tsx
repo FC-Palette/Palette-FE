@@ -1,6 +1,11 @@
 import { styled } from 'styled-components'
+import { HomeLayer } from 'components/index'
 export const ImgArea = () => {
-  return <ImgContainer></ImgContainer>
+  return (
+    <ImgContainer>
+      <HomeLayer />
+    </ImgContainer>
+  )
 }
 const ImgContainer = styled.div`
   height: 429px;

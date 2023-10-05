@@ -6,7 +6,7 @@ import { styled } from 'styled-components'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import {
   inDetailState,
-  noticeState,
+  // noticeState,
   roomIdState,
   chatTypeState
 } from 'recoil/index'
