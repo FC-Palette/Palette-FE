@@ -3,11 +3,10 @@ import styled from 'styled-components'
 import { BrushSquare } from 'iconsax-react'
 import { useNavigate } from 'react-router-dom'
 
-export const CareerMainItemCreateButton = () => {
-  const isProfile = true
+export const CareerMainItemCreateButton = ({ isProfile }) => {
   const naviage = useNavigate()
   const handleClickBtn = () => {
-    isProfile ? naviage('/create/1') : naviage('/profile/1')
+    isProfile ? naviage('/create/1') : naviage('/profile')
   }
   return (
     <>
@@ -30,7 +29,7 @@ export const CareerMainItemCreateButton = () => {
 // 버튼 위치 조절 스타일러
 const BtnLocationChangeDiv = styled.div`
   position: fixed;
-  top: 82%;
+  top: 80%;
   z-index: 1;
   margin-left: 270px;
   transition: 0.3s;
@@ -43,12 +42,7 @@ const BtnLocationChangeDiv = styled.div`
 
   @media (max-width: 390px) {
     margin-left: 60%;
-    top: 83%;
-    transition: 0.3s;
-  }
-  @media (max-width: 391px) {
-    margin-left: 60%;
-    top: 78%;
+    top: 77%;
     transition: 0.3s;
   }
 
@@ -60,7 +54,7 @@ const BtnLocationChangeDiv = styled.div`
 
   @media (max-width: 325px) {
     margin-left: 55%;
-    top: 68%;
+    top: 70%;
     transition: 0.3s;
   }
 `

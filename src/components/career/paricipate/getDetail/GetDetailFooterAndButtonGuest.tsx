@@ -21,6 +21,10 @@ export const GetDetailFooterAndButtonGuest = ({ loggedInUser }) => {
   const remainingSeats: number = headCount - +recruitedPersonnel
 
   if (!detailid) {
+    return null
+  }
+
+  if (!detailid) {
     return
   }
 
@@ -122,7 +126,7 @@ export const GetDetailFooterAndButtonGuest = ({ loggedInUser }) => {
           <UseButtons
             modalState={useModal}
             onLeftClick={() => setUseModal(false)}
-            onRightClick={() => alert('메세지 보내기 구현 미완')}
+            onRightClick={() => navigate('/chatlist/p')}
             leftBtn={modalText[2]}
             rightBtn={modalText[3]}
           />
@@ -131,6 +135,27 @@ export const GetDetailFooterAndButtonGuest = ({ loggedInUser }) => {
     </>
   )
 }
+
+const Wrapper = styled.footer`
+  display: flex;
+  align-items: center;
+  position: sticky;
+  width: 100%;
+  max-width: 430px;
+  min-height: 80px;
+  z-index: 100;
+  bottom: 0%;
+  background-color: ${props => props.theme.main.white};
+  box-shadow: 0px -1px 1px rgba(0, 0, 0, 0.2);
+`
+
+const BtnWrap = styled.div`
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: 500;
+  width: 100%;
+  margin: 0 24px;
+`
 
 const IsUserNotJoined = styled.div`
   z-index: 100;
@@ -146,25 +171,4 @@ const IsUserNotJoined = styled.div`
   background-color: ${props => props.theme.greyScale.grey7};
   opacity: 0.9;
   color: ${props => props.theme.main.white};
-`
-
-const Wrapper = styled.footer`
-  display: flex;
-  align-items: center;
-  position: sticky;
-  width: 100%;
-  max-width: 430px;
-  min-height: 80px;
-  z-index: 100;
-  bottom: 0;
-  background-color: ${props => props.theme.main.white};
-  box-shadow: 0px -1px 1px rgba(0, 0, 0, 0.2);
-`
-
-const BtnWrap = styled.div`
-  font-size: 20px;
-  line-height: 26px;
-  font-weight: 500;
-  width: 100%;
-  margin: 0 24px;
 `

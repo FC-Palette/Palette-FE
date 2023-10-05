@@ -74,7 +74,7 @@ export const routes = [
     errorElement: <ErrorComponent />,
     children: [
       generateRoute('/career', <CareerMain />),
-      generateRoute('/profile/:profileid', <CareerIsNotUserInfo />),
+      generateRoute('/profile', <CareerIsNotUserInfo />),
       generateRoute('/participate/confirm/:checkid', <CareerMeetingConfirm />),
       generateRoute('/create/:createstepid', <CareerMeetingsCreate />),
       generateRoute(

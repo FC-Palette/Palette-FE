@@ -111,6 +111,18 @@ const CardCategoryChip = styled.div`
   border-radius: 4px;
   white-space: nowrap;
   overflow-x: auto;
+
+  @media screen and (max-width: 320px) {
+    & {
+      font-size: 10px;
+    }
+  }
+
+  @media screen and (max-width: 375px) {
+    & {
+      font-size: 12px;
+    }
+  }
 `
 
 const CardTitle = styled.div`

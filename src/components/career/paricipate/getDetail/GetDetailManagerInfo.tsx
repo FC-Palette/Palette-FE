@@ -1,21 +1,44 @@
+import { followAdd, followDelete } from '@/api'
 import { Button } from '@/components'
 import { fetchDetailGlobalState } from '@/recoil'
 import { useEffect, useState } from 'react'
 import { useRecoilValue } from 'recoil'
 import styled from 'styled-components'
 
+const initailFormData = {
+  nickname: 'nickname',
+  bio: 'bio',
+  followingId: 0,
+  image: null
+}
 export const GetDetailManagerInfo = () => {
+  const [isFollow, setIsFollow] = useState(false)
   const atom = useRecoilValue(fetchDetailGlobalState)
   const { meetingMemberDto } = atom
-  const [isFollow, setIsFollow] = useState(false)
-  const managerName = meetingMemberDto?.nickname || ''
-  const managerIntroduce = meetingMemberDto?.bio || ''
+  const { nickname, bio, id, image } = meetingMemberDto
+  const [profile, setProfile] = useState(initailFormData)
 
-  useEffect(() => {}, [managerName, managerIntroduce])
+  useEffect(() => {
+    setProfile({
+      nickname: nickname,
+      bio: bio,
+      followingId: id,
+      image: image
+    })
+  }, [meetingMemberDto])
 
-  // 대충 구현만 한거고 실제 사용시에는 클릭시마다 api호출 필요할듯
-  const handleFollow = () => {
-    setIsFollow(!isFollow)
+  const handleFollow = async () => {
+    if (isFollow) {
+      const deleteRes = await followDelete(id)
+      if (deleteRes.status === 200) {
+        setIsFollow(!isFollow)
+      }
+    } else {
+      const addRes = await followAdd(id, profile)
+      if (addRes.status === 200) {
+        setIsFollow(!isFollow)
+      }
+    }
   }
 
   const truncateText = (text: string, maxLength: number) => {
@@ -48,11 +71,11 @@ export const GetDetailManagerInfo = () => {
   return (
     <>
       <Container>
-        <RoomManagerImage />
+        {image && <RoomManagerImage src={image} />}
         <NameAndIntroduceWrap_Column>
-          <RoomManagerName>{managerName}</RoomManagerName>
+          <RoomManagerName>{nickname || ''}</RoomManagerName>
           <RoomManagerIntroduce>
-            {truncateText(managerIntroduce, 12)}
+            {truncateText(bio, 12) || ''}
           </RoomManagerIntroduce>
         </NameAndIntroduceWrap_Column>
         <FollowBtn>{checkFollow(isFollow)}</FollowBtn>
@@ -70,7 +93,7 @@ const Container = styled.div`
   align-items: center;
   gap: 8px;
 `
-const RoomManagerImage = styled.div`
+const RoomManagerImage = styled.img`
   background-color: ${props => props.theme.greyScale.grey5};
   border-radius: 8px;
   width: 52px;

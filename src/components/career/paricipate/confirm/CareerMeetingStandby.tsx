@@ -9,7 +9,7 @@ import styled from 'styled-components'
 export const CareerMeetingStandby = () => {
   const [letter, setLetter] = useState<{ [key: string]: boolean }>({})
   const [list, setList] = useRecoilState(paricipateListAtom)
-  const meetingId = String(48)
+  const meetingId = String(45)
 
   useEffect(() => {
     const fetchList = async () => {
@@ -22,6 +22,8 @@ export const CareerMeetingStandby = () => {
     }
     fetchList()
   }, [meetingId])
+
+  console.log(list)
 
   const handleToggle = (itemId: string) => {
     setLetter(prevLetter => ({

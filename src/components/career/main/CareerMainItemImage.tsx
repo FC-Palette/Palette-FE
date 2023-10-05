@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 interface PreviewImgProps {
-  image: string[]
+  $image: string[]
 }
 export const CareerMainItemImage = ({ image, remainingSeats }) => {
   const renderRemain = () => {
@@ -20,7 +20,7 @@ export const CareerMainItemImage = ({ image, remainingSeats }) => {
   }
   return (
     <Wrapper>
-      <PreviewImg image={image}>
+      <PreviewImg $image={image}>
         <RemainSpaces>{renderRemain()}</RemainSpaces>
       </PreviewImg>
     </Wrapper>
@@ -40,7 +40,7 @@ const PreviewImg = styled.div<PreviewImgProps>`
   width: 100px;
   height: 100px;
   border-radius: 8px;
-  background-image: ${props => `url(${props.image})`};
+  background-image: ${props => `url(${props.$image})`};
   background-size: 100% 100%;
   font-size: ${props => props.theme.customSize.medium};
   justify-content: flex-end;

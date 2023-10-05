@@ -87,7 +87,7 @@ const Wrapper = styled.footer`
   max-width: 430px;
   min-height: 80px;
   z-index: 100;
-  bottom: 0;
+  bottom: 0%;
   background-color: ${props => props.theme.main.white};
   box-shadow: 0px -1px 1px rgba(0, 0, 0, 0.2);
 `

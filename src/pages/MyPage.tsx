@@ -1,51 +1,62 @@
-import { NAVIGATION_PATH } from "constants/index";
-import { Footer, Header, MyPageChatBtn } from "components/index";
-import { MyPageEditBtn, MyPageIntro, MyPagePostDisplay, MyPageSelectTab } from "components/index";
-import { Notification, Setting2 } from "iconsax-react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { css, styled } from "styled-components";
-import { useEffect, useState } from "react";
-import { myPageIntroProps } from "@/types";
-import { decoder } from "@/utils";
+import { NAVIGATION_PATH } from 'constants/index'
+import { Footer, Header, MyPageChatBtn } from 'components/index'
+import {
+  MyPageEditBtn,
+  MyPageIntro,
+  MyPagePostDisplay,
+  MyPageSelectTab
+} from 'components/index'
+import { Notification, Setting2 } from 'iconsax-react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { css, styled } from 'styled-components'
+import { useEffect, useState } from 'react'
+import { myPageIntroProps } from '@/types'
+import { decoder } from '@/utils'
 
 export const MyPage = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
+  const navigate = useNavigate()
+  const location = useLocation()
 
-  const decodedPayload = decoder();
-  console.log(decodedPayload.memberId);
-  const myPagePath = `/mypage/${decodedPayload.memberId}`;
+  const decodedPayload = decoder()
 
-useEffect(() => {
-  if (location.pathname === '/mypage/' || location.pathname === myPagePath) {
-    navigate('/mypage');
-  }
-}, [location.pathname, myPagePath]);
+  const myPagePath = `/mypage/${decodedPayload.memberId}`
 
-  const [userData, setUserData] = useState<myPageIntroProps | null>(null);
-  
+  useEffect(() => {
+    if (location.pathname === '/mypage/' || location.pathname === myPagePath) {
+      navigate('/mypage')
+    }
+  }, [location.pathname, myPagePath])
+
+  const [userData, setUserData] = useState<myPageIntroProps | null>(null)
+
   return (
-    <MyPageWrap>      
+    <MyPageWrap>
       <Header centerText="마이페이지">
         <StyledIcon>
-          <Link {...NAVIGATION_PATH.navigatorAlarm} >
-          <Notification />
+          <Link {...NAVIGATION_PATH.navigatorAlarm}>
+            <Notification />
           </Link>
         </StyledIcon>
         <IconWrapper>
           <Link {...NAVIGATION_PATH.navigatorSettingPage}>
-          <Setting2 />
+            <Setting2 />
           </Link>
         </IconWrapper>
       </Header>
-      <MyPageIntro userData={userData} setUserData={setUserData} />
+      <MyPageIntro
+        userData={userData}
+        setUserData={setUserData}
+      />
       <BtnWrap>
         <MyPageEditBtn userData={userData} />
-        <MyPageChatBtn/>
+        <MyPageChatBtn />
       </BtnWrap>
       <MyPageSelectTab />
-      <MyPagePostArea hide={userData?.response?.job === null && location.pathname === '/mypage'} >
-        <MyPagePostDisplay/>
+      <MyPagePostArea
+        hide={
+          userData?.response?.job === null && location.pathname === '/mypage'
+        }>
+        <MyPagePostDisplay />
       </MyPagePostArea>
       <Footer />
     </MyPageWrap>
@@ -60,31 +71,31 @@ const MyPageWrap = styled.div`
 
 const IconWrapper = styled.div`
   margin-left: 5px;
-  :visited{
+  :visited {
     color: inherit;
   }
-  :link{
+  :link {
     color: inherit;
   }
-    `
+`
 
 const StyledIcon = styled.div`
   margin-right: 5px;
-  :visited{
+  :visited {
     color: inherit;
   }
-  :link{
+  :link {
     color: inherit;
   }
 `
 
 const MyPagePostArea = styled.div<{ hide: boolean }>`
-    ${(props) =>
+  ${props =>
     props.hide &&
     css`
       opacity: 0;
     `}
-`;
+`
 
 const BtnWrap = styled.div`
   display: flex;
