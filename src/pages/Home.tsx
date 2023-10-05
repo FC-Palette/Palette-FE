@@ -15,6 +15,7 @@ import {
   ImgArea
 } from 'components/index'
 import { formatLocalDateTime } from 'utils/index'
+
 export const Home = () => {
   return (
     <>

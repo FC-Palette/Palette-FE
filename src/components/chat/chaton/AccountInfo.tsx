@@ -2,9 +2,12 @@ import { styled } from 'styled-components'
 import { Copy, Edit2 } from 'iconsax-react'
 import { useNavigate } from 'react-router-dom'
 import { Flexbox } from 'styles/index'
-import { useCallback } from 'react'
-// import { getAccount } from 'api/index'
-// import { useQuery } from '@tanstack/react-query'
+import { useCallback, useEffect } from 'react'
+import { getAccount, getNotice } from 'api/index'
+import { useRecoilValue, useRecoilState } from 'recoil'
+import { useQuery } from '@tanstack/react-query'
+import { accInfoState, roomIdState } from 'recoil/index'
+import { CHAT_TEXTS } from 'constants/index'
 /*
 {
 	"status": 200, 
@@ -17,22 +20,51 @@ import { useCallback } from 'react'
 		}
 }
 */
-export const AccountInfo = ({ isHost, account }) => {
+export const AccountInfo = ({ isHost }) => {
   const navigate = useNavigate()
+  const roomId = useRecoilValue(roomIdState)
+  const [accInfo, setAccInfo] = useRecoilState(accInfoState)
   const toEditPage = () => {
     navigate('/groupupload/1')
   }
   const handleCopy = useCallback(async () => {
-    await navigator.clipboard.writeText(account.split(' ')[1])
+    await navigator.clipboard.writeText(accInfo.accountNumber)
   }, [])
   const iconProps = {
     size: '16',
     cursor: 'pointer'
   }
+
+  const { data: notice } = useQuery(['notice', roomId], () => {
+    return getNotice(roomId)
+  })
+  const contentNotice = notice?.response?.contentNotice
+  const contentId = contentNotice.contentId
+
+  if (contentId) {
+    const { data: account } = useQuery(
+      ['account', contentId],
+      () => {
+        return getAccount(contentId)
+      },
+      {
+        onSuccess: data =>
+          setAccInfo({
+            bank: data.response.bank,
+            accountNumber: data.response.accountNumber,
+            accountOwner: data.response.accountOwner
+          })
+      }
+    )
+    console.log(accInfo)
+  }
+
   return (
     <Wrapper>
-      <Account>계좌번호</Account>
-      <HostAccount>{account}</HostAccount>
+      <Account>{CHAT_TEXTS.account}</Account>
+      <HostAccount>
+        {accInfo.bank} {accInfo.accountNumber} {accInfo.accountOwner}
+      </HostAccount>
       {isHost && (
         <Edit2
           {...iconProps}

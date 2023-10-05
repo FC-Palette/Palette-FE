@@ -2,30 +2,28 @@
 import { styled } from 'styled-components'
 import { useQuery } from '@tanstack/react-query'
 import { getNotice } from 'api/index'
-import { useRecoilValue } from 'recoil'
+import { useRecoilValue, useRecoilValueLoadable } from 'recoil'
 import { chatTypeState, roomIdState } from 'recoil/index'
 import { STATUS_TEXTS } from 'constants/index'
 
 export const ChatStatus = () => {
   const roomId = useRecoilValue(roomIdState)
-  const chatType = useRecoilValue(chatTypeState)
+  const chatType = useRecoilValueLoadable(chatTypeState)
 
   const { data: notice } = useQuery(['notice', roomId], () => {
     return getNotice(roomId)
   })
   const deleted = notice?.response?.delete
+  const typeCheck = v => {
+    const types = {
+      MEETING: STATUS_TEXTS.noGroup,
+      SECONDHAND: STATUS_TEXTS.noTrade,
+      PURCHASE: STATUS_TEXTS.noPurchase
+    }
+    return types[v] || ''
+  }
 
-  return (
-    <>
-      {deleted && (
-        <StatusBar>
-          {chatType === 'MEETING' && STATUS_TEXTS.noGroup}
-          {chatType === 'SECONDHAND' && STATUS_TEXTS.noTrade}
-          {chatType === 'PURCHASE' && STATUS_TEXTS.noPurchase}
-        </StatusBar>
-      )}
-    </>
-  )
+  return <>{deleted && <StatusBar>{typeCheck(chatType)}</StatusBar>}</>
 }
 const StatusBar = styled.div`
   margin-top: 8px;

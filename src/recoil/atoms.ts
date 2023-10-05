@@ -60,3 +60,11 @@ export const noticeState = atom({
 export const chatTypeState = atom<string>({
   key: 'chatTypeState'
 })
+export const accInfoState = atom({
+  key: 'accInfoState',
+  default: {
+    bank: '',
+    accountNumber: '',
+    accountOwner: ''
+  }
+})

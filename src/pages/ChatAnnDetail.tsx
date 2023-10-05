@@ -13,12 +13,18 @@ import { getNoticeList, getNotice } from 'api/index'
 import { useQuery } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 
+interface filteredAnnProps {
+  createdAt: string
+  profileImgUrl?: string
+  notice: string
+  nickname: string
+}
+
 export const ChatAnnDetail = () => {
   const notice = useRecoilValue(noticeState)
-  console.log(notice)
   const navigate = useNavigate()
   const roomId = useRecoilValue(roomIdState)
-  const [filteredAnn, SetFilteredAnn] = useState({})
+  const [filteredAnn, SetFilteredAnn] = useState<filteredAnnProps>()
 
   const setShowMembers = useSetRecoilState(showMembersState)
   const backToChat = () => {
@@ -35,11 +41,6 @@ export const ChatAnnDetail = () => {
     return getNoticeList(roomId)
   })
 
-  /*
-  1. 채팅방 공지 => useLocation으로 state들고오자, 
-  2. 리스트 => 마찬가지?
-  => 객체 반환, 값 뽑아서 렌더링
-*/
   useEffect(() => {
     const noticeView = notices.response.find(v => v.noticeId === notice)
     console.log(noticeView)
@@ -60,10 +61,10 @@ export const ChatAnnDetail = () => {
 
       <Wrapper>
         <AnnPublisher
-          src={filteredAnn.profileImgUrl}
-          createdAt={filteredAnn.createdAt}
+          src={filteredAnn?.profileImgUrl}
+          createdAt={filteredAnn?.createdAt}
         />
-        <AnnContent>{filteredAnn.notice}</AnnContent>
+        <AnnContent>{filteredAnn?.notice}</AnnContent>
       </Wrapper>
     </>
   )

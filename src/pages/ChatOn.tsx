@@ -59,6 +59,7 @@ export const ChatOn = () => {
   const backToList = useCallback(() => {
     navigate('/chatlist/g')
     setShowMembers(false)
+    setInDetail(false)
   }, [])
 
   const token = `${localStorage.getItem('Token')} `
