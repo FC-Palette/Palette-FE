@@ -19,3 +19,22 @@ export async function followDelete(memberIdToDelete) {
     throw error;
   }
 }
+
+export async function checkFollowed(memberId) {
+  try {
+    const response = await authInstance.get(`${apiUrl}api/mypage/followed/${memberId}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function checkFollowing(memberId) {
+  try {
+    const response = await authInstance.get(`${apiUrl}api/mypage/following/${memberId}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
