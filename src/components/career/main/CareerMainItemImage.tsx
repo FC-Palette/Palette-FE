@@ -1,27 +1,35 @@
 import { styled } from 'styled-components'
 interface PreviewImgProps {
-  $image: string[]
+  $image?: string[]
+  $isNone?: boolean
+  $isOpacity?: boolean
 }
 export const CareerMainItemImage = ({ image, remainingSeats }) => {
   const renderRemain = () => {
-    if (remainingSeats === 0)
+    if (remainingSeats === 0) {
       return (
-        <>
-          <ImpactColor>마감되었습니다</ImpactColor>
-        </>
+        <RemainSpaces $isNone={true}>
+          <ImpactColor $isNone={true}>마감되었습니다</ImpactColor>
+        </RemainSpaces>
       )
-
-    return (
-      <>
-        <ImpactColor>{remainingSeats}자리</ImpactColor>
-        남았어요
-      </>
-    )
+    }
+    if (remainingSeats <= 2) {
+      return (
+        <RemainSpaces $isNone={false}>
+          <ImpactColor $isNone={false}>{remainingSeats}자리</ImpactColor>
+          남았어요
+        </RemainSpaces>
+      )
+    }
+    return
   }
+
   return (
     <Wrapper>
-      <PreviewImg $image={image}>
-        <RemainSpaces>{renderRemain()}</RemainSpaces>
+      <PreviewImg
+        $image={image}
+        $isOpacity={remainingSeats === 0}>
+        {renderRemain()}
       </PreviewImg>
     </Wrapper>
   )
@@ -45,9 +53,10 @@ const PreviewImg = styled.div<PreviewImgProps>`
   font-size: ${props => props.theme.customSize.medium};
   justify-content: flex-end;
   align-items: contain;
+  opacity: ${props => (props.$isOpacity ? 0.6 : 1)};
 `
 // 미리보기 아래 잔여 참여석
-const RemainSpaces = styled.div`
+const RemainSpaces = styled.div<PreviewImgProps>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,8 +68,10 @@ const RemainSpaces = styled.div`
   color: ${props => props.theme.main.white};
   background-color: ${props => props.theme.greyScale.grey8};
   gap: 2px;
+  display: ${props => (props.$isNone ? 'none' : 'span')};
 `
 // 미리보기 아래 잔여석 글자 강조색
-const ImpactColor = styled.p`
+const ImpactColor = styled.p<PreviewImgProps>`
   color: ${props => props.theme.subColor.redD2};
+  display: ${props => (props.$isNone ? 'none' : 'span')};
 `

@@ -1,8 +1,18 @@
 import { styled } from 'styled-components'
 
-export const CareerMainItemCategory = ({ jobs }) => {
+interface CategoryItemProps {
+  $isGrey: boolean
+}
+
+export const CareerMainItemCategory = ({ jobs, remainingSeats }) => {
   const categoryChips = jobs.slice(0, 2).map((category, index) => {
-    return <CategoryItem key={index}>{category}</CategoryItem>
+    return (
+      <CategoryItem
+        key={index}
+        $isGrey={remainingSeats === 0}>
+        {category}
+      </CategoryItem>
+    )
   })
   return <CategoryWrap>{categoryChips}</CategoryWrap>
 }
@@ -19,10 +29,11 @@ const CategoryWrap = styled.div`
   }
 `
 
-const CategoryItem = styled.div`
+const CategoryItem = styled.div<CategoryItemProps>`
   width: auto;
   height: 25px;
-  color: ${props => props.theme.greyScale.grey7};
+  color: ${props =>
+    props.$isGrey ? props.theme.greyScale.grey4 : props.theme.greyScale.grey7};
   background-color: ${props => props.theme.greyScale.grey2};
   font-size: 14px;
   line-height: 16.71px;

@@ -1,9 +1,13 @@
 import { styled } from 'styled-components'
+interface GreyProps {
+  $isGrey?: boolean
+}
 export const CareerMainItemMeetingTime = ({
   week,
   days,
   time,
-  progressTime
+  progressTime,
+  remainingSeats
 }) => {
   const fetchWeek = week
   const fetchDays = days
@@ -11,14 +15,15 @@ export const CareerMainItemMeetingTime = ({
   const fetchProgressTiem = progressTime
 
   return (
-    <MeetingTime>
+    <MeetingTime $isGrey={remainingSeats === 0}>
       {fetchWeek ? fetchWeek : ''} {fetchDays ? fetchDays : ''} {fetchTime}{' '}
       {fetchProgressTiem ? `${fetchProgressTiem}분` : '-'}
     </MeetingTime>
   )
 }
 
-const MeetingTime = styled.div`
-  color: ${props => props.theme.greyScale.grey6};
+const MeetingTime = styled.div<GreyProps>`
+  color: ${props =>
+    props.$isGrey ? props.theme.greyScale.grey3 : props.theme.greyScale.grey6};
   margin-bottom: -5px;
 `
