@@ -33,7 +33,7 @@ export const MeetupDetailsSelector = () => {
   const toggleDaySelection = (day: string) => {
     if (days.includes(day)) {
       handleToggle(
-        globalState.days.filter(selectedDay => selectedDay !== day),
+        globalState.days.filter((selectedDay: string) => selectedDay !== day),
         'days'
       )
     } else {
@@ -98,57 +98,59 @@ export const MeetupDetailsSelector = () => {
         <PeriodicCheckBoxText>주기적으로 모이시겠어요?</PeriodicCheckBoxText>
       </PeriodicCheckBoxContainer>
 
-      {/* {periodicMeeting && ( */}
-      <>
-        <ToggleNTextWrap>
-          <QuestionTitle>모임 요일을 정해주세요.</QuestionTitle>
-          <ToggleRowSortContainerThree>
-            <ToggleL60
-              onClick={() => handleToggle('매주', 'week')}
-              $isSelected={week === '매주'}>
-              매주
-            </ToggleL60>
-            <ToggleM60
-              onClick={() => handleToggle('격주', 'week')}
-              $isSelected={week === '격주'}>
-              격주
-            </ToggleM60>
-            <ToggleR60
-              onClick={() => handleToggle('매달', 'week')}
-              $isSelected={week === '매달'}>
-              매달
-            </ToggleR60>
-          </ToggleRowSortContainerThree>
-        </ToggleNTextWrap>
-        <AnswerFlexWrap>{daysItems}</AnswerFlexWrap>
+      {periodicMeeting && (
+        <>
+          <ToggleNTextWrap>
+            <QuestionTitle>모임 요일을 정해주세요.</QuestionTitle>
+            <ToggleRowSortContainerThree>
+              <ToggleL60
+                onClick={() => handleToggle('매주', 'week')}
+                $isSelected={week === '매주'}>
+                매주
+              </ToggleL60>
+              <ToggleM60
+                onClick={() => handleToggle('격주', 'week')}
+                $isSelected={week === '격주'}>
+                격주
+              </ToggleM60>
+              <ToggleR60
+                onClick={() => handleToggle('매달', 'week')}
+                $isSelected={week === '매달'}>
+                매달
+              </ToggleR60>
+            </ToggleRowSortContainerThree>
+          </ToggleNTextWrap>
+          <AnswerFlexWrap>{daysItems}</AnswerFlexWrap>
 
-        {/* 모임시간 */}
-        <TimePickerContainer>
-          <QuestionTitle>모임 시간을 정해주세요.</QuestionTitle>
-          <CommonTimePicker onTimeChange={time => handleToggle(time, 'time')} />
-        </TimePickerContainer>
+          {/* 모임시간 */}
+          <TimePickerContainer>
+            <QuestionTitle>모임 시간을 정해주세요.</QuestionTitle>
+            <CommonTimePicker
+              onTimeChange={time => handleToggle(time, 'time')}
+            />
+          </TimePickerContainer>
 
-        {/* 진행시간 */}
-        <QuestionTitle>진행시간은 얼마나 될까요?</QuestionTitle>
-        <Slider
-          value={progressTime}
-          sx={{ width: '85%', margin: '0 auto' }}
-          aria-label="progress-time"
-          size="medium"
-          defaultValue={30}
-          valueLabelDisplay="auto"
-          marks={timeSliderMarks}
-          step={10}
-          min={30}
-          max={180}
-          onChange={(_, value) => {
-            if (typeof value === 'number') {
-              handleToggle(value.toString(), 'progressTime')
-            }
-          }}
-        />
-      </>
-      {/* )} */}
+          {/* 진행시간 */}
+          <QuestionTitle>진행시간은 얼마나 될까요?</QuestionTitle>
+          <Slider
+            value={progressTime}
+            sx={{ width: '85%', margin: '0 auto' }}
+            aria-label="progress-time"
+            size="medium"
+            defaultValue={30}
+            valueLabelDisplay="auto"
+            marks={timeSliderMarks}
+            step={10}
+            min={30}
+            max={180}
+            onChange={(_, value) => {
+              if (typeof value === 'number') {
+                handleToggle(value.toString(), 'progressTime')
+              }
+            }}
+          />
+        </>
+      )}
     </>
   )
 }

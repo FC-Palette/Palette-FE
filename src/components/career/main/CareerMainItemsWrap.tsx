@@ -21,6 +21,7 @@ interface CareerData {
   positions: string[]
   recruitedPersonnel: string
   headCount: number
+  likemsg?: boolean
 }
 export const CareerMainItemsWrap = ({ data }: { data: CareerData }) => {
   const navigate = useNavigate()
@@ -36,7 +37,8 @@ export const CareerMainItemsWrap = ({ data }: { data: CareerData }) => {
     progressTime,
     positions,
     recruitedPersonnel,
-    headCount
+    headCount,
+    likemsg
   } = data
 
   const handleDetail = () => {
@@ -74,7 +76,10 @@ export const CareerMainItemsWrap = ({ data }: { data: CareerData }) => {
         </ItemFlexColumnWrapper>
       </ItemFlexRowWrapper>
       <LikeWrap>
-        <CareerMainItemLikeButton meetingId={id} />
+        <CareerMainItemLikeButton
+          meetingId={id}
+          likemsg={likemsg}
+        />
       </LikeWrap>
     </Wrap>
   )

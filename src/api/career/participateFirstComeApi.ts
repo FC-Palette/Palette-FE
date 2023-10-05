@@ -2,10 +2,10 @@
 import { fetchMainResponseDataProps } from '@/types'
 import { authInstance } from '../axios'
 
-export async function participateMeetingApi(meetingId: string) {
+export async function participateFirstComeApi(meetingId: string) {
   try {
     const response = await authInstance.post(
-      `/develop/participate/${meetingId}`
+      `/develop/participate/firstCome/${meetingId}`
     )
     return response
   } catch (error: any) {

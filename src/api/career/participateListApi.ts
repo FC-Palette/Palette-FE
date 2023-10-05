@@ -1,10 +1,14 @@
+
+
 // 모임 참여 체크
 import { fetchMainResponseDataProps } from '@/types'
 import { authInstance } from '../axios'
 
-export async function meetingDeleteRequestApi(meetingId: string) {
+export async function participateListApi(meetingId: string) {
   try {
-    const response = await authInstance.post(`/develop/delete/${meetingId}`)
+    const response = await authInstance.get(
+      `/develop/${meetingId}/participate/member`
+    )
     return response.data
   } catch (error: any) {
     const errorResponseData: fetchMainResponseDataProps = {

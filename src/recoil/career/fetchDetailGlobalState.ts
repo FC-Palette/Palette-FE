@@ -33,6 +33,7 @@ export const fetchDetailGlobalState = atom({
     likes: 0,
     createdAt: '2023-09-26T17:56:43.916435',
     closing: false,
-    msg: ''
+    msg: '',
+    likemsg: false
   }
 })

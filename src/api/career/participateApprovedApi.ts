@@ -2,10 +2,16 @@
 import { fetchMainResponseDataProps } from '@/types'
 import { authInstance } from '../axios'
 
-export async function meetingDeleteRequestApi(meetingId: string) {
+export async function participateApprovedApi(
+  meetingId: string,
+  submitPr: any
+) {
   try {
-    const response = await authInstance.post(`/develop/delete/${meetingId}`)
-    return response.data
+    const response = await authInstance.post(
+      `/develop/participate/${meetingId}`,
+      submitPr
+    )
+    return response
   } catch (error: any) {
     const errorResponseData: fetchMainResponseDataProps = {
       status: error.response?.status,

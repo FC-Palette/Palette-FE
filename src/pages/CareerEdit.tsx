@@ -2,7 +2,12 @@ import { editRequestApi } from '@/api/career/editRequestApi'
 import { Header } from '@/components'
 import { EditOneCard, EditThreeCard, EditTwoCard } from '@/components/career'
 import { EditFooter } from '@/components/career/edit/EditFooter'
-import { editDtoAtom, editImageAtom } from '@/recoil'
+import {
+  editDtoAtom,
+  editImageAtom,
+  resetDtoAtom,
+  resetFileAtom
+} from '@/recoil'
 import { CareerUseParamsProps } from '@/types'
 import { ArrowLeft2 } from 'iconsax-react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
@@ -15,16 +20,21 @@ export const CareerEdit = () => {
   const meetingId = location.state.meetingId
   const { editstep = '1' } = useParams<CareerUseParamsProps>()
   const [editFile, setEditFile] = useRecoilState(editImageAtom)
-  const submitDto = useRecoilValue(editDtoAtom)
+  const [editDto, setEditDto] = useRecoilState(editDtoAtom)
+  const resetFile = useRecoilValue(resetFileAtom)
+  const resetDto = useRecoilValue(resetDtoAtom)
   const submitFile = editFile.file
 
   const handleSubmit = async () => {
     if (editstep === '3') {
-      const res = await editRequestApi(submitDto, submitFile, meetingId)
+      const res = await editRequestApi(editDto, submitFile, meetingId)
 
       if (res.status === 200) {
+        setEditDto(resetDto)
+        setEditFile(resetFile)
         navigate(`/detail/${meetingId}`)
-        setEditFile({ file: null })
+      } else {
+        console.log(res)
       }
     }
   }
@@ -107,7 +117,7 @@ const Wrap = styled.div`
   overflow-y: scroll;
 `
 
-const StyledIcon = styled.button`
+const StyledIcon = styled.div`
   color: #000;
   font-size: ${props => props.theme.customSize.xxlarge};
 `

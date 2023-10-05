@@ -2,57 +2,39 @@ import { styled } from 'styled-components'
 import { Heart } from 'iconsax-react'
 import { requestMeetingLikeApi, requestMeetingLikeCancelApi } from '@/api'
 import { useEffect, useState } from 'react'
-import { theme } from '@/styles'
 
-export const CareerMainItemLikeButton = ({ meetingId }) => {
-  const [like, setLike] = useState(false)
-  // const [cancel, setCancel] = useState(false)
+interface HeartProps {
+  $isLike: boolean
+  onClick?: () => void
+}
 
-  // const fetchLikeStatus = async () => {
-  //   const [likeResponse, cancelResponse] = await Promise.all([
-  //     requestMeetingLikeApi(meetingId),
-  //     requestMeetingLikeCancelApi(meetingId)
-  //   ])
-  //   if (likeResponse !== null) {
-  //     setLike(likeResponse.success) // 성공 시 찜 상태로 설정
-  //     console.log(likeResponse)
-  //   }
-
-  //   if (cancelResponse !== null) {
-  //     // setCancel(cancelResponse.success) // 성공 시 취소 상태로 설정
-  //   }
-  // }
-
-  useEffect(() => {
-    // 초기 랜더링 시 데이터 가져오기
-  }, [meetingId])
+export const CareerMainItemLikeButton = ({ meetingId, likemsg }) => {
+  const [likeSuccess, setLikeSuccess] = useState(likemsg)
+  useEffect(() => {}, [meetingId])
 
   // 찜하기 또는 취소하기 클릭 시 상태를 변경하는 함수
-  const toggleLike = async () => {
-    try {
-      if (like) {
-        // 현재 찜 상태인 경우, 취소 API 호출
-        await requestMeetingLikeCancelApi(meetingId)
-        setLike(false) // 찜 상태 해제
-      } else {
-        // 현재 찜하지 않은 상태인 경우, 찜 API 호출
-        const likeRes = await requestMeetingLikeApi(meetingId)
-        console.log(likeRes)
-        setLike(true) // 찜 상태 설정
-      }
-    } catch (error) {
-      console.error('찜하기 또는 취소하기 중 오류 발생:', error)
+  const handleLike = async () => {
+    const api = likemsg ? requestMeetingLikeCancelApi : requestMeetingLikeApi
+    const response = await api(meetingId)
+
+    if (response) {
+      setLikeSuccess(!likeSuccess)
     }
   }
 
   return (
-    <StyledIcon onClick={toggleLike}>
-      <Heart fill={like ? theme.subColor.prettyRed : theme.main.black} />
+    <StyledIcon
+      onClick={handleLike}
+      $isLike={likeSuccess}>
+      <Heart />
     </StyledIcon>
   )
 }
 
-const StyledIcon = styled(Heart)`
+const StyledIcon = styled(Heart)<HeartProps>`
   width: 24px;
   height: 24px;
+  fill: ${props => (props.$isLike ? props.theme.subColor.prettyRed : 'none')};
+  color: ${props =>
+    props.$isLike ? props.theme.subColor.prettyRed : props.theme.main.black};
 `

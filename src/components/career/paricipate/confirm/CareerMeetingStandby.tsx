@@ -1,14 +1,35 @@
+import { participateListApi } from '@/api'
 import { CommonArrowDown } from '@/components'
 import { CONFIRM_WARING_TEXT } from '@/constants'
-import { useState } from 'react'
+import { paricipateListAtom } from '@/recoil'
+import { useEffect, useState } from 'react'
+import { useRecoilState } from 'recoil'
 import styled from 'styled-components'
 
 export const CareerMeetingStandby = () => {
-  const [letter, setLetter] = useState(false)
+  const [letter, setLetter] = useState<{ [key: string]: boolean }>({})
+  const [list, setList] = useRecoilState(paricipateListAtom)
+  const meetingId = String(48)
 
-  const handleToggle = () => {
-    setLetter(!letter)
+  useEffect(() => {
+    const fetchList = async () => {
+      const listRes = await participateListApi(meetingId)
+      if (listRes.status === 200) {
+        setList(listRes.response)
+      } else {
+        alert('올바른 호출이 아닙니다.')
+      }
+    }
+    fetchList()
+  }, [meetingId])
+
+  const handleToggle = (itemId: string) => {
+    setLetter(prevLetter => ({
+      ...prevLetter,
+      [itemId]: !prevLetter[itemId]
+    }))
   }
+
   const warningText = CONFIRM_WARING_TEXT.map(item => (
     <WarningText key={item}>{item}</WarningText>
   ))
@@ -17,32 +38,28 @@ export const CareerMeetingStandby = () => {
     return text.length > maxLength ? text.slice(0, maxLength) + '...' : text
   }
 
-  const dummyFetch = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-  const fetchParticipantsInfo = dummyFetch.map(item => (
+  const fetchParticipantsInfo = list.map(item => (
     <>
-      <ParticipantsWrap key={item}>
+      <ParticipantsWrap key={item.id}>
         <ParticipantsCheckBox type="checkbox" />
         <ParticipantsImage />
         <NameAndDescription>
-          <ParticipantsName>{item}</ParticipantsName>
+          <ParticipantsName>{item.nickname}</ParticipantsName>
           <ParticipantsDescription>
-            {truncateText(
-              '긴글긴글긴글긴글긴글긴글긴글긴글긴글긴글긴글긴글긴글',
-              20
-            )}
+            {truncateText(item.bio, 20)}
           </ParticipantsDescription>
         </NameAndDescription>
         <ParticipantsArrow
-          onClick={handleToggle}
-          key={item}>
+          onClick={() => handleToggle(String(item.id))}
+          key={item.id}>
           <CommonArrowDown size={24} />
         </ParticipantsArrow>
       </ParticipantsWrap>
-      {letter && (
-        <ParticipantsLetter key={item}>
-          안녕하세요. 저번달에 갓 입사한 샌애기 마케터입니다. 스터디를 꼭 해보고
-          싶었는데 좋은 기회일 것 같아 신청합니다...! ESTJ라 성실하게 임할 수
-          있습니다 ^_^ 감사합니다.
+      {letter[item.id] && (
+        <ParticipantsLetter key={item.id}>
+          {/* {truncateText(item.pr, 83)} */}
+
+          {item.pr}
         </ParticipantsLetter>
       )}
     </>
@@ -108,12 +125,17 @@ const ParticipantsArrow = styled.button`
 
 const ParticipantsLetter = styled.button`
   margin-left: 36px;
+  width: 300px;
   max-width: 300px;
+  height: auto;
   max-height: 147px;
   padding: 12px 16px 15px 16px;
   border-radius: 8px;
   border: 1px solid ${props => props.theme.greyScale.grey3};
   background-color: ${props => props.theme.main.white};
+  word-break: break-all;
+  line-height: normal;
+  overflow: hidden;
 `
 
 const WarningTextContainer = styled.div`
