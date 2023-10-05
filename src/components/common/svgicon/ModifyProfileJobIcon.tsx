@@ -2,15 +2,15 @@ import { theme } from '@/styles';
 import { useState } from 'react';
 import styled from 'styled-components';
 
-export const ModifyProfileJobIcon = ({ formData, setFormData }) => {
-  const [selectedJob, setSelectedJob] = useState(null);
+export const ModifyProfileJobIcon = ({ value, formData, setFormData }) => {
+  const [selectedJob, setSelectedJob] = useState(value);
 
   const handleJobClick = (job) => {
     if (selectedJob === job) {
       setSelectedJob(null);
       setFormData({
         ...formData,
-        job: null, 
+        job: null,
       });
     } else {
       setSelectedJob(job);
@@ -360,7 +360,7 @@ const JobWrap = styled.div`
   align-items: center;
 `;
 
-const Job = styled.div`
+const Job = styled.div<{ clicked?: string }>`
   display: flex;
   background-color: ${(props) => (props.clicked === "true" ? theme.greyScale.blie : theme.greyScale.blueGrey)};
   padding: 12px;
@@ -379,7 +379,6 @@ const Job = styled.div`
   }
 `;
 
-const StyledSpan = styled.span`
-  color: ${(props) => props.spanColor};
+const StyledSpan = styled.span<{ spanColor?: string }>`
+  color: ${(props) => props.spanColor || 'inherit'};
 `;
-

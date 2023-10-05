@@ -55,7 +55,7 @@ const PositionList = styled.ul`
   margin-top: 12px;
 `
 
-const PositionItem = styled.li`
+const PositionItem = styled.li<{ selected?: boolean;}>`
   color: black;
   background-color: ${(props) =>
     props.selected ? theme.greyScale.blie :theme.greyScale.blueGrey};

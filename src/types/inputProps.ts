@@ -11,6 +11,7 @@ export interface InputProps {
   children?: React.ReactNode
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
   disabled?: boolean
+  name?: string;
 }
 
 export type InputType = Pick<

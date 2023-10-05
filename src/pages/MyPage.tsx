@@ -2,12 +2,26 @@ import { NAVIGATION_PATH } from "constants/index";
 import { Footer, Header, MyPageChatBtn } from "components/index";
 import { MyPageEditBtn, MyPageIntro, MyPagePostDisplay, MyPageSelectTab } from "components/index";
 import { Notification, Setting2 } from "iconsax-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { css, styled } from "styled-components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { myPageIntroProps } from "@/types";
+import { decoder } from "@/utils";
 
 export const MyPage = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const decodedPayload = decoder();
+  console.log(decodedPayload.memberId);
+  const myPagePath = `/mypage/${decodedPayload.memberId}`;
+
+useEffect(() => {
+  if (location.pathname === '/mypage/' || location.pathname === myPagePath) {
+    navigate('/mypage');
+  }
+}, [location.pathname, myPagePath]);
+
   const [userData, setUserData] = useState<myPageIntroProps | null>(null);
   
   return (
@@ -27,7 +41,7 @@ export const MyPage = () => {
       <MyPageIntro userData={userData} setUserData={setUserData} />
       <BtnWrap>
         <MyPageEditBtn userData={userData} />
-        <MyPageChatBtn hide={location.pathname === '/mypage/:member_id'}/>
+        <MyPageChatBtn/>
       </BtnWrap>
       <MyPageSelectTab />
       <MyPagePostArea hide={userData?.response?.job === null && location.pathname === '/mypage'} >
@@ -64,7 +78,7 @@ const StyledIcon = styled.div`
   }
 `
 
-const MyPagePostArea = styled.div`
+const MyPagePostArea = styled.div<{ hide: boolean }>`
     ${(props) =>
     props.hide &&
     css`
@@ -76,6 +90,7 @@ const BtnWrap = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
   padding: 0 24px;
   margin-bottom: 20px;
   width: 100%;
