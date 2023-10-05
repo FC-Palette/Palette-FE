@@ -27,7 +27,7 @@ export const GetDetailHeader = ({ isAdmin, meetingId }) => {
   const isManager = isAdmin
   const moveToEdit = () => {
     navigate('/edit/1', {
-      state: {meetingId}
+      state: { meetingId }
     })
   }
 
@@ -119,7 +119,7 @@ const Wrap = styled.div`
   width: 100%;
 `
 
-const StyledIcon = styled.button`
+const StyledIcon = styled.div`
   color: #000;
   font-size: ${props => props.theme.customSize.xxlarge};
 `

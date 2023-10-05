@@ -1,28 +1,31 @@
 import { styled } from 'styled-components'
-import { agreeModalOnState } from 'recoil/index'
-import { useRecoilValue } from 'recoil'
-import { Modal } from 'components/index'
+import { UseModal } from 'components/common/useActions/index'
 import { Flexbox } from 'styles/index'
 
-export const HeaderModal = ({ title, content, children }) => {
-  const modalOn = useRecoilValue(agreeModalOnState)
+export const UseBackgroundModal = ({
+  title,
+  content,
+  children,
+  modalState
+}) => {
+  let modalOn = modalState
 
   return (
     <>
       {modalOn && (
-        <Background>
-          <Modal
+        <UseBackground>
+          <UseModal
             title={title}
             content={content}>
             {children}
-          </Modal>
-        </Background>
+          </UseModal>
+        </UseBackground>
       )}
     </>
   )
 }
 
-export const Background = styled(Flexbox)`
+export const UseBackground = styled(Flexbox)`
   justify-content: flex-end;
   position: absolute;
   height: 100%;

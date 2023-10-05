@@ -4,7 +4,12 @@ export const ManagerInfo = ({ managerName, managerInfo, managerImg }) => {
   return (
     <>
       <ContentsContainer>
-        <RoomManagerImage>{managerImg}</RoomManagerImage>
+        <RoomManagerImage>
+          <img
+            src={managerImg}
+            alt={'이미지없음'}
+          />
+        </RoomManagerImage>
         <NameAndIntroduceWrap_Column>
           <RoomManagerName>{managerName}</RoomManagerName>
           <RoomManagerIntroduce>{managerInfo}</RoomManagerIntroduce>
@@ -24,11 +29,16 @@ const ContentsContainer = styled.div`
   align-items: center;
 `
 
-const RoomManagerImage = styled.img`
+const RoomManagerImage = styled.div`
   background-color: transparent;
   border-radius: 8px;
   width: 52px;
   height: 52px;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `
 
 const NameAndIntroduceWrap_Column = styled.div`

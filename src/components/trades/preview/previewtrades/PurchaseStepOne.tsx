@@ -36,7 +36,7 @@ export const PurchaseStepOne = () => {
     </>
   )
 }
-const StyledIcon = styled.button`
+const StyledIcon = styled.div`
   color: #000;
   font-size: ${theme.customSize.xxlarge};
 `

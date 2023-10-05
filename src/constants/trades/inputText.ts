@@ -4,14 +4,14 @@ import {
   AgreeMsg2,
   Account,
   UploadInputDetail,
-  UploadInputDetail1,
   DeadLine,
-  SecondHandOption,
   PurchaseImages,
   PurchaseOption,
+  SecondHandOption,
   SecondHandImages,
   SecondHandDay,
-  SecondHandTime
+  SecondHandTime,
+  UploadInputDetail1
 } from 'components/trades/upload/index'
 
 export const TRADES_TEXT = [
