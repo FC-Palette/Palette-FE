@@ -28,7 +28,7 @@ export const MyPageEditBtn = ({ userData }) => {
   const bio = userData?.response.bio 
   const nickname = userData?.response.nickname
   const image = userData?.response.image 
-
+  console.log(userData)
   const handleFollow = async () => {
     try {
       const profileData = {
@@ -43,14 +43,12 @@ export const MyPageEditBtn = ({ userData }) => {
         : await followAdd(member_id, profileData);
 
       console.log(`${isFollowing ? '언팔로우' : '팔로우'} 성공:`, response);
-
+      console.log(response)
       setIsFollowing(!isFollowing);
     } catch (error) {
       console.error('API 요청 실패:', error);
     }
   };
-
-
     return (
       <ButtonWrap>
         {isMyPage && (

@@ -20,7 +20,7 @@ export const Footer = ({ $fixed = true }) => {
           onClick={() => handleIconClick(path)}>
           <StyledIcon>
             {(location.pathname === '/mypage' ||
-              location.pathname === '/alarm') &&
+              location.pathname === '/alarm' || location.pathname === '/friend' ) &&
             path === '/mypage' ? (
               <MyPageFooterIcon />
             ) : (
