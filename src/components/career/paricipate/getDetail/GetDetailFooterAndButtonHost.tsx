@@ -46,9 +46,6 @@ export const GetDetailFooterAndButtonHost = ({ loggedInUser }) => {
       setClosing(!closing)
     }
   }
-  //   금융・컨설팅・VC
-  // 서비스기획・운영
-  // 인사・채용・노무
 
   let buttonText = ''
   if (isRecruitmentClosed === 0) {
