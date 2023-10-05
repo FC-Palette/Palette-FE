@@ -45,7 +45,7 @@ export const GetDetailMeetupInfo = () => {
     return date.split('T')[0]
   }
 
-  const participationMethod = acceptType ? '승인제' : '선착순'
+  const participationMethod = acceptType
 
   const infos = (
     <InfoZone>

@@ -1,36 +1,35 @@
 import { JOIN_MEETING_HEADER_TEXT } from '@/constants'
-import { useState } from 'react'
+import { reasonTextAtom } from '@/recoil'
+import { useRecoilState } from 'recoil'
 import styled from 'styled-components'
 
 export const JoinMeetingStepTwoTextField = () => {
-  const [textContent, setTextContent] = useState('')
-  const [textLength, setTextLength] = useState('')
-  const maxTextLength = 300
+  const [prAtom, setPrAtom] = useRecoilState(reasonTextAtom)
 
+  const maxTextLength = 300
   const placeHolder = JOIN_MEETING_HEADER_TEXT.stepTwoPlaceholder[0]
 
   const handleChipClick = (chipText: string) => {
-    setTextContent(chipText)
+    setPrAtom(prev => ({ ...prev, pr: chipText }))
   }
 
-  const onChangeText = e => {
+  const onChangeText = (e: any) => {
     const text = e.target.value
-    setTextContent(text)
-    setTextLength(text)
+    setPrAtom(prev => ({ ...prev, pr: text }))
   }
 
   return (
     <>
       <TextAreaContainer>
         <TextAreaContents
-          value={textContent}
+          value={prAtom.pr}
           placeholder={placeHolder}
           onChange={onChangeText}
           maxLength={maxTextLength}
         />
       </TextAreaContainer>
       <TextAreaLengthWrap>
-        {textLength.length || textContent.length}/{maxTextLength}
+        {prAtom.pr.length}/{maxTextLength}
       </TextAreaLengthWrap>
       <ChipsField>
         {JOIN_MEETING_HEADER_TEXT.stepTwoChips.map((chipText, index) => (

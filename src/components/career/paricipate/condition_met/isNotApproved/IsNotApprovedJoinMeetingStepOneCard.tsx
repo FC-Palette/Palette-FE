@@ -1,8 +1,17 @@
 import styled from 'styled-components'
 import { JoinMeetingStepOneTitle } from '../common'
 import { Button } from '@/components'
+import { participateFirstComeApi } from '@/api'
+import { useLocation } from 'react-router-dom'
 
 export const IsNotApprovedJoinMeetingStepOneCard = () => {
+  const location = useLocation()
+  const detailId = location.state.detailid
+  const handleMeetingStart = async () => {
+    const firstComRes = await participateFirstComeApi(detailId)
+    if (firstComRes.status === 200) {
+    }
+  }
   return (
     <Container>
       <JoinMeetingStepOneTitle />
@@ -10,7 +19,7 @@ export const IsNotApprovedJoinMeetingStepOneCard = () => {
       <Wrapper>
         <BtnWrap>
           <Button
-            onClick={() => alert('채팅창 이동 로직')}
+            onClick={handleMeetingStart}
             $btnWidth="100%"
             $btnHeight="60px"
             $fontSize="20px"

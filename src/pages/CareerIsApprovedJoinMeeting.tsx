@@ -4,25 +4,43 @@ import {
   IsApprovedJoinMeetingStepOneCard,
   IsApprovedJoinMeetingStepTwoCard
 } from '@/components/career'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { CareerUseParamsProps } from '@/types'
 import styled from 'styled-components'
+import { decoder } from '@/utils'
+import { participateApprovedApi } from '@/api'
+import { useRecoilValue } from 'recoil'
+import { reasonTextAtom } from '@/recoil'
 
 const CareerIsApprovedJoinMeeting = () => {
   const navigate = useNavigate()
+  const location = useLocation()
+  const meetingId = location.state.detailid
   const { approvedstepid = '1' } = useParams<CareerUseParamsProps>()
+  const isUser = decoder().memberId ? true : false
+  const prValue = useRecoilValue(reasonTextAtom)
+  const submitPr = prValue
 
-  const handleNextStep = () => {
-    const nextStep = parseInt(approvedstepid) + 1
-    navigate(`/joinmeeting/approved/${nextStep}`)
+  if (!isUser) {
+    navigate('/career')
   }
 
-  if (
-    approvedstepid !== '1' &&
-    approvedstepid !== '2' &&
-    approvedstepid !== '3'
-  ) {
-    navigate('/career')
+  const handleNextStep = async () => {
+    const nextStep = parseInt(approvedstepid) + 1
+    navigate(`/joinmeeting/approved/${nextStep}`, {
+      state: { detailid: meetingId }
+    })
+    if (approvedstepid === '2') {
+      const participateRes = await participateApprovedApi(meetingId, submitPr)
+      if (participateRes.status === 200)
+        navigate(`/joinmeeting/approved/3`, {
+          state: { detailid: meetingId }
+        })
+    }
+
+    if (approvedstepid === '3') {
+      navigate('/career')
+    }
   }
 
   const handleBtnText = () => {
@@ -60,6 +78,7 @@ const CareerIsApprovedJoinMeeting = () => {
             btnText={handleBtnText()}
           />
         )
+
       default:
         return (
           <IsApprovedJoinMeetingFooter

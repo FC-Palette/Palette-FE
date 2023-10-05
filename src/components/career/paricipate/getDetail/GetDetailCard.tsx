@@ -37,10 +37,9 @@ export const GetDetailCard = () => {
   const roomAdminId = meetingRes.meetingMemberDto.id // 게시글 글쓴이 id
   const loggedInUser = decoder()?.memberId // 현재 로그인한 유저 id
   const isAdmin = loggedInUser === roomAdminId // 글쓴이 === 로그인한 유저
+
   const navitate = useNavigate()
 
-
-  console.log(meetingRes)
   if (!detailid && !loggedInUser) {
     navitate('/career')
   }
@@ -90,25 +89,26 @@ export const GetDetailCard = () => {
         <GetDetailStats />
         <GetDetailMeetupInfo />
 
-        {/* 멤버소개: 지금 멤버 데이터 없어서 빈배열 출력됨 */}
-        <GetDetailMembersInfo />
+        <GetDetailMembersInfo isAdmin={isAdmin} />
 
-        {/* 비슷한 모임 추천: 현재 이미지 없음 */}
         <GetDetailSimilarMeetupInfo />
-
-        {renderFooter()}
       </>
     )
   }
 
   const renderFooter = () => {
     return isAdmin ? (
-      <GetDetailFooterAndButtonHost />
+      <GetDetailFooterAndButtonHost loggedInUser={loggedInUser} />
     ) : (
-      <GetDetailFooterAndButtonGuest />
+      <GetDetailFooterAndButtonGuest loggedInUser={loggedInUser} />
     )
   }
-  return <Card>{renderContent()}</Card>
+  return (
+    <Card>
+      {renderContent()}
+      {renderFooter()}
+    </Card>
+  )
 }
 
 const Card = styled.div`

@@ -3,4 +3,5 @@ export interface ModalButtonsProps {
   rightBtn: string
   onLeftClick?: () => void
   onRightClick?: () => void
+  modalState?: boolean
 }

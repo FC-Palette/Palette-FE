@@ -191,6 +191,7 @@ const ContentsWrap = styled.div`
   flex-wrap: wrap;
   gap: 12px;
   margin: 12px 24px;
+  position: sticky;
 `
 
 const Contents = styled.div<SelectedAnswerProps>`

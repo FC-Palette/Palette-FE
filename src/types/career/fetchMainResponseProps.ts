@@ -23,4 +23,5 @@ export interface fetchMainResponseProps {
   likes?: number // 좋아요 수
   createdAt?: string // 생성일 "2023-09-26T16:16:27.138517",
   closing?: boolean // 모집된건지 마감인지
+  likemsg?: boolean // 찜한 목록
 }

@@ -10,7 +10,7 @@ import dayjs from 'dayjs'
 export const EditRecruitmentPeriodSelector = () => {
   const setGlobalState = useSetRecoilState(editDtoAtom)
 
-  const handleStartDateChange = date => {
+  const handleStartDateChange = (date: any) => {
     const dateFormat_Start = dayjs(date).format('YYYY-MM-DD')
     setGlobalState(prevDate => ({
       ...prevDate,
@@ -19,7 +19,7 @@ export const EditRecruitmentPeriodSelector = () => {
   }
 
   // 종료일 변경 핸들러
-  const handleEndDateChange = date => {
+  const handleEndDateChange = (date: any) => {
     const dateFormat_End = dayjs(date).format('YYYY-MM-DD')
     setGlobalState(prevDate => ({
       ...prevDate,

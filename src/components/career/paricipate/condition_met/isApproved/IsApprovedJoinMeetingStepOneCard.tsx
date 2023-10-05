@@ -6,12 +6,16 @@ import { ArrowLeft2 } from 'iconsax-react'
 
 export const IsApprovedJoinMeetingStepOneCard = () => {
   const navigate = useNavigate()
+
+  const moveToBack = () => {
+    navigate(-1)
+  }
   return (
     <Container>
       <Header
         centerText="모임신청"
         leftIcon={
-          <StyledIcon onClick={() => navigate(-1)}>
+          <StyledIcon onClick={moveToBack}>
             <ArrowLeft2 />
           </StyledIcon>
         }

@@ -1,4 +1,10 @@
-import { BackgroundModal, Header, ModalButtons } from '@/components'
+import {
+  BackgroundModal,
+  Header,
+  ModalButtons,
+  UseBackgroundModal,
+  UseButtons
+} from '@/components'
 import { ArrowLeft2, Heart, More, Send2, Trash, Edit } from 'iconsax-react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
@@ -6,7 +12,12 @@ import { CREATE_EDIT_TEXT, DELETE_MODAL_TEXT } from '@/constants'
 import { useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { fetchDetailGlobalState, modalOnState } from '@/recoil'
-import { meetingDeleteRequestApi } from '@/api'
+
+import {
+  meetingDeleteRequestApi,
+  requestMeetingLikeApi,
+  requestMeetingLikeCancelApi
+} from '@/api'
 
 interface DropdownProps {
   $isOpen: boolean
@@ -17,17 +28,24 @@ interface OptionItemProps {
   onClick: () => void
 }
 
+interface HeartProps {
+  $isLike: boolean
+  onClick?: () => void
+}
+
 export const GetDetailHeader = ({ isAdmin, meetingId }) => {
   const navigate = useNavigate()
   const atom = useRecoilValue(fetchDetailGlobalState)
-  const { title } = atom
+  const { title, likemsg } = atom
   const [isOpen, setIsOpen] = useState(false)
   const [selectedOption, setSelectedOption] = useState<string>('')
-  const [isModalOpen, setIsModalOpen] = useRecoilState(modalOnState)
+  const [useModal, setUseModal] = useState(false)
+  const [likeSuccess, setLikeSuccess] = useState(likemsg)
   const isManager = isAdmin
+
   const moveToEdit = () => {
     navigate('/edit/1', {
-      state: {meetingId}
+      state: { meetingId }
     })
   }
 
@@ -42,19 +60,32 @@ export const GetDetailHeader = ({ isAdmin, meetingId }) => {
       moveToEdit()
     }
     if (value === '삭제하기') {
-      setIsModalOpen(!isModalOpen)
+      setUseModal(!useModal)
     }
   }
 
+  // GUEST: 찜하기 기능
+  const handleLike = async () => {
+    const api = likemsg ? requestMeetingLikeCancelApi : requestMeetingLikeApi
+    const response = await api(meetingId)
+
+    if (response) {
+      setLikeSuccess(!likeSuccess)
+    }
+  }
+
+  // HOST: 삭제 기능
   const handleConfirmYes = async () => {
     const res = await meetingDeleteRequestApi(meetingId)
+
     if (res.status === 200) {
       navigate('/career')
+      setUseModal(false)
     }
   }
 
   const handleConfirmNo = () => {
-    setIsModalOpen(false)
+    setUseModal(false)
   }
 
   const dynamicHeaderIcon = (isManager: boolean) => {
@@ -82,44 +113,45 @@ export const GetDetailHeader = ({ isAdmin, meetingId }) => {
     ) : (
       <MultiIconWrap>
         <Send2 />
-        <Heart />
+        <StyledHeard
+          onClick={handleLike}
+          $isLike={likeSuccess}
+        />
       </MultiIconWrap>
     )
   }
 
   return (
-    <Wrap>
+    <>
       <Header
         leftIcon={
           <StyledIcon onClick={() => navigate('/career')}>
             <ArrowLeft2 />
           </StyledIcon>
         }
-        centerText={title}>
+        centerText={title.length > 15 ? title.slice(0, 10) + '...' : title}>
         {dynamicHeaderIcon(isManager)}
       </Header>
 
-      {isModalOpen && (
-        <BackgroundModal
+      {useModal && (
+        <UseBackgroundModal
+          modalState={useModal}
           title={DELETE_MODAL_TEXT[0]}
           content={DELETE_MODAL_TEXT[1]}>
-          <ModalButtons
+          <UseButtons
+            modalState={useModal}
             onLeftClick={handleConfirmYes}
             onRightClick={handleConfirmNo}
             leftBtn={DELETE_MODAL_TEXT[2]}
             rightBtn={DELETE_MODAL_TEXT[3]}
           />
-        </BackgroundModal>
+        </UseBackgroundModal>
       )}
-    </Wrap>
+    </>
   )
 }
 
-const Wrap = styled.div`
-  width: 100%;
-`
-
-const StyledIcon = styled.button`
+const StyledIcon = styled.div`
   color: #000;
   font-size: ${props => props.theme.customSize.xxlarge};
 `
@@ -178,4 +210,10 @@ const OptionItem = styled.div<OptionItemProps>`
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px;
   }
+`
+
+const StyledHeard = styled(Heart)<HeartProps>`
+  fill: ${props => (props.$isLike ? props.theme.subColor.prettyRed : 'none')};
+  color: ${props =>
+    props.$isLike ? props.theme.subColor.prettyRed : props.theme.main.black};
 `

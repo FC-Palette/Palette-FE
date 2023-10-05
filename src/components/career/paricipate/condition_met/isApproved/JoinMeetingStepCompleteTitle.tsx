@@ -4,6 +4,7 @@ import styled from 'styled-components'
 export const JoinMeetingStepCompleteTitle = () => {
   const { stepTwoCompleteTitle, stepTwoCompleSubTitle } =
     JOIN_MEETING_HEADER_TEXT
+
   return (
     <Container>
       <FetchTitle>[마케팅] 출근 전 트렌드 분석</FetchTitle>
