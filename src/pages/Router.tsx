@@ -108,7 +108,6 @@ export const router = createBrowserRouter([
     children: [
       generateRoute('/mypage', <MyPage />),
       generateRoute('/mypage/:member_id', <MyPage />),
-      generateRoute('/changeprofile', <ChangeProfile />),
       generateRoute('/modifyprofile', <ModifyProfile />, <ErrorComponent />),
       generateRoute('/simpleprofile', <ModifyProfile />, <ErrorComponent />),
       generateRoute('/setting', <Setting />, <ErrorComponent />),
