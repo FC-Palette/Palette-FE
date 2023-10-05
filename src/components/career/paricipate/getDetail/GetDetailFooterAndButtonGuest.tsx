@@ -1,7 +1,8 @@
 import { participateCheckApi } from '@/api'
 import { Button, UseBackgroundModal, UseButtons } from '@/components'
 import { CREATE_MODAL_TEXT, meetingConditionText } from '@/constants'
-import { fetchDetailGlobalState } from '@/recoil'
+import { fetchDetailGlobalState, fetchDetailMemberState } from '@/recoil'
+import { theme } from '@/styles'
 import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
@@ -10,12 +11,14 @@ import styled from 'styled-components'
 export const GetDetailFooterAndButtonGuest = ({ loggedInUser }) => {
   const navigate = useNavigate()
   const { detailid } = useParams()
-
+  const memberAtom = useRecoilValue(fetchDetailMemberState)
+  const meetingRes = useRecoilValue(fetchDetailGlobalState)
   const [useModal, setUseModal] = useState(false)
   const modalText = CREATE_MODAL_TEXT.condition_not_met
-  const meetingRes = useRecoilValue(fetchDetailGlobalState)
-  const { msg, acceptType } = meetingRes
+  const { msg, acceptType, headCount } = meetingRes
   const isUserJoined = msg === '참여하고 있지않은 모임입니다.' ? false : true
+  const recruitedPersonnel = memberAtom.length
+  const remainingSeats: number = headCount - +recruitedPersonnel
 
   if (!detailid) {
     return
@@ -38,6 +41,9 @@ export const GetDetailFooterAndButtonGuest = ({ loggedInUser }) => {
   }
 
   const checkCondition = async () => {
+    if (remainingSeats === 0) {
+      return
+    }
     if (detailid && !isUserJoined) {
       const checkRes = await participateCheckApi(detailid)
       if (
@@ -72,6 +78,20 @@ export const GetDetailFooterAndButtonGuest = ({ loggedInUser }) => {
     }
   }
 
+  const renderBtnText = () => {
+    if (remainingSeats === 0) {
+      return '마감된 모집입니다.'
+    } else if (isUserJoined) {
+      return '채팅하기'
+    } else {
+      return '참여하기'
+    }
+  }
+
+  const bgColor = remainingSeats ? '' : theme.greyScale.grey2
+  const borderColor = remainingSeats ? '' : theme.greyScale.grey2
+  const color = remainingSeats ? '' : theme.greyScale.grey3
+
   return (
     <>
       <Wrapper>
@@ -81,8 +101,11 @@ export const GetDetailFooterAndButtonGuest = ({ loggedInUser }) => {
             $btnWidth="100%"
             $btnHeight="60px"
             $fontSize="20px"
-            $borderRadius="8px">
-            {isUserJoined ? '채팅하기' : '참여하기'}
+            $borderRadius="8px"
+            $bgColor={bgColor}
+            $borderColor={borderColor}
+            color={color}>
+            {renderBtnText()}
           </Button>
         </BtnWrap>
       </Wrapper>
@@ -99,7 +122,7 @@ export const GetDetailFooterAndButtonGuest = ({ loggedInUser }) => {
           <UseButtons
             modalState={useModal}
             onLeftClick={() => setUseModal(false)}
-            onRightClick={() => alert('메세지 보내기 로직 필요')}
+            onRightClick={() => alert('메세지 보내기 구현 미완')}
             leftBtn={modalText[2]}
             rightBtn={modalText[3]}
           />
