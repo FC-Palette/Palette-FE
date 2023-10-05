@@ -1,37 +1,62 @@
 import { requestMeetingCloseApi, requestMeetingReopenApi } from '@/api'
 import { Button } from '@/components'
-import { fetchDetailGlobalState } from '@/recoil'
+import { fetchDetailGlobalState, fetchDetailMemberState } from '@/recoil'
 import { theme } from '@/styles'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import styled from 'styled-components'
 
-export const GetDetailFooterAndButtonHost = () => {
+export const GetDetailFooterAndButtonHost = ({ loggedInUser }) => {
   const { detailid } = useParams()
   const atom = useRecoilValue(fetchDetailGlobalState)
-  const { closing } = atom
+  const memberAtom = useRecoilValue(fetchDetailMemberState)
+  const [closing, setClosing] = useState(atom.closing)
+  const { headCount } = atom
   const roomId = detailid
+  const isRecruitmentClosed = +headCount - memberAtom.length // headCount: 모집 인원, recruitedPersonnel: 모집된 인원
 
+  if (!loggedInUser) {
+    return
+  }
   if (!roomId) {
     return null
   }
 
-  const handleButtonClick = async () => {
-    let api
-    if (closing) {
-      api = requestMeetingReopenApi
-    } else {
-      api = requestMeetingCloseApi
+  useEffect(() => {
+    const closeRoom = async () => {
+      if (isRecruitmentClosed === 0) {
+        await requestMeetingCloseApi(roomId)
+      }
     }
 
+    closeRoom()
+  }, [])
+
+  const handleButtonClick = async () => {
+    if (isRecruitmentClosed === 0) {
+      return
+    }
+    const api = closing ? requestMeetingReopenApi : requestMeetingCloseApi
     const res = await api(roomId)
-    console.log(res)
+
+    if (res) {
+      setClosing(!closing)
+    }
   }
 
-  const buttonText = closing ? '모집 종료' : '모집 마감하기'
-  const bgColor = closing ? theme.greyScale.grey2 : ''
-  const borderColor = closing ? theme.greyScale.grey2 : ''
-  const color = closing ? theme.greyScale.grey3 : ''
+  let buttonText = ''
+  if (isRecruitmentClosed === 0) {
+    buttonText = '모집 종료되었습니다.'
+  } else if (closing) {
+    buttonText = '다시 모집하기'
+  } else {
+    buttonText = '모집 마감하기'
+  }
+
+  const bgColor = isRecruitmentClosed ? '' : theme.greyScale.grey2
+  const borderColor = isRecruitmentClosed ? '' : theme.greyScale.grey2
+  const color = isRecruitmentClosed ? '' : theme.greyScale.grey3
 
   return (
     <>
@@ -43,8 +68,8 @@ export const GetDetailFooterAndButtonHost = () => {
             $btnHeight="60px"
             $fontSize="20px"
             $borderRadius="8px"
-            $borderColor={borderColor}
             $bgColor={bgColor}
+            $borderColor={borderColor}
             color={color}>
             {buttonText}
           </Button>

@@ -2,15 +2,29 @@ import { ChatRoomInfo, UnreadInfo } from 'components/index'
 import { styled } from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { rowCentralise } from 'styles/index'
+import { useSetRecoilState } from 'recoil'
+import { roomIdState, roomInfoState } from 'recoil/index'
 
-//`onClick`으로 `roomid`를 통해 => `ChatOn` 으로 진입시킴
-export const ChatRoom = ({ title, image, members, msg, time, unread }) => {
+export const ChatRoom = ({
+  title,
+  image,
+  members,
+  msg,
+  time,
+  unread,
+  roomid
+}) => {
   const navigate = useNavigate()
+  const setRoomId = useSetRecoilState(roomIdState)
+  const setRoomInfo = useSetRecoilState(roomInfoState)
+  const moveToChat = () => {
+    setRoomId(roomid)
+    setRoomInfo({ title: title, members: members })
+    navigate('/chat')
+  }
+
   return (
-    <Wrapper
-      onClick={() => {
-        navigate('/chat')
-      }}>
+    <Wrapper onClick={moveToChat}>
       <ChatRoomInfo
         title={title}
         members={members}

@@ -58,7 +58,9 @@ export const GroupUpload = () => {
       setTradesGlobalState(initialTradeCreateGlobalState)
       setImageGlobalState(initialImageState)
       navigate(`/GroupPurchase`)
+
       setModal(false)
+
     } else if (modalText === TRADES_MODAL_TEXT.cancel) {
       setTradesGlobalState(initialTradeCreateGlobalState)
       setImageGlobalState(initialImageState)
@@ -74,7 +76,9 @@ export const GroupUpload = () => {
     } else if (modalText === TRADES_MODAL_TEXT.cancel) {
       setTradesGlobalState(initialTradeCreateGlobalState)
       setImageGlobalState(initialImageState)
+
       setModal(false)
+
     }
   }
 

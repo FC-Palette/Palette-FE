@@ -3,7 +3,6 @@ import { Fixer } from 'components/index'
 import { Logout, Notification } from 'iconsax-react'
 import { Flexbox } from 'styles/index'
 
-// /api/chat/exit?roomId 채팅방 나가기 `delete`
 export const MembersFooter = ({ onClick }) => {
   return (
     <Fixer $bottom="0">

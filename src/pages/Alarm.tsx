@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom"
 
 export const Alarm = () => {
     const navigate = useNavigate()
-  return (
+    return (
     <AlarmWrap>
         <Header 
         leftIcon={
@@ -25,8 +25,6 @@ export const Alarm = () => {
     <AlarmList />
     <AlarmList />
     <AlarmList />
-    <AlarmList />
-    <AlarmList />
     <Footer />
     </AlarmWrap>
     )
@@ -35,4 +33,5 @@ export const Alarm = () => {
 const AlarmWrap = styled.div`
     max-width: 430px;
     min-height: 100vh;
+    overflow-y: scroll;
 `

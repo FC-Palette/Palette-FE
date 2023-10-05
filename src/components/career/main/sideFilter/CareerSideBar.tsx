@@ -11,7 +11,7 @@ export interface SelectedAnswerProps {
   $isSelected?: boolean
   onClick: () => void
 }
-const defaultFilterState = {
+export const defaultFilterState = {
   filter: '',
   onOff: '',
   type: '',
@@ -34,46 +34,32 @@ export const CareerSideBar: React.FC<SideBarProps> = ({
   }
 
   // Contents를 클릭할 때 호출될 함수
+  const currentFilterState = { ...filterState }
+  
   const handleContentClick = (content: string, title: string) => {
-    const currentFilterState = { ...filterState }
-
     currentFilterState.job = currentFilterState.job || []
     currentFilterState.position = currentFilterState.position || []
 
     if (title === '직무') {
-      if (currentFilterState.job.includes(content)) {
-        currentFilterState.job = currentFilterState.job.filter(
-          item => item !== content
-        )
-      } else {
-        currentFilterState.job = [...currentFilterState.job, content]
-      }
+      currentFilterState.job.includes(content)
+        ? (currentFilterState.job = currentFilterState.job.filter(
+            item => item !== content
+          ))
+        : (currentFilterState.job = [...currentFilterState.job, content])
     } else if (title === '성별') {
-      if (currentFilterState.sex === content) {
-        currentFilterState.sex = ''
-      } else {
-        currentFilterState.sex = content
-      }
+      currentFilterState.sex = currentFilterState.sex === content ? '' : content
     } else if (title === '온・오프') {
-      if (currentFilterState.onOff === content) {
-        currentFilterState.onOff = ''
-      } else {
-        currentFilterState.onOff = content
-      }
+      currentFilterState.onOff =
+        currentFilterState.onOff === content ? '' : content
     } else if (title === '직급') {
-      if (currentFilterState.position.includes(content)) {
-        currentFilterState.position = currentFilterState.position.filter(
-          item => item !== content
-        )
-      } else {
-        currentFilterState.position = [...currentFilterState.position, content]
-      }
+      currentFilterState.position = currentFilterState.position.includes(
+        content
+      )
+        ? currentFilterState.position.filter(item => item !== content)
+        : [...currentFilterState.position, content]
     } else if (title === '종류') {
-      if (currentFilterState.type === content) {
-        currentFilterState.type = ''
-      } else {
-        currentFilterState.type = content
-      }
+      currentFilterState.type =
+        currentFilterState.type === content ? '' : content
     }
 
     setFilterState(currentFilterState)
@@ -191,6 +177,7 @@ const ContentsWrap = styled.div`
   flex-wrap: wrap;
   gap: 12px;
   margin: 12px 24px;
+  position: sticky;
 `
 
 const Contents = styled.div<SelectedAnswerProps>`

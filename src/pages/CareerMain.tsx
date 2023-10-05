@@ -31,8 +31,8 @@ export const CareerMain = () => {
   const [isOpen, setIsOpen] = useRecoilState(sideBarState)
   const [closedFilter, setClosedFilter] = useState(0)
   const [sortedResponseData, setSortedResponseData] = useState<SortedData[]>([])
-  const sortState = useRecoilValue(careerSortGlobalState)
-  const filterState = useRecoilValue(careerFilterGlobalState)
+  const sortState = useRecoilValue(careerSortGlobalState) // 찜 많은순, 오래된순, 최신순, 모임시작일 순
+  const filterState = useRecoilValue(careerFilterGlobalState) // 슬라이드 필터 아이템
   const { filter, onOff, type, job, position, sex } = filterState
 
   // 마감된 모집 제외
@@ -60,7 +60,6 @@ export const CareerMain = () => {
     fetchMainData()
   }, [closedFilter, filter, onOff, type, job, position, sex])
 
-  // 찜 많은순, 오래된순, 최신순, 모임시작일 순...
   useEffect(() => {
     if (responseData) {
       const sortedData = sortResponseData(

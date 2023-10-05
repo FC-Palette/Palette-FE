@@ -15,18 +15,8 @@ export const inDetailState = atom<boolean>({
   default: false
 })
 
-export const isBuyingState = atom<boolean>({
-  key: 'isByuyingState',
-  default: false
-})
-
 export const sendFileState = atom<boolean>({
   key: 'sendFileState',
-  default: false
-})
-
-export const isPersonalState = atom<boolean>({
-  key: 'isPersonalState',
   default: false
 })
 
@@ -53,4 +43,28 @@ export const headerModalOnState = atom({
 export const agreeModalOnState = atom({
   key: 'agreeModalOnState',
   default: false
+})
+
+export const roomIdState = atom({
+  key: 'roomIdState',
+  default: ''
+})
+export const roomInfoState = atom({
+  key: 'roomInfoState',
+  default: { title: '', members: 0 }
+})
+export const noticeState = atom({
+  key: 'noticeState',
+  default: ''
+})
+export const chatTypeState = atom<string>({
+  key: 'chatTypeState'
+})
+export const accInfoState = atom({
+  key: 'accInfoState',
+  default: {
+    bank: '',
+    accountNumber: '',
+    accountOwner: ''
+  }
 })

@@ -1,31 +1,77 @@
 import { theme } from "styles/index";
-import { styled } from "styled-components";
+import { css, styled } from "styled-components";
+import { useEffect } from "react";
+import { getMyPage } from "@/api/mypage/mypageApi";
+import { useParams, useLocation } from "react-router-dom";
+import { decoder } from "@/utils";
+import { PROFILE_EDIT_TEXT } from "@/constants";
+import { MyPageSimpleProfileBtn } from "./MyPageSimpleProfileBtn";
 
-export const MyPageIntro = () => {
+export const MyPageIntro = ({ userData, setUserData }) => {
+  const { member_id } = useParams();
+  const location = useLocation();
+  const decodedPayload = decoder();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        let data;
+
+        if (member_id) {
+          data = await getMyPage(member_id);
+        } else {
+          data = await getMyPage(decodedPayload.memberId);
+        }
+
+        setUserData(data);
+      } catch (error) {
+        console.error('사용자 데이터 가져오기 오류:', error);
+      }
+    };
+
+    fetchData();
+  }, [member_id]);
+  
   return (
     <Container>
       <TextInformation>
-        <NickName></NickName>
-        <TextArea></TextArea>
+        <NickName>{userData?.response?.nickname}</NickName>
+        <TextArea>{userData?.response?.bio}</TextArea>
         <CategoryWrap>
-          <JobCategory></JobCategory>
-          <PositionCategory></PositionCategory>
+          {userData?.response?.job !== null ? (
+            <>
+              <JobCategory hide={userData?.response?.job === null}>
+                {userData?.response?.job}
+              </JobCategory>
+              <PositionCategory hide={userData?.response?.position === null}>
+                {userData?.response?.position}
+              </PositionCategory>
+            </>
+          ) : (
+            <BuildingWrap>
+              <div>{userData?.response?.building}</div>
+              <div>{userData?.response?.wing}</div>
+              <div>{userData?.response?.roomNumber}</div>
+            </BuildingWrap>
+          )}
         </CategoryWrap>
-        <FollowUserArea>
+        <FollowUserArea hide={userData?.response?.job === null}>
           <FollowerWrap>
-            <Follower>팔로워</Follower>
-            <FollowerNumber></FollowerNumber>
+            <Follower>{PROFILE_EDIT_TEXT.profileFollowText}</Follower>
+            <FollowerNumber>{userData?.response?.followedCount}</FollowerNumber>
           </FollowerWrap>
           <FollowingWrap>
-            <Following>팔로잉</Following>
-            <FollowingNumber></FollowingNumber>
+            <Following>{PROFILE_EDIT_TEXT.profileFollowingText}</Following>
+            <FollowingNumber>{userData?.response?.followingCount}</FollowingNumber>
           </FollowingWrap>
         </FollowUserArea>
       </TextInformation>
-
       <ImageInformation>
-        <CircleImage></CircleImage>
+        <CircleImage>
+          <img src={userData?.response?.image} alt="User Profile" />
+        </CircleImage>
       </ImageInformation>
+      <MyPageSimpleProfileBtn hide={userData?.response?.job === null && location.pathname === '/mypage'} />
     </Container>
   );
 };
@@ -48,6 +94,9 @@ const NickName = styled.div`
 `;
 
 const TextArea = styled.div`
+  word-break: break-all;
+  max-width: 293px;
+  min-width: 293px;
   color: ${theme.greyScale.grey5};
   font-size: 16px;
   line-height: 19.09px;
@@ -56,29 +105,47 @@ const TextArea = styled.div`
 
 const CategoryWrap = styled.div`
   display: flex;
+  div {
+    padding-right: 5px;
+  }
 `;
 
-const JobCategory = styled.div`
+const JobCategory = styled.div<{ hide: boolean }>`
   color: ${theme.greyScale.grey7};
   background-color: ${theme.greyScale.grey2};
   font-size: 14px;
   border-radius: 4px;
   margin-right: 4px;
   padding: 4px 8px;
+  ${(props) =>
+    props.hide &&
+    css`
+      display: none;
+    `}
 `;
 
-const PositionCategory = styled.div`
+const PositionCategory = styled.div<{ hide: boolean }>`
   color: ${theme.greyScale.grey7};
   background-color: ${theme.greyScale.grey2};
   font-size: 14px;
   border-radius: 4px;
   padding: 4px 8px;
   padding-left: 4px;
+  ${(props) =>
+    props.hide &&
+    css`
+      display: none;
+    `}
 `;
 
-const FollowUserArea = styled.div`
+const FollowUserArea = styled.div<{ hide: boolean }>`
   display: flex;
-  padding: 12px 0;
+  padding: 24px 0;
+  ${(props) =>
+    props.hide &&
+    css`
+      padding-top: 50px;
+    `}
 `;
 
 const FollowerWrap = styled.div`
@@ -119,4 +186,16 @@ const CircleImage = styled.div`
   width: 75px;
   height: 75px;
   border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+`;
+
+const BuildingWrap = styled.div`
+  display: flex;
+  color: #6B7280;
+  font-size: 16px;
 `;

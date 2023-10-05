@@ -58,6 +58,7 @@ export const SecondHandUpload = ({}) => {
     if (modalText === SECONDHAND_MODAL_TEXT.create) {
       setSecondHandGlobalState(initialSecondHandGlobalState)
       setImageGlobalState(initialImageState)
+
       setModal3(false)
       navigate(`/secondHand`)
     } else if (modalText === SECONDHAND_MODAL_TEXT.cancel) {
@@ -65,6 +66,7 @@ export const SecondHandUpload = ({}) => {
       setImageGlobalState(initialImageState)
       setModal3(false)
       navigate(`/secondHand`)
+
     }
   }
 

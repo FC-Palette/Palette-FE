@@ -12,40 +12,17 @@ import {
 } from 'components/index'
 import { CHATON_TEXTS } from 'constants/index'
 import { modalOnState, showMembersState } from 'recoil/index'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import { useNavigate } from 'react-router-dom'
 import { useCallback } from 'react'
-// import { quitChatRoom } from 'api/index'
-/*
- 
- /api/chat/exit?roomId 채팅방 나가기 `delete`
+import { quitChatRoom } from 'api/index'
+import { roomIdState } from 'recoil/index'
 
- 유저 목록 확인 -get
- {
-	"status": 200, 
-	"success": true,
-	"response": [
-		{
-			"memberId" : 2, 
-			"prifileImgUrl" : "https://",
-			"nickName" : "호스트",
-	    "host" : 2
-		},
-		{
-			"memberId" : 3, 
-			"prifileImgUrl" : "https://",
-			"nickName" : "고슴도치",
-	    "host" : 2
-		},
-		...
-	] 
-}
-*/
 export const ChatMembers = () => {
   const navigate = useNavigate()
   const [modalOn, setModalOn] = useRecoilState(modalOnState)
   const [showMembers, setShowMembers] = useRecoilState(showMembersState)
-
+  const roomId = useRecoilValue(roomIdState)
   const handleShowMembers = useCallback(() => {
     setShowMembers(!showMembers)
   }, [showMembers])
@@ -66,6 +43,7 @@ export const ChatMembers = () => {
             setModalOn(!modalOn)
           }}
           onRightClick={() => {
+            quitChatRoom(roomId)
             navigate('/chatlist/g')
           }}
         />

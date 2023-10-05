@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 import { useEffect } from 'react'
-export const ChatInput = ({ inputRef, onEnterPress }) => {
+export const ChatInput = ({ inputRef, sendMessage, client }) => {
   useEffect(() => {
     handleResizeHeight()
   }, [])
@@ -9,6 +9,15 @@ export const ChatInput = ({ inputRef, onEnterPress }) => {
     if (inputRef?.current) {
       inputRef.current.style.height = 'auto' //height 초기화
       inputRef.current.style.height = inputRef?.current.scrollHeight + 'px'
+    }
+  }
+  const onEnterPress = e => {
+    if (e.key === 'Enter' && client) {
+      e.preventDefault()
+      sendMessage(e.target.value)
+      inputRef.current.value = ''
+      inputRef.current.style.height = 'auto'
+      return
     }
   }
 

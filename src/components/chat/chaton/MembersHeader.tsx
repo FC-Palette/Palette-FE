@@ -2,8 +2,24 @@ import { styled } from 'styled-components'
 import { ArrowLeft2 } from 'iconsax-react'
 import { ToChatList } from 'components/index'
 import { Flexbox } from 'styles/index'
+import { CHAT_TEXTS } from 'constants/index'
+import { getMembers } from 'api/index'
+import { useQuery } from '@tanstack/react-query'
+import { roomIdState } from 'recoil/index'
+import { useRecoilValue } from 'recoil'
 
 export const MembersHeader = ({ onClick }) => {
+  const roomId = useRecoilValue(roomIdState)
+
+  const {
+    data: members
+    // isLoading,
+    // isError
+  } = useQuery(['chatMembers', roomId], () => {
+    return getMembers(roomId)
+  })
+  const membersCount = members?.response?.length
+
   return (
     <Fixer $top="0">
       <Container>
@@ -11,8 +27,11 @@ export const MembersHeader = ({ onClick }) => {
           <ArrowLeft2 cursor="pointer" />
         </IconWrapper>
         <Grow>
-          <Members>참여인원</Members>
-          <MembersNum>3명</MembersNum>
+          <Members>{CHAT_TEXTS.groupInfo}</Members>
+          <MembersNum>
+            {membersCount}
+            {CHAT_TEXTS.count}
+          </MembersNum>
         </Grow>
         <ToChatList />
       </Container>

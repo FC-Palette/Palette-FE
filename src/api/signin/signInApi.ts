@@ -12,18 +12,19 @@ export async function login(email, password) {
   try {
     const requestData = {
       email: email,
-      password: password
-    }
+      password: password,
+    };
 
     const response = await authInstance.post(`${apiUrl}api/login`, requestData)
 
-    const responseData = response.data
+    const responseData = response.data;
 
     if (responseData && responseData.response.token) {
-      localStorage.setItem('Token', responseData.response.token)
+      localStorage.setItem('Token', responseData.response.token);
     }
-    return responseData
+    return responseData;
   } catch (error) {
-    throw error
+    throw error;
   }
 }
+

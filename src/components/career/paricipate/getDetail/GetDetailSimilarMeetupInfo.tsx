@@ -4,9 +4,11 @@ import { CommonLikeIcon, CommonViewIcon } from '@/components'
 import { useRecoilValue } from 'recoil'
 import { fetchDetailRecommendState } from '@/recoil'
 import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export const GetDetailSimilarMeetupInfo = () => {
   const recommendations = useRecoilValue(fetchDetailRecommendState)
+  const navigate = useNavigate()
 
   const checkTitleLength = (title: string, length: number) => {
     return title.length > length ? title.slice(0, length) + '...' : title
@@ -22,7 +24,9 @@ export const GetDetailSimilarMeetupInfo = () => {
 
       <Container>
         {recommendations.map((recommendation, index) => (
-          <CardContainer key={index}>
+          <CardContainer
+            key={index}
+            onClick={() => navigate(`/detail/${recommendation.id}`)}>
             {/* Render each recommendation here */}
             <CardImage src={recommendation.image[index]} />
             <CardCategoryChipsWrap>
@@ -78,7 +82,7 @@ const CardContainer = styled.div`
 
 const CardImage = styled.img`
   width: 100%;
-  height: auto;
+  height: 137px;
   max-height: 137px;
   max-width: 183px;
   object-fit: cover;

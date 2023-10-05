@@ -6,12 +6,16 @@ import { ArrowLeft2 } from 'iconsax-react'
 
 export const IsApprovedJoinMeetingStepOneCard = () => {
   const navigate = useNavigate()
+
+  const moveToBack = () => {
+    navigate(-1)
+  }
   return (
     <Container>
       <Header
         centerText="모임신청"
         leftIcon={
-          <StyledIcon onClick={() => navigate(-1)}>
+          <StyledIcon onClick={moveToBack}>
             <ArrowLeft2 />
           </StyledIcon>
         }
@@ -29,7 +33,7 @@ const Container = styled.div`
   overflow-x: hidden;
 `
 
-const StyledIcon = styled.button`
+const StyledIcon = styled.div`
   color: #000;
   font-size: ${props => props.theme.customSize.xxlarge};
 `

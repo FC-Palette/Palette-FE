@@ -14,7 +14,9 @@ import {
 import {
   careerCreateGlobalState,
   careerImageState,
-  modalOnState
+  modalOnState,
+  resetDtoAtom,
+  resetFileAtom
 } from '@/recoil'
 import { CREATE_MODAL_TEXT } from '@/constants'
 import { CareerUseParamsProps } from '@/types'
@@ -23,9 +25,12 @@ import { careerCreateApi } from '@/api'
 export const CareerMeetingsCreate = () => {
   const [modlaOnState, setModalOnState] = useRecoilState(modalOnState)
   const [modalText, setModalText] = useState(CREATE_MODAL_TEXT.create)
-  const createAtom = useRecoilValue(careerCreateGlobalState)
-  const imageAtom = useRecoilValue(careerImageState)
+  const [dto, setDto] = useRecoilState(careerCreateGlobalState)
+  const [file, setFile] = useRecoilState(careerImageState)
+  const resetFile = useRecoilValue(resetFileAtom)
+  const resetDto = useRecoilValue(resetDtoAtom)
   const navigate = useNavigate()
+  const blobImageFiles = file.file
   const { createstepid = '1' } = useParams<CareerUseParamsProps>()
 
   const handleNextStep = () => {
@@ -33,16 +38,16 @@ export const CareerMeetingsCreate = () => {
     navigate(`/create/${nextStep}`)
   }
 
-  const blobImageFiles = imageAtom.file
-
   // 개설하기
   const handleCreateMeeting = async () => {
     setModalText(CREATE_MODAL_TEXT.create)
 
-    const response = await careerCreateApi(createAtom, blobImageFiles)
+    const response = await careerCreateApi(dto, blobImageFiles)
 
-    if (!response) {
+    if (response.status === 200) {
       setModalOnState(true)
+      setDto(resetDto)
+      setFile(resetFile)
     }
   }
 
@@ -58,7 +63,8 @@ export const CareerMeetingsCreate = () => {
       navigate('/career')
       setModalOnState(false)
     } else if (modalText === CREATE_MODAL_TEXT.cancel) {
-      alert('삭제')
+      setDto(resetDto)
+      setFile(resetFile)
       setModalOnState(false)
     }
   }

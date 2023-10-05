@@ -3,29 +3,70 @@ import { Header, AnnPublisher, AnnContent, Wrapper } from 'components/index'
 import { useNavigate } from 'react-router-dom'
 import { Flexbox } from 'styles/index'
 import { AlignIcon, CloseIcon } from 'components/index'
+import { noticeState, showMembersState } from 'recoil/index'
+import { useSetRecoilState } from 'recoil'
+import { CHAT_TEXTS } from 'constants/index'
+import { roomIdState } from 'recoil/index'
+import { useRecoilValue } from 'recoil'
+import { getNoticeList } from 'api/index'
+
+import { useQuery } from '@tanstack/react-query'
+import { useState } from 'react'
+
+interface filteredAnnProps {
+  createdAt: string
+  profileImgUrl?: string
+  notice: string
+  nickname: string
+}
+
 export const ChatAnnDetail = () => {
+  const notice = useRecoilValue(noticeState)
   const navigate = useNavigate()
+  const roomId = useRecoilValue(roomIdState)
+  const [filteredAnn, SetFilteredAnn] = useState<filteredAnnProps>()
+  console.log(notice)
+  const setShowMembers = useSetRecoilState(showMembersState)
   const backToChat = () => {
     navigate('/chat')
+    setShowMembers(false)
   }
-  const backToChatList = () => {
+  const backToAnnList = () => {
     navigate('/chatannlist')
   }
+  const {} = useQuery(
+    ['notices', roomId],
+    () => {
+      return getNoticeList(roomId)
+    },
+    {
+      onSuccess: data => {
+        console.log(data.response)
+        const noticeView = data.response.find(v => v.noticeId === notice)
+        console.log(noticeView)
+        SetFilteredAnn(noticeView)
+      }
+    }
+  )
+
   return (
     <>
       <Header
-        centerText="상세보기"
+        centerText={CHAT_TEXTS.inDetail}
         leftIcon={<CloseIcon />}
         cancelClick={backToChat}>
-        <ToAnnList onClick={backToChatList}>
-          <AlignIcon></AlignIcon>
-          <Text>공지목록</Text>
+        <ToAnnList onClick={backToAnnList}>
+          <AlignIcon />
+          <Text>{CHAT_TEXTS.annList}</Text>
         </ToAnnList>
       </Header>
 
       <Wrapper>
-        <AnnPublisher />
-        <AnnContent />
+        <AnnPublisher
+          src={filteredAnn?.profileImgUrl}
+          createdAt={filteredAnn?.createdAt}
+        />
+        <AnnContent>{filteredAnn?.notice}</AnnContent>
       </Wrapper>
     </>
   )

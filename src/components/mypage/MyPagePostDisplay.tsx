@@ -4,17 +4,30 @@ import { START_MEET_TEXT } from "constants/index"
 import { Link } from "react-router-dom"
 
 export const MyPagePostDisplay = () => {
+  const isMyPage = location.pathname === '/mypage';
+
   return (
     <DisplayArea>
       <DisplayWrap>
-        <RequestText>
-          {START_MEET_TEXT.startRequestText}
-        </RequestText>
-        <Link to={"/career"}>
-          <Button>        
-            {START_MEET_TEXT.startMeetingBtnText}
-          </Button>
-        </Link>
+        {isMyPage && (
+          <>
+          <RequestText>
+            {START_MEET_TEXT.startRequestText}
+          </RequestText>
+          <Link to={"/career"}>
+            <Button>        
+              {START_MEET_TEXT.startMeetingBtnText}
+            </Button>
+          </Link>
+          </>
+        )}
+        {isMyPage || (
+          <>
+          <RequestText>
+            {START_MEET_TEXT.nonExistentText}
+          </RequestText>
+          </>
+        )}
       </DisplayWrap>
     </DisplayArea>
   )
@@ -28,6 +41,7 @@ const DisplayArea = styled.div`
   margin: 0 27.5px;
   max-width: 430px;
   height: 282px;
+
 `
 
 const DisplayWrap = styled.div`

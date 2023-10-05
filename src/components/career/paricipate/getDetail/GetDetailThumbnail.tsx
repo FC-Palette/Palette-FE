@@ -6,7 +6,6 @@ import { useEffect } from 'react'
 
 export const GetDetailThumbnail = () => {
   const atom = useRecoilValue(fetchDetailGlobalState)
-
   const { image } = atom
 
   useEffect(() => {}, [image])
