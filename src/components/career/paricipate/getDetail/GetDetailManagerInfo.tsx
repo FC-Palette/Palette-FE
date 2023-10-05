@@ -8,8 +8,8 @@ export const GetDetailManagerInfo = () => {
   const atom = useRecoilValue(fetchDetailGlobalState)
   const { meetingMemberDto } = atom
   const [isFollow, setIsFollow] = useState(false)
-  const managerName = meetingMemberDto?.nickname
-  const managerIntroduce = meetingMemberDto?.bio
+  const managerName = meetingMemberDto?.nickname || ''
+  const managerIntroduce = meetingMemberDto?.bio || ''
 
   useEffect(() => {}, [managerName, managerIntroduce])
 

@@ -3,6 +3,7 @@ export * from 'components/MediaQuery'
 export * from 'components/signin'
 export * from 'components/start'
 export * from 'components/mypage'
+export * from 'components/modifyProfile'
 export * from 'components/alarm'
 export * from 'components/setting'
 

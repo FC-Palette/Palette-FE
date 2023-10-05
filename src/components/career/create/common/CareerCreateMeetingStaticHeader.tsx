@@ -2,7 +2,25 @@ import { ArrowLeft2 } from 'iconsax-react'
 import { Header } from '@/components'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
+import {
+  careerCreateGlobalState,
+  careerImageState,
+  resetDtoAtom,
+  resetFileAtom
+} from '@/recoil'
 export const CareerCreateMeetingStaticHeader = () => {
+  const setFile = useSetRecoilState(careerImageState)
+  const setDto = useSetRecoilState(careerCreateGlobalState)
+  const resetFile = useRecoilValue(resetFileAtom)
+  const resetDto = useRecoilValue(resetDtoAtom)
+
+  const handleXButton = () => {
+    setFile(resetFile)
+    setDto(resetDto)
+    navigate('/career')
+  }
+
   const navigate = useNavigate()
   return (
     <Header
@@ -12,7 +30,7 @@ export const CareerCreateMeetingStaticHeader = () => {
         </StyledIcon>
       }
       centerText="모임생성">
-      <X onClick={() => navigate('/career')}>
+      <X onClick={handleXButton}>
         <svg
           width="25"
           height="25"

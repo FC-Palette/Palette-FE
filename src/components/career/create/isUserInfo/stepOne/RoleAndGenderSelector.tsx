@@ -6,6 +6,7 @@ import { iconMapping } from '@/components'
 import { useRecoilState } from 'recoil'
 import { careerCreateGlobalState } from '@/recoil'
 import { useCallback } from 'react'
+import { sexList } from '@/constants'
 
 interface SelectedAnswerProps {
   $isSelected: boolean
@@ -15,7 +16,6 @@ interface SelectedAnswerProps {
 export const RoleAndGenderSelector = () => {
   const [globalState, setGlobalState] = useRecoilState(careerCreateGlobalState)
   const { sex, positions } = globalState
-  const genderList = ['무관', '남성만', '여성만']
 
   const updateGender = useCallback(
     (newGender: string) => {
@@ -37,10 +37,10 @@ export const RoleAndGenderSelector = () => {
             item => item !== role
           )
         } else {
-          if (role === '무관') {
-            newSelectedRoles = ['무관']
+          if (role === sexList[0]) {
+            newSelectedRoles = [sexList[0]]
           } else {
-            newSelectedRoles = prevGlobalState.positions.includes('무관')
+            newSelectedRoles = prevGlobalState.positions.includes(sexList[0])
               ? [role]
               : [...prevGlobalState.positions, role]
           }
@@ -74,12 +74,12 @@ export const RoleAndGenderSelector = () => {
   }, [updateSelectedRoles, positions])
 
   const renderAnswerItems_2 = useCallback(() => {
-    return genderList.map(item => (
+    return sexList.map(item => (
       <AnswerItem
         key={item}
         onClick={() => updateGender(item)}
         $isSelected={sex === item}>
-        {item !== '무관' && (
+        {item !== sexList[0] && (
           <IconWrapper
             $isSelected={isItemSelected(item)}
             onClick={() => updateGender(item)}>

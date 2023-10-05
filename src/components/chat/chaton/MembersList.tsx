@@ -1,40 +1,31 @@
 import { Fixer, Member } from 'components/index'
-// import { getMembers } from 'api/index'
-// import { useQuery } from '@tanstack/react-query'
-// import { useEffect, useState } from 'react'
-
+import { getMembers } from 'api/index'
+import { useQuery } from '@tanstack/react-query'
+import { roomIdState } from 'recoil/index'
+import { useRecoilValue } from 'recoil'
 export const MembersList = () => {
-  // const [members, SetMembers] = useState([])
+  const roomId = useRecoilValue(roomIdState)
 
-  // useEffect(() => {
-  //   const fetchMembers = async () => {
-  //     const res = await getMembers()
-  //     SetMembers(res)
-  //     return
-  //   }
-  // }, [members])
-
+  const {
+    data: members
+    // isLoading,
+    // isError
+  } = useQuery(['chatMembers', roomId], () => {
+    return getMembers(roomId)
+  })
   return (
     <Fixer $center={true}>
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
-      <Member />
+      {members &&
+        members.response &&
+        members.response.map(m => (
+          <Member
+            key={m.memberId}
+            memberId={m.memberId}
+            url={m.profileImgUrl}
+            name={m.nickName}
+            host={m.host}
+          />
+        ))}
     </Fixer>
   )
 }

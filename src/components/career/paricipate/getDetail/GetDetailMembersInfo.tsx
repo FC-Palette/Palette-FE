@@ -1,31 +1,29 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { CareerCreateMeetingCommonQuestion } from '../..'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { CommonAddIcon } from '@/components'
 import { useRecoilValue } from 'recoil'
-import { fetchDetailMemberState } from '@/recoil'
+import { fetchDetailGlobalState, fetchDetailMemberState } from '@/recoil'
 
-export const GetDetailMembersInfo = () => {
+export const GetDetailMembersInfo = ({ isAdmin }) => {
   const navigate = useNavigate()
   const [showMessage, setShowMessage] = useState(false)
-  const atom = useRecoilValue(fetchDetailMemberState)
+  const memberAtom = useRecoilValue(fetchDetailMemberState)
+  const meetingRes = useRecoilValue(fetchDetailGlobalState)
+  const { msg } = meetingRes
+  const isUserJoined = msg === '참여하고 있지않은 모임입니다.' ? false : true
 
-  useEffect(() => {
-
-  },[atom])
-
-  const isUserJoined = false
   const maxLength = 20
 
   const longText = (text: string, maxLength: number) => {
     return text.length > maxLength ? text.slice(0, maxLength) + '...' : text
   }
 
-  const fetchMembersCount = atom.length
+  const fetchMembersCount = memberAtom.length
 
   const handleSeeMoreClick = () => {
-    if (isUserJoined) {
+    if (isUserJoined || isAdmin) {
       navigate('members')
     } else {
       setShowMessage(true)
@@ -46,7 +44,7 @@ export const GetDetailMembersInfo = () => {
         </CareerCreateMeetingCommonQuestion>
       </TitleContainer>
       <MembersContainer>
-        {atom.map((member, index) => {
+        {memberAtom.map((member, index) => {
           if (member.nickname && member.bio && member.image !== null) {
             return (
               <MemberItem key={index}>

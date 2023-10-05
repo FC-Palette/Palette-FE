@@ -9,6 +9,7 @@ import {
 import { UploadFooter } from 'components/trades/upload/index'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useRecoilState } from 'recoil'
+
 import { SECONDHAND_MODAL_TEXT } from 'constants/trades/index'
 import { useState } from 'react'
 import { PreviewFooter } from 'components/trades/preview/index'
@@ -58,6 +59,7 @@ export const SecondHandUpload = ({}) => {
     if (modalText === SECONDHAND_MODAL_TEXT.create) {
       setSecondHandGlobalState(initialSecondHandGlobalState)
       setImageGlobalState(initialImageState)
+
       setModal3(false)
       navigate(`/secondHand`)
     } else if (modalText === SECONDHAND_MODAL_TEXT.cancel) {
@@ -65,7 +67,8 @@ export const SecondHandUpload = ({}) => {
       setImageGlobalState(initialImageState)
       setModal3(false)
       navigate(`/secondHand`)
-    }
+
+ 
   }
 
   // 모달 오른쪽 버튼 클릭 시 실행

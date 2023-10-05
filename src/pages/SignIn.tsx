@@ -36,7 +36,7 @@ const FieldWrap = styled.div`
   margin: 0 24px;
   `
 
-const StyledIcon = styled.button`
+const StyledIcon = styled.div`
   color: #000;
   font-size: ${props => props.theme.customSize.xxlarge};
 

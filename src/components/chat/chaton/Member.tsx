@@ -1,10 +1,16 @@
 import { styled } from 'styled-components'
 import { Flexbox } from 'styles/index'
-export const Member = () => {
+import { decoder } from 'utils/index'
+export const Member = ({ memberId, url, name, host }) => {
+  // host면 호스트표시, myself면 나표시
+  const isHost = memberId === host
+  const isMyself = memberId === decoder().memberId
   return (
     <Wrapper>
-      <Image src="https://avatars.githubusercontent.com/u/142562921?s=200&v=4"></Image>
-      <Username>고스트 사원</Username>
+      {isHost && <></>}
+      {isMyself && <></>}
+      <Image src={url} />
+      <Username>{name}</Username>
     </Wrapper>
   )
 }

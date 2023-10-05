@@ -4,9 +4,7 @@ import { authInstance } from '../axios'
 
 export async function meetingDeleteRequestApi(meetingId: string) {
   try {
-    const response = await authInstance.post(
-      `/develop/delete/${meetingId}`
-    )
+    const response = await authInstance.post(`/develop/delete/${meetingId}`)
     return response.data
   } catch (error: any) {
     const errorResponseData: fetchMainResponseDataProps = {

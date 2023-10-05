@@ -1,57 +1,60 @@
 import { Header, ChatAnnListItems, ChatAnnListItem } from 'components/index'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft2 } from 'iconsax-react'
-// import { getNoticeList } from 'api/index'
-// import { useQuery } from '@tanstack/react-query'
-import { anns } from 'constants/index'
+import { getNoticeList } from 'api/index'
+import { useQuery } from '@tanstack/react-query'
+import { inDetailState, roomIdState, showMembersState } from 'recoil/index'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useEffect } from 'react'
+import { CHAT_TEXTS } from 'constants/index'
 
-/*
-{
-	"status": 200, 
-	"success": true,
-	"response": [
-		{
-			"noticeId" : 1, 
-			"notice" : "공지 확인해주세요",
-	    "memberId" : 1,
-			"profileImgUrl" : "https://",
-	    "createdAt" : 23.09.18,
-			"host" : 2
-		},
-		...
-	] 
-}
-*/
-// 1. 채팅방 멤버를 불러온다.
-// 2. 멤버들을 상태에 저장한다.
-// 3. 상태에 저장한 멤버 내에서 공지의 멤버 아이디를 비교한다.
-// 4. 일치하는 멤버의 닉네임을 불러온다.
-// => 공지에 memberId만 있기 때문에
 export const ChatAnnList = () => {
   const navigate = useNavigate()
+  const roomId = useRecoilValue(roomIdState)
+  const setShowMembers = useSetRecoilState(showMembersState)
+  const setInDetail = useSetRecoilState(inDetailState)
+
+  const handleHistory = () => {
+    setShowMembers(false)
+    setInDetail(false)
+  }
+
+  const { data: notices } = useQuery(['notices', roomId], () => {
+    return getNoticeList(roomId)
+  })
+  const handleGoBack = () => {
+    navigate('/chat')
+    handleHistory()
+  }
+  console.log(notices)
+  useEffect(() => {
+    window.onpopstate = handleHistory
+  }, [])
 
   return (
     <>
       <Header
-        centerText="공지목록"
+        centerText={CHAT_TEXTS.annList}
         leftIcon={
           <ArrowLeft2
             cursor="pointer"
-            onClick={() => {
-              navigate('/chat')
-            }}
+            onClick={handleGoBack}
           />
         }></Header>
       <ChatAnnListItems>
         {/* 응답에 맞춰 수정필요 */}
-        {anns.map(({ noticeId, notice, createdAt, memberId }) => (
-          <ChatAnnListItem
-            key={noticeId}
-            notice={notice}
-            createdAt={createdAt}
-            memberId={memberId}
-          />
-        ))}
+        {notices &&
+          notices.response &&
+          notices.response.map(({ noticeId, notice, createdAt, memberId }) => (
+            <ChatAnnListItem
+              key={noticeId}
+              notice={notice}
+              noticeId={noticeId}
+              createdAt={createdAt}
+              // 닉네임으로 바꿔띄우기
+              memberId={memberId}
+            />
+          ))}
       </ChatAnnListItems>
     </>
   )

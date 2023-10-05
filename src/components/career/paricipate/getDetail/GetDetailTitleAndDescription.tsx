@@ -1,5 +1,4 @@
 import { fetchDetailGlobalState } from '@/recoil'
-import { useEffect } from 'react'
 import { useRecoilValue } from 'recoil'
 import styled from 'styled-components'
 
@@ -10,9 +9,7 @@ export const GetDetailTitleAndDescription = () => {
     return text.length > maxLength ? text.slice(0, maxLength) + '...' : text
   }
 
-  const maxDescription = truncateText(description, 40)
-
-  useEffect(() => {}, [title, description])
+  const maxDescription = truncateText(description, 150)
 
   return (
     <>
@@ -43,9 +40,9 @@ const Title = styled.div`
 `
 const Description = styled.div`
   margin: 3.5% 6.4% 0;
-
   line-height: 150%;
   font-size: ${props => props.theme.customSize.large};
   color: #3a3a3a;
+  word-break: break-all;
   overflow-y: hidden;
 `

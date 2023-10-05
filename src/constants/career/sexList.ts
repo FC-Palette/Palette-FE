@@ -1,0 +1,1 @@
+export const sexList = ['무관', '남성만', '여성만']

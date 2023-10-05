@@ -1,5 +1,8 @@
 // 1페이지, 1번 2번 항목 관리
-import { profileNCareerFilter } from '@/constants'
+import {
+  careerMeetingCommonQuestionText,
+  profileNCareerFilter
+} from '@/constants'
 import { useState } from 'react'
 import { useRecoilState } from 'recoil'
 import { careerCreateGlobalState } from '@/recoil'
@@ -55,13 +58,13 @@ export const MeetupTypeSelector1 = () => {
   return (
     <>
       <CareerCreateMeetingCommonQuestion>
-        어떤 주제로 모임을 만드시겠어요
+        {careerMeetingCommonQuestionText}
       </CareerCreateMeetingCommonQuestion>
 
       <AnswerContainer>{Answer_1}</AnswerContainer>
 
       <CareerCreateMeetingCommonQuestion>
-        어떤 주제로 모임을 만드시겠어요
+        {careerMeetingCommonQuestionText}
       </CareerCreateMeetingCommonQuestion>
 
       <AnswerContainer>{Answer_2}</AnswerContainer>

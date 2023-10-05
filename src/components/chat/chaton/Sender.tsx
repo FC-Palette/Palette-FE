@@ -13,7 +13,9 @@ export const Sender = ({
   createdAt,
   showCreatedTime,
   showMsgActions,
-  toggleMsgActions
+  toggleMsgActions,
+  roomId,
+  msgId
 }) => {
   const reset = useResetRecoilState(msgActionsState)
   const ref = useOutsideClick({
@@ -42,6 +44,8 @@ export const Sender = ({
               msgRef={ref}
               $sender={$sender}
               message={message}
+              roomId={roomId}
+              msgId={msgId}
             />
           )}
         </MessageBox>

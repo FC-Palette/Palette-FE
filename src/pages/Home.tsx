@@ -15,6 +15,7 @@ import {
   ImgArea
 } from 'components/index'
 import { formatLocalDateTime } from 'utils/index'
+
 export const Home = () => {
   return (
     <>
@@ -64,7 +65,7 @@ export const Home = () => {
             title={HOME_TEXTS.timetable}
             subitem={formatLocalDateTime(new Date())}
           />
-          <Navigation>만들어야함</Navigation>
+          <Navigation> </Navigation>
         </NavArea>
       </Template>
       <Footer $fixed={false} />

@@ -29,7 +29,7 @@ const Wrap = styled.div`
   width: 100%;
   overflow-y: scroll;
 `
-const StyledIcon = styled.button`
+const StyledIcon = styled.div`
   color: #000;
   font-size: ${props => props.theme.customSize.xxlarge};
 `

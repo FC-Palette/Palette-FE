@@ -4,6 +4,7 @@ import { profileNCareerFilter } from '@/constants'
 import { iconMapping } from '@/components'
 import { useRecoilState } from 'recoil'
 import { editDtoAtom } from '@/recoil'
+import { sexList } from '@/constants'
 
 interface SelectedAnswerProps {
   $isSelected: boolean
@@ -13,8 +14,6 @@ interface SelectedAnswerProps {
 export const EditRoleAndGenderSelector = () => {
   const [globalState, setGlobalState] = useRecoilState(editDtoAtom)
   const { sex, positions } = globalState // position === 직급
-
-  const sexList = ['무관', '남성만', '여성만']
 
   const updateSex = (newSex: string) => {
     setGlobalState(prevData => ({
@@ -30,12 +29,12 @@ export const EditRoleAndGenderSelector = () => {
       if (prevData.positions.includes(role)) {
         newPositions = prevData.positions.filter(item => item !== role)
       } else {
-        if (role === '무관') {
+        if (role === sexList[0]) {
           // 무관 선택시 다 제거하고 무관만 선택
-          newPositions = ['무관']
+          newPositions = [sexList[0]]
         } else {
           // 무관 이외 아이템 선택시, 무관 빼고 아이템 선택
-          newPositions = prevData.positions.includes('무관')
+          newPositions = prevData.positions.includes(sexList[0])
             ? [role]
             : [...prevData.positions, role]
         }
@@ -70,7 +69,7 @@ export const EditRoleAndGenderSelector = () => {
       key={item}
       onClick={() => updateSex(item)}
       $isSelected={sex === item}>
-      {item !== '무관' && (
+      {item !== sexList[0] && (
         <IconWrapper
           $isSelected={isSexSelected(item)}
           onClick={() => updateSex(item)}>
