@@ -11,4 +11,5 @@ export const NAVIGATION_PATH = {
     navigatorSettingManagePage: {to: "/setting/manage"},
     navigatorSettingNoticePage: {to: "/setting/notice"},
     navigatorSettingServicePage: {to: "/setting/service"},
+    navigatorSettinghomePage: {to: "/home"},
 }
