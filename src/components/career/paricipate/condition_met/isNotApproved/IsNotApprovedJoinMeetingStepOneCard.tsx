@@ -1,15 +1,29 @@
 import styled from 'styled-components'
 import { JoinMeetingStepOneTitle } from '../common'
-import { Button } from '@/components'
+import { Button, UseButtons, UseWhiteModal } from '@/components'
 import { participateFirstComeApi } from '@/api'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import { JOIN_MEETING_SUCCESS } from '@/constants'
 
 export const IsNotApprovedJoinMeetingStepOneCard = () => {
+  const [modalState, setModalState] = useState(false)
   const location = useLocation()
+  const navigate = useNavigate()
   const detailId = location.state.detailid
+
+  const movoToCareer = () => {
+    navigate('/career')
+  }
+
+  const moveToDetail = () => {
+    navigate(`/chatlist/g}`)
+  }
+
   const handleMeetingStart = async () => {
     const firstComRes = await participateFirstComeApi(detailId)
     if (firstComRes.status === 200) {
+      setModalState(!modalState)
     }
   }
   return (
@@ -28,6 +42,20 @@ export const IsNotApprovedJoinMeetingStepOneCard = () => {
           </Button>
         </BtnWrap>
       </Wrapper>
+
+      {modalState && (
+        <UseWhiteModal
+          modalState={modalState}
+          title={JOIN_MEETING_SUCCESS[0]}>
+          <UseButtons
+            modalState={modalState}
+            onLeftClick={movoToCareer}
+            onRightClick={moveToDetail}
+            leftBtn={JOIN_MEETING_SUCCESS[2]}
+            rightBtn={JOIN_MEETING_SUCCESS[3]}
+          />
+        </UseWhiteModal>
+      )}
     </Container>
   )
 }

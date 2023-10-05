@@ -38,12 +38,11 @@ export const GetDetailCard = () => {
   const loggedInUser = decoder()?.memberId // 현재 로그인한 유저 id
   const isAdmin = loggedInUser === roomAdminId // 글쓴이 === 로그인한 유저
 
-  const navitate = useNavigate()
+  const navigate = useNavigate()
 
   if (!detailid && !loggedInUser) {
-    navitate('/career')
+    navigate('/career')
   }
-
   useEffect(() => {
     const fetchDetailData = async () => {
       if (detailid) {
@@ -103,6 +102,7 @@ export const GetDetailCard = () => {
       <GetDetailFooterAndButtonGuest loggedInUser={loggedInUser} />
     )
   }
+
   return (
     <Card>
       {renderContent()}

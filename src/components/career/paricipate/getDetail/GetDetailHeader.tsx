@@ -1,17 +1,11 @@
-import {
-  BackgroundModal,
-  Header,
-  ModalButtons,
-  UseBackgroundModal,
-  UseButtons
-} from '@/components'
+import { Header, UseBackgroundModal, UseButtons } from '@/components'
 import { ArrowLeft2, Heart, More, Send2, Trash, Edit } from 'iconsax-react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { CREATE_EDIT_TEXT, DELETE_MODAL_TEXT } from '@/constants'
 import { useState } from 'react'
-import { useRecoilState, useRecoilValue } from 'recoil'
-import { fetchDetailGlobalState, modalOnState } from '@/recoil'
+import { useRecoilValue } from 'recoil'
+import { fetchDetailGlobalState } from '@/recoil'
 
 import {
   meetingDeleteRequestApi,

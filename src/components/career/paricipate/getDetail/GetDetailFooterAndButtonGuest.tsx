@@ -1,6 +1,6 @@
 import { participateCheckApi } from '@/api'
 import { Button, UseBackgroundModal, UseButtons } from '@/components'
-import { CREATE_MODAL_TEXT } from '@/constants'
+import { CREATE_MODAL_TEXT, meetingConditionText } from '@/constants'
 import { fetchDetailGlobalState } from '@/recoil'
 import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -10,9 +10,6 @@ import styled from 'styled-components'
 export const GetDetailFooterAndButtonGuest = ({ loggedInUser }) => {
   const navigate = useNavigate()
   const { detailid } = useParams()
-  if (!detailid) {
-    return
-  }
 
   const [useModal, setUseModal] = useState(false)
   const modalText = CREATE_MODAL_TEXT.condition_not_met
@@ -20,19 +17,9 @@ export const GetDetailFooterAndButtonGuest = ({ loggedInUser }) => {
   const { msg, acceptType } = meetingRes
   const isUserJoined = msg === '참여하고 있지않은 모임입니다.' ? false : true
 
-  // 우선 pr받고 채팅 로직 후 적용
-  // const participantId = decoder().memberId
-  // const [chatId, setChatId] = useRecoilState(chatAtom)
-
-  // useEffect(() => {
-  //   if (detailid && !isUserJoined) {
-  //     setChatId({
-  //       type: 'PERSONAL',
-  //       contentId: detailid,
-  //       participant: participantId
-  //     })
-  //   }
-  // }, [detailid, isUserJoined])
+  if (!detailid) {
+    return
+  }
 
   if (!loggedInUser) {
     return
@@ -55,29 +42,33 @@ export const GetDetailFooterAndButtonGuest = ({ loggedInUser }) => {
       const checkRes = await participateCheckApi(detailid)
       if (
         acceptType === '선착순' &&
-        checkRes.response === '가입요건이 맞지 않아요'
+        checkRes.response === meetingConditionText[0]
       ) {
         setUseModal(!useModal)
+        console.log(checkRes)
       } else if (
         acceptType === '선착순' &&
-        checkRes.response === '가입요건이 충족되었습니다.'
+        checkRes.response === meetingConditionText[1]
       ) {
         moveToJoinMeetingNot()
+        console.log(checkRes)
       } else if (
         acceptType === '승인제' &&
-        checkRes.response === '가입요건이 충족되었습니다.'
+        checkRes.response === meetingConditionText[1]
       ) {
         moveToJoinMeetingApprove()
+        console.log(checkRes)
       } else if (
         acceptType === '승인제' &&
-        checkRes.response === '가입요건이 맞지 않아요'
+        checkRes.response === meetingConditionText[0]
       ) {
         setUseModal(!useModal)
+        console.log(checkRes)
       }
     }
 
     if (detailid && isUserJoined) {
-      alert('위에서 받은 chatId보내면 될듯?')
+      navigate('/chatlist/g')
     }
   }
 
