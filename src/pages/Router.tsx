@@ -33,7 +33,6 @@ import {
   CareerMeetingConfirm,
   CareerEdit,
   Home,
-  SimpleProfile
 } from 'pages/index'
 import type { RouteObject } from 'react-router-dom'
 import { Start } from './Start'
@@ -101,6 +100,7 @@ export const router = createBrowserRouter([
       generateRoute('/findpassword', <FindPassword />)
     ]
   },
+  
   {
     path: '/',
     element: <Layout />,

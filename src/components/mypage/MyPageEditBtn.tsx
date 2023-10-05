@@ -58,7 +58,6 @@ export const MyPageEditBtn = ({ userData }) => {
             <Button
               color={theme.main.blue0}
               $bgColor={theme.main.white}
-              $btnWidth="382px"
               $btnHeight="60px">
               {PROFILE_EDIT_TEXT.profileEditBtnText}
             </Button>
@@ -78,8 +77,7 @@ export const MyPageEditBtn = ({ userData }) => {
 
 
 const ButtonWrap = styled.div`
-  max-width: 430px;
-  width: 186px;
+  width: 100%;
   Button{
     width: 100%;
     font-size: 20px;

@@ -2,6 +2,8 @@ export interface myPageIntroProps {
   status: number;
   success: boolean;
   response: {
+    name: string;
+    sex: string;
     nickname: string;
     image: string | null;
     bio: string;
@@ -10,7 +12,7 @@ export interface myPageIntroProps {
     position: string;
     building: string;
     wing: string;
-    birthday: number;
+    birthday: string;
     roomNumber: string;
     followedCount: number;
     followingCount: number;

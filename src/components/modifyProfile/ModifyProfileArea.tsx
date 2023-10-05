@@ -9,15 +9,18 @@ import { ModifySex } from "./ModifySex";
 import { ModifyJob } from "./ModifyJob";
 import { useEffect, useState } from "react";
 import { decoder } from "@/utils";
-import { getMyPage, modifyProfile } from "@/api";
+import { authInstance, getMyPage } from "@/api";
 import { useParams } from "react-router-dom";
+
+const apiUrl = import.meta.env.VITE_BASE_URL;
+
 
 export const ModifyProfileArea = () => {
   const { member_id } = useParams();
   const decodedPayload = decoder();
 
   const [formData, setFormData] = useState({
-    image: null,
+    image: null as File | null,
     email: null,
     name: null,
     phoneNumber: null,
@@ -42,35 +45,39 @@ export const ModifyProfileArea = () => {
           data = await getMyPage(decodedPayload.memberId);
         }
 
-        const {
-          image,
-          name,
-          phoneNumber,
-          birthday,
-          nickname,
-          bio,
-          sex,
-          position,
-          job,
-        } = data.response;
+        if (data) {
+          const {
+            image,
+            name,
+            phoneNumber,
+            birthday,
+            nickname,
+            bio,
+            sex,
+            position,
+            job,
+          } = data.response;
 
-        const email = decodedPayload.sub;
+          const email = decodedPayload.sub;
 
-        setFormData({
-          ...formData,
-          image: image || null,
-          email: email || null,
-          name: name || null,
-          phoneNumber: phoneNumber || null,
-          birthday: birthday || null,
-          nickname: nickname || null,
-          bio: bio || '',
-          sex: sex || null,
-          position: position || null,
-          job: job || null,
-        });
+          setFormData({
+            ...formData,
+            image: image || null,
+            email: email || null,
+            name: name || null,
+            phoneNumber: phoneNumber || null,
+            birthday: birthday ? birthday.replace(/-/g, '') : null,
+            nickname: nickname || null,
+            bio: bio || '',
+            sex: sex || null,
+            position: position || null,
+            job: job || null,
+          });
 
-        console.log(data.response);
+          console.log(data.response);
+        } else {
+          console.error('사용자 데이터를 불러오지 못했습니다.');
+        }
       } catch (error) {
         console.error('사용자 데이터 가져오기 오류:', error);
       }
@@ -79,33 +86,107 @@ export const ModifyProfileArea = () => {
     fetchData();
   }, [member_id]);
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+  const handleImageChange = (event) => {
+    const file = event.target.files && event.target.files[0];
+    if (file) {
+      setFormData({
+        ...formData,
+        image: file as File | null,
+      });
+    }
   };
+
 
   const handleModify = async () => {
     try {
-      const response = await modifyProfile(decodedPayload.memberId, formData);
-      console.log('프로필 수정 결과:', response);
-      alert('데이터 수정 완료 테스트 메세지')
+      // FormData 객체 생성
+      const profileData = new FormData();
+  
+      // 이미지 데이터를 추가
+      profileData.append('image', formData.image || '');
+  
+      // 서버로 이미지 데이터를 전송
+      const imageResponse = await authInstance.post(
+        `${apiUrl}api/mypage/${decodedPayload.memberId}`,
+        profileData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data', 
+          },
+        }
+      );
+  
 
+
+      const textResponse = await authInstance.post(
+        `${apiUrl}api/mypage/${decodedPayload.memberId}`,
+        profileData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          params: {
+            dto: JSON.stringify({
+              email: formData.email,
+              name: formData.name,
+              phoneNumber: formData.phoneNumber,
+              birthday: formData.birthday,
+              nickname: formData.nickname,
+              bio: formData.bio,
+              sex: formData.sex,
+              position: formData.position,
+              job: formData.job,
+            }),
+          },
+        }
+      );
+  
+      console.log('프로필 수정 결과 (이미지):', imageResponse.data);
+      console.log('프로필 수정 결과 (텍스트):', textResponse.data);
+      alert('데이터 수정 완료 테스트 메세지');
     } catch (error) {
       console.error('프로필 수정 오류:', error);
+    }
+  };
 
+
+
+
+
+  const handleChange = (event) => {
+    const { name, type } = event.target;
+  
+    if (type === 'file') {
+      const file = event.target.files[0];
+      setFormData({
+        ...formData,
+        [name]: file,
+      });
+    } else {
+      const value = event.target.value;
+      setFormData({
+        ...formData,
+        [name]: value !== '' ? value : null,
+      });
     }
   };
 
   return (
     <Wrap>
       <ImageWrap>
-      <SvgWrap style={{ marginLeft: formData.image ? '10%' : '0', marginTop: formData.image ? '9%' : '0' }}>
-          <ChangeProfilImage />
-        </SvgWrap>
-        <img src={formData.image} alt="User Profile" />
+        <label>
+          <input
+            type="file"
+            name="image"
+            onChange={handleImageChange}
+            accept="image/*"
+            style={{ display: 'none' }}
+          />
+          <SvgWrap style={{ marginLeft: formData.image ? '10%' : '0', marginTop: formData.image ? '9%' : '0' }}>
+            <ChangeProfilImage />
+          </SvgWrap>
+          <img src={formData.image instanceof Blob ? URL.createObjectURL(formData.image) : undefined}  />
+        </label>
       </ImageWrap>
       <InputArea>
         {MODIFY_PROFILE_INPUT_TEXTS.emailText}
@@ -113,7 +194,7 @@ export const ModifyProfileArea = () => {
       </InputArea>
       <InputArea>
         {MODIFY_PROFILE_INPUT_TEXTS.nameText}
-        <Input name="name" onChange={handleChange} />
+        <Input name="name" value={formData.name || ''} onChange={handleChange} />
       </InputArea>
       <InputArea>
       <TitleWrap>
@@ -127,7 +208,7 @@ export const ModifyProfileArea = () => {
       </InputArea>
       <InputArea>
         {MODIFY_PROFILE_INPUT_TEXTS.birthText}
-        <Input ph={"user birthday"} disabled />
+        <Input ph={formData.birthday || ''} disabled />
       </InputArea>
       <ModifyBioText formData={formData} setFormData={setFormData} />
       <InputArea>
@@ -206,10 +287,13 @@ const ImageWrap = styled.div`
   border: 1px solid rgba( 0,0,0, .3);
   margin-top: 22px;
   margin-bottom: 46px;
+  cursor: pointer;
   img{
-    width: 100%;
-    height: 100%;
+    width: 122px;
+    height: 122px;
     border-radius: 50%;
+    position: absolute;
+    cursor: pointer;
   }
   svg{
     margin: 49px;
@@ -217,6 +301,7 @@ const ImageWrap = styled.div`
     border-radius: 50%;
     border: 1px solid rgba( 0,0,0, .3);
     padding: 1px;
+    cursor: pointer;
   }
 `
 const SvgWrap = styled.div`

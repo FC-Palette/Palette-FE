@@ -1,4 +1,4 @@
-import { css, styled } from "styled-components"
+import { styled } from "styled-components"
 import { Button } from "components/index"
 import { START_MEET_TEXT } from "constants/index"
 import { Link } from "react-router-dom"

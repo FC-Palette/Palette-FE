@@ -29,7 +29,7 @@ export const MyPageSimpleProfileBtn = (props) => {
 }
 
 
-const SimpleBtnWrap = styled.div`
+const SimpleBtnWrap = styled.div<{ hide: boolean }>`
   position: absolute;
   display: none;
   padding: 0 15px;

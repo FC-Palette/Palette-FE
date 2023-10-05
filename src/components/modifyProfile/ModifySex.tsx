@@ -4,13 +4,28 @@ import styled from "styled-components";
 import { ModifySexIcon } from "../common/svgicon";
 import { useState } from "react";
 
-export const ModifySex = ({ formData, setFormData }) => {
+interface CategoryProps {
+  selected: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
+}
 
+const Category: React.FC<CategoryProps> = ({ selected, children, onClick }) => (
+  <CategoryContainer
+    onClick={onClick}
+    selected={selected}
+  >
+    <ModifySexIcon male={selected} strokeColor={selected ? theme.main.blueL1 : theme.greyScale.grey5} />
+    {children}
+  </CategoryContainer>
+);
+
+export const ModifySex = ({ formData, setFormData }) => {
   const handleSexClick = (isMale) => {
     setSelectedSex(isMale);
     setFormData({
       ...formData,
-      sex: isMale ? "남성" : "여성" 
+      sex: isMale ? "남성" : "여성"
     });
   };
 
@@ -20,16 +35,14 @@ export const ModifySex = ({ formData, setFormData }) => {
     <SexWrap>
       <Category
         onClick={() => handleSexClick(false)}
-        selected={selectedSex === false} 
+        selected={selectedSex === false}
       >
-        <ModifySexIcon male={false} strokeColor={selectedSex === false ? theme.main.blueL1 : theme.greyScale.grey5} />
         {MODIFY_PROFILE_INPUT_TEXTS.sexFemaleText}
       </Category>
       <Category
         onClick={() => handleSexClick(true)}
-        selected={selectedSex === true} 
+        selected={selectedSex === true}
       >
-        <ModifySexIcon male={true} strokeColor={selectedSex ? theme.main.blueL1 : theme.greyScale.grey5} />
         {MODIFY_PROFILE_INPUT_TEXTS.sexMaleText}
       </Category>
     </SexWrap>
@@ -41,7 +54,7 @@ const SexWrap = styled.div`
   display: flex;
 `;
 
-const Category = styled.div`
+const CategoryContainer = styled.div<CategoryProps>`
   box-sizing: border-box;
   display: flex;
   font-size: 16px;
@@ -59,4 +72,4 @@ const Category = styled.div`
     margin-right: 4px;
     stroke: ${(props) => (props.selected ? "white" : theme.greyScale.blueGrey)};
   }
-`
+`;
