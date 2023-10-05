@@ -40,8 +40,6 @@ export const GetDetailFooterAndButtonHost = ({ loggedInUser }) => {
     const api = closing ? requestMeetingReopenApi : requestMeetingCloseApi
     const res = await api(roomId)
 
-    console.log(res)
-
     if (res) {
       setClosing(!closing)
     }
