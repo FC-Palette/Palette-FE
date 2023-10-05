@@ -33,7 +33,7 @@ const Container = styled.div`
   overflow-x: hidden;
 `
 
-const StyledIcon = styled.button`
+const StyledIcon = styled.div`
   color: #000;
   font-size: ${props => props.theme.customSize.xxlarge};
 `

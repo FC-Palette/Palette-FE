@@ -3,13 +3,25 @@ interface PreviewImgProps {
   image: string[]
 }
 export const CareerMainItemImage = ({ image, remainingSeats }) => {
+  const renderRemain = () => {
+    if (remainingSeats === 0)
+      return (
+        <>
+          <ImpactColor>마감되었습니다</ImpactColor>
+        </>
+      )
+
+    return (
+      <>
+        <ImpactColor>{remainingSeats}자리</ImpactColor>
+        남았어요
+      </>
+    )
+  }
   return (
     <Wrapper>
       <PreviewImg image={image}>
-        <RemainSpaces>
-          <ImpactColor>{remainingSeats}자리</ImpactColor>
-          남았어요
-        </RemainSpaces>
+        <RemainSpaces>{renderRemain()}</RemainSpaces>
       </PreviewImg>
     </Wrapper>
   )
