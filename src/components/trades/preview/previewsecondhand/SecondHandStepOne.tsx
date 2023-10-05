@@ -38,7 +38,7 @@ export const SecondHandStepOne = () => {
     </>
   )
 }
-const StyledIcon = styled.button`
+const StyledIcon = styled.div`
   color: #000;
   font-size: ${theme.customSize.xxlarge};
 `

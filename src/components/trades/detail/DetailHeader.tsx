@@ -1,13 +1,15 @@
 // CommonHeader.js
 import { useState } from 'react'
 import styled from 'styled-components'
-import { Header, ModalButtons } from 'components/index'
+import { Header } from 'components/index'
 import { ArrowLeft2, Heart, More, Send2, Trash, Edit } from 'iconsax-react'
 import { useNavigate } from 'react-router-dom'
 import { SECONDHAND_DELETE_MODAL_TEXT } from 'constants/trades/index'
-import { useRecoilState } from 'recoil'
-import { HeaderModal } from 'components/trades/detail/index'
-import { headerModalOnState } from 'recoil/index'
+
+import {
+  UseBackgroundModal,
+  UseButtons
+} from 'components/common/useActions/index'
 import { CREATE_EDIT_TEXT } from 'constants/index'
 import { GroupPurchaseDeleteApi, SecondHandDeleteApi } from 'api/trades/index'
 
@@ -24,7 +26,7 @@ export const DetailHeader = ({ title, isAdmin, productId, offerId }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedOption, setSelectedOption] = useState('')
   const navigate = useNavigate()
-  const [isModalOpen, setIsModalOpen] = useRecoilState(headerModalOnState)
+  const [modal4, setModal4] = useState(false)
   const maxLength = 13
 
   const truncatedTitle =
@@ -45,7 +47,7 @@ export const DetailHeader = ({ title, isAdmin, productId, offerId }) => {
       }
     }
     if (value === '삭제하기') {
-      setIsModalOpen(!isModalOpen)
+      setModal4(true)
     }
   }
 
@@ -54,17 +56,17 @@ export const DetailHeader = ({ title, isAdmin, productId, offerId }) => {
       await GroupPurchaseDeleteApi(offerId)
       alert('삭제되었습니다.')
       navigate('/grouppurchase')
-      setIsModalOpen(false)
+      setModal4(false)
     } else {
       await SecondHandDeleteApi(productId)
       alert('삭제되었습니다.')
       navigate('/secondhand')
-      setIsModalOpen(false)
+      setModal4(false)
     }
   }
 
   const handleConfirmNo = () => {
-    setIsModalOpen(false)
+    setModal4(false)
   }
 
   const dynamicHeaderIcon = () => {
@@ -109,17 +111,18 @@ export const DetailHeader = ({ title, isAdmin, productId, offerId }) => {
         {dynamicHeaderIcon()}
       </Header>
 
-      {isModalOpen && (
-        <HeaderModal
+      {modal4 && (
+        <UseBackgroundModal
           title={SECONDHAND_DELETE_MODAL_TEXT[0]}
-          content={SECONDHAND_DELETE_MODAL_TEXT[1]}>
-          <ModalButtons
+          content={SECONDHAND_DELETE_MODAL_TEXT[1]}
+          modalState={modal4}>
+          <UseButtons
             onLeftClick={handleConfirmYes}
             onRightClick={handleConfirmNo}
             leftBtn={SECONDHAND_DELETE_MODAL_TEXT[2]}
             rightBtn={SECONDHAND_DELETE_MODAL_TEXT[3]}
           />
-        </HeaderModal>
+        </UseBackgroundModal>
       )}
     </Wrap>
   )
@@ -129,7 +132,7 @@ const Wrap = styled.div`
   width: 100%;
 `
 
-const StyledIcon = styled.button`
+const StyledIcon = styled.div`
   color: #000;
   font-size: ${props => props.theme.customSize.xxlarge};
 `
