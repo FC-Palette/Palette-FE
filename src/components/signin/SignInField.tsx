@@ -16,21 +16,17 @@ export const SignInField = () => {
   const passwordRegex = SIGNIN_REGEX_TEXT.pwdCondition
   const isValidEmail = emailRegex.test(email)
   const isValidPassword = passwordRegex.test(password)
-  const navigate = useNavigate()
   const setTokenPayload = useSetRecoilState(tokenPayloadState)
-
   const handleEmailChange = e => setEmail(e.target.value)
   const handlePasswordChange = e => setPassword(e.target.value)
+  const navigate = useNavigate()
 
   const handleLogin = async () => {
     try {
       const response = await login(email, password)
-      // console.log('로그인 성공:', response);
-      // alert('로그인 성공 테스트 메세지');
-      if (response) {
-        navigate('/career')
-      }
-
+      console.log('로그인 성공:', response)
+      alert('로그인 성공')
+      navigate('/home')
       const decodedPayload = decoder()
       console.log('Decoded Token Payload:', decodedPayload)
 
@@ -39,7 +35,6 @@ export const SignInField = () => {
       console.error('로그인 실패:', error)
     }
   }
-
   const renderEmailErrorMessage = () => {
     if (!email) {
       return null

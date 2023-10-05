@@ -7,8 +7,12 @@ import { ArrowLeft2 } from 'iconsax-react'
 export const ProfileEnterWrap = () => {
   const navigate = useNavigate()
 
+  const moveToProfile = () => {
+    navigate('/modifyprofile')
+  }
+
   const onClickHandler = () => {
-    navigate(-1)
+    navigate('/career')
   }
 
   return (
@@ -37,6 +41,7 @@ export const ProfileEnterWrap = () => {
       <Wrapper>
         <BtnWrap>
           <Button
+            onClick={moveToProfile}
             $btnWidth="100%"
             $btnHeight="60px"
             $fontSize="20px"

@@ -37,12 +37,14 @@ export const GetDetailCard = () => {
   const roomAdminId = meetingRes.meetingMemberDto.id // 게시글 글쓴이 id
   const loggedInUser = decoder()?.memberId // 현재 로그인한 유저 id
   const isAdmin = loggedInUser === roomAdminId // 글쓴이 === 로그인한 유저
-
   const navigate = useNavigate()
 
-  if (!detailid && !loggedInUser) {
-    navigate('/career')
-  }
+  useEffect(() => {
+    if (!loggedInUser) {
+      navigate('/')
+    }
+  }, [loggedInUser])
+
   useEffect(() => {
     const fetchDetailData = async () => {
       if (detailid) {
@@ -56,7 +58,6 @@ export const GetDetailCard = () => {
           setMeetingRes(meetingResponse.response)
           setIsLoading(false)
         }
-
         if (memberResponse.status === 200) {
           setMemberRes(memberResponse.response)
         }
@@ -96,6 +97,10 @@ export const GetDetailCard = () => {
   }
 
   const renderFooter = () => {
+    if (isLoading) {
+      return 
+    }
+
     return isAdmin ? (
       <GetDetailFooterAndButtonHost loggedInUser={loggedInUser} />
     ) : (

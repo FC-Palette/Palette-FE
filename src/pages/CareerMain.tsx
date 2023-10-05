@@ -20,11 +20,13 @@ import {
   careerSortGlobalState,
   sideBarState
 } from 'recoil/index'
-import { fetchMainApi } from '@/api'
+import { fetchMainApi, getMyPage } from '@/api'
 import { fetchMainResponseDataProps } from '@/types'
-import { SortedData, sortResponseData } from '@/utils'
+import { SortedData, decoder, sortResponseData } from '@/utils'
+import { useNavigate } from 'react-router-dom'
 
 export const CareerMain = () => {
+  const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(true)
   const [responseData, setResponseData] =
     useState<fetchMainResponseDataProps | null>(null)
@@ -34,32 +36,48 @@ export const CareerMain = () => {
   const sortState = useRecoilValue(careerSortGlobalState) // 찜 많은순, 오래된순, 최신순, 모임시작일 순
   const filterState = useRecoilValue(careerFilterGlobalState) // 슬라이드 필터 아이템
   const { filter, onOff, type, job, position, sex } = filterState
+  const userId = decoder()?.memberId
+  const [isProfile, setIsProfile] = useState(false)
 
-  // 마감된 모집 제외
+  useEffect(() => {
+    if (!userId) {
+      navigate('/')
+    }
+  }, [userId])
+
+  const moveToAlarm = () => {
+    navigate('/alarm')
+  }
+  const moveToBack = () => {
+    navigate(-1)
+  }
+
+  // 마감된 모집 제외 상태 리프팅
   const toggleClosedFilter = (value: number) => {
     setClosedFilter(value)
   }
 
   useEffect(() => {
-    const fetchMainData = async () => {
-      const mainData = await fetchMainApi(
-        closedFilter,
-        filter,
-        onOff,
-        type,
-        job,
-        position,
-        sex
-      )
+    const fetchCareerData = async () => {
+      const [userData, mainData] = await Promise.all([
+        getMyPage(userId),
+        fetchMainApi(closedFilter, filter, onOff, type, job, position, sex)
+      ])
+
+      const userProfile = userData.response?.job
+      if (userProfile) {
+        setIsProfile(!isProfile)
+      }
+
       if (mainData) {
         setResponseData(mainData)
         setIsLoading(false)
       }
     }
-
-    fetchMainData()
+    fetchCareerData()
   }, [closedFilter, filter, onOff, type, job, position, sex])
 
+  // 토클 sort
   useEffect(() => {
     if (responseData) {
       const sortedData = sortResponseData(
@@ -70,7 +88,7 @@ export const CareerMain = () => {
     }
   }, [responseData, sortState])
 
-  const toggleSideBar = () => {
+  const handleSideBar = () => {
     setIsOpen(!isOpen)
   }
 
@@ -91,13 +109,13 @@ export const CareerMain = () => {
 
         <Wrap>
           <Header
-            leftIcon={<ArrowLeft2 />}
+            leftIcon={<ArrowLeft2 onClick={moveToBack} />}
             centerText="같이 성장해요">
             <IconWrapper>
               <SearchNormal1 />
             </IconWrapper>
             <StyledIcon>
-              <Notification />
+              <Notification onClick={moveToAlarm} />
             </StyledIcon>
           </Header>
 
@@ -107,13 +125,13 @@ export const CareerMain = () => {
           />
 
           <CareerMainFilterBar
-            toggleSideBar={toggleSideBar}
+            toggleSideBar={handleSideBar}
             toggleClosedFilter={toggleClosedFilter}
           />
 
           <CareerMainCard responseData={sortedResponseData} />
 
-          <CareerMainItemCreateButton />
+          <CareerMainItemCreateButton isProfile={isProfile} />
 
           <Footer />
         </Wrap>
