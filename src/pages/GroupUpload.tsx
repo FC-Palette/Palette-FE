@@ -5,7 +5,6 @@ import {
 import { UploadFooter } from 'components/trades/upload/index'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useRecoilState } from 'recoil'
-
 import { TRADES_MODAL_TEXT } from 'constants/trades/index'
 import { useState } from 'react'
 import {
@@ -60,8 +59,6 @@ export const GroupUpload = () => {
       setImageGlobalState(initialImageState)
       navigate(`/GroupPurchase`)
       setModal(false)
-
-
     } else if (modalText === TRADES_MODAL_TEXT.cancel) {
       setTradesGlobalState(initialTradeCreateGlobalState)
       setImageGlobalState(initialImageState)
@@ -79,7 +76,6 @@ export const GroupUpload = () => {
       setImageGlobalState(initialImageState)
 
       setModal(false)
-
     }
   }
 

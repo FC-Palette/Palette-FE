@@ -1,7 +1,5 @@
 import { styled } from 'styled-components'
-
 import { UseModal } from 'components/common/useActions/index'
-
 import { Flexbox } from 'styles/index'
 
 export const UseBackgroundModal = ({
