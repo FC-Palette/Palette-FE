@@ -2,24 +2,13 @@ import { styled } from 'styled-components'
 import { Copy, Edit2 } from 'iconsax-react'
 import { useNavigate } from 'react-router-dom'
 import { Flexbox } from 'styles/index'
-import { useCallback, useEffect } from 'react'
+import { useCallback } from 'react'
 import { getAccount, getNotice } from 'api/index'
 import { useRecoilValue, useRecoilState } from 'recoil'
 import { useQuery } from '@tanstack/react-query'
 import { accInfoState, roomIdState } from 'recoil/index'
 import { CHAT_TEXTS } from 'constants/index'
-/*
-{
-	"status": 200, 
-	"success": true,
-	"response":
-		{
-			"bank" : "신한은행",
-			"accountNumber" : "123-4444-67897-1",
-			"accountOwner" : "김*운",
-		}
-}
-*/
+
 export const AccountInfo = ({ isHost }) => {
   const navigate = useNavigate()
   const roomId = useRecoilValue(roomIdState)
@@ -29,7 +18,7 @@ export const AccountInfo = ({ isHost }) => {
   }
   const handleCopy = useCallback(async () => {
     await navigator.clipboard.writeText(accInfo.accountNumber)
-  }, [])
+  }, [accInfo])
   const iconProps = {
     size: '16',
     cursor: 'pointer'
@@ -42,7 +31,7 @@ export const AccountInfo = ({ isHost }) => {
   const contentId = contentNotice.contentId
 
   if (contentId) {
-    const { data: account } = useQuery(
+    const {} = useQuery(
       ['account', contentId],
       () => {
         return getAccount(contentId)
@@ -56,7 +45,6 @@ export const AccountInfo = ({ isHost }) => {
           })
       }
     )
-    console.log(accInfo)
   }
 
   return (

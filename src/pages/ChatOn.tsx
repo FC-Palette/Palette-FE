@@ -8,7 +8,7 @@ import {
 } from 'components/index'
 import { styled } from 'styled-components'
 import { ArrowLeft2, More } from 'iconsax-react'
-import { STATUS_TEXTS, CHATON_TEXTS } from 'constants/index'
+import { CHATON_TEXTS } from 'constants/index'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import {
   showMembersState,

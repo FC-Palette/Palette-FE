@@ -8,7 +8,10 @@ import { useSetRecoilState } from 'recoil'
 import { CHAT_TEXTS } from 'constants/index'
 import { roomIdState } from 'recoil/index'
 import { useRecoilValue } from 'recoil'
-import { getNoticeList, getNotice } from 'api/index'
+import {
+  getNoticeList
+  //  getNotice
+} from 'api/index'
 
 import { useQuery } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
