@@ -6,6 +6,8 @@ import { Input, Button, RegIcon } from 'components/index';
 import { login, tokenPayloadState } from 'api/index';
 import { useSetRecoilState } from 'recoil';
 import { decoder } from '@/utils';
+import { useNavigate } from 'react-router-dom';
+
 
 export const SignInField = () => {
 
@@ -19,24 +21,24 @@ export const SignInField = () => {
   const setTokenPayload = useSetRecoilState(tokenPayloadState); 
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
+  const navigate = useNavigate();
   
   const handleLogin = async () => {
     try {
       const response = await login(email, password);
       console.log('로그인 성공:', response);
-      alert('로그인 성공 테스트 메세지');
-
+      alert('로그인 성공');
+      navigate("/home");
       const decodedPayload = decoder();
       console.log('Decoded Token Payload:', decodedPayload);
-
+  
       setTokenPayload(decodedPayload);
-
+  
 
     } catch (error) {
       console.error('로그인 실패:', error);
     }
   };
-
     const renderEmailErrorMessage = () => {
       if (!email) {
         return null; 

@@ -24,7 +24,6 @@ export const MyPageIntro = ({ userData, setUserData }) => {
         }
 
         setUserData(data);
-        console.log(data);
       } catch (error) {
         console.error('사용자 데이터 가져오기 오류:', error);
       }

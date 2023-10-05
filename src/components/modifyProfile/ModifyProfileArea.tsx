@@ -32,7 +32,6 @@ export const ModifyProfileArea = () => {
     job: null,
   });
 
-  console.log(formData);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -74,7 +73,6 @@ export const ModifyProfileArea = () => {
             job: job || null,
           });
 
-          console.log(data.response);
         } else {
           console.error('사용자 데이터를 불러오지 못했습니다.');
         }
