@@ -6,7 +6,7 @@ import { styled } from 'styled-components'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import {
   inDetailState,
-  // noticeState,
+  noticeState,
   roomIdState,
   chatTypeState
 } from 'recoil/index'
@@ -26,7 +26,7 @@ export const ChatInfo = () => {
   const navigate = useNavigate()
   const inDetail = useRecoilValue(inDetailState)
   const roomId = useRecoilValue(roomIdState)
-  // const setNotice = useSetRecoilState(noticeState)
+  const setNotice = useSetRecoilState(noticeState)
   const setChatType = useSetRecoilState(chatTypeState)
 
   const { data: notice } = useQuery(
@@ -43,11 +43,9 @@ export const ChatInfo = () => {
   const contentNotice = notice?.response?.contentNotice
   const type = contentNotice?.type
   // 추가예정
-  // const noticeId = notice?.response?.noticeId
-
+  const noticeId = notice?.response?.noticeId
   const toDetail = () => {
-    // setNotice(noticeId)
-    console.log('clicked')
+    setNotice(noticeId)
     navigate('/chatann')
   }
 
