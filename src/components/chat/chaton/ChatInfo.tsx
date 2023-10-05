@@ -43,7 +43,7 @@ export const ChatInfo = () => {
   const contentNotice = notice?.response?.contentNotice
   const type = contentNotice?.type
   // 추가예정
-  // const noticeId = notice?.response?.noticeIDd
+  // const noticeId = notice?.response?.noticeId
 
   const toDetail = () => {
     // setNotice(noticeId)
@@ -83,7 +83,7 @@ export const ChatInfo = () => {
       {inDetail && isBuying && (
         <AccountInfo
           isHost={false}
-          account={'신한은행 123-4444-67897-12 김*운'}
+          // account={'신한은행 123-4444-67897-12 김*운'}
         />
       )}
       {/* 4. 등록된 공지가 있을 때, 렌더링  */}
