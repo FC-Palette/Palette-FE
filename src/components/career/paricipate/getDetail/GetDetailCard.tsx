@@ -40,8 +40,6 @@ export const GetDetailCard = () => {
 
   const navigate = useNavigate()
 
-  console.log()
-
   if (!detailid && !loggedInUser) {
     navigate('/career')
   }
