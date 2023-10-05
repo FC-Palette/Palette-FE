@@ -32,7 +32,7 @@ import {
   ModifyProfile,
   CareerMeetingConfirm,
   CareerEdit,
-  Home,
+  Home
 } from 'pages/index'
 import type { RouteObject } from 'react-router-dom'
 import { Start } from './Start'
@@ -48,7 +48,7 @@ const generateRoute = (path, component, children?): RouteObject => {
   }
 }
 
-export const router = createBrowserRouter([
+export const routes = [
   {
     path: '/',
     element: <Layout />,
@@ -100,7 +100,7 @@ export const router = createBrowserRouter([
       generateRoute('/findpassword', <FindPassword />)
     ]
   },
-  
+
   {
     path: '/',
     element: <Layout />,
@@ -108,14 +108,14 @@ export const router = createBrowserRouter([
     children: [
       generateRoute('/mypage', <MyPage />),
       generateRoute('/mypage/:member_id', <MyPage />),
-      generateRoute('/modifyprofile', <ModifyProfile />, <ErrorComponent />),
-      generateRoute('/simpleprofile', <ModifyProfile />, <ErrorComponent />),
-      generateRoute('/setting', <Setting />, <ErrorComponent />),
-      generateRoute('/alarm', <Alarm />, <ErrorComponent />),
-      generateRoute('/setting/password', <SettingPassword />, <ErrorComponent />),
-      generateRoute('/setting/alarm', <SettingAlarm />, <ErrorComponent />),
-      generateRoute('/setting/notice', <SettingNotice />, <ErrorComponent />),
-      generateRoute('/setting/service', <SettingService />, <ErrorComponent />),
+      generateRoute('/modifyprofile', <ModifyProfile />),
+      generateRoute('/simpleprofile', <ModifyProfile />),
+      generateRoute('/setting', <Setting />),
+      generateRoute('/alarm', <Alarm />),
+      generateRoute('/setting/password', <SettingPassword />),
+      generateRoute('/setting/alarm', <SettingAlarm />),
+      generateRoute('/setting/notice', <SettingNotice />),
+      generateRoute('/setting/service', <SettingService />)
     ]
   },
   {
@@ -129,4 +129,6 @@ export const router = createBrowserRouter([
       generateRoute('/chatann', <ChatAnnDetail />)
     ]
   }
-])
+]
+
+export const router = createBrowserRouter(routes)

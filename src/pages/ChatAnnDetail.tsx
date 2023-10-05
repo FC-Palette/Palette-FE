@@ -8,13 +8,10 @@ import { useSetRecoilState } from 'recoil'
 import { CHAT_TEXTS } from 'constants/index'
 import { roomIdState } from 'recoil/index'
 import { useRecoilValue } from 'recoil'
-import {
-  getNoticeList
-  //  getNotice
-} from 'api/index'
+import { getNoticeList } from 'api/index'
 
 import { useQuery } from '@tanstack/react-query'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 interface filteredAnnProps {
   createdAt: string
@@ -28,7 +25,7 @@ export const ChatAnnDetail = () => {
   const navigate = useNavigate()
   const roomId = useRecoilValue(roomIdState)
   const [filteredAnn, SetFilteredAnn] = useState<filteredAnnProps>()
-
+  console.log(notice)
   const setShowMembers = useSetRecoilState(showMembersState)
   const backToChat = () => {
     navigate('/chat')
@@ -37,18 +34,20 @@ export const ChatAnnDetail = () => {
   const backToAnnList = () => {
     navigate('/chatannlist')
   }
-  // const { data: notice } = useQuery(['notice', roomId], () => {
-  //   return getNotice(roomId)
-  // })
-  const { data: notices } = useQuery(['notices', roomId], () => {
-    return getNoticeList(roomId)
-  })
-
-  useEffect(() => {
-    const noticeView = notices.response.find(v => v.noticeId === notice)
-    console.log(noticeView)
-    SetFilteredAnn(noticeView)
-  }, [])
+  const {} = useQuery(
+    ['notices', roomId],
+    () => {
+      return getNoticeList(roomId)
+    },
+    {
+      onSuccess: data => {
+        console.log(data.response)
+        const noticeView = data.response.find(v => v.noticeId === notice)
+        console.log(noticeView)
+        SetFilteredAnn(noticeView)
+      }
+    }
+  )
 
   return (
     <>
