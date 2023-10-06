@@ -9,26 +9,30 @@ import { decoder } from "@/utils"
 
 
 export const MyPageEditBtn = ({ userData }) => {
-  const [isFollowing, setIsFollowing] = useState(false);
+  const location = useLocation();
+  const isMyPage = location.pathname === '/mypage';
+
+  // memberId를 동적으로 사용하여 API 호출
+  // memberId는 현재 경로의 동적 세그먼트에서 가져온 값
+  // 예: /mypage/2에서 memberId는 2가 됨
+  const { member_id } = useParams();
+  const decodedPayload = decoder();
+  const followingId = decodedPayload.memberId;
+  const bio = userData?.response.bio;
+  const nickname = userData?.response.nickname;
+  const image = userData?.response.image;
+
+  // Initialize isFollowing using userData when it's available
+  const [isFollowing, setIsFollowing] = useState(userData ? userData.response.followed : false);
 
   useEffect(() => {
     if (userData) {
       setIsFollowing(userData.response.followed);
     }
   }, [userData]);
-  
-  const location = useLocation();
-  const isMyPage = location.pathname === '/mypage';
-      // memberId를 동적으로 사용하여 API 호출
-      // memberId는 현재 경로의 동적 세그먼트에서 가져온 값
-      // 예: /mypage/2에서 memberId는 2가 됨
-  const { member_id } = useParams();
-  const decodedPayload = decoder();
-  const followingId = decodedPayload.memberId
-  const bio = userData?.response.bio 
-  const nickname = userData?.response.nickname
-  const image = userData?.response.image 
-  console.log(userData)
+
+  console.log(userData);
+
   const handleFollow = async () => {
     try {
       const profileData = {
@@ -37,18 +41,24 @@ export const MyPageEditBtn = ({ userData }) => {
         nickname,
         bio,
       };
-
+  
       const response = isFollowing
         ? await followDelete(member_id)
         : await followAdd(member_id, profileData);
-
+  
       console.log(`${isFollowing ? '언팔로우' : '팔로우'} 성공:`, response);
-      console.log(response)
-      setIsFollowing(!isFollowing);
+  
+      // Log the updated value of isFollowing after the state update
+      setIsFollowing((prevState) => {
+        const newValue = !prevState;
+        console.log('Updated isFollowing:', newValue);
+        return newValue;
+      });
     } catch (error) {
       console.error('API 요청 실패:', error);
     }
   };
+  
     return (
       <ButtonWrap>
         {isMyPage && (
