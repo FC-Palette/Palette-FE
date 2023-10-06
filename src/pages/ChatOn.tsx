@@ -28,11 +28,12 @@ import { Client } from '@stomp/stompjs'
 import { getChatLog } from 'api/index'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 
-const [HTTP, CHATPATH, ENTER, SUB] = [
+const [HTTP, CHATPATH, ENTER, SUB, BROKER] = [
   import.meta.env.VITE_BASE_WS_URL,
   import.meta.env.VITE_WS_CHAT_PATH,
   import.meta.env.VITE_WS_CHAT_ENTER,
-  import.meta.env.VITE_WS_CHAT_SUB
+  import.meta.env.VITE_WS_CHAT_SUB,
+  import.meta.env.VITE_BROKER_URL
 ]
 
 // const nickname = localStorage.getItem('nickname')
@@ -122,10 +123,11 @@ export const ChatOn = () => {
     window.onpopstate = handleHistory
 
     let client = new Client({
-      webSocketFactory: () => {
-        const sockjs = new SockJS(`${HTTP}`)
-        return sockjs
-      },
+      // webSocketFactory: () => {
+      //   const sockjs = new SockJS(`${HTTP}`)
+      //   return sockjs
+      // },
+      brokerURL: `${BROKER}`,
       onConnect: () => {
         client?.subscribe(
           `${SUB}${roomId}`,
