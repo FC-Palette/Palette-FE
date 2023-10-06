@@ -1,7 +1,7 @@
 export interface SortedData {
   createdAt: string
   likes: number
-  startDate: string
+  startDate?: string
   price: number
 }
 
@@ -27,7 +27,10 @@ export const sortResponseData = (
       case SortFilter.MostLiked:
         return b.likes - a.likes
       case SortFilter.StartDate:
-        return new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
+        return (
+          (a.startDate ? new Date(a.startDate).getTime() : 0) -
+          (b.startDate ? new Date(b.startDate).getTime() : 0)
+        )
       case SortFilter.LowPrice:
         return a.price - b.price
       case SortFilter.HighPrice:

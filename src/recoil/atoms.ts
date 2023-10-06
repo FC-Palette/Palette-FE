@@ -68,3 +68,8 @@ export const accInfoState = atom({
     accountOwner: ''
   }
 })
+
+export const isClosingState = atom({
+  key: 'isClosingState',
+  default: false
+})

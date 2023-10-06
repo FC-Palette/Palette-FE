@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { theme } from 'styles/index'
 import { GetTitleAndDescription } from 'components/career/create/isUserInfo/index'
 import {
   SecondHandInfo,
@@ -9,14 +10,15 @@ import { ManagerInfo } from 'components/trades/detail/index'
 import { SecondHandDetailResProps } from 'types/trades/index'
 import { useEffect, useState } from 'react'
 import { SecondHandDetail } from 'api/trades/index'
-import {
-  OthertProducts,
-  ImageDetail,
-  DetailHeader
-} from 'components/trades/detail/index'
+import { ImageDetail, DetailHeader } from 'components/trades/detail/index'
 import { CareerCreateMeetingCommonQuestion } from 'components/career/create/common/index'
 import { decoder } from 'utils/index'
 import { PurchaseFooter, DetailStats } from 'components/trades/detail/index'
+import {
+  TradesImage,
+  TradesTitle,
+  TradesPrice
+} from 'components/trades/cardlist/index'
 
 export const SecondHandDetailCard = ({ productId }) => {
   const [secondHandDetailList, setSecondHandDetailList] =
@@ -34,6 +36,10 @@ export const SecondHandDetailCard = ({ productId }) => {
 
     DetailData()
   }, [productId])
+
+  const handleWrapperClick = productId => {
+    window.location.href = `${productId}`
+  }
   return (
     <>
       {secondHandDetailList && (
@@ -71,7 +77,18 @@ export const SecondHandDetailCard = ({ productId }) => {
             <CareerCreateMeetingCommonQuestion>
               사용자님의 다른상품
             </CareerCreateMeetingCommonQuestion>
-            <OthertProducts />
+
+            {secondHandDetailList?.anotherProductDtos.map(product => (
+              <OtherWrapper
+                onClick={() => handleWrapperClick(product.id)}
+                key={product.id}>
+                <TradesImage imageUrl={product.thumbnailUrl}></TradesImage>
+                <InfoWrapper>
+                  <TradesTitle title={product.title}></TradesTitle>
+                  <TradesPrice price={product.price}></TradesPrice>
+                </InfoWrapper>
+              </OtherWrapper>
+            ))}
           </Wrapper>
           <PurchaseFooter
             isAdmin={isAdmin}
@@ -79,6 +96,7 @@ export const SecondHandDetailCard = ({ productId }) => {
             isSoldOut={secondHandDetailList.isSoldOut}
             offerId={null}
             productId={productId}
+            isParticipating={null}
           />
         </>
       )}
@@ -91,4 +109,21 @@ const Wrapper = styled.div`
   overflow-x: hidden;
   margin-bottom: 30px;
 `
-//
+
+const OtherWrapper = styled.div`
+  width: 165px;
+  height: 235px;
+  margin: 7% 5.7% 0;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  box-shadow: 0px 8px 16px ${theme.greyScale.grey3};
+  cursor: pointer;
+`
+
+const InfoWrapper = styled.div`
+  padding: 10px;
+  width: 100%;
+  gap: 15px;
+  overflow-x: scroll;
+  padding-bottom: 8px;
+`

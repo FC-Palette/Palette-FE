@@ -10,3 +10,9 @@ export const careerSortGlobalState = atom<CareerSortGlobalStateProps>({
     filter: ''
   }
 })
+export const purchaseSortGlobalState = atom<CareerSortGlobalStateProps>({
+  key: 'purchaseSortGlobalState',
+  default: {
+    filter: ''
+  }
+})

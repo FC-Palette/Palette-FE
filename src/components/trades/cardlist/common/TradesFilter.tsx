@@ -5,7 +5,7 @@ import { TRADES_MAIN_FILTER_ITEMS } from 'constants/trades/index'
 import { centralise, rowCentralise } from 'styles/index'
 import { CareerMainFilterSortOption } from 'components/career/index'
 
-export const TradesFilter = ({ toggleSideBar }) => {
+export const TradesFilter = ({ toggleSideBar, ClosingData }) => {
   const list = ['']
 
   return (
@@ -27,7 +27,10 @@ export const TradesFilter = ({ toggleSideBar }) => {
         <FilterBar
           filterButton={
             <StyledRecordWrapper>
-              <CheckBox type="checkbox" />
+              <CheckBox
+                onClick={ClosingData}
+                type="checkbox"
+              />
             </StyledRecordWrapper>
           }
           filterText="마감된 거래 제외"

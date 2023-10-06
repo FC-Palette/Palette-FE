@@ -81,3 +81,10 @@ export const ImageState = atom<CreateFile>({
 export const initialImageState: CreateFile = {
   file: []
 }
+
+export const likeState = atom({
+  key: 'likeAtomState',
+  default: {
+    isBookmarked: false
+  }
+})

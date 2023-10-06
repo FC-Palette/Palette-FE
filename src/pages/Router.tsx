@@ -33,7 +33,9 @@ import {
   CareerMeetingConfirm,
   CareerEdit,
   Home,
-  Friend
+  Friend,
+  GroupEdit,
+  SecondHandEdit
 } from 'pages/index'
 import type { RouteObject } from 'react-router-dom'
 import { Start } from './Start'
@@ -66,7 +68,9 @@ export const routes = [
       generateRoute('/secondHandUpload/:stepId', <SecondHandUpload />),
       generateRoute('/GroupUpload/:stepId', <GroupUpload />),
       generateRoute('/secondHand/:productId', <SecondHandDetail />),
-      generateRoute('/groupPurchase/:offerId', <GroupPurchaseDetail />)
+      generateRoute('/groupPurchase/:offerId', <GroupPurchaseDetail />),
+      generateRoute('/GroupEdit/:stepId', <GroupEdit />),
+      generateRoute('/secondhandEdit/:stepId', <SecondHandEdit />)
     ]
   },
   {

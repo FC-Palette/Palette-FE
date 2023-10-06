@@ -1,11 +1,9 @@
 import { authInstance } from 'api/index'
 
-// 성공 응답 데이터 타입
-
-export async function SecondHandLikeApi(productId) {
+export async function GroupParticipatingApi(offerId) {
   try {
     const response = await authInstance.post(
-      `/api/secondhand/${productId}/bookmark`
+      `/api/groupPurchase/${offerId}/participate`
     )
     return response.data
   } catch (error) {

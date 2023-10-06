@@ -1,11 +1,9 @@
-import {
-  PurchaseStepOne,
-  PurchasePreview
-} from 'components/trades/preview/index'
+import { PurchasePreview } from 'components/trades/preview/index'
+import { EditPurchase } from 'components/trades/edit/index'
 import { UploadFooter } from 'components/trades/upload/index'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useRecoilState } from 'recoil'
-import { TRADES_MODAL_TEXT } from 'constants/trades/index'
+import { MODIFY_MODAL_TEXT } from 'constants/trades/index'
 import { useState } from 'react'
 import {
   tradescreateglobalstate,
@@ -13,7 +11,7 @@ import {
   initialImageState,
   ImageState
 } from 'recoil/index'
-import { GroupPurchasePostApi } from 'api/trades/index'
+import { GroupPurchaseModifyApi } from 'api/trades/index'
 import {
   UseBackgroundModal,
   UseButtons
@@ -24,11 +22,13 @@ interface Params {
   [key: string]: string | undefined
 }
 
-export const GroupUpload = () => {
+export const GroupEdit = () => {
   const navigate = useNavigate()
+  const location = useLocation()
+  const offerId = location.state.offerId
   const { stepId = '1' } = useParams<Params>()
   const [modal, setModal] = useState(false)
-  const initialModalText = TRADES_MODAL_TEXT.create
+  const initialModalText = MODIFY_MODAL_TEXT.create
   const [modalText, setModalText] = useState(initialModalText)
   const [tradesGlobalState, setTradesGlobalState] = useRecoilState(
     tradescreateglobalstate
@@ -37,28 +37,34 @@ export const GroupUpload = () => {
 
   const handleNextStep = () => {
     const nextStep = parseInt(stepId) + 1
-    navigate(`/GroupUpload/${nextStep}`)
+    navigate(`/GroupEdit/${nextStep}`, {
+      state: { offerId }
+    })
   }
 
   const handleTrades = async () => {
-    await GroupPurchasePostApi(tradesGlobalState, imageGlobalState.file)
-    setModalText(TRADES_MODAL_TEXT.create)
+    await GroupPurchaseModifyApi(
+      tradesGlobalState,
+      imageGlobalState.file,
+      offerId
+    )
+    setModalText(MODIFY_MODAL_TEXT.create)
     setModal(true)
   }
 
   const handleCancel = () => {
-    setModalText(TRADES_MODAL_TEXT.cancel)
+    setModalText(MODIFY_MODAL_TEXT.cancel)
     setModal(true)
   }
 
   // 모달 왼쪽 버튼 클릭 시 실행
   const handleConfirmYes = () => {
-    if (modalText === TRADES_MODAL_TEXT.create) {
+    if (modalText === MODIFY_MODAL_TEXT.create) {
       setTradesGlobalState(initialTradeCreateGlobalState)
       setImageGlobalState(initialImageState)
       navigate(`/GroupPurchase`)
       setModal(false)
-    } else if (modalText === TRADES_MODAL_TEXT.cancel) {
+    } else if (modalText === MODIFY_MODAL_TEXT.cancel) {
       setTradesGlobalState(initialTradeCreateGlobalState)
       setImageGlobalState(initialImageState)
       navigate(`/GroupPurchase`)
@@ -68,9 +74,9 @@ export const GroupUpload = () => {
 
   // 모달 오른쪽 버튼 클릭 시 실행
   const handleConfirmNo = () => {
-    if (modalText === TRADES_MODAL_TEXT.create) {
+    if (modalText === MODIFY_MODAL_TEXT.create) {
       alert('채팅 페이지 이동 로직')
-    } else if (modalText === TRADES_MODAL_TEXT.cancel) {
+    } else if (modalText === MODIFY_MODAL_TEXT.cancel) {
       setTradesGlobalState(initialTradeCreateGlobalState)
       setImageGlobalState(initialImageState)
       setModal(false)
@@ -80,11 +86,11 @@ export const GroupUpload = () => {
   const renderContent = () => {
     switch (stepId) {
       case '1':
-        return <PurchaseStepOne />
+        return <EditPurchase />
       case '2':
         return <PurchasePreview />
       default:
-        return <PurchaseStepOne />
+        return <EditPurchase />
     }
   }
   const renderFooter = () => {
@@ -99,7 +105,7 @@ export const GroupUpload = () => {
       case '2':
         return (
           <PreviewFooter
-            Text="공동구매 제안하기"
+            Text="공동구매 수정하기"
             handleTrades={handleTrades}
             handleCancel={handleCancel}
           />

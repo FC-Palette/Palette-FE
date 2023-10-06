@@ -24,7 +24,7 @@ export const PreviewHeader = ({ title }) => {
     </Header>
   )
 }
-const StyledIcon = styled.button`
+const StyledIcon = styled.div`
   color: #000;
   font-size: ${props => props.theme.customSize.xxlarge};
 `

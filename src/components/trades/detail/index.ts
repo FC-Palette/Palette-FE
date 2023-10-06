@@ -1,7 +1,7 @@
 export * from 'components/trades/detail/SecondHandDetailCard'
 export * from 'components/trades/detail/PurchaseDetailCard'
 export * from 'components/trades/detail/ManagerInfo'
-export * from 'components/trades/detail/OtherProducts'
+
 export * from 'components/trades/detail/ImageDetail'
 export * from 'components/trades/detail/PurchaseFooter'
 export * from 'components/trades/detail/DetailHeader'
