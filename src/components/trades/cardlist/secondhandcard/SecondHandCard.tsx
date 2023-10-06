@@ -59,7 +59,7 @@ export const SecondHandCard = () => {
   return (
     <>
       {secondHandList
-        .filter(item => !isClosing && !item.isSoldOut)
+        .filter(item => isClosing || !item.isSoldOut)
         .map(item => (
           <Container key={item.id}>
             <TradesLikeBtn
