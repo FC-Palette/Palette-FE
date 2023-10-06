@@ -106,6 +106,7 @@ export const PurchaseDetailCard = ({ offerId }) => {
             isSoldOut={null}
             offerId={offerId}
             productId={null}
+            isParticipating={purchaseDetailList.isParticipating}
           />
         </>
       )}

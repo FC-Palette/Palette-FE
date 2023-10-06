@@ -14,10 +14,18 @@ import { GroupPurchaseListApi } from 'api/trades/index'
 import { GroupPurchaseResProps } from 'types/trades/index'
 import { rowCentralise } from 'styles/index'
 import { useNavigate } from 'react-router-dom'
+import { isClosingState } from 'recoil/index'
+import { useRecoilValue } from 'recoil'
+import { SortedData, sortResponseData } from 'utils/index'
+import { careerSortGlobalState } from 'recoil/index'
 
 export const PurchaseCard = () => {
   const [purchaseList, setPurchaseList] = useState<GroupPurchaseResProps[]>([])
   const navigate = useNavigate()
+  const isClosing = useRecoilValue(isClosingState)
+  const [sortedeData, setSortedData] = useState<SortedData[]>([])
+
+  const sortState = useRecoilValue(careerSortGlobalState)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,7 +35,21 @@ export const PurchaseCard = () => {
       }
     }
     fetchData()
-  }, [])
+  }, [isClosing])
+
+  useEffect(() => {
+    if (purchaseList && purchaseList.length > 0 && sortState.filter) {
+      const sortedData: SortedData[] = purchaseList.map(item => ({
+        likes: item.hits,
+        price: item.price,
+        createdAt: item.createdAt
+      }))
+
+      const sortedResult = sortResponseData(sortedData, sortState.filter)
+
+      setSortedData(sortedResult)
+    }
+  }, [purchaseList, sortState.filter, sortedeData])
 
   const handleDetail = itemId => {
     navigate(`/groupPurchase/${itemId}`)
@@ -35,25 +57,31 @@ export const PurchaseCard = () => {
 
   return (
     <>
-      {purchaseList.map(item => (
-        <Container key={item.id}>
-          <TradesLikeBtn />
-          <ClickWrapper onClick={() => handleDetail(item.id)}>
-            <TradesPreview>
-              <TradesImage imageUrl={item.thumbnailUrl} />
-            </TradesPreview>
-            <TradesCategory category={item.category} />
-            <TitleWrapper>
-              <TradesTitle title={item.title} />
-              <TradesPrice price={item.price} />
-            </TitleWrapper>
-            <TradesCount>
-              <TradesLikeCount hits={item.hits} />
-              <TradesViews bookmarkCount={item.bookmarkCount} />
-            </TradesCount>
-          </ClickWrapper>
-        </Container>
-      ))}
+      {purchaseList
+        .filter(item => !isClosing && !item.isClosing)
+        .map(item => (
+          <Container key={item.id}>
+            <TradesLikeBtn
+              productId={null}
+              offerId={item.id}
+              isBookmarked={item.isBookmarked}
+            />
+            <ClickWrapper onClick={() => handleDetail(item.id)}>
+              <TradesPreview>
+                <TradesImage imageUrl={item.thumbnailUrl} />
+              </TradesPreview>
+              <TradesCategory category={item.category} />
+              <TitleWrapper>
+                <TradesTitle title={item.title} />
+                <TradesPrice price={item.price} />
+              </TitleWrapper>
+              <TradesCount>
+                <TradesLikeCount hits={item.bookmarkCount} />
+                <TradesViews bookmarkCount={item.hits} />
+              </TradesCount>
+            </ClickWrapper>
+          </Container>
+        ))}
     </>
   )
 }

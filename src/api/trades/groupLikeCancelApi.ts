@@ -2,10 +2,10 @@ import { authInstance } from 'api/index'
 
 // 성공 응답 데이터 타입
 
-export async function SecondHandLikeApi(productId) {
+export async function GroupLikeCancelApi(offerId) {
   try {
     const response = await authInstance.post(
-      `/api/secondhand/${productId}/bookmark`
+      `/api/groupPurchase/${offerId}/unbookmark`
     )
     return response.data
   } catch (error) {

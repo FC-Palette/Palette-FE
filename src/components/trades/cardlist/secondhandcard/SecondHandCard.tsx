@@ -14,11 +14,17 @@ import { SecondHandListApi } from 'api/trades/index'
 import { SecondHandResProps } from 'types/trades/index'
 import { rowCentralise } from 'styles/index'
 import { useNavigate } from 'react-router-dom'
+import { useRecoilValue } from 'recoil'
+import { isClosingState } from 'recoil/index'
+import { SortedData, sortResponseData } from 'utils/index'
+import { careerSortGlobalState } from 'recoil/index'
 
 export const SecondHandCard = () => {
   const [secondHandList, setSecondHandList] = useState<SecondHandResProps[]>([])
   const navigate = useNavigate()
-
+  const isClosing = useRecoilValue(isClosingState)
+  const sortState = useRecoilValue(careerSortGlobalState)
+  const [sortedeData, setSortedData] = useState<SortedData[]>([])
   useEffect(() => {
     const fetchData = async () => {
       const res = await SecondHandListApi()
@@ -27,7 +33,24 @@ export const SecondHandCard = () => {
       }
     }
     fetchData()
-  }, [])
+  }, [isClosing])
+
+  useEffect(() => {
+    console.log(sortedeData)
+    if (secondHandList && secondHandList.length > 0) {
+      const sortedData: SortedData[] = secondHandList.map(item => ({
+        createdAt: item.createdAt,
+        likes: item.hits,
+        price: item.price
+      }))
+
+      // sortState.filter에 따라 정렬합니다.
+      const sortedResult = sortResponseData(sortedData, sortState.filter)
+
+      // 정렬된 데이터를 업데이트합니다.
+      setSortedData(sortedResult)
+    }
+  }, [secondHandList, sortState.filter])
 
   const handleDetail = itemId => {
     navigate(`/secondhand/${itemId}`)
@@ -35,25 +58,31 @@ export const SecondHandCard = () => {
 
   return (
     <>
-      {secondHandList.map(item => (
-        <Container key={item.id}>
-          <TradesLikeBtn />
-          <ClickWrapper onClick={() => handleDetail(item.id)}>
-            <TradesPreview>
-              <TradesImage imageUrl={item.thumbnailUrl} />
-            </TradesPreview>
-            <TradesCategory category={item.category} />
-            <TitleWrapper>
-              <TradesTitle title={item.title} />
-              <TradesPrice price={item.price} />
-            </TitleWrapper>
-            <TradesCount>
-              <TradesLikeCount hits={item.hits} />
-              <TradesViews bookmarkCount={item.bookmarkCount} />
-            </TradesCount>
-          </ClickWrapper>
-        </Container>
-      ))}
+      {secondHandList
+        .filter(item => !isClosing && !item.isSoldOut)
+        .map(item => (
+          <Container key={item.id}>
+            <TradesLikeBtn
+              productId={item.id}
+              offerId={null}
+              isBookmarked={item.isBookmarked}
+            />
+            <ClickWrapper onClick={() => handleDetail(item.id)}>
+              <TradesPreview>
+                <TradesImage imageUrl={item.thumbnailUrl} />
+              </TradesPreview>
+              <TradesCategory category={item.category} />
+              <TitleWrapper>
+                <TradesTitle title={item.title} />
+                <TradesPrice price={item.price} />
+              </TitleWrapper>
+              <TradesCount>
+                <TradesLikeCount hits={item.bookmarkCount} />
+                <TradesViews bookmarkCount={item.hits} />
+              </TradesCount>
+            </ClickWrapper>
+          </Container>
+        ))}
     </>
   )
 }

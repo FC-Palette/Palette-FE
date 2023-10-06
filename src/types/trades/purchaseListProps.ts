@@ -7,7 +7,10 @@ export interface GroupPurchaseResProps {
   price: number
   thumbnailUrl: string
   hits: number
-  bookmarkCount?: number
+  isBookmarked: boolean
+  bookmarkCount: number
+  isClosing: boolean
+  createdAt: string
 }
 
 // 오류 응답 데이터 타입

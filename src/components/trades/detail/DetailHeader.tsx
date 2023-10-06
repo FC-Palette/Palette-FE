@@ -5,6 +5,14 @@ import { Header } from 'components/index'
 import { ArrowLeft2, Heart, More, Send2, Trash, Edit } from 'iconsax-react'
 import { useNavigate } from 'react-router-dom'
 import { SECONDHAND_DELETE_MODAL_TEXT } from 'constants/trades/index'
+import { likeState } from 'recoil/tradescreateglobalstate'
+import { useRecoilValue } from 'recoil'
+import {
+  GroupLikeApi,
+  SecondHandLikeApi,
+  GroupLikeCancelApi,
+  SecondHandLikeCancelApi
+} from 'api/trades/index'
 
 import {
   UseBackgroundModal,
@@ -15,6 +23,10 @@ import { GroupPurchaseDeleteApi, SecondHandDeleteApi } from 'api/trades/index'
 
 interface DropdownProps {
   $isOpen: boolean
+}
+interface HeartProps {
+  $isLike: boolean
+  onClick?: () => void
 }
 
 interface OptionItemProps {
@@ -28,7 +40,9 @@ export const DetailHeader = ({ title, isAdmin, productId, offerId }) => {
   const navigate = useNavigate()
   const [modal4, setModal4] = useState(false)
   const maxLength = 13
-
+  const atom = useRecoilValue(likeState)
+  const { isBookmarked } = atom
+  const [likeSuccess, setLikeSuccess] = useState(isBookmarked)
   const truncatedTitle =
     title.length > maxLength ? `${title.substring(0, maxLength)}..` : title
 
@@ -36,14 +50,18 @@ export const DetailHeader = ({ title, isAdmin, productId, offerId }) => {
     setIsOpen(!isOpen)
   }
 
-  const handleOptionClick = value => {
+  const handleOptionClick = (value, offerId, productId) => {
     setSelectedOption(value)
     setIsOpen(false)
     if (value === '수정하기') {
       if (offerId) {
-        navigate(`/groupUpload/1`)
+        navigate(`/GroupEdit/1`, {
+          state: { offerId }
+        })
       } else {
-        navigate('/secondhandupload/1')
+        navigate(`/secondhandEdit/1`, {
+          state: { productId }
+        })
       }
     }
     if (value === '삭제하기') {
@@ -69,6 +87,24 @@ export const DetailHeader = ({ title, isAdmin, productId, offerId }) => {
     setModal4(false)
   }
 
+  const handleLike = async () => {
+    if (offerId) {
+      const api = isBookmarked ? GroupLikeCancelApi : GroupLikeApi
+      const response = await api(offerId)
+
+      if (response) {
+        setLikeSuccess(!likeSuccess)
+      }
+    } else if (productId) {
+      const api = isBookmarked ? SecondHandLikeCancelApi : SecondHandLikeApi
+      const response = await api(productId)
+
+      if (response) {
+        setLikeSuccess(!likeSuccess)
+      }
+    }
+  }
+
   const dynamicHeaderIcon = () => {
     const iconSize = 18
     return isAdmin ? (
@@ -78,7 +114,7 @@ export const DetailHeader = ({ title, isAdmin, productId, offerId }) => {
           {CREATE_EDIT_TEXT.map(item => (
             <OptionItem
               key={item.value}
-              onClick={() => handleOptionClick(item.label)}
+              onClick={() => handleOptionClick(item.label, offerId, productId)}
               $isSelected={item.label === selectedOption}>
               {item.label}
               {item.label === '수정하기' ? (
@@ -94,7 +130,10 @@ export const DetailHeader = ({ title, isAdmin, productId, offerId }) => {
     ) : (
       <MultiIconWrap>
         <Send2 />
-        <Heart />
+        <StyledHeard
+          onClick={handleLike}
+          $isLike={likeSuccess}
+        />
       </MultiIconWrap>
     )
   }
@@ -144,6 +183,7 @@ const MultiIconWrap = styled.div`
   font-weight: 100;
   font-size: ${props => props.theme.customSize.xxlarge};
   height: 24px;
+  cursor: pointer;
 `
 
 const DropdownMenu = styled.div<DropdownProps>`
@@ -187,4 +227,9 @@ const OptionItem = styled.div<OptionItemProps>`
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px;
   }
+`
+const StyledHeard = styled(Heart)<HeartProps>`
+  fill: ${props => (props.$isLike ? props.theme.subColor.prettyRed : 'none')};
+  color: ${props =>
+    props.$isLike ? props.theme.subColor.prettyRed : props.theme.main.black};
 `

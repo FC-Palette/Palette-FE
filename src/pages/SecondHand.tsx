@@ -9,9 +9,15 @@ import { SideBar } from 'components/common/index'
 import { CATEGORY_TEXT } from 'constants/trades/index'
 import { sideBarState } from 'recoil/index'
 import { useRecoilState } from 'recoil'
+import { isClosingState } from 'recoil/index'
 
 export const SecondHand = () => {
   const [isOpen, setIsOpen] = useRecoilState(sideBarState)
+  const [isClosing, setIsClosing] = useRecoilState(isClosingState)
+
+  const toggleClosingFilter = () => {
+    setIsClosing(!isClosing)
+  }
 
   const toggleSideBar = () => {
     setIsOpen(true)
@@ -45,7 +51,10 @@ export const SecondHand = () => {
       />
       <CategoryWrapper>
         <FilterWrapper>
-          <TradesFilter toggleSideBar={toggleSideBar} />
+          <TradesFilter
+            ClosingData={toggleClosingFilter}
+            toggleSideBar={toggleSideBar}
+          />
         </FilterWrapper>
       </CategoryWrapper>
       <MainWrapper>

@@ -23,7 +23,6 @@ export const PurchasePreview = () => {
     price,
     startDate,
     endDate,
-
     headCount,
     shopUrl,
     category
