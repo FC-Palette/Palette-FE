@@ -22,7 +22,7 @@ import { decoder } from 'utils/index'
 import { msgProps } from 'types/index'
 import { useRecoilValue } from 'recoil'
 
-import * as SockJS from 'sockjs-client'
+// import * as SockJS from 'sockjs-client'
 import { Client } from '@stomp/stompjs'
 
 import { getChatLog } from 'api/index'
