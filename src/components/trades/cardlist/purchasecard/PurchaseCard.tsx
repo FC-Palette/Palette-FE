@@ -58,7 +58,7 @@ export const PurchaseCard = () => {
   return (
     <>
       {purchaseList
-        .filter(item => !isClosing && !item.isClosing)
+        .filter(item => isClosing || !item.isClosing)
         .map(item => (
           <Container key={item.id}>
             <TradesLikeBtn
