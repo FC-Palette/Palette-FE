@@ -142,7 +142,7 @@ export const ModifyProfileArea = () => {
       
       console.log('프로필 수정 결과 (이미지):', imageResponse);
       console.log('프로필 수정 결과 (텍스트):', textResponse.data);
-      alert('데이터 수정 완료 테스트 메세지');
+      alert('데이터 수정 완료');
     } catch (error) {
       console.error('프로필 수정 오류:', error);
     }
@@ -241,7 +241,7 @@ const Wrap = styled.div`
   height: 300px;
   padding: 0 24px;
   Input{
-    width: 382px;
+    width: 100%;
     height: 48px;
     padding: 0;
     padding-left: 16px;
@@ -263,7 +263,7 @@ const InputArea = styled.div`
   font-weight: bold;
 
   Input {
-    width: 382px;
+    width: 100%;
     height: 48px;
     padding: 0;
     padding-left: 16px;
