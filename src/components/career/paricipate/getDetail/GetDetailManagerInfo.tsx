@@ -1,6 +1,7 @@
-import { followAdd, followDelete } from '@/api'
+import { checkFollowed, checkFollowing, followAdd, followDelete } from '@/api'
 import { Button } from '@/components'
 import { fetchDetailGlobalState } from '@/recoil'
+import { decoder } from '@/utils'
 import { useEffect, useState } from 'react'
 import { useRecoilValue } from 'recoil'
 import styled from 'styled-components'
@@ -17,6 +18,17 @@ export const GetDetailManagerInfo = () => {
   const { meetingMemberDto } = atom
   const { nickname, bio, id, image } = meetingMemberDto
   const [profile, setProfile] = useState(initailFormData)
+  const loggedUserId = decoder().memberId
+
+  useEffect(() => {
+    const fetchFollwData = async () => {
+      const res = await checkFollowing(id)
+      console.log(res.response)
+      const followRes = res.response.filter(item => item.memberId === id)
+      console.log(followRes)
+    }
+    fetchFollwData()
+  }, [isFollow])
 
   useEffect(() => {
     setProfile({
@@ -33,11 +45,13 @@ export const GetDetailManagerInfo = () => {
     if (isFollow) {
       const deleteRes = await followDelete(id)
       if (deleteRes.status === 200) {
+        console.log(deleteRes)
         setIsFollow(!isFollow)
       }
     } else {
       const addRes = await followAdd(id, profile)
       if (addRes.status === 200) {
+        console.log(addRes)
         setIsFollow(!isFollow)
       }
     }

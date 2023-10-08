@@ -21,23 +21,57 @@ import {
   sideBarState
 } from 'recoil/index'
 import { fetchMainApi, getMyPage } from '@/api'
-import { fetchMainResponseDataProps } from '@/types'
-import { SortedData, decoder, sortResponseData } from '@/utils'
+import { decoder, sortResponseData } from '@/utils'
 import { useNavigate } from 'react-router-dom'
+import { useQueries } from '@tanstack/react-query'
 
 export const CareerMain = () => {
   const navigate = useNavigate()
-  const [isLoading, setIsLoading] = useState(true)
-  const [responseData, setResponseData] =
-    useState<fetchMainResponseDataProps | null>(null)
   const [isOpen, setIsOpen] = useRecoilState(sideBarState)
   const [closedFilter, setClosedFilter] = useState(0)
-  const [sortedResponseData, setSortedResponseData] = useState<SortedData[]>([])
   const sortState = useRecoilValue(careerSortGlobalState) // 찜 많은순, 오래된순, 최신순, 모임시작일 순
   const filterState = useRecoilValue(careerFilterGlobalState) // 슬라이드 필터 아이템
   const { filter, onOff, type, job, position, sex } = filterState
   const userId = decoder()?.memberId
-  const [isProfile, setIsProfile] = useState(false)
+  const shouldFetchData = !!userId
+
+  const careerMainQueries = useQueries({
+    queries: [
+      {
+        queryKey: [
+          'mainData',
+          closedFilter,
+          filter,
+          onOff,
+          type,
+          job,
+          position,
+          sex
+        ],
+        queryFn: () =>
+          shouldFetchData
+            ? fetchMainApi(
+                closedFilter,
+                filter,
+                onOff,
+                type,
+                job,
+                position,
+                sex
+              )
+            : null
+      },
+      {
+        queryKey: ['isProfileCheck', userId],
+        queryFn: () => (shouldFetchData ? getMyPage(userId) : null)
+      }
+    ]
+  })
+
+  const mainData = careerMainQueries[0].data?.response
+  const isProfileQuery = !!careerMainQueries[1].data?.response?.job
+  const sortedData =
+    Array.isArray(mainData) && sortResponseData(mainData, sortState.filter)
 
   useEffect(() => {
     if (!userId) {
@@ -57,45 +91,15 @@ export const CareerMain = () => {
     setClosedFilter(value)
   }
 
-  useEffect(() => {
-    const fetchCareerData = async () => {
-      const [userData, mainData] = await Promise.all([
-        getMyPage(userId),
-        fetchMainApi(closedFilter, filter, onOff, type, job, position, sex)
-      ])
-
-      const userProfile = userData.response?.job
-      if (userProfile) {
-        setIsProfile(!isProfile)
-      }
-
-      if (mainData) {
-        setResponseData(mainData)
-        setIsLoading(false)
-      }
-    }
-    fetchCareerData()
-  }, [closedFilter, filter, onOff, type, job, position, sex])
-
-  // 토클 sort
-  useEffect(() => {
-    if (responseData) {
-      const sortedData = sortResponseData(
-        responseData.response,
-        sortState.filter
-      )
-      setSortedResponseData(sortedData)
-    }
-  }, [responseData, sortState])
-
   const handleSideBar = () => {
     setIsOpen(!isOpen)
   }
 
-  const resLength = responseData?.response?.length || 0
+  const resLength = Array.isArray(mainData) ? mainData.length : 0
 
   const renderContents = () => {
-    if (isLoading) return <CommonSpinner />
+    if (careerMainQueries[0].isLoading && careerMainQueries[1].isLoading)
+      return <CommonSpinner />
 
     return (
       <>
@@ -129,9 +133,9 @@ export const CareerMain = () => {
             toggleClosedFilter={toggleClosedFilter}
           />
 
-          <CareerMainCard responseData={sortedResponseData} />
+          <CareerMainCard responseData={sortedData} />
 
-          <CareerMainItemCreateButton isProfile={isProfile} />
+          <CareerMainItemCreateButton isProfile={isProfileQuery} />
 
           <Footer />
         </Wrap>
