@@ -45,9 +45,6 @@ export const GetDetailFooterAndButtonGuest = ({ loggedInUser }) => {
   }
 
   const checkCondition = async () => {
-    if (remainingSeats === 0) {
-      return
-    }
     if (detailid && !isUserJoined) {
       const checkRes = await participateCheckApi(detailid)
       if (
@@ -83,18 +80,34 @@ export const GetDetailFooterAndButtonGuest = ({ loggedInUser }) => {
   }
 
   const renderBtnText = () => {
-    if (remainingSeats === 0) {
-      return '마감된 모집입니다.'
-    } else if (isUserJoined) {
+    if (isUserJoined) {
       return '채팅하기'
+    } else if (remainingSeats === 0) {
+      return '마감된 모집입니다.'
     } else {
       return '참여하기'
     }
   }
+  // const bgColor = remainingSeats ? '' : theme.greyScale.grey2
+  // const borderColor = remainingSeats ? '' : theme.greyScale.grey2
+  // const color = remainingSeats ? '' : theme.greyScale.grey3
+  const renderBtnStyle = () => {
+    if (isUserJoined) {
+      return {
+        bgColor: '',
+        borderColor: '',
+        color: ''
+      }
+    } else {
+      return {
+        bgColor: remainingSeats ? '' : theme.greyScale.grey2,
+        borderColor: remainingSeats ? '' : theme.greyScale.grey2,
+        color: remainingSeats ? '' : theme.greyScale.grey3
+      }
+    }
+  }
 
-  const bgColor = remainingSeats ? '' : theme.greyScale.grey2
-  const borderColor = remainingSeats ? '' : theme.greyScale.grey2
-  const color = remainingSeats ? '' : theme.greyScale.grey3
+  const btnStyle = renderBtnStyle()
 
   return (
     <>
@@ -106,9 +119,9 @@ export const GetDetailFooterAndButtonGuest = ({ loggedInUser }) => {
             $btnHeight="60px"
             $fontSize="20px"
             $borderRadius="8px"
-            $bgColor={bgColor}
-            $borderColor={borderColor}
-            color={color}>
+            $bgColor={btnStyle.bgColor}
+            $borderColor={btnStyle.borderColor}
+            color={btnStyle.color}>
             {renderBtnText()}
           </Button>
         </BtnWrap>
