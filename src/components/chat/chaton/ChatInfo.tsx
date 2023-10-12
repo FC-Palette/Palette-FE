@@ -1,7 +1,3 @@
-/* 채팅방 상단 공지(토글X) (ChatAnn.tsx)
-모임/상품 정보(토글) (ChatSubject.tsx) 
-감싸는 컴포넌트 
-*/
 import { styled } from 'styled-components'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import {
@@ -42,7 +38,6 @@ export const ChatInfo = () => {
   const registered = notice?.response?.notice
   const contentNotice = notice?.response?.contentNotice
   const type = contentNotice?.type
-  // 추가예정
   const noticeId = notice?.response?.noticeId
   const toDetail = () => {
     setNotice(noticeId)
@@ -100,11 +95,3 @@ const InfoWrapper = styled.div`
   top: 0;
   box-shadow: 0px 3px 6px 0px rgba(187, 187, 210, 0.3);
 `
-
-// const {
-//   data: account,
-//   isLoading,
-//   isError
-// } = useQuery(['account', contentId], () => {
-//   return getNotice(contentId)
-// })

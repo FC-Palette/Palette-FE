@@ -51,8 +51,9 @@ export const ChatField = ({ messages }) => {
 
   const renderMessage = (message, index) => {
     const nextMessage = messages[index + 1]
+    const prevMessage = messages[index - 1]
     const showTimestamp = renderTime(message, nextMessage)
-
+    const showUserInfo = renderTime(message, prevMessage)
     //메시지 유형별 조건부 렌더링 조건들
     const msgInfo = {
       isSender:
@@ -81,6 +82,7 @@ export const ChatField = ({ messages }) => {
       profile: message.profileImgUrl,
       createdAt: message.createdAt,
       showCreatedTime: showTimestamp,
+      showIcon: showUserInfo,
       showMsgActions: openMsgActionsIndex === index && msgInfo.isChat,
       toggleMsgActions: () => toggleMsgActions(index),
       roomId: roomId,

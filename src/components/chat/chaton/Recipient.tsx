@@ -24,7 +24,8 @@ export const Recipient = ({
   showMsgActions,
   toggleMsgActions,
   roomId,
-  msgId
+  msgId,
+  showIcon
 }) => {
   const reset = useResetRecoilState(msgActionsState)
   const ref = useOutsideClick({
@@ -35,10 +36,10 @@ export const Recipient = ({
 
   return (
     <MessageBlock $sender={$sender}>
-      {showCreatedTime && <MemberImg src={profile} />}
-      {!showCreatedTime && <MemberImg src="" />}
+      {showIcon && <MemberImg src={profile} />}
+      {!showIcon && <MemberImg src="" />}
       <RecipientBlock>
-        {showCreatedTime && <MemberName>{nickName}</MemberName>}
+        {showIcon && <MemberName>{nickName}</MemberName>}
         <Flexbox>
           <MessageBox
             $sender={$sender}
@@ -55,7 +56,7 @@ export const Recipient = ({
             )}
           </MessageBox>
           <MessageTime
-            time={showCreatedTime ? formatHourMinute(createdAt) : null}
+            time={showCreatedTime && formatHourMinute(createdAt)}
             $sender={$sender}
           />
         </Flexbox>
