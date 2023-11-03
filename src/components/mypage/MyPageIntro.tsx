@@ -32,6 +32,8 @@ export const MyPageIntro = ({ userData, setUserData }) => {
     fetchData();
   }, [member_id]);
   
+
+
   return (
     <Container>
       <TextInformation>
@@ -57,13 +59,13 @@ export const MyPageIntro = ({ userData, setUserData }) => {
         </CategoryWrap>
         <FollowUserArea hide={userData?.response?.job === null}>
           <FollowerWrap>
-            <Link to={"/friend"}>
+            <Link to={`/friend/${member_id}`}>
             <Follower>{PROFILE_EDIT_TEXT.profileFollowText}</Follower>
             <FollowerNumber>{userData?.response?.followedCount}</FollowerNumber>
             </Link>
           </FollowerWrap>
           <FollowingWrap>
-            <Link to={"/friend"}>
+            <Link to={`/friend/${member_id}`}>
             <Following>{PROFILE_EDIT_TEXT.profileFollowingText}</Following>
             <FollowingNumber>{userData?.response?.followingCount}</FollowingNumber>
             </Link>
@@ -145,6 +147,9 @@ const PositionCategory = styled.div<{ hide: boolean }>`
 const FollowUserArea = styled.div<{ hide: boolean }>`
   display: flex;
   padding: 24px 0;
+  :link{
+    color: inherit;
+  }
   :visited{
     color: inherit;
   }

@@ -16,9 +16,7 @@ import { decoder } from '@/utils'
 export const MyPage = () => {
   const navigate = useNavigate()
   const location = useLocation()
-
   const decodedPayload = decoder()
-
   const myPagePath = `/mypage/${decodedPayload.memberId}`
 
   useEffect(() => {

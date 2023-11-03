@@ -21,17 +21,15 @@ export const MyPageEditBtn = ({ userData }) => {
   const bio = userData?.response.bio;
   const nickname = userData?.response.nickname;
   const image = userData?.response.image;
-
-  // Initialize isFollowing using userData when it's available
   const [isFollowing, setIsFollowing] = useState(userData ? userData.response.followed : false);
 
   useEffect(() => {
     if (userData) {
-      setIsFollowing(userData.response.followed);
-    }
+      setIsFollowing(userData.response.followed);}
   }, [userData]);
-
   console.log(userData);
+
+
 
   const handleFollow = async () => {
     try {
@@ -42,18 +40,17 @@ export const MyPageEditBtn = ({ userData }) => {
         bio,
       };
   
-      const response = isFollowing
-        ? await followDelete(member_id)
-        : await followAdd(member_id, profileData);
+      if (isFollowing) {
+        const response = await followDelete(member_id);
+        console.log('언팔로우 성공:', response);
+      } else {
+        const response = await followAdd(member_id, profileData);
+        console.log('팔로우 성공:', response);
+      }
   
-      console.log(`${isFollowing ? '언팔로우' : '팔로우'} 성공:`, response);
-  
-      // Log the updated value of isFollowing after the state update
-      setIsFollowing((prevState) => {
-        const newValue = !prevState;
-        console.log('Updated isFollowing:', newValue);
-        return newValue;
-      });
+      setIsFollowing((prevState) => !prevState); // 팔로우 상태 업데이트
+      // userData.response.followed 값을 업데이트
+      userData.response.followed = !isFollowing;
     } catch (error) {
       console.error('API 요청 실패:', error);
     }
