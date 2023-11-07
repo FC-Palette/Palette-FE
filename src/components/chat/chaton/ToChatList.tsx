@@ -6,12 +6,12 @@ import { CHAT_TEXTS } from 'constants/index'
 
 export const ToChatList = () => {
   const navigate = useNavigate()
+  const toChat = () => {
+    navigate('/chatannlist')
+  }
 
   return (
-    <Wrapper
-      onClick={() => {
-        navigate('/chatannlist')
-      }}>
+    <Wrapper onClick={toChat}>
       <Edit size="16" />
       <Notice>{CHAT_TEXTS.register}</Notice>
     </Wrapper>

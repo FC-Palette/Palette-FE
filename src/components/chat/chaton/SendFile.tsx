@@ -3,6 +3,7 @@ import { Button } from 'components/index'
 import { Additem, Image } from 'iconsax-react'
 import { theme, columnise } from 'styles/index'
 import { useMemo } from 'react'
+import { CHAT_TEXTS } from '@/constants'
 export const SendFile = () => {
   const ButtonProps = useMemo(
     () => ({
@@ -19,11 +20,11 @@ export const SendFile = () => {
     <Wrapper>
       <Button {...ButtonProps}>
         <Image />
-        &nbsp;이미지 전송하기
+        {CHAT_TEXTS.sendImg}
       </Button>
       <Button {...ButtonProps}>
         <Additem />
-        &nbsp;파일 전송하기
+        {CHAT_TEXTS.sendFile}
       </Button>
     </Wrapper>
   )

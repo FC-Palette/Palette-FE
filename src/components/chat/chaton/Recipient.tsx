@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { styled } from 'styled-components'
 import { useResetRecoilState } from 'recoil'
 import { msgActionsState } from 'recoil/index'
@@ -12,58 +13,61 @@ import {
   MsgActions
 } from 'components/index'
 import { Flexbox, columnise } from 'styles/index'
+import { RecipientProps } from 'types/index'
 
 //ChatField
-export const Recipient = ({
-  message,
-  $sender,
-  nickName,
-  createdAt,
-  profile,
-  showCreatedTime,
-  showMsgActions,
-  toggleMsgActions,
-  roomId,
-  msgId,
-  showIcon
-}) => {
-  const reset = useResetRecoilState(msgActionsState)
-  const ref = useOutsideClick({
-    onClickOutside: () => {
-      reset()
-    }
-  })
+export const Recipient = memo(
+  ({
+    message,
+    $sender,
+    nickName,
+    createdAt,
+    profile,
+    showCreatedTime,
+    showMsgActions,
+    toggleMsgActions,
+    roomId,
+    msgId,
+    showIcon
+  }: RecipientProps) => {
+    const reset = useResetRecoilState(msgActionsState)
+    const ref = useOutsideClick({
+      onClickOutside: () => {
+        reset()
+      }
+    })
 
-  return (
-    <MessageBlock $sender={$sender}>
-      {showIcon && <MemberImg src={profile} />}
-      {!showIcon && <MemberImg src="" />}
-      <RecipientBlock>
-        {showIcon && <MemberName>{nickName}</MemberName>}
-        <Flexbox>
-          <MessageBox
-            $sender={$sender}
-            onDoubleClick={toggleMsgActions}>
-            {message}
-            {showMsgActions && typeof message === 'string' && (
-              <MsgActions
-                msgRef={ref}
-                $sender={$sender}
-                message={message}
-                roomId={roomId}
-                msgId={msgId}
-              />
-            )}
-          </MessageBox>
-          <MessageTime
-            time={showCreatedTime && formatHourMinute(createdAt)}
-            $sender={$sender}
-          />
-        </Flexbox>
-      </RecipientBlock>
-    </MessageBlock>
-  )
-}
+    return (
+      <MessageBlock $sender={$sender}>
+        {showIcon && <MemberImg src={profile} />}
+        {!showIcon && <MemberImg src="" />}
+        <RecipientBlock>
+          {showIcon && <MemberName>{nickName}</MemberName>}
+          <Flexbox>
+            <MessageBox
+              $sender={$sender}
+              onDoubleClick={toggleMsgActions}>
+              {message}
+              {showMsgActions && typeof message === 'string' && (
+                <MsgActions
+                  msgRef={ref}
+                  $sender={$sender}
+                  message={message}
+                  roomId={roomId}
+                  msgId={msgId}
+                />
+              )}
+            </MessageBox>
+            <MessageTime
+              time={showCreatedTime && formatHourMinute(createdAt)}
+              $sender={$sender}
+            />
+          </Flexbox>
+        </RecipientBlock>
+      </MessageBlock>
+    )
+  }
+)
 
 const RecipientBlock = styled.div`
   ${columnise};
