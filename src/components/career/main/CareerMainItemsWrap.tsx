@@ -22,6 +22,7 @@ interface CareerData {
   recruitedPersonnel: string
   headCount: number
   likemsg?: boolean
+  closing?: boolean
 }
 export const CareerMainItemsWrap = ({ data }: { data: CareerData }) => {
   const navigate = useNavigate()

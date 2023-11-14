@@ -21,11 +21,19 @@ export const CareerCreateMeetingStaticHeader = () => {
     navigate('/career')
   }
 
+  const moveToBack = () => {
+    navigate(-1)
+    if (location.pathname === '/create/1') {
+      setFile(resetFile)
+      setDto(resetDto)
+    }
+  }
+
   const navigate = useNavigate()
   return (
     <Header
       leftIcon={
-        <StyledIcon onClick={() => navigate(-1)}>
+        <StyledIcon onClick={moveToBack}>
           <ArrowLeft2 />
         </StyledIcon>
       }
@@ -56,7 +64,7 @@ export const CareerCreateMeetingStaticHeader = () => {
     </Header>
   )
 }
-const StyledIcon = styled.button`
+const StyledIcon = styled.div`
   color: #000;
   font-size: ${props => props.theme.customSize.xxlarge};
 `

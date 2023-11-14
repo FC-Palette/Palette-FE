@@ -1,7 +1,7 @@
 import { styled } from 'styled-components'
 import { Heart } from 'iconsax-react'
 import { requestMeetingLikeApi, requestMeetingLikeCancelApi } from '@/api'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 interface HeartProps {
   $isLike: boolean
@@ -10,7 +10,6 @@ interface HeartProps {
 
 export const CareerMainItemLikeButton = ({ meetingId, likemsg }) => {
   const [likeSuccess, setLikeSuccess] = useState(likemsg)
-  useEffect(() => {}, [meetingId])
 
   // 찜하기 또는 취소하기 클릭 시 상태를 변경하는 함수
   const handleLike = async () => {

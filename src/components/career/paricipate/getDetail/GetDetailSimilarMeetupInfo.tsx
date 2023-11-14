@@ -1,10 +1,9 @@
 import styled from 'styled-components'
-import { CareerCreateMeetingCommonQuestion } from '../..'
 import { CommonLikeIcon, CommonViewIcon } from '@/components'
 import { useRecoilValue } from 'recoil'
 import { fetchDetailRecommendState } from '@/recoil'
-import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { renderCareerCommonTitle } from '@/utils'
 
 export const GetDetailSimilarMeetupInfo = () => {
   const recommendations = useRecoilValue(fetchDetailRecommendState)
@@ -14,14 +13,9 @@ export const GetDetailSimilarMeetupInfo = () => {
     return title.length > length ? title.slice(0, length) + '...' : title
   }
 
-  useEffect(() => {}, [recommendations])
-
   return (
     <>
-      <CareerCreateMeetingCommonQuestion>
-        비슷한 모임 추천
-      </CareerCreateMeetingCommonQuestion>
-
+      {renderCareerCommonTitle('비슷한 모임 추천')}
       <Container>
         {recommendations.map((recommendation, index) => (
           <CardContainer

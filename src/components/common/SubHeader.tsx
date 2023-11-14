@@ -26,7 +26,6 @@ export const SubHeader: React.FC<SubHeaderProps> = ({ items, initialItem }) => {
         {items.map(item => (
           <HeaderItemSimple
             key={item.text}
-            // $isSelected={selectedHeader === item.text}
             $isSelected={selectedHeader === item.text}
             onClick={() => handleSubHeaderClick(item)}>
             {item.text}

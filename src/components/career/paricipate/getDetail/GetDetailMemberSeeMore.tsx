@@ -3,25 +3,15 @@
 import { Button, Header } from '@/components'
 import { fetchDetailMemberState } from '@/recoil'
 import { ArrowLeft2 } from 'iconsax-react'
-import { useEffect } from 'react'
-// import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import styled from 'styled-components'
 export const GetDetailMemberSeeMore = () => {
   const memeberAtom = useRecoilValue(fetchDetailMemberState)
-
   const location = useLocation()
   const navigate = useNavigate()
   const detailId = location.state.detailid
-
-  if (!detailId) {
-    console.log(detailId)
-  }
-
-  useEffect(() => {
-    // const fetchData = async () => {}
-  }, [])
+  console.log(detailId)
 
   const longText = (text, maxLength) => {
     return text.length > maxLength ? text.slice(0, maxLength) + '...' : text

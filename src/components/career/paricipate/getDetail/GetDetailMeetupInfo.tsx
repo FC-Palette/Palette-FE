@@ -1,10 +1,10 @@
 import { iconMapping } from '@/components'
 import { MEETUP_SIMPLE_INFO } from '@/constants'
 import styled from 'styled-components'
-import { CareerCreateMeetingCommonQuestion } from '../..'
 import { useRecoilValue } from 'recoil'
 import { fetchDetailGlobalState } from '@/recoil'
 import { useEffect } from 'react'
+import { renderCareerCommonTitle } from '@/utils'
 
 export const GetDetailMeetupInfo = () => {
   const atom = useRecoilValue(fetchDetailGlobalState)
@@ -72,9 +72,7 @@ export const GetDetailMeetupInfo = () => {
   )
   return (
     <>
-      <CareerCreateMeetingCommonQuestion>
-        모임정보
-      </CareerCreateMeetingCommonQuestion>
+      {renderCareerCommonTitle('모임 정보')}
 
       <MainContainer>
         <ColumnContainer>{iconsAndTitles}</ColumnContainer>
@@ -99,7 +97,7 @@ const ColumnContainer = styled.div`
   gap: 17px;
   padding: 4.5% 16px 4.5% 4.5%;
 `
-// left
+
 const Icon = styled.div`
   width: 24px;
   height: 24px;

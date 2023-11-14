@@ -15,14 +15,10 @@ export const GetDetailFooterAndButtonGuest = ({ loggedInUser }) => {
   const meetingRes = useRecoilValue(fetchDetailGlobalState)
   const [useModal, setUseModal] = useState(false)
   const modalText = CREATE_MODAL_TEXT.condition_not_met
-  const { msg, acceptType, headCount } = meetingRes
+  const { msg, acceptType, headCount, closing } = meetingRes
   const isUserJoined = msg === '참여하고 있지않은 모임입니다.' ? false : true
   const recruitedPersonnel = memberAtom.length
   const remainingSeats: number = headCount - +recruitedPersonnel
-
-  if (!detailid) {
-    return null
-  }
 
   if (!detailid) {
     return
@@ -45,6 +41,10 @@ export const GetDetailFooterAndButtonGuest = ({ loggedInUser }) => {
   }
 
   const checkCondition = async () => {
+    if (renderBtnText() === '마감된 모집입니다.') {
+      return
+    }
+
     if (detailid && !isUserJoined) {
       const checkRes = await participateCheckApi(detailid)
       if (
@@ -52,25 +52,21 @@ export const GetDetailFooterAndButtonGuest = ({ loggedInUser }) => {
         checkRes.response === meetingConditionText[0]
       ) {
         setUseModal(!useModal)
-        console.log(checkRes)
       } else if (
         acceptType === '선착순' &&
         checkRes.response === meetingConditionText[1]
       ) {
         moveToJoinMeetingNot()
-        console.log(checkRes)
       } else if (
         acceptType === '승인제' &&
         checkRes.response === meetingConditionText[1]
       ) {
         moveToJoinMeetingApprove()
-        console.log(checkRes)
       } else if (
         acceptType === '승인제' &&
         checkRes.response === meetingConditionText[0]
       ) {
         setUseModal(!useModal)
-        console.log(checkRes)
       }
     }
 
@@ -82,15 +78,13 @@ export const GetDetailFooterAndButtonGuest = ({ loggedInUser }) => {
   const renderBtnText = () => {
     if (isUserJoined) {
       return '채팅하기'
-    } else if (remainingSeats === 0) {
+    } else if (remainingSeats === 0 || closing) {
       return '마감된 모집입니다.'
     } else {
       return '참여하기'
     }
   }
-  // const bgColor = remainingSeats ? '' : theme.greyScale.grey2
-  // const borderColor = remainingSeats ? '' : theme.greyScale.grey2
-  // const color = remainingSeats ? '' : theme.greyScale.grey3
+
   const renderBtnStyle = () => {
     if (isUserJoined) {
       return {
