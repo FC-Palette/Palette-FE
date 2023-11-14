@@ -1,6 +1,60 @@
 import styled from 'styled-components'
+import { followAdd, followDelete } from 'api/index'
+import { useState } from 'react'
+import { Button } from 'components/index'
 
-export const ManagerInfo = ({ managerName, managerInfo, managerImg }) => {
+export const ManagerInfo = ({
+  managerName,
+  managerInfo,
+  managerImg,
+  id,
+  profile
+}) => {
+  const [isFollow, setIsFollow] = useState(false)
+
+  const handleFollow = async () => {
+    if (isFollow) {
+      const deleteRes = await followDelete(id)
+      if (deleteRes.status === 200) {
+        setIsFollow(!isFollow)
+      }
+    } else {
+      const addRes = await followAdd(id, profile)
+      if (addRes.status === 200) {
+        setIsFollow(!isFollow)
+      }
+    }
+  }
+  const truncateManagerInfo = info => {
+    if (info.length > 15) {
+      return info.substring(0, 15) + '...'
+    }
+    return info
+  }
+
+  const checkFollow = (followInfo: boolean) => {
+    return followInfo ? (
+      <Button
+        onClick={handleFollow}
+        color="#6B7280"
+        $bgColor="#F5F6FA"
+        $borderColor="F5F6FA"
+        $btnWidth="105px"
+        $btnHeight="35px">
+        팔로우 삭제
+      </Button>
+    ) : (
+      <Button
+        onClick={handleFollow}
+        $bgColor="#2563EB"
+        $borderColor="2563EB"
+        $btnWidth="105px"
+        $btnHeight="35px">
+        팔로우
+      </Button>
+    )
+  }
+
   return (
     <>
       <ContentsContainer>
@@ -12,9 +66,11 @@ export const ManagerInfo = ({ managerName, managerInfo, managerImg }) => {
         </RoomManagerImage>
         <NameAndIntroduceWrap_Column>
           <RoomManagerName>{managerName}</RoomManagerName>
-          <RoomManagerIntroduce>{managerInfo}</RoomManagerIntroduce>
+          <RoomManagerIntroduce>
+            {truncateManagerInfo(managerInfo)}
+          </RoomManagerIntroduce>
         </NameAndIntroduceWrap_Column>
-        <FollowBtn>팔로워 삭제</FollowBtn>
+        <FollowBtn>{checkFollow(isFollow)}</FollowBtn>
       </ContentsContainer>
     </>
   )

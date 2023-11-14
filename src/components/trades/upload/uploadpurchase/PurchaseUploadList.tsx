@@ -33,6 +33,7 @@ export const PurchaseUploadList = () => {
                   $borderRadius="8px"
                   $paddingLeft="12px"
                   ph={item.props?.ph}
+                  type={item.type}
                   onChange={e =>
                     inputUtils(
                       e.target.value,

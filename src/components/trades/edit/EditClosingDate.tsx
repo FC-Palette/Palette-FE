@@ -2,20 +2,20 @@ import React from 'react'
 import { theme } from 'styles/index'
 import { styled } from 'styled-components'
 import { useRecoilState } from 'recoil'
-import { tradescreateglobalstate } from 'recoil/index'
+import { tradesModifyGlobalState } from 'recoil/index'
 
 const TRADES_CLOSING_OPTIONS = [
-  { label: '마감 일시 도달 시 자동 마감', value: 'DATETIME' },
+  { label: '마감 일자 도달 시 자동 마감', value: 'DATETIME' },
   { label: '마감 인원 도달 시 자동 마감', value: 'HEAD_COUNT' }
 ]
 
-export const ClosingDate = () => {
-  const [tradesGlobalState, setTradesGlobalState] = useRecoilState(
-    tradescreateglobalstate
+export const EditClosingDate = () => {
+  const [tradesModify, setTradesModify] = useRecoilState(
+    tradesModifyGlobalState
   )
 
   const handleOptionChange = selectedOption => {
-    setTradesGlobalState(prevGlobalState => ({
+    setTradesModify(prevGlobalState => ({
       ...prevGlobalState,
       closingType: selectedOption
     }))
@@ -32,7 +32,7 @@ export const ClosingDate = () => {
                 id={`radio${option.value}`}
                 name="closingOption"
                 value={option.value}
-                checked={tradesGlobalState.closingType === option.value}
+                checked={tradesModify.closingType === option.value}
                 onChange={() => handleOptionChange(option.value)}
               />
             </Label>

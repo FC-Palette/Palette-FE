@@ -21,10 +21,17 @@ export const PurchaseDetailCard = ({ offerId }) => {
   const [timeremaining, setTimeremaining] = useState<string>('')
   const decodedToken = decoder()
   const isAdmin = decodedToken?.memberId === purchaseDetailList?.member?.id
+  const [profile, setProfile] = useState({
+    image: '',
+    bio: '',
+    nickname: '',
+    followingId: ''
+  })
 
   useEffect(() => {
     const DetailData = async () => {
       const res = await GroupPurchaseDetail(offerId)
+      console.log(res.response)
       if (res.success) {
         setPurchaseDetailList(res.response)
 
@@ -32,12 +39,17 @@ export const PurchaseDetailCard = ({ offerId }) => {
         const currentTime = new Date()
         const timeDifference = endDate.getTime() - currentTime.getTime()
         const days = Math.floor(timeDifference / (3600000 * 24)) // 일
-        const hours = Math.floor((timeDifference % (3600000 * 24)) / 3600000) // 시간
-        const minutes = Math.floor((timeDifference % 3600000) / 60000) // 분
-
-        const remainingTime = `${days}일 ${hours} : ${minutes} `
+        const remainingTime = `${days}일`
 
         setTimeremaining(remainingTime)
+
+        const updatedProfile = {
+          image: res.response.member.image || '',
+          bio: res.response.member.bio || '',
+          nickname: res.response.member.nickname || '',
+          followingId: res.response.member.id || ''
+        }
+        setProfile(updatedProfile)
       }
     }
     DetailData()
@@ -71,6 +83,7 @@ export const PurchaseDetailCard = ({ offerId }) => {
             offerId={offerId}
             productId={null}
             isAdmin={isAdmin}
+            isBookmarked={purchaseDetailList.isBookmarked}
           />
           <Wrapper>
             <ImageDetail meetupImages={purchaseDetailList.image} />
@@ -78,6 +91,8 @@ export const PurchaseDetailCard = ({ offerId }) => {
               managerImg={purchaseDetailList.member.image}
               managerInfo={purchaseDetailList.member.bio}
               managerName={purchaseDetailList.member.nickname}
+              id={purchaseDetailList.member.id}
+              profile={profile}
             />
             <PreviewPrice price={purchaseDetailList.price} />
             <GetTitleAndDescription

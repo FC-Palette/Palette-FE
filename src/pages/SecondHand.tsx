@@ -5,18 +5,20 @@ import { styled } from 'styled-components'
 import { ArrowLeft2, SearchNormal1, Notification } from 'iconsax-react'
 import { TRADES_SUBHEADER_TEXT } from 'constants/trades/index'
 import { TradesFilter } from 'components/trades/cardlist/index'
-import { SideBar } from 'components/common/index'
+import { SecondHandSideBar } from 'components/trades/cardlist/index'
 import { CATEGORY_TEXT } from 'constants/trades/index'
 import { sideBarState } from 'recoil/index'
-import { useRecoilState } from 'recoil'
-import { isClosingState } from 'recoil/index'
+import { useRecoilState, useRecoilValue } from 'recoil'
+import { isSoldOutState } from 'recoil/index'
+import { SecondHandCountState } from 'recoil/tradescreateglobalstate'
 
 export const SecondHand = () => {
   const [isOpen, setIsOpen] = useRecoilState(sideBarState)
-  const [isClosing, setIsClosing] = useRecoilState(isClosingState)
+  const [isSoldOut, setIsSoldOut] = useRecoilState(isSoldOutState)
+  const secondHandCount = useRecoilValue(SecondHandCountState)
 
   const toggleClosingFilter = () => {
-    setIsClosing(!isClosing)
+    setIsSoldOut(!isSoldOut)
   }
 
   const toggleSideBar = () => {
@@ -26,9 +28,10 @@ export const SecondHand = () => {
   return (
     <>
       {isOpen && (
-        <SideBar
+        <SecondHandSideBar
           centerText="중고 거래"
           items={CATEGORY_TEXT}
+          count={secondHandCount}
         />
       )}
       <Header

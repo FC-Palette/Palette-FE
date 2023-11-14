@@ -1,31 +1,24 @@
 import { theme } from 'styles/index'
 import { styled } from 'styled-components'
-import {
-  tradescreateglobalstate,
-  secondhandcreateglobalstate
-} from 'recoil/index'
+import { tradesModifyGlobalState } from 'recoil/index'
 import { useRecoilState } from 'recoil'
 
 const placeholderText = `TIP!
   수금은 어떻게 진행하실 건가요?
   어디서 상품을 나누실 건가요?
   왜 이상품을 공동구매 하시나요?`
-const placeholderText1 = `TIP!
-  거래는 어떻게 진행하실 건가요?
-  어디서 상품을 나누실 건가요?
-  왜 이상품을 중고거래 하시나요?`
 
-export const UploadInputDetail = () => {
-  const [tradesGlobalState, setTradesGlobalState] = useRecoilState(
-    tradescreateglobalstate
+export const EditDescription = () => {
+  const [tradesModify, setTradesModify] = useRecoilState(
+    tradesModifyGlobalState
   )
-  const { description } = tradesGlobalState
+  const { description } = tradesModify
 
   const handleTextChange = e => {
     const text = e.target.value
     const maxDescriptionLength = 300
     if (text.length <= maxDescriptionLength) {
-      setTradesGlobalState(prev => ({
+      setTradesModify(prev => ({
         ...prev,
         description: text
       }))
@@ -45,42 +38,7 @@ export const UploadInputDetail = () => {
   )
 }
 
-export const UploadInputDetail1 = () => {
-  const [secondHandGlobalState, setSecondHandGlobalState] = useRecoilState(
-    secondhandcreateglobalstate
-  )
-  const { description } = secondHandGlobalState
-
-  const handleTextChange = e => {
-    const text = e.target.value
-    const maxDescriptionLength = 300
-    if (text.length <= maxDescriptionLength) {
-      setSecondHandGlobalState(prev => ({
-        ...prev,
-        description: text
-      }))
-    }
-  }
-
-  return (
-    <Wrapper>
-      <InputWrapper>
-        <TextArea
-          placeholder={placeholderText1}
-          onChange={handleTextChange}
-        />
-      </InputWrapper>
-      <TextCount>{description.length} / 300</TextCount>
-    </Wrapper>
-  )
-}
-
 //
-const Wrapper = styled.div`
-  width: 100%;
-  margin-top: 8px;
-  height: 209px;
-`
 
 const Wrapper1 = styled.div`
   width: 100%;

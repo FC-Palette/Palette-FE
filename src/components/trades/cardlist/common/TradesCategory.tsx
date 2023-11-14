@@ -1,14 +1,21 @@
 import { theme } from 'styles/index'
-import { styled } from 'styled-components'
 import { categoryMap } from 'constants/trades/index'
+import { styled, css } from 'styled-components'
+import { TradesClosingProps } from 'types/trades/index'
 
-export const TradesCategory = ({ category }) => {
+export const TradesCategory = ({ category, isClosing, isSoldOut }) => {
   const formattedCategory = categoryMap[category] || '알 수 없음'
 
-  return <CategoryWrapper>{formattedCategory}</CategoryWrapper>
+  return (
+    <CategoryWrapper
+      isClosing={isClosing}
+      isSoldOut={isSoldOut}>
+      {formattedCategory}
+    </CategoryWrapper>
+  )
 }
 
-const CategoryWrapper = styled.div`
+const CategoryWrapper = styled.div<TradesClosingProps>`
   height: 25px;
   top: 158px;
   left: 8px;
@@ -20,5 +27,10 @@ const CategoryWrapper = styled.div`
   display: flex;
   align-items: center;
   color: ${theme.greyScale.grey7};
+  ${props =>
+    (props.isClosing || props.isSoldOut) &&
+    css`
+      color: ${theme.greyScale.grey3};
+    `}
   font-weight: 400;
 `

@@ -44,4 +44,5 @@ export interface SideBarProps {
   count?: number
   centerText?: string
   icon?: boolean
+  setFilteredData?: (data: any) => void
 }

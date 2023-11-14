@@ -1,11 +1,9 @@
-import {
-  SecondHandStepOne,
-  SecondHandPre
-} from 'components/trades/preview/index'
+import { SecondHandPre } from 'components/trades/preview/index'
 import {
   UseBackgroundModal,
   UseButtons
 } from 'components/common/useActions/index'
+import { EditSecondHand } from 'components/trades/edit/index'
 import { UploadFooter } from 'components/trades/upload/index'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useRecoilState } from 'recoil'
@@ -15,12 +13,11 @@ import { PreviewFooter } from 'components/trades/preview/index'
 import {
   secondhandcreateglobalstate,
   initialSecondHandGlobalState,
-  initialImageState,
-  ImageState
+  initialeditSecondHandImage,
+  editSecondHandImage,
+  RemoveSecondHandImage
 } from 'recoil/index'
 import { SecondHandeModifyApi } from 'api/trades/index'
-
-// import { styled } from 'styled-components'
 
 interface Params {
   [key: string]: string | undefined
@@ -37,7 +34,9 @@ export const SecondHandEdit = ({}) => {
   )
   const location = useLocation()
   const productId = location.state.productId
-  const [imageGlobalState, setImageGlobalState] = useRecoilState(ImageState)
+  const [editSecondHandState, setEditSecondHandState] =
+    useRecoilState(editSecondHandImage)
+  const [removeSecondHandImageState] = useRecoilState(RemoveSecondHandImage)
 
   const handleNextStep = () => {
     const nextStep = parseInt(stepId) + 1
@@ -49,8 +48,9 @@ export const SecondHandEdit = ({}) => {
   const handleTrades = async () => {
     await SecondHandeModifyApi(
       secondHandGlobalState,
-      imageGlobalState.file,
-      productId
+      editSecondHandState.file,
+      productId,
+      removeSecondHandImageState.urls
     )
     setModalText(SECONDHAND_MODAL_TEXT.create)
     setModal3(true)
@@ -65,12 +65,12 @@ export const SecondHandEdit = ({}) => {
   const handleConfirmYes = () => {
     if (modalText === SECONDHAND_MODAL_TEXT.create) {
       setSecondHandGlobalState(initialSecondHandGlobalState)
-      setImageGlobalState(initialImageState)
+      setEditSecondHandState(initialeditSecondHandImage)
       setModal3(false)
       navigate(`/secondHand`)
     } else if (modalText === SECONDHAND_MODAL_TEXT.cancel) {
       setSecondHandGlobalState(initialSecondHandGlobalState)
-      setImageGlobalState(initialImageState)
+      setEditSecondHandState(initialeditSecondHandImage)
       setModal3(false)
       navigate(`/secondHand`)
     }
@@ -88,11 +88,11 @@ export const SecondHandEdit = ({}) => {
   const renderContent = () => {
     switch (stepId) {
       case '1':
-        return <SecondHandStepOne />
+        return <EditSecondHand />
       case '2':
         return <SecondHandPre />
       default:
-        return <SecondHandStepOne />
+        return <EditSecondHand />
     }
   }
 

@@ -5,8 +5,6 @@ import { Header } from 'components/index'
 import { ArrowLeft2, Heart, More, Send2, Trash, Edit } from 'iconsax-react'
 import { useNavigate } from 'react-router-dom'
 import { SECONDHAND_DELETE_MODAL_TEXT } from 'constants/trades/index'
-import { likeState } from 'recoil/tradescreateglobalstate'
-import { useRecoilValue } from 'recoil'
 import {
   GroupLikeApi,
   SecondHandLikeApi,
@@ -34,14 +32,18 @@ interface OptionItemProps {
   onClick: () => void
 }
 // 공통 헤더 컴포넌트
-export const DetailHeader = ({ title, isAdmin, productId, offerId }) => {
+export const DetailHeader = ({
+  title,
+  isAdmin,
+  productId,
+  offerId,
+  isBookmarked
+}) => {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedOption, setSelectedOption] = useState('')
   const navigate = useNavigate()
   const [modal4, setModal4] = useState(false)
   const maxLength = 13
-  const atom = useRecoilValue(likeState)
-  const { isBookmarked } = atom
   const [likeSuccess, setLikeSuccess] = useState(isBookmarked)
   const truncatedTitle =
     title.length > maxLength ? `${title.substring(0, maxLength)}..` : title

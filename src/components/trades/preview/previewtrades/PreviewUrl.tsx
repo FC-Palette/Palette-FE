@@ -14,7 +14,7 @@ export const PreviewUrl = ({ shopUrl }) => {
         const response = await fetch(shopUrl)
         const text = await response.text()
         const parser = new DOMParser()
-        const doc = parser.parseFromString(text, 'text/html')
+        const doc = parser.parseFromString(text, 'text/html') // doc 변수를 이 위치에서 정의
 
         // 이미지 태그를 가져오기
         const imageTag = doc.querySelector('meta[property="og:image"]')
@@ -39,7 +39,9 @@ export const PreviewUrl = ({ shopUrl }) => {
     <Link to={shopUrl}>
       <Wrapper>
         <ImageWrapper>
-          <Image src={imageUrl} />
+          <Image>
+            <img src={imageUrl}></img>
+          </Image>
 
           <MetaTitle>{metaTitle}</MetaTitle>
           <UrlLink>{shopUrl}</UrlLink>
@@ -70,13 +72,18 @@ const ImageWrapper = styled.div`
   border-radius: 8px;
 `
 
-const Image = styled.img`
+const Image = styled.div`
   width: 100%;
   height: 150px;
   overflow: hidden;
-  border-radius: 8px 8px 0px 0px;
-`
+  border-radius: 8px;
 
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+`
 const MetaTitle = styled.div`
   font-size: ${theme.customSize.large};
   color: ${theme.greyScale.grey8};

@@ -6,43 +6,29 @@ import { Header, Background } from 'components/common/index'
 import { ArrowLeft2, ArrowRotateRight } from 'iconsax-react'
 import { useRecoilState } from 'recoil'
 import { sideBarState } from 'recoil/index'
-import Box from '@mui/material/Box'
-import Slider from '@mui/material/Slider'
 import {
-  TradesFilterState,
-  TradesFilterDataState
+  SecondHandFilterState,
+  FilteredDataState
 } from 'recoil/tradescreateglobalstate'
-import { groupFilterApi } from 'api/trades/groupFilterApi'
+import { secondHandFilterApi } from 'api/trades/index'
 import { categoryMapping } from 'constants/trades/index'
 
 export const defaultFilterState = {
   category: [] as string[],
   minPrice: 0,
-  maxPrice: 100000
+  maxPrice: 0
 }
 
-export const SideBar: React.FC<SideBarProps> = ({
+export const SecondHandSideBar: React.FC<SideBarProps> = ({
   items,
   count,
   centerText
 }) => {
   const [isOpen, setIsOpen] = useRecoilState(sideBarState)
   const [rightPosition, setRightPosition] = useState<string>('-100%')
-  const [tradesFilterGlobalState, setTradesFilterGlobalState] =
-    useRecoilState(TradesFilterState)
-  const [tradesFilterData, setTradesFilterData] = useRecoilState(
-    TradesFilterDataState
-  )
-
-  const handleSliderChange = (_: Event, newValue: number | number[]) => {
-    const [minPrice, maxPrice] = Array.isArray(newValue) ? newValue : [0, 0]
-
-    setTradesFilterGlobalState(prevState => ({
-      ...prevState,
-      minPrice,
-      maxPrice
-    }))
-  }
+  const [secondHandFilterGlobalState, setSecondHandFilterGlobalState] =
+    useRecoilState(SecondHandFilterState)
+  const [filteredData, setFilteredData] = useRecoilState(FilteredDataState)
 
   const handleCancelSide = () => {
     setIsOpen(false)
@@ -50,14 +36,14 @@ export const SideBar: React.FC<SideBarProps> = ({
 
   const handleCategoryClick = async (category: string) => {
     try {
-      const currentCategories = tradesFilterGlobalState.category || []
+      const currentCategories = secondHandFilterGlobalState.category || []
 
       const newCategories = currentCategories.includes(category)
         ? currentCategories.filter(cat => cat !== category)
         : [...currentCategories, category] // 선택
 
       // Recoil 상태 업데이트
-      setTradesFilterGlobalState(prevState => ({
+      setSecondHandFilterGlobalState(prevState => ({
         ...prevState,
         category: newCategories
       }))
@@ -68,17 +54,16 @@ export const SideBar: React.FC<SideBarProps> = ({
       ) as string[]
 
       const categoryKeysCombined = categoryKeys.join(',')
-      const data = await groupFilterApi(
-        categoryKeysCombined,
-        tradesFilterGlobalState.minPrice,
-        tradesFilterGlobalState.maxPrice
-      )
+      const data = await secondHandFilterApi(categoryKeysCombined)
       const filteredDataJSON = JSON.stringify(data)
-      if (tradesFilterData) {
-        setTradesFilterData([filteredDataJSON])
+
+      if (filteredData) {
+        // JSON 데이터를 파싱하여 문자열 배열로 변경
+        setFilteredData([filteredDataJSON])
       }
+      console.log('카테고리', secondHandFilterGlobalState)
       console.log('필터 데이터:', data)
-      console.log('필터링된 데이터:', tradesFilterData)
+      console.log('필터링된 데이터:', filteredData)
     } catch (error) {
       console.error('API 호출 중 에러 발생:', error)
     }
@@ -109,7 +94,9 @@ export const SideBar: React.FC<SideBarProps> = ({
           children={
             <StyledIcon>
               <ArrowRotateRight
-                onClick={() => setTradesFilterGlobalState(defaultFilterState)}
+                onClick={() =>
+                  setSecondHandFilterGlobalState(defaultFilterState)
+                }
               />
             </StyledIcon>
           }
@@ -124,8 +111,8 @@ export const SideBar: React.FC<SideBarProps> = ({
                     key={contentIndex}
                     $isOpen={isOpen}
                     $isSelected={
-                      tradesFilterGlobalState.category
-                        ? tradesFilterGlobalState.category.includes(
+                      secondHandFilterGlobalState.category
+                        ? secondHandFilterGlobalState.category.includes(
                             categoryMapping[content]
                           )
                         : false
@@ -140,8 +127,8 @@ export const SideBar: React.FC<SideBarProps> = ({
                 <ContentWrapper
                   $isOpen={isOpen}
                   $isSelected={
-                    tradesFilterGlobalState.category
-                      ? tradesFilterGlobalState.category.includes(
+                    secondHandFilterGlobalState.category
+                      ? secondHandFilterGlobalState.category.includes(
                           categoryMapping[item.content]
                         )
                       : false
@@ -154,24 +141,7 @@ export const SideBar: React.FC<SideBarProps> = ({
               )}
             </FilterWrapper>
           ))}
-          <FilterWrapper>
-            <TitleWrapper>금액</TitleWrapper>
-            <Box sx={{ width: '85%', margin: '0 auto' }}>
-              <Slider
-                value={[
-                  tradesFilterGlobalState.minPrice,
-                  tradesFilterGlobalState.maxPrice
-                ]}
-                onChange={handleSliderChange}
-                getAriaLabel={() => 'Temperature range'}
-                defaultValue={[0, 100000]}
-                valueLabelDisplay="auto"
-                step={5000}
-                min={0}
-                max={100000}
-              />
-            </Box>
-          </FilterWrapper>
+          <FilterWrapper></FilterWrapper>
         </MainWrapper>
         <FooterWrapper
           onClick={() => {
@@ -210,6 +180,7 @@ const FooterWrapper = styled.div<{ $isOpen?: boolean }>`
   font-size: 20px;
   padding: 20px;
   color: ${theme.main.white};
+  cursor: pointer;
 `
 const TitleWrapper = styled.div<{ $isOpen?: boolean }>`
   font-size: ${theme.customSize.xlarge};

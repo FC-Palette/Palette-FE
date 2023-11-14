@@ -6,27 +6,28 @@ import { useNavigate } from 'react-router-dom'
 import { EditPurchaseUploadList } from 'components/trades/edit/index'
 import { useSetRecoilState } from 'recoil'
 import {
-  ImageState,
-  initialImageState,
-  initialTradeCreateGlobalState,
-  tradescreateglobalstate
+  editPurchaseImage,
+  initialImageEdit,
+  initialTradeModifyGlobalState,
+  tradesModifyGlobalState
 } from 'recoil/index'
 
 export const EditPurchase = () => {
   const navigate = useNavigate()
-  const setImageGlobalState = useSetRecoilState(ImageState)
-  const setTradesGlobalState = useSetRecoilState(tradescreateglobalstate)
+  const editImageState = useSetRecoilState(editPurchaseImage)
+  const setTradesModify = useSetRecoilState(tradesModifyGlobalState)
 
   const handleButton = () => {
-    setTradesGlobalState(initialTradeCreateGlobalState)
-    setImageGlobalState(initialImageState)
+    setTradesModify(initialTradeModifyGlobalState)
+    editImageState(initialImageEdit)
+
     navigate('/groupPurchase')
   }
 
   return (
     <>
       <Header
-        centerText="공동 구매 제안하기"
+        centerText="공동 구매 수정하기"
         leftIcon={
           <StyledIcon onClick={handleButton}>
             <ArrowLeft2 />

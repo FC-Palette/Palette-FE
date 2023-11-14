@@ -71,5 +71,10 @@ export const accInfoState = atom({
 
 export const isClosingState = atom({
   key: 'isClosingState',
-  default: false
+  default: true
+})
+
+export const isSoldOutState = atom({
+  key: 'isSoldOutState',
+  default: true
 })

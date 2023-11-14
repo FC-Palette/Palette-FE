@@ -57,6 +57,7 @@ export const SecondHandUploadList = () => {
                   $borderRadius="8px"
                   $paddingLeft="12px"
                   ph={item.props?.ph}
+                  type={item.type}
                   onChange={e =>
                     secondHandUtils(
                       e.target.value,

@@ -15,73 +15,118 @@ import { GroupPurchaseResProps } from 'types/trades/index'
 import { rowCentralise } from 'styles/index'
 import { useNavigate } from 'react-router-dom'
 import { isClosingState } from 'recoil/index'
-import { useRecoilValue } from 'recoil'
-import { SortedData, sortResponseData } from 'utils/index'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { TradesSortedData, TradesSortResponseData } from 'utils/index'
 import { careerSortGlobalState } from 'recoil/index'
+import { CommonSpinner } from 'components/index'
+import {
+  TradesFilterDataState,
+  ListCountState
+} from 'recoil/tradescreateglobalstate'
+// import { useQuery } from '@tanstack/react-query'
 
 export const PurchaseCard = () => {
   const [purchaseList, setPurchaseList] = useState<GroupPurchaseResProps[]>([])
   const navigate = useNavigate()
   const isClosing = useRecoilValue(isClosingState)
-  const [sortedeData, setSortedData] = useState<SortedData[]>([])
-
   const sortState = useRecoilValue(careerSortGlobalState)
+  const [isLoading, setIsLoading] = useState(true)
+  const [TradesSortedData, setTradesSortedData] = useState<TradesSortedData[]>(
+    []
+  )
+  const [tradesFilterData] = useRecoilValue(TradesFilterDataState)
+  const setCountState = useSetRecoilState(ListCountState)
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await GroupPurchaseListApi()
-      if (response.success) {
-        setPurchaseList(response.response)
+      if (tradesFilterData) {
+        const parsedData = JSON.parse(tradesFilterData)
+        if (parsedData.response.length === 0) {
+          const res = await GroupPurchaseListApi()
+          if (res.success) {
+            setPurchaseList(res.response)
+          }
+        } else {
+          setPurchaseList(parsedData.response)
+        }
+        setCountState(parsedData.response.length)
+      } else {
+        const res = await GroupPurchaseListApi()
+        if (res.success) {
+          setPurchaseList(res.response)
+          setCountState(res.response.length)
+        }
       }
+      setIsLoading(false)
     }
     fetchData()
-  }, [isClosing])
+  }, [isClosing, tradesFilterData])
 
   useEffect(() => {
-    if (purchaseList && purchaseList.length > 0 && sortState.filter) {
-      const sortedData: SortedData[] = purchaseList.map(item => ({
-        likes: item.hits,
-        price: item.price,
-        createdAt: item.createdAt
-      }))
-
-      const sortedResult = sortResponseData(sortedData, sortState.filter)
-
-      setSortedData(sortedResult)
+    if (!isLoading && purchaseList.length > 0 && sortState.filter) {
+      const sortedResult = TradesSortResponseData(
+        purchaseList,
+        sortState.filter
+      )
+      setTradesSortedData(sortedResult)
     }
-  }, [purchaseList, sortState.filter, sortedeData])
+  }, [isLoading, purchaseList, sortState.filter])
 
   const handleDetail = itemId => {
     navigate(`/groupPurchase/${itemId}`)
   }
 
+  if (isLoading) {
+    return <CommonSpinner />
+  }
+
   return (
     <>
-      {purchaseList
-        .filter(item => isClosing || !item.isClosing)
-        .map(item => (
-          <Container key={item.id}>
-            <TradesLikeBtn
-              productId={null}
-              offerId={item.id}
-              isBookmarked={item.isBookmarked}
-            />
-            <ClickWrapper onClick={() => handleDetail(item.id)}>
-              <TradesPreview>
-                <TradesImage imageUrl={item.thumbnailUrl} />
-              </TradesPreview>
-              <TradesCategory category={item.category} />
-              <TitleWrapper>
-                <TradesTitle title={item.title} />
-                <TradesPrice price={item.price} />
-              </TitleWrapper>
-              <TradesCount>
-                <TradesLikeCount hits={item.bookmarkCount} />
-                <TradesViews bookmarkCount={item.hits} />
-              </TradesCount>
-            </ClickWrapper>
-          </Container>
-        ))}
+      {TradesSortedData && TradesSortedData.length > 0 ? (
+        TradesSortedData.filter(item => isClosing || !item.isClosing).map(
+          item => (
+            <Container key={item.id}>
+              <TradesLikeBtn
+                productId={null}
+                offerId={item.id}
+                isBookmarked={item.isBookmarked}
+              />
+              <ClickWrapper onClick={() => handleDetail(item.id)}>
+                <TradesPreview>
+                  <TradesImage
+                    imageUrl={item.thumbnailUrl}
+                    isClosing={item.isClosing}
+                    isSoldOut={null}
+                  />
+                </TradesPreview>
+                <TradesCategory
+                  isClosing={item.isClosing}
+                  category={item.category}
+                  isSoldOut={null}
+                />
+                <TitleWrapper>
+                  <TradesTitle
+                    title={item.title}
+                    isClosing={item.isClosing}
+                    isSoldOut={null}
+                  />
+                  <TradesPrice
+                    price={item.price}
+                    isClosing={item.isClosing}
+                    isSoldOut={null}
+                  />
+                </TitleWrapper>
+                <TradesCount>
+                  <TradesLikeCount hits={item.bookmarkCount} />
+                  <TradesViews bookmarkCount={item.hits} />
+                </TradesCount>
+              </ClickWrapper>
+            </Container>
+          )
+        )
+      ) : (
+        <span>작성된 글이 없습니다.</span>
+      )}
     </>
   )
 }

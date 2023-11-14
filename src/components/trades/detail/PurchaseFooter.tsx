@@ -1,6 +1,7 @@
 import {
   UseBackgroundModal,
-  UseButtons
+  UseButtons,
+  UseBackgroundAgreeModal
 } from 'components/common/useActions/index'
 import { Button } from 'components/common/index'
 import styled from 'styled-components'
@@ -15,6 +16,8 @@ import {
   AGREE_MODAL_TEXT
 } from 'constants/trades/index'
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+// import { decoder } from 'utils/index'
 
 export const PurchaseFooter = ({
   isAdmin,
@@ -28,6 +31,10 @@ export const PurchaseFooter = ({
   const [modal1, setModal1] = useState(false)
   const [modal2, setModal2] = useState(false)
   const [modal3, setModal3] = useState(false)
+  // const decodedToken = decoder()
+  // const participant = decodedToken?.memberId
+  // const contentId = offerId
+  const navigate = useNavigate()
 
   const handleButtonClick = () => {
     if (productId) {
@@ -35,6 +42,7 @@ export const PurchaseFooter = ({
       } else if (isAdmin) {
         setModal1(true)
       } else {
+        navigate('/chatlist/p')
       }
     } else if (offerId) {
       if (isClosing) {
@@ -45,6 +53,7 @@ export const PurchaseFooter = ({
         setModal2(true)
       }
     } else {
+      navigate('/chatlist/p')
     }
   }
 
@@ -53,10 +62,12 @@ export const PurchaseFooter = ({
       await SecondHandClosingApi(productId)
       setButtonText('종료된 거래입니다')
       alert('종료되었습니다.')
+      window.location.reload()
     } else if (offerId) {
       await GroupPurchaseClosingApi(offerId)
       setButtonText('마감된 거래입니다')
       alert('마감되었습니다.')
+      window.location.reload()
     }
     setModal1(false)
   }
@@ -67,10 +78,13 @@ export const PurchaseFooter = ({
       // 성공 시 알림 메시지 표시
       alert('참여하였습니다')
       setModal2(false)
+      window.location.reload()
     } catch (error) {
       // 실패 시 알림 메시지 표시
-      alert('참여실패하였습니다')
+
+      setButtonText('참여하기')
       setModal2(false)
+      window.location.reload()
     }
   }
 
@@ -93,12 +107,13 @@ export const PurchaseFooter = ({
       } else {
         setButtonText('참여하기')
       }
-    } else {
-      setButtonText('채팅하기')
     }
   }, [productId, offerId, isAdmin, isSoldOut, isClosing, isParticipating])
   return (
     <>
+      {offerId && isParticipating && (
+        <Participating>이미 참여중인 거래입니다</Participating>
+      )}
       <FooterWrapper>
         <ButtonWrap>
           <Button
@@ -112,7 +127,7 @@ export const PurchaseFooter = ({
           </Button>
         </ButtonWrap>
       </FooterWrapper>
-
+      {/* 중고거래모달 */}
       {modal1 && (
         <UseBackgroundModal
           title={SECONDHAND_CLOSING_MODAL_TEXT[0]}
@@ -126,19 +141,22 @@ export const PurchaseFooter = ({
           />
         </UseBackgroundModal>
       )}
+      {/* 공동구매 모달 */}
       {modal2 && (
-        <UseBackgroundModal
+        <UseBackgroundAgreeModal
           modalState={modal2}
           title={AGREE_MODAL_TEXT[0]}
-          content={AGREE_MODAL_TEXT[1]}>
+          subTitle={AGREE_MODAL_TEXT[1]}
+          content={AGREE_MODAL_TEXT[2]}>
           <UseButtons
             onLeftClick={() => setModal2(false)}
             onRightClick={handleParticipateButton}
-            leftBtn={AGREE_MODAL_TEXT[2]}
-            rightBtn={AGREE_MODAL_TEXT[3]}
+            leftBtn={AGREE_MODAL_TEXT[3]}
+            rightBtn={AGREE_MODAL_TEXT[4]}
           />
-        </UseBackgroundModal>
+        </UseBackgroundAgreeModal>
       )}
+      {/* 모집마감모달 */}
       {modal3 && (
         <UseBackgroundModal
           modalState={modal3}
@@ -155,6 +173,17 @@ export const PurchaseFooter = ({
     </>
   )
 }
+
+const Participating = styled.div`
+  display: flex;
+  width: 100%;
+  background-color: ${props => props.theme.greyScale.grey7};
+  height: 32px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  color: ${props => props.theme.main.white};
+`
 
 const FooterWrapper = styled.footer`
   display: flex;

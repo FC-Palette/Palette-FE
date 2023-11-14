@@ -4,16 +4,18 @@ import { Header, Footer, SubHeader } from 'components/common/index'
 import { TRADES_SUBHEADER_TEXT } from 'constants/trades/index'
 import { styled } from 'styled-components'
 import { ArrowLeft2, SearchNormal1, Notification } from 'iconsax-react'
-import { TradesFilter } from 'components/trades/cardlist/index'
+import { PurchaseCategory } from 'components/trades/cardlist/index'
 import { SideBar } from 'components/common/index'
 import { CATEGORY_TEXT } from 'constants/trades/index'
 import { sideBarState } from 'recoil/index'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import { isClosingState } from 'recoil/index'
+import { ListCountState } from 'recoil/tradescreateglobalstate'
 
 export const GroupPurchase = () => {
   const [isOpen, setIsOpen] = useRecoilState(sideBarState)
   const [isClosing, setIsClosing] = useRecoilState(isClosingState)
+  const countState = useRecoilValue(ListCountState)
 
   const toggleClosingFilter = () => {
     setIsClosing(!isClosing)
@@ -29,6 +31,7 @@ export const GroupPurchase = () => {
         <SideBar
           centerText="공동 구매"
           items={CATEGORY_TEXT}
+          count={countState}
         />
       )}
       <Header
@@ -51,7 +54,7 @@ export const GroupPurchase = () => {
       />
       <CategoryWrapper>
         <FilterWrapper>
-          <TradesFilter
+          <PurchaseCategory
             ClosingData={toggleClosingFilter}
             toggleSideBar={toggleSideBar}
           />

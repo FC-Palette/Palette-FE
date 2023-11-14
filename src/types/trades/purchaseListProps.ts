@@ -9,8 +9,8 @@ export interface GroupPurchaseResProps {
   hits: number
   isBookmarked: boolean
   bookmarkCount: number
-  isClosing: boolean
-  createdAt: string
+  isClosing?: boolean
+  created_at: string
 }
 
 // 오류 응답 데이터 타입
@@ -43,6 +43,7 @@ export interface GroupPurchaseDetailResProps {
   }[]
   title: string
   category: string
+  isBookmarked: boolean
   startDate: string
   endDate: string
   description: string
