@@ -1,6 +1,13 @@
 import { baseInstanceFormData } from 'api/index'
 
-export async function SecondHandeModifyApi(dto, file, productId) {
+export async function SecondHandeModifyApi(
+  dto,
+  file,
+  productId,
+  removeFileUrl
+) {
+  console.log(dto)
+  console.log(file)
   try {
     const formData = new FormData()
 
@@ -9,11 +16,17 @@ export async function SecondHandeModifyApi(dto, file, productId) {
       new Blob([JSON.stringify(dto)], { type: 'application/json' })
     )
 
-    for (const blob of file) {
-      formData.append('file', blob, `${Date.now()}.png`)
+    if (file && file.length > 0) {
+      for (const blob of file) {
+        formData.append('file', blob, `${Date.now()}.png`)
+      }
     }
 
-    const response = await baseInstanceFormData.post(
+    if (removeFileUrl && removeFileUrl.length > 0) {
+      formData.append('removeFileUrl', JSON.stringify(removeFileUrl))
+    }
+
+    const response = await baseInstanceFormData.patch(
       `/api/secondhand/${productId}`,
       formData
     )

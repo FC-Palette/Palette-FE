@@ -7,12 +7,6 @@ export interface CareerSortGlobalStateProps {
 export const careerSortGlobalState = atom<CareerSortGlobalStateProps>({
   key: 'careerSortGlobalState',
   default: {
-    filter: ''
-  }
-})
-export const purchaseSortGlobalState = atom<CareerSortGlobalStateProps>({
-  key: 'purchaseSortGlobalState',
-  default: {
-    filter: ''
+    filter: '최신순'
   }
 })

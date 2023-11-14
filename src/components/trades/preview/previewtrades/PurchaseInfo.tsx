@@ -5,7 +5,7 @@ import { Profile2User, Timer1, Calendar } from 'iconsax-react'
 
 const iconMapping = {
   마감일자: <Calendar />,
-  남은시간: <Timer1 />,
+  남은일자: <Timer1 />,
   모집인원: <Profile2User />
 }
 

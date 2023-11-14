@@ -45,7 +45,6 @@ const Wrapper = styled.div`
   min-height: 48px;
   padding: 10px 20px;
   overflow-x: auto;
-  justify-content: space-between;
 `
 
 const CategoryContainer = styled.div`

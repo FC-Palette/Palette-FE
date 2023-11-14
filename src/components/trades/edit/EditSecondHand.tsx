@@ -7,7 +7,7 @@ import { EditSecondHandUploadList } from 'components/trades/edit/index'
 import { useNavigate } from 'react-router-dom'
 import { useSetRecoilState } from 'recoil'
 import {
-  ImageState,
+  editSecondHandImage,
   initialImageState,
   secondhandcreateglobalstate,
   initialSecondHandGlobalState
@@ -15,13 +15,13 @@ import {
 
 export const EditSecondHand = () => {
   const navigate = useNavigate()
-  const setImageGlobalState = useSetRecoilState(ImageState)
+  const editSecondHandState = useSetRecoilState(editSecondHandImage)
   const setSecondHandGlobalState = useSetRecoilState(
     secondhandcreateglobalstate
   )
 
   const handleButton = () => {
-    setImageGlobalState(initialImageState)
+    editSecondHandState(initialImageState)
     setSecondHandGlobalState(initialSecondHandGlobalState)
     navigate('/secondHand')
   }

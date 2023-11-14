@@ -64,3 +64,28 @@ export const secondHandUtils = (
       break
   }
 }
+
+export const editInputUtils = (text, field, setTradesModify) => {
+  switch (field) {
+    case 'shopUrl':
+      setTradesModify(prev => ({
+        ...prev,
+        shopUrl: text
+      }))
+      break
+    case 'price':
+      setTradesModify(prev => ({
+        ...prev,
+        price: text
+      }))
+      break
+    case 'headCount':
+      setTradesModify(prev => ({
+        ...prev,
+        headCount: text
+      }))
+      break
+    default:
+      break
+  }
+}

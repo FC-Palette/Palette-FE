@@ -18,6 +18,6 @@ export const getTimeDiff = (serverDate: Date) => {
       'ko-KR',
       koreanDateOptions
     )
-    return `오늘 ${koreanDateFormatter.format(serverDate)}`
+    return ` ${koreanDateFormatter.format(serverDate)}`
   }
 }

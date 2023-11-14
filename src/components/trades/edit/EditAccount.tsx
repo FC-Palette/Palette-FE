@@ -3,7 +3,7 @@ import { styled } from 'styled-components'
 import { Input } from 'components/index'
 import Select from '@mui/material/Select'
 import MenuItem from '@mui/material/MenuItem'
-import { tradescreateglobalstate } from 'recoil/index'
+import { tradesModifyGlobalState } from 'recoil/index'
 import { useRecoilState } from 'recoil'
 import { ArrowRight2 } from 'iconsax-react'
 import { bankOptions } from 'components/common/index'
@@ -13,16 +13,16 @@ const TRADES_ACCOUNT_TEXT = [
   { id: 2, text: '계좌주 성명' }
 ]
 
-export const Account = () => {
-  const [tradesGlobalState, setTradesGlobalState] = useRecoilState(
-    tradescreateglobalstate
+export const EditAccount = () => {
+  const [tradesModify, setTradesModify] = useRecoilState(
+    tradesModifyGlobalState
   )
-  const { bank, accountNumber, accountOwner } = tradesGlobalState
+  const { bank, accountNumber, accountOwner } = tradesModify
 
   const handleChangeBank = event => {
     const selectedBankValue = event.target.value
 
-    setTradesGlobalState(prev => ({
+    setTradesModify(prev => ({
       ...prev,
       bank: selectedBankValue
     }))
@@ -30,7 +30,7 @@ export const Account = () => {
 
   const handleChangeAccount = event => {
     const text = event.target.value
-    setTradesGlobalState(prev => ({
+    setTradesModify(prev => ({
       ...prev,
       accountNumber: text
     }))
@@ -38,7 +38,7 @@ export const Account = () => {
 
   const handleChangeAccountOwner = event => {
     const text = event.target.value
-    setTradesGlobalState(prev => ({
+    setTradesModify(prev => ({
       ...prev,
       accountOwner: text
     }))

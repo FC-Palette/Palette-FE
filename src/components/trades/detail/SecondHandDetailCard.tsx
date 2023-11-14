@@ -25,13 +25,28 @@ export const SecondHandDetailCard = ({ productId }) => {
     useState<SecondHandDetailResProps | null>(null)
   const decodedToken = decoder()
   const isAdmin = decodedToken?.memberId === secondHandDetailList?.member?.id
+  const [profile, setProfile] = useState({
+    image: '',
+    bio: '',
+    nickname: '',
+    followingId: ''
+  })
 
   useEffect(() => {
     const DetailData = async () => {
       const res = await SecondHandDetail(productId)
+
       if (res.success) {
         setSecondHandDetailList(res.response)
+        console.log(res.response)
       }
+      const updatedProfile = {
+        image: res.response.member.image || '',
+        bio: res.response.member.bio || '',
+        nickname: res.response.member.nickname || '',
+        followingId: res.response.member.id || ''
+      }
+      setProfile(updatedProfile)
     }
 
     DetailData()
@@ -49,6 +64,7 @@ export const SecondHandDetailCard = ({ productId }) => {
             productId={productId}
             offerId={null}
             isAdmin={isAdmin}
+            isBookmarked={secondHandDetailList.isBookmarked}
           />
           <Wrapper>
             <ImageDetail meetupImages={secondHandDetailList.images} />
@@ -56,6 +72,8 @@ export const SecondHandDetailCard = ({ productId }) => {
               managerImg={secondHandDetailList.member.image}
               managerInfo={secondHandDetailList.member.bio}
               managerName={secondHandDetailList.member.nickname}
+              id={secondHandDetailList.member.id}
+              profile={profile}
             />
             <PreviewPrice price={secondHandDetailList.price} />
             <GetTitleAndDescription
@@ -77,18 +95,28 @@ export const SecondHandDetailCard = ({ productId }) => {
             <CareerCreateMeetingCommonQuestion>
               사용자님의 다른상품
             </CareerCreateMeetingCommonQuestion>
-
-            {secondHandDetailList?.anotherProductDtos.map(product => (
-              <OtherWrapper
-                onClick={() => handleWrapperClick(product.id)}
-                key={product.id}>
-                <TradesImage imageUrl={product.thumbnailUrl}></TradesImage>
-                <InfoWrapper>
-                  <TradesTitle title={product.title}></TradesTitle>
-                  <TradesPrice price={product.price}></TradesPrice>
-                </InfoWrapper>
-              </OtherWrapper>
-            ))}
+            <ProductWrapper>
+              {secondHandDetailList?.anotherProductDtos.map(product => (
+                <OtherWrapper
+                  onClick={() => handleWrapperClick(product.id)}
+                  key={product.id}>
+                  <TradesImage
+                    imageUrl={product.thumbnailUrl}
+                    isSoldOut={null}
+                    isClosing={null}></TradesImage>
+                  <InfoWrapper>
+                    <TradesTitle
+                      isSoldOut={null}
+                      isClosing={null}
+                      title={product.title}></TradesTitle>
+                    <TradesPrice
+                      isSoldOut={null}
+                      isClosing={null}
+                      price={product.price}></TradesPrice>
+                  </InfoWrapper>
+                </OtherWrapper>
+              ))}
+            </ProductWrapper>
           </Wrapper>
           <PurchaseFooter
             isAdmin={isAdmin}
@@ -108,6 +136,12 @@ const Wrapper = styled.div`
   width: 100%;
   overflow-x: hidden;
   margin-bottom: 30px;
+`
+
+const ProductWrapper = styled.div`
+  overflow-x: scroll;
+  width: 100%;
+  display: flex;
 `
 
 const OtherWrapper = styled.div`

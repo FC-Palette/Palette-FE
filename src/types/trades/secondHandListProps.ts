@@ -9,8 +9,8 @@ export interface SecondHandResProps {
   hits: number
   bookmarkCount: number
   isBookmarked: boolean
-  isSoldOut: boolean
-  createdAt: string
+  isSoldOut?: boolean
+  created_at: string
 }
 
 // 오류 응답 데이터 타입
@@ -40,6 +40,7 @@ export interface SecondHandDetailResProps {
   images: string[]
   title: string
   category: string
+  isBookmarked: boolean
   transactionStartTime: string
   transactionEndTime: string
   description: string

@@ -3,18 +3,21 @@ import { theme } from 'styles/index'
 import { styled } from 'styled-components'
 import { UploadTitle } from 'components/trades/upload/index'
 import { Input } from 'components/index'
-import { TRADES_TEXT } from 'constants/trades/index'
-import { inputUtils } from 'utils/index'
-import { tradescreateglobalstate } from 'recoil/index'
-import { useSetRecoilState } from 'recoil'
+import { EDIT_TRADES_TEXT } from 'constants/trades/index'
+import { editInputUtils } from 'utils/index'
+import { tradesModifyGlobalState } from 'recoil/index'
+import { useRecoilState } from 'recoil'
 
 export const EditPurchaseUploadList = () => {
-  const setTradesGlobalState = useSetRecoilState(tradescreateglobalstate)
-  const maxTitleLength = 25
+  const [tradesModify, setTradesModify] = useRecoilState(
+    tradesModifyGlobalState
+  )
+
+  console.log(tradesModify)
 
   return (
     <Wrapper>
-      {TRADES_TEXT.map((item, index) => (
+      {EDIT_TRADES_TEXT.map((item, index) => (
         <ComponentWappper key={index}>
           <TitleWrapper>
             <UploadTitle Text={item.title}> </UploadTitle>
@@ -33,14 +36,11 @@ export const EditPurchaseUploadList = () => {
                   $borderRadius="8px"
                   $paddingLeft="12px"
                   ph={item.props?.ph}
+                  type={item.type}
                   onChange={e =>
-                    inputUtils(
-                      e.target.value,
-                      item.field,
-                      setTradesGlobalState,
-                      maxTitleLength
-                    )
+                    editInputUtils(e.target.value, item.field, setTradesModify)
                   }
+                  disabled={item.field === 'title'}
                 />
               </InputFocus>
             ) : (

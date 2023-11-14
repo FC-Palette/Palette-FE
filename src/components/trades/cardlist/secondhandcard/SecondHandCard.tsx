@@ -14,75 +14,118 @@ import { SecondHandListApi } from 'api/trades/index'
 import { SecondHandResProps } from 'types/trades/index'
 import { rowCentralise } from 'styles/index'
 import { useNavigate } from 'react-router-dom'
-import { useRecoilValue } from 'recoil'
-import { isClosingState } from 'recoil/index'
-import { SortedData, sortResponseData } from 'utils/index'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { SecondHandSortedData, TradesSortResponseData } from 'utils/index'
 import { careerSortGlobalState } from 'recoil/index'
+import { CommonSpinner } from 'components/index'
+import { isSoldOutState } from 'recoil/index'
+import {
+  FilteredDataState,
+  SecondHandCountState
+} from 'recoil/tradescreateglobalstate'
 
 export const SecondHandCard = () => {
   const [secondHandList, setSecondHandList] = useState<SecondHandResProps[]>([])
   const navigate = useNavigate()
-  const isClosing = useRecoilValue(isClosingState)
+  const isSoldOut = useRecoilValue(isSoldOutState)
+  const [isLoading, setIsLoading] = useState(true)
   const sortState = useRecoilValue(careerSortGlobalState)
-  const [sortedeData, setSortedData] = useState<SortedData[]>([])
+  const [TradesSortedData, setTradesSortedData] = useState<
+    SecondHandSortedData[]
+  >([])
+  const [filteredData] = useRecoilValue(FilteredDataState)
+  const setSecondHandCount = useSetRecoilState(SecondHandCountState)
+
   useEffect(() => {
     const fetchData = async () => {
-      const res = await SecondHandListApi()
-      if (res.success) {
-        setSecondHandList(res.response)
+      if (filteredData) {
+        const parsedData = JSON.parse(filteredData)
+        if (parsedData.response.length === 0) {
+          const res = await SecondHandListApi()
+          if (res.success) {
+            setSecondHandList(res.response)
+          }
+        } else {
+          setSecondHandList(parsedData.response)
+        }
+        setSecondHandCount(parsedData.response.length)
+      } else {
+        const res = await SecondHandListApi()
+        if (res.success) {
+          setSecondHandList(res.response)
+          setSecondHandCount(res.response.length)
+        }
       }
+      setIsLoading(false)
     }
+
     fetchData()
-  }, [isClosing])
+  }, [isSoldOut, filteredData])
 
   useEffect(() => {
-    console.log(sortedeData)
-    if (secondHandList && secondHandList.length > 0) {
-      const sortedData: SortedData[] = secondHandList.map(item => ({
-        createdAt: item.createdAt,
-        likes: item.hits,
-        price: item.price
-      }))
-
-      // sortState.filter에 따라 정렬합니다.
-      const sortedResult = sortResponseData(sortedData, sortState.filter)
-
-      // 정렬된 데이터를 업데이트합니다.
-      setSortedData(sortedResult)
+    if (!isLoading && secondHandList.length > 0 && sortState.filter) {
+      const sortedResult = TradesSortResponseData(
+        secondHandList,
+        sortState.filter
+      )
+      setTradesSortedData(sortedResult)
     }
-  }, [secondHandList, sortState.filter])
+  }, [isLoading, secondHandList, sortState.filter])
 
   const handleDetail = itemId => {
     navigate(`/secondhand/${itemId}`)
   }
+  if (isLoading) {
+    return <CommonSpinner />
+  }
 
   return (
     <>
-      {secondHandList
-        .filter(item => isClosing || !item.isSoldOut)
-        .map(item => (
-          <Container key={item.id}>
-            <TradesLikeBtn
-              productId={item.id}
-              offerId={null}
-              isBookmarked={item.isBookmarked}
-            />
-            <ClickWrapper onClick={() => handleDetail(item.id)}>
-              <TradesPreview>
-                <TradesImage imageUrl={item.thumbnailUrl} />
-              </TradesPreview>
-              <TradesCategory category={item.category} />
-              <TitleWrapper>
-                <TradesTitle title={item.title} />
-                <TradesPrice price={item.price} />
-              </TitleWrapper>
-              <TradesCount>
-                <TradesLikeCount hits={item.bookmarkCount} />
-                <TradesViews bookmarkCount={item.hits} />
-              </TradesCount>
-            </ClickWrapper>
-          </Container>
-        ))}
+      {TradesSortedData && TradesSortedData.length > 0 ? (
+        TradesSortedData.filter(item => isSoldOut || !item.isSoldOut).map(
+          item => (
+            <Container key={item.id}>
+              <TradesLikeBtn
+                productId={item.id}
+                offerId={null}
+                isBookmarked={item.isBookmarked}
+              />
+              <ClickWrapper onClick={() => handleDetail(item.id)}>
+                <TradesPreview>
+                  <TradesImage
+                    imageUrl={item.thumbnailUrl}
+                    isSoldOut={item.isSoldOut}
+                    isClosing={null}
+                  />
+                </TradesPreview>
+                <TradesCategory
+                  category={item.category}
+                  isSoldOut={item.isSoldOut}
+                  isClosing={null}
+                />
+                <TitleWrapper>
+                  <TradesTitle
+                    title={item.title}
+                    isSoldOut={item.isSoldOut}
+                    isClosing={null}
+                  />
+                  <TradesPrice
+                    price={item.price}
+                    isClosing={null}
+                    isSoldOut={item.isSoldOut}
+                  />
+                </TitleWrapper>
+                <TradesCount>
+                  <TradesLikeCount hits={item.bookmarkCount} />
+                  <TradesViews bookmarkCount={item.hits} />
+                </TradesCount>
+              </ClickWrapper>
+            </Container>
+          )
+        )
+      ) : (
+        <span>작성된 글이 없습니다.</span>
+      )}
     </>
   )
 }

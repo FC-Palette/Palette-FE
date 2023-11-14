@@ -3,7 +3,7 @@ import { theme } from 'styles/index'
 import { styled } from 'styled-components'
 import { UploadTitle } from 'components/trades/upload/index'
 import { Input } from 'components/index'
-import { TRADES_SECONDHAND_TEXT } from 'constants/trades/index'
+import { EDIT_SECONDHAND_TEXT } from 'constants/trades/index'
 import { secondHandUtils } from 'utils/index'
 import { secondhandcreateglobalstate } from 'recoil/index'
 import { useRecoilState } from 'recoil'
@@ -34,7 +34,7 @@ export const EditSecondHandUploadList = () => {
   console.log(secondHandGlobalState)
   return (
     <Wrapper>
-      {TRADES_SECONDHAND_TEXT.map((item, index) => (
+      {EDIT_SECONDHAND_TEXT.map((item, index) => (
         <ComponentWappper key={item.title}>
           <TitleWrapper>
             <UploadTitle Text={item.title}> </UploadTitle>

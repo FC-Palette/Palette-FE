@@ -105,7 +105,6 @@ const OptionItem = styled.div<OptionItemProps>`
   border-bottom: 1px solid ${props => props.theme.greyScale.grey3};
   display: flex;
   align-items: center;
-  justify-content: space-between;
 
   cursor: pointer;
 

@@ -4,14 +4,14 @@ import { Setting4 } from 'iconsax-react'
 import { TRADES_MAIN_FILTER_ITEMS, categoryMap } from 'constants/trades/index'
 import { centralise, rowCentralise } from 'styles/index'
 import { CareerMainFilterSortOption } from 'components/career/index'
-import { SecondHandFilterState } from 'recoil/tradescreateglobalstate'
+import { TradesFilterState } from 'recoil/tradescreateglobalstate'
 import { useRecoilValue } from 'recoil'
 
-export const TradesFilter = ({ toggleSideBar, ClosingData }) => {
-  const secondHandFilterGlobalState = useRecoilValue(SecondHandFilterState)
+export const PurchaseCategory = ({ toggleSideBar, ClosingData }) => {
+  const tradesFilterGlobalState = useRecoilValue(TradesFilterState)
 
-  const filteredList = secondHandFilterGlobalState.category
-    ? Object.values(secondHandFilterGlobalState.category)
+  const filteredList = tradesFilterGlobalState?.category
+    ? Object.values(tradesFilterGlobalState.category)
         .filter(item => {
           return (
             (typeof item !== 'string' || item.trim() !== '') &&
@@ -75,6 +75,7 @@ const CaregoryWrap = styled.div`
   width: auto;
 `
 
+// 파란 아이콘 래퍼 [카테고리 필터]
 const StyledIcon = styled.button`
   position: absolute;
   right: 10px;
@@ -87,13 +88,13 @@ const StyledIcon = styled.button`
   border-radius: 12px;
   ${centralise};
 `
-
+// 파란 아이콘 아이템 [카테고리 필터]
 const StyledSetting4 = styled(Setting4)`
   color: ${props => props.theme.main.white};
   width: ${props => props.theme.customSize.xlarge};
   height: ${props => props.theme.customSize.xlarge};
 `
-
+// 파란 동그라미 래퍼 [생성일자 필터]
 const StyledRecordWrapper = styled.button`
   width: 20px;
   height: 20px;

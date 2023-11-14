@@ -23,3 +23,20 @@ export interface SecondHandGlobalStateProps {
   transactionStartTime: string
   transactionEndTime: string
 }
+
+export interface TradesClosingProps {
+  isClosing: boolean
+  isSoldOut: boolean
+}
+export interface TradesModifyProps {
+  description: string
+  price: number
+  startDate: string
+  endDate: string
+  headCount: number
+  closingType: string
+  accountOwner: string
+  accountNumber: string
+  shopUrl: string
+  bank: string
+}

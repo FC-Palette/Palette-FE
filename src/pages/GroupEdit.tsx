@@ -1,4 +1,4 @@
-import { PurchasePreview } from 'components/trades/preview/index'
+import { EditPurchasePreview } from 'components/trades/edit/index'
 import { EditPurchase } from 'components/trades/edit/index'
 import { UploadFooter } from 'components/trades/upload/index'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
@@ -6,10 +6,11 @@ import { useRecoilState } from 'recoil'
 import { MODIFY_MODAL_TEXT } from 'constants/trades/index'
 import { useState } from 'react'
 import {
-  tradescreateglobalstate,
-  initialTradeCreateGlobalState,
-  initialImageState,
-  ImageState
+  tradesModifyGlobalState,
+  initialTradeModifyGlobalState,
+  initialImageEdit,
+  editPurchaseImage,
+  RemoveImage
 } from 'recoil/index'
 import { GroupPurchaseModifyApi } from 'api/trades/index'
 import {
@@ -30,10 +31,11 @@ export const GroupEdit = () => {
   const [modal, setModal] = useState(false)
   const initialModalText = MODIFY_MODAL_TEXT.create
   const [modalText, setModalText] = useState(initialModalText)
-  const [tradesGlobalState, setTradesGlobalState] = useRecoilState(
-    tradescreateglobalstate
+  const [tradesModify, setTradesModify] = useRecoilState(
+    tradesModifyGlobalState
   )
-  const [imageGlobalState, setImageGlobalState] = useRecoilState(ImageState)
+  const [removeImageState] = useRecoilState(RemoveImage)
+  const [editImageState, setEditImageState] = useRecoilState(editPurchaseImage)
 
   const handleNextStep = () => {
     const nextStep = parseInt(stepId) + 1
@@ -43,13 +45,16 @@ export const GroupEdit = () => {
   }
 
   const handleTrades = async () => {
-    await GroupPurchaseModifyApi(
-      tradesGlobalState,
-      imageGlobalState.file,
-      offerId
+    const res = await GroupPurchaseModifyApi(
+      tradesModify,
+      editImageState.file,
+      offerId,
+      removeImageState.urls
     )
+
     setModalText(MODIFY_MODAL_TEXT.create)
     setModal(true)
+    console.log(res)
   }
 
   const handleCancel = () => {
@@ -60,13 +65,13 @@ export const GroupEdit = () => {
   // 모달 왼쪽 버튼 클릭 시 실행
   const handleConfirmYes = () => {
     if (modalText === MODIFY_MODAL_TEXT.create) {
-      setTradesGlobalState(initialTradeCreateGlobalState)
-      setImageGlobalState(initialImageState)
+      setTradesModify(initialTradeModifyGlobalState)
+      setEditImageState(initialImageEdit)
       navigate(`/GroupPurchase`)
       setModal(false)
     } else if (modalText === MODIFY_MODAL_TEXT.cancel) {
-      setTradesGlobalState(initialTradeCreateGlobalState)
-      setImageGlobalState(initialImageState)
+      setTradesModify(initialTradeModifyGlobalState)
+      setEditImageState(initialImageEdit)
       navigate(`/GroupPurchase`)
       setModal(false)
     }
@@ -77,8 +82,6 @@ export const GroupEdit = () => {
     if (modalText === MODIFY_MODAL_TEXT.create) {
       alert('채팅 페이지 이동 로직')
     } else if (modalText === MODIFY_MODAL_TEXT.cancel) {
-      setTradesGlobalState(initialTradeCreateGlobalState)
-      setImageGlobalState(initialImageState)
       setModal(false)
     }
   }
@@ -88,7 +91,7 @@ export const GroupEdit = () => {
       case '1':
         return <EditPurchase />
       case '2':
-        return <PurchasePreview />
+        return <EditPurchasePreview />
       default:
         return <EditPurchase />
     }

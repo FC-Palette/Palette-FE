@@ -5,7 +5,7 @@ import {
   GetStats,
   GetTitleAndDescription
 } from 'components/career/create/isUserInfo/index'
-import { tradescreateglobalstate, ImageState } from 'recoil/index'
+import { tradesModifyGlobalState, editPurchaseImage } from 'recoil/index'
 import {
   PurchaseInfo,
   PreviewPrice,
@@ -15,35 +15,27 @@ import {
 } from 'components/trades/preview/index'
 import { Thumbnail } from 'components/trades/detail/index'
 
-export const PurchasePreview = () => {
-  const tradesGlobalState = useRecoilValue(tradescreateglobalstate)
-  const {
-    title,
-    description,
-    price,
-    startDate,
-    endDate,
-    headCount,
-    shopUrl,
-    category
-  } = tradesGlobalState
+export const EditPurchasePreview = () => {
+  const tradesModify = useRecoilValue(tradesModifyGlobalState)
+  const { description, price, startDate, endDate, headCount, shopUrl } =
+    tradesModify
 
-  const imageGlobalState = useRecoilValue(ImageState)
-  const { file } = imageGlobalState
+  const editImageState = useRecoilValue(editPurchaseImage)
+  const { file } = editImageState
 
   return (
     <>
-      <PreviewHeader title={title} />
+      <PreviewHeader title={''} />
       <Wrapper>
         <Thumbnail images={file} />
         <GetRoomManagerInfo />
         <PreviewPrice price={price} />
         <GetTitleAndDescription
           detailText="아직 이 공동거래에 대한 소개가 작성되지 않았어요."
-          title={title}
+          title={''}
           description={description}
         />
-        <PreviewCategory category={category} />
+        <PreviewCategory category={''} />
         <GetStats />
         <PurchaseInfo
           currentCount="1"

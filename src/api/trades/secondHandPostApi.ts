@@ -1,8 +1,6 @@
 import { baseInstanceFormData } from 'api/index'
 
 export async function SecondHandPostApi(dto, file) {
-  console.log(dto)
-  console.log(file)
   try {
     const formData = new FormData()
 
