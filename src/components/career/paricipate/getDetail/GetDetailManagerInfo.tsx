@@ -52,8 +52,6 @@ export const GetDetailManagerInfo = () => {
   }, [meetingMemberDto, isFollow])
 
   const handleFollow = async () => {
-    console.log('id:', id)
-    console.log('profile:', profile)
     if (isFollow) {
       const deleteRes = await followDelete(managerId)
       if (deleteRes.status === 200) {
