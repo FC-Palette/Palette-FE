@@ -6,13 +6,13 @@ export const CareerMainItemTitle = ({ title, remainingSeats }) => {
     if (remainingSeats === 0) {
       return (
         <Title $isGrey={true}>
-          {title.length > 15 ? title.slice(0, 10) + '...' : title || '없음'}
+          {title.length > 15 ? title.slice(0, 15) + '...' : title || '없음'}
         </Title>
       )
     }
     return (
       <Title>
-        {title.length > 15 ? title.slice(0, 10) + '...' : title || '없음'}
+        {title.length > 15 ? title.slice(0, 15) + '...' : title || '없음'}
       </Title>
     )
   }

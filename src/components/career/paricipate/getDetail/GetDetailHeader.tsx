@@ -123,7 +123,7 @@ export const GetDetailHeader = ({ isAdmin, meetingId }) => {
             <ArrowLeft2 />
           </StyledIcon>
         }
-        centerText={title.length > 15 ? title.slice(0, 10) + '...' : title}>
+        centerText={title.length > 15 ? title.slice(0, 13) + '...' : title}>
         {dynamicHeaderIcon(isManager)}
       </Header>
 

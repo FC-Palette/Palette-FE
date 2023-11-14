@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import styled from 'styled-components'
 import { ArrowLeft2, SearchNormal1, Notification } from 'iconsax-react'
@@ -23,7 +23,7 @@ import {
 import { fetchMainApi, getMyPage } from '@/api'
 import { decoder, sortResponseData } from '@/utils'
 import { useNavigate } from 'react-router-dom'
-import { useQueries } from '@tanstack/react-query'
+import { useQueries, useQueryClient } from '@tanstack/react-query'
 
 export const CareerMain = () => {
   const navigate = useNavigate()
@@ -34,20 +34,22 @@ export const CareerMain = () => {
   const { filter, onOff, type, job, position, sex } = filterState
   const userId = decoder()?.memberId
   const shouldFetchData = !!userId
+  const queryClient = useQueryClient()
+  const mainQueryKey = [
+    'mainData',
+    closedFilter,
+    filter,
+    onOff,
+    type,
+    job,
+    position,
+    sex
+  ]
 
   const careerMainQueries = useQueries({
     queries: [
       {
-        queryKey: [
-          'mainData',
-          closedFilter,
-          filter,
-          onOff,
-          type,
-          job,
-          position,
-          sex
-        ],
+        queryKey: mainQueryKey,
         queryFn: () =>
           shouldFetchData
             ? fetchMainApi(
@@ -59,7 +61,8 @@ export const CareerMain = () => {
                 position,
                 sex
               )
-            : null
+            : null,
+        keepPreviousData: true
       },
       {
         queryKey: ['isProfileCheck', userId],
@@ -69,21 +72,43 @@ export const CareerMain = () => {
   })
 
   const mainData = careerMainQueries[0].data?.response
+
   const isProfileQuery = !!careerMainQueries[1].data?.response?.job
-  const sortedData =
-    Array.isArray(mainData) && sortResponseData(mainData, sortState.filter)
+  const sortedData = useMemo(() => {
+    if (Array.isArray(mainData)) {
+      return sortResponseData(mainData, sortState.filter)
+    }
+    return []
+  }, [mainData, sortState.filter])
 
   useEffect(() => {
     if (!userId) {
       navigate('/')
     }
-  }, [userId])
+
+    if (closedFilter !== 1) {
+      queryClient.prefetchQuery(
+        ['mainData', 1, filter, onOff, type, job, position, sex],
+        () => fetchMainApi(1, filter, onOff, type, job, position, sex)
+      )
+    }
+  }, [
+    userId,
+    queryClient,
+    closedFilter,
+    filter,
+    onOff,
+    type,
+    job,
+    position,
+    sex
+  ])
 
   const moveToAlarm = () => {
     navigate('/alarm')
   }
   const moveToBack = () => {
-    navigate(-1)
+    navigate('/home')
   }
 
   // 마감된 모집 제외 상태 리프팅
@@ -97,6 +122,7 @@ export const CareerMain = () => {
 
   const resLength = Array.isArray(mainData) ? mainData.length : 0
 
+  console.log(mainData)
   const renderContents = () => {
     if (careerMainQueries[0].isLoading && careerMainQueries[1].isLoading)
       return <CommonSpinner />

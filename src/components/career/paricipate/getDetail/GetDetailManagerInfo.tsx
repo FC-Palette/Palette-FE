@@ -1,4 +1,4 @@
-import { checkFollowed, checkFollowing, followAdd, followDelete } from '@/api'
+import { checkFollowing, followAdd, followDelete } from '@/api'
 import { Button } from '@/components'
 import { fetchDetailGlobalState } from '@/recoil'
 import { decoder } from '@/utils'
@@ -12,44 +12,56 @@ const initailFormData = {
   followingId: 0,
   image: null
 }
+
 export const GetDetailManagerInfo = () => {
   const [isFollow, setIsFollow] = useState(false)
   const atom = useRecoilValue(fetchDetailGlobalState)
-  const { meetingMemberDto } = atom
-  const { nickname, bio, id, image } = meetingMemberDto
+  const { meetingMemberDto } = atom // 주최자 정보
+  const {
+    nickname: managerNickname,
+    bio,
+    id: managerId,
+    image
+  } = meetingMemberDto // 주최자 정보
+
   const [profile, setProfile] = useState(initailFormData)
   const loggedUserId = decoder().memberId
 
   useEffect(() => {
     const fetchFollwData = async () => {
-      const res = await checkFollowing(id)
-      console.log(res.response)
-      const followRes = res.response.filter(item => item.memberId === id)
-      console.log(followRes)
+      const res = await checkFollowing(loggedUserId)
+      const followRes = res.response.find(
+        userInfo => userInfo.memberId === managerId
+      ).memberId
+
+      if (followRes === managerId) {
+        setIsFollow(followRes === managerId)
+      }
     }
+
     fetchFollwData()
   }, [isFollow])
 
   useEffect(() => {
     setProfile({
-      nickname: nickname,
+      nickname: managerNickname,
       bio: bio,
-      followingId: id,
+      followingId: managerId,
       image: image
     })
-  }, [meetingMemberDto])
+  }, [meetingMemberDto, isFollow])
 
   const handleFollow = async () => {
     console.log('id:', id)
     console.log('profile:', profile)
     if (isFollow) {
-      const deleteRes = await followDelete(id)
+      const deleteRes = await followDelete(managerId)
       if (deleteRes.status === 200) {
         console.log(deleteRes)
         setIsFollow(!isFollow)
       }
     } else {
-      const addRes = await followAdd(id, profile)
+      const addRes = await followAdd(managerId, profile)
       if (addRes.status === 200) {
         console.log(addRes)
         setIsFollow(!isFollow)
@@ -89,7 +101,7 @@ export const GetDetailManagerInfo = () => {
       <Container>
         {image && <RoomManagerImage src={image} />}
         <NameAndIntroduceWrap_Column>
-          <RoomManagerName>{nickname || ''}</RoomManagerName>
+          <RoomManagerName>{managerNickname || ''}</RoomManagerName>
           <RoomManagerIntroduce>
             {truncateText(bio, 12) || ''}
           </RoomManagerIntroduce>

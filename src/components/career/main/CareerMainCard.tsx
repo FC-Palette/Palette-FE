@@ -1,19 +1,22 @@
 import styled from 'styled-components'
 import { CareerMainItemsWrap } from 'components/career/index'
+import { useMemo } from 'react'
 
 export const CareerMainCard = ({ responseData }) => {
-  return (
-    <Card>
-      {responseData &&
-        responseData.length > 0 &&
-        responseData.map(item => (
-          <CareerMainItemsWrap
-            key={item.id}
-            data={item}
-          />
-        ))}
-    </Card>
-  )
+  const cardContent = useMemo(() => {
+    if (!Array.isArray(responseData) || responseData.length === 0) {
+      return null
+    }
+
+    return responseData.map(item => (
+      <CareerMainItemsWrap
+        key={item.id}
+        data={item}
+      />
+    ))
+  }, [responseData])
+
+  return <Card>{cardContent}</Card>
 }
 
 const Card = styled.div`

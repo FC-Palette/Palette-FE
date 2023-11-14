@@ -33,8 +33,6 @@ export const CareerMeetingsCreate = () => {
   const blobImageFiles = file.file
   const { createstepid = '1' } = useParams<CareerUseParamsProps>()
 
-  console.log(dto)
-
   const handleNextStep = () => {
     const nextStep = parseInt(createstepid) + 1
     navigate(`/create/${nextStep}`)
@@ -77,8 +75,7 @@ export const CareerMeetingsCreate = () => {
       alert('채팅 페이지 이동 로직')
       setModalOnState(false)
     } else if (modalText === CREATE_MODAL_TEXT.cancel) {
-      // setModalOnState(false)
-      alert('유지')
+      setModalOnState(false)
     }
   }
 

@@ -2,14 +2,14 @@ import { fetchDetailGlobalState } from '@/recoil'
 import { useRecoilValue } from 'recoil'
 import styled from 'styled-components'
 
+const truncateText = (text: string, maxLength: number) => {
+  return text.length > maxLength ? text.slice(0, maxLength) + '...' : text
+}
+
 export const GetDetailTitleAndDescription = () => {
   const atom = useRecoilValue(fetchDetailGlobalState)
   const { title, description } = atom
-  const truncateText = (text: string, maxLength: number) => {
-    return text.length > maxLength ? text.slice(0, maxLength) + '...' : text
-  }
-
-  const maxDescription = truncateText(description, 150)
+  const maxDescription = truncateText(description, 130)
 
   return (
     <>
