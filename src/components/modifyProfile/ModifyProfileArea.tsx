@@ -139,7 +139,6 @@ export const ModifyProfileArea = () => {
         `${apiUrl}api/mypage/${decodedPayload.memberId}`,
         dtoData,
       );
-      
       console.log('프로필 수정 결과 (이미지):', imageResponse);
       console.log('프로필 수정 결과 (텍스트):', textResponse.data);
       alert('데이터 수정 완료');

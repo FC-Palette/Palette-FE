@@ -59,13 +59,13 @@ export const MyPageIntro = ({ userData, setUserData }) => {
         </CategoryWrap>
         <FollowUserArea hide={userData?.response?.job === null}>
           <FollowerWrap>
-            <Link to={`/friend/${member_id}`}>
+            <Link to={`/friend/${decodedPayload.memberId}`}>
             <Follower>{PROFILE_EDIT_TEXT.profileFollowText}</Follower>
             <FollowerNumber>{userData?.response?.followedCount}</FollowerNumber>
             </Link>
           </FollowerWrap>
           <FollowingWrap>
-            <Link to={`/friend/${member_id}`}>
+            <Link to={`/friend/${decodedPayload.memberId}`}>
             <Following>{PROFILE_EDIT_TEXT.profileFollowingText}</Following>
             <FollowingNumber>{userData?.response?.followingCount}</FollowingNumber>
             </Link>

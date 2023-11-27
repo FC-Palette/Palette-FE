@@ -1,7 +1,7 @@
-export const ModifySexIcon = ({ male = false, strokeColor = "#D1D5DB" }) => {
+export const ModifySexIcon = ({ isMale , strokeColor }) => {
   return (
     <div>
-      {male ? (
+      {isMale ? (
         <svg
           width="16"
           height="17"

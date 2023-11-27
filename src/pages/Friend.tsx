@@ -5,14 +5,13 @@
   import { styled } from "styled-components";
   import { followPageDataProps } from "@/types";
 import { theme } from "@/styles";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
   
 
   export const Friend = () => {
     const decodedPayload = decoder();
-    const { member_id } = useParams();
-    console.log(member_id)
+    console.log(decodedPayload.memberId)
     const [activeTab, setActiveTab] = useState("followers"); 
     const [isFollowed, setIsFollowed] = useState<followPageDataProps[] | null>(null);
     const [isFollowing, setIsFollowing] = useState<followPageDataProps[] | null>(null);
@@ -86,7 +85,7 @@ import { Link, useParams } from "react-router-dom";
                 <Link to={`/mypage/${isfollowingItem.memberId}`}>
                 <UserImage>{<img src={isfollowingItem.image} alt="User Profile" />}</UserImage>
                 <UserInfoWrap>
-                  <UserNickname>{isfollowingItem.nickname}</UserNickname>
+                  <UserNickname>{isfollowingItem.nickname ? isfollowingItem.nickname : isfollowingItem.name}</UserNickname>
                   <UserBio>{isfollowingItem.bio}</UserBio>
                 </UserInfoWrap>
                 </Link>
@@ -105,9 +104,15 @@ import { Link, useParams } from "react-router-dom";
   };
 
   const Wrap = styled.div`
+  margin: 0 auto;
+  height: 100vh;
+  overflow-y: scroll;
+  position: relative;
+  width: 100%;
   `;
 
   const BodyWrap = styled.div`
+  
   `;
 
   const TabWrap = styled.div`
@@ -142,8 +147,8 @@ import { Link, useParams } from "react-router-dom";
   `;
 
   const FriendListWrap = styled.div`
-    overflow-y: scroll;
-  `
+  background-color: ${theme.main.white};
+    `
 
 
   const SetItems = styled.div`
@@ -184,7 +189,9 @@ import { Link, useParams } from "react-router-dom";
   const UserBio = styled.div`
     color: ${theme.greyScale.grey5};
     width: 201px;
-    white-space:normal;
+    white-space:nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   `
   const UserInfoWrap = styled.div`
     padding-right: 12px;
