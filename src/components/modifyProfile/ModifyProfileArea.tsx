@@ -10,7 +10,7 @@ import { ModifyJob } from "./ModifyJob";
 import { useEffect, useState } from "react";
 import { decoder } from "@/utils";
 import { authInstance, getMyPage } from "@/api";
-import { useParams } from "react-router-dom";
+import { useNavigate , useParams } from "react-router-dom";
 
 const apiUrl = import.meta.env.VITE_BASE_URL;
 
@@ -33,6 +33,7 @@ export const ModifyProfileArea = () => {
   });
 
   useEffect(() => {
+    
     const fetchData = async () => {
       try {
         let data;
@@ -72,7 +73,6 @@ export const ModifyProfileArea = () => {
             job: job || null,
           });
 
-          console.log(data.response);
         } else {
           console.error('사용자 데이터를 불러오지 못했습니다.');
         }
@@ -94,7 +94,7 @@ export const ModifyProfileArea = () => {
     }
     
   };
-
+  const navigate = useNavigate(); 
   const handleModify = async () => {
     try {
       // FormData 객체 생성
@@ -134,7 +134,7 @@ export const ModifyProfileArea = () => {
         new Blob([JSON.stringify(bodyData)], { type: 'application/json' })
       );
       
-      // 나머지 코드는 그대로 유지
+
       const textResponse = await authInstance.post(
         `${apiUrl}api/mypage/${decodedPayload.memberId}`,
         dtoData,
@@ -142,13 +142,13 @@ export const ModifyProfileArea = () => {
       console.log('프로필 수정 결과 (이미지):', imageResponse);
       console.log('프로필 수정 결과 (텍스트):', textResponse.data);
       alert('데이터 수정 완료');
+      navigate('/mypage');
     } catch (error) {
       console.error('프로필 수정 오류:', error);
     }
     
   };
 
-  console.log(formData)
 
 
   

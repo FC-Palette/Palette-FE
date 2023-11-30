@@ -27,7 +27,7 @@ export const MyPageEditBtn = ({ userData }) => {
     if (userData) {
       setIsFollowing(userData.response.followed);}
   }, [userData]);
-  console.log(userData);
+
 
 
 

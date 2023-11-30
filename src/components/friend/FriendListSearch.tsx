@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { useState } from "react";
 import { Input } from "..";
 
 const SearchIcon = (
@@ -8,13 +7,7 @@ const SearchIcon = (
       </svg>
 );
 
-export const FriendListSearch = () => {
-  const [inputValue, setInputValue] = useState("");
-
-  const handleInputChange = (e) => {
-    setInputValue(e.target.value);
-  };
-
+export const FriendListSearch = ({ inputValue, handleInputChange }) => {
   return (
     <Wrap>
       <InputWrapper>
@@ -31,12 +24,13 @@ export const FriendListSearch = () => {
 };
 
 
+
 const Wrap = styled.div`
   padding: 0 24px;
-
+  
   input {
     width: 100%;
-    padding: 0 32px;
+    padding: 0 40px;
   }
 `;
 
@@ -47,7 +41,7 @@ const InputWrapper = styled.div`
 
 const Icon = styled.div`
   position: absolute;
-  top: 50%;
+  top: 53%;
   transform: translateY(-50%);
   left: 10px;
 `;

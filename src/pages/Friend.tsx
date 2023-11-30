@@ -1,9 +1,9 @@
-  import { checkFollowed, checkFollowing } from "@/api";
-  import { useState, useEffect } from "react";
-  import { Footer, FriendFollowingBtn, FriendListSearch, Header } from "@/components";
-  import { decoder } from "@/utils";
-  import { styled } from "styled-components";
-  import { followPageDataProps } from "@/types";
+import { checkFollowed, checkFollowing } from "@/api";
+import { useState, useEffect } from "react";
+import { Footer, FriendFollowingBtn, FriendListSearch, Header } from "@/components";
+import { decoder } from "@/utils";
+import { styled } from "styled-components";
+import { followPageDataProps } from "@/types";
 import { theme } from "@/styles";
 import { Link } from "react-router-dom";
 
@@ -60,42 +60,67 @@ import { Link } from "react-router-dom";
         </TabWrap>
       );
     };
+    
+    const [inputValue, setInputValue] = useState("");
+
+    const handleInputChange = (e) => {
+      setInputValue(e.target.value);
+    };
+    console.log(inputValue);
+
+
     return (
       <Wrap>
         <Header centerText="친구 목록" />
         <BodyWrap>
           <FriendTabs activeTab={activeTab} />
-          <FriendListSearch></FriendListSearch>
+          <FriendListSearch inputValue={inputValue} handleInputChange={handleInputChange} followingData={activeTab === 'followers' ? isFollowed : activeTab === 'following' ? isFollowing : null} />
           <FriendListWrap>
-          {activeTab === "followers" && isFollowed !== null ? (
-            isFollowed.map((isfollowedItem, index) => (
-              <SetItems key={index}>
-                <Link to={`/mypage/${isfollowedItem.memberId}`}>
-                  <UserImage>{<img src={isfollowedItem.image} alt="User Profile" />}</UserImage>
-                  <UserInfoWrap>
-                    <UserNickname>{isfollowedItem.nickname}</UserNickname>
-                    <UserBio>{isfollowedItem.bio}</UserBio>
-                  </UserInfoWrap>
-                </Link>
-              </SetItems>
-            ))
-          ) : activeTab === "following" && isFollowing !== null ? (
-            isFollowing.map((isfollowingItem, index) => (
-              <SetItems key={index}>
-                <Link to={`/mypage/${isfollowingItem.memberId}`}>
-                <UserImage>{<img src={isfollowingItem.image} alt="User Profile" />}</UserImage>
+          {activeTab === 'followers' && isFollowed !== null ? 
+          (isFollowed.length > 0 
+          ? 
+          (isFollowed.map((isfollowedItem, index) => (
+            <SetItems key={index}>
+              <Link to={`/mypage/${isfollowedItem.memberId}`}>
+                <UserImage>
+                  {<img src={isfollowedItem.image} alt="User Profile" />}
+                </UserImage>
                 <UserInfoWrap>
-                  <UserNickname>{isfollowingItem.nickname ? isfollowingItem.nickname : isfollowingItem.name}</UserNickname>
+                  <UserNickname>{isfollowedItem.nickname}</UserNickname>
+                  <UserBio>{isfollowedItem.bio}</UserBio>
+                </UserInfoWrap>
+              </Link>
+            </SetItems>
+          ))
+          ) : (<NoData>데이터가 없습니다.</NoData>)
+          ) : activeTab === 'following' && isFollowing !== null ? (
+        isFollowing.length > 0 ? (
+          isFollowing
+          .filter(
+            (item) =>
+              (item.nickname ? item.nickname.toLowerCase().includes(inputValue.toLowerCase()) : item.name.toLowerCase().includes(inputValue.toLowerCase()))
+          ).map((isfollowingItem, index) => (
+            <SetItems key={index}>
+              <Link to={`/mypage/${isfollowingItem.memberId}`}>
+                <UserImage>
+                  {<img src={isfollowingItem.image} alt="User Profile" />}
+                </UserImage>
+                <UserInfoWrap>
+                  <UserNickname>
+                    {isfollowingItem.nickname ? isfollowingItem.nickname : isfollowingItem.name}
+                  </UserNickname>
                   <UserBio>{isfollowingItem.bio}</UserBio>
                 </UserInfoWrap>
-                </Link>
-                <FriendFollowingBtn/>
-              </SetItems>
-            ))
-          ) : (
-            // 데이터가 없거나 null인 경우에 대한 처리
-            <NoData>데이터가 없습니다.</NoData>
-          )}
+              </Link>
+              <FriendFollowingBtn />
+            </SetItems>
+          ))
+        ) : (
+          <NoData>데이터가 없습니다.</NoData>
+        )
+      ) : (
+        <NoData>데이터가 없습니다.</NoData>
+      )}
           </FriendListWrap> 
         </BodyWrap>
         <Footer />
