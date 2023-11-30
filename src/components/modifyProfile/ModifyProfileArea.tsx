@@ -24,7 +24,7 @@ export const ModifyProfileArea = () => {
     email: null,
     name: null,
     phoneNumber: null,
-    birthday: null,
+    birthday: '',
     nickname: null,
     bio: '',
     sex: null,
@@ -63,8 +63,8 @@ export const ModifyProfileArea = () => {
             image: image || null,
             email: email || null,
             name: name || null,
-            phoneNumber: phoneNumber || null,
-            birthday: birthday ? birthday.replace(/-/g, '') : null,
+            phoneNumber: phoneNumber ? phoneNumber.replace(/-/g, '') : '',
+            birthday: birthday ? birthday.replace(/-/g, '') : '',
             nickname: nickname || null,
             bio: bio || '',
             sex: sex || null,
@@ -92,8 +92,8 @@ export const ModifyProfileArea = () => {
         image: file as File | null,
       });
     }
+    
   };
-
 
   const handleModify = async () => {
     try {
@@ -145,10 +145,13 @@ export const ModifyProfileArea = () => {
     } catch (error) {
       console.error('프로필 수정 오류:', error);
     }
+    
   };
+
+  console.log(formData)
+
+
   
-
-
 
 
   const handleChange = (event) => {
@@ -161,9 +164,8 @@ export const ModifyProfileArea = () => {
         [name]: file,
       });
     } else if (name === 'birthday') {
-      // '0000-00-00' 형식의 생일을 '00000000'으로 변경
       const value = event.target.value;
-      const formattedBirthday = value.replace(/-/g, '');
+      const formattedBirthday = value.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3');
       setFormData({
         ...formData,
         [name]: formattedBirthday || null,
@@ -176,6 +178,10 @@ export const ModifyProfileArea = () => {
       });
     }
   };
+
+  const formattedBirthday = formData.birthday ? formData.birthday.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3') : '';
+  // add birthday hyphen rendering
+
 
   return (
     <Wrap>
@@ -191,7 +197,7 @@ export const ModifyProfileArea = () => {
           <SvgWrap style={{ marginLeft: formData.image ? '10%' : '0', marginTop: formData.image ? '9%' : '0' }}>
             <ChangeProfilImage />
           </SvgWrap>
-          <img src={formData.image instanceof Blob ? URL.createObjectURL(formData.image) : undefined}  />
+          <img src={formData.image instanceof Blob ? URL.createObjectURL(formData.image) : formData.image || ''}  />
         </label>
       </ImageWrap>
       <InputArea>
@@ -200,13 +206,13 @@ export const ModifyProfileArea = () => {
       </InputArea>
       <InputArea>
         {MODIFY_PROFILE_INPUT_TEXTS.nameText}
-        <Input name="name" value={formData.name || ''} onChange={handleChange} />
+        <Input name="name" value={formData.name || ''} onChange={handleChange} disabled/>
       </InputArea>
       <InputArea>
       <TitleWrap>
         {MODIFY_PROFILE_INPUT_TEXTS.nicknameText}
         <span>{MODIFY_PROFILE_INPUT_TEXTS.necessarySymbol}</span>
-        <Input name="nickname" value={formData.nickname || ''} onChange={handleChange}  />
+        <Input name="nickname" value={formData.nickname || ''} onChange={handleChange} maxLength={10} />
       </TitleWrap>
       </InputArea>
       <InputArea>
@@ -214,7 +220,7 @@ export const ModifyProfileArea = () => {
       </InputArea>
       <InputArea>
         {MODIFY_PROFILE_INPUT_TEXTS.birthText}
-        <Input ph={formData.birthday || ''} disabled />
+        <Input ph={formattedBirthday} disabled />
       </InputArea>
       <ModifyBioText formData={formData} setFormData={setFormData} />
       <InputArea>
@@ -290,7 +296,6 @@ const ImageWrap = styled.div`
   background-color: ${theme.greyScale.grey1};
   margin: 0 auto;
   border-radius: 50%;
-  border: 1px solid rgba( 0,0,0, .2);
   margin-top: 22px;
   margin-bottom: 46px;
   cursor: pointer;
