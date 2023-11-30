@@ -29,11 +29,11 @@ export const ModifySex = ({ formData, setFormData }) => {
   return (
     <SexWrap>
       <Category selected={formData.sex === "여성"}>
-        <ModifySexIcon isMale={false} strokeColor={formData.sex === "여성" ? theme.main.blueL1 : theme.greyScale.grey4} />
+        <ModifySexIcon isMale={false} strokeColor={formData.sex === "여성" ? theme.main.blue0 : theme.greyScale.grey4} />
         {MODIFY_PROFILE_INPUT_TEXTS.sexFemaleText}
       </Category>
       <Category selected={formData.sex === "남성"}>
-        <ModifySexIcon isMale={true} strokeColor={formData.sex === "남성" ? theme.main.blueL1 : theme.greyScale.grey4} />
+        <ModifySexIcon isMale={true} strokeColor={formData.sex === "남성" ? theme.main.blue0 : theme.greyScale.grey4} />
         {MODIFY_PROFILE_INPUT_TEXTS.sexMaleText}
       </Category>
     </SexWrap>
@@ -53,7 +53,7 @@ const CategoryContainer = styled.div<CategoryProps>`
   font-size: 16px;
   font-weight: 400;
   border: 1px solid ${(props) => (props.selected ? "white" : theme.greyScale.grey3)};
-  color: ${(props) => (props.selected ? theme.main.blueL1 : theme.greyScale.grey4)};
+  color: ${(props) => (props.selected ? theme.main.blue0 : theme.greyScale.grey4)};
   background-color: ${(props) =>
     props.selected ? theme.greyScale.blie : "white"};
   padding: 12px;

@@ -234,8 +234,9 @@ export const ModifyProfileArea = () => {
         <ModifyJob formData={formData} setFormData={setFormData} />
       </InputArea>
       <ApplyWrap>
-      <Button onClick={handleModify}>
-          {MODIFY_PROFILE_INPUT_TEXTS.completeModifytext}</Button>
+        <Button onClick={handleModify} disabled={!formData.nickname || !formData.position}>
+          {MODIFY_PROFILE_INPUT_TEXTS.completeModifytext}
+        </Button>
       </ApplyWrap>
     </Wrap>
   );

@@ -59,7 +59,7 @@ const PositionItem = styled.li<{ selected?: boolean;}>`
   color: black;
   background-color: ${(props) =>
     props.selected ? theme.greyScale.blie :theme.greyScale.blueGrey};
-  color: ${(props) => (props.selected ? theme.main.blueL1 : "black")};
+  color: ${(props) => (props.selected ? theme.main.blue0 : "black")};
   padding: 12px;
   margin-right: 8px;
   margin-bottom: 8px;

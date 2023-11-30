@@ -23,8 +23,8 @@ export const ModifyProfileJobIcon = ({ formData, setFormData }) => {
   };
 
   useEffect(() => {
-  }, [selectedJob]);
-
+    setSelectedJob(formData.job); // formData.job의 값으로 초기 selectedJob 설정
+  }, [formData.job]);
 
   return (
     <JobWrap>
