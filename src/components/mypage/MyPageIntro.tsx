@@ -24,6 +24,7 @@ export const MyPageIntro = ({ userData, setUserData }) => {
         }
 
         setUserData(data);
+        console.log(data.response)
       } catch (error) {
         console.error('사용자 데이터 가져오기 오류:', error);
       }
@@ -61,13 +62,13 @@ export const MyPageIntro = ({ userData, setUserData }) => {
           <FollowerWrap>
             <Link to={`/friend/${decodedPayload.memberId}`}>
             <Follower>{PROFILE_EDIT_TEXT.profileFollowText}</Follower>
-            <FollowerNumber>{userData?.response?.followedCount}</FollowerNumber>
+            <FollowingNumber>{userData?.response?.followingCount}</FollowingNumber>
             </Link>
           </FollowerWrap>
           <FollowingWrap>
             <Link to={`/friend/${decodedPayload.memberId}`}>
             <Following>{PROFILE_EDIT_TEXT.profileFollowingText}</Following>
-            <FollowingNumber>{userData?.response?.followingCount}</FollowingNumber>
+            <FollowerNumber>{userData?.response?.followedCount}</FollowerNumber>
             </Link>
           </FollowingWrap>
         </FollowUserArea>

@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
   export const Friend = () => {
     const decodedPayload = decoder();
     console.log(decodedPayload.memberId)
-    const [activeTab, setActiveTab] = useState("followers"); 
+    const [activeTab, setActiveTab] = useState("following"); 
     const [isFollowed, setIsFollowed] = useState<followPageDataProps[] | null>(null);
     const [isFollowing, setIsFollowing] = useState<followPageDataProps[] | null>(null);
     
@@ -45,15 +45,15 @@ import { Link } from "react-router-dom";
     const FriendTabs = ({ activeTab }) => {
       return (
         <TabWrap>
-          <TabButton
-            onClick={() => handleTabChange("followers")}
-            isActive={activeTab === "followers"}
+                    <TabButton
+            onClick={() => handleTabChange("following")}
+            isActive={activeTab === "following"}
           >
             팔로워
           </TabButton>
           <TabButton
-            onClick={() => handleTabChange("following")}
-            isActive={activeTab === "following"}
+            onClick={() => handleTabChange("followers")}
+            isActive={activeTab === "followers"}
           >
             팔로잉
           </TabButton>
@@ -79,7 +79,11 @@ import { Link } from "react-router-dom";
           {activeTab === 'followers' && isFollowed !== null ? 
           (isFollowed.length > 0 
           ? 
-          (isFollowed.map((isfollowedItem, index) => (
+          (isFollowed          
+            .filter(
+            (item) =>
+              (item.nickname ? item.nickname.toLowerCase().includes(inputValue.toLowerCase()) : item.name.toLowerCase().includes(inputValue.toLowerCase()))
+          ).map((isfollowedItem, index) => (
             <SetItems key={index}>
               <Link to={`/mypage/${isfollowedItem.memberId}`}>
                 <UserImage>

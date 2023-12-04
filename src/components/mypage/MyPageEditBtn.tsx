@@ -17,7 +17,8 @@ export const MyPageEditBtn = ({ userData }) => {
   // 예: /mypage/2에서 memberId는 2가 됨
   const { member_id } = useParams();
   const decodedPayload = decoder();
-  const followingId = decodedPayload.memberId;
+  const loginUserId = decodedPayload.memberId;
+  const followingId = member_id;
   const bio = userData?.response.bio;
   const nickname = userData?.response.nickname;
   const image = userData?.response.image;
@@ -30,21 +31,22 @@ export const MyPageEditBtn = ({ userData }) => {
 
 
 
-
   const handleFollow = async () => {
     try {
       const profileData = {
         followingId,
+        // 유저 a가 유저 b를 팔로우 버튼을 눌렀을 때, 유저 b의 id값 
         image,
         nickname,
         bio,
       };
   
       if (isFollowing) {
-        const response = await followDelete(member_id);
+        const response = await followDelete(followingId);
         console.log('언팔로우 성공:', response);
+
       } else {
-        const response = await followAdd(member_id, profileData);
+        const response = await followAdd(loginUserId, profileData);
         console.log('팔로우 성공:', response);
       }
   
