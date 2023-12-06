@@ -6,6 +6,7 @@ import { useParams, useLocation, Link } from "react-router-dom";
 import { decoder } from "@/utils";
 import { PROFILE_EDIT_TEXT } from "@/constants";
 import { MyPageSimpleProfileBtn } from "./MyPageSimpleProfileBtn";
+import { MyPageChatBtn, MyPageEditBtn } from ".";
 
 export const MyPageIntro = ({ userData, setUserData }) => {
   const { member_id } = useParams();
@@ -24,18 +25,18 @@ export const MyPageIntro = ({ userData, setUserData }) => {
         }
 
         setUserData(data);
-        console.log(data.response)
       } catch (error) {
         console.error('사용자 데이터 가져오기 오류:', error);
       }
     };
 
     fetchData();
-  }, [member_id]);
+  }, [setUserData]);
   
 
 
   return (
+    <>
     <Container>
       <TextInformation>
         <NickName>{userData?.response?.nickname}</NickName>
@@ -80,6 +81,11 @@ export const MyPageIntro = ({ userData, setUserData }) => {
       </ImageInformation>
       <MyPageSimpleProfileBtn hide={userData?.response?.job === null && location.pathname === '/mypage'} />
     </Container>
+    <BtnWrap>
+      <MyPageEditBtn userData={userData} setUserData={setUserData}/>
+      <MyPageChatBtn />
+    </BtnWrap>
+    </>
   );
 };
 
@@ -212,3 +218,14 @@ const BuildingWrap = styled.div`
   color: #6B7280;
   font-size: 16px;
 `;
+
+
+const BtnWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 0 24px;
+  margin-bottom: 20px;
+  width: 100%;
+`

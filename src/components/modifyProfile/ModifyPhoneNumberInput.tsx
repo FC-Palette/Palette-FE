@@ -5,6 +5,7 @@ import styled from "styled-components";
 export const ModifyPhoneNumberInput = ({ formData, setFormData }) => {
   const handleInputChange = (event) => {
     console.log(event.target)
+    
     const { name, value } = event.target;
     const formattedValue = value.replace(/\D/g, '').replace(/^(\d{3})(\d{0,4})/, '010$2').slice(0, 11);
     // 하이픈을 제거한 값으로 저장, 앞자리 010 고정, 숫자만가능.

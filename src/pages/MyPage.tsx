@@ -1,7 +1,7 @@
 import { NAVIGATION_PATH } from 'constants/index'
-import { Footer, Header, MyPageChatBtn } from 'components/index'
+import { Footer, Header } from 'components/index'
 import {
-  MyPageEditBtn,
+  
   MyPageIntro,
   MyPagePostDisplay,
   MyPageSelectTab
@@ -27,6 +27,7 @@ export const MyPage = () => {
 
   const [userData, setUserData] = useState<myPageIntroProps | null>(null)
 
+
   return (
     <MyPageWrap>
       <Header centerText="마이페이지">
@@ -45,10 +46,6 @@ export const MyPage = () => {
         userData={userData}
         setUserData={setUserData}
       />
-      <BtnWrap>
-        <MyPageEditBtn userData={userData} />
-        <MyPageChatBtn />
-      </BtnWrap>
       <MyPageSelectTab />
       <MyPagePostArea
         hide={
@@ -95,12 +92,3 @@ const MyPagePostArea = styled.div<{ hide: boolean }>`
     `}
 `
 
-const BtnWrap = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  padding: 0 24px;
-  margin-bottom: 20px;
-  width: 100%;
-`

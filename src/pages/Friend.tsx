@@ -11,7 +11,6 @@ import { Link } from "react-router-dom";
 
   export const Friend = () => {
     const decodedPayload = decoder();
-    console.log(decodedPayload.memberId)
     const [activeTab, setActiveTab] = useState("following"); 
     const [isFollowed, setIsFollowed] = useState<followPageDataProps[] | null>(null);
     const [isFollowing, setIsFollowing] = useState<followPageDataProps[] | null>(null);
