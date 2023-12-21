@@ -1,46 +1,50 @@
-import styled from "styled-components";
-import { Button } from ".."
-import { checkFollowed, followDelete, followAdd } from "@/api";
-import { theme } from "@/styles";
-import { decoder } from "@/utils";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from 'react'
+import styled from 'styled-components'
+import { Button } from '..'
+import { theme } from '@/styles'
+import { followDelete, followAdd, checkFollowed } from '@/api'
+import { decoder } from '@/utils'
 
-export const FriendFollowingBtn = ({ isFollowed  }) => {
+export const FollowDataBtn = ({ isfollowedItem }) => {
+
   const [isFollowing, setIsFollowing] = useState(false);
-  const followingId = isFollowed?.response.memberId;
   const decodedPayload = decoder();
   const loginUserId = decodedPayload.memberId;
-  const bio = isFollowed?.response.bio;
-  const nickname = isFollowed?.response.nickname;
-  const image = isFollowed?.response.image;
-  console.log(isFollowed)
+  const followingId = isfollowedItem?.memberId;
+  const memberId = isfollowedItem?.memberId;
+  const bio = isfollowedItem?.bio;
+  const nickname = isfollowedItem?.nickname;
+  const image = isfollowedItem?.image;
 
+  console.log(isfollowedItem)
 
 
   useEffect(() => {
     async function fetchData() {
       try {
-        if (isFollowed) { // userData가 존재하는 경우에만 실행
+        if (isfollowedItem) { // userData가 존재하는 경우에만 실행
           const followedData = await checkFollowed(decodedPayload.memberId);
           setIsFollowing(false);
   
           const userIdArray = followedData.response.map(item => item.memberId);
           const uniqueUserIdArray = Array.from(new Set(userIdArray));
 
-          setIsFollowing(uniqueUserIdArray.includes(followingId));
+          setIsFollowing(uniqueUserIdArray.includes(memberId));
         }
       } catch (error) {
         console.error("Error checking follow status:", error);
       }
     }
     fetchData(); 
-  }, [isFollowed]);
+  }, [isfollowedItem]);
 
   useEffect(() => {
-    console.log(isFollowed);
-  }, [isFollowed]);
+    console.log(isfollowedItem);
+  }, [isfollowedItem]);
 
+  
 
+  
   const handleFollow = async () => {
     try {
       const profileData = {
@@ -50,7 +54,7 @@ export const FriendFollowingBtn = ({ isFollowed  }) => {
         bio,
       };
       if (isFollowing) {
-        const response = await followDelete(followingId);
+        const response = await followDelete(memberId);
         console.log('언팔로우 성공:', response);
       } else {
         const response = await followAdd(loginUserId, profileData);
@@ -63,19 +67,21 @@ export const FriendFollowingBtn = ({ isFollowed  }) => {
   };
 
 
-
   return (
-          <FollowWrap>
-            <Button
-              onClick={handleFollow} 
-              $bgColor={isFollowing ? theme.main.white : theme.main.blue0}
-              color={isFollowing ? theme.main.blue0 : theme.main.white}>
-              {isFollowing ? '팔로우 취소' : '팔로우'}
-            </Button>
-          </FollowWrap>
-  )
+    <FollowWrap>
+      <Button
+        onClick={handleFollow} 
+        $bgColor={isFollowing ? theme.main.white : theme.main.blue0}
+        color={isFollowing ? theme.main.blue0 : theme.main.white}>
+        {isFollowing ? '팔로우 취소' : '팔로우'}
+      </Button>
+    </FollowWrap>
+)
 }
 
 
 const FollowWrap = styled.div`
+  Button {
+
+  }
 `

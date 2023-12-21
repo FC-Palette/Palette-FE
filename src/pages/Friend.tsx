@@ -1,12 +1,12 @@
 import { checkFollowed, checkFollowing } from "@/api";
 import { useState, useEffect } from "react";
-import { Footer, FriendFollowingBtn, FriendListSearch, Header } from "@/components";
+import { Footer, FriendListSearch, Header } from "@/components";
 import { decoder } from "@/utils";
 import { styled } from "styled-components";
 import { followPageDataProps } from "@/types";
 import { theme } from "@/styles";
 import { Link } from "react-router-dom";
-
+import { FollowDataBtn } from "../components/friend/FollowDataBtn"
   
 
   export const Friend = () => {
@@ -15,6 +15,7 @@ import { Link } from "react-router-dom";
     const [isFollowed, setIsFollowed] = useState<followPageDataProps[] | null>(null);
     const [isFollowing, setIsFollowing] = useState<followPageDataProps[] | null>(null);
     
+
     useEffect(() => {
       async function fetchData() {
         try {
@@ -22,11 +23,13 @@ import { Link } from "react-router-dom";
             const followedData = await checkFollowed(decodedPayload.memberId);
             setIsFollowed(followedData.response) 
             console.log(followedData.response)
+            console.log(isFollowed)
           } 
           else if (activeTab === "following") {
             const followingData  = await checkFollowing(decodedPayload.memberId);
             setIsFollowing(followingData.response)
             console.log(followingData.response)
+            console.log(isFollowing)
           }
         } catch (error) {
           console.error("Error checking follow status:", error);
@@ -93,6 +96,7 @@ import { Link } from "react-router-dom";
                   <UserBio>{isfollowedItem.bio}</UserBio>
                 </UserInfoWrap>
               </Link>
+              <FollowDataBtn isfollowedItem={isfollowedItem}/>
             </SetItems>
           ))
           ) : (<NoData>데이터가 없습니다.</NoData>)
@@ -115,7 +119,7 @@ import { Link } from "react-router-dom";
                   <UserBio>{isfollowingItem.bio}</UserBio>
                 </UserInfoWrap>
               </Link>
-              <FriendFollowingBtn />
+              <FollowDataBtn isfollowedItem={isfollowingItem}/>
             </SetItems>
           ))
         ) : (
@@ -192,7 +196,6 @@ import { Link } from "react-router-dom";
     }
       Button{
         font-size: 14px;
-        color: ${theme.greyScale.grey5};
         width: 105px;
         height: 35px;
         cursor: pointer;
@@ -229,4 +232,5 @@ import { Link } from "react-router-dom";
     text-align: center;
     padding-top: 20px;
   `
+
 
