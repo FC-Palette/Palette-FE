@@ -43,12 +43,13 @@ export const CareerMeetingsCreate = () => {
     setModalText(CREATE_MODAL_TEXT.create)
 
     const response = await careerCreateApi(dto, blobImageFiles)
-
+    console.log(response)
     if (response.status === 200) {
       setModalOnState(true)
       setDto(resetDto)
       setFile(resetFile)
     }
+    console.log(response)
   }
 
   // 취소하기

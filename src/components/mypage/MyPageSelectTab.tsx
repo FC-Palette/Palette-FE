@@ -60,7 +60,6 @@ const Tab = styled.div<myPageSelectTabProps>`
     border-bottom: 4px solid ${theme.main.blue0};
     border-radius: 4px;
     position: absolute;
-    bottom: 0;
     left: 50%;
     bottom: -5%;
     transform: translateX(-50%);

@@ -2,55 +2,49 @@ import { MODIFY_PROFILE_INPUT_TEXTS } from "@/constants/modifyprofile";
 import { theme } from "@/styles";
 import styled from "styled-components";
 import { ModifySexIcon } from "../common/svgicon";
-import { useState } from "react";
+import { useEffect } from "react";
 
 interface CategoryProps {
   selected: boolean;
-  onClick: () => void;
   children: React.ReactNode;
 }
 
-const Category: React.FC<CategoryProps> = ({ selected, children, onClick }) => (
+const Category: React.FC<CategoryProps> = ({ selected, children }) => (
   <CategoryContainer
-    onClick={onClick}
     selected={selected}>
-    <ModifySexIcon male={selected} strokeColor={selected ? theme.main.blueL1 : theme.greyScale.grey5} />
     {children}
   </CategoryContainer>
 );
 
 export const ModifySex = ({ formData, setFormData }) => {
-  const handleSexClick = (isMale) => {
-    setSelectedSex(isMale);
+  // 수정되지 않도록 하는 selectedSex 상태값을 초기에 받아온 값으로 설정
+  useEffect(() => {
+    const initialSelectedSex = formData.sex === "여성" ? false : true;
     setFormData({
       ...formData,
-      sex: isMale ? "남성" : "여성"
+      sex: initialSelectedSex ? "남성" : "여성"
     });
-  };
-
-  const [selectedSex, setSelectedSex] = useState(formData.sex === "남성");
+  }, []); // 컴포넌트가 처음 렌더링될 때 한 번만 실행되도록 빈 배열 전달
 
   return (
     <SexWrap>
-      <Category
-        onClick={() => handleSexClick(false)}
-        selected={selectedSex === false}
-      >
+      <Category selected={formData.sex === "여성"}>
+        <ModifySexIcon isMale={false} strokeColor={formData.sex === "여성" ? theme.main.blue0 : theme.greyScale.grey4} />
         {MODIFY_PROFILE_INPUT_TEXTS.sexFemaleText}
       </Category>
-      <Category
-        onClick={() => handleSexClick(true)}
-        selected={selectedSex === true}
-      >
+      <Category selected={formData.sex === "남성"}>
+        <ModifySexIcon isMale={true} strokeColor={formData.sex === "남성" ? theme.main.blue0 : theme.greyScale.grey4} />
         {MODIFY_PROFILE_INPUT_TEXTS.sexMaleText}
       </Category>
     </SexWrap>
   );
 };
 
+
 const SexWrap = styled.div`
   margin-top: 12px;
   display: flex;
+
 `;
 
 const CategoryContainer = styled.div<CategoryProps>`
@@ -59,16 +53,15 @@ const CategoryContainer = styled.div<CategoryProps>`
   font-size: 16px;
   font-weight: 400;
   border: 1px solid ${(props) => (props.selected ? "white" : theme.greyScale.grey3)};
-  color: ${(props) => (props.selected ? theme.main.blueL1 : "black")};
+  color: ${(props) => (props.selected ? theme.main.blue0 : theme.greyScale.grey4)};
   background-color: ${(props) =>
     props.selected ? theme.greyScale.blie : "white"};
   padding: 12px;
   margin-right: 8px;
   margin-bottom: 8px;
   border-radius: 21px;
-  cursor: pointer;
+  pointer-events: none;
   svg {
     margin-right: 4px;
-    stroke: ${(props) => (props.selected ? "white" : theme.greyScale.blueGrey)};
   }
 `;

@@ -8,7 +8,7 @@ export const ModifyBioText = ({ formData, setFormData }) => {
 
 
 
-  const maxCharacters = 100;
+  const maxCharacters = 50;
 
   const handleBioChange = (event) => {
     const { name, value } = event.target;

@@ -12,6 +12,7 @@ export interface InputProps {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
   disabled?: boolean
   name?: string;
+  maxLength?: number;
 }
 
 export type InputType = Pick<

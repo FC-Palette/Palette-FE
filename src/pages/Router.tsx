@@ -116,6 +116,7 @@ export const routes = [
       generateRoute('/modifyprofile', <ModifyProfile />),
       generateRoute('/simpleprofile', <ModifyProfile />),
       generateRoute('/friend', <Friend />),
+      generateRoute('/friend/:member_id', <Friend />),
       generateRoute('/setting', <Setting />),
       generateRoute('/alarm', <Alarm />),
       generateRoute('/setting/password', <SettingPassword />),

@@ -6,6 +6,7 @@ import { useParams, useLocation, Link } from "react-router-dom";
 import { decoder } from "@/utils";
 import { PROFILE_EDIT_TEXT } from "@/constants";
 import { MyPageSimpleProfileBtn } from "./MyPageSimpleProfileBtn";
+import { MyPageChatBtn, MyPageEditBtn } from ".";
 
 export const MyPageIntro = ({ userData, setUserData }) => {
   const { member_id } = useParams();
@@ -30,9 +31,12 @@ export const MyPageIntro = ({ userData, setUserData }) => {
     };
 
     fetchData();
-  }, [member_id]);
+  }, [setUserData]);
   
+
+
   return (
+    <>
     <Container>
       <TextInformation>
         <NickName>{userData?.response?.nickname}</NickName>
@@ -57,15 +61,15 @@ export const MyPageIntro = ({ userData, setUserData }) => {
         </CategoryWrap>
         <FollowUserArea hide={userData?.response?.job === null}>
           <FollowerWrap>
-            <Link to={"/friend"}>
+            <Link to={`/friend/${decodedPayload.memberId}`}>
             <Follower>{PROFILE_EDIT_TEXT.profileFollowText}</Follower>
-            <FollowerNumber>{userData?.response?.followedCount}</FollowerNumber>
+            <FollowingNumber>{userData?.response?.followingCount}</FollowingNumber>
             </Link>
           </FollowerWrap>
           <FollowingWrap>
-            <Link to={"/friend"}>
+            <Link to={`/friend/${decodedPayload.memberId}`}>
             <Following>{PROFILE_EDIT_TEXT.profileFollowingText}</Following>
-            <FollowingNumber>{userData?.response?.followingCount}</FollowingNumber>
+            <FollowerNumber>{userData?.response?.followedCount}</FollowerNumber>
             </Link>
           </FollowingWrap>
         </FollowUserArea>
@@ -77,6 +81,11 @@ export const MyPageIntro = ({ userData, setUserData }) => {
       </ImageInformation>
       <MyPageSimpleProfileBtn hide={userData?.response?.job === null && location.pathname === '/mypage'} />
     </Container>
+    <BtnWrap>
+      <MyPageEditBtn userData={userData} setUserData={setUserData}/>
+      <MyPageChatBtn />
+    </BtnWrap>
+    </>
   );
 };
 
@@ -145,6 +154,9 @@ const PositionCategory = styled.div<{ hide: boolean }>`
 const FollowUserArea = styled.div<{ hide: boolean }>`
   display: flex;
   padding: 24px 0;
+  :link{
+    color: inherit;
+  }
   :visited{
     color: inherit;
   }
@@ -206,3 +218,14 @@ const BuildingWrap = styled.div`
   color: #6B7280;
   font-size: 16px;
 `;
+
+
+const BtnWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 0 24px;
+  margin-bottom: 20px;
+  width: 100%;
+`

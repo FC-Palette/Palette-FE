@@ -10,7 +10,7 @@ import { ModifyJob } from "./ModifyJob";
 import { useEffect, useState } from "react";
 import { decoder } from "@/utils";
 import { authInstance, getMyPage } from "@/api";
-import { useParams } from "react-router-dom";
+import { useNavigate , useParams } from "react-router-dom";
 
 const apiUrl = import.meta.env.VITE_BASE_URL;
 
@@ -24,7 +24,7 @@ export const ModifyProfileArea = () => {
     email: null,
     name: null,
     phoneNumber: null,
-    birthday: null,
+    birthday: '',
     nickname: null,
     bio: '',
     sex: null,
@@ -33,6 +33,7 @@ export const ModifyProfileArea = () => {
   });
 
   useEffect(() => {
+    
     const fetchData = async () => {
       try {
         let data;
@@ -63,8 +64,8 @@ export const ModifyProfileArea = () => {
             image: image || null,
             email: email || null,
             name: name || null,
-            phoneNumber: phoneNumber || null,
-            birthday: birthday ? birthday.replace(/-/g, '') : null,
+            phoneNumber: phoneNumber ? phoneNumber.replace(/-/g, '') : '',
+            birthday: birthday ? birthday.replace(/-/g, '') : '',
             nickname: nickname || null,
             bio: bio || '',
             sex: sex || null,
@@ -72,7 +73,6 @@ export const ModifyProfileArea = () => {
             job: job || null,
           });
 
-          console.log(data.response);
         } else {
           console.error('사용자 데이터를 불러오지 못했습니다.');
         }
@@ -92,9 +92,9 @@ export const ModifyProfileArea = () => {
         image: file as File | null,
       });
     }
+    
   };
-
-
+  const navigate = useNavigate(); 
   const handleModify = async () => {
     try {
       // FormData 객체 생성
@@ -134,22 +134,24 @@ export const ModifyProfileArea = () => {
         new Blob([JSON.stringify(bodyData)], { type: 'application/json' })
       );
       
-      // 나머지 코드는 그대로 유지
+
       const textResponse = await authInstance.post(
         `${apiUrl}api/mypage/${decodedPayload.memberId}`,
         dtoData,
       );
-      
       console.log('프로필 수정 결과 (이미지):', imageResponse);
       console.log('프로필 수정 결과 (텍스트):', textResponse.data);
       alert('데이터 수정 완료');
+      navigate('/mypage');
     } catch (error) {
       console.error('프로필 수정 오류:', error);
     }
+    
   };
+
+
+
   
-
-
 
 
   const handleChange = (event) => {
@@ -162,9 +164,8 @@ export const ModifyProfileArea = () => {
         [name]: file,
       });
     } else if (name === 'birthday') {
-      // '0000-00-00' 형식의 생일을 '00000000'으로 변경
       const value = event.target.value;
-      const formattedBirthday = value.replace(/-/g, '');
+      const formattedBirthday = value.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3');
       setFormData({
         ...formData,
         [name]: formattedBirthday || null,
@@ -178,6 +179,10 @@ export const ModifyProfileArea = () => {
     }
   };
 
+  const formattedBirthday = formData.birthday ? formData.birthday.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3') : '';
+  // add birthday hyphen rendering
+
+console.log(formData)
   return (
     <Wrap>
       <ImageWrap>
@@ -192,7 +197,7 @@ export const ModifyProfileArea = () => {
           <SvgWrap style={{ marginLeft: formData.image ? '10%' : '0', marginTop: formData.image ? '9%' : '0' }}>
             <ChangeProfilImage />
           </SvgWrap>
-          <img src={formData.image instanceof Blob ? URL.createObjectURL(formData.image) : undefined}  />
+          <img src={formData.image instanceof Blob ? URL.createObjectURL(formData.image) : formData.image || ''}  />
         </label>
       </ImageWrap>
       <InputArea>
@@ -201,13 +206,13 @@ export const ModifyProfileArea = () => {
       </InputArea>
       <InputArea>
         {MODIFY_PROFILE_INPUT_TEXTS.nameText}
-        <Input name="name" value={formData.name || ''} onChange={handleChange} />
+        <Input name="name" value={formData.name || ''} onChange={handleChange} disabled/>
       </InputArea>
       <InputArea>
       <TitleWrap>
         {MODIFY_PROFILE_INPUT_TEXTS.nicknameText}
         <span>{MODIFY_PROFILE_INPUT_TEXTS.necessarySymbol}</span>
-        <Input name="nickname" value={formData.nickname || ''} onChange={handleChange}  />
+        <Input name="nickname" value={formData.nickname || ''} onChange={handleChange} maxLength={10} />
       </TitleWrap>
       </InputArea>
       <InputArea>
@@ -215,7 +220,7 @@ export const ModifyProfileArea = () => {
       </InputArea>
       <InputArea>
         {MODIFY_PROFILE_INPUT_TEXTS.birthText}
-        <Input ph={formData.birthday || ''} disabled />
+        <Input ph={formattedBirthday} disabled />
       </InputArea>
       <ModifyBioText formData={formData} setFormData={setFormData} />
       <InputArea>
@@ -229,8 +234,9 @@ export const ModifyProfileArea = () => {
         <ModifyJob formData={formData} setFormData={setFormData} />
       </InputArea>
       <ApplyWrap>
-      <Button onClick={handleModify}>
-          {MODIFY_PROFILE_INPUT_TEXTS.completeModifytext}</Button>
+        <Button onClick={handleModify} disabled={!formData.nickname || !formData.position}>
+          {MODIFY_PROFILE_INPUT_TEXTS.completeModifytext}
+        </Button>
       </ApplyWrap>
     </Wrap>
   );
@@ -291,7 +297,6 @@ const ImageWrap = styled.div`
   background-color: ${theme.greyScale.grey1};
   margin: 0 auto;
   border-radius: 50%;
-  border: 1px solid rgba( 0,0,0, .2);
   margin-top: 22px;
   margin-bottom: 46px;
   cursor: pointer;

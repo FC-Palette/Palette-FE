@@ -14,6 +14,7 @@ export const Input = ({
   value,
   $paddingLeft,
   disabled,
+  maxLength,
   ...props
 }: InputProps) => {
   return (
@@ -30,6 +31,7 @@ export const Input = ({
         value={value}
         placeholder={ph}
         disabled={disabled}
+        maxLength={maxLength}
       />
       {/* absolute를 통해 Icon */}
       {children}

@@ -57,8 +57,10 @@ export const SignInField = () => {
       if (!SIGNIN_REGEX_TEXT.numInPwd.test(password)) {
         return SIGNIN_REGEX_TEXT.pwdReqNum
       }
-
-      // 특수문자 포함 정규식 추가 필요
+      
+      if (!SIGNIN_REGEX_TEXT.numInPwd.test(password)) {
+        return SIGNIN_REGEX_TEXT.pwdReqSym
+      }
 
       if (password.length < 8) {
         return SIGNIN_REGEX_TEXT.pwdLengLeast
