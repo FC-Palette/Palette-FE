@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 import { Button } from '..'
 import { theme } from '@/styles'
 import { followDelete, followAdd, checkFollowed } from '@/api'
 import { decoder } from '@/utils'
 
 export const FollowDataBtn = ({ isfollowedItem }) => {
-
   const [isFollowing, setIsFollowing] = useState(false);
   const decodedPayload = decoder();
   const loginUserId = decodedPayload.memberId;
@@ -16,7 +15,6 @@ export const FollowDataBtn = ({ isfollowedItem }) => {
   const nickname = isfollowedItem?.nickname;
   const image = isfollowedItem?.image;
 
-  console.log(isfollowedItem)
 
 
   useEffect(() => {
@@ -37,13 +35,6 @@ export const FollowDataBtn = ({ isfollowedItem }) => {
     }
     fetchData(); 
   }, [isfollowedItem]);
-
-  useEffect(() => {
-    console.log(isfollowedItem);
-  }, [isfollowedItem]);
-
-  
-
   
   const handleFollow = async () => {
     try {
@@ -81,7 +72,4 @@ export const FollowDataBtn = ({ isfollowedItem }) => {
 
 
 const FollowWrap = styled.div`
-  Button {
-
-  }
 `

@@ -26,10 +26,8 @@ export const MyPageEditBtn = ({ userData, setUserData }) => {
         if (userData) { // userData가 존재하는 경우에만 실행
           const followedData = await checkFollowed(decodedPayload.memberId);
           setIsFollowing(false);
-  
           const userIdArray = followedData.response.map(item => item.memberId);
           const uniqueUserIdArray = Array.from(new Set(userIdArray));
-
           setIsFollowing(uniqueUserIdArray.includes(followingId));
         }
       } catch (error) {
@@ -40,7 +38,6 @@ export const MyPageEditBtn = ({ userData, setUserData }) => {
   }, [userData]);
 
   useEffect(() => {
-    console.log(userData);
   }, [userData]);
 
   const handleFollow = async () => {

@@ -1,13 +1,14 @@
 import { checkFollowed, checkFollowing } from "@/api";
 import { useState, useEffect } from "react";
-import { Footer, FriendListSearch, Header } from "@/components";
+import { FollowDataBtn, Footer, FriendListSearch, Header } from "@/components";
 import { decoder } from "@/utils";
 import { styled } from "styled-components";
 import { followPageDataProps } from "@/types";
 import { theme } from "@/styles";
 import { Link } from "react-router-dom";
-import { FollowDataBtn } from "../components/friend/FollowDataBtn"
-  
+import { friendFollowBtnProps } from "@/types/friend/friendFollowBtnProps";
+
+
 
   export const Friend = () => {
     const decodedPayload = decoder();
@@ -22,14 +23,12 @@ import { FollowDataBtn } from "../components/friend/FollowDataBtn"
           if (activeTab === "followers") {
             const followedData = await checkFollowed(decodedPayload.memberId);
             setIsFollowed(followedData.response) 
-            console.log(followedData.response)
-            console.log(isFollowed)
+
           } 
           else if (activeTab === "following") {
             const followingData  = await checkFollowing(decodedPayload.memberId);
             setIsFollowing(followingData.response)
-            console.log(followingData.response)
-            console.log(isFollowing)
+
           }
         } catch (error) {
           console.error("Error checking follow status:", error);
@@ -68,7 +67,6 @@ import { FollowDataBtn } from "../components/friend/FollowDataBtn"
     const handleInputChange = (e) => {
       setInputValue(e.target.value);
     };
-    console.log(inputValue);
 
 
     return (
@@ -76,7 +74,7 @@ import { FollowDataBtn } from "../components/friend/FollowDataBtn"
         <Header centerText="친구 목록" />
         <BodyWrap>
           <FriendTabs activeTab={activeTab} />
-          <FriendListSearch inputValue={inputValue} handleInputChange={handleInputChange} followingData={activeTab === 'followers' ? isFollowed : activeTab === 'following' ? isFollowing : null} />
+          <FriendListSearch inputValue={inputValue} handleInputChange={handleInputChange}  />
           <FriendListWrap>
           {activeTab === 'followers' && isFollowed !== null ? 
           (isFollowed.length > 0 
@@ -155,7 +153,7 @@ import { FollowDataBtn } from "../components/friend/FollowDataBtn"
     border-bottom: 1px solid ${theme.greyScale.grey2};
   `
 
-  const TabButton = styled.div`
+  const TabButton = styled.div<friendFollowBtnProps>`
     display: flex;
     justify-content: center;
     align-items: center;

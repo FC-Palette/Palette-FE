@@ -1,2 +1,2 @@
 export * from 'components/friend/FriendListSearch'
-export * from 'components/friend/FriendFollowingBtn'
+export * from 'components/friend/FriendFollowDataBtn'
